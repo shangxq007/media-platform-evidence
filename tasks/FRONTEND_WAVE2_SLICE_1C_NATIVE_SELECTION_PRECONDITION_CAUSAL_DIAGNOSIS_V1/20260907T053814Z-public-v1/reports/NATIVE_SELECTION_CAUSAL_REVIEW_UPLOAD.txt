@@ -1,0 +1,267 @@
+INDEPENDENT REVIEW UPLOAD — NATIVE SELECTION CAUSAL DIAGNOSIS
+Decision requested: review the causal attribution and proposed next bounded correction scope. No implementation acceptance, source correction or publication is requested or performed.
+Primary classification: PRODUCT_DEFECT, native capture-dependent stage click misclassified as empty-background intent after a node-origin zero-movement gesture.
+Two exact-input reproductions, both native selected() assertion exit1, zero acceptance checks. R1 passive/no debugger establishes caller; R2 non-pausing logpoints establish exact empty dispatch/replace and unique inventory. R3 not run.
+Read FINAL_REPORT.txt first, then evidence/static/MEASURED_CAUSAL_SUMMARY.json and evidence/runs/R1/trace.json; cross-check evidence/runs/R2/logpoints.json against R2 trace and source.
+EVIDENCE_MANIFEST.sha256 hashes every payload file except itself. The ZIP also includes that manifest. Detached DELIVERY_RECEIPT.json/DELIVERY.sha256 are outside the ZIP to avoid a self-hash cycle.
+Local delivery only; no remote upload has occurred.
+
+FINAL_REPORT_SHA256=30a1921f95ccea38894c986c564e0f12f64bd0d3bc6103ee5240abfe7673f351
+
+TASK=FRONTEND_WAVE2_SLICE_1C_NATIVE_SELECTION_PRECONDITION_CAUSAL_DIAGNOSIS_V1
+TASK_EXECUTION=COMPLETE_CAUSAL_DIAGNOSIS
+CAUSE_CLASSIFICATION=PRODUCT_DEFECT
+CLEARING_OPERATION=LOCAL_EPHEMERAL_SELECT_IDS_EMPTY_DISPATCH_TO_SELECT_REPLACE_EMPTY_TO_PUBLISH_SELECTION
+CLEARING_CALLER=CanvasSession_STAGE_BACKGROUND_onClick_TO_clear
+NATIVE_REPRODUCTION_COUNT=2
+EXPECTED_PRECONDITION_FAILURE_REPRODUCED=YES
+OBSERVATION_NONINTERFERENCE=SUPPORTED_FOR_UNCHANGED_INPUT_AND_PRODUCT_METHODS_WITH_UNPAUSED_R1_COMPARISON_NOT_ZERO_TIMING_OVERHEAD
+PRE_BROWSER_GATES=REUSED_EXACT_TREE_BASELINE
+NEW_ACCEPTANCE_CHECKS_COMPLETED=0
+SLICE_1C_ACCEPTED=NO
+PRODUCT_CORRECTION_PERFORMED=NO
+FROZEN_HARNESS_CORRECTION_PERFORMED=NO
+H4_LEDGER_OWNER_DISPOSITION=UNRESOLVED
+TRACKED_DIST_POLICY_RECONCILIATION=UNRESOLVED
+EP19_CLOSED=NO
+ROADMAP_23=NO_GO
+SECOND_WAVE=NO_GO
+COMMIT_CANDIDATE_FREEZE_MERGE_PUSH_PUBLICATION_PERFORMED=NO
+ACTUAL_UPLOAD=NO_LOCAL_DELIVERY_ONLY
+INDEPENDENT_REVIEW_REQUIRED=YES
+
+DECISION
+The bounded diagnosis establishes a Canvas gesture/click product defect on the exact frozen implementation and build. A primary mouse press beginning inside project-node selects it at revision 2 and captures the pointer on the Canvas stage. The zero-movement pointerup completes the node-origin drag path, releases capture and leaves suppressClick=false. Chromium then delivers a trusted click targeted at the stage. Canvas classifies that target alone as empty background and dispatches an empty LOCAL_EPHEMERAL selection. The store correctly converts that action to an empty replace request and publishes revision 3, selectedRefs=[], primaryRef=null, retaining the same lifetime, scope and supported actions.
+
+This is not an inferred reconcile defect. R1's passive synchronous store-notification stack establishes the actual clearing call chain without a debugger. R2 records the empty action/request, unique live inventory, no-drag branch and background handler. The previous historical process did not capture its caller stack; these are fresh exact-baseline reproductions of its identical input and state sequence, not retroactively invented historical traces. No product correction or browser acceptance is claimed.
+
+1. INPUT IDENTITIES AND FROZEN SOURCE RECOVERY
+Repository: shangxq007/media-platform.
+Canonical path: [LOCAL_PRODUCT_REPOSITORY]
+Historical frontend worktree: [LOCAL_FRONTEND_WORKTREE]
+Canonical local HEAD/main: 86d6aef94fd5e58da552e97c11473cff6eca734e
+Historical worktree HEAD: f5e19cf53fd010eea2935dd29557e82a879e042c
+Historical branch: refs/heads/agent/frontend-wave2-product-ux-v1
+The worktree is dirty. Neither its name nor HEAD is used as the frozen source authority. No reset, checkout, fetch, pull, index write or ref mutation was performed.
+AUTHORITATIVE_IMPLEMENTATION_TREE=ffeec76721e7334325a4a4c9f3aaea84174d0cb4
+Exact source recovered by reading the existing lint-correction snapshot, verifying all 7948 manifest entries, and matching every path/mode/blob against git ls-tree of this existing Git tree. Final snapshot bytes and executable modes also match. This is identity verification, NOT a claim to have read 7948 file bodies.
+SOURCE_MANIFEST_ENTRY_COUNT=7948
+SOURCE_MANIFEST_SHA256=d25eab4e6b4b225486e1128febe0b79ab7ba1a8fcbb7c9559ed82ba4d24b8d9b
+FINAL_SLICE_1C_PATH_COUNT=9
+The original complete FINAL_SLICE_1C_IMPLEMENTATION.patch is preserved, with its nine diff headers verified. The total dirty worktree paths are a different denominator and were not relabelled as this nine-path patch.
+FOUNDATIONPAGES_BLOB=f7b790ddcd3d5a529cbc43c744381f2bbf6578d5
+INTERACTION_SHELL_TEST_BLOB=bbfc026f2a7c972a880dfd838bf8c56d7086c474
+WORKSPACE_CANVAS_TEST_BLOB=6359cfc638c1948b8d6758cff05e8437842e1509
+WorkspaceCanvas.tsx blob=59853dd5028bca26a0e259312727e4448fc5d440
+interaction/model.ts blob=c1f1337e993a5089fa5eed5b29054e3b6e21990b
+SelectionContext.tsx blob=05e93cd94bbff6b2049869563b15d00df2e53913
+BUILD_MANIFEST_SHA256=53597b2de327034d94a395513c9c12ebe881a34554ae40f80980618bc7482cf8
+BUILD_ARTIFACT_COUNT=8
+The existing lint-correction build was served unchanged by the byte-pinned fixture server. It was not rebuilt. All eight artifacts are included in the package under evidence/inputs/build.
+WorkspaceCanvas-CJYBS6re.js SHA256=8349580e2758863011a9698dae0197bd486f5f9c00f7b05ee8bb6a7f4d275d19
+FoundationPages-hrn57YLE.js SHA256=51918c04db919998ae92404543fcd01bbc571f8597f56edbf9563505153035d6
+
+Required prior actual-byte verifications all matched before use and again at preservation readback:
+Previous FINAL_REPORT.txt: 0bafd2fbb81da38a60c91a6769b692ffda7fab3be9b5d710a62c0d78f21ec413
+Previous FRONTEND_WAVE2_SLICE_1C_BROWSER_ENVIRONMENT_CORRECTED_REVIEW_UPLOAD.txt: 36163f0040207ce7ee572ac6f28614162514da2a1413c28480664c2af74661a1
+Previous FRONTEND_WAVE2_SLICE_1C_BROWSER_ENVIRONMENT_CORRECTED_REVIEW_PACKAGE.zip: 06f347828e4b8aa5b40e6ce9c8371a2d91a481c3eea23250e65f10322910b941
+Lint-corrected review ZIP: 72d61b6779d83ca8630342c6527852d689f81b7f636fba9d79ac15f4763307e2
+Prior archives have 313 and 378 entries respectively, zero duplicates/unsafe names and no CRC failure. Original archives are included intact; copied historical seals retain historical scope. All 310 entries of the previous environment evidence manifest and 135 frozen policy pins matched at readback.
+
+Applicable root AGENTS.md files were read in the current canonical/worktree and frozen snapshot; no additional frontend instruction file was found outside dependencies. Explicit current Owner diagnosis authorization takes precedence over generic implementation/freeze workflow. Historical decision recovery files retain PROPOSED labels; original Slice1C WRITER_TASK.txt explicitly records their Owner adoption as CLOSED_PASS/FROZEN. Their original labels are preserved, not silently rewritten into new approvals. Current task authorizes diagnosis only.
+
+2. ENVIRONMENT, EXECUTION AND INPUT SEMANTICS
+PYTHON_VERSION=3.13.14
+WEBSOCKETS_VERSION=15.0.1
+Interpreter=[LOCAL_AUDIT_ROOT]/FRONTEND_WAVE2_SLICE_1C_BROWSER_HARNESS_ENVIRONMENT_CORRECTION_AND_NATIVE_VALIDATION_CONTINUATION_V1/venv/bin/python3
+PYTHON_ENVIRONMENT_MANIFEST_SHA256=167fdcabeb566a7a130c905dddb9c4dec045a165cb0037f7c78888791cabfabb
+WEBSOCKETS_WHEEL_SHA256=f7a866fbc1e97b5c617ee4116daaa09b722101d4a3c170c787450ba409f9736f
+Installed environment: 65 manifested files unchanged; base interpreter binary also byte-identical. Existing qualified environment used read-only, Python bytecode writes disabled. Seven negative controls and positive API/loopback qualification are REUSED, not rerun.
+BROWSER_VERSION=Chrome/149.0.7827.55
+Chrome executable=[LOCAL_BROWSER_CACHE]/chromium-1228/chrome-linux64/chrome
+No environment mismatch, global install, upgrade, interpreter substitution or dependency modification occurred. Fresh task-owned profiles per reproduction. Chrome flags preserve headless=new, no-sandbox, disable-gpu and remote-debugging-port=9267. Fixture port=4196.
+
+Actual call chain:
+native_routes.py:11 selected -> native_common.CanvasBrowser.reset -> chromium_helpers.Browser.nav and inherited wait/locale -> browser_helpers.Browser.click:42-45 -> chromium_helpers.Browser.call:27-40 -> chromium_helpers.Browser.raw.
+CanvasBrowser.mouse:9-13 is NOT called by selected(). Its explicit buttons/pointerType and .08 sleep must not be attributed to this input.
+The inherited click reads project-node center (566,625.59375); Python round produces (566,626). It sends sequential CDP calls, waiting for each response:
+1 {type:mouseMoved,x:566,y:626,modifiers:0}
+2 {type:mousePressed,x:566,y:626,button:left,clickCount:1,modifiers:0}
+3 {type:mouseReleased,x:566,y:626,button:left,clickCount:1,modifiers:0}
+buttons and pointerType are omitted, not explicitly zero. Native delivered pointerdown has button=0/buttons=1; pointerup/click have button=0/buttons=0, pointerId=1, pointerType=mouse. No held-button mouseMoved occurs in this click. All three CDP responses succeeded. Exact input parameter equality against the historical JSONL was verified programmatically in both reproductions.
+Viewport: 1440x1000, deviceScaleFactor=1, mobile=false. Existing focus emulation=true; document.hasFocus() was true. Existing synthetic locale input/change helper retained. No extra application focus, selection, camera, route or fixture mutations were introduced.
+Original .3 navigation wait, polling waits, .5 reset wait, .15 click wait and .2 selected wait remain inherited. No arbitrary sleeps were added to product input. Only server readiness polling was added outside the native sequence.
+
+Bounded driver executes unchanged native_routes.py AST prefix (imports, browser setup, observer install, definitions), then calls its original selected() exactly once. It does not execute the top-level acceptance loop. Frozen source bytes, function body and assertion are unchanged. Output bindings are byte-exact harness copies in each task-owned run directory, with individual read-only mounts. This prefix-only invocation is the declared diagnostic orchestration deviation, not a frozen harness repair. Unexpected selection survival would stop without acceptance continuation.
+
+R1: passive event listeners, committed-fiber reads and synchronous store subscription; no debugger.
+R2: same passive observer plus 16 conditional production-bundle logpoints that return false, no deliberate pauses/steps. Exact expressions, locations and hashes were recorded before launch in runs/R2/logpoints.json.
+R3=NOT_RUN; no remaining discriminating observation justified consuming it. No run was used to seek a passing selection.
+R1_DIAGNOSTIC_EXIT_CODE=1
+R2_DIAGNOSTIC_EXIT_CODE=1
+EXPECTED_DIAGNOSTIC_PRECONDITION_FAILURE_COUNT=2
+R1_NATIVE_COMMAND_COUNT=21
+R2_NATIVE_COMMAND_COUNT=38
+TOTAL_NATIVE_COMMAND_COUNT=59
+CDP_ERROR_RESPONSE_COUNT=0
+NEW_ACCEPTANCE_CHECKS_COMPLETED=0
+No rec() executed. Both original selectedRefs assertions failed and their raw tracebacks remain preserved. Zero completed checks is not PASS.
+
+3. EXACT CAUSAL CHAIN
+Primary evidence: runs/R1/trace.json and event-store-timeline.jsonl; runs/R2 equivalents; static/MEASURED_CAUSAL_SUMMARY.json. Times below are performance.now milliseconds within each document, not comparable wall-clock timestamps across runs.
+
+R1 (no debugger):
+1198.3: trusted pointerdown on SPAN inside project-node; active store=1, lifetime=2, revision=1, empty selection.
+1201.7: synchronous notification revision=2, project-node selected. Stack: Canvas de/onPointerDown -> flushSync -> D/selectNode -> store select(h) -> publishSelection(V) -> update(v) -> subscriber. Active committed provider references exactly this store.
+Selection commit inserts action bar/Inspector: stage changes from x=24,y=434.59375,width=1392,height=520 to x=24,y=476.59375,width=1097,height=520. Gesture captures the post-commit geometry, drawing origin (25,477.59375), camera (306,20,zoom1).
+1213.9: product focuses project-node with preventScroll; capture held, gesture kind=drag, moved=false. No observer-induced focus call.
+1217.4: native gotpointercapture targets stage, held=true.
+1223.4: native pointerup targets stage while capture held. Gesture still valid, no movement.
+1224.7: native lostpointercapture, held=false, gesture absent.
+1225.3: trusted click detail=1 targets DIV.ff-workspace-canvas, state still revision=2 selected. Click is not default-prevented.
+1226.2: synchronous clearing notification revision=3 empty/null, same store=1 and lifetime=2, same scope and supported actions. Stack contains Canvas onClick -> U(clear) -> Object.dispatch -> h(select) -> V(publishSelection) -> v(update). It does not identify reconcile as the publishing caller.
+1226.5 onward: node blur/focusout then stage focus; these follow the clearing write because clear() calls stage.focus after dispatch.
+The synchronous notification can precede React DOM updates: at revision 2 notification the DOM still says unselected, and at revision 3 notification it still says selected. Subsequent committed-DOM observations converge. This is expected store-versus-render timing, not an alternate store authority.
+
+R2 (non-pausing targeted logpoints):
+Register observed once: adapter id=1, previous adapter=null, documentRetired=false. Diagnostic IDs are per observer: R2 product store id=3, lifetime=2; the independent frozen observer still calls its product owner 1. Numeric IDs from separate WeakMaps are not globally comparable.
+13 actual reconciliation inventories were captured. Every inventory has exactly one NODE/project-node and one NODE/note-node; adapter id=1 throughout. Full scoped refs in the same snapshot match workspace ux-workspace, project ux-project, surface canvas. Before the empty replace, reconciliation publishes the surviving project-node projection without a revision change. No absent, duplicate or scope-incompatible resolution caused clearing.
+1258.1: actual ResizeObserver callback sees selected project-node and valid active drag. Captured and live geometry agree; no cancellation/fit/reveal is invoked in that callback. Initial fit callbacks occur before the gesture; another fit occurs after clearing. No reveal logpoint hit.
+1264.7: pointerup handler sees stage event, coordinates (566,626), buttons=0, active drag moved=false.
+1265.6: cancelGesture releases/discards the completed gesture, followed by successful live-context recheck.
+1266.4: no-drag return records moved=false, delta=(0,0), suppressClick=false, contextRevision=2. The assignment suppressClick=active.moved has executed.
+1268.8: Canvas click-capture handler sees suppression=false, trusted click detail=1 on the stage.
+1269.6: background handler explicitly records isStage=true,isViewport=false,store=3.
+1270.4: clear() sees the same store at revision 2 selected.
+1272.1: dispatch receives exactly {category:'LOCAL_EPHEMERAL',type:'select',ids:[]}, invocationSource='DIRECT'.
+1272.8: select receives {mode:'replace',refs:[],revision:2,lifetime:<same object>}; requestLifetime and store lifetime diagnostic ids both 2. primary is undefined, not an invented alternate primary.
+1273.4: publishSelection receives objects=[] with supported=['rename','move','reveal'].
+1273.5: update receives empty selectedObjects/selectedRefs, null primarySelectedObject/primaryRef, invalidate=true while previous revision=2.
+Synchronous subscription then observes revision=3. Same active committed product store and lifetime; no retirement event or register change intervenes.
+
+Classification of operation alternatives:
+Established: empty LOCAL_EPHEMERAL dispatch -> select REPLACE empty -> publishSelection -> revision increment.
+Not a select(mode='clear'), remove or toggle request.
+Not reconciliation pruning: inventory remained uniquely resolvable, reconcile preserved selected projection before explicit replace.
+Not adapter/owner/document retirement: one registration, no retirement hits, no pagehide, unchanged product lifetime and supported actions. Native got/lost capture is pointer ownership, not Selection owner retirement.
+Not camera/time/revisionPair/inspect/agent state mutation: exact update payload and caller establish the membership write.
+Not an observation artifact: synchronous authority notification, active committed store identity, handler-local store, frozen observer and final DOM agree.
+
+4. SOURCE/BUILD CORRESPONDENCE
+No source maps are present in the eight-artifact build. Reviewed offsets are zero-based bundle line/UTF-16 column locations, not source maps. Source lines below come from exact source bodies. Raw minified excerpts and prospective locations are retained in runs/R2/logpoints.json.
+WorkspaceCanvas-CJYBS6re.js, line 0:
+column 3612: cancelGesture source WorkspaceCanvas.tsx:57-66.
+column 6717: onPointerUp entry source :148-151.
+column 6833: no-drag return after suppression assignment source :155-158.
+column 7924: clear's dispatch source :183.
+column 8031: fit source :184.
+column 8138: reveal source :185-193.
+column 9110: ResizeObserver callback source :212-220.
+column 12690: onClickCapture suppression check source :276.
+column 12782: background onClick -> isEmptyTarget/clear source :101,:276.
+Pointerdown/select/capture correspondence additionally reviewed at bundle text near 5422/5436 (flushSync selection) and 6127 (setPointerCapture), source :112-132; R1 stack locations are one-based as emitted by Chrome.
+FoundationPages-hrn57YLE.js, line 0:
+column 8824: update before write, model.ts:61-64.
+column 8945: retireSelectionOwner, :67-72.
+column 9619: publishSelection, :84-94.
+column 10036: reconcile with actual inventory, :95-98.
+column 10119: select request, :99-118.
+column 11162: register, :126-131.
+column 11622: dispatch, :143-158.
+SelectionContext.tsx:45-51 keeps one stable registered adapter whose getters use latest committed adapter; layout effects reconcile. :6-34 owns scope/lifetime and pagehide retirement. None of that code was altered.
+Canvas model.ts:45-54 supplies the two exact presentation nodes; :73-80 fit changes camera only; :85-86 coordinate conversion; :113-117 defines four-client-pixel threshold and positive marquee area. R2 no-drag delta was zero, not a marquee fallback.
+InteractionShell.tsx:9-24 and :52-61 add action bar and Inspector only with a primary selection. AppShell.tsx:97-109 places Inspector beside center and owns the scoped provider. These explain the measured layout shift, not a new selection authority.
+
+5. COMPETING HYPOTHESES — FINAL MATRIX
+H1 Pointer capture/click/background-clear
+Supporting: R1 native pointerup and click target stage; got/lostcapture; unchanged selected state immediately before click; synchronous clear caller stack. R2 false suppression and stage-only handler condition, exact empty action/request.
+Contradicting: none in these reproductions. A blanket assertion that all stage clicks should clear is contradicted at interaction-intent level by the node-origin, zero-delta gesture.
+Distinguishing observation: direct action + same-store write from actual trusted stage click.
+Disposition: ESTABLISHED_PRIMARY_CAUSE.
+
+H2 Reconcile/inventory resolution
+Supporting static possibility: reconcile prunes non-unique or unresolved refs and runs in layout effects and action boundaries.
+Contradicting: 13 R2 actual inventory calls each resolve project-node uniquely in unchanged scope/adapter; selected projection survives pre-dispatch and pre-select reconcile; write stack/payload is explicit replace empty.
+Distinguishing observation: inventories and publication arguments at each actual call, not observer-triggered reconcile.
+Disposition: RULED_OUT_AS_CLEARING_CAUSE_IN_OBSERVED_REPRODUCTIONS.
+
+H3 Layout/focus/camera
+Supporting: selection really changes stage origin and width; focus and ResizeObserver callbacks occur.
+Contradicting: post-flushSync capture bounds remain valid; camera transform remains matrix(1,0,0,1,306,20) through click; node remains under (566,626) before/after layout; no move event after down; no-drag branch reached, no reveal. Focus-to-stage follows clear rather than causes it.
+Distinguishing observation: bounds/origin/camera and gesture at down/up/click, callback ordering, zero delta and suppression value.
+Disposition: LAYOUT_PARTICIPATED_BUT_NOT_CANCELLATION_OR_CLEARING_CAUSE; CAPTURE_CLICK_MISCLASSIFICATION_PERSISTS_WITH_VALID_GEOMETRY.
+
+H4 Harness input/observation mismatch
+Supporting risk: actual inherited click omits buttons; prior observer samples mutations rather than writes; synthetic unit tests manually choose click targets.
+Contradicting: input exactly matches historical params; native buttons, pointer identity, modifiers and capture are coherent; coordinates remain inside project-node; R1 synchronous callback proves actual active store transition, R2 handler-local store agrees. No held-button motion exists here, so the different CanvasBrowser.mouse encoding is not explanatory.
+Distinguishing observation: actual CDP commands/responses, native delivered events, committed provider identity and same-store callback stack.
+Disposition: NOT_ESTABLISHED_AS_HARNESS_OR_OBSERVATION_DEFECT. No claim of physical-device equivalence or universal correctness of every inherited input helper.
+
+H5 Adapter/owner/route/lifecycle
+Supporting static possibility: unregister/retirement clears and rotates lifetime; route replacement can replace store.
+Contradicting: R2 one registration and no retirement hit, same adapter/lifetime/scope at every causal boundary; no pagehide or navigation after initial reset; R1 same active committed store across both writes.
+Distinguishing observation: actual register/retirement logpoints plus write payload and owner identity.
+Disposition: RULED_OUT_AS_CLEARING_CAUSE_IN_OBSERVED_INTERVAL. This is not full lifecycle/Back/Forward/BFCache validation.
+
+6. CODE, BROWSER, HARNESS AND CONTRACT ARE DIFFERENT CLAIMS
+Code did: selected node on pointerdown; captured stage; released on no-drag pointerup; permitted ensuing click; classified stage target as background; dispatched a legal empty replace. Store invariants held correctly for that request.
+Browser delivered: trusted pointerdown on node descendant, captured pointerup on stage and trusted click on stage, although coordinates still lie within node. mousedown/mouseup listeners recorded none in this sequence; pointerdown was prevented by the product, while click still arrived. Native event evidence, not assumed CDP defaults, governs this statement.
+Harness intended: one ordinary primary click at project-node center must establish selectedRefs before route checks. It did not intend an empty-space click, no drag, no route transition and no store mutation. Its assertion remains valid for ordinary node selection.
+Frozen behavior requires: explicit node activation selects; focus alone does not select; genuine background/empty gesture clears; modifier/group behavior and lifecycle invalidation remain fail-closed. Same-owner/scope guarantees do not prohibit legitimate explicit user clears, but this was not an empty-background-origin intent. Treating the captured stage click as such is the product defect. This finding is narrower than invalidating every Canvas test or the Selection architecture.
+
+7. EXISTING TEST COVERAGE AND MINIMAL NEXT SCOPE — NOT IMPLEMENTED
+WorkspaceCanvas.test.tsx:299-313 explicitly states happy-dom lacks native pointer routing/click synthesis. It replaces capture with a Set-backed mock.
+:62-64 and :172-201 use fireEvent.click with explicit chosen node/background targets.
+:347-375 exercises selected-layout entry and drag, but no zero-movement native post-capture click.
+:578-599 manually sends pointerup to stage then fireEvent.click(project) at :594. This does not reproduce Chromium synthesizing the click on captured stage.
+:517-541 manually checks post-drag suppression using a selected target. That coverage remains useful for those branches.
+:781-808 is synthetic pagehide/capture cancellation coverage, not the native selection precondition or actual BFCache evidence.
+Coverage gap: a real captured node-origin primary click with zero/subthreshold movement and the browser-generated final click target is not established by these manual target tests. No assertion was changed or weakened.
+
+Recommended new authorization, limited to:
+- frontend/src/product/canvas/WorkspaceCanvas.tsx, CanvasSession gesture-completion/onPointerUp and background-click intent classification (and only necessary local gesture metadata).
+- frontend/src/product/canvas/WorkspaceCanvas.test.tsx, precise regression for node-origin no-drag completion versus genuine background intent.
+- A separately versioned external native regression helper/evidence, leaving this frozen harness intact unless separately authorized.
+Behavioral correction objective: preserve the originating node-selection intent across native capture-dependent click delivery while retaining valid empty-background clear and all accepted gesture cancellation semantics. Do not use a blanket capture disable, forced event target, forced selection, direct-store harness action, arbitrary sleep, unconditional suppression or weakened selected(). Detailed implementation choice requires separate Owner correction authorization and review.
+No justified correction scope in interaction/model.ts, SelectionContext.tsx, adapter objects, route ownership, fixtures, dependencies, backend or validation policy.
+Required regression scope after correction: native initial unselected node click, already-selected node and group preservation, tiny subthreshold motion, actual background stage/viewport click, positive-area marquee including modifiers, completed drag, capture loss/cancellation and existing keyboard/editable/IME ownership. Exercise the actual native final click, not a manually targeted surrogate. Preserve focus separate from Selection, exact scoped identity, revision behavior, camera/border origin and fail-closed retirement.
+Reusable: original contracts, test-identity/guard policy, qualified Python/Chrome environment if reverified, unchanged historical source/build seals and historical pre-browser results for THIS exact tree. They remain historical baselines, not green validation of a corrected tree.
+Fresh after a product change: affected Canvas/model/interaction/shell tests, required current-tree frontend gates (test discovery/execution, typecheck, lint, guards, dependency checks as policy requires), a new explicitly external production build and native click regression on that exact build. Any later Slice1C route/lifecycle/Back/Forward/BFCache acceptance requires separate continuation authorization; old zero-check browser result cannot be reused as PASS.
+No policy change is needed to diagnose this defect. H4 ledger and tracked-dist disposition remain separate Owner decisions. No correction was started here.
+
+8. NONINTERFERENCE, LIMITATIONS AND ACTUAL DEVIATIONS
+External observer never calls select, dispatch, reconcile, register, retire, focus, pointer capture setters, preventDefault or stopPropagation. It does not replace methods/getters or change layout/camera. It adds passive window listeners, one read-only subscription per discovered store, a MutationObserver and diagnostic data under window.__diag. All store snapshots are from the product authority. Observational IDs and gesture projections are not another Selection store.
+R1 callback stack capture, geometry reads and fiber traversal have overhead. R2 conditional debugger instrumentation also adds overhead despite not deliberately pausing. Measured pointerdown-to-click: R1 27.0 ms, R2 approximately 34.4 ms. Selected-to-cleared: R1 24.5 ms, R2 approximately 31.4 ms. No claim of zero timing perturbation, original wall-clock reproduction or physical mouse validation. The causal event/caller sequence is independently present in unpaused R1 and R2.
+The frozen CDP raw helper discards unsolicited events while awaiting each response. Therefore complete Debugger.breakpointResolved/paused event accounting is not available; initial setBreakpointByUrl responses have empty locations because scripts are not loaded yet. Actual named logpoint hits prove execution at the causal boundaries. Unhit retirement/reveal probes alone are not the proof of absence: unchanged lifetime/update payload and captured geometry/callers independently constrain those alternatives. This limitation does not require a third run to identify the clearing operation.
+One diagnostic schema collision: no-drag-return includes payload kind='drag', which overwrites the generic row kind='logpoint' in the external recorder. The row is intact with name='no-drag-return', suppression=false, moved=false and delta=(0,0). Analysis selects named logpoints by presence of name, not only kind. Original trace is preserved; no helper retry or evidence rewriting was used to conceal it. This did not change application behavior or prevent diagnosis.
+R1 and R2 only captured final-state screenshots after preserving failure, not transient revision-2 screenshots. The R1 screenshot visibly shows 0 selected, primary None, stage focus and no Inspector. It is supplementary; event/store traces prove causality. No historical screenshots were fabricated.
+The first static export path filter also copied unrelated historical lifecycle-named documents into the task's external static directory. Those originals are retained locally, not used as diagnosis authority and excluded from the review package. No backend source was altered. Packaged source-body exports are limited to relevant frontend and root instruction files; full requested manifests/previous sealed archives retain their original contents.
+Bootstrap tool reads and evidence file generation were not retroactively relabelled as a historical predeclared command ledger. Per-run prospective plans contain the exact commands, environment, helper hashes, write boundaries and expected failure before launch. No unreported execution retry occurred.
+
+NOT_RUN: R3; all engineering gates as fresh runs; full acceptance; query/hash route checks; Back/Forward; full-document navigation; BFCache; T17; gesture acceptance scenarios; physical touch; OS IME; screen reader; backend EP19 work; commit/freeze/merge/push/publication; external upload.
+No unrelated crash, source drift, CDP error or environment mismatch was observed. The two raw selected() failures are expected diagnostic failures, not browser acceptance successes.
+
+9. PRESERVATION AND TEARDOWN
+Evidence: static/PRESERVATION_READBACK.json, inputs/*-tracked-before.json, before/after Git records, run containment/process/port receipts.
+Canonical tracked-file denominator=7631; observed changed entries=0.
+Historical frontend tracked-file denominator=7948; observed changed entries=0.
+Both real indexes, status, branch, HEAD and stash observations remained unchanged; shared local refs and worktree registry remained unchanged. Frozen snapshot denominator=7948; mismatches=0. Eight build artifacts unchanged. Original harness and both run copies match all frozen pins. Previous environment sealed evidence denominator=310; mismatches=0. Frozen policy denominator=135; mismatches=0.
+This is a measured before/after scope plus read-only runtime mounts, not continuous seven-lane/all-files monitoring. It does not reuse the earlier seven-lane interval as a new global attestation. Other lanes' source/refs/indexes/registrations received no task-issued write. EP19 census, pack monitor and backend sanity were not invoked.
+Relevant Skill/Memory observation: 23 files under the two loaded skill directories and default memories, hash+mtime and path-set comparison; differences=0. Window begins after initial skill loading at preflight and ends at preservation readback. Root usage metadata and all other skills were not included. Task-issued Skill/Memory/configuration writes=0. No EP19 drift disclosure or earlier frontend zero-drift result is imported into this interval.
+
+Each run was contained by bwrap with '/' read-only, only its output/home/profile and private /tmp writable. Copied frozen harness files were individually mounted read-only. Readback of filesystem flags confirmed repository, historical source, snapshot/build, previous evidence and venv read-only inside execution.
+Both ports were checked before each launch; no pre-existing listener was killed.
+R1 diagnostic PID10527 exit1; Chrome group PID10362 teardown exit-15; fixture group PID10359 teardown exit-15.
+R2 diagnostic PID10950 exit1; Chrome group PID10781 teardown exit-15; fixture group PID10778 teardown exit-15.
+Every owned process was waited. Teardown SIGTERM exits are not acceptance/diagnostic exits. No other process group was targeted. Both post-run TCP checks found zero remaining listeners on 4196/9267. Profiles remain external as local evidence and are excluded from delivery.
+
+10. DELIVERY AND INDEPENDENT REVIEW
+Deliverables are in the task root's delivery directory:
+FINAL_REPORT.txt
+NATIVE_SELECTION_CAUSAL_REVIEW_UPLOAD.txt
+NATIVE_SELECTION_CAUSAL_REVIEW_PACKAGE.zip
+EVIDENCE_MANIFEST.sha256
+DELIVERY_RECEIPT.json plus DELIVERY.sha256 (detached, no self-hash cycle)
+The package contains relevant exact sources, frozen build, complete patch/manifest, original predecessor archives, plans/helpers, raw CDP/event/store/logpoint traces, failures, screenshots, preservation and teardown evidence. Profiles, unrelated newly exported historical documents and extracted working copies are excluded.
+The detached receipt is generated after sealing this report and records actual archive membership, duplicate/unsafe-path checks, manifest hashes, extraction byte comparisons and bounded credential scan results. It is the packaging verification record; package integrity does not imply Slice1C acceptance.
+Actual upload status is NO: local TUI file delivery only, no remote upload or independent reviewer receipt. Submit the TXT/ZIP for independent causal review and obtain explicit bounded correction authorization before any product change. H4/tracked-dist remain unresolved; EP19 remains open; Roadmap #23 and Second Wave remain NO_GO.

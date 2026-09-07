@@ -1,0 +1,210 @@
+[
+  {
+    "name": "update-before",
+    "source_correspondence": "frontend/src/interaction/model.ts:61-64",
+    "bundle_sha256": "51918c04db919998ae92404543fcd01bbc571f8597f56edbf9563505153035d6",
+    "character_offset": 8824,
+    "excerpt": "ect:null,inspectorOpen:!0,agentOpen:!1,supported:[]}),c=null,d=!1,p=!1;const l=new Set,v=(a,g=!1)=>{Object.entries(a).every(([u,m])=>_(s[u],m))&&!g||(s=o({...s,...a,revision:s.revision+(g?1:0)}),l.forEach(u=>u()))},T=a=>{a===\"document\"&&(p=!0),!d&&(d=!0,c=null,v({lifetime:{},selectedRefs:[],primaryRef:null,selectedObjects:[],primarySelectedObject:null,supported:[],revisionPair:void 0,time:void 0,agentOpen:!1},!0))},x=()=>((c==null?void 0:c.object",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/FoundationPages-hrn57YLE.js",
+      "lineNumber": 0,
+      "columnNumber": 8824,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"update-before\",next:a,invalidate:g,before:s,lifetime:__diag.id(s.lifetime),adapter:__diag.id(c),stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  },
+  {
+    "name": "retirement",
+    "source_correspondence": "frontend/src/interaction/model.ts:67-72",
+    "bundle_sha256": "51918c04db919998ae92404543fcd01bbc571f8597f56edbf9563505153035d6",
+    "character_offset": 8945,
+    "excerpt": "ry(([u,m])=>_(s[u],m))&&!g||(s=o({...s,...a,revision:s.revision+(g?1:0)}),l.forEach(u=>u()))},T=a=>{a===\"document\"&&(p=!0),!d&&(d=!0,c=null,v({lifetime:{},selectedRefs:[],primaryRef:null,selectedObjects:[],primarySelectedObject:null,supported:[],revisionPair:void 0,time:void 0,agentOpen:!1},!0))},x=()=>((c==null?void 0:c.objects())??[]).filter(a=>[\"NODE\",\"CLIP\",\"LANE\"].includes(a.kind)).map(a=>Object.freeze({id:a.id,kind:a.kind,title:a.title,x:a.",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/FoundationPages-hrn57YLE.js",
+      "lineNumber": 0,
+      "columnNumber": 8945,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"retirement\",reason:a,retired:d,documentRetired:p,before:s,adapter:__diag.id(c),stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  },
+  {
+    "name": "register",
+    "source_correspondence": "frontend/src/interaction/model.ts:126-131",
+    "bundle_sha256": "51918c04db919998ae92404543fcd01bbc571f8597f56edbf9563505153035d6",
+    "character_offset": 11162,
+    "excerpt": ",subscribe:a=>(l.add(a),()=>{l.delete(a)}),reconcile:P,select:h,retireSelectionOwner:T,register:a=>{if(p)return()=>{};if(c)throw new Error(\"Only one active surface adapter may own the selection context.\");return d=!1,c=a,P(),()=>{c===a&&T(\"adapter\")}},setTime:a=>{if(d)return;const g=m=>Math.min(20,Math.max(0,Number.isFinite(m)?Math.round(m):0)),u={...a,playhead:g(a.playhead),range:a.range?[...a.range].map(g).sort((m,O)=>m-O):void 0};_(u,s.time)||",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/FoundationPages-hrn57YLE.js",
+      "lineNumber": 0,
+      "columnNumber": 11162,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"register\",nextAdapter:__diag.id(a),previousAdapter:__diag.id(c),documentRetired:p,before:s,stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  },
+  {
+    "name": "reconcile-inventory",
+    "source_correspondence": "frontend/src/interaction/model.ts:95-98",
+    "bundle_sha256": "51918c04db919998ae92404543fcd01bbc571f8597f56edbf9563505153035d6",
+    "character_offset": 10036,
+    "excerpt": ".freeze([...u])},!0),H&&((ie=c==null?void 0:c.onSelection)==null||ie.call(c,m))},P=()=>{const a=x();V(s.selectedRefs.flatMap(g=>{const u=$(g,a);return u?[u]:[]}),s.primaryRef)},h=a=>{if(d)return E(\"Selection ownership has retired.\");if(P(),a.lifetime!==s.lifetime||a.revision!==s.revision)return E(\"Context changed. Select again on the current surface.\");const g=x(),u=[...new Map(a.refs.map(y=>[R(y),y])).values()];if(u.some(y=>!$(y,g)))return E(\"Th",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/FoundationPages-hrn57YLE.js",
+      "lineNumber": 0,
+      "columnNumber": 10036,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"reconcile-inventory\",inventory:a,before:s,adapter:__diag.id(c),lifetime:__diag.id(s.lifetime),projectNodeMatches:a.filter(o=>o.kind===\"NODE\"&&o.id===\"project-node\").length,stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  },
+  {
+    "name": "select-request",
+    "source_correspondence": "frontend/src/interaction/model.ts:99-118",
+    "bundle_sha256": "51918c04db919998ae92404543fcd01bbc571f8597f56edbf9563505153035d6",
+    "character_offset": 10119,
+    "excerpt": "()=>{const a=x();V(s.selectedRefs.flatMap(g=>{const u=$(g,a);return u?[u]:[]}),s.primaryRef)},h=a=>{if(d)return E(\"Selection ownership has retired.\");if(P(),a.lifetime!==s.lifetime||a.revision!==s.revision)return E(\"Context changed. Select again on the current surface.\");const g=x(),u=[...new Map(a.refs.map(y=>[R(y),y])).values()];if(u.some(y=>!$(y,g)))return E(\"The requested selection is no longer on this surface.\");let m=s.selectedRefs.slice();",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/FoundationPages-hrn57YLE.js",
+      "lineNumber": 0,
+      "columnNumber": 10119,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"select-request\",request:a,before:s,requestLifetime:__diag.id(a.lifetime),lifetime:__diag.id(s.lifetime),adapter:__diag.id(c),stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  },
+  {
+    "name": "publish-selection",
+    "source_correspondence": "frontend/src/interaction/model.ts:84-94",
+    "bundle_sha256": "51918c04db919998ae92404543fcd01bbc571f8597f56edbf9563505153035d6",
+    "character_offset": 9619,
+    "excerpt": "R(i(m))===R(a));return u.length===1?u[0]:void 0},V=(a,g,u=(c==null?void 0:c.supports)??[])=>{var ie;const m=Object.freeze([...a]),O=Object.freeze(a.map(i)),L=O.findIndex(xe=>g&&R(xe)===R(g)),y=m[L<0?0:L]??null,N=O[L<0?0:L]??null;if(_(m,s.selectedObjects)&&_(N,s.primaryRef)&&_(u,s.supported))return;const H=!_(O,s.selectedRefs);v({selectedObjects:m,selectedRefs:O,primarySelectedObject:y,primaryRef:N,supported:Object.freeze([...u])},!0),H&&((ie=c==n",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/FoundationPages-hrn57YLE.js",
+      "lineNumber": 0,
+      "columnNumber": 9619,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"publish-selection\",objects:a,primary:g,supported:u,before:s,lifetime:__diag.id(s.lifetime),adapter:__diag.id(c),stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  },
+  {
+    "name": "dispatch-action",
+    "source_correspondence": "frontend/src/interaction/model.ts:143-158",
+    "bundle_sha256": "51918c04db919998ae92404543fcd01bbc571f8597f56edbf9563505153035d6",
+    "character_offset": 11622,
+    "excerpt": ",!0)},setRevisionPair:a=>{d||_(a,s.revisionPair)||v({revisionPair:a},!0)},dispatch:(a,g=\"DIRECT\")=>{if([\"CANONICAL_SEMANTIC\"].includes(a.category)||a.type===\"semantic\")return E(ee);if(d)return E(\"Selection ownership has retired.\");if(P(),a.category===\"LOCAL_EPHEMERAL\"){if(a.type===\"agent\")return v({agentOpen:a.open}),G();if(a.type===\"inspect\")return v({inspectorOpen:a.open}),G();if(a.type!==\"select\")return E(\"Unsupported local intent.\");const u=x",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/FoundationPages-hrn57YLE.js",
+      "lineNumber": 0,
+      "columnNumber": 11622,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"dispatch-action\",action:a,invocationSource:g,before:s,lifetime:__diag.id(s.lifetime),adapter:__diag.id(c),stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  },
+  {
+    "name": "cancel-gesture",
+    "source_correspondence": "frontend/src/product/canvas/WorkspaceCanvas.tsx:57-66",
+    "bundle_sha256": "8349580e2758863011a9698dae0197bd486f5f9c00f7b05ee8bb6a7f4d275d19",
+    "character_offset": 3612,
+    "excerpt": "seState(null),[p,P]=v.useState(null),[Y,X]=v.useState(\"select\"),N=v.useRef(!1),g=v.useCallback(()=>{const e=a.current;if(a.current=null,h(null),P(null),!!e){N.current=!0;try{e.capture.releasePointerCapture(e.pointerId)}catch{}}},[]),k=e=>{const t=e(u.current);t!==u.current&&g(),u.current=t,c(t)},I=ve(),M=we(),[O,le]=v.useState(!1),D=(e,t)=>{const s=I.getSnapshot();I.select({mode:t?\"toggle\":\"replace\",refs:[{workspaceId:s.workspaceId,projectId:s.pr",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/WorkspaceCanvas-CJYBS6re.js",
+      "lineNumber": 0,
+      "columnNumber": 3612,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"cancel-gesture\",active:__diag.gestures(),suppression:N.current,store:__diag.id(I),stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  },
+  {
+    "name": "pointerup-entry",
+    "source_correspondence": "frontend/src/product/canvas/WorkspaceCanvas.tsx:148-151",
+    "bundle_sha256": "8349580e2758863011a9698dae0197bd486f5f9c00f7b05ee8bb6a7f4d275d19",
+    "character_offset": 6717,
+    "excerpt": "t.moved&&(t.kind===\"drag\"?h(re(t.canvas,t.originals,s).nodes):P({x:e.clientX,y:e.clientY}))},pe=e=>{const t=V(e.pointerId);if(!t)return;const s=H(t,e);if(g(),!(!F(t)||a.current))if(N.current=t.moved,t.kind===\"drag\"){if(!t.moved)return;k(d=>re(d,t.originals,s)),I.reconcile()}else if(t.kind===\"pan\"&&t.moved)k(d=>te(d,e.clientX-t.startScreen.x,e.clientY-t.startScreen.y));else{const d={x:e.clientX,y:e.clientY},l=t.kind===\"marquee\"&&se(t.startScreen,d",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/WorkspaceCanvas-CJYBS6re.js",
+      "lineNumber": 0,
+      "columnNumber": 6717,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"pointerup-entry\",event:{type:e.type,target:__diag.desc(e.target),currentTarget:__diag.desc(e.currentTarget),clientX:e.clientX,clientY:e.clientY,buttons:e.buttons,button:e.button},active:__diag.gestures(),suppression:N.current,store:__diag.id(I),stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  },
+  {
+    "name": "no-drag-return",
+    "source_correspondence": "frontend/src/product/canvas/WorkspaceCanvas.tsx:155-158",
+    "bundle_sha256": "8349580e2758863011a9698dae0197bd486f5f9c00f7b05ee8bb6a7f4d275d19",
+    "character_offset": 6833,
+    "excerpt": "terId);if(!t)return;const s=H(t,e);if(g(),!(!F(t)||a.current))if(N.current=t.moved,t.kind===\"drag\"){if(!t.moved)return;k(d=>re(d,t.originals,s)),I.reconcile()}else if(t.kind===\"pan\"&&t.moved)k(d=>te(d,e.clientX-t.startScreen.x,e.clientY-t.startScreen.y));else{const d={x:e.clientX,y:e.clientY},l=t.kind===\"marquee\"&&se(t.startScreen,d)?De(u.current.nodes,t.startLocal,{x:t.startLocal.x+s.x,y:t.startLocal.y+s.y},t.context,t.union?t.refs:[]):[];I.sele",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/WorkspaceCanvas-CJYBS6re.js",
+      "lineNumber": 0,
+      "columnNumber": 6833,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"no-drag-return\",moved:t.moved,kind:t.kind,suppression:N.current,delta:s,store:__diag.id(I),contextRevision:t.context.revision,stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  },
+  {
+    "name": "clear-dispatch",
+    "source_correspondence": "frontend/src/product/canvas/WorkspaceCanvas.tsx:183",
+    "bundle_sha256": "8349580e2758863011a9698dae0197bd486f5f9c00f7b05ee8bb6a7f4d275d19",
+    "character_offset": 7924,
+    "excerpt": "rimarySelectedObject)==null?void 0:t.id)}),R=(e,t)=>k(s=>te(s,e,t)),z=e=>k(t=>Ce(t,e)),U=()=>{var e;I.dispatch({category:\"LOCAL_EPHEMERAL\",type:\"select\",ids:[]}),(e=b.current)==null||e.focus()},T=()=>{var t;const e=(t=b.current)==null?void 0:t.getBoundingClientRect();e&&k(s=>Ee(s,e.width,e.height))},$=()=>{var t;const e=(t=b.current)==null?void 0:t.getBoundingClientRect();e&&k(s=>{const d=s.nodes.find(m=>{var y;return m.presentationId===((y=M.pri",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/WorkspaceCanvas-CJYBS6re.js",
+      "lineNumber": 0,
+      "columnNumber": 7924,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"clear-dispatch\",store:__diag.id(I),state:__diag.state(I),suppression:N.current,stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  },
+  {
+    "name": "click-capture",
+    "source_correspondence": "frontend/src/product/canvas/WorkspaceCanvas.tsx:276 onClickCapture",
+    "bundle_sha256": "8349580e2758863011a9698dae0197bd486f5f9c00f7b05ee8bb6a7f4d275d19",
+    "character_offset": 12690,
+    "excerpt": "erCapture:e=>{var t;((t=a.current)==null?void 0:t.pointerId)===e.pointerId&&g()},onClickCapture:e=>{N.current&&e.detail!==0&&(N.current=!1,e.preventDefault(),e.stopPropagation())},onClick:e=>{_(e.target)&&U()},style:{backgroundSize:`${24*o.zoom}px ${24*o.zoom}px`},children:[i.jsxs(\"div\",{ref:B,className:\"ff-canvas-viewport\",style:{transition:\"none\",transform:`translate(${o.viewportX+q.x}px, ${o.viewportY+q.y}px) scale(${o.zoom})`},children:[o.edg",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/WorkspaceCanvas-CJYBS6re.js",
+      "lineNumber": 0,
+      "columnNumber": 12690,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"click-capture\",suppression:N.current,event:{type:e.type,detail:e.detail,target:__diag.desc(e.target),currentTarget:__diag.desc(e.currentTarget),isTrusted:e.nativeEvent.isTrusted},store:__diag.id(I),stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  },
+  {
+    "name": "background-click",
+    "source_correspondence": "frontend/src/product/canvas/WorkspaceCanvas.tsx:101,276 onClick",
+    "bundle_sha256": "8349580e2758863011a9698dae0197bd486f5f9c00f7b05ee8bb6a7f4d275d19",
+    "character_offset": 12782,
+    "excerpt": "ure:e=>{N.current&&e.detail!==0&&(N.current=!1,e.preventDefault(),e.stopPropagation())},onClick:e=>{_(e.target)&&U()},style:{backgroundSize:`${24*o.zoom}px ${24*o.zoom}px`},children:[i.jsxs(\"div\",{ref:B,className:\"ff-canvas-viewport\",style:{transition:\"none\",transform:`translate(${o.viewportX+q.x}px, ${o.viewportY+q.y}px) scale(${o.zoom})`},children:[o.edges.map(e=>{const t=A.find(m=>m.presentationId===e.fromPresentationId),s=A.find(m=>m.presenta",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/WorkspaceCanvas-CJYBS6re.js",
+      "lineNumber": 0,
+      "columnNumber": 12782,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"background-click\",event:{type:e.type,detail:e.detail,target:__diag.desc(e.target),currentTarget:__diag.desc(e.currentTarget),isTrusted:e.nativeEvent.isTrusted},isStage:e.target===b.current,isViewport:e.target===B.current,suppression:N.current,store:__diag.id(I),stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  },
+  {
+    "name": "resize-callback",
+    "source_correspondence": "frontend/src/product/canvas/WorkspaceCanvas.tsx:212-220",
+    "bundle_sha256": "8349580e2758863011a9698dae0197bd486f5f9c00f7b05ee8bb6a7f4d275d19",
+    "character_offset": 9110,
+    "excerpt": "]),v.useEffect(()=>{if(typeof ResizeObserver>\"u\"||!b.current)return;const e=new ResizeObserver(()=>{const t=a.current;if(t){if(oe(t,b.current))return;g()}C?$():T()});return e.observe(b.current),()=>e.disconnect()},[(G=M.primarySelectedObject)==null?void 0:G.id]);const fe=e=>{var l;const t=e.target;if(t.closest('input, textarea, select, [contenteditable]:not([contenteditable=\"false\"])'))return;const s=(l=t.closest(\"[data-canvas-node]\"))==null?void",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/WorkspaceCanvas-CJYBS6re.js",
+      "lineNumber": 0,
+      "columnNumber": 9110,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"resize-callback\",active:__diag.gestures(),selected:C?.presentationId,suppression:N.current,geometry:__diag.geometry(),store:__diag.id(I),stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  },
+  {
+    "name": "fit",
+    "source_correspondence": "frontend/src/product/canvas/WorkspaceCanvas.tsx:184",
+    "bundle_sha256": "8349580e2758863011a9698dae0197bd486f5f9c00f7b05ee8bb6a7f4d275d19",
+    "character_offset": 8031,
+    "excerpt": "tch({category:\"LOCAL_EPHEMERAL\",type:\"select\",ids:[]}),(e=b.current)==null||e.focus()},T=()=>{var t;const e=(t=b.current)==null?void 0:t.getBoundingClientRect();e&&k(s=>Ee(s,e.width,e.height))},$=()=>{var t;const e=(t=b.current)==null?void 0:t.getBoundingClientRect();e&&k(s=>{const d=s.nodes.find(m=>{var y;return m.presentationId===((y=M.primarySelectedObject)==null?void 0:y.id)});if(!d)return s;const l=Math.min(1,(e.width-32)/230,(e.height-32)/1",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/WorkspaceCanvas-CJYBS6re.js",
+      "lineNumber": 0,
+      "columnNumber": 8031,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"fit\",geometry:__diag.geometry(),active:__diag.gestures(),store:__diag.id(I),stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  },
+  {
+    "name": "reveal",
+    "source_correspondence": "frontend/src/product/canvas/WorkspaceCanvas.tsx:185-193",
+    "bundle_sha256": "8349580e2758863011a9698dae0197bd486f5f9c00f7b05ee8bb6a7f4d275d19",
+    "character_offset": 8138,
+    "excerpt": "=(t=b.current)==null?void 0:t.getBoundingClientRect();e&&k(s=>Ee(s,e.width,e.height))},$=()=>{var t;const e=(t=b.current)==null?void 0:t.getBoundingClientRect();e&&k(s=>{const d=s.nodes.find(m=>{var y;return m.presentationId===((y=M.primarySelectedObject)==null?void 0:y.id)});if(!d)return s;const l=Math.min(1,(e.width-32)/230,(e.height-32)/160);return{...s,zoom:l,viewportX:(e.width-230*l)/2-d.x*l,viewportY:(e.height-160*l)/2-d.y*l}})};je({objects",
+    "params": {
+      "url": "http://127.0.0.1:4196/assets/WorkspaceCanvas-CJYBS6re.js",
+      "lineNumber": 0,
+      "columnNumber": 8138,
+      "condition": "typeof __diag!==\"undefined\"&&(__diag.record(\"logpoint\",{name:\"reveal\",geometry:__diag.geometry(),active:__diag.gestures(),store:__diag.id(I),stack:new Error(\"diagnostic logpoint\").stack}),false)"
+    }
+  }
+]

@@ -1,0 +1,109 @@
+{
+  "cases": [
+    {
+      "id": "SELFQUAL_MISSING_DEPENDENCY",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "output": {
+        "status": "FAIL",
+        "error_type": "PackageNotFoundError",
+        "error": "No package metadata was found for websockets"
+      },
+      "pass": true
+    },
+    {
+      "id": "SELFQUAL_WRONG_INTERPRETER",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "output": {
+        "status": "FAIL",
+        "error_type": "AssertionError",
+        "error": "WRONG_INTERPRETER"
+      },
+      "pass": true
+    },
+    {
+      "id": "SELFQUAL_INCOMPATIBLE_API",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "output": {
+        "status": "FAIL",
+        "error_type": "AssertionError",
+        "error": "INCOMPATIBLE_SYNC_API"
+      },
+      "pass": true
+    },
+    {
+      "id": "SELFQUAL_WRONG_VERSION",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "output": {
+        "status": "FAIL",
+        "error_type": "AssertionError",
+        "error": "VERSION_MISMATCH"
+      },
+      "pass": true
+    },
+    {
+      "id": "SELFQUAL_WRONG_PACKAGE_HASH",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "output": {
+        "status": "FAIL",
+        "error_type": "AssertionError",
+        "error": "WHEEL_HASH_MISMATCH"
+      },
+      "pass": true
+    },
+    {
+      "id": "SELFQUAL_MISSING_SOURCE",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "output": {
+        "status": "FAIL",
+        "error_type": "AssertionError",
+        "error": "MISSING_SOURCE:missing-frozen-module.py"
+      },
+      "pass": true
+    },
+    {
+      "id": "SELFQUAL_WRONG_SOURCE_HASH",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "output": {
+        "status": "FAIL",
+        "error_type": "AssertionError",
+        "error": "SOURCE_HASH_MISMATCH:native_routes.py"
+      },
+      "pass": true
+    },
+    {
+      "id": "SELFQUAL_CORRECT",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "output": {
+        "status": "PASS",
+        "executable": "[LOCAL_AUDIT_ROOT]/FRONTEND_WAVE2_SLICE_1C_BROWSER_HARNESS_ENVIRONMENT_CORRECTION_AND_NATIVE_VALIDATION_CONTINUATION_V1/venv/bin/python3",
+        "python_version": "3.13.14 (main, Aug 14 2026, 23:29:42) [GCC]",
+        "prefix": "[LOCAL_AUDIT_ROOT]/FRONTEND_WAVE2_SLICE_1C_BROWSER_HARNESS_ENVIRONMENT_CORRECTION_AND_NATIVE_VALIDATION_CONTINUATION_V1/venv",
+        "base_prefix": "/usr",
+        "sys_path": [
+          "[LOCAL_AUDIT_ROOT]/FRONTEND_WAVE2_SLICE_1C_BROWSER_HARNESS_ENVIRONMENT_CORRECTION_AND_NATIVE_VALIDATION_CONTINUATION_V1/harness",
+          "/usr/lib64/python313.zip",
+          "/usr/lib64/python3.13",
+          "/usr/lib64/python3.13/lib-dynload",
+          "[LOCAL_AUDIT_ROOT]/FRONTEND_WAVE2_SLICE_1C_BROWSER_HARNESS_ENVIRONMENT_CORRECTION_AND_NATIVE_VALIDATION_CONTINUATION_V1/venv/lib64/python3.13/site-packages",
+          "[LOCAL_AUDIT_ROOT]/FRONTEND_WAVE2_SLICE_1C_BROWSER_HARNESS_ENVIRONMENT_CORRECTION_AND_NATIVE_VALIDATION_CONTINUATION_V1/venv/lib/python3.13/site-packages"
+        ],
+        "websockets_version": "15.0.1",
+        "wheel_entries_verified": 55,
+        "source_pins_verified": 10,
+        "sync_client_import": "PASS",
+        "api_exchange": "PASS",
+        "scenario_import_mode": "compiled; complete dependency closure imported without starting browser scenarios"
+      },
+      "pass": true
+    }
+  ],
+  "status": "PASS"
+}

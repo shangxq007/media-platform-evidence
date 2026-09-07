@@ -1,0 +1,103 @@
+{
+  "tree": "ffeec76721e7334325a4a4c9f3aaea84174d0cb4",
+  "checks": [],
+  "check_count": 0,
+  "passed": 0,
+  "failed": 0,
+  "harness_native_exit": 1,
+  "harness_process_failed_count": 1,
+  "scenarios_started": "YES_PRECONDITION_ONLY",
+  "completed_scenarios": 0,
+  "status": "BLOCKED",
+  "failure": {
+    "status": "BLOCKED_NATIVE_SELECTION_PRECONDITION",
+    "native_exit": 1,
+    "classification": "UNRESOLVED_PRODUCT_VS_HARNESS_INPUT_OR_OBSERVATION",
+    "location": "native_routes.py:selected(): assert s[\"snapshot\"][0][\"selectedRefs\"]",
+    "recorded_checks": 0,
+    "scenario_attempt_started": true,
+    "completed_scenarios": 0,
+    "evidence": "Project node click produced revision 2 with project-node selected, followed by revision 3 empty; owner 1/lifetime 2 and route stayed unchanged in the recorded snapshots. Cause is not proven by these observations.",
+    "snapshot_sequence": [
+      {
+        "path": "/w/ux-workspace/projects/ux-project/canvas",
+        "snapshot": [
+          {
+            "owner": 1,
+            "lifetime": 2,
+            "revision": 1,
+            "surfaceId": "canvas",
+            "workspaceId": "ux-workspace",
+            "projectId": "ux-project",
+            "selectedRefs": [],
+            "primaryRef": null,
+            "supported": [
+              "rename",
+              "move",
+              "reveal"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/w/ux-workspace/projects/ux-project/canvas",
+        "snapshot": [
+          {
+            "owner": 1,
+            "lifetime": 2,
+            "revision": 2,
+            "surfaceId": "canvas",
+            "workspaceId": "ux-workspace",
+            "projectId": "ux-project",
+            "selectedRefs": [
+              {
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "kind": "NODE",
+                "localId": "project-node"
+              }
+            ],
+            "primaryRef": {
+              "surfaceId": "canvas",
+              "workspaceId": "ux-workspace",
+              "projectId": "ux-project",
+              "kind": "NODE",
+              "localId": "project-node"
+            },
+            "supported": [
+              "rename",
+              "move",
+              "reveal"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/w/ux-workspace/projects/ux-project/canvas",
+        "snapshot": [
+          {
+            "owner": 1,
+            "lifetime": 2,
+            "revision": 3,
+            "surfaceId": "canvas",
+            "workspaceId": "ux-workspace",
+            "projectId": "ux-project",
+            "selectedRefs": [],
+            "primaryRef": null,
+            "supported": [
+              "rename",
+              "move",
+              "reveal"
+            ]
+          }
+        ]
+      }
+    ],
+    "bf_cache": "NOT_RUN_PREDECESSOR_FAILED",
+    "retry_count": 0,
+    "correction_performed": false,
+    "recommendation": "Authorize bounded read-only diagnosis of click/Selection transition and frozen harness input contract before deciding product or harness correction. Do not authorize a speculative patch."
+  },
+  "bf_cache_native_exit": "NOT_RUN"
+}

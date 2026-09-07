@@ -1,0 +1,212 @@
+{
+  "classification": "DERIVED_SUMMARY",
+  "rules": [
+    {
+      "replacement": "[LOCAL_AUDIT_ROOT]/",
+      "reason": "local path minimization"
+    },
+    {
+      "replacement": "[LOCAL_FRONTEND_WORKTREE]",
+      "reason": "local path minimization"
+    },
+    {
+      "replacement": "[LOCAL_PRODUCT_REPOSITORY]",
+      "reason": "local path minimization"
+    },
+    {
+      "replacement": "[LOCAL_BROWSER_CACHE]/",
+      "reason": "local path minimization"
+    },
+    {
+      "replacement": "[LOCAL_AGENT_HOME]/",
+      "reason": "local path minimization"
+    },
+    {
+      "replacement": "[LOCAL_HOME]",
+      "reason": "local path minimization"
+    }
+  ],
+  "files": [
+    {
+      "original_source": "FINAL_REPORT.txt",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 1,
+        "[LOCAL_FRONTEND_WORKTREE]": 1,
+        "[LOCAL_PRODUCT_REPOSITORY]": 1,
+        "[LOCAL_BROWSER_CACHE]/": 1
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "NATIVE_SELECTION_CAUSAL_REVIEW_UPLOAD.txt",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 1,
+        "[LOCAL_FRONTEND_WORKTREE]": 1,
+        "[LOCAL_PRODUCT_REPOSITORY]": 1,
+        "[LOCAL_BROWSER_CACHE]/": 1
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "delivery/DELIVERY_RECEIPT.json",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 5
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/static/MEASURED_CAUSAL_SUMMARY.json",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 198,
+        "[LOCAL_BROWSER_CACHE]/": 2
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/static/PRESERVATION_READBACK.json",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 3
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/runs/R1/diagnostic.log",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 2
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/runs/R1/prospective-plan.json",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 140,
+        "[LOCAL_FRONTEND_WORKTREE]": 1,
+        "[LOCAL_PRODUCT_REPOSITORY]": 1,
+        "[LOCAL_BROWSER_CACHE]/": 1
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/runs/R1/process-receipts.json",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 99,
+        "[LOCAL_BROWSER_CACHE]/": 1
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/runs/R1/containment.txt",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 5,
+        "[LOCAL_FRONTEND_WORKTREE]": 1,
+        "[LOCAL_PRODUCT_REPOSITORY]": 1
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/runs/R2/diagnostic.log",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 2
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/runs/R2/prospective-plan.json",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 140,
+        "[LOCAL_FRONTEND_WORKTREE]": 1,
+        "[LOCAL_PRODUCT_REPOSITORY]": 1,
+        "[LOCAL_BROWSER_CACHE]/": 1
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/runs/R2/process-receipts.json",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 99,
+        "[LOCAL_BROWSER_CACHE]/": 1
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/runs/R2/containment.txt",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 5,
+        "[LOCAL_FRONTEND_WORKTREE]": 1,
+        "[LOCAL_PRODUCT_REPOSITORY]": 1
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/helpers/run_reproduction.py",
+      "aliases": {
+        "[LOCAL_FRONTEND_WORKTREE]": 1,
+        "[LOCAL_PRODUCT_REPOSITORY]": 1,
+        "[LOCAL_BROWSER_CACHE]/": 1
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/helpers/analyze.py",
+      "aliases": {
+        "[LOCAL_FRONTEND_WORKTREE]": 1,
+        "[LOCAL_PRODUCT_REPOSITORY]": 2,
+        "[LOCAL_AGENT_HOME]/": 3
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/runs/R1/scope_check.py",
+      "aliases": {
+        "[LOCAL_FRONTEND_WORKTREE]": 1,
+        "[LOCAL_PRODUCT_REPOSITORY]": 1
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/runs/R1/BUILD_ARTIFACT_BOUNDARY.json",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 1
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/inputs/required-input-verification.json",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 3
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/inputs/previous-environment/BROWSER_NATIVE_RAW.log",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 2
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/inputs/previous-environment/PYTHON_ENVIRONMENT_MANIFEST.json",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 9
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/inputs/previous-environment/HARNESS_SELFQUALIFICATION.json",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 5
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    },
+    {
+      "original_source": "evidence/inputs/contracts/FRONTEND_WAVE2_SLICE_1C_ROUTE_SELECTION_LIFETIME_BOUNDED_IMPLEMENTATION_V1/WRITER_TASK.txt",
+      "aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 3,
+        "[LOCAL_FRONTEND_WORKTREE]": 1
+      },
+      "reason": "Remove unnecessary local filesystem and agent-home details; preserve causal event, revision, inventory, exception and timing values."
+    }
+  ],
+  "semantic_fields_removed": false,
+  "originals_unchanged": true
+}
