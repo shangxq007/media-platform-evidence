@@ -1,0 +1,587 @@
+{
+  "schema_version": "1.0",
+  "task": "FRONTEND_WAVE2_SLICE_1C_BOUNDARY_VALIDATOR_COMPLETENESS_CORRECTION_AND_OFFLINE_REASSESSMENT_V1",
+  "delivery_id": "20260907T084300Z-offline-review-v1",
+  "claimed_outcome": "EXTERNAL_VALIDATOR_CORRECTION_QUALIFIED_AND_INTACT_EVIDENCE_REASSESSED_OFFLINE",
+  "independent_review": "PENDING",
+  "claims": [
+    {
+      "id": "V1",
+      "claim": "Both exact old missing-field false acceptances reproduced and rejected by v3",
+      "evidence": [
+        "results/REVIEWER_COUNTEREXAMPLE_REPRODUCTION.json",
+        "results/counterexample-lifetime.json",
+        "results/counterexample-primary.json",
+        "helpers/boundary_validator_v3.py",
+        "results/OLD_NEW_VALIDATOR.diff"
+      ]
+    },
+    {
+      "id": "V2",
+      "claim": "181 offline controls match expected outcomes; original 15 decisions replayed; pure and deterministic",
+      "evidence": [
+        "FIELD_REQUIREMENT_MATRIX.md",
+        "helpers/qualify.py",
+        "results/OFFLINE_QUALIFICATION_RESULTS.json",
+        "results/ORIGINAL_NEGATIVE_DERIVATIVES.json"
+      ]
+    },
+    {
+      "id": "V3",
+      "claim": "Intact proof accepted offline; eleven assertion bodies unchanged; zero fresh browser/native checks",
+      "evidence": [
+        "results/OFFLINE_REASSESSMENT.json",
+        "results/ASSERTION_EVIDENCE_MAPPING.json",
+        "results/PRESERVATION_VERIFICATION.json",
+        "results/COMMANDS_AND_EXITS.json"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "source": "delivery/FINAL_REPORT.txt",
+      "original_sha256": "c7ad67910e4318dec00879b52777bf4d48180cc2bfe624cd617614eb45b2f1de",
+      "original_bytes": 7740,
+      "public_sha256": "c7ad67910e4318dec00879b52777bf4d48180cc2bfe624cd617614eb45b2f1de",
+      "public_bytes": 7740,
+      "parts": [
+        "FINAL_REPORT.txt"
+      ],
+      "classification": "DERIVED_SUMMARY",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "FIELD_REQUIREMENT_MATRIX.md",
+      "original_sha256": "7e52a473c818540567d96ac4da310581c4ec87220407570d5bec2421e2388f28",
+      "original_bytes": 4179,
+      "public_sha256": "7e52a473c818540567d96ac4da310581c4ec87220407570d5bec2421e2388f28",
+      "public_bytes": 4179,
+      "parts": [
+        "FIELD_REQUIREMENT_MATRIX.md"
+      ],
+      "classification": "DERIVED_SUMMARY",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/INPUT_IDENTITIES.json",
+      "original_sha256": "bd80cc5bdb4d0dcb80e5ba34eb4fc401d0412fec367be21e2ad9cf84b66e1c89",
+      "original_bytes": 13064,
+      "public_sha256": "cd844d82186f7708ee16bebc75a865f85f106505d2d29c50a44385fe3d46e6fd",
+      "public_bytes": 12200,
+      "parts": [
+        "inputs/INPUT_IDENTITIES.json"
+      ],
+      "classification": "REDACTED",
+      "path_aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 26,
+        "[LOCAL_FRONTEND_WORKTREE]": 5,
+        "[LOCAL_HOME]": 2
+      },
+      "original_bytes_reconstructable": false
+    },
+    {
+      "source": "inputs/INSTRUCTION_METADATA_BASELINE.json",
+      "original_sha256": "735968a757014aef2fa6882ef2c79c44a2bd964e1ab9fe62d4fbe19323d5ade8",
+      "original_bytes": 933,
+      "public_sha256": "735968a757014aef2fa6882ef2c79c44a2bd964e1ab9fe62d4fbe19323d5ade8",
+      "public_bytes": 933,
+      "parts": [
+        "inputs/INSTRUCTION_METADATA_BASELINE.json"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/ORIGINAL_ASSERTION_PROGRAM_IDENTITY.json",
+      "original_sha256": "3391121f6b246f9018da32e1bf193491d416a3811463cb80b5d63c82fe162a83",
+      "original_bytes": 747,
+      "public_sha256": "abef25c962b76e4f8e279fbbd4195725074a5fc5d2c66d6e01fd344fcb404560",
+      "public_bytes": 724,
+      "parts": [
+        "inputs/ORIGINAL_ASSERTION_PROGRAM_IDENTITY.json"
+      ],
+      "classification": "REDACTED",
+      "path_aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 1
+      },
+      "original_bytes_reconstructable": false
+    },
+    {
+      "source": "inputs/delivery/FINAL_REPORT.txt",
+      "original_sha256": "102cba8d5b6103db2a26e9d03565671a93d09fcb1e265b8360b89b778d405ecc",
+      "original_bytes": 19706,
+      "public_sha256": "b036733704f3bbc0324d6724ef631940f311c3e01dde9ccb03b04d15a9c807d7",
+      "public_bytes": 19708,
+      "parts": [
+        "inputs/delivery/FINAL_REPORT.txt"
+      ],
+      "classification": "REDACTED",
+      "path_aliases": {
+        "[LOCAL_HOME]": 1
+      },
+      "original_bytes_reconstructable": false
+    },
+    {
+      "source": "inputs/helpers/boundary_validator.py",
+      "original_sha256": "fe514fbf338f01193f35f109c69e9250d1571c8e440504deee0f9b89f705d5b1",
+      "original_bytes": 3128,
+      "public_sha256": "fe514fbf338f01193f35f109c69e9250d1571c8e440504deee0f9b89f705d5b1",
+      "public_bytes": 3128,
+      "parts": [
+        "inputs/helpers/boundary_validator.py"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/helpers/lifecycle-boundary-v2.js",
+      "original_sha256": "47743dd4d1d6af6896ff4ce57243c2f57a55cebf513a58a907429837956eda68",
+      "original_bytes": 2717,
+      "public_sha256": "47743dd4d1d6af6896ff4ce57243c2f57a55cebf513a58a907429837956eda68",
+      "public_bytes": 2717,
+      "parts": [
+        "inputs/helpers/lifecycle-boundary-v2.js"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/helpers/lifecycle_v2.py",
+      "original_sha256": "cff5c88fd43a841d93a8c91757e6ec672520752a548ba7490b0364ca4c1f24c2",
+      "original_bytes": 2780,
+      "public_sha256": "cff5c88fd43a841d93a8c91757e6ec672520752a548ba7490b0364ca4c1f24c2",
+      "public_bytes": 2780,
+      "parts": [
+        "inputs/helpers/lifecycle_v2.py"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/helpers/original_native_lifecycle.py",
+      "original_sha256": "c2f9c4e1a4b964e881991fea374b0be9e3ba81114ee2f3b9d3e9f8629e4cba5e",
+      "original_bytes": 5947,
+      "public_sha256": "c2f9c4e1a4b964e881991fea374b0be9e3ba81114ee2f3b9d3e9f8629e4cba5e",
+      "public_bytes": 5947,
+      "parts": [
+        "inputs/helpers/original_native_lifecycle.py"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/helpers/qualification.py",
+      "original_sha256": "f0111a3ab7edf4f73695c7762470ab192851ba8217d7cd0ebd5fb73096094fde",
+      "original_bytes": 4599,
+      "public_sha256": "f0111a3ab7edf4f73695c7762470ab192851ba8217d7cd0ebd5fb73096094fde",
+      "public_bytes": 4599,
+      "parts": [
+        "inputs/helpers/qualification.py"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/inputs/ASSERTION_BODY_COMPARISON.json",
+      "original_sha256": "b0ede7704828372cd372eae7ac73f4f285c58e8b2dfedffeecb2bc0a30532941",
+      "original_bytes": 658,
+      "public_sha256": "b0ede7704828372cd372eae7ac73f4f285c58e8b2dfedffeecb2bc0a30532941",
+      "public_bytes": 658,
+      "parts": [
+        "inputs/inputs/ASSERTION_BODY_COMPARISON.json"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/inputs/DIAGNOSTIC_DISPOSITION.json",
+      "original_sha256": "fd12a206de3307938162a6ea6bd26b7c104f065cfe03c2167480fe6bca5c73f9",
+      "original_bytes": 1393,
+      "public_sha256": "fd12a206de3307938162a6ea6bd26b7c104f065cfe03c2167480fe6bca5c73f9",
+      "public_bytes": 1393,
+      "parts": [
+        "inputs/inputs/DIAGNOSTIC_DISPOSITION.json"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/runs/D1/D1_TRACE.json",
+      "original_sha256": "3ba1fa0086195f375fb846c024eb818f52aa24e04b245b7961c7ed3eca379cc7",
+      "original_bytes": 40881,
+      "public_sha256": "3ba1fa0086195f375fb846c024eb818f52aa24e04b245b7961c7ed3eca379cc7",
+      "public_bytes": 40881,
+      "parts": [
+        "inputs/runs/D1/D1_TRACE.json"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/runs/D3/D3_TRACE.json",
+      "original_sha256": "051019becf95373563c6b0f7c897cf89b3b29f3063508562c7f170200e6f326f",
+      "original_bytes": 36329,
+      "public_sha256": "051019becf95373563c6b0f7c897cf89b3b29f3063508562c7f170200e6f326f",
+      "public_bytes": 36329,
+      "parts": [
+        "inputs/runs/D3/D3_TRACE.json"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/runs/lifecycle-v2/ASSERTION_MAPPING.json",
+      "original_sha256": "a5995a86107dffd51a986bedf952f98ecee5007b96a2e307ada8e7e9d8e215e3",
+      "original_bytes": 2057,
+      "public_sha256": "a5995a86107dffd51a986bedf952f98ecee5007b96a2e307ada8e7e9d8e215e3",
+      "public_bytes": 2057,
+      "parts": [
+        "inputs/runs/lifecycle-v2/ASSERTION_MAPPING.json"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/runs/lifecycle-v2/BROWSER_LIFECYCLE_RAW_LOG.txt",
+      "original_sha256": "ab959fbf8b854825bb6eb3d031893cda5e626ef8da6588648b2fc2943cf06f61",
+      "original_bytes": 154238,
+      "public_sha256": "ab959fbf8b854825bb6eb3d031893cda5e626ef8da6588648b2fc2943cf06f61",
+      "public_bytes": 154238,
+      "parts": [
+        "inputs/runs/lifecycle-v2/BROWSER_LIFECYCLE_RAW_LOG.txt"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/runs/lifecycle-v2/DEPARTURE_BOUNDARY_PROOF.json",
+      "original_sha256": "64d7fb37e3c3ed90ad26de586721f441bc72f74a0be858547ecebde3c9ace621",
+      "original_bytes": 25882,
+      "public_sha256": "64d7fb37e3c3ed90ad26de586721f441bc72f74a0be858547ecebde3c9ace621",
+      "public_bytes": 25882,
+      "parts": [
+        "inputs/runs/lifecycle-v2/DEPARTURE_BOUNDARY_PROOF.json"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/runs/lifecycle-v2/LIFECYCLE_V2_PROGRAM.py",
+      "original_sha256": "9468d93035f65f95d4fa457ff2770b72a2ed105253bf08d817ca621ed6b5d6f1",
+      "original_bytes": 6558,
+      "public_sha256": "9468d93035f65f95d4fa457ff2770b72a2ed105253bf08d817ca621ed6b5d6f1",
+      "public_bytes": 6558,
+      "parts": [
+        "inputs/runs/lifecycle-v2/LIFECYCLE_V2_PROGRAM.py"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/runs/lifecycle-v2/NATIVE_LIFECYCLE_RESULTS.json",
+      "original_sha256": "3111f8bae6fe5de425c9af1bc23b1e62d1b8db458fde21281b2a6d0d734281b0",
+      "original_bytes": 103159,
+      "public_sha256": "3111f8bae6fe5de425c9af1bc23b1e62d1b8db458fde21281b2a6d0d734281b0",
+      "public_bytes": 103159,
+      "parts": [
+        "inputs/runs/lifecycle-v2/NATIVE_LIFECYCLE_RESULTS.json"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/runs/qualification/FIXTURE_TRACES.json",
+      "original_sha256": "a7588fd328b6ccd1d3c568a2dd17cf108bc8c369f9b72c5c70f8ecbd711d460b",
+      "original_bytes": 47628,
+      "public_sha256": "a7588fd328b6ccd1d3c568a2dd17cf108bc8c369f9b72c5c70f8ecbd711d460b",
+      "public_bytes": 47628,
+      "parts": [
+        "inputs/runs/qualification/FIXTURE_TRACES.json"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "inputs/runs/qualification/QUALIFICATION_RESULTS.json",
+      "original_sha256": "826f08647cfaf384c053ee4ba8f3934dfc82d44f5c3f80aa0f8630bda8473a73",
+      "original_bytes": 8519,
+      "public_sha256": "826f08647cfaf384c053ee4ba8f3934dfc82d44f5c3f80aa0f8630bda8473a73",
+      "public_bytes": 8519,
+      "parts": [
+        "inputs/runs/qualification/QUALIFICATION_RESULTS.json"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "helpers/boundary_validator_v3.py",
+      "original_sha256": "52598c40b3711f8834f3a6648a5d05bf00714a0b24a95e6bd1b43eba8556c941",
+      "original_bytes": 8782,
+      "public_sha256": "52598c40b3711f8834f3a6648a5d05bf00714a0b24a95e6bd1b43eba8556c941",
+      "public_bytes": 8782,
+      "parts": [
+        "helpers/boundary_validator_v3.py"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "helpers/qualify.py",
+      "original_sha256": "d8ce76b0d52e4495c467281ddd095e92f178d35d4f4d229ecffa7f59bc38ea64",
+      "original_bytes": 8677,
+      "public_sha256": "d8ce76b0d52e4495c467281ddd095e92f178d35d4f4d229ecffa7f59bc38ea64",
+      "public_bytes": 8677,
+      "parts": [
+        "helpers/qualify.py"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "helpers/reassess.py",
+      "original_sha256": "c0440ff55e095d43413d3c5b5ab1d8bde322989128107b3c34cefb8a9d48040b",
+      "original_bytes": 5886,
+      "public_sha256": "c0440ff55e095d43413d3c5b5ab1d8bde322989128107b3c34cefb8a9d48040b",
+      "public_bytes": 5886,
+      "parts": [
+        "helpers/reassess.py"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "helpers/reproduce.py",
+      "original_sha256": "8932ad5466c2729c7319fcf2f647aada8291bf70dfee40e6924cb0079f568fd6",
+      "original_bytes": 1448,
+      "public_sha256": "8932ad5466c2729c7319fcf2f647aada8291bf70dfee40e6924cb0079f568fd6",
+      "public_bytes": 1448,
+      "parts": [
+        "helpers/reproduce.py"
+      ],
+      "classification": "BYTE_EXACT",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "results/ASSERTION_EVIDENCE_MAPPING.json",
+      "original_sha256": "36e302bd1977a41507f1766f3853f83896453c8ef6de6f7b91171ef6fb0752a5",
+      "original_bytes": 7004,
+      "public_sha256": "36e302bd1977a41507f1766f3853f83896453c8ef6de6f7b91171ef6fb0752a5",
+      "public_bytes": 7004,
+      "parts": [
+        "results/ASSERTION_EVIDENCE_MAPPING.json"
+      ],
+      "classification": "DERIVED_SUMMARY",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "results/COMMANDS_AND_EXITS.json",
+      "original_sha256": "9e5360545a16621422ef0e98d37dc1ad838f4be642663819ea8dec7a6ceffe0c",
+      "original_bytes": 1448,
+      "public_sha256": "9e5360545a16621422ef0e98d37dc1ad838f4be642663819ea8dec7a6ceffe0c",
+      "public_bytes": 1448,
+      "parts": [
+        "results/COMMANDS_AND_EXITS.json"
+      ],
+      "classification": "DERIVED_SUMMARY",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "results/FAILED_ATTEMPTS.json",
+      "original_sha256": "cf3f010c0a8413395a10b305984e887bd6c14d6f5e93dcaca6ee4e2ba4337e33",
+      "original_bytes": 1793,
+      "public_sha256": "cf3f010c0a8413395a10b305984e887bd6c14d6f5e93dcaca6ee4e2ba4337e33",
+      "public_bytes": 1793,
+      "parts": [
+        "results/FAILED_ATTEMPTS.json"
+      ],
+      "classification": "DERIVED_SUMMARY",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "results/OFFLINE_QUALIFICATION_RESULTS.json",
+      "original_sha256": "30d5bff603e0827d3e536e0bc35839eadd99ac139d986a960fc7d2a0fa1ed06a",
+      "original_bytes": 228125,
+      "public_sha256": "30d5bff603e0827d3e536e0bc35839eadd99ac139d986a960fc7d2a0fa1ed06a",
+      "public_bytes": 228125,
+      "parts": [
+        "results/OFFLINE_QUALIFICATION_RESULTS.json"
+      ],
+      "classification": "DERIVED_SUMMARY",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "results/OFFLINE_REASSESSMENT.json",
+      "original_sha256": "1c13c45441ebbc0d79738a18a21bb724e4645d4396ee78c27a15c67479730652",
+      "original_bytes": 5703,
+      "public_sha256": "1c13c45441ebbc0d79738a18a21bb724e4645d4396ee78c27a15c67479730652",
+      "public_bytes": 5703,
+      "parts": [
+        "results/OFFLINE_REASSESSMENT.json"
+      ],
+      "classification": "DERIVED_SUMMARY",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "results/OLD_NEW_VALIDATOR.diff",
+      "original_sha256": "c09e299ae5f481021a4d6a7d5c792edd5a5325933fd178781d7f93dff7df8de4",
+      "original_bytes": 6023,
+      "public_sha256": "c09e299ae5f481021a4d6a7d5c792edd5a5325933fd178781d7f93dff7df8de4",
+      "public_bytes": 6023,
+      "parts": [
+        "results/OLD_NEW_VALIDATOR.diff"
+      ],
+      "classification": "DERIVED_SUMMARY",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "results/ORIGINAL_NEGATIVE_DERIVATIVES.json",
+      "original_sha256": "6661c72c7c27a122d4c3b51b88d6370c15d5d7fafde5933ec6ebe85898eedfb6",
+      "original_bytes": 179991,
+      "public_sha256": "6661c72c7c27a122d4c3b51b88d6370c15d5d7fafde5933ec6ebe85898eedfb6",
+      "public_bytes": 179991,
+      "parts": [
+        "results/ORIGINAL_NEGATIVE_DERIVATIVES.json"
+      ],
+      "classification": "DERIVED_SUMMARY",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "results/PRESERVATION_VERIFICATION.json",
+      "original_sha256": "6e943b8eecd2149b4e94234aa29f629a8681f443ef440aa17710bc7112ce5fed",
+      "original_bytes": 5020,
+      "public_sha256": "28056553d664d8821b535966f4450dd48edeffbd1a4108d698dad1319eb54a41",
+      "public_bytes": 4972,
+      "parts": [
+        "results/PRESERVATION_VERIFICATION.json"
+      ],
+      "classification": "DERIVED_SUMMARY",
+      "path_aliases": {
+        "[LOCAL_FRONTEND_WORKTREE]": 1,
+        "[LOCAL_HOME]": 3
+      },
+      "original_bytes_reconstructable": false
+    },
+    {
+      "source": "results/REVIEWER_COUNTEREXAMPLE_REPRODUCTION.json",
+      "original_sha256": "b5dd2114f0612d9854311afa992965ce587a395d94e76d2df1ea2d06adb8afc5",
+      "original_bytes": 1627,
+      "public_sha256": "b5dd2114f0612d9854311afa992965ce587a395d94e76d2df1ea2d06adb8afc5",
+      "public_bytes": 1627,
+      "parts": [
+        "results/REVIEWER_COUNTEREXAMPLE_REPRODUCTION.json"
+      ],
+      "classification": "DERIVED_SUMMARY",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "results/counterexample-lifetime.json",
+      "original_sha256": "00914291af12a8a51a9ff4456380650463e2c7b3d12c9fe83ba090c63e2880dd",
+      "original_bytes": 22894,
+      "public_sha256": "00914291af12a8a51a9ff4456380650463e2c7b3d12c9fe83ba090c63e2880dd",
+      "public_bytes": 22894,
+      "parts": [
+        "results/counterexample-lifetime.json"
+      ],
+      "classification": "DERIVED_SUMMARY",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "results/counterexample-primary.json",
+      "original_sha256": "0990382928fb8c48ae25430dc99e4b5f6f0ce054e4ed6f1f331c4d0143aeedb4",
+      "original_bytes": 22888,
+      "public_sha256": "0990382928fb8c48ae25430dc99e4b5f6f0ce054e4ed6f1f331c4d0143aeedb4",
+      "public_bytes": 22888,
+      "parts": [
+        "results/counterexample-primary.json"
+      ],
+      "classification": "DERIVED_SUMMARY",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "results/reassess-metadata-final.log",
+      "original_sha256": "b077ee73c46e27a0a4cda62d0fbf1bd1d3728963ca0e3420e974848181c40dda",
+      "original_bytes": 111,
+      "public_sha256": "b077ee73c46e27a0a4cda62d0fbf1bd1d3728963ca0e3420e974848181c40dda",
+      "public_bytes": 111,
+      "parts": [
+        "results/reassess-metadata-final.log"
+      ],
+      "classification": "DERIVED_SUMMARY",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    },
+    {
+      "source": "results/reassess.log",
+      "original_sha256": "b077ee73c46e27a0a4cda62d0fbf1bd1d3728963ca0e3420e974848181c40dda",
+      "original_bytes": 111,
+      "public_sha256": "b077ee73c46e27a0a4cda62d0fbf1bd1d3728963ca0e3420e974848181c40dda",
+      "public_bytes": 111,
+      "parts": [
+        "results/reassess.log"
+      ],
+      "classification": "DERIVED_SUMMARY",
+      "path_aliases": {},
+      "original_bytes_reconstructable": true
+    }
+  ],
+  "limitations": [
+    "Mock-backed historical frontend observations only, not backend integration.",
+    "Historical browser12/12 and earlier49/50 are not fresh checks.",
+    "D1 preview invalid-selector observation excluded despite structural predicate pass. D3 direct handler entry/return probes NOT_ESTABLISHED.",
+    "No claim of end-of-all-dispatch, timer fallback, unsupported browser/crash/discard or unobserved path proof.",
+    "H4/tracked-dist unresolved; independent acceptance required. No product publication or backend gate change.",
+    "No private browser profiles, Skill/Memory contents, credentials or unrelated inventories. Known instruction hashes/mtime only. No previously denied historical scans retried.",
+    "Public path aliases are declared; historical browser programs are review/AST inputs, never runnable instructions for this task.",
+    "Post-push receipts are published in a separate additive receipt commit, whose pinned URL is returned separately; no self-hash cycle."
+  ],
+  "manifest": "MANIFEST.sha256",
+  "provenance": "provenance/FILES.json",
+  "fixed_implementation_tree": "00128d35b97775b97124ad1921053a0da282690d",
+  "fixed_build_manifest_sha256": "9644fe897b61e912e9c60bd467b6bf0aec5d497d66f362838e2d6f4750ba331e",
+  "qualification": {
+    "count": 181,
+    "expected_accept": 5,
+    "expected_reject": 176,
+    "matched": 181,
+    "original_controls": 15
+  },
+  "fresh_browser_runs": 0,
+  "fresh_native_lifecycle_checks": 0,
+  "prior_native_lifecycle_result": "12_PASS_RECORDED_IN_PRIOR_TASK",
+  "product_changes": 0,
+  "backend_changes": 0,
+  "slice_1c_accepted": "NO_PENDING_INDEPENDENT_REVIEW"
+}

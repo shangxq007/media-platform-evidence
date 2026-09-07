@@ -1,0 +1,119 @@
+--- old/boundary_validator.py
++++ new/boundary_validator_v3.py
+@@ -1,4 +1,116 @@
++"""Version 3: typed completeness gate for the recorded boundary format.
++Pure offline validation. No input mutation, observation, coercion or fallback.
++The original semantic function is retained below as _semantic for auditability.
++"""
++
+ def verify(trace, expected, actual_restoration):
++    errors = []
++
++    def field(obj, key, kind, path, *, nullable=False, minimum=None):
++        at = path + '.' + key
++        if key not in obj:
++            errors.append('MISSING:' + at)
++            return None
++        value = obj[key]
++        if value is None:
++            if not nullable:
++                errors.append('NULL:' + at)
++            return None
++        if type(value) is not kind:
++            errors.append('TYPE:' + at)
++            return None
++        if kind is str and not value:
++            errors.append('VALUE:' + at + ':nonempty')
++        if minimum is not None and value < minimum:
++            errors.append('VALUE:' + at + ':minimum_' + str(minimum))
++        return value
++
++    def object_value(value, path):
++        if type(value) is not dict:
++            errors.append(('NULL:' if value is None else 'TYPE:') + path)
++            return False
++        return True
++
++    def snapshot(value, path, armed=False):
++        if not object_value(value, path):
++            return
++        if armed:
++            field(value, 'documentId', str, path)
++        for key in ('store', 'lifetime'):
++            field(value, key, int, path, minimum=1)
++        field(value, 'revision', int, path, minimum=0)
++        field(value, 'refs', list, path)
++        field(value, 'primary', dict, path, nullable=not armed)
++
++    if not object_value(trace, 'trace') or not object_value(expected, 'expected'):
++        return {'passed': False, 'errors': errors}
++    snapshot(expected, 'expected', armed=True)
++    field(trace, 'documentId', str, 'trace')
++    rows = field(trace, 'rows', list, 'trace')
++    if type(actual_restoration) is not bool:
++        errors.append(('NULL:' if actual_restoration is None else 'TYPE:') + 'actual_restoration')
++    event_types = {'early-pagehide': 'pagehide', 'late-pagehide': 'pagehide',
++                   'freeze': 'freeze', 'early-pageshow': 'pageshow'}
++    critical = {'early-pagehide', 'notify', 'late-pagehide', 'freeze'}
++    if rows is not None:
++        for index, row in enumerate(rows):
++            path = 'trace.rows[' + str(index) + ']'
++            if not object_value(row, path):
++                continue
++            field(row, 'seq', int, path, minimum=1)
++            kind = field(row, 'kind', str, path)
++            document = field(row, 'documentId', str, path)
++            if document is not None and document != expected.get('documentId'):
++                errors.append('SEMANTIC:' + path + '.documentId:expected_document')
++            if kind in critical:
++                armed = field(row, 'armed', dict, path)
++                if armed is not None:
++                    snapshot(armed, path + '.armed', armed=True)
++                stores = field(row, 'stores', list, path)
++                if stores is not None:
++                    for j, store in enumerate(stores):
++                        snapshot(store, path + '.stores[' + str(j) + ']')
++            if kind in event_types:
++                event = field(row, 'event', dict, path)
++                if event is not None:
++                    field(event, 'id', int, path + '.event', minimum=1)
++                    recorded_type = field(event, 'type', str, path + '.event')
++                    if recorded_type is not None and recorded_type != event_types[kind]:
++                        errors.append('VALUE:' + path + '.event.type:expected_' + event_types[kind])
++                    field(event, 'trusted', bool, path + '.event')
++                    field(event, 'persisted', type(None) if kind == 'freeze' else bool,
++                          path + '.event', nullable=kind == 'freeze')
++            if kind == 'freeze':
++                departure = field(row, 'departure', dict, path)
++                if departure is not None:
++                    field(departure, 'id', int, path + '.departure', minimum=1)
++                    field(departure, 'trusted', bool, path + '.departure')
++                    field(departure, 'persisted', bool, path + '.departure')
++            if kind in ('late-pagehide', 'freeze'):
++                dom = field(row, 'dom', dict, path)
++                if dom is not None:
++                    field(dom, 'preview', bool, path + '.dom')
++                    field(dom, 'proposal', bool, path + '.dom')
++                    capture = field(dom, 'capture', list, path + '.dom')
++                    if capture is not None:
++                        for j, item in enumerate(capture):
++                            at = path + '.dom.capture[' + str(j) + ']'
++                            if object_value(item, at):
++                                field(item, 'held', list, at)
++    if errors:
++        return {'passed': False, 'errors': errors}
++    result = _semantic(trace, expected, actual_restoration)
++    # Correlated pagehide evidence must retain its recorded boolean meaning.
++    for index, row in enumerate(rows):
++        if row['kind'] == 'late-pagehide' and (row['event']['trusted'] is not True or row['event']['persisted'] is not True):
++            result['errors'].append('SEMANTIC:trace.rows[' + str(index) + '].event:trusted_persisted_pagehide')
++        if row['kind'] == 'freeze' and (row['departure']['trusted'] is not True or row['departure']['persisted'] is not True):
++            result['errors'].append('SEMANTIC:trace.rows[' + str(index) + '].departure:trusted_persisted_pagehide')
++    result['passed'] = not result['errors']
++    return result
++
++
++def _semantic(trace, expected, actual_restoration):
+  """Nonvacuous trusted pre-freeze departure proof; never a timer/end-of-pagehide claim."""
+  errors=[]
+  def need(ok,label):

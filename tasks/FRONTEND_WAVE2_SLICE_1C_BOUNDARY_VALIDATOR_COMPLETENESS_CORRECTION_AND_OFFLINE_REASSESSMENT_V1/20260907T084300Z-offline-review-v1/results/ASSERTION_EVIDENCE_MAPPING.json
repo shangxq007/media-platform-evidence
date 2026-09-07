@@ -1,0 +1,166 @@
+{
+  "prior_run_identity": {
+    "evidence_commit": "2a2d014890d3a0ff693f4ad876a39a0df4d236df",
+    "prior_task": "FRONTEND_WAVE2_SLICE_1C_PAGEHIDE_OBSERVATION_BOUNDARY_DIAGNOSIS_AND_CONDITIONAL_HARNESS_CORRECTION_V1",
+    "run_directory": "runs/lifecycle-v2",
+    "documentId": "cfd39554-a87b-41e3-b420-7479a0c278c6",
+    "source_tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "build_manifest": "9644fe897b61e912e9c60bd467b6bf0aec5d497d66f362838e2d6f4750ba331e",
+    "browser_version_recorded": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/149.0.7827.55",
+      "revision": "@3188f8a607ae7e067593be8aab7f02d2451fec07",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+      "jsVersion": "14.9.207.21"
+    },
+    "first_recorded_check_timestamp": "2026-09-07T07:42:14.615802+00:00",
+    "last_recorded_check_timestamp": "2026-09-07T07:42:17.637607+00:00",
+    "proof_sha256": "64d7fb37e3c3ed90ad26de586721f441bc72f74a0be858547ecebde3c9ace621",
+    "raw_log_sha256": "ab959fbf8b854825bb6eb3d031893cda5e626ef8da6588648b2fc2943cf06f61",
+    "native_results_sha256": "3111f8bae6fe5de425c9af1bc23b1e62d1b8db458fde21281b2a6d0d734281b0",
+    "program_sha256": "9468d93035f65f95d4fa457ff2770b72a2ed105253bf08d817ca621ed6b5d6f1"
+  },
+  "old_validator_sha256": "fe514fbf338f01193f35f109c69e9250d1571c8e440504deee0f9b89f705d5b1",
+  "corrected_validator_sha256": "52598c40b3711f8834f3a6648a5d05bf00714a0b24a95e6bd1b43eba8556c941",
+  "affected_identity": "real-pagehide-retires-before-suspension",
+  "unchanged_assertion_bodies": 11,
+  "programs_compared_by_AST_not_executed": true,
+  "original_program_sha256": "c2f9c4e1a4b964e881991fea374b0be9e3ba81114ee2f3b9d3e9f8629e4cba5e",
+  "checks": [
+    {
+      "identity": "same-scope-query-hash-live-owner",
+      "prior_result": "PASS",
+      "historical_body_unchanged": true,
+      "current_action": "UNCHANGED_RECORDED_ASSERTION_BODY_ONLY_NOT_RERUN",
+      "prior_validator_verdict": null,
+      "reassessed_verdict": null,
+      "prior_record_timestamp": "2026-09-07T07:42:14.615802+00:00"
+    },
+    {
+      "identity": "focus-is-not-selection",
+      "prior_result": "PASS",
+      "historical_body_unchanged": true,
+      "current_action": "UNCHANGED_RECORDED_ASSERTION_BODY_ONLY_NOT_RERUN",
+      "prior_validator_verdict": null,
+      "reassessed_verdict": null,
+      "prior_record_timestamp": "2026-09-07T07:42:14.624363+00:00"
+    },
+    {
+      "identity": "same-live-proposal-remains-current",
+      "prior_result": "PASS",
+      "historical_body_unchanged": true,
+      "current_action": "UNCHANGED_RECORDED_ASSERTION_BODY_ONLY_NOT_RERUN",
+      "prior_validator_verdict": null,
+      "reassessed_verdict": null,
+      "prior_record_timestamp": "2026-09-07T07:42:15.000052+00:00"
+    },
+    {
+      "identity": "full-document-navigation-no-selection",
+      "prior_result": "PASS",
+      "historical_body_unchanged": true,
+      "current_action": "UNCHANGED_RECORDED_ASSERTION_BODY_ONLY_NOT_RERUN",
+      "prior_validator_verdict": null,
+      "reassessed_verdict": null,
+      "prior_record_timestamp": "2026-09-07T07:42:15.057136+00:00"
+    },
+    {
+      "identity": "real-bfcache-restoration-observed",
+      "prior_result": "PASS",
+      "historical_body_unchanged": true,
+      "current_action": "UNCHANGED_RECORDED_ASSERTION_BODY_ONLY_NOT_RERUN",
+      "prior_validator_verdict": null,
+      "reassessed_verdict": null,
+      "prior_record_timestamp": "2026-09-07T07:42:15.398358+00:00"
+    },
+    {
+      "identity": "real-pagehide-retires-before-suspension",
+      "prior_result": "PASS",
+      "historical_body_unchanged": false,
+      "current_action": "OFFLINE_VALIDATOR_REASSESSMENT",
+      "prior_validator_verdict": {
+        "passed": true,
+        "errors": [],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "cfd39554-a87b-41e3-b420-7479a0c278c6",
+        "departure_event": 4,
+        "freeze_seq": 11,
+        "notification_sequences": [
+          8
+        ]
+      },
+      "reassessed_verdict": {
+        "passed": true,
+        "errors": [],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "cfd39554-a87b-41e3-b420-7479a0c278c6",
+        "departure_event": 4,
+        "freeze_seq": 11,
+        "notification_sequences": [
+          8
+        ]
+      },
+      "prior_record_timestamp": "2026-09-07T07:42:15.401153+00:00"
+    },
+    {
+      "identity": "real-pageshow-fresh-lifetime",
+      "prior_result": "PASS",
+      "historical_body_unchanged": true,
+      "current_action": "UNCHANGED_RECORDED_ASSERTION_BODY_ONLY_NOT_RERUN",
+      "prior_validator_verdict": null,
+      "reassessed_verdict": null,
+      "prior_record_timestamp": "2026-09-07T07:42:15.402672+00:00"
+    },
+    {
+      "identity": "back-does-not-restore-selection",
+      "prior_result": "PASS",
+      "historical_body_unchanged": true,
+      "current_action": "UNCHANGED_RECORDED_ASSERTION_BODY_ONLY_NOT_RERUN",
+      "prior_validator_verdict": null,
+      "reassessed_verdict": null,
+      "prior_record_timestamp": "2026-09-07T07:42:15.404203+00:00"
+    },
+    {
+      "identity": "agent-proposal-stale-after-document-retirement",
+      "prior_result": "PASS",
+      "historical_body_unchanged": true,
+      "current_action": "UNCHANGED_RECORDED_ASSERTION_BODY_ONLY_NOT_RERUN",
+      "prior_validator_verdict": null,
+      "reassessed_verdict": null,
+      "prior_record_timestamp": "2026-09-07T07:42:15.413565+00:00"
+    },
+    {
+      "identity": "forward-does-not-restore-selection",
+      "prior_result": "PASS",
+      "historical_body_unchanged": true,
+      "current_action": "UNCHANGED_RECORDED_ASSERTION_BODY_ONLY_NOT_RERUN",
+      "prior_validator_verdict": null,
+      "reassessed_verdict": null,
+      "prior_record_timestamp": "2026-09-07T07:42:15.928925+00:00"
+    },
+    {
+      "identity": "repeat-bfcache-no-membership-resurrection",
+      "prior_result": "PASS",
+      "historical_body_unchanged": true,
+      "current_action": "UNCHANGED_RECORDED_ASSERTION_BODY_ONLY_NOT_RERUN",
+      "prior_validator_verdict": null,
+      "reassessed_verdict": null,
+      "prior_record_timestamp": "2026-09-07T07:42:16.265130+00:00"
+    },
+    {
+      "identity": "document-reload-no-selection-restoration",
+      "prior_result": "PASS",
+      "historical_body_unchanged": true,
+      "current_action": "UNCHANGED_RECORDED_ASSERTION_BODY_ONLY_NOT_RERUN",
+      "prior_validator_verdict": null,
+      "reassessed_verdict": null,
+      "prior_record_timestamp": "2026-09-07T07:42:17.637607+00:00"
+    }
+  ],
+  "exclusions": [
+    "D1 preview invalid selector remains excluded",
+    "D3 direct conditional entry/return probes NOT_ESTABLISHED",
+    "old early sample failures retained",
+    "H4 and tracked-dist unresolved",
+    "No backend integration"
+  ]
+}

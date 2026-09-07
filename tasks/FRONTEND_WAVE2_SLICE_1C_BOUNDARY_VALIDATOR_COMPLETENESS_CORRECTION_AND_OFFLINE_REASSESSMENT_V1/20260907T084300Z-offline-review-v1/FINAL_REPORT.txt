@@ -1,0 +1,55 @@
+TASK=FRONTEND_WAVE2_SLICE_1C_BOUNDARY_VALIDATOR_COMPLETENESS_CORRECTION_AND_OFFLINE_REASSESSMENT_V1
+LANE=FRONTEND_VALIDATION
+MODE=BOUNDED_EXTERNAL_VALIDATOR_CORRECTION_AND_OFFLINE_EVIDENCE_REASSESSMENT
+TASK_EXECUTION=COMPLETE_OFFLINE_CORRECTION_AND_REASSESSMENT
+FIXED_IMPLEMENTATION_TREE=00128d35b97775b97124ad1921053a0da282690d
+FIXED_SOURCE_MANIFEST_SHA256=3beacd5bb7d3a01be3499b3cd4eac2fc56bab4d6ddfefa135f8f19851dc24c53
+FIXED_BUILD_MANIFEST_SHA256=9644fe897b61e912e9c60bd467b6bf0aec5d497d66f362838e2d6f4750ba331e
+PRODUCT_CHANGED_PATHS=0
+BACKEND_CHANGES=0
+NEW_BACKEND_REQUIREMENTS=NONE
+PRODUCT_REBUILD=NO
+OBSERVER_CHANGED=NO
+RAW_EVIDENCE_CHANGED=NO
+OLD_VALIDATOR_COUNTEREXAMPLES=2_REPRODUCED_FALSE_ACCEPTANCES_BEFORE_CORRECTION
+CORRECTED_VALIDATOR_QUALIFICATION=181_EXECUTED_181_EXPECTED_OUTCOMES_0_FAILED
+OFFLINE_REASSESSMENT=PASS_INTACT_RECORDED_DEPARTURE_PROOF
+FRESH_BROWSER_RUNS=0
+FRESH_NATIVE_LIFECYCLE_CHECKS=0
+PRIOR_NATIVE_LIFECYCLE_RESULT=12_PASS_RECORDED_IN_PRIOR_TASK
+ORIGINAL_EARLY_SAMPLE_FAILURE=RETAINED
+DIRECT_HANDLER_PROBE_PROOF=NOT_ESTABLISHED
+H4_LEDGER_OWNER_DISPOSITION=UNRESOLVED
+TRACKED_DIST_POLICY_RECONCILIATION=UNRESOLVED
+SLICE_1C_ACCEPTED=NO_PENDING_INDEPENDENT_REVIEW
+PRODUCT_PUBLICATION=NOT_PERFORMED
+INDEPENDENT_REVIEW=REQUIRED
+STOP=YES
+
+一、已建立的产品观察与边界
+沿用 Owner 指定的固定证据 commit 2a2d014890d3a0ff693f4ad876a39a0df4d236df，清单 SHA256=c255e0bbb8aefe116e82ffc070c3104bf4f732eeffe1edd3b6ec2c5e6bc595c2。本任务先核验119条清单与113项重组产物，并将16项所需本地原件与索引的 original_sha256 对照。旧文件、旧报告及旧清单未修改。
+原早期微任务样本早于同一物理 store 的退休通知，随后为已清理的 pagehide 观察和可信 freeze 检查点；既有因果结论 OBSERVER_BOUNDARY_DEFECT 在记录的 Chromium 路径上仍获支持。本任务没有发现新产品生命周期缺陷，也未将旧浏览器执行重新标为失败。
+证明只覆盖所记录的 pagehide→退休/清理→freeze→实际 BFCache 恢复路径，不将晚回调称为全部 dispatch 的终点，不用恢复后空状态或 timer 替代挂起前要求，不推广至其他浏览器、崩溃、discard 或未观察执行。
+
+二、外部验证器修正及资格验证
+旧 verify() 的 .get('lifetime') 将缺失转为 None，None != armed lifetime 可误通过；.get('primary') is None 混淆缺失与显式 null。
+严格复现两个独立深复制输入：documentId=cfd39554-a87b-41e3-b420-7479a0c278c6，armed.store=2、lifetime=3、revision=2；仅分别删除 seq8/10/11 每个 stores 条目的 lifetime 或 primary。旧结果均 passed=true、errors=[]；RED 命令实际退出1，属于预期发现缺陷。输入文件、删除步骤、哈希和输出均保留。
+在 FIELD_REQUIREMENT_MATRIX.md 先声明最小契约，再新增独立 boundary_validator_v3.py；旧语义函数原样保留为 _semantic，前置检查必填字段、类型、合法 null、序列和事件身份。错误含 MISSING/NULL/TYPE/VALUE/SEMANTIC 与字段/行路径。不填默认值、不修复输入、不丢弃坏行；整数明确排除 bool，可信/恢复字段必须是真 boolean。安装/初始 pageshow 的 armed=null、stores=[] 保持合法。
+181项离线控制中，5项预期接受、176项预期拒绝，全部符合预期。包含原15项资格控制的精确旧判定重放、两个 reviewer 反例、三个关键行分别缺字段、合法显式 primary=null、错误 lifetime/revision/布尔类型、expected 身份缺失/无效、缺少空集合、DOM/capture/event证据、初始合法未武装行和输入不变性。每项调用前后对象及规范化哈希一致，同输入重复调用判定一致。原结构化负例仅从原 qualification.py 提取纯 AST 变换块执行；从未执行该历史浏览器程序。记录的 actual-reload 控制只重评旧/新 documentId，不是新 reload。
+仅外部验证器及本任务离线帮助程序发生修正；observer、原 native runner、产品源码/测试、依赖、环境、构建均未修改。无新采集缺口需要补录，停止可选测试。
+
+三、离线重评与计数来源
+未修改的 DEPARTURE_BOUNDARY_PROOF.json 经修正版判定 PASS。实际值来自原始证据，不由源代码、最终空状态、相邻行或摘要补齐。
+受影响身份仅 real-pagehide-retires-before-suspension。解析原与 lifecycle-v2 程序的 record 调用 AST，确认另外11个断言体不变；12个不同 identity 的 PASS 都是前任务的历史执行记录。当前任务没有新 native 检查。更早49/50 ledger仍保持原状，不称“50/50 fresh”。映射记录旧/新验证器哈希、原程序、原 raw log、proof 和 ledger 哈希、时间戳、浏览器版本及先前/重评判定。
+D1与D3的现有结构化 trace 可通过修正版纯谓词，但 D1 的 preview 字段来自错误选择器，其 preview 证明资格依然排除，不能因格式通过而升级为完整证明。D3保留已记录的非空 preview/capture支持；未命中 conditional probe 仍为直接入口/返回证明 NOT_ESTABLISHED，不作缺席推断。
+
+四、保全与执行异常
+相关四个产品源码文件、固定 source/build 清单及八个构建文件全部复核一致；选取的16个旧原始输入及本任务只读输入副本一致。前端分支/HEAD/index/status摘要前后相同。该测量不冻结后端 refs、工作区、缓存或独立 EP19。
+可用的固定树对象位于先前 Canvas 修正任务的 snapshot/.git，而不是脏前端工作树的对象库。一次错误对象库定位检查 child exit128、wrapper exit1已保留；随后仅只读验证正确 snapshot 中 tree 类型及四个对应 blob，无新写对象、重建或 materialize。
+一次工具路径拼写错误创建了任务旁零字节 UNUSED 文件，核验空文件后删除该文件和空目录；无产品或历史数据改变。记录于 FAILED_ATTEMPTS.json。修正版资格执行没有非预期失败。首次发布准备因新任务目录内出现 __pycache__ 而 fail-closed，发生在任何仓库写入或推送之前；保留失败脚本及部分 staging，改为显式排除 bytecode cache。其写入者 NOT_ESTABLISHED，该异常不属于验证器或产品失败。
+本任务未主动修改 Skill/Memory或权限。已记录所用指令内容哈希和采样 mtime；所采样文件未见漂移。Skill元数据基线取于加载之后，任务开始前的运行时元数据状态 NOT_ESTABLISHED，不猜测写入者，也未重试被禁止的历史扫描或做全工作区 census。
+
+五、证据交付状态的分离
+本文件在发布前密封，仅陈述已完成的离线工作，不伪造未来 commit 或上传结果。EVIDENCE_COMMIT_SHA、REVIEW_INDEX_URL、PUBLIC_MANIFEST_SHA256 与 REMOTE_VERIFICATION 由实际正常推送和固定 commit 回读之后的独立交付回执及最终答复给出。回执另以增量 evidence-only commit 交付，避免自哈希循环；不覆盖前次证据或另一 lane。
+公开范围仅本任务报告、修正版/精确diff、字段契约、离线复现/资格/重评脚本及结果、必要的固定输入和身份、命令/退出/异常与保全。路径别名会明确标为 REDACTED；文档、store、lifetime、revision、event、selection值不改。私有 Skill/Memory 内容、浏览器配置、凭据和无关清单不发布。最终扫描仅覆盖本次拟发布增量与独立回执，固定 commit 字节回读与哈希核验另行记录。
+建议独立接受评审此窄范围外部验证器修正和现有证据重评。不要因此创建新的产品实现任务；不关闭EP19，不改变Roadmap #23、Second Wave或H4/tracked-dist，不声称真实后端集成。

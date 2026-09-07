@@ -1,0 +1,6203 @@
+{
+  "extracted_mutation_source": "t = copy.deepcopy(good['trace'])\na = copy.deepcopy(good['armed'])\nactual = good['actual_bfcache']\nfreeze = next((r for r in t['rows'] if r['kind'] == 'freeze'))\nhide = next((r for r in t['rows'] if r['kind'] == 'early-pagehide'))\nif case == 'sampling_before_retirement':\n    freeze['stores'] = copy.deepcopy(hide['stores'])\nif case == 'wrong_document':\n    t['documentId'] = 'wrong-document'\nif case == 'wrong_store':\n    a['store'] += 100\nif case == 'wrong_lifetime':\n    a['lifetime'] += 100\nif case == 'missing_rows':\n    t['rows'] = []\nif case == 'truncated_rows':\n    t['rows'] = t['rows'][:-2]\nif case == 'missing_notification':\n    t['rows'] = [r for r in t['rows'] if r['kind'] != 'notify']\nif case == 'missing_freeze':\n    t['rows'] = [r for r in t['rows'] if r['kind'] != 'freeze']\nif case == 'preview_residue':\n    freeze['dom']['preview'] = True\nif case == 'capture_residue':\n    freeze['dom']['capture'] = [{'held': [1]}]\nif case == 'ordinary_reload_not_bfcache':\n    actual = False",
+  "source_file_sha256": "f0111a3ab7edf4f73695c7762470ab192851ba8217d7cd0ebd5fb73096094fde",
+  "cases": [
+    {
+      "name": "sampling_before_retirement",
+      "input": {
+        "trace": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "rows": [
+            {
+              "seq": 1,
+              "kind": "installed-before-application",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 46.400000002235174,
+              "event": null,
+              "departure": null,
+              "armed": null,
+              "stores": [],
+              "dom": {
+                "capture": [],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 2,
+              "kind": "armed",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 52.900000002235174,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 3,
+              "kind": "late-listeners-registered",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 57.80000000074506,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 4,
+              "kind": "early-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.40000000223517,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "originalSamples": [
+                {
+                  "event": "pagehide",
+                  "persisted": true,
+                  "path": "/lifecycle-away",
+                  "at": 72,
+                  "snapshot": [],
+                  "proposals": [],
+                  "selectedDom": [],
+                  "capture": []
+                }
+              ]
+            },
+            {
+              "seq": 5,
+              "kind": "early-microtask-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.5,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 6,
+              "kind": "notify",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.69999999925494,
+              "event": null,
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "stack": "Error: same-store notification\n    at <anonymous>:8:217\n    at <anonymous>:1:492\n    at Set.forEach (<anonymous>)\n    at window.fixtureRetire (<anonymous>:1:480)"
+            },
+            {
+              "seq": 7,
+              "kind": "capture-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 8,
+              "kind": "late-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73.10000000149012,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 9,
+              "kind": "freeze",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 80.10000000149012,
+              "event": {
+                "id": 5,
+                "type": "freeze",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 10,
+              "kind": "resume",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.40000000223517,
+              "event": {
+                "id": 6,
+                "type": "resume",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 11,
+              "kind": "early-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.80000000074506,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 12,
+              "kind": "early-microtask-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.90000000223517,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            }
+          ]
+        },
+        "armed": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "store": 1,
+          "lifetime": 2,
+          "revision": 2,
+          "refs": [
+            {
+              "localId": "fixture"
+            }
+          ],
+          "primary": {
+            "localId": "fixture"
+          },
+          "agentOpen": false
+        },
+        "actual_bfcache": true
+      },
+      "canonical_sha256": "c97ae3aa3cf97fc26e9d2e2e7a5ec5ee6cf7252c153a895266077739cc8497b5"
+    },
+    {
+      "name": "wrong_document",
+      "input": {
+        "trace": {
+          "documentId": "wrong-document",
+          "rows": [
+            {
+              "seq": 1,
+              "kind": "installed-before-application",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 46.400000002235174,
+              "event": null,
+              "departure": null,
+              "armed": null,
+              "stores": [],
+              "dom": {
+                "capture": [],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 2,
+              "kind": "armed",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 52.900000002235174,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 3,
+              "kind": "late-listeners-registered",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 57.80000000074506,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 4,
+              "kind": "early-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.40000000223517,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "originalSamples": [
+                {
+                  "event": "pagehide",
+                  "persisted": true,
+                  "path": "/lifecycle-away",
+                  "at": 72,
+                  "snapshot": [],
+                  "proposals": [],
+                  "selectedDom": [],
+                  "capture": []
+                }
+              ]
+            },
+            {
+              "seq": 5,
+              "kind": "early-microtask-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.5,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 6,
+              "kind": "notify",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.69999999925494,
+              "event": null,
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "stack": "Error: same-store notification\n    at <anonymous>:8:217\n    at <anonymous>:1:492\n    at Set.forEach (<anonymous>)\n    at window.fixtureRetire (<anonymous>:1:480)"
+            },
+            {
+              "seq": 7,
+              "kind": "capture-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 8,
+              "kind": "late-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73.10000000149012,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 9,
+              "kind": "freeze",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 80.10000000149012,
+              "event": {
+                "id": 5,
+                "type": "freeze",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 10,
+              "kind": "resume",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.40000000223517,
+              "event": {
+                "id": 6,
+                "type": "resume",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 11,
+              "kind": "early-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.80000000074506,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 12,
+              "kind": "early-microtask-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.90000000223517,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            }
+          ]
+        },
+        "armed": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "store": 1,
+          "lifetime": 2,
+          "revision": 2,
+          "refs": [
+            {
+              "localId": "fixture"
+            }
+          ],
+          "primary": {
+            "localId": "fixture"
+          },
+          "agentOpen": false
+        },
+        "actual_bfcache": true
+      },
+      "canonical_sha256": "0f6a422d55af4e4f364e629ca935d6048533fe7b404157534df28264b861f3e3"
+    },
+    {
+      "name": "wrong_store",
+      "input": {
+        "trace": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "rows": [
+            {
+              "seq": 1,
+              "kind": "installed-before-application",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 46.400000002235174,
+              "event": null,
+              "departure": null,
+              "armed": null,
+              "stores": [],
+              "dom": {
+                "capture": [],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 2,
+              "kind": "armed",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 52.900000002235174,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 3,
+              "kind": "late-listeners-registered",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 57.80000000074506,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 4,
+              "kind": "early-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.40000000223517,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "originalSamples": [
+                {
+                  "event": "pagehide",
+                  "persisted": true,
+                  "path": "/lifecycle-away",
+                  "at": 72,
+                  "snapshot": [],
+                  "proposals": [],
+                  "selectedDom": [],
+                  "capture": []
+                }
+              ]
+            },
+            {
+              "seq": 5,
+              "kind": "early-microtask-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.5,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 6,
+              "kind": "notify",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.69999999925494,
+              "event": null,
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "stack": "Error: same-store notification\n    at <anonymous>:8:217\n    at <anonymous>:1:492\n    at Set.forEach (<anonymous>)\n    at window.fixtureRetire (<anonymous>:1:480)"
+            },
+            {
+              "seq": 7,
+              "kind": "capture-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 8,
+              "kind": "late-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73.10000000149012,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 9,
+              "kind": "freeze",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 80.10000000149012,
+              "event": {
+                "id": 5,
+                "type": "freeze",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 10,
+              "kind": "resume",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.40000000223517,
+              "event": {
+                "id": 6,
+                "type": "resume",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 11,
+              "kind": "early-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.80000000074506,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 12,
+              "kind": "early-microtask-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.90000000223517,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            }
+          ]
+        },
+        "armed": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "store": 101,
+          "lifetime": 2,
+          "revision": 2,
+          "refs": [
+            {
+              "localId": "fixture"
+            }
+          ],
+          "primary": {
+            "localId": "fixture"
+          },
+          "agentOpen": false
+        },
+        "actual_bfcache": true
+      },
+      "canonical_sha256": "76fc8855b8cdba60b57ff865ee42e3781ce3774ea31dd019b1fceed295c131f2"
+    },
+    {
+      "name": "wrong_lifetime",
+      "input": {
+        "trace": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "rows": [
+            {
+              "seq": 1,
+              "kind": "installed-before-application",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 46.400000002235174,
+              "event": null,
+              "departure": null,
+              "armed": null,
+              "stores": [],
+              "dom": {
+                "capture": [],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 2,
+              "kind": "armed",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 52.900000002235174,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 3,
+              "kind": "late-listeners-registered",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 57.80000000074506,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 4,
+              "kind": "early-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.40000000223517,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "originalSamples": [
+                {
+                  "event": "pagehide",
+                  "persisted": true,
+                  "path": "/lifecycle-away",
+                  "at": 72,
+                  "snapshot": [],
+                  "proposals": [],
+                  "selectedDom": [],
+                  "capture": []
+                }
+              ]
+            },
+            {
+              "seq": 5,
+              "kind": "early-microtask-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.5,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 6,
+              "kind": "notify",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.69999999925494,
+              "event": null,
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "stack": "Error: same-store notification\n    at <anonymous>:8:217\n    at <anonymous>:1:492\n    at Set.forEach (<anonymous>)\n    at window.fixtureRetire (<anonymous>:1:480)"
+            },
+            {
+              "seq": 7,
+              "kind": "capture-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 8,
+              "kind": "late-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73.10000000149012,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 9,
+              "kind": "freeze",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 80.10000000149012,
+              "event": {
+                "id": 5,
+                "type": "freeze",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 10,
+              "kind": "resume",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.40000000223517,
+              "event": {
+                "id": 6,
+                "type": "resume",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 11,
+              "kind": "early-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.80000000074506,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 12,
+              "kind": "early-microtask-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.90000000223517,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            }
+          ]
+        },
+        "armed": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "store": 1,
+          "lifetime": 102,
+          "revision": 2,
+          "refs": [
+            {
+              "localId": "fixture"
+            }
+          ],
+          "primary": {
+            "localId": "fixture"
+          },
+          "agentOpen": false
+        },
+        "actual_bfcache": true
+      },
+      "canonical_sha256": "722410ebe5bc07ed3b97b383cbbffda141a53d63ff4ae92aea6d4e0d7ea0d4f8"
+    },
+    {
+      "name": "missing_rows",
+      "input": {
+        "trace": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "rows": []
+        },
+        "armed": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "store": 1,
+          "lifetime": 2,
+          "revision": 2,
+          "refs": [
+            {
+              "localId": "fixture"
+            }
+          ],
+          "primary": {
+            "localId": "fixture"
+          },
+          "agentOpen": false
+        },
+        "actual_bfcache": true
+      },
+      "canonical_sha256": "4e5ad07385ca7096d44c668c5b74c85c357937bad65484bb8dba458487166b46"
+    },
+    {
+      "name": "truncated_rows",
+      "input": {
+        "trace": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "rows": [
+            {
+              "seq": 1,
+              "kind": "installed-before-application",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 46.400000002235174,
+              "event": null,
+              "departure": null,
+              "armed": null,
+              "stores": [],
+              "dom": {
+                "capture": [],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 2,
+              "kind": "armed",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 52.900000002235174,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 3,
+              "kind": "late-listeners-registered",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 57.80000000074506,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 4,
+              "kind": "early-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.40000000223517,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "originalSamples": [
+                {
+                  "event": "pagehide",
+                  "persisted": true,
+                  "path": "/lifecycle-away",
+                  "at": 72,
+                  "snapshot": [],
+                  "proposals": [],
+                  "selectedDom": [],
+                  "capture": []
+                }
+              ]
+            },
+            {
+              "seq": 5,
+              "kind": "early-microtask-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.5,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 6,
+              "kind": "notify",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.69999999925494,
+              "event": null,
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "stack": "Error: same-store notification\n    at <anonymous>:8:217\n    at <anonymous>:1:492\n    at Set.forEach (<anonymous>)\n    at window.fixtureRetire (<anonymous>:1:480)"
+            },
+            {
+              "seq": 7,
+              "kind": "capture-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 8,
+              "kind": "late-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73.10000000149012,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 9,
+              "kind": "freeze",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 80.10000000149012,
+              "event": {
+                "id": 5,
+                "type": "freeze",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 10,
+              "kind": "resume",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.40000000223517,
+              "event": {
+                "id": 6,
+                "type": "resume",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            }
+          ]
+        },
+        "armed": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "store": 1,
+          "lifetime": 2,
+          "revision": 2,
+          "refs": [
+            {
+              "localId": "fixture"
+            }
+          ],
+          "primary": {
+            "localId": "fixture"
+          },
+          "agentOpen": false
+        },
+        "actual_bfcache": true
+      },
+      "canonical_sha256": "34156ce5d172800a52e0e093f61f84152de8a642c7fb7e7c44c41464c2d2d872"
+    },
+    {
+      "name": "missing_notification",
+      "input": {
+        "trace": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "rows": [
+            {
+              "seq": 1,
+              "kind": "installed-before-application",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 46.400000002235174,
+              "event": null,
+              "departure": null,
+              "armed": null,
+              "stores": [],
+              "dom": {
+                "capture": [],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 2,
+              "kind": "armed",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 52.900000002235174,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 3,
+              "kind": "late-listeners-registered",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 57.80000000074506,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 4,
+              "kind": "early-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.40000000223517,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "originalSamples": [
+                {
+                  "event": "pagehide",
+                  "persisted": true,
+                  "path": "/lifecycle-away",
+                  "at": 72,
+                  "snapshot": [],
+                  "proposals": [],
+                  "selectedDom": [],
+                  "capture": []
+                }
+              ]
+            },
+            {
+              "seq": 5,
+              "kind": "early-microtask-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.5,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 7,
+              "kind": "capture-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 8,
+              "kind": "late-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73.10000000149012,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 9,
+              "kind": "freeze",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 80.10000000149012,
+              "event": {
+                "id": 5,
+                "type": "freeze",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 10,
+              "kind": "resume",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.40000000223517,
+              "event": {
+                "id": 6,
+                "type": "resume",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 11,
+              "kind": "early-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.80000000074506,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 12,
+              "kind": "early-microtask-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.90000000223517,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            }
+          ]
+        },
+        "armed": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "store": 1,
+          "lifetime": 2,
+          "revision": 2,
+          "refs": [
+            {
+              "localId": "fixture"
+            }
+          ],
+          "primary": {
+            "localId": "fixture"
+          },
+          "agentOpen": false
+        },
+        "actual_bfcache": true
+      },
+      "canonical_sha256": "d201412b2f52affcbfb396f377746fc7fd7e9559ee5426fc64b5854ce336cd98"
+    },
+    {
+      "name": "missing_freeze",
+      "input": {
+        "trace": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "rows": [
+            {
+              "seq": 1,
+              "kind": "installed-before-application",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 46.400000002235174,
+              "event": null,
+              "departure": null,
+              "armed": null,
+              "stores": [],
+              "dom": {
+                "capture": [],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 2,
+              "kind": "armed",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 52.900000002235174,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 3,
+              "kind": "late-listeners-registered",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 57.80000000074506,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 4,
+              "kind": "early-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.40000000223517,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "originalSamples": [
+                {
+                  "event": "pagehide",
+                  "persisted": true,
+                  "path": "/lifecycle-away",
+                  "at": 72,
+                  "snapshot": [],
+                  "proposals": [],
+                  "selectedDom": [],
+                  "capture": []
+                }
+              ]
+            },
+            {
+              "seq": 5,
+              "kind": "early-microtask-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.5,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 6,
+              "kind": "notify",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.69999999925494,
+              "event": null,
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "stack": "Error: same-store notification\n    at <anonymous>:8:217\n    at <anonymous>:1:492\n    at Set.forEach (<anonymous>)\n    at window.fixtureRetire (<anonymous>:1:480)"
+            },
+            {
+              "seq": 7,
+              "kind": "capture-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 8,
+              "kind": "late-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73.10000000149012,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 10,
+              "kind": "resume",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.40000000223517,
+              "event": {
+                "id": 6,
+                "type": "resume",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 11,
+              "kind": "early-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.80000000074506,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 12,
+              "kind": "early-microtask-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.90000000223517,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            }
+          ]
+        },
+        "armed": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "store": 1,
+          "lifetime": 2,
+          "revision": 2,
+          "refs": [
+            {
+              "localId": "fixture"
+            }
+          ],
+          "primary": {
+            "localId": "fixture"
+          },
+          "agentOpen": false
+        },
+        "actual_bfcache": true
+      },
+      "canonical_sha256": "6a568d71767a1cb92c5361874a6ecd235c8f9a726495679b64535e494091c820"
+    },
+    {
+      "name": "preview_residue",
+      "input": {
+        "trace": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "rows": [
+            {
+              "seq": 1,
+              "kind": "installed-before-application",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 46.400000002235174,
+              "event": null,
+              "departure": null,
+              "armed": null,
+              "stores": [],
+              "dom": {
+                "capture": [],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 2,
+              "kind": "armed",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 52.900000002235174,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 3,
+              "kind": "late-listeners-registered",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 57.80000000074506,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 4,
+              "kind": "early-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.40000000223517,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "originalSamples": [
+                {
+                  "event": "pagehide",
+                  "persisted": true,
+                  "path": "/lifecycle-away",
+                  "at": 72,
+                  "snapshot": [],
+                  "proposals": [],
+                  "selectedDom": [],
+                  "capture": []
+                }
+              ]
+            },
+            {
+              "seq": 5,
+              "kind": "early-microtask-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.5,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 6,
+              "kind": "notify",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.69999999925494,
+              "event": null,
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "stack": "Error: same-store notification\n    at <anonymous>:8:217\n    at <anonymous>:1:492\n    at Set.forEach (<anonymous>)\n    at window.fixtureRetire (<anonymous>:1:480)"
+            },
+            {
+              "seq": 7,
+              "kind": "capture-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 8,
+              "kind": "late-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73.10000000149012,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 9,
+              "kind": "freeze",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 80.10000000149012,
+              "event": {
+                "id": 5,
+                "type": "freeze",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": true,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 10,
+              "kind": "resume",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.40000000223517,
+              "event": {
+                "id": 6,
+                "type": "resume",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 11,
+              "kind": "early-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.80000000074506,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 12,
+              "kind": "early-microtask-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.90000000223517,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            }
+          ]
+        },
+        "armed": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "store": 1,
+          "lifetime": 2,
+          "revision": 2,
+          "refs": [
+            {
+              "localId": "fixture"
+            }
+          ],
+          "primary": {
+            "localId": "fixture"
+          },
+          "agentOpen": false
+        },
+        "actual_bfcache": true
+      },
+      "canonical_sha256": "aa2ddaecade90565bdc1fa0d2f9f078add81181f3134524e6f146196e52a3e21"
+    },
+    {
+      "name": "capture_residue",
+      "input": {
+        "trace": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "rows": [
+            {
+              "seq": 1,
+              "kind": "installed-before-application",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 46.400000002235174,
+              "event": null,
+              "departure": null,
+              "armed": null,
+              "stores": [],
+              "dom": {
+                "capture": [],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 2,
+              "kind": "armed",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 52.900000002235174,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 3,
+              "kind": "late-listeners-registered",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 57.80000000074506,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 4,
+              "kind": "early-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.40000000223517,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "originalSamples": [
+                {
+                  "event": "pagehide",
+                  "persisted": true,
+                  "path": "/lifecycle-away",
+                  "at": 72,
+                  "snapshot": [],
+                  "proposals": [],
+                  "selectedDom": [],
+                  "capture": []
+                }
+              ]
+            },
+            {
+              "seq": 5,
+              "kind": "early-microtask-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.5,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 6,
+              "kind": "notify",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.69999999925494,
+              "event": null,
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "stack": "Error: same-store notification\n    at <anonymous>:8:217\n    at <anonymous>:1:492\n    at Set.forEach (<anonymous>)\n    at window.fixtureRetire (<anonymous>:1:480)"
+            },
+            {
+              "seq": 7,
+              "kind": "capture-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 8,
+              "kind": "late-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73.10000000149012,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 9,
+              "kind": "freeze",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 80.10000000149012,
+              "event": {
+                "id": 5,
+                "type": "freeze",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": [
+                      1
+                    ]
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 10,
+              "kind": "resume",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.40000000223517,
+              "event": {
+                "id": 6,
+                "type": "resume",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 11,
+              "kind": "early-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.80000000074506,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 12,
+              "kind": "early-microtask-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.90000000223517,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            }
+          ]
+        },
+        "armed": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "store": 1,
+          "lifetime": 2,
+          "revision": 2,
+          "refs": [
+            {
+              "localId": "fixture"
+            }
+          ],
+          "primary": {
+            "localId": "fixture"
+          },
+          "agentOpen": false
+        },
+        "actual_bfcache": true
+      },
+      "canonical_sha256": "4228a62c131138bd7694a4d6e8628391c7f030d0627c4c13af353ac9fc1cf5fe"
+    },
+    {
+      "name": "ordinary_reload_not_bfcache",
+      "input": {
+        "trace": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "rows": [
+            {
+              "seq": 1,
+              "kind": "installed-before-application",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 46.400000002235174,
+              "event": null,
+              "departure": null,
+              "armed": null,
+              "stores": [],
+              "dom": {
+                "capture": [],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 2,
+              "kind": "armed",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 52.900000002235174,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 3,
+              "kind": "late-listeners-registered",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 57.80000000074506,
+              "event": null,
+              "departure": null,
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 4,
+              "kind": "early-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.40000000223517,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "originalSamples": [
+                {
+                  "event": "pagehide",
+                  "persisted": true,
+                  "path": "/lifecycle-away",
+                  "at": 72,
+                  "snapshot": [],
+                  "proposals": [],
+                  "selectedDom": [],
+                  "capture": []
+                }
+              ]
+            },
+            {
+              "seq": 5,
+              "kind": "early-microtask-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.5,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 6,
+              "kind": "notify",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 72.69999999925494,
+              "event": null,
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              },
+              "stack": "Error: same-store notification\n    at <anonymous>:8:217\n    at <anonymous>:1:492\n    at Set.forEach (<anonymous>)\n    at window.fixtureRetire (<anonymous>:1:480)"
+            },
+            {
+              "seq": 7,
+              "kind": "capture-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 8,
+              "kind": "late-pagehide",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 73.10000000149012,
+              "event": {
+                "id": 3,
+                "type": "pagehide",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 9,
+              "kind": "freeze",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 80.10000000149012,
+              "event": {
+                "id": 5,
+                "type": "freeze",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 10,
+              "kind": "resume",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.40000000223517,
+              "event": {
+                "id": 6,
+                "type": "resume",
+                "trusted": true,
+                "persisted": null,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 11,
+              "kind": "early-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.80000000074506,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            },
+            {
+              "seq": 12,
+              "kind": "early-microtask-pageshow",
+              "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+              "at": 96.90000000223517,
+              "event": {
+                "id": 7,
+                "type": "pageshow",
+                "trusted": true,
+                "persisted": true,
+                "phase": 2
+              },
+              "departure": {
+                "id": 3,
+                "trusted": true,
+                "persisted": true
+              },
+              "armed": {
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "store": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "refs": [
+                  {
+                    "localId": "fixture"
+                  }
+                ],
+                "primary": {
+                  "localId": "fixture"
+                },
+                "agentOpen": false
+              },
+              "stores": [
+                {
+                  "store": 1,
+                  "lifetime": 4,
+                  "revision": 3,
+                  "refs": [],
+                  "primary": null,
+                  "agentOpen": false
+                }
+              ],
+              "dom": {
+                "capture": [
+                  {
+                    "held": []
+                  }
+                ],
+                "preview": false,
+                "proposal": false,
+                "positions": []
+              }
+            }
+          ]
+        },
+        "armed": {
+          "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+          "store": 1,
+          "lifetime": 2,
+          "revision": 2,
+          "refs": [
+            {
+              "localId": "fixture"
+            }
+          ],
+          "primary": {
+            "localId": "fixture"
+          },
+          "agentOpen": false
+        },
+        "actual_bfcache": false
+      },
+      "canonical_sha256": "8ce64c5cfac08f157774abcf6f8082fc2cc133c4f323d8276ad6f819fa3348a6"
+    }
+  ]
+}

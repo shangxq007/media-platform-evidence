@@ -1,0 +1,58 @@
+{
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "helpers/reproduce.py"
+      ],
+      "observed_exit": 1,
+      "phase": "RED_BEFORE_CORRECTION_EXPECTED_FALSE_ACCEPTANCES",
+      "output": "REVIEWER_COUNTEREXAMPLE_REPRODUCTION.json"
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "helpers/qualify.py"
+      ],
+      "observed_exit": 0,
+      "phase": "OFFLINE_QUALIFICATION",
+      "output": "OFFLINE_QUALIFICATION_RESULTS.json"
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "helpers/reassess.py"
+      ],
+      "observed_exit": 0,
+      "phase": "OFFLINE_REASSESSMENT",
+      "output": "reassess.log"
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "helpers/reassess.py"
+      ],
+      "observed_exit": 0,
+      "phase": "REPORT_METADATA_LABEL_CORRECTION_ONLY_NO_ADDITIONAL_QUALIFICATION",
+      "output": "reassess-metadata-final.log"
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "helpers/reassess.py"
+      ],
+      "observed_exit": 0,
+      "phase": "REPORT_METADATA_LABEL_CORRECTION_ONLY_NO_ADDITIONAL_QUALIFICATION",
+      "output": "reassess-metadata-final.log"
+    }
+  ],
+  "provenance": "Actual terminal exits; first two transcribed from returned tool results; last subprocess captured directly",
+  "native_program_executions": [],
+  "fresh_browser_runs": 0,
+  "fresh_native_lifecycle_checks": 0
+}

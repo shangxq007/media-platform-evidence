@@ -1,0 +1,53 @@
+{
+  "source_sha256": "64d7fb37e3c3ed90ad26de586721f441bc72f74a0be858547ecebde3c9ace621",
+  "old_validator_sha256": "fe514fbf338f01193f35f109c69e9250d1571c8e440504deee0f9b89f705d5b1",
+  "controls": [
+    {
+      "case": "MISSING_RETIRED_LIFETIME",
+      "delete_key": "lifetime",
+      "rows": [
+        8,
+        10,
+        11
+      ],
+      "input_file": "counterexample-lifetime.json",
+      "input_sha256": "00914291af12a8a51a9ff4456380650463e2c7b3d12c9fe83ba090c63e2880dd",
+      "expected_passed": false,
+      "old_actual": {
+        "passed": true,
+        "errors": [],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "cfd39554-a87b-41e3-b420-7479a0c278c6",
+        "departure_event": 4,
+        "freeze_seq": 11,
+        "notification_sequences": [
+          8
+        ]
+      }
+    },
+    {
+      "case": "MISSING_PRIMARY_STATE",
+      "delete_key": "primary",
+      "rows": [
+        8,
+        10,
+        11
+      ],
+      "input_file": "counterexample-primary.json",
+      "input_sha256": "0990382928fb8c48ae25430dc99e4b5f6f0ce054e4ed6f1f331c4d0143aeedb4",
+      "expected_passed": false,
+      "old_actual": {
+        "passed": true,
+        "errors": [],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "cfd39554-a87b-41e3-b420-7479a0c278c6",
+        "departure_event": 4,
+        "freeze_seq": 11,
+        "notification_sequences": [
+          8
+        ]
+      }
+    }
+  ],
+  "false_acceptances_reproduced": 2
+}

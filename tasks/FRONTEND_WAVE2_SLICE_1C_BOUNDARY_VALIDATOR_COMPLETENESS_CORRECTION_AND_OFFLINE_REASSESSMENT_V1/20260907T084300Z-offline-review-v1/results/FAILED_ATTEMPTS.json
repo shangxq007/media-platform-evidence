@@ -1,0 +1,32 @@
+{
+  "attempts": [
+    {
+      "stage": "old-validator red reproduction",
+      "command": "python3 -B helpers/reproduce.py",
+      "exit_code": 1,
+      "disposition": "EXPECTED_RED; two published false acceptances reproduced before correction"
+    },
+    {
+      "stage": "tool write path typo",
+      "effect": "One empty task-adjacent UNUSED file in misspelled new task directory, no product/historical writes",
+      "disposition": "Verified zero-byte file, removed it and its now-empty task-created directory; no data discarded"
+    },
+    {
+      "stage": "optional live product object availability check",
+      "command": "git --no-optional-locks -C FRONTEND_WORKTREE cat-file -t 00128d35b97775b97124ad1921053a0da282690d",
+      "child_exit": 128,
+      "wrapper_exit": 1,
+      "error": "could not get object info",
+      "disposition": "No product mutation or object reconstruction performed. Investigate correct sealed tree provenance; not a validator/product trace failure.",
+      "resolution": "Resolved by reading the accepted correction snapshot object database: exact tree exists there and its four relevant blob entries match the live protected source bytes. Nothing materialized or written in either Git repository."
+    },
+    {
+      "stage": "public payload preparation attempt1",
+      "exit_code": 1,
+      "error": "AssertionError: task-local __pycache__ discovered by broad new-task file iterator",
+      "script_sha256": "ee01dc3a34ef8e24f88cda27280a23e323e40555f8ec5de36023b474a722c828",
+      "disposition": "Partial staging and script retained locally; explicitly exclude task-local bytecode caches from public export. Cache writer NOT_ESTABLISHED. Failure occurred before repository writes, commit or push."
+    }
+  ],
+  "unexpected_validator_failure_count": 0
+}
