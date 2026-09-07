@@ -1,0 +1,35 @@
+{
+  "candidate_commit_unchanged": true,
+  "classification": "Gate-output isolation/invocation defect; not H7 predicate or canonical business-authority semantics defect.",
+  "dependent_gates_not_run": [
+    "APPLICATION_CLASSPATH",
+    "APPLICATION_PROBE",
+    "FOUNDATION",
+    "BOOTJAR"
+  ],
+  "full_backend_acceptance": "REJECT_TRACKED_DRIFT",
+  "full_backend_native_exit": 0,
+  "next_authorization": "Authorize a separate append-forward external gate-output-isolation correction: preserve this checkout and commit, run frontend gates in a disposable independent repository, perform renewed required FCV in a new exact-SHA verification checkout, and review the Pack-only versus broader historical harness preservation scope. No H7/business predicate patch, history rewrite or product publication requested.",
+  "overlap": "FRONTEND_BUILD ran against same candidate filesystem during FULL_BACKEND; native build log names the generated backend static assets. No historical Pack writer inference.",
+  "preserved": "No reset/restore/clean/amend/replacement commit or full retry performed.",
+  "result": "BLOCKED_EXACT_CANDIDATE_VALIDATION",
+  "scope_deviation": "Frontend build output target was not recovered before launching the gate; three tracked static-resource paths changed outside the four product correction paths. Default Gradle user-home cache and /tmp were also used (FCV inventory records GRADLE_USER_HOME and TMPDIR unset); those runtime cache namespaces were not baselined. No global configuration or access-control change claimed or issued.",
+  "source_of_output_binding": {
+    "lines": [
+      [
+        26,
+        "    outDir: path.resolve(__dirname, '../platform-app/src/main/resources/static'),"
+      ],
+      [
+        27,
+        "    emptyOutDir: true,"
+      ]
+    ],
+    "path": "frontend/vite.config.ts"
+  },
+  "tracked_paths": [
+    "platform-app/src/main/resources/static/assets/index-BScGmBpo.js",
+    "platform-app/src/main/resources/static/assets/index-BcM_xmO2.css",
+    "platform-app/src/main/resources/static/index.html"
+  ]
+}

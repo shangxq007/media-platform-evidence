@@ -1,0 +1,41 @@
+TASK=EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1
+TASK_EXECUTION=BLOCKED_EXACT_CANDIDATE_VALIDATION
+H7_PRODUCTION_INPUT_BOUNDARY=PASS_FOCUSED_AND_EXACT_ENTRYPOINT
+H7_SEMANTIC_CONTINUITY=PASS_33_RULES_UNCHANGED
+PACK_MONITOR_QUALIFICATION=PASS_13_BOUNDED_CONTROLS_NOT_FULL_HISTORICAL_HARNESS_EQUIVALENCE
+PACK_HISTORICAL_BYTE_IMMUTABILITY=NOT_RECOVERABLE
+CANDIDATE_BASE_SHA=86d6aef94fd5e58da552e97c11473cff6eca734e
+CANDIDATE_COMMIT_SHA=689ab9456461a8d19a72d059f5157092efc43aff
+CANDIDATE_TREE=6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6
+REQUIRED_GATES=BLOCKED_REJECT_TRACKED_DRIFT
+PRESERVATION_SCOPE=BOUNDED_ENDPOINTS_AND_DISCRETE_CANONICAL_PACK_WINDOWS
+DELIVERY_SCAN_COVERAGE=SEE_DETACHED_DELIVERY_SCAN_RECEIPTS
+EVIDENCE_DELIVERY=AUTHORIZED_CHANNEL_PREPARED_PUBLICATION_PENDING_AT_REPORT_SEAL
+PRODUCT_PUBLICATION=NOT_PERFORMED
+POST_PUBLICATION_SANITY=NOT_RUN
+EP19_CLOSED=NO
+ROADMAP_23_SECOND_WAVE=NO_GO
+INDEPENDENT_REVIEW=REQUIRED
+
+完成：四路径生产枚举边界候选已在独立对象库提交；未共享 canonical 对象库。Git-tree membership + raw-byte equality + explicit root/tree receipt，不再递归扫描 nested worktrees。接受的 308 源、122 额外源排除、settings context、确定性顺序、真实违规与重复权威检测均已聚焦资格验证。旧 external census 未重跑；历史 14/17/13/15 仅作为历史材料。所有 33 条规则与 ZERO_LAWS、parser/masking/evaluator/self-test AST 连续性保留，canonical counts/details 一致。
+
+新执行身份对账：
+AFFECTED_INTEGRATION expected=21 executed=21 missing=0 unexpected=0 duplicate=0 failed=0 errored=0 skipped=0 passed=21
+FRONTEND expected=149 executed=149 missing=0 unexpected=0 duplicate=0 failed=0 errored=0 skipped=0 passed=149
+FULL_BACKEND expected=7973 executed=7973 missing=0 unexpected=0 duplicate=0 failed=0 errored=0 skipped=29 passed=7944
+H7_FOCUSED expected=15 executed=15 missing=0 unexpected=0 duplicate=0 failed=0 errored=0 skipped=0 passed=15
+H7_MUTATIONS expected=13 executed=13 missing=0 unexpected=0 duplicate=0 failed=0 errored=0 skipped=0 passed=13
+PACK_QUALIFICATION expected=13 executed=13 missing=0 unexpected=0 duplicate=0 failed=0 errored=0 skipped=0 passed=13
+RUNTIME_PREFLIGHT expected=3 executed=3 missing=0 unexpected=0 duplicate=0 failed=0 errored=0 skipped=0 passed=3
+
+核心阻塞：FULL_BACKEND native exit 0，但最终 REJECT_TRACKED_DRIFT。并行 FRONTEND_BUILD 使用 frontend/vite.config.ts 的 outDir 写入后端已跟踪 static 资源，两个旧 asset 被删除、index.html 改动，另有新未跟踪 asset。Git commit/tree 未变，不代表执行文件系统与冻结树一致；不得把 7973 身份原生测试结果提升为精确候选 FCV PASS。完整漂移及日志已保留，不回滚、不修补、不重试。ApplicationModules classpath/probe、foundation、bootJar 后续依赖门禁 NOT_RUN。
+
+分类：这是本任务门禁输出隔离/调用缺陷，不是 H7 业务或 attribution 算法缺陷。初次 qualify_h7 helper 的 duplicate-authority 断言曾误用调用作用域计数，已在冻结前修正 reporting/test helper，失败日志保留；冻结谓词未变。原 native manifest 的 .json 文件名实际为原生 TSV；另提供字节相同 .tsv 别名，未改执行语义。
+
+Pack：13 项控制通过，含真实队列溢出、watch loss、退出边界、write/restore、metadata-only、新目录和 stop-on-event。任意观测事件/丢失/记录元数据差异均拒绝；无 IN_ATTRIB 豁免。未建立 PID writer、连续字节不可变性、所有属性种类或权限拒绝专项复现。当前 Pack-only scope 不是对旧完整 PRIMARY/SHADOW harness 契约等价性的自我批准，具体映射需独立审查。
+
+保全：canonical tracked/index/HEAD/refs/worktree registrations 和接受的历史 deliverables 无观测差异；.usage.json 漂移单独披露。历史四个 Skill 路径（两个内容、两个运行元数据）及一个 Memory 路径变化保留，writer NOT_ESTABLISHED。零显式 Skill/Memory 写入不证明无运行时写入。只提供哈希和有限观测，不复制 Memory 内容。默认 Gradle cache 与 /tmp 的边界限制见 EXECUTION_DRIFT_DISPOSITION.json。
+
+交付：见 EXTERNAL_MANIFEST.sha256、ARCHIVE_VERIFICATION.json、DELIVERY_CREDENTIAL_SCAN.json 和 EVIDENCE_DELIVERY_RECEIPT.json（如远端成功）。凭据扫描仅针对本次新交付，有精确覆盖边界；没有重试上一次被拒绝的补充扫描。不声明普遍 secret absence。报告封装时远端发布尚未发生，最终不可变 URL 和远端回读在 detached receipt 中；本地路径不是 ChatGPT upload。
+
+下一项需要的精确授权：保留当前冻结 commit 与脏执行工作区，另行进行 append-forward 外部门禁隔离修正：frontend 在独立 disposable clone 执行；另一个 exact-SHA checkout 重新执行 required FCV；同时明确 Pack-only 与原完整 preservation harness 的契约映射。此处不请求产品发布，也不请求修补 H7 业务语义。当前候选不得进入 publication，必须先解决执行隔离并重新独立审查。
