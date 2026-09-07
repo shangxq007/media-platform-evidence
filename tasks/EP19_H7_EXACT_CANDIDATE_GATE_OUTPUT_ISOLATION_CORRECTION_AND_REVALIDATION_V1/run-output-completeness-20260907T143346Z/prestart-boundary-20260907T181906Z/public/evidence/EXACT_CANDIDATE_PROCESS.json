@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "import sys,json;from pathlib import Path;sys.path.insert(0,'/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/executor');from execution import exact;roots=['/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/outputs/continuation-runs/owner-observer-restored-689ab945-v1/sources/backend', '/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/outputs/continuation-runs/owner-observer-restored-689ab945-v1/sources/frontend', '/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/outputs/continuation-runs/owner-observer-restored-689ab945-v1/sources/shadow-fixture'];print(json.dumps({r:len(exact(Path(r))) for r in roots}))"
+  ],
+  "exit": 0,
+  "stdout": "{\"/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/outputs/continuation-runs/owner-observer-restored-689ab945-v1/sources/backend\": 7634, \"/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/outputs/continuation-runs/owner-observer-restored-689ab945-v1/sources/frontend\": 7634, \"/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/outputs/continuation-runs/owner-observer-restored-689ab945-v1/sources/shadow-fixture\": 7634}\n",
+  "stderr": "",
+  "elapsed_seconds": 7.416309356689453,
+  "product_gate_execution": false
+}

@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/qualify.py", line 128, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/qualify.py", line 124, in main
+    return run(args.output_dir) if args.output_dir else verify(args.verify_output)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/qualify.py", line 75, in run
+    out.mkdir(exist_ok=False)
+  File "/home/user/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py", line 1116, in mkdir
+    os.mkdir(self, mode)
+FileExistsError: [Errno 17] File exists: '/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/runs/parent-native-001'

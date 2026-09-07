@@ -1,0 +1,338 @@
+{
+  "schema": "runtime-boundary-source-references-v1",
+  "captured_utc": "2026-09-07T18:26:32.170240+00:00",
+  "installation_root": "/home/user/.hermes/hermes-agent",
+  "observed_terminal_env": {
+    "HERMES_HOME": "/home/user/.hermes"
+  },
+  "live_agent_context_override": "NOT_INSPECTED; terminal env is not proof of in-process ContextVar",
+  "credential_files_read": false,
+  "config_values_read": false,
+  "local_sources": [
+    {
+      "id": "launcher",
+      "path": "/home/user/.local/bin/hermes",
+      "sha256": "ec11dfbd85e8b56aa1d155b61a0a58f89a846a01cc0676b8b85254d989705599",
+      "size_bytes": 114,
+      "line_count": 4,
+      "line_ranges": [
+        [
+          1,
+          4
+        ]
+      ],
+      "supports": "Installed launcher",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "console",
+      "path": "/home/user/.hermes/hermes-agent/venv/bin/hermes",
+      "sha256": "12871000851050b8d84e3d5abc74216438e7612bd0e8ee40f0a7e165faa749b0",
+      "size_bytes": 329,
+      "line_count": 10,
+      "line_ranges": [
+        [
+          1,
+          10
+        ]
+      ],
+      "supports": "Console entrypoint imports hermes_cli.main",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "resolver",
+      "path": "/home/user/.hermes/hermes-agent/hermes_constants.py",
+      "sha256": "f83dcbd244d269dbdca87c8d0bb7ead54100894216c7eddfcd2d4fe97f78c3fc",
+      "size_bytes": 49209,
+      "line_count": 1185,
+      "line_ranges": [
+        [
+          25,
+          42
+        ],
+        [
+          82,
+          89
+        ],
+        [
+          131,
+          161
+        ]
+      ],
+      "supports": "ContextVar and process-home precedence",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "cli-profile",
+      "path": "/home/user/.hermes/hermes-agent/hermes_cli/main.py",
+      "sha256": "1db8c4ac4b45b4ab50761cd3101f8f129165c0fe067effbb1e7a2a5c6edc402e",
+      "size_bytes": 139845,
+      "line_count": 3435,
+      "line_ranges": [
+        [
+          495,
+          544
+        ]
+      ],
+      "supports": "Profile pre-import resolution and sticky profile",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "profile-env",
+      "path": "/home/user/.hermes/hermes-agent/hermes_cli/profiles.py",
+      "sha256": "8ca5eddec8fcacc7011e0a4da1fad61767d3cd96c74fc3159967a5e733eb9dff",
+      "size_bytes": 77600,
+      "line_count": 1718,
+      "line_ranges": [
+        [
+          1680,
+          1704
+        ]
+      ],
+      "supports": "Exact profile root mapping; existing named profile required",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "web-scope",
+      "path": "/home/user/.hermes/hermes-agent/hermes_cli/web_server_profiles.py",
+      "sha256": "76652d0a173b226e48fb3918fa0e40e8ff89ea854398c1e95eb1fe6331b6af92",
+      "size_bytes": 18508,
+      "line_count": 398,
+      "line_ranges": [
+        [
+          197,
+          242
+        ]
+      ],
+      "supports": "Config-only task scope versus locked global skills scope",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "skills-view",
+      "path": "/home/user/.hermes/hermes-agent/tools/skills_tool.py",
+      "sha256": "0f205b8c2d9266d272d8c6cae3d189b86a5aebce98f03b61605d266b65f9497c",
+      "size_bytes": 37268,
+      "line_count": 691,
+      "line_ranges": [
+        [
+          60,
+          69
+        ],
+        [
+          640,
+          663
+        ]
+      ],
+      "supports": "Dynamic skills path and successful view telemetry",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "skills-manager",
+      "path": "/home/user/.hermes/hermes-agent/tools/skill_manager_tool.py",
+      "sha256": "87f088f543adbac9723ef196336f424adf2afd15a6c71c5e0e2918173df1a386",
+      "size_bytes": 44894,
+      "line_count": 906,
+      "line_ranges": [
+        [
+          67,
+          80
+        ]
+      ],
+      "supports": "Call-time path, explicit module patch precedence",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "skill-usage",
+      "path": "/home/user/.hermes/hermes-agent/tools/skill_usage.py",
+      "sha256": "82702d4736a8fc81ceb4dd5e6ce9706aa242102c84277c474c661e659a6f1aed",
+      "size_bytes": 36245,
+      "line_count": 742,
+      "line_ranges": [
+        [
+          45,
+          80
+        ],
+        [
+          329,
+          339
+        ],
+        [
+          348,
+          407
+        ],
+        [
+          437,
+          486
+        ]
+      ],
+      "supports": "Usage map fields, atomic write, lock, best-effort lifecycle",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "atomic-write",
+      "path": "/home/user/.hermes/hermes-agent/utils.py",
+      "sha256": "0b943a7f82eea20361a8fee913a60fd97dea048a15da4305e298d4bee9c05c92",
+      "size_bytes": 21753,
+      "line_count": 491,
+      "line_ranges": [
+        [
+          136,
+          217
+        ]
+      ],
+      "supports": "Temp/rename and fallback paths",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "memory-tool",
+      "path": "/home/user/.hermes/hermes-agent/tools/memory_tool.py",
+      "sha256": "38630aab4d9ef64be4c21a6fa91db5588636bdb9450e0d83ac9ef63b813bbcfc",
+      "size_bytes": 18039,
+      "line_count": 350,
+      "line_ranges": [
+        [
+          38,
+          60
+        ],
+        [
+          161,
+          178
+        ]
+      ],
+      "supports": "Per-call memory path and config flags",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "memory-store",
+      "path": "/home/user/.hermes/hermes-agent/tools/memory_tool_store.py",
+      "sha256": "5d25c0604de0c4bf4b4f07402b0582b20c33377330a0c7354e059a7e7cf52293",
+      "size_bytes": 23548,
+      "line_count": 417,
+      "line_ranges": [
+        [
+          150,
+          165
+        ],
+        [
+          380,
+          410
+        ]
+      ],
+      "supports": "Memory file mapping and atomic .mem_ writes",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "coverage",
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/executor/coverage.py",
+      "sha256": "158d443af7566b2b2237cd633502a5e8fc30c49bf0e4aafd5b503f0597003a52",
+      "size_bytes": 9214,
+      "line_count": 139,
+      "line_ranges": [
+        [
+          23,
+          83
+        ]
+      ],
+      "supports": "Retains all original paths and instruction recursive universe",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "collector",
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/executor/preservation.py",
+      "sha256": "cfdc63fde7be1a5d3634d9425e35198ec3f9c4060b1d09197e3ad9e2c48f87a7",
+      "size_bytes": 8202,
+      "line_count": 136,
+      "line_ranges": [
+        [
+          10,
+          98
+        ],
+        [
+          116,
+          136
+        ]
+      ],
+      "supports": "Original paths, metadata fields, completeness predicates",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "observer",
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/executor/observe.py",
+      "sha256": "2e060dd77ed4b24132d581e36cc3fa84c8b67d928cd9ec7689dcdc8823e991e2",
+      "size_bytes": 18193,
+      "line_count": 256,
+      "line_ranges": [
+        [
+          1,
+          89
+        ],
+        [
+          186,
+          238
+        ]
+      ],
+      "supports": "Instruction rejection, event masks, bounded interval",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "runner",
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/executor/runner.py",
+      "sha256": "046efed3390959b4223fc7d9a1015b71d694de4f9663194f8ad1764cfb2f1a47",
+      "size_bytes": 29327,
+      "line_count": 397,
+      "line_ranges": [
+        [
+          321,
+          374
+        ]
+      ],
+      "supports": "Original baseline comparison before START and at final acceptance",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "monitor-contract",
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/inputs/MONITOR_CONTRACT.txt",
+      "sha256": "199682e5802759204bf1779e1f60abedf83bf200ad2fabc6297d80dc8c7156dd",
+      "size_bytes": 3654,
+      "line_count": 15,
+      "line_ranges": [
+        [
+          6,
+          15
+        ]
+      ],
+      "supports": "Original rejection semantics and explicit limits",
+      "capture": "read-only sequential current source, not historical attribution"
+    },
+    {
+      "id": "continuation-contract",
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/qualification/CONTINUATION_PRESERVATION_CONTRACT.md",
+      "sha256": "22f5e52bd46d651e7d17e94ac0bc674b0738085576fcd6baa2ebf9f126404ffc",
+      "size_bytes": 10222,
+      "line_count": 57,
+      "line_ranges": [
+        [
+          11,
+          25
+        ],
+        [
+          45,
+          51
+        ]
+      ],
+      "supports": "No skill metadata exemption; relaxation not approved",
+      "capture": "read-only sequential current source, not historical attribution"
+    }
+  ],
+  "web_sources_manifest": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/runtime-analysis/web-sources.json",
+  "docs_implementation_discrepancy": {
+    "documentation": "user-guide__features__curator.txt:266",
+    "implementation": "tools/skill_usage.py:400-407,459-475",
+    "finding": "online page excludes bundled/hub telemetry; installed implementation records ANY/ALL sources"
+  },
+  "runtime_side_effects": {
+    "known_tool_spill": "/home/user/.hermes/cache/exec/stdout-9d03cffe0023.txt",
+    "skill_view_usage_write": "POSSIBLE_BY_IMPLEMENTATION_NOT_ATTRIBUTED",
+    "absolute_write_only_claim": false
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "checks": [
+    {
+      "case": "current",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/qualify.py",
+        "--verify-output",
+        "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/runs/parent-native-001"
+      ],
+      "native_exit": 0,
+      "expected_exit": 0,
+      "raw_log": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/parent-binding-checks/current.log",
+      "log_sha256": "5889a189b4a9be47cc48fdb9f0177e4c17016dff4687c441c2a7f007bd7533ed"
+    },
+    {
+      "case": "stale-initial",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/qualify.py",
+        "--verify-output",
+        "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/runs/attempt-002"
+      ],
+      "native_exit": 1,
+      "expected_exit": 1,
+      "raw_log": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/parent-binding-checks/stale-initial.log",
+      "log_sha256": "8e3937e070232334aa9ed0d71e188798fc0589b5d50a866a5718e2795b1881d5"
+    },
+    {
+      "case": "stale-followup",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/qualify.py",
+        "--verify-output",
+        "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/runs/followup-attempt-002"
+      ],
+      "native_exit": 1,
+      "expected_exit": 1,
+      "raw_log": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/parent-binding-checks/stale-followup.log",
+      "log_sha256": "6bc295bebe082c7c89499ccc22db4aa2dcd2d5542d649ae2435dacbe5fbf945c"
+    },
+    {
+      "case": "reuse-output",
+      "argv": [
+        "python3",
+        "-B",
+        "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/qualify.py",
+        "--output-dir",
+        "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/runs/parent-native-001"
+      ],
+      "native_exit": 1,
+      "expected_exit": 1,
+      "raw_log": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/parent-binding-checks/reuse-output.log",
+      "log_sha256": "c5939942fbd6fe3ff259aa54042c590b28b109e1354423e3861c4e949cd3cff4"
+    }
+  ],
+  "result": "PASS",
+  "product_gate_execution": false
+}

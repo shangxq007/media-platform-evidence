@@ -1,0 +1,54 @@
+{
+  "schema": "ep19-external-prestart-decision-v1",
+  "run": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/runs/parent-native-001/fixtures/test_unreadable_baseline_retains_error_when_scope_allows_evidence-47a7d7c2602a45e597ad66eb3249c59a/outputs/continuation-runs/fixture",
+  "run_id": "fixture",
+  "candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+  "base": "86d6aef94fd5e58da552e97c11473cff6eca734e",
+  "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6",
+  "phase": "PRESTART",
+  "gate": null,
+  "decision": "REJECT",
+  "reason": "[Errno 13] Permission denied: 'baseline.json'",
+  "decision_scope": "Baseline comparison only. Caller acceptance also requires the writer to return successfully. A receipt file alone does not prove write/fsync completion.",
+  "baseline_identity": {
+    "status": "NOT_ESTABLISHED"
+  },
+  "policy_identity": {
+    "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/runs/parent-native-001/fixtures/test_unreadable_baseline_retains_error_when_scope_allows_evidence-47a7d7c2602a45e597ad66eb3249c59a/outputs/continuation-runs/fixture/scope.json",
+    "raw_sha256": "9305e7228ea3360e01e0e82cd0821e28f5b06fff6f61ec5a17a6a870feeaa880",
+    "metadata": {
+      "st_dev": 47,
+      "st_ino": 21799885,
+      "st_mode": 33188,
+      "st_uid": 1000,
+      "st_gid": 100,
+      "st_size": 1410,
+      "st_mtime_ns": 1788806540720409932,
+      "st_ctime_ns": 1788806540720409932,
+      "st_nlink": 1
+    }
+  },
+  "capture_errors": [],
+  "evidence_errors": [
+    {
+      "path": null,
+      "type": "PermissionError",
+      "errno": 13,
+      "reason": "[Errno 13] Permission denied: 'baseline.json'"
+    }
+  ],
+  "shadow_omitted": [],
+  "gate_process_status": "NOT_ESTABLISHED",
+  "call_boundary": "GATES_NOT_YET_INVOKED_BY_THIS_RUN_ALL_CALL",
+  "coverage_bounds": "Sequential endpoint capture of the original wanted keys and all original fields; directories in file scope retain metadata only. No new enumeration, no atomic snapshot, no continuous command-gap monitoring, no writer attribution. START presence is an endpoint observation, not proof of process history. No bodies exported.",
+  "started_ns": 1788806540917362999,
+  "baseline_entries": {},
+  "before": {},
+  "current": {},
+  "differences": [],
+  "START": {
+    "status": "ABSENT_AT_CAPTURE",
+    "observed_ns": 1788806540917826145
+  },
+  "finished_ns": 1788806540918043462
+}

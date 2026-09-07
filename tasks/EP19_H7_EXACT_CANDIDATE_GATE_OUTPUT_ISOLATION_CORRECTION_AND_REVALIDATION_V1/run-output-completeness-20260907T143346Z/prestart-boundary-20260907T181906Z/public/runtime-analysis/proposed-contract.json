@@ -1,0 +1,50 @@
+{
+  "schema": "hermes-original-preservation-proposal-v1",
+  "status": "NOT_ENACTED",
+  "execution_authorized": false,
+  "observer_modification_authorized": false,
+  "historical_reclassification_authorized": false,
+  "historical_writer": "NOT_ESTABLISHED",
+  "original_roots": ["/home/user/.hermes/skills", "/home/user/.hermes/memories"],
+  "original_metadata_fields": ["st_dev", "st_ino", "st_mode", "st_uid", "st_gid", "st_size", "st_mtime_ns", "st_ctime_ns", "st_nlink"],
+  "strict_scope": {
+    "members": "ALL original recursive entries except exact approved bookkeeping objects; all memories entries strict",
+    "support_inputs": "ALL retained original protected entries and sealed helper/control/qualification/authorization/candidate inputs",
+    "policy": "deny unknown paths, unknown fields, record insertion/deletion, symlinks, hardlink aliases and ancestor rebinding"
+  },
+  "bookkeeping_candidate": {
+    "target": "/home/user/.hermes/skills/.usage.json",
+    "record_scope": "existing exact authorized skill IDs only, RFC6901 escaped",
+    "permitted_record_fields": ["view_count", "use_count", "last_viewed_at", "last_used_at"],
+    "all_other_fields": "DEEP_EQUAL_REQUIRED",
+    "count_predicate": "after = before + number_of_bound_committed_operations; nonnegative integer excluding bool; no normalization or decrement",
+    "timestamp_predicate": "exact timestamp from bound transaction within verified time interval",
+    "record_creation": "REJECT",
+    "patch_generation_or_reuse_generation_delta": "REJECT",
+    "temp_path": "exact transaction-registered /home/user/.hermes/skills/.usage_<generated>.tmp; pattern alone NEVER authorizes",
+    "temp_final_state": "ABSENT",
+    "lock_path": "/home/user/.hermes/skills/.usage.json.lock",
+    "lock_rule": "preserve baseline existing identity and fields; baseline-absent creation requires separate explicit owner entry authorization",
+    "target_identity_rule": "same mount, exact transaction temp inode replaces target; baseline mode/uid/gid preserved; nlink=1; all metadata deltas causally explained",
+    "unexplained_atomic_fallback": "REJECT"
+  },
+  "directory_rules": {
+    "entry_set": "exact baseline set except separately authorized persistent lock entry; every transient entry fully accounted",
+    "skills_root_strict_fields": ["st_dev", "st_ino", "st_mode", "st_uid", "st_gid", "st_nlink"],
+    "skills_root_conditional_fields": ["st_size", "st_mtime_ns", "st_ctime_ns"],
+    "conditional_predicate": "complete exact transaction syscall ledger accounts for ALL directory effects; no unknown writer or unapproved attribute operation; final entry set valid",
+    "other_directories": "all old metadata fields equal",
+    "attribute_claim_limit": "atime not frozen; full ACL/xattr claims require additional verified capture, not current inotify/fields alone"
+  },
+  "required_transaction_evidence": ["run_id", "transaction_id", "boot_id", "pid", "process_start_time", "executable_sha256", "runtime_code_digest", "config_digest", "effective_profile_home", "skill_id", "operation", "syscall_name_and_result", "fd_dev_ino", "parent_binding", "monotonic_event_sequence", "before_sha256", "after_sha256", "allowed_json_diff", "complete_open_write_fsync_rename_unlink_attribute_interval"],
+  "observed_event_names": ["IN_MODIFY", "IN_ATTRIB", "IN_CLOSE_WRITE", "IN_MOVED_FROM", "IN_MOVED_TO", "IN_CREATE", "IN_DELETE", "IN_DELETE_SELF", "IN_MOVE_SELF"],
+  "fail_closed": ["unknown_writer", "missing_receipt", "unbound_identity", "unexplained_delta", "unknown_field", "unknown_path", "overflow", "watch_loss", "unknown_watch", "prewatch_gap", "count_mismatch", "policy_field_change", "unexplained_directory_metadata", "unapproved_scope_change"],
+  "existing_lifecycle_hook_sufficient": false,
+  "existing_inotify_writer_attribution_sufficient": false,
+  "new_pass_predicate": "approved_before_start AND sealed_binding_valid AND strict_original_equal AND complete_event_coverage AND every_delta_exactly_accounted AND zero_unknown_writer AND final_entry_set_valid AND directory_metadata_reconciled AND product_predicates_unchanged",
+  "public_claim_if_adopted_and_passed": "ORIGINAL_STRICT_CONTENT_PRESERVED_WITH_ACCOUNTED_BOOKKEEPING",
+  "forbidden_claim": "ORIGINAL_ALL_BYTES_AND_METADATA_IMMUTABLE",
+  "private_claim": "PRIVATE_INPUT_SNAPSHOT_MATCH does not discharge ORIGINAL obligations",
+  "required_adoption": ["versioned_owner_approval_before_start", "independent_review", "new_evaluator_authority_without_silent_observer_exemption", "new_run_namespace", "new_baseline_and_seal", "positive_and_negative_qualification", "fresh_preflight", "preserve_old_rejection_and_old_predicate_results"],
+  "current_disposition": "NO_IMPLEMENTED_COMPLETE_WRITER_LEDGER; PROPOSAL_NOT_ADOPTABLE_AS_CURRENT_PASS"
+}

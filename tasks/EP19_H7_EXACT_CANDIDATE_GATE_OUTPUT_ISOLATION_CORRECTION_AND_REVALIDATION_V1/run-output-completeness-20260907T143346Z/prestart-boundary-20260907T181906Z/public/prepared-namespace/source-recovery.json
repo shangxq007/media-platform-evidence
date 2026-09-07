@@ -1,0 +1,956 @@
+{
+  "candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+  "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6",
+  "source_files": {
+    ".github/workflows/ci.yml": "8ed2681347e13dc386b216ecfa3c0e6bebf21532f8924ee49d9a835c7c42f822",
+    "ai-module/build.gradle.kts": "b59748b3027175860ede169ad50ea8439203c73ef38ffd7851969079f2cbe395",
+    "artifact-module/build.gradle.kts": "50dd406c81bce33dc0b45a64ba1f7b5d85b62e3836da68e2d24d3ec17c689de8",
+    "audio-module/build.gradle.kts": "71814ade95fac842d6dcd2ad91daa5c5672a35fe5815c1aa49acd713cbd2d08b",
+    "audit-compliance-module/build.gradle.kts": "0cd3a11d61d56b5182be070339b3624bab4d1cd5b064d231fa4eb44e51217259",
+    "billing-module/build.gradle.kts": "3878d5cc79ac74ea5509d705dd660ccd08e77903f81009997eb1b884ef2a7d45",
+    "bmf-provider-module/build.gradle.kts": "8dc1d9229f2607ae58f4c3de7bbb8b547288ca79172dac0d4cc70eff64e82224",
+    "build.gradle.kts": "845fb5d54e9fefe940d66f98b04ac55546d409f020b5ee684a6b6ca2dd61eb18",
+    "cloud-resource-module/build.gradle.kts": "883815740f92be624536dfbd97a6302c32a4f563f1911310d764924660adc48d",
+    "color-image-module/build.gradle.kts": "b84d7c017415aa9027305768b93162be433afb3b20bf795792004e87f451e946",
+    "commerce-module/build.gradle.kts": "b87d4e7e7123735ec075f454dba6f3ac02421f795aa63478132e1e8ed1eb7c4d",
+    "composite-resource-module/build.gradle.kts": "d1845c4711cbeccb70f3f24417fb20784cc7921142b412256dd45444b7bbc4e7",
+    "config-module/build.gradle.kts": "b90ebb640bcd2e0a0f266275424e6382201fe651e4cab7aac5eaa043fe6a2191",
+    "datasource-module/build.gradle.kts": "d03a3d51188a169208cf6368e0038a879f385239fbc0db91cb828d03261f8697",
+    "delivery-module/build.gradle.kts": "4d7124407a98df8497120e9540d9d1a55175d6f5f9840437103717ec8523874e",
+    "docs/architecture/governance/automated-guards/check-phase17-sandbox-architecture.py": "8fd88a00896c59c6b5efc10f340fb5c6b1b0c93763ea529c615ab2b46120ba8d",
+    "docs/architecture/governance/automated-guards/check-phase17-sandbox-conformance-results.py": "4881e6526c8705c04dd709d4d79dfe2b56953def1a0712d80b5d8265d4b409df",
+    "docs/architecture/governance/automated-guards/check-phase17-sandbox-ledger-test.py": "07f6bd08bf5736b11e4aa56c1795565e67086f1a9e9afc1091ebc164d8c50fd8",
+    "docs/architecture/governance/automated-guards/check-phase17-sandbox-ledger.py": "0c58ead7708ede5aab1507de293b2c756455a5fac286f34640e85ae4d0c88b0a",
+    "docs/architecture/governance/automated-guards/test_verify_billing_entitlement_payment_authority_convergence_v1.py": "76f67b715ab07d714b78e2c5e2252e0066c948b7d1000d917783a53e0920afe2",
+    "docs/architecture/governance/automated-guards/verify-ar-v2-mechanical-ledger.py": "38dae9a798bde6d81bbd226587d995485197e6d6722b2675ae06522fcd50e3ba",
+    "docs/architecture/governance/automated-guards/verify-billing-entitlement-payment-authority-convergence-v1.py": "ecd850a294c88d6664f06abd462e29205b2d41248d45b291cfa51c174addeda9",
+    "docs/architecture/governance/automated-guards/verify-cfrh-i1-single-source-of-truth.py": "f8d1c208a483f5772bb48afcb2a202a4b69ece21903c19717b3e76038169d233",
+    "docs/architecture/governance/automated-guards/verify-cfrh-i2-inventory-contract.py": "4e4c18bcb352ae8967544b2c3f6134c8d62de47604ea39a11e690eceda3a6041",
+    "entitlement-module/build.gradle.kts": "bc2fff4f38fb6f4a8665d61b84fb4a87a99c1ffa8d2d12a22b33afcf5f7ec496",
+    "extension-module/build.gradle.kts": "b6f37881a3f336cce01b43bac987d2a1093c120518df284ad390c3c44f177186",
+    "federation-query-module/build.gradle.kts": "10bfda6efb1b8cf27c4561d5c47fca31eaccd639bd644f6a489199b7b88dc5d3",
+    "ffmpeg-provider-module/build.gradle.kts": "e28c054af44d59d012b009db587092f62c49d39f24e087f587d7ae8505142825",
+    "font-text-module/build.gradle.kts": "5340516409efd8cc46ffe11c050e1276c2c70f7a469bfb0fa95235f14f4da1c0",
+    "frontend/package-lock.json": "3a7a68ac2fe02df54868cafb01e7785fbd8b9007f50a254427e0c86b79f333b4",
+    "frontend/package.json": "b8adfcfe288730204eeeaab1ca9ff4cc3d9a569e0ad9f19e4b224bfd8b167e27",
+    "frontend/vite.config.ts": "894c73bd2226b14f3647d972870c899c6165ff99981827d60f91b74e4c2c2a1f",
+    "gradle.properties": "a80e8ae82d53d5a9e6ff1c5179cdcabf7f5ca868d125163318548de15aabdbff",
+    "gradlew": "b2fe376b143a459ba5d0bd290dc89beed5399fc6d159cd1214bd642ea94bcf07",
+    "identity-access-module/build.gradle.kts": "4aec6bc1dbeca6f7a350e923b305929d6c68c044c58bd78fe198c430c38e795f",
+    "media-execution-plan-module/build.gradle.kts": "ff148084097a0608cb39bf1289dede7676239707535d03e0f4bf212490be7de2",
+    "media-module/build.gradle.kts": "6ac132b470517481e28542a1f53d9f9bb0bb54679ac7d72db1ca88e80c54fe3c",
+    "notification-module/build.gradle.kts": "eb583ac491208e5fb1bd7bf690489b78ac8ae2707962aaef20e2c4341e5d1372",
+    "observability-module/build.gradle.kts": "cc1717a306ee080ad4729797ba7fdf3f168444ca030573148feb96958df3e015",
+    "operation-module/build.gradle.kts": "56f47b136096ba86f7d1a5e736c4c003e88e84c302c81653442bd2318cbd3598",
+    "outbox-event-module/build.gradle.kts": "e8774e0a8334a1b01b5a515015c1191418aac1e8aa575e0cfac8dbaafd05b352",
+    "payment-module/build.gradle.kts": "dfd648d7579da779ef77b12698353e9f801de46cfd18c53d230778aa7c79747e",
+    "platform-algorithms/graph/build.gradle.kts": "9f52d0f229c7299527f8965030551bd51e77a1efe7ba124aae0873a8df921419",
+    "platform-app/build.gradle.kts": "e1a9380711dc08f005d3b38e62138fd11d61ff69df76e9958096533f8b75720c",
+    "platform-distribution/build.gradle.kts": "c7ab9701d228b4652ec3ef1129bec8bb539711bb0f2710a807d1703a1a17089c",
+    "policy-governance-module/build.gradle.kts": "51097207b2be12c7e6aac0c6ef41c6bceacf0389c5a38ec6581c0d50db0ef000",
+    "prompt-module/build.gradle.kts": "a04349257a83b8c1e630f9465704ce94efbb02d7bd96642a45cb9ab5feda034f",
+    "provider-plugin-runtime-module/build.gradle.kts": "57d6dc132dbf17a8f96db931f8a0e3679dd6b1b4270ab2ba44dc020f5c09c799",
+    "remote-render-worker/build.gradle.kts": "8429dc51561e478e136c7cccebbeccc584d8a5a1e44913f1bd8b4b5058463755",
+    "render-module/build.gradle.kts": "be3b7da93c7e62e543a04a4cc1b687fd6f5015484ee23ede143129e74bd1df4a",
+    "sandbox-isolation-module/build.gradle.kts": "0e4c6d9ffe1513b49a33162012242812b0d0f2725407cd383b8447409ffef2be",
+    "sandbox-worker/build.gradle.kts": "3f11f213697c40fa750023d1a0d2b3e85cd608da2beffac2aca6fec7cb779a2c",
+    "scheduler-module/build.gradle.kts": "cc1717a306ee080ad4729797ba7fdf3f168444ca030573148feb96958df3e015",
+    "scripts/agent/agent-api-loop.sh": "e6d0fb5c075f78bc00d8c5ef83d4a75a0b366d4270c8cce9315a53d69db09021",
+    "scripts/agent/agent-product-workflow.sh": "5cf1f4a444e6620449e8f2271d14ed7f2375ec1bc5e55049cfa32c85f518febf",
+    "scripts/agent/agent-render-workflow.sh": "2cebf07dedf9bb4e9483cbb5b99a01779905fe454fb1c6f70f97758625759320",
+    "scripts/api/export-openapi.sh": "ea29eb9b7718ef72a60aa0f172e775df84663ac2a07df2fb51f464aa3fd7e8b4",
+    "scripts/check-api-contract-governance.sh": "59b7fffef34c460404a79feb5f356dadec1424831637a95c5e042892977a935d",
+    "scripts/check-architecture-drift.sh": "68f29771675b71bdba9d2efa4e8969bab30f8f1c1e281f2512eeb111eb37fd6d",
+    "scripts/check-document-governance.sh": "d4195b88744eccfbcf4a0089c29b1fb4d59082ffc4df9bf2271504b20202e895",
+    "scripts/check-storage-identity-placement-m0-m1.py": "10e4287bd0d273a3bba2c00745c8fdd906acb2f504e98584a4adb645da05455c",
+    "scripts/ci/census_test_execution_topology.py": "cfa286b9d0d172332a6c5ead05062a1583b4f0482c5bd0f4beb6c14b550c24fc",
+    "scripts/ci/change_impact_classifier.py": "d426f7748ef265fd9457ddd7f7cb3e0565d420ac9bb57bec7f8be3cf75cc106f",
+    "scripts/ci/phase19-runtime-conformance.sh": "511bc8436c306069f1c1de6eed6daadfb6559d765d84c11a6f123b5eccc2a068",
+    "scripts/ci/phase19-targeted-runtime-conformance.sh": "7eb0b4204e78b3cca7b83b9a313a633b6a7cdf3b0105cd9e5d105d257dad57af",
+    "scripts/ci/run_full_deterministic_backend_suite.py": "5c3c02b292568304a72fe7c1bf5e2bf1a45bb71cd0297c039df1d0e66c48894d",
+    "scripts/ci/run_test_execution_benchmark.py": "8a888a960d46e41fc9007b55b1da68164da364383b872e06330d29427be7446e",
+    "scripts/ci/setup-test-runtime.sh": "727b45d7758b8b7271468500fb34dcb5b8c5441654638a1bd3538bc3055d2e72",
+    "scripts/ci/test_change_impact_classifier.py": "2d49a4c35f12cbd367a12a28d46caab62abc087f4d4b4f5210aff00761f0c685",
+    "scripts/ci/test_execution_accounting.py": "bfe00ba236877409c585fb3f987a0fe35dddbbf2f8f8627301c15d288adca3a2",
+    "scripts/ci/test_execution_policy.py": "9cd5ecc6eef60b27a1dc7457236f041992adf50ee6dfe464c13a086517606f50",
+    "scripts/ci/test_phase19_runtime_conformance_contract.py": "5257a9a2f96306f1f81b17dc89644316f5da0541eda4588ab853dfd643cf29f5",
+    "scripts/ci/test_phase19_targeted_runtime_conformance_contract.py": "058b882399fce479ea6503c1763ecdddf79cffdf5d2d5f3432c87563ef85c8a5",
+    "scripts/ci/test_semgrep_architecture_rules.py": "fc78e3e87c5c13c27998f3fb2ba0242bdc4a8306e8f1ffaf23e208421b9ff57a",
+    "scripts/ci/test_setup_test_runtime_contract.py": "e01520db85140e9d7fb13001567ffdfc6592e3dd5da675cd3963733b3f2dc10f",
+    "scripts/ci/test_test_execution_parallelization_policy.py": "19563521d6400f8300e470d8373114a18be47822aa4e489692be72a85ec27d8f",
+    "scripts/ci/verify_phase19_runtime_conformance_results.py": "f032b04dc42a2a9525d75062bcdc5108d8c5f74ab19058b4be0e7c92fe09b967",
+    "scripts/ci/verify_phase19_targeted_runtime_results.py": "0b7a8628bc2414061da4b5dc393ed1c9cabdedc4453bddceff40caee96f9c5a4",
+    "scripts/control-plane/discover-hermes-control-plane.sh": "8b2c2e1f5179c341b14ff7df83271fc74d0905ef1b27e0615abd9dfb3a6c0a97",
+    "scripts/control-plane/hermes_receipt_writer.py": "19f611f0e259680bd3f72be4f5da97923a2fe19ea3b9ee1b54dfa88dc88e57f8",
+    "scripts/control-plane/install-hermes-control-plane.sh": "c7a5e3ae5c3e894c139b2763f040fafa12029f08424670a0b22c8912ccb1656d",
+    "scripts/control-plane/rollback-hermes-control-plane.sh": "55b1840242bfd7c58a77fb2ae663dca6312a53c5ba507f28880b50881e4edf86",
+    "scripts/control-plane/submit_governance_receipt.py": "1b2ed6ed391657cac7d56d3c73367fa6311672ba93b961c0121a05ad0040fe7b",
+    "scripts/control-plane/test-hermes-control-plane.sh": "74d69c83be1326e4d5f313e03c5e904091270dda9ca5b87672fc0d391e6767e3",
+    "scripts/control-plane/verify-hermes-control-plane.sh": "41e415b9f45b9546886ba660069a11db9a88a126abb938aaada706fa677bc0d6",
+    "scripts/dev/s3-object-storage-smoke.sh": "2c2ab374fe851c56d17e9a12aa2ddf5875c2d599e08097b9729b04f31e88e17d",
+    "scripts/document-governance/check_commit_scope.py": "ffcd5cf71c11623457611f495424b4e8af136f2c5d7e53ee7a792d94199ceeb8",
+    "scripts/document-governance/check_document_governance.py": "4c3505a1c9db36fb742cb805a2ccdae6b0a3bd9f3a1e76993329ae7b9c1a9900",
+    "scripts/document-governance/check_governance_boundaries.py": "8758b30dd6e53564c89592d72563325934e2d1489f88fe5ed9ef4a6af14b1c0a",
+    "scripts/document-governance/check_markdown_links.py": "2661740e4c7fc89199e415cae5e292beb78a139a7c20d75d285a02315065aa93",
+    "scripts/document-governance/check_metadata.py": "e6a463132652c292de3bf35b5bdba4f5aeeccb2fdd3135354bacbedd76776447",
+    "scripts/document-governance/check_semantic_bodies.py": "b74cc88e4664fd30d5b3771a64d6e4ad9295a3143d9b550d19cb2567ee72189b",
+    "scripts/document-governance/validate_receipts.py": "54859a86b0ea9027cd348acedf38985e7c75f146d8c017b6ce3821821d51e7a4",
+    "scripts/final-review-validate.sh": "ffbf951c5fad7110f398738b05963153492706280ab86d115c8b21ce2b3f0a8a",
+    "scripts/formal/check-proof-holes.py": "1190c8a09f8b57ece2d95f1da47ea56463afd19e19ec3cc7d7a1b8540afe46e9",
+    "scripts/formal/check-witness-mapping.py": "985b149498b3b3eb2c8c43e3afd8d39c20ef512a9d1f424f13fd4636405d84d1",
+    "scripts/formal/test-formal-checks.py": "80e4ef7f8c80f583e0c23ab1434f8c0940d0897673bc658be8e82a617cc2458c",
+    "scripts/formal/validate-faof2.sh": "a0af5b817ef05db0f3a0dd30d9bef3e9671e5606f20470a604c12dfad589ce8a",
+    "scripts/generate-jooq.sh": "4dd40316a0de5cf3a4ca65f00cf5bf615d4b17a276b95cdf088c4801b37da3a0",
+    "scripts/guards/check-local-guardrails.sh": "12f2b8572c1fb91ae3573ea32c51e99a277de133fa937fea4f2ce5ec8fc33cfd",
+    "scripts/guards/h6-artifact-storage-application-boundary.sh": "1b5621fd94038f2e19302c4042a4bd77224d8acb1ac107f7aca4e4b96d90f85e",
+    "scripts/guards/h7-architecture-guard.py": "460dd45a086f9c4548a0ced79555215ab24b712e1ac61adcbbcfa8a9bddf7338",
+    "scripts/guards/h7-v2-architecture-guard.py": "f0c9329db2683533e36a1a69c5e1070111407910376e570834bdbc2d70ae71f1",
+    "scripts/guards/h7_input_boundary.py": "a65e7cbe3d50f22e2fd3c30a7b989403bd83f7caefaa47fead5a259cdc38c00c",
+    "scripts/guards/h8-operation-invocation-boundary-guard.py": "cd0788f042c5e51174782722e6fff1247fd8af419198948b499b538387ad9fca",
+    "scripts/guards/test_h7_input_boundary.py": "9556afb92a4205e3edf97e333ed5072ff1a9090434621700d06fac34ab7ca764",
+    "scripts/guards/validate-storage-object-identity-placement-migration-contract.py": "39e9b29101f955f59240dd30fd885af88f54439480b7e9853c7e37096e788128",
+    "scripts/h10-r1-render-initiator-guard.py": "276be34ba91bf3e199d92e380e3eb660c98ff9a10207e9ea7ff3f8b738373899",
+    "scripts/infra-validate.sh": "541409bc910c6fb441dd64a682116f837f721711a19f280087a5858c6cbb558a",
+    "scripts/local-docker-test.sh": "21f1fbf026f476611809af8a91bfd89065309f5d36f6c4cb9b056e1623fc16b3",
+    "scripts/local-test.sh": "5842ab9d670e809caa23eef060f10309404170c345a0829f2e35544c4610b041",
+    "scripts/phase16-clean-forward-guards.py": "d75ff39f2e741bdfd68dae18d2c7206a409a656ff99be330b7d0cb53b232c4db",
+    "scripts/phase19-clean-forward-guards.py": "8cb501248469c308b1080ded158743f52439b62b061713880f1547730312050a",
+    "scripts/phase19-final-governance-evidence-guard.py": "c49abf4273342b2b9366d35384efba22f2ab46dd2fae6e434eb691a52da36909",
+    "scripts/phase19-governance-placeholder-guard.py": "527afbda68f834e22263d5ed069cec62e8b7c0d1d645597f42d5d3a847f60221",
+    "scripts/phase19-render-zero-awareness-guard.py": "76bffd961f44d96a8cefdf606dafd4dd1994c47a396dbea2dbcfae1053b2e649",
+    "scripts/phase20-resource-accounting-contract-guard.py": "ddc1ed755260d3ece6a7fc5ef59c412ce4fb81a179d963841105464841d3d489",
+    "scripts/phase20-resource-accounting-implementation-closure-guard.py": "d03065765c24aba96224ea289a847d3616b249b4f84c14a2424130a6e12a9688",
+    "scripts/render-k8s-manifests.sh": "d6b25128898ee29ad65a699e2289c1c48e3b1ff2d4266ef687f339c049bc2240",
+    "scripts/roadmap20-source-completeness-gate.sh": "86cd31bc01ce4ac63d558574d642d12105446ad2c62edc2bbe929f14d4cda72b",
+    "scripts/smoke-local.sh": "5eeef1778d123f795e7df3e4ec483fd2c9616a44317b96fa75dbcc868138290a",
+    "scripts/smoke/e2e-render-flow.sh": "64ed3fdf43e64f973b98d83ab5fb307e263dd9d7ee5d8b8ce4c5e6471caa5f7a",
+    "scripts/smoke/preview-render-smoke.sh": "663ce8131c2d7f7055a60ea5498fd63cee9f96ac27bcfebda5a36b1d8572817c",
+    "scripts/smoke/r2-preview-smoke.sh": "d0a758e5df482828ff296d18443eacd94f2f015f05c3d3c63d19a23e637eb7aa",
+    "scripts/smoke/real-media-render-smoke.sh": "f33e05923c02e02d3eb5febd16b63d5f72458a3f5da6a07e5f49e6839e43cca5",
+    "scripts/smoke/render-execution-smoke.sh": "5ba802d415b5f2e50acaa6315dae81cf0e930576cea74db8c1b12ecdba2f7fa4",
+    "scripts/test-check-storage-identity-placement-m0-m1.py": "9318c5dcaaeda6f71e173f62027d2a09b8c792f6c573b124072d011358560f4f",
+    "scripts/test-phase20-resource-accounting-contract-guard.py": "1cc923c90e6bd470aa644879eeab710d34509df6999a89d020f62f17aaad3ad5",
+    "scripts/test-phase20-resource-accounting-implementation-closure-guard.py": "c2cf184148752651b95a0a5f9fc802ac40df35557a7d96680cf096eff51c46a9",
+    "scripts/test/observe-connections-state.sh": "6eadd43524a9a3ffe8b6a83f16351989c193b3e5d8d4b8a3cc507914410b132a",
+    "scripts/test/observe-connections.sh": "39d5b95e4720d7da50555628a7d9fde4ee9652f544fbc0b6a9bd937ac44d76cb",
+    "scripts/test/podman-hermetic.sh": "62fd257207ae6f60a0c8aba3cc7258efb5b56dc7a8985fc28cb40f135f7b4cce",
+    "scripts/test_h10_r1_render_initiator_guard.py": "c70e4197ba469b7f37527b2003909845e5631d978deb3ac1c88a8c33a2f710e4",
+    "scripts/test_phase19_clean_forward_guards.py": "93410eec0133b543484b8385790d04247410099c272270a1ab57bb21a015f67e",
+    "scripts/test_phase19_final-governance-evidence-guard.py": "fee07b522e070c85382200b5e4d7540d9988502ebcac924fa39d0822a76386ad",
+    "scripts/test_phase19_governance-placeholder-guard.py": "b1fcb80a0a7e8b4bbeedafd1dc0de5dcd9d4b620fc7d395685d87eb307cec429",
+    "scripts/test_phase19_render-zero-awareness-guard.py": "19cf9deb37af7c263ea1b29a7c9ff4fd536f0038f89f98f2552fbda9be60ab3f",
+    "scripts/test_verify_jooq_generated_schema_parity.py": "d15290894fa2f3df767eea975abb4583be4924ef4ff0c441dfa880025efcef5c",
+    "scripts/tools/download-oasdiff.sh": "dacfd76f856590e7ac8636a253dfb73f06059327a72e6d1fd73f0e4a74777500",
+    "scripts/update-gitops-manifests.sh": "54b7cc6baf463d3518267c74a6697058ef48faef1cc0453bbf29f313ad946d96",
+    "scripts/validate-production-readiness.sh": "8dad9d1ec63865eb3d08b1822582bec44e10ac797f04b30068c8b0f69b2b99d8",
+    "scripts/verify-egress-smoke-config.sh": "99540d59d743b8781ad1b4df614d45018a9799e5a6c070808f39e159a163fd64",
+    "scripts/verify-jooq-generated-schema-parity.py": "03f25d09117f548d0ceb356de5160bd7949e731890e226a370f4bc1716278e91",
+    "scripts/verify-oidc-jwt.sh": "d618668d5ba114bc6d988c862dd0a1b2a2c9303c5af6fc20db4ae623daaedfa3",
+    "scripts/verify-pfirr1-jooq-authority-fail-closed.sh": "1d5be7582da35b52d6db4977e6cbf181f872997066277f1cf1d3067c1a7037a4",
+    "secrets-config-module/build.gradle.kts": "269108ad65ac64fbbc18ee8b319264f540ae7d1afa221351be7cbb4eef7cb743",
+    "settings.gradle.kts": "cdb22788f725b96cbe57b9b2ca9d0ff3e3b7530984336753b3c617c0d944fb28",
+    "shared-kernel/build.gradle.kts": "571de41eccaa0fe05359acba7fcae88076e1f49e40ae945fc1479f8d426cea8e",
+    "social-publish-module/build.gradle.kts": "95a3d87a60809d67ea3b9113c507bf3aeb9787631bc22085d554361c03cdda3f",
+    "spring-ai-adapter/build.gradle.kts": "2f0dd766650f33b6cc51a8fbad390f18fd3785ab49b109d1cb087e37543d124c",
+    "storage-module/build.gradle.kts": "4adb532710cc9facf2a61abb7dc2c6b170589b96313bf393b6088608aaad67b6",
+    "storage-provider-opendal/build.gradle.kts": "f51c56a61fb964f23b33f231a92f4e458eeae093112877aeb4129ae11d25f096",
+    "timeline-module/build.gradle.kts": "2b14ef304efe794667832fdbb594e2c4847f28b39bbdbb901b260725472c5e03",
+    "typed-schema-module/build.gradle.kts": "942e1577cfc714eb34e482426b72f91e9142429d8c8a9079403059ac06cb345f",
+    "typed-schema-module/test/regenerate-jooq-schema-fail-closed-test.sh": "2433319afbd510db60dfe05448d11cd3941f6cd6eceb89007a5de7383d677364",
+    "user-analytics-module/build.gradle.kts": "189bad01a3ed8e73c589e4c334a76a0ba70bcdadfa9bbb41c7514399aa51cbf7",
+    "worker-fabric-module/build.gradle.kts": "fff0049dbc77e2990f91848c67edbad476f13a31eb0beb2fb36cb4054d0908ac",
+    "workflow-module/build.gradle.kts": "ace37cbb95d98633cdc5bc2b8fb99fa9b42a0e22e704ccf814619f3274fd6fdb"
+  },
+  "invocation_references": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "line": 67,
+      "text": "python3 scripts/ci/change_impact_classifier.py \\"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "line": 127,
+      "text": "run: npm ci"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "line": 130,
+      "text": "run: npm run lint --if-present"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "line": 136,
+      "text": "run: npm run build"
+    },
+    {
+      "path": "build.gradle.kts",
+      "line": 307,
+      "text": "commandLine("
+    },
+    {
+      "path": "build.gradle.kts",
+      "line": 324,
+      "text": "val pb = ProcessBuilder(\"bash\", script.absolutePath)"
+    },
+    {
+      "path": "build.gradle.kts",
+      "line": 346,
+      "text": "val process = ProcessBuilder("
+    },
+    {
+      "path": "docs/architecture/governance/automated-guards/check-phase17-sandbox-architecture.py",
+      "line": 29,
+      "text": "count = len(re.findall(r\"new\\s+ProcessBuilder\\s*\\(\", text))"
+    },
+    {
+      "path": "docs/architecture/governance/automated-guards/check-phase17-sandbox-architecture.py",
+      "line": 35,
+      "text": "fail(f\"ProcessBuilder sites differ: expected={EXPECTED_PROCESS_BUILDER_SITES} actual={found}\")"
+    },
+    {
+      "path": "docs/architecture/governance/automated-guards/check-phase17-sandbox-conformance-results.py",
+      "line": 100,
+      "text": "result = subprocess.run("
+    },
+    {
+      "path": "docs/architecture/governance/automated-guards/check-phase17-sandbox-ledger-test.py",
+      "line": 51,
+      "text": "return subprocess.run("
+    },
+    {
+      "path": "docs/architecture/governance/automated-guards/check-phase17-sandbox-ledger.py",
+      "line": 323,
+      "text": "evidence = subprocess.run("
+    },
+    {
+      "path": "docs/architecture/governance/automated-guards/verify-ar-v2-mechanical-ledger.py",
+      "line": 60,
+      "text": "return subprocess.run([\"git\"] + args, capture_output=True, text=True,"
+    },
+    {
+      "path": "docs/architecture/governance/automated-guards/verify-billing-entitlement-payment-authority-convergence-v1.py",
+      "line": 150,
+      "text": "def git(*args: str) -> subprocess.CompletedProcess[str]:"
+    },
+    {
+      "path": "docs/architecture/governance/automated-guards/verify-billing-entitlement-payment-authority-convergence-v1.py",
+      "line": 151,
+      "text": "return subprocess.run("
+    },
+    {
+      "path": "docs/architecture/governance/automated-guards/verify-cfrh-i1-single-source-of-truth.py",
+      "line": 84,
+      "text": "r = subprocess.run([\"git\", \"-C\", str(REPO), *args], capture_output=True, text=True)"
+    },
+    {
+      "path": "frontend/package.json",
+      "line": 8,
+      "text": "\"build\": \"vite build\","
+    },
+    {
+      "path": "scripts/check-architecture-drift.sh",
+      "line": 18,
+      "text": "python3 - \"$1\" <<'PY'"
+    },
+    {
+      "path": "scripts/ci/census_test_execution_topology.py",
+      "line": 23,
+      "text": "output = subprocess.check_output([str(root / \"gradlew\"), \"--no-daemon\", \"testExecutionTopologyCensus\"], cwd=root, text=True)"
+    },
+    {
+      "path": "scripts/ci/change_impact_classifier.py",
+      "line": 223,
+      "text": "result = subprocess.run("
+    },
+    {
+      "path": "scripts/ci/phase19-runtime-conformance.sh",
+      "line": 69,
+      "text": "python3 - \"$PHASE19_RUNTIME_START_MARKER\" <<'PY'"
+    },
+    {
+      "path": "scripts/ci/phase19-runtime-conformance.sh",
+      "line": 84,
+      "text": "./gradlew --no-daemon --max-workers=1 test --rerun-tasks"
+    },
+    {
+      "path": "scripts/ci/phase19-runtime-conformance.sh",
+      "line": 86,
+      "text": "./gradlew --no-daemon --max-workers=1 \\"
+    },
+    {
+      "path": "scripts/ci/phase19-runtime-conformance.sh",
+      "line": 92,
+      "text": "python3 scripts/phase19-clean-forward-guards.py"
+    },
+    {
+      "path": "scripts/ci/phase19-runtime-conformance.sh",
+      "line": 93,
+      "text": "python3 scripts/test_phase19_clean_forward_guards.py"
+    },
+    {
+      "path": "scripts/ci/phase19-runtime-conformance.sh",
+      "line": 94,
+      "text": "python3 scripts/ci/verify_phase19_runtime_conformance_results.py"
+    },
+    {
+      "path": "scripts/ci/phase19-targeted-runtime-conformance.sh",
+      "line": 55,
+      "text": "python3 - \"$PHASE19_TARGETED_RUNTIME_START_MARKER\" <<'PY'"
+    },
+    {
+      "path": "scripts/ci/phase19-targeted-runtime-conformance.sh",
+      "line": 70,
+      "text": "./gradlew --no-daemon --max-workers=1 :ffmpeg-provider-module:test --tests '*FfmpegClosedLoopIntegrationTest' --rerun-tasks"
+    },
+    {
+      "path": "scripts/ci/phase19-targeted-runtime-conformance.sh",
+      "line": 72,
+      "text": "python3 scripts/ci/verify_phase19_targeted_runtime_results.py"
+    },
+    {
+      "path": "scripts/ci/run_full_deterministic_backend_suite.py",
+      "line": 34,
+      "text": "completed = subprocess.run(command, cwd=root, check=False)"
+    },
+    {
+      "path": "scripts/ci/run_test_execution_benchmark.py",
+      "line": 166,
+      "text": "completed = subprocess.run("
+    },
+    {
+      "path": "scripts/ci/run_test_execution_benchmark.py",
+      "line": 168,
+      "text": "cwd=root, env=env, stdout=captured, stderr=subprocess.STDOUT, check=False,"
+    },
+    {
+      "path": "scripts/ci/test_execution_accounting.py",
+      "line": 144,
+      "text": "return subprocess.check_output([\"git\", \"rev-parse\", \"HEAD\"], cwd=root, text=True).strip()"
+    },
+    {
+      "path": "scripts/ci/test_semgrep_architecture_rules.py",
+      "line": 129,
+      "text": "def run(command: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:"
+    },
+    {
+      "path": "scripts/ci/test_semgrep_architecture_rules.py",
+      "line": 131,
+      "text": "return subprocess.run("
+    },
+    {
+      "path": "scripts/ci/test_semgrep_architecture_rules.py",
+      "line": 135,
+      "text": "stdout=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/ci/test_semgrep_architecture_rules.py",
+      "line": 136,
+      "text": "stderr=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/ci/test_semgrep_architecture_rules.py",
+      "line": 140,
+      "text": "except (OSError, subprocess.TimeoutExpired) as exc:"
+    },
+    {
+      "path": "scripts/ci/test_semgrep_architecture_rules.py",
+      "line": 144,
+      "text": "def command_evidence(completed: subprocess.CompletedProcess[str]) -> str:"
+    },
+    {
+      "path": "scripts/ci/test_test_execution_parallelization_policy.py",
+      "line": 345,
+      "text": "completed = subprocess.run("
+    },
+    {
+      "path": "scripts/document-governance/check_commit_scope.py",
+      "line": 11,
+      "text": "result = subprocess.run([\"git\", \"rev-list\", \"--count\", f\"{base}..{head}\"],"
+    },
+    {
+      "path": "scripts/document-governance/check_document_governance.py",
+      "line": 205,
+      "text": "result = subprocess.run("
+    },
+    {
+      "path": "scripts/final-review-validate.sh",
+      "line": 73,
+      "text": "run_check \"vite build\" ./node_modules/.bin/vite build"
+    },
+    {
+      "path": "scripts/formal/validate-faof2.sh",
+      "line": 7,
+      "text": "python3 scripts/formal/check-proof-holes.py"
+    },
+    {
+      "path": "scripts/formal/validate-faof2.sh",
+      "line": 8,
+      "text": "python3 scripts/formal/check-witness-mapping.py"
+    },
+    {
+      "path": "scripts/formal/validate-faof2.sh",
+      "line": 9,
+      "text": "python3 scripts/formal/test-formal-checks.py"
+    },
+    {
+      "path": "scripts/formal/validate-faof2.sh",
+      "line": 18,
+      "text": "coqc -dump-glob /tmp/Faof2Graph.glob -o /tmp/Faof2Graph.vo formal/coq/Faof2Graph.v"
+    },
+    {
+      "path": "scripts/formal/validate-faof2.sh",
+      "line": 34,
+      "text": "coqc -dump-glob /tmp/Faof2Graph.glob -o /tmp/Faof2Graph.vo formal/coq/Faof2Graph.v"
+    },
+    {
+      "path": "scripts/guards/h7_input_boundary.py",
+      "line": 72,
+      "text": "result = subprocess.run(['git', '-C', str(self.root), *args],"
+    },
+    {
+      "path": "scripts/guards/h8-operation-invocation-boundary-guard.py",
+      "line": 1026,
+      "text": "completed = subprocess.run("
+    },
+    {
+      "path": "scripts/guards/h8-operation-invocation-boundary-guard.py",
+      "line": 1028,
+      "text": "except (OSError, subprocess.SubprocessError) as failure:"
+    },
+    {
+      "path": "scripts/guards/h8-operation-invocation-boundary-guard.py",
+      "line": 1048,
+      "text": "completed = subprocess.run("
+    },
+    {
+      "path": "scripts/guards/h8-operation-invocation-boundary-guard.py",
+      "line": 1050,
+      "text": "except (OSError, subprocess.SubprocessError) as failure:"
+    },
+    {
+      "path": "scripts/guards/h8-operation-invocation-boundary-guard.py",
+      "line": 1069,
+      "text": "completed = subprocess.run("
+    },
+    {
+      "path": "scripts/guards/h8-operation-invocation-boundary-guard.py",
+      "line": 1071,
+      "text": "except (OSError, subprocess.SubprocessError) as failure:"
+    },
+    {
+      "path": "scripts/guards/h8-operation-invocation-boundary-guard.py",
+      "line": 2331,
+      "text": "completed = subprocess.run("
+    },
+    {
+      "path": "scripts/guards/h8-operation-invocation-boundary-guard.py",
+      "line": 2334,
+      "text": "except (OSError, subprocess.SubprocessError):"
+    },
+    {
+      "path": "scripts/guards/test_h7_input_boundary.py",
+      "line": 31,
+      "text": "return subprocess.check_output(['git', '-C', str(self.root), *args]).decode().strip()"
+    },
+    {
+      "path": "scripts/phase19-clean-forward-guards.py",
+      "line": 103,
+      "text": "def git_text(git_repository: Path, *arguments: str) -> subprocess.CompletedProcess[str]:"
+    },
+    {
+      "path": "scripts/phase19-clean-forward-guards.py",
+      "line": 104,
+      "text": "return subprocess.run("
+    },
+    {
+      "path": "scripts/phase19-clean-forward-guards.py",
+      "line": 125,
+      "text": "r\"\\bnew\\s+ProcessBuilder\\b|\""
+    },
+    {
+      "path": "scripts/phase19-clean-forward-guards.py",
+      "line": 465,
+      "text": "r\"new\\s+ProcessBuilder\\s*\\(\\s*[\\\"']ff(?:mpeg|probe)[\\\"']|\""
+    },
+    {
+      "path": "scripts/phase19-clean-forward-guards.py",
+      "line": 502,
+      "text": "r\"new\\s+ProcessBuilder\\s*\\(\\s*[\\\"']ff(?:mpeg|probe)[\\\"']\")"
+    },
+    {
+      "path": "scripts/phase19-clean-forward-guards.py",
+      "line": 527,
+      "text": "\"DIRECT_PROCESS_BUILDER_COUNT\": r\"\\bnew\\s+ProcessBuilder\\b\","
+    },
+    {
+      "path": "scripts/phase19-final-governance-evidence-guard.py",
+      "line": 420,
+      "text": "completed = subprocess.run("
+    },
+    {
+      "path": "scripts/phase19-final-governance-evidence-guard.py",
+      "line": 423,
+      "text": "stdout=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/phase19-final-governance-evidence-guard.py",
+      "line": 424,
+      "text": "stderr=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/phase19-final-governance-evidence-guard.py",
+      "line": 446,
+      "text": "completed = subprocess.run("
+    },
+    {
+      "path": "scripts/phase19-final-governance-evidence-guard.py",
+      "line": 449,
+      "text": "stdout=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/phase19-final-governance-evidence-guard.py",
+      "line": 450,
+      "text": "stderr=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/phase19-render-zero-awareness-guard.py",
+      "line": 137,
+      "text": "(\"direct-concrete-process\", r\"\\b(?:ProcessBuilder|Runtime\\s*\\.\\s*getRuntime\\s*\\(\\)\\s*\\.\\s*exec|exec|spawn|popen)[^\\n]*ff[._-]?(?:mpeg|probe)\\b\"),"
+    },
+    {
+      "path": "scripts/phase19-render-zero-awareness-guard.py",
+      "line": 143,
+      "text": "(\"process-builder-in-concrete-file\", r\"\\bnew\\s+ProcessBuilder\\b\"),"
+    },
+    {
+      "path": "scripts/phase19-render-zero-awareness-guard.py",
+      "line": 351,
+      "text": "result = subprocess.run("
+    },
+    {
+      "path": "scripts/phase19-render-zero-awareness-guard.py",
+      "line": 366,
+      "text": "result = subprocess.run("
+    },
+    {
+      "path": "scripts/phase19-render-zero-awareness-guard.py",
+      "line": 487,
+      "text": "except (OSError, subprocess.SubprocessError) as error:"
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-contract-guard.py",
+      "line": 74,
+      "text": "result = subprocess.run("
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-contract-guard.py",
+      "line": 75,
+      "text": "[\"git\", *args], cwd=root, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE"
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-contract-guard.py",
+      "line": 81,
+      "text": "return subprocess.run("
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-contract-guard.py",
+      "line": 83,
+      "text": "stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,"
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-contract-guard.py",
+      "line": 274,
+      "text": "except (ValueError, OSError, json.JSONDecodeError, subprocess.CalledProcessError) as exc:"
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 339,
+      "text": "r\"\\b(?:ProcessBuilder|Runtime\\s*\\.\\s*getRuntime\\s*\\(\\s*\\)\\s*\\.\\s*exec|detectTools)\\b\")"
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 506,
+      "text": "baseline = subprocess.run("
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 508,
+      "text": "check=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 573,
+      "text": "r\"(?:new\\s+ProcessBuilder|\""
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 600,
+      "text": "r\"new\\s+ProcessBuilder\\s*\\(\\s*binary\\s*,\\s*versionFlag\\s*\\)\","
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 704,
+      "text": "return subprocess.run("
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 706,
+      "text": "stdout=subprocess.PIPE, stderr=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 724,
+      "text": "baseline = subprocess.run("
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 726,
+      "text": "check=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 738,
+      "text": "result = subprocess.run("
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 740,
+      "text": "text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 815,
+      "text": "except (GuardFailure, OSError, json.JSONDecodeError, subprocess.SubprocessError) as error:"
+    },
+    {
+      "path": "scripts/test-check-storage-identity-placement-m0-m1.py",
+      "line": 80,
+      "text": "def run(root: Path) -> subprocess.CompletedProcess[str]:"
+    },
+    {
+      "path": "scripts/test-check-storage-identity-placement-m0-m1.py",
+      "line": 81,
+      "text": "return subprocess.run("
+    },
+    {
+      "path": "scripts/test-check-storage-identity-placement-m0-m1.py",
+      "line": 84,
+      "text": "stdout=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test-check-storage-identity-placement-m0-m1.py",
+      "line": 85,
+      "text": "stderr=subprocess.STDOUT,"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-contract-guard.py",
+      "line": 18,
+      "text": "def run(contract: pathlib.Path, ledger: pathlib.Path, inventory: pathlib.Path) -> subprocess.CompletedProcess[str]:"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-contract-guard.py",
+      "line": 19,
+      "text": "return subprocess.run("
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-contract-guard.py",
+      "line": 22,
+      "text": "stdout=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-contract-guard.py",
+      "line": 23,
+      "text": "stderr=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 39,
+      "text": "tracked = subprocess.run("
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 41,
+      "text": "cwd=ROOT, check=True, stdout=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 74,
+      "text": "subprocess.run([\"git\", \"init\", \"-q\"], cwd=root, check=True)"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 75,
+      "text": "subprocess.run([\"git\", \"add\", \"-A\"], cwd=root, check=True)"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 78,
+      "text": "def run_guard(root: Path, baseline: Path) -> subprocess.CompletedProcess[str]:"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 79,
+      "text": "return subprocess.run("
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 90,
+      "text": "stdout=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 91,
+      "text": "stderr=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 141,
+      "text": "subprocess.run([\"git\", \"add\", \"-A\"], cwd=root, check=True)"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 147,
+      "text": "subprocess.run([\"git\", \"add\", \"-A\"], cwd=root, check=True)"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 151,
+      "text": "status_before = subprocess.run("
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 153,
+      "text": "text=True, stdout=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 257,
+      "text": "Process probe() throws Exception { return new ProcessBuilder(\"node\", \"--version\").start(); }"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 258,
+      "text": "Process locate() throws Exception { return new ProcessBuilder(\"which\", \"node\").start(); }"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 260,
+      "text": "return new ProcessBuilder(binary, versionFlag).start();"
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 315,
+      "text": "status_after = subprocess.run("
+    },
+    {
+      "path": "scripts/test-phase20-resource-accounting-implementation-closure-guard.py",
+      "line": 317,
+      "text": "text=True, stdout=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test_h10_r1_render_initiator_guard.py",
+      "line": 84,
+      "text": "def run_guard(self) -> subprocess.CompletedProcess[str]:"
+    },
+    {
+      "path": "scripts/test_h10_r1_render_initiator_guard.py",
+      "line": 85,
+      "text": "return subprocess.run("
+    },
+    {
+      "path": "scripts/test_h10_r1_render_initiator_guard.py",
+      "line": 235,
+      "text": "result = subprocess.run("
+    },
+    {
+      "path": "scripts/test_phase19_clean_forward_guards.py",
+      "line": 67,
+      "text": "return tuple(subprocess.run("
+    },
+    {
+      "path": "scripts/test_phase19_clean_forward_guards.py",
+      "line": 78,
+      "text": "def run_guard(self, current_root: Path) -> subprocess.CompletedProcess[str]:"
+    },
+    {
+      "path": "scripts/test_phase19_clean_forward_guards.py",
+      "line": 79,
+      "text": "return subprocess.run("
+    },
+    {
+      "path": "scripts/test_phase19_clean_forward_guards.py",
+      "line": 153,
+      "text": "+ \"  void run() throws Exception { new ProcessBuilder(\\\"ffmpeg\\\").start(); }\\n\""
+    },
+    {
+      "path": "scripts/test_phase19_clean_forward_guards.py",
+      "line": 176,
+      "text": "\"new ProcessBuilder(\\\"ffmpeg\\\", \\\"-version\\\").start(); } }\\n\")"
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 142,
+      "text": "def git(self, *arguments: str) -> subprocess.CompletedProcess[str]:"
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 143,
+      "text": "completed = subprocess.run("
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 147,
+      "text": "stdout=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 148,
+      "text": "stderr=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 167,
+      "text": "def run_guard(self, *arguments: str) -> subprocess.CompletedProcess[str]:"
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 168,
+      "text": "return subprocess.run("
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 172,
+      "text": "stdout=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 173,
+      "text": "stderr=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 183,
+      "text": ") -> subprocess.CompletedProcess[str]:"
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 203,
+      "text": "return subprocess.CompletedProcess("
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 209,
+      "text": "return subprocess.CompletedProcess(arguments, 0, EXPECTED_PASS, \"\")"
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 211,
+      "text": "def run_internal_guard(self) -> subprocess.CompletedProcess[str]:"
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 336,
+      "text": "completed = subprocess.run("
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 339,
+      "text": "stdout=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 340,
+      "text": "stderr=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 345,
+      "text": "completed = subprocess.run("
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 349,
+      "text": "stdout=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test_phase19_final-governance-evidence-guard.py",
+      "line": 350,
+      "text": "stderr=subprocess.PIPE,"
+    },
+    {
+      "path": "scripts/test_phase19_governance-placeholder-guard.py",
+      "line": 100,
+      "text": "def run_guard(root: Path) -> subprocess.CompletedProcess[str]:"
+    },
+    {
+      "path": "scripts/test_phase19_governance-placeholder-guard.py",
+      "line": 101,
+      "text": "return subprocess.run("
+    },
+    {
+      "path": "scripts/test_phase19_render-zero-awareness-guard.py",
+      "line": 66,
+      "text": "'new ProcessBuilder(\"ffprobe\", \"-version\").start();\\n',"
+    },
+    {
+      "path": "scripts/test_phase19_render-zero-awareness-guard.py",
+      "line": 598,
+      "text": "subprocess.run("
+    },
+    {
+      "path": "scripts/test_phase19_render-zero-awareness-guard.py",
+      "line": 609,
+      "text": "subprocess.run("
+    },
+    {
+      "path": "scripts/test_phase19_render-zero-awareness-guard.py",
+      "line": 622,
+      "text": "def run_guard(self, root: Path) -> subprocess.CompletedProcess[str]:"
+    },
+    {
+      "path": "scripts/test_phase19_render-zero-awareness-guard.py",
+      "line": 623,
+      "text": "return subprocess.run("
+    },
+    {
+      "path": "scripts/test_phase19_render-zero-awareness-guard.py",
+      "line": 627,
+      "text": "def counts(self, result: subprocess.CompletedProcess[str]) -> dict[str, int]:"
+    },
+    {
+      "path": "scripts/test_phase19_render-zero-awareness-guard.py",
+      "line": 645,
+      "text": "def assert_clean_pass(self, result: subprocess.CompletedProcess[str]) -> None:"
+    },
+    {
+      "path": "scripts/verify-pfirr1-jooq-authority-fail-closed.sh",
+      "line": 47,
+      "text": "./gradlew --no-daemon \"$task\" >\"$log\" 2>&1"
+    },
+    {
+      "path": "typed-schema-module/test/regenerate-jooq-schema-fail-closed-test.sh",
+      "line": 41,
+      "text": "bash \"$REGENERATION_SCRIPT\" >\"$STDOUT_FILE\" 2>\"$STDERR_FILE\""
+    },
+    {
+      "path": "typed-schema-module/test/regenerate-jooq-schema-fail-closed-test.sh",
+      "line": 120,
+      "text": "bash \"$NO_OP_MODULE/regenerate-jooq-schema.sh\" >\"$NO_OP_STDOUT\" 2>\"$NO_OP_STDERR\""
+    }
+  ],
+  "recovered_contract": {
+    "resources": "platform-app applies org.springframework.boot; root applies java. No custom platform-app resource transforms or frontend Gradle task found in candidate Gradle files.",
+    "backend_frontend": "run_full_deterministic_backend_suite.py runs only supplied Gradle test command. check-architecture-drift invokes Python source guards. Foundation regeneration negatives copy scripts/config into mktemp fixtures. No backend Gradle npm/vite producer hook present.",
+    "full_suite": "Coordinator writes its own TSV manifest before exactly one Gradle invocation; unsupported write-manifest-only/shadow-result flags removed from external runner only.",
+    "foundation": "pfirr1RemediationCheck -> jooqFoundationCheck + verifyPfirr1AuthenticationAuthority; verifyJooqRegenerationFailClosed -> typed-schema-module/test/regenerate-jooq-schema-fail-closed-test.sh -> disposable copied regenerate-jooq-schema.sh. No skipping.",
+    "formal": "validate-faof2.sh hardcodes /tmp/Faof2Graph.glob/.vo; external bwrap binds run tmp over /tmp. Shared container engine remains separate scoped external runtime; :Z mount requires disabled SELinux or separate parent disposition.",
+    "docker": "DOCKER_BUILD absent from authoritative 29-entry matrix. Prior matrix.py proposing 30 was never executed here; runtime_image_publish=false is recorded in input classifier."
+  },
+  "historical_contract_sources": {
+    "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/inputs/original-native_runner.py": "3ffc898724f1fb4b86d86688e730f87af770aa77f34635f33fb6d2c2f5479d85",
+    "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/inputs/original-shadow_monitor.py": "bb63de244007818956aa151ecceae98bf8c4fa50c45f2f7ee09bc74d63d21d0b",
+    "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/inputs/original-control.py": "3ddaf594180b44375eb0ef7e22d3f5ab7138bd0435ddc8469251e5fc3ce3609e",
+    "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/inputs/MONITOR_CONTRACT.txt": "199682e5802759204bf1779e1f60abedf83bf200ad2fabc6297d80dc8c7156dd"
+  },
+  "authority": "Read-only source analysis, not gate results or independent acceptance"
+}

@@ -1,0 +1,814 @@
+{
+  "schema": "ep19-external-prestart-decision-v1",
+  "run": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/runs/parent-native-001/fixtures/test_usage_runtime_protected_member_is_not_excluded-508c9c8388844be7aff0904d743136a4/outputs/continuation-runs/fixture",
+  "run_id": "fixture",
+  "candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+  "base": "86d6aef94fd5e58da552e97c11473cff6eca734e",
+  "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6",
+  "phase": "PRESTART",
+  "gate": null,
+  "decision": "REJECT",
+  "reason": "FROZEN_BASELINE_DRIFT_ACROSS_COMMAND_GAP",
+  "decision_scope": "Baseline comparison only. Caller acceptance also requires the writer to return successfully. A receipt file alone does not prove write/fsync completion.",
+  "baseline_identity": {
+    "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/runs/parent-native-001/fixtures/test_usage_runtime_protected_member_is_not_excluded-508c9c8388844be7aff0904d743136a4/outputs/continuation-runs/fixture/baseline.json",
+    "raw_sha256": "7985cac95fcb26c061e28e0b1407e70c5658d292b3f7ef1718d450320d707a99",
+    "metadata": {
+      "st_dev": 47,
+      "st_ino": 21799906,
+      "st_mode": 33188,
+      "st_uid": 1000,
+      "st_gid": 100,
+      "st_size": 745,
+      "st_mtime_ns": 1788806541021412879,
+      "st_ctime_ns": 1788806541021412879,
+      "st_nlink": 1
+    }
+  },
+  "policy_identity": {
+    "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/runs/parent-native-001/fixtures/test_usage_runtime_protected_member_is_not_excluded-508c9c8388844be7aff0904d743136a4/outputs/continuation-runs/fixture/scope.json",
+    "raw_sha256": "256b98eafac2bc94292d6610e1a555176bdbf5890d4bd2ccc64c9ab0e4d5faee",
+    "metadata": {
+      "st_dev": 47,
+      "st_ino": 21799907,
+      "st_mode": 33188,
+      "st_uid": 1000,
+      "st_gid": 100,
+      "st_size": 1368,
+      "st_mtime_ns": 1788806540924411929,
+      "st_ctime_ns": 1788806540924411929,
+      "st_nlink": 1
+    }
+  },
+  "capture_errors": [],
+  "evidence_errors": [],
+  "shadow_omitted": [],
+  "gate_process_status": "NOT_ESTABLISHED",
+  "call_boundary": "GATES_NOT_YET_INVOKED_BY_THIS_RUN_ALL_CALL",
+  "coverage_bounds": "Sequential endpoint capture of the original wanted keys and all original fields; directories in file scope retain metadata only. No new enumeration, no atomic snapshot, no continuous command-gap monitoring, no writer attribution. START presence is an endpoint observation, not proof of process history. No bodies exported.",
+  "started_ns": 1788806541117955724,
+  "executor_identity": {
+    "result": "COMPLETE",
+    "native_exit": 0,
+    "start_ns": 1788806541118888879,
+    "end_ns": 1788806541125340701,
+    "entries": {
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/ExposureProbe.java": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783861,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 1031,
+          "st_mtime_ns": 1788791830932503881,
+          "st_ctime_ns": 1788805146514716810,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "327ef74f80c6993808526b22bb379fbfdd6fb063f7a6307b52ce33639074d35d",
+        "git_blob": "290944f0243c10e38ab3d21664a391b42c48692c"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/VERSION.json": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783896,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 441,
+          "st_mtime_ns": 1788793931031397729,
+          "st_ctime_ns": 1788805146519716859,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "9f776546e8c3e54897d967142a7bae902958d31fe9d0b04cd886ba5820ca2b76",
+        "git_blob": "df3a9e16616ab5fb7b92c2e264f01bc1fcc782a3"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/account.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783862,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 3842,
+          "st_mtime_ns": 1788791830932503881,
+          "st_ctime_ns": 1788805146514716810,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "0ec7573b3291218da34c0be289ecb46aef0f5c6e1932d80afc0a17db10da8259",
+        "git_blob": "191a912f939e9a5b4f68ae968670f93fd6d1e47c"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/artifacts.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783890,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 5353,
+          "st_mtime_ns": 1788792792738239821,
+          "st_ctime_ns": 1788805146518716849,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "7b64903294a81f1fc396b8361ea06278c370f09f101ab190c494070fd5490e2b",
+        "git_blob": "cf7d470ad24f33f54b894796e2673de8fb615777"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/bindings.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783863,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 7102,
+          "st_mtime_ns": 1788792887293182721,
+          "st_ctime_ns": 1788805146514716810,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "d5d693d75f3b89c92a8b7fe593f9f18870f55c1b757dd895c9c21afc0fdd2c70",
+        "git_blob": "08319df4166ce1cb18d44c092ad8d065ebe1cbe2"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/classpath.init.gradle": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783864,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 527,
+          "st_mtime_ns": 1788791830933503892,
+          "st_ctime_ns": 1788805146514716810,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "ba4814f13edfa67393d62309a547e8cb434e66514cdc993aef81af50dd191f57",
+        "git_blob": "fff01747b8cd0d0b8401422eade1ae6039c4d797"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/collect_frontend.mjs": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783865,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 1473,
+          "st_mtime_ns": 1788791830933503892,
+          "st_ctime_ns": 1788805146514716810,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "692c12e38d864d6110192cf9e9a61f5e91000e1de1ef71f857d4a73d174e3c11",
+        "git_blob": "08af11858c089cf92774daccf2c92cb18048a55d"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/compile.init.gradle": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783891,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 3025,
+          "st_mtime_ns": 1788792824956561101,
+          "st_ctime_ns": 1788805146518716849,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "c3efe1970c854a6087268f7368594a45ab956e2ea0c0a35a981a5e7aba1e564a",
+        "git_blob": "4239b4b0496ee25edf82dccba5123bc6c7681859"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/compile_inventory.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783892,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 3432,
+          "st_mtime_ns": 1788792008395301054,
+          "st_ctime_ns": 1788805146518716849,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "1b1fe1ab47e64226171d47f069bec9232b8d604c63f0a70e3882c9f2f6cdf91a",
+        "git_blob": "0a469fcd9cc62b0c99ec8c859d9d6416a29c5ce4"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/coverage.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783866,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 9214,
+          "st_mtime_ns": 1788792706888374734,
+          "st_ctime_ns": 1788805146515716820,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "158d443af7566b2b2237cd633502a5e8fc30c49bf0e4aafd5b503f0597003a52",
+        "git_blob": "9ceac9d83db9e2d1aa3e1adb978382e8faed1269"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/decision_evidence.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21787234,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 12657,
+          "st_mtime_ns": 1788806113005217551,
+          "st_ctime_ns": 1788806113005217551,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "037b29d403c10d95f597b7bae544291addb5b26f2e5f70aaa7b9b47c46c690cf",
+        "git_blob": "13f2ba21c8b29f5acf8b2e030d3be53f169f9826"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/engineering.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783867,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 2901,
+          "st_mtime_ns": 1788792171193949733,
+          "st_ctime_ns": 1788805146515716820,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "e895d246660dc6ddceb21c86dd703d41275f33a268f4eb536f9e9b0adc48c990",
+        "git_blob": "7221735c7e86aa45ec14892b94934ecc8dabc88e"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/execution.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783868,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 5762,
+          "st_mtime_ns": 1788806113291220363,
+          "st_ctime_ns": 1788806113291220363,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "8ace695e65f4a3594e07f6eceb81e4054102162fcbfc912083ebe91fa7e6d504",
+        "git_blob": "8a3c85474aca5ef4373216c686d7e85b829b54a5"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/freshness.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783869,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 3908,
+          "st_mtime_ns": 1788792008384300942,
+          "st_ctime_ns": 1788805146515716820,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "23dcce0ca006e8b398704735cf33f9ad6b549f890220c64ba6d1826e7cd97585",
+        "git_blob": "96405b46cac16b36ae676e285256c1f76f339197"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/frozen_shadow_monitor.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783870,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 3556,
+          "st_mtime_ns": 1788791830933503892,
+          "st_ctime_ns": 1788805146515716820,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "bb63de244007818956aa151ecceae98bf8c4fa50c45f2f7ee09bc74d63d21d0b",
+        "git_blob": "1b79cdd7c7c8acbf4e42504547d2f773b2e5d34d"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/isolation.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783871,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 911,
+          "st_mtime_ns": 1788791830934503902,
+          "st_ctime_ns": 1788805146516716830,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "4c0277d71479bb65cfd453a68799c53f7ed22e6b31cb72fce256859a7b9a4dc5",
+        "git_blob": "0a86672b2481d42236661afd44871ec69f9a6043"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/matrix.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783872,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 409,
+          "st_mtime_ns": 1788791830934503902,
+          "st_ctime_ns": 1788805146516716830,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "76c0c5aec3cf9a4b850f792814fcf3053e34396e1a71c4d4e79f7fe73a6815ab",
+        "git_blob": "119a7a13b518715370700af7941453eb41260366"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/namespaces.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783889,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 5043,
+          "st_mtime_ns": 1788792887294182731,
+          "st_ctime_ns": 1788805146518716849,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "9fc414a5612b061aab6f1bdda74a06c9448a428e8a8c06d4549bd33d66b28652",
+        "git_blob": "078b96b3312a1bad124daca86fd3f11b17a4420f"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/observe.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783897,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 18193,
+          "st_mtime_ns": 1788799975806027066,
+          "st_ctime_ns": 1788805146519716859,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "2e060dd77ed4b24132d581e36cc3fa84c8b67d928cd9ec7689dcdc8823e991e2",
+        "git_blob": "e810e3c56b3da76d3d725bef53cb57262edc8a9d"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/packaging.init.gradle": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783873,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 2375,
+          "st_mtime_ns": 1788791830934503902,
+          "st_ctime_ns": 1788805146516716830,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "fd3c8ce83acd27274b616ee32de17352ba2b533bc9dbce875fb93f3a6921a6e4",
+        "git_blob": "b91eb93a6679a417c461e16f4dae92ad89f7a567"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/packaging.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783874,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 5782,
+          "st_mtime_ns": 1788791830934503902,
+          "st_ctime_ns": 1788805146516716830,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "e7eb80c587d11e4c33ac8d1eb5485aa975e8fcc5a7beb1dde6d654dfd47ec299",
+        "git_blob": "a473bf75460886cc86b4eca7f730ad52763927d0"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/parser_tools.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783895,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 1520,
+          "st_mtime_ns": 1788792546094746368,
+          "st_ctime_ns": 1788805146519716859,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "aa517a257d5b85b4fbc6403f3f21f2facb11be0561f49d481eed82201a946fb3",
+        "git_blob": "32c8a48092493bbdb137f11c8d3f4b2b78dbf6f7"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/parsers.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783875,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 6407,
+          "st_mtime_ns": 1788792201917260870,
+          "st_ctime_ns": 1788805146516716830,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "d4b9409e4ca8aa2028558d885a934f384025d0e0c035f9e11d9bfd0b997f08c9",
+        "git_blob": "ebc221b964f2015fd98c600201f4cb82655b0e81"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/preflight.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783876,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 188,
+          "st_mtime_ns": 1788792675856060468,
+          "st_ctime_ns": 1788805146516716830,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "536211ae18cda30a9cc2290689f4923eac7502005b629ea1dfe77a284fd5b914",
+        "git_blob": "1c42c63498bc40a1071a47e74dc345788d3c0e61"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/prepare.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783877,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 186,
+          "st_mtime_ns": 1788792675856060468,
+          "st_ctime_ns": 1788805146516716830,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "f199697ad274077537840b6a7b08402fd06ecfa193b89e47323fad9ff8ed9e0d",
+        "git_blob": "63c2b97ab30443b513740c3df56c281ed264635e"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/prepare_finalize.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783878,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 187,
+          "st_mtime_ns": 1788792675856060468,
+          "st_ctime_ns": 1788805146516716830,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "dc68828ad5b42f6ec9d5b02403952d68207ce6f272138de4aa8f8cc62f7ef90d",
+        "git_blob": "8c0256e24fa4efe907a71c359fefdba969e47990"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/preservation.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783879,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 8202,
+          "st_mtime_ns": 1788791830935503912,
+          "st_ctime_ns": 1788805146517716840,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "cfdc63fde7be1a5d3634d9425e35198ec3f9c4060b1d09197e3ad9e2c48f87a7",
+        "git_blob": "150f29c18cdd4dfb0c4d156f55ae8027389f47ef"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/qualify_frontend.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783880,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 293,
+          "st_mtime_ns": 1788792675857060478,
+          "st_ctime_ns": 1788805146517716840,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "013af0fd6a54ac97c8b3c7fab44d6fbeb1e14f1a4cffdb8e49df0c27987111d4",
+        "git_blob": "1863a8b2c81a8f209dfcf641526fc4182f0923f9"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/runner.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783881,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 29409,
+          "st_mtime_ns": 1788805383987048702,
+          "st_ctime_ns": 1788805383987048702,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "ff8575d72753c49e2b07b46cc07c5200cc334221c19215d23b673c5a84b12112",
+        "git_blob": "a236489a040519682da9d09af13acfb3b13918e8"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/shadow_binding.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783882,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 1927,
+          "st_mtime_ns": 1788791830935503912,
+          "st_ctime_ns": 1788805146517716840,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "eaf4933c7785dc421149681a09f62e4809a5c985da8d5d9cf81a878c493cf71e",
+        "git_blob": "2967e61051cc9982a78a7dbff9eae7fc0b557b12"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/test_account.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783883,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 4777,
+          "st_mtime_ns": 1788791830935503912,
+          "st_ctime_ns": 1788805146517716840,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "e0367c95ef5d37ef997a5a33be7e58e4fe2828d6b9af35c4597a822e4a5adf97",
+        "git_blob": "cec9e4a8c9883e0c301008c33f27f86c47b287b3"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/test_continuation.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783884,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 22993,
+          "st_mtime_ns": 1788791830935503912,
+          "st_ctime_ns": 1788805146517716840,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "90fc2cbcc63adc05ce3427065202b6e935958a086f151f584d65bf2747da1c2a",
+        "git_blob": "3de805f3a288548e7c408a79d9dfe1cc94d5029a"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/test_contract.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783885,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 7436,
+          "st_mtime_ns": 1788791830936503922,
+          "st_ctime_ns": 1788805146517716840,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "3fc1b622f5a1f6c18b38bd1f3d908bc956cfd9cace746fbfed5b0c27b94efa4a",
+        "git_blob": "8564976277eb0c89eb8a4ea298951e617aca3ef9"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/test_isolation.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783886,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 2052,
+          "st_mtime_ns": 1788791830936503922,
+          "st_ctime_ns": 1788805146517716840,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "d50cac4592d382b997217a7dd6216788c3dc3a576be94f3df064b34c3d8a8f75",
+        "git_blob": "b4692355bb6e8b2e4c6377c4c3238878aa1690d4"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/test_owner_preparation.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783887,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 27021,
+          "st_mtime_ns": 1788791830936503922,
+          "st_ctime_ns": 1788805146518716849,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "8bd6d3343101564bde44ebd06fece088d6b494d87ee5ebf79717ec004b2d93f6",
+        "git_blob": "db2f71136f18591062b4fd59fd4b12150e6559fc"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/vite_closure.mjs": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783893,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 8012,
+          "st_mtime_ns": 1788794010332077678,
+          "st_ctime_ns": 1788805146518716849,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "c384d54525bfa558a0d488d2c76562f926e8ec7c1e61a4434cecf1d153d379b8",
+        "git_blob": "d105f063047c4625bf103dae4d76776d1815648e"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/vite_closure.py": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783894,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 444,
+          "st_mtime_ns": 1788792084011066824,
+          "st_ctime_ns": 1788805146518716849,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "c3fe538a50c24567136c1dbb3e2c8267174a5d30c9b959e64b6302be7286afef",
+        "git_blob": "82b88d56b738da63b76292f0a820232ca48dbb61"
+      },
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/executor/vite_resolution.mjs": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21783888,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 887,
+          "st_mtime_ns": 1788792145059685066,
+          "st_ctime_ns": 1788805146518716849,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "989ad04b5eef1f96e608adbbba25559ea05ad2b88fe1dc56015f7f5a8095a74c",
+        "git_blob": "f4b35405946cfcbfec492dcff92df01e3841ef54"
+      }
+    },
+    "errors": [],
+    "hashed": 38,
+    "read_policy": "ORDINARY_READ_EXPLICIT_CONTRACT_ATIME_NOT_FROZEN",
+    "metadata_fields": [
+      "st_dev",
+      "st_ino",
+      "st_mode",
+      "st_uid",
+      "st_gid",
+      "st_size",
+      "st_mtime_ns",
+      "st_ctime_ns",
+      "st_nlink"
+    ],
+    "timestamp_restoration": false,
+    "body_export": false,
+    "claim": "Current sequential endpoints; not atomic or historical continuity"
+  },
+  "capture": {
+    "result": "COMPLETE",
+    "native_exit": 0,
+    "start_ns": 1788806541125379201,
+    "end_ns": 1788806541125632862,
+    "entries": {
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/runs/parent-native-001/fixtures/test_usage_runtime_protected_member_is_not_excluded-508c9c8388844be7aff0904d743136a4/outputs/continuation-runs/fixture/runtime/usage.json": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21799917,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 9,
+          "st_mtime_ns": 1788806541021412879,
+          "st_ctime_ns": 1788806541021412879,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "9bfa8faa6e0ad6e7e194377cc0ed7646da00b4940019d2a9d6d3dbcd75474901",
+        "git_blob": "b3caf4d68fe4006a6ebf0b3855e4c820a9e758a0"
+      }
+    },
+    "errors": [],
+    "hashed": 1,
+    "read_policy": "ORDINARY_READ_EXPLICIT_CONTRACT_ATIME_NOT_FROZEN",
+    "metadata_fields": [
+      "st_dev",
+      "st_ino",
+      "st_mode",
+      "st_uid",
+      "st_gid",
+      "st_size",
+      "st_mtime_ns",
+      "st_ctime_ns",
+      "st_nlink"
+    ],
+    "timestamp_restoration": false,
+    "body_export": false,
+    "claim": "Current sequential endpoints; not atomic or historical continuity"
+  },
+  "baseline_entries": {
+    "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/runs/parent-native-001/fixtures/test_usage_runtime_protected_member_is_not_excluded-508c9c8388844be7aff0904d743136a4/outputs/continuation-runs/fixture/runtime/usage.json": {
+      "metadata": {
+        "st_dev": 47,
+        "st_ino": 21799917,
+        "st_mode": 33188,
+        "st_uid": 1000,
+        "st_gid": 100,
+        "st_size": 9,
+        "st_mtime_ns": 1788806541020412869,
+        "st_ctime_ns": 1788806541020412869,
+        "st_nlink": 1
+      },
+      "kind": "file",
+      "sha256": "c892bdc4349b98d6efce04e4de61f7bae739d0979677765b6c2c7511233d1179",
+      "git_blob": "e477bd52b614e3c09caa29649c3317727948d5fb"
+    }
+  },
+  "before": {
+    "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/runs/parent-native-001/fixtures/test_usage_runtime_protected_member_is_not_excluded-508c9c8388844be7aff0904d743136a4/outputs/continuation-runs/fixture/runtime/usage.json": {
+      "metadata": {
+        "st_dev": 47,
+        "st_ino": 21799917,
+        "st_mode": 33188,
+        "st_uid": 1000,
+        "st_gid": 100,
+        "st_size": 9,
+        "st_mtime_ns": 1788806541020412869,
+        "st_ctime_ns": 1788806541020412869,
+        "st_nlink": 1
+      },
+      "kind": "file",
+      "sha256": "c892bdc4349b98d6efce04e4de61f7bae739d0979677765b6c2c7511233d1179",
+      "git_blob": "e477bd52b614e3c09caa29649c3317727948d5fb"
+    }
+  },
+  "current": {
+    "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/runs/parent-native-001/fixtures/test_usage_runtime_protected_member_is_not_excluded-508c9c8388844be7aff0904d743136a4/outputs/continuation-runs/fixture/runtime/usage.json": {
+      "metadata": {
+        "st_dev": 47,
+        "st_ino": 21799917,
+        "st_mode": 33188,
+        "st_uid": 1000,
+        "st_gid": 100,
+        "st_size": 9,
+        "st_mtime_ns": 1788806541021412879,
+        "st_ctime_ns": 1788806541021412879,
+        "st_nlink": 1
+      },
+      "kind": "file",
+      "sha256": "9bfa8faa6e0ad6e7e194377cc0ed7646da00b4940019d2a9d6d3dbcd75474901",
+      "git_blob": "b3caf4d68fe4006a6ebf0b3855e4c820a9e758a0"
+    }
+  },
+  "differences": [
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/prestart-boundary-20260907T181906Z/qualification/runs/parent-native-001/fixtures/test_usage_runtime_protected_member_is_not_excluded-508c9c8388844be7aff0904d743136a4/outputs/continuation-runs/fixture/runtime/usage.json",
+      "categories": [
+        "changed"
+      ],
+      "fields": [
+        {
+          "field": "git_blob",
+          "before": "e477bd52b614e3c09caa29649c3317727948d5fb",
+          "current": "b3caf4d68fe4006a6ebf0b3855e4c820a9e758a0"
+        },
+        {
+          "field": "metadata.st_ctime_ns",
+          "before": 1788806541020412869,
+          "current": 1788806541021412879
+        },
+        {
+          "field": "metadata.st_mtime_ns",
+          "before": 1788806541020412869,
+          "current": 1788806541021412879
+        },
+        {
+          "field": "sha256",
+          "before": "c892bdc4349b98d6efce04e4de61f7bae739d0979677765b6c2c7511233d1179",
+          "current": "9bfa8faa6e0ad6e7e194377cc0ed7646da00b4940019d2a9d6d3dbcd75474901"
+        }
+      ],
+      "capture_errors": []
+    }
+  ],
+  "START": {
+    "status": "ABSENT_AT_CAPTURE",
+    "observed_ns": 1788806541125667619
+  },
+  "finished_ns": 1788806541125893032
+}

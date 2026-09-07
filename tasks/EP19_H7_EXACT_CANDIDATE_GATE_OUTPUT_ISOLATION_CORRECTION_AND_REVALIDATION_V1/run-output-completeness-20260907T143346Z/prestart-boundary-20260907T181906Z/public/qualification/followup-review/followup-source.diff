@@ -1,0 +1,214 @@
+--- pre-followup/executor/execution.py
++++ executor/execution.py
+@@ -2,7 +2,7 @@
+ from pathlib import Path
+ import os,subprocess,hashlib,json
+ D=Path(__file__).resolve().parents[1]
+-O=D.parent
++O=Path('/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1')
+ H=D/'executor'
+ BASE='86d6aef94fd5e58da552e97c11473cff6eca734e'
+ SHA='689ab9456461a8d19a72d059f5157092efc43aff';TREE='6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6'
+--- pre-followup/executor/decision_evidence.py
++++ executor/decision_evidence.py
+@@ -228,10 +228,17 @@
+             except FileNotFoundError:
+                 receipt['START']['status'] = 'ABSENT_AT_CAPTURE'
+             else:
+-                receipt['START'].update(status='FILE_PRESENT_AT_CAPTURE' if stat.S_ISREG(row.st_mode)
+-                                        else 'NOT_ESTABLISHED', metadata=metadata(row))
++                receipt['START']['metadata'] = metadata(row)
++                if not stat.S_ISREG(row.st_mode):
++                    raise RuntimeError('DECISION_START_NOT_REGULAR '+str(start_path))
++                receipt['START']['status'] = 'FILE_PRESENT_AT_CAPTURE'
+     except Exception as exc:
+         receipt['START'].update(status='NOT_ESTABLISHED', error=error(exc, start_path))
++        receipt['evidence_errors'].append(error(exc, start_path))
++        if rejection is None:
++            rejection = RuntimeError('DECISION_START_OBSERVATION_INCOMPLETE '+str(exc))
++            receipt['reason'] = str(rejection)
++        receipt['decision'] = 'REJECT'
+     receipt['finished_ns'] = time.time_ns()
+     try:
+         if scope is None:
+--- pre-followup/qualification/qualify.py
++++ qualification/qualify.py
+@@ -12,6 +12,8 @@
+ import time
+ 
+ ROOT = Path(__file__).resolve().parents[1]
++TASK_ROOT = Path('/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1')
++FOLLOWUP_PREIMAGE = ROOT/'preimages/followup-20260907T183449Z'
+ 
+ 
+ def sha(path):
+@@ -24,8 +26,16 @@
+ 
+ 
+ def inputs():
++    matrix = json.loads((TASK_ROOT/'GATE_EXECUTION_MATRIX.json').read_text())
+     return sorted([*filter(Path.is_file, (ROOT/'executor').iterdir()),
+                    *filter(Path.is_file, (ROOT/'preimages/executor').iterdir()),
++                   *filter(Path.is_file, (ROOT/'tools').rglob('*')),
++                   *filter(Path.is_file, (ROOT.parent/'tools').rglob('*')),
++                   TASK_ROOT/'GATE_EXECUTION_MATRIX.json', TASK_ROOT/'PROTECTION_SCOPE.json',
++                   *[TASK_ROOT/'inputs'/name for name in matrix['inventories']],
++                   FOLLOWUP_PREIMAGE/'preservation-manifest.json',
++                   *filter(Path.is_file, (FOLLOWUP_PREIMAGE/'executor').iterdir()),
++                   ROOT/'PARENT_FOLLOWUP.md', ROOT/'qualification/FOLLOWUP_CONTROLS.md',
+                    ROOT/'CODEX_BRIEF.md', ROOT/'SCOPE.md',
+                    ROOT/'qualification/test_decisions.py', ROOT/'qualification/qualify.py',
+                    ROOT/'qualification/CONTROLS.md', ROOT/'qualification/PARENT_COMMANDS.md'])
+@@ -67,7 +77,8 @@
+     put(out/'source-inputs-before.json', sources)
+     snapshot = out/'source-snapshot'
+     for path in inputs():
+-        copy = snapshot/path.relative_to(ROOT)
++        copy = snapshot/(path.relative_to(ROOT) if path.is_relative_to(ROOT)
++                         else Path('external-authority')/path.relative_to(TASK_ROOT))
+         copy.parent.mkdir(parents=True, exist_ok=True)
+         shutil.copyfile(path, copy)
+         if sha(copy) != sources[str(path)]:
+--- pre-followup/qualification/test_decisions.py
++++ qualification/test_decisions.py
+@@ -27,6 +27,8 @@
+ import runner
+ 
+ OUT = Path(os.environ['EP19_DIAGNOSTIC_TEST_OUTPUT'])
++TASK_ROOT = Path('/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1')
++FOLLOWUP_PREIMAGE = ROOT/'preimages/followup-20260907T183449Z'
+ 
+ 
+ def put(path, value):
+@@ -123,6 +125,57 @@
+         self.assertEqual(row['phase'], 'PRESTART')
+         self.assertIn('sha256', [f['field'] for f in row['differences'][0]['fields']])
+ 
++    def start_lookup_error(self):
++        native = os.stat
++        def injected(path, *args, **kwargs):
++            if path == 'START.json' and kwargs.get('dir_fd') is not None:
++                raise PermissionError(errno.EACCES, 'Injected START lookup denial', path)
++            return native(path, *args, **kwargs)
++        return patch.object(de.os, 'stat', side_effect=injected)
++
++    def test_injected_start_lookup_error_rejects_real_run_all(self):
++        with self.start_lookup_error():
++            self.reject_launch('DECISION_START_OBSERVATION_INCOMPLETE')
++        row = self.receipts()[0][1]
++        self.assertEqual(row['decision'], 'REJECT')
++        self.assertEqual(row['START']['status'], 'NOT_ESTABLISHED')
++        self.assertEqual(row['START']['error']['errno'], errno.EACCES)
++        self.assertIn(row['START']['error'], row['evidence_errors'])
++        self.assertEqual(row['before'], row['current'])
++
++    def test_start_lookup_error_preserves_original_drift_reason(self):
++        self.target.write_text('changed before START error')
++        with self.start_lookup_error():
++            self.reject_launch('FROZEN_BASELINE_DRIFT_ACROSS_COMMAND_GAP')
++        row = self.receipts()[0][1]
++        self.assertEqual(row['reason'], 'FROZEN_BASELINE_DRIFT_ACROSS_COMMAND_GAP')
++        self.assertEqual(row['START']['status'], 'NOT_ESTABLISHED')
++        self.assertEqual(row['START']['error']['errno'], errno.EACCES)
++
++    def test_native_start_symlink_rejects_comparison(self):
++        start = self.run/'runtime/START.json'
++        start.symlink_to(self.target)
++        before = self.target.read_bytes()
++        with self.assertRaisesRegex(RuntimeError, 'DECISION_START_OBSERVATION_INCOMPLETE'):
++            self.compare()
++        row = self.receipts()[0][1]
++        self.assertEqual(row['decision'], 'REJECT')
++        self.assertEqual(row['START']['status'], 'NOT_ESTABLISHED')
++        self.assertIn('DECISION_START_NOT_REGULAR', row['START']['error']['reason'])
++        self.assertEqual(self.target.read_bytes(), before)
++        self.assertTrue(start.is_symlink())
++
++    def test_native_start_fifo_rejects_actual_gate_before_command(self):
++        os.mkfifo(self.run/'runtime/START.json')
++        with patch.object(runner, 'repos', return_value=[]), patch.object(observe, 'run') as child:
++            row = runner.run_gate('FIXTURE', self.matrix, self.run, self.scope, self.sealed, {})
++        child.assert_not_called()
++        self.assertIn('DECISION_START_OBSERVATION_INCOMPLETE', row['reason'])
++        receipt = self.receipts()[0][1]
++        self.assertEqual(receipt['phase'], 'GATE_BOUNDARY')
++        self.assertEqual(receipt['decision'], 'REJECT')
++        self.assertEqual(receipt['START']['status'], 'NOT_ESTABLISHED')
++
+     def test_actual_gate_boundary_rejects_before_command(self):
+         self.target.write_text('changed')
+         with patch.object(runner, 'repos', return_value=[]), patch.object(observe, 'run') as child:
+@@ -497,10 +550,72 @@
+     def test_unchanged_original_helpers_and_no_removed_sources(self):
+         original = ROOT/'preimages/executor'
+         for path in original.iterdir():
+-            if path.name != 'runner.py':
++            if path.name == 'execution.py':
++                old = path.read_bytes()
++                self.assertEqual(old.count(b'\nO=D.parent\n'), 1)
++                expected = old.replace(b'\nO=D.parent\n',
++                    ("\nO=Path('"+str(TASK_ROOT)+"')\n").encode())
++                self.assertEqual(expected, (ROOT/'executor/execution.py').read_bytes())
++                self.assertEqual(old, (FOLLOWUP_PREIMAGE/'executor/execution.py').read_bytes())
++            elif path.name != 'runner.py':
+                 self.assertEqual(path.read_bytes(), (ROOT/'executor'/path.name).read_bytes(), path.name)
++        self.assertEqual((ROOT/'executor/runner.py').read_bytes(),
++                         (FOLLOWUP_PREIMAGE/'executor/runner.py').read_bytes())
+         self.assertEqual({p.name for p in (ROOT/'executor').iterdir()} - {p.name for p in original.iterdir()},
+                          {'decision_evidence.py'})
++
++    def test_all29_original_authority_private_paths_without_execution(self):
++        self.assertEqual(execution.O, TASK_ROOT)
++        self.assertEqual(execution.D, ROOT)
++        self.assertEqual(execution.H, ROOT/'executor')
++        self.assertEqual(runner.AUTHORITY, TASK_ROOT/'owner-clarified-execution-20260907T1120Z')
++        authority = json.loads((TASK_ROOT/'GATE_EXECUTION_MATRIX.json').read_text())
++        with patch.object(execution.subprocess, 'run', side_effect=AssertionError('No process authorized')), \
++                patch.object(execution.subprocess, 'check_output', side_effect=AssertionError('No process authorized')):
++            bound = runner.bindings.build(self.run)
++        self.assertEqual(bound['order'], authority['order'])
++        self.assertEqual(len(bound['gates']), 29)
++        self.assertEqual(bound['authoritative_matrix_sha256'], coverage.digest(TASK_ROOT/'GATE_EXECUTION_MATRIX.json'))
++        for name, spec in bound['gates'].items():
++            self.assertEqual(spec['authoritative_command'], authority['gates'][name]['command'])
++            repo = Path(spec['repository'])
++            self.assertIn(repo, runner.repos(self.run))
++            self.assertTrue(Path(spec['cwd']).is_relative_to(repo), name)
++            for field in ('cache', 'tmp'):
++                self.assertTrue(Path(spec[field]).is_relative_to(self.run/'runtime'), (name, field))
++            self.assertEqual(spec['cleanup'], authority['gates'][name]['cleanup'])
++            for path in spec['outputs'] + spec['output_bindings']['required_files']:
++                self.assertTrue(Path(path).is_relative_to(repo) or Path(path).is_relative_to(self.run/'runtime'), (name, path))
++            for token in spec['command']:
++                for old in ('sources', 'owned', 'outputs', 'cache', 'tmp'):
++                    self.assertNotIn(str(TASK_ROOT/old)+'/', token, (name, token))
++            self.assertEqual(spec['run_id'], self.run.name)
++        self.assertFalse((self.run/'sources').exists())
++        put(self.root/'all29-bindings.json', bound)
++        put(self.root/'authority-input-digests.json', coverage.seal([
++            TASK_ROOT/'GATE_EXECUTION_MATRIX.json', TASK_ROOT/'PROTECTION_SCOPE.json',
++            *[TASK_ROOT/'inputs'/name for name in authority['inventories']]]))
++
++    def test_parent_copied_tools_match_343_original_files(self):
++        def files(root):
++            return {str(p.relative_to(root)):coverage.digest(p) for p in root.rglob('*') if p.is_file()}
++        copied, original = files(ROOT/'tools'), files(ROOT.parent/'tools')
++        self.assertEqual(len(copied), 343)
++        self.assertEqual(copied, original)
++        put(self.root/'tools-digests.json', copied)
++
++    def test_stale_execution_binding_rejects_launch(self):
++        self.seal['files'][str(ROOT/'executor/execution.py')] = coverage.digest(FOLLOWUP_PREIMAGE/'executor/execution.py')
++        (self.run/'seal.json').write_text(json.dumps(self.seal))
++        self.reject_launch('FROZEN_INPUT_CHANGED .*execution.py')
++
++    def test_stale_execution_binding_rejects_qualification(self):
++        helpers = coverage.seal(self.sources)
++        helpers[str(ROOT/'executor/execution.py')] = coverage.digest(FOLLOWUP_PREIMAGE/'executor/execution.py')
++        q = self.root/'qualification.json'
++        put(q, {'schema':'ep19-output-corrections-v2', 'helpers':helpers, 'dependencies':helpers})
++        with self.assertRaisesRegex(RuntimeError, 'FROZEN_INPUT_CHANGED .*execution.py'):
++            coverage.qualification_inputs(q)
+ 
+ 
+ if __name__ == '__main__':
