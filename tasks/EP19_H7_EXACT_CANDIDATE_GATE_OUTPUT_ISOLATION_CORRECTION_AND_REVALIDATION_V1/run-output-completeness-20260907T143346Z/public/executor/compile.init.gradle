@@ -1,0 +1,42 @@
+// Output-only evidence. No candidate source/build edits or task action replacement.
+import org.gradle.api.GradleException
+import org.gradle.api.tasks.compile.JavaCompile
+import groovy.json.JsonOutput
+import java.security.MessageDigest
+
+def run = System.getenv('EP19_RUN_ROOT')
+def gate = System.getenv('EP19_GATE_ID')
+if (!run || gate != 'COMPILE') throw new GradleException('COMPILE evidence identity missing')
+def folder = new File(run, 'runtime/gates/COMPILE')
+def emit = { String name, obj ->
+ def file = new File(folder, name)
+ if (!file.createNewFile()) throw new GradleException('PREEXISTING_COMPILE_EVIDENCE '+file)
+ file.text = JsonOutput.toJson(obj)
+}
+def hash = { File f -> MessageDigest.getInstance('SHA-256').digest(f.bytes).encodeHex().toString() }
+def inventory = { Collection<File> fs -> fs.findAll { it.isFile() }.sort { it.absolutePath }.collect { [path:it.absolutePath,size:it.length(),sha256:hash(it)] } }
+def outputs = { t -> t.outputs.files.files.collect { it.absolutePath }.sort() }
+def sourceSets = { p ->
+ def sets=p.extensions.findByName('sourceSets')
+ sets == null ? [] : sets.collect { s -> [name:s.name,compileTask:s.compileJavaTaskName,javaDirs:s.java.srcDirs.collect { it.absolutePath }.sort(),classDirs:s.output.classesDirs.files.collect { it.absolutePath }.sort()] }
+}
+def required = []
+gradle.taskGraph.whenReady { graph ->
+ required = graph.allTasks.findAll { it instanceof JavaCompile }
+ def expected = gradle.rootProject.allprojects.collectMany { p -> sourceSets(p).collect { s -> p.tasks.findByName(s.compileTask) }.findAll { it instanceof JavaCompile } }.collect { it.path }.sort()
+ emit('compile-graph.json',[run_root:run,candidate:System.getenv('EP19_CANDIDATE'),tree:System.getenv('H7_SOURCE_TREE'),gate:gate,repository:gradle.rootProject.rootDir.absolutePath,
+  expected_source_set_tasks:expected,graph:graph.allTasks.collect { [path:it.path,type:it.class.name,dependencies:it.taskDependencies.getDependencies(it).collect { d -> d.path }.sort()] },
+  required:required.collect { t -> [path:t.path,outputs:outputs(t),destination:t.destinationDirectory.get().asFile.absolutePath,sourceSets:sourceSets(t.project),graph_sources:inventory(t.source.files),preexisting:t.outputs.files.files.findAll { it.exists() }.collect { it.absolutePath }] }])
+}
+gradle.taskGraph.beforeTask { t ->
+ if (t instanceof JavaCompile) {
+  def id=t.path.replace(':','_')
+  emit('compile-before'+id+'.json',[task:t.path,sources:inventory(t.source.files),outputs:outputs(t),preexisting:t.outputs.files.files.findAll { it.exists() }.collect { it.absolutePath }])
+ }
+}
+gradle.taskGraph.afterTask { t,state ->
+ if (t instanceof JavaCompile) {
+  def id=t.path.replace(':','_')
+  emit('compile-after'+id+'.json',[task:t.path,sources:inventory(t.source.files),outputs:outputs(t),executed:state.executed,didWork:state.didWork,skipped:state.skipped,skipMessage:state.skipMessage,noSource:state.noSource,upToDate:state.upToDate,failure:state.failure?.toString(),files:inventory(t.outputs.files.asFileTree.files)])
+ }
+}

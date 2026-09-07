@@ -1,0 +1,246 @@
+{
+  "result": "FAIL",
+  "tests": 31,
+  "failures": 3,
+  "errors": 0,
+  "skipped": 0,
+  "cases": [
+    {
+      "case": "cases.Cases.test_A_copy_link_inputs_and_consumer_equality",
+      "expected": "REJECT: linked producer bytes and mutable consumer divergence.",
+      "actual": "PASS"
+    },
+    {
+      "case": "cases.Cases.test_A_matrix_preservation_mapping",
+      "expected": "PASS: all 29 authoritative argv/dependencies retained, execution roots rebound.",
+      "actual": "PASS"
+    },
+    {
+      "case": "cases.Cases.test_A_sealed_changed_removed_symlink_hardlink (variant='changed')",
+      "expected": "Control satisfies stated acceptance/rejection",
+      "actual": "PASS",
+      "detail": null
+    },
+    {
+      "case": "cases.Cases.test_A_sealed_changed_removed_symlink_hardlink (variant='removed')",
+      "expected": "Control satisfies stated acceptance/rejection",
+      "actual": "PASS",
+      "detail": null
+    },
+    {
+      "case": "cases.Cases.test_A_sealed_changed_removed_symlink_hardlink (variant='symlink')",
+      "expected": "Control satisfies stated acceptance/rejection",
+      "actual": "PASS",
+      "detail": null
+    },
+    {
+      "case": "cases.Cases.test_A_sealed_changed_removed_symlink_hardlink (variant='hardlink')",
+      "expected": "Control satisfies stated acceptance/rejection",
+      "actual": "PASS",
+      "detail": null
+    },
+    {
+      "case": "cases.Cases.test_A_sealed_changed_removed_symlink_hardlink",
+      "expected": "REJECT: mutation, loss, symlink and hardlink of sealed artifact.",
+      "actual": "PASS"
+    },
+    {
+      "case": "cases.Cases.test_A_two_real_candidate_runs",
+      "expected": "PASS: all six exact clones and Git directories independent; B writes cannot alter A.",
+      "actual": "PASS"
+    },
+    {
+      "case": "cases.Cases.test_B_negative_scope_and_outcomes",
+      "expected": "REJECT: missing tasks/outputs, stale class, altered sources, skipped/cached/up-to-date and false NO-SOURCE.",
+      "actual": "FAIL",
+      "detail": "Traceback (most recent call last):\n  File \"/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/qualification/cases.py\", line 97, in test_B_negative_scope_and_outcomes\n    run,gate,repo=self.compile_fixture();compile_inventory.validate(run,gate,repo)\n                  ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/qualification/cases.py\", line 84, in compile_fixture\n    self.assertEqual(native(cmd,repo,gate/'native.log',env),0,(gate/'native.log').read_text()[-4000:])\nAssertionError: 1 != 0 : Picked up JAVA_TOOL_OPTIONS: -Djava.io.tmpdir=/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/qualification/attempt-20260907T144632Z-54ced6/test_B_negative_scope_and_outcomes-cf3d78e8/run/runtime/tmp/backend\n\nWelcome to Gradle 9.1.0!\n\nHere are the highlights of this release:\n - Full Java 25 support\n - Native task graph visualization\n - Enhanced console output\n\nFor more details see https://docs.gradle.org/9.1.0/release-notes.html\n\n\nFAILURE: Build failed with an exception.\n\n* What went wrong:\nGradle could not start your build.\n> Could not create service of type FileLockContentionHandler using BasicGlobalScopeServices.createFileLockContentionHandler().\n   > Could not determine a usable wildcard IP for this machine.\n\n* Try:\n> Run with --stacktrace option to get the stack trace.\n> Run with --info or --debug option to get more log output.\n> Run with --scan to generate a Build Scan (Powered by Develocity).\n> Get more help at https://help.gradle.org.\n\n"
+    },
+    {
+      "case": "cases.Cases.test_B_real_gradle_generated_no_source_and_seal",
+      "expected": "PASS: real JavaCompile graph, generated Java, nested classes and legitimate NO-SOURCE.",
+      "actual": "FAIL",
+      "detail": "Traceback (most recent call last):\n  File \"/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/qualification/cases.py\", line 88, in test_B_real_gradle_generated_no_source_and_seal\n    run,gate,repo=self.compile_fixture();r=compile_inventory.validate(run,gate,repo);put(gate/'compile-manifest.json',r)\n                  ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/qualification/cases.py\", line 84, in compile_fixture\n    self.assertEqual(native(cmd,repo,gate/'native.log',env),0,(gate/'native.log').read_text()[-4000:])\nAssertionError: 1 != 0 : Picked up JAVA_TOOL_OPTIONS: -Djava.io.tmpdir=/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/qualification/attempt-20260907T144632Z-54ced6/test_B_real_gradle_generated_no_source_and_seal-5915a0ea/run/runtime/tmp/backend\n\nWelcome to Gradle 9.1.0!\n\nHere are the highlights of this release:\n - Full Java 25 support\n - Native task graph visualization\n - Enhanced console output\n\nFor more details see https://docs.gradle.org/9.1.0/release-notes.html\n\n\nFAILURE: Build failed with an exception.\n\n* What went wrong:\nGradle could not start your build.\n> Could not create service of type FileLockContentionHandler using BasicGlobalScopeServices.createFileLockContentionHandler().\n   > Could not determine a usable wildcard IP for this machine.\n\n* Try:\n> Run with --stacktrace option to get the stack trace.\n> Run with --info or --debug option to get more log output.\n> Run with --scan to generate a Build Scan (Powered by Develocity).\n> Get more help at https://help.gradle.org.\n\n"
+    },
+    {
+      "case": "cases.Cases.test_C_html_js_css_manifest_positive",
+      "expected": "PASS: HTML, manifest, JS, CSS, base/query/fragment, external/data and routes.",
+      "actual": "PASS"
+    },
+    {
+      "case": "cases.Cases.test_C_missing_html_js_css_transitive_and_escape (variant='html_js')",
+      "expected": "Control satisfies stated acceptance/rejection",
+      "actual": "PASS",
+      "detail": null
+    },
+    {
+      "case": "cases.Cases.test_C_missing_html_js_css_transitive_and_escape (variant='html_css')",
+      "expected": "Control satisfies stated acceptance/rejection",
+      "actual": "PASS",
+      "detail": null
+    },
+    {
+      "case": "cases.Cases.test_C_missing_html_js_css_transitive_and_escape (variant='chunk')",
+      "expected": "Control satisfies stated acceptance/rejection",
+      "actual": "PASS",
+      "detail": null
+    },
+    {
+      "case": "cases.Cases.test_C_missing_html_js_css_transitive_and_escape (variant='asset')",
+      "expected": "Control satisfies stated acceptance/rejection",
+      "actual": "PASS",
+      "detail": null
+    },
+    {
+      "case": "cases.Cases.test_C_missing_html_js_css_transitive_and_escape (variant='manifest')",
+      "expected": "Control satisfies stated acceptance/rejection",
+      "actual": "PASS",
+      "detail": null
+    },
+    {
+      "case": "cases.Cases.test_C_missing_html_js_css_transitive_and_escape (variant='escape')",
+      "expected": "Control satisfies stated acceptance/rejection",
+      "actual": "PASS",
+      "detail": null
+    },
+    {
+      "case": "cases.Cases.test_C_missing_html_js_css_transitive_and_escape (variant='encoded_escape')",
+      "expected": "Control satisfies stated acceptance/rejection",
+      "actual": "PASS",
+      "detail": null
+    },
+    {
+      "case": "cases.Cases.test_C_missing_html_js_css_transitive_and_escape (variant='dynamic_expression')",
+      "expected": "Control satisfies stated acceptance/rejection",
+      "actual": "PASS",
+      "detail": null
+    },
+    {
+      "case": "cases.Cases.test_C_missing_html_js_css_transitive_and_escape (variant='css_escape')",
+      "expected": "Control satisfies stated acceptance/rejection",
+      "actual": "PASS",
+      "detail": null
+    },
+    {
+      "case": "cases.Cases.test_C_missing_html_js_css_transitive_and_escape",
+      "expected": "REJECT: absent HTML assets, transitive chunk/asset, manifest graph hole and boundary escape.",
+      "actual": "PASS"
+    },
+    {
+      "case": "cases.Cases.test_C_real_tiny_vite_acceptance_and_seal",
+      "expected": "PASS: tiny real Vite build, actual parsers.parse acceptance and independent full output copy.",
+      "actual": "FAIL",
+      "detail": "Traceback (most recent call last):\n  File \"/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/qualification/cases.py\", line 151, in test_C_real_tiny_vite_acceptance_and_seal\n    self.assertEqual(native(cmd,src,gate/'native.log',execution.environment('frontend',run)),0,(gate/'native.log').read_text())\nAssertionError: 1 != 0 : vite v6.4.3 building for production...\ntransforming...\n\u2713 6 modules transformed.\n\u2717 Build failed in 102ms\nerror during build:\n[vite:esbuild-transpile] The service was stopped: spawn /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/tools/node_modules/vite/node_modules/@esbuild/linux-x64/bin/esbuild EACCES\n    at /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/tools/node_modules/vite/node_modules/esbuild/lib/main.js:718:38\n    at responseCallbacks.<computed> (/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/tools/node_modules/vite/node_modules/esbuild/lib/main.js:603:9)\n    at ChildProcess.afterClose (/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/tools/node_modules/vite/node_modules/esbuild/lib/main.js:594:28)\n    at ChildProcess.emit (node:events:519:28)\n    at ChildProcess._handle.onexit (node:internal/child_process:291:12)\n    at onErrorNT (node:internal/child_process:483:16)\n    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)\n\n"
+    },
+    {
+      "case": "cases.Cases.test_integrated_gate_acceptance_rejects_missing_compile_evidence",
+      "expected": "REJECT: native success cannot bypass COMPILE completeness on run_gate path.",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_backend_untagged_detached_child_remains_observed",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_fresh_native_failure_reject",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_instruction_runtime_metadata_drift_rejects",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_new_unexpected_missing_stays_failure",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_packaging_discovers_prefix",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_packaging_extra_resource",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_packaging_hash_mismatch",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_packaging_missing_jar_rejects",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_packaging_missing_resource",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_packaging_missing_zip_static",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_packaging_resources_and_zip_positive",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_packaging_unsupported_transform",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_packaging_wrong_blob_rejected",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_packaging_wrong_candidate",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_packaging_zip_conflict",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_packaging_zip_duplicate",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_packaging_zip_extra",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_primary_transient_index_write_strict",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_shadow_missing_reconciler_rejects",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_shadow_permitted_actual_observe_acceptance",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    },
+    {
+      "case": "test_continuation.Controls.test_shadow_semantic_delta_rejects",
+      "expected": "Original focused control passes",
+      "actual": "PASS"
+    }
+  ],
+  "product_gate_execution": false
+}

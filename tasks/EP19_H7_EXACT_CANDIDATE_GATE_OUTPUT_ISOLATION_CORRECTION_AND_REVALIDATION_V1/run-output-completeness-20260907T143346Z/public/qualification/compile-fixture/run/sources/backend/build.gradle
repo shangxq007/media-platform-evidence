@@ -1,0 +1,7 @@
+plugins { id 'java' }
+def generated = layout.buildDirectory.dir('generated/sources/demo')
+tasks.register('generateDemo') {
+ outputs.dir(generated)
+ doLast { def f=new File(generated.get().asFile,'Generated.java');f.parentFile.mkdirs();f.text='class Generated {}' }
+}
+sourceSets.main.java.srcDir(tasks.named('generateDemo'))

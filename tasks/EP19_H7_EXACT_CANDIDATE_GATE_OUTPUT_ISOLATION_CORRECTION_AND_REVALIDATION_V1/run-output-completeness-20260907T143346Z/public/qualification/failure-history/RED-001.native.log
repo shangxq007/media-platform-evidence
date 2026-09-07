@@ -1,0 +1,51 @@
+test_A_preserved_artifact_api (__main__.Red.test_A_preserved_artifact_api) ... ERROR
+test_A_run_owned_checkouts (__main__.Red.test_A_run_owned_checkouts) ... ERROR
+test_B_compile_completeness_api (__main__.Red.test_B_compile_completeness_api) ... ERROR
+test_C_acceptance_calls_closure (__main__.Red.test_C_acceptance_calls_closure) ... FAIL
+
+======================================================================
+ERROR: test_A_preserved_artifact_api (__main__.Red.test_A_preserved_artifact_api)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/qualification/red.py", line 11, in test_A_preserved_artifact_api
+    import artifacts
+ModuleNotFoundError: No module named 'artifacts'
+
+======================================================================
+ERROR: test_A_run_owned_checkouts (__main__.Red.test_A_run_owned_checkouts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/qualification/red.py", line 8, in test_A_run_owned_checkouts
+    m=bindings.build(run)
+      ^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/executor/bindings.py", line 30, in build
+    run=Path(run);m=json.loads((D/'GATE_EXECUTION_MATRIX.json').read_text())
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py", line 1058, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/GATE_EXECUTION_MATRIX.json'
+
+======================================================================
+ERROR: test_B_compile_completeness_api (__main__.Red.test_B_compile_completeness_api)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/qualification/red.py", line 14, in test_B_compile_completeness_api
+    import compile_inventory
+ModuleNotFoundError: No module named 'compile_inventory'
+
+======================================================================
+FAIL: test_C_acceptance_calls_closure (__main__.Red.test_C_acceptance_calls_closure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/qualification/red.py", line 18, in test_C_acceptance_calls_closure
+    self.assertIn('vite_closure',inspect.getsource(parsers.parse))
+AssertionError: 'vite_closure' not found in "def parse(name,run,gate,repo):\n    text=(gate/'native.log').read_text();o=run/'runtime/outputs';e=json.loads((D/'inputs/EXPECTED_IDENTITIES.json').read_text());result={'result':'PASS','parser_gate':name}\n    if name in XML:\n        want=e[name];result=account.reconcile(want['identities'],account.xml_rows(gate/'xml'),want['skips'])\n        if name=='FULL_BACKEND':\n            rows=list(csv.DictReader((o/'backend/FULL_EXECUTION_MANIFEST.tsv').open(),delimiter='\\t'))\n            if len(rows)!=1 or rows[0]['COMMIT']!=SHA or rows[0]['PROFILE']!='V2_CANDIDATE_FCV' or rows[0]['RESULTS_ROOT']!=str(repo):raise RuntimeError('FULL_MANIFEST_BINDING')\n            marker(text,r'^PASS FULL_DETERMINISTIC_BACKEND_SUITE total=7973 passed=7944 skipped=29$')\n    elif name=='CHANGE_IMPACT':\n        if json.loads(text)!=json.loads((D/'inputs/CHANGE_IMPACT.json').read_text()):raise RuntimeError('CHANGE_IMPACT_MISMATCH')\n    elif name=='H7_FOCUSED':result=account.reconcile(e[name]['identities'],account.unittest_rows(gate/'native.log'))\n    elif name=='H7_MUTATIONS':\n        result=account.reconcile(e[name]['identities'],re.findall(r'^MUTATION (\\S+)=(PASS|FAIL)\\b',text,re.M));marker(text,r'^MUTATION_MATRIX_FAILURES=0$')\n    elif name=='H7_ENTRY':\n        r=json.loads((o/'backend/H7_PRODUCTION_INPUT_RECEIPT.json').read_text())\n        if r.get('schema')!='h7-git-tree-input-v1' or r.get('tree')!=TREE or r.get('repository')!=str(repo):raise RuntimeError('H7_RECEIPT_BINDING')\n        validate_h7_receipt(r,repo)\n        marker(text,r'^H7_ARCHITECTURE_GUARD=PASS$')\n    elif name=='FRONTEND_COLLECTION':\n        rows=[(account.canonical(json.loads(x)),'PASS') for x in (o/'frontend-evidence/COLLECTED.jsonl').read_text().splitlines()]\n        result=account.reconcile(e['FRONTEND_TEST']['identities'],rows)\n    elif name=='FRONTEND_TEST':result=account.reconcile(e[name]['identities'],account.frontend_rows(o/'frontend-evidence/FRONTEND_TEST_RESULTS.json',repo),e[name]['skips'])\n    elif name=='FRONTEND_IDENTITIES':\n        rows=json.loads(text);old=json.loads((D/'inputs/FRONTEND_IDENTITIES.native.log').read_text())\n        oldroot=str(D.parent/'EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/candidate')\n        def normalize(rows,root):\n            return sorted((str(Path(r['file']).relative_to(root)),r['name']) for r in rows)\n        if normalize(rows,repo)!=normalize(old,oldroot):raise RuntimeError('FRONTEND_LIST_IDENTITY_MISMATCH')\n    elif name=='FRONTEND_BUILD':\n        resolution=json.loads((gate/'resolution.json').read_text())\n        if resolution['outDir']!=str(o/'frontend') or resolution['emptyOutDir'] is not True:raise RuntimeError('VITE_OUTPUT_BOUNDARY')\n        if not (o/'frontend/index.html').is_file():raise RuntimeError('VITE_OUTPUT_INCOMPLETE')\n        result['external_output_consumed_by_bootJar']=False;marker(text,r'built in')\n    elif name=='APPLICATION_CLASSPATH':\n        cp=(o/'backend/classpath.txt').read_text().strip();paths=[Path(p) for p in cp.split(os.pathsep)]\n        if not cp or any(not p.is_absolute() or not p.exists() or p.resolve()!=p or not (p.is_relative_to(repo) or p.is_relative_to(run/'runtime/cache/backend')) for p in paths):raise RuntimeError('CLASSPATH_INPUT_MISSING_OR_ESCAPE')\n        result['classpath']=list(map(str,paths))\n    elif name=='APPLICATION_PROBE':\n        for s in ['IMPLEMENTATION_PUBLIC=false','IMPLEMENTATION_EXPOSED_COUNT=0','QUERY_EXPOSED_COUNT=1','APPLICATION_MODULES_CENSUS=PASS']:marker(text,'^'+s+'$')\n    elif name=='SHADOW':\n        if len(re.findall(r'^PASS: .* rejects missing authority and does not recreate ',text,re.M))!=3:raise RuntimeError('SHADOW_EXPECTED_CONTROL_COUNT')\n        marker(text,r'^OK: PFIRR1-B1 jOOQ authority verification is fail-closed and non-mutating$')\n    elif name=='CLASSIFIER_TEST':marker(text,r'^CHANGE_IMPACT_CLASSIFIER_RED_MATRIX=PASS cases=\\d+ workflow_mutations=\\d+ governance_mutations=\\d+ classifier_mutations=\\d+')\n    elif name=='ARCHITECTURE':marker(text,r'All architecture drift checks passed')\n    elif name.startswith('GITOPS_'):marker(text,r'^  FAIL: +0$');marker(text,r'All critical checks passed')\n    elif name=='FORMAL':marker(text,r'^FAOF2_FORMAL_VALIDATION=PASS lean=4.19.0 coq=8.20.1$')\n    elif name in ('GRADLE_PREFLIGHT','COMPILE','FOUNDATION','BOOTJAR'):\n        marker(text,r'^BUILD SUCCESSFUL in ')\n        if name=='FOUNDATION':\n            for s in ['MISSING_GENERATOR_JAR_NEGATIVE_CONTROL=PASS','NO_OP_GENERATOR_NEGATIVE_CONTROL=PASS','OK PFIRR1-B2:']:marker(text,re.escape(s))\n    elif name in NATIVE:result['basis']='Exact sealed command native success; producer defines exit-code contract; raw log digest retained'\n    else:raise RuntimeError('UNBOUND_PARSER '+name)\n    if result['result']!='PASS':raise RuntimeError('IDENTITY_ACCOUNTING_REJECT '+json.dumps(result))\n    return result\n"
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.015s
+
+FAILED (failures=1, errors=3)

@@ -1,0 +1,42 @@
+{
+  "result": "PASS",
+  "root": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/parent-probes/file-url-escape-v1",
+  "base": "/",
+  "inventory": {
+    ".vite/manifest.json": {
+      "size": 60,
+      "sha256": "74ec9c659c6550f4f1436b2266cabeb11cf889af79ff07ae47c1b465aad160fd"
+    },
+    "assets/main.js": {
+      "size": 11,
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    "index.html": {
+      "size": 61,
+      "sha256": "436f99c5bbe8f33ce829155ef7b895122908c3d9975384c7b9b17f447017928b"
+    }
+  },
+  "edges": [
+    {
+      "from": ".vite/manifest.json",
+      "raw": "assets/main.js",
+      "kind": "manifest file",
+      "target": "assets/main.js"
+    }
+  ],
+  "ignored": [
+    {
+      "from": "index.html",
+      "raw": "file:///tmp/outside.js",
+      "kind": "html script",
+      "reason": "external/data/fragment"
+    }
+  ],
+  "parsers": [
+    "acorn",
+    "postcss",
+    "postcss-value-parser",
+    "parse5"
+  ],
+  "external_output_consumed_by_bootJar": false
+}

@@ -1,0 +1,79 @@
+{
+  "result": "PASS",
+  "root": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/qualification/attempt-20260907T152934Z-dc42c9/test_C_real_tiny_vite_acceptance_and_seal-5ed9a240/run/runtime/outputs/frontend",
+  "base": "/app/",
+  "inventory": {
+    ".vite/manifest.json": {
+      "size": 360,
+      "sha256": "7746ca5d69948966b742cd14e1875570800a435b9d4846bf8decb6fc2af109f7"
+    },
+    "assets/index-CaP_4Zek.css": {
+      "size": 18,
+      "sha256": "a1ed3672f114972ddbd77ae42726fb6f6af1e581096ef335fc134e14b4338a4c"
+    },
+    "assets/index-thove455.js": {
+      "size": 1929,
+      "sha256": "ad309e911653cee33169717fab8bf2bd2e8ff818632c3e5b0a27dd6a045c24af"
+    },
+    "assets/lazy-BQ6Tr66v.js": {
+      "size": 33,
+      "sha256": "e301c7e6ce1ef347d57c5812635d211c3d5c21ace146fcbef7c83392ca8853d7"
+    },
+    "index.html": {
+      "size": 154,
+      "sha256": "0014fa8ec73ad12db5887e7c9a300353f57005ea1ac89c45d5948e5a1d0e2ba3"
+    }
+  },
+  "edges": [
+    {
+      "from": ".vite/manifest.json",
+      "raw": "assets/index-thove455.js",
+      "kind": "manifest file",
+      "target": "assets/index-thove455.js"
+    },
+    {
+      "from": "index.html",
+      "raw": "lazy.js",
+      "kind": "manifest dynamicImports",
+      "target": "assets/lazy-BQ6Tr66v.js"
+    },
+    {
+      "from": ".vite/manifest.json",
+      "raw": "assets/index-CaP_4Zek.css",
+      "kind": "manifest css",
+      "target": "assets/index-CaP_4Zek.css"
+    },
+    {
+      "from": ".vite/manifest.json",
+      "raw": "assets/lazy-BQ6Tr66v.js",
+      "kind": "manifest file",
+      "target": "assets/lazy-BQ6Tr66v.js"
+    },
+    {
+      "from": "assets/index-thove455.js",
+      "raw": "./lazy-BQ6Tr66v.js",
+      "kind": "js dynamic import",
+      "target": "assets/lazy-BQ6Tr66v.js"
+    },
+    {
+      "from": "index.html",
+      "raw": "/app/assets/index-thove455.js",
+      "kind": "html script",
+      "target": "assets/index-thove455.js"
+    },
+    {
+      "from": "index.html",
+      "raw": "/app/assets/index-CaP_4Zek.css",
+      "kind": "html link",
+      "target": "assets/index-CaP_4Zek.css"
+    }
+  ],
+  "ignored": [],
+  "parsers": [
+    "acorn",
+    "postcss",
+    "postcss-value-parser",
+    "parse5"
+  ],
+  "external_output_consumed_by_bootJar": false
+}

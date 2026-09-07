@@ -1,0 +1,1123 @@
+--- revision-preimage-001/executor/VERSION.json
++++ executor/VERSION.json
+@@ -1 +1,12 @@
+-{"version":"2.0.0-output-isolation-completeness","entrypoint":"runner.py","fixed_candidate":"689ab9456461a8d19a72d059f5157092efc43aff","tree":"6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6","base":"86d6aef94fd5e58da552e97c11473cff6eca734e","matrix_keys":29,"independent_review":"REQUIRED/PENDING","formal_execution":"PARENT_ONLY","publication":"NOT_AUTHORIZED"}
++{
++  "version": "2.0.1-defect-c-file-url-correction",
++  "entrypoint": "runner.py",
++  "fixed_candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
++  "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6",
++  "base": "86d6aef94fd5e58da552e97c11473cff6eca734e",
++  "matrix_keys": 29,
++  "independent_review": "REQUIRED/PENDING",
++  "formal_execution": "PARENT_ONLY",
++  "publication": "NOT_AUTHORIZED",
++  "revision_preimage": "revision-preimage-001"
++}
+--- revision-preimage-001/executor/vite_closure.mjs
++++ executor/vite_closure.mjs
+@@ -12,13 +12,27 @@
+ function crawl(dir){for(const n of fs.readdirSync(dir).sort()){const p=path.join(dir,n),s=fs.lstatSync(p);if(s.isSymbolicLink()||(!s.isFile()&&!s.isDirectory()))fail('VITE_LINK_OR_SPECIAL');if(s.isDirectory())crawl(p);else {if(s.nlink!==1)fail('VITE_HARDLINK');const b=fs.readFileSync(p);inventory[path.relative(root,p).split(path.sep).join('/') ]={size:b.length,sha256:crypto.createHash('sha256').update(b).digest('hex')};}}}
+ if(fs.realpathSync(root)!==root)fail('VITE_ROOT_LINK');crawl(root);
+ if(!inventory['index.html']||!inventory['.vite/manifest.json'])fail('VITE_REQUIRED_ENTRY_OR_MANIFEST');
+-const external=s=>/^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(s);
+-const base=external(baseArg)?new URL(baseArg).pathname:baseArg;
++function external(s,{data=false}={}){
++ // Browser URL parsing removes embedded ASCII controls; reject before classification.
++ if(/[\x00-\x1f\x7f]/.test(s))fail('VITE_URL_CONTROL');
++ const scheme=/^([a-z][a-z\d+.-]*):/i.exec(s)?.[1].toLowerCase();
++ if(scheme==='data'&&data)return true;
++ if(scheme&&!['http','https'].includes(scheme))fail('VITE_UNSUPPORTED_SCHEME '+scheme);
++ if(scheme||s.startsWith('//')){
++  if(/[\x00-\x20\x7f\\]/.test(s))fail('VITE_URL_CONTROL');
++  if(scheme&&!/^https?:\/\//i.test(s))fail('VITE_UNSUPPORTED_SCHEME nonhierarchical');
++  let url;try{url=new URL(s.startsWith('//')?'https:'+s:s);}catch{fail('VITE_UNSUPPORTED_SCHEME malformed URL')}
++  if(!url.hostname)fail('VITE_UNSUPPORTED_SCHEME missing authority');
++  return true;
++ }
++ return false;
++}
++const base=external(baseArg)?new URL(baseArg.startsWith('//')?'https:'+baseArg:baseArg).pathname:baseArg;
+ if(!base.startsWith('/')&&base!==''&&base!=='./')fail('VITE_UNSUPPORTED_BASE');
+ function ref(from,raw,kind,rootRelative=false){
+  if(typeof raw!=='string'||!raw.trim())fail('VITE_EMPTY_REFERENCE');raw=raw.trim();
+  if(external(baseArg)&&raw.startsWith(baseArg)){raw=raw.slice(baseArg.length);rootRelative=true;}
+- if(external(raw)||raw.startsWith('#')){ignored.push({from,raw,kind,reason:'external/data/fragment'});return;}
++ if(external(raw,{data:!kind.startsWith('manifest ')})||raw.startsWith('#')){ignored.push({from,raw,kind,reason:'external/data/fragment'});return;}
+  let clean;try{clean=decodeURIComponent(raw.split(/[?#]/)[0]);}catch{fail('VITE_BAD_ENCODING')}
+  if(clean.includes('\\')||clean.includes('\0'))fail('VITE_PATH_ESCAPE');
+  let parts=[];
+@@ -37,7 +51,7 @@
+    const b=n.arguments[1];const isMeta=b?.type==='MemberExpression'&&b.object?.type==='MetaProperty'&&b.object.meta.name==='import'&&b.object.property.name==='meta'&&b.property.name==='url';
+    let s=literal(n.arguments[0]);
+    if(s===null)fail('VITE_UNRESOLVED_NEW_URL '+from);
+-   if(external(s))ref(from,s,'js new URL');
++   if(external(s,{data:true}))ref(from,s,'js new URL');
+    else if(isMeta)ref(from,s,'js new URL');
+    else if(s.startsWith('/'))ref(from,s,'js absolute new URL');
+    else if(literal(b)&&external(literal(b)))ignored.push({from,raw:s,kind:'js new URL',reason:'explicit external URL base'});
+--- /dev/null
++++ qualification/defect_c.py
+@@ -0,0 +1,53 @@
++"""Bounded URI scheme regression controls; no network or product gates."""
++from pathlib import Path
++import json, os, sys, unittest, uuid
++D=Path(__file__).resolve().parents[1]
++sys.path.insert(0,str(D/'executor'))
++import execution, parsers, vite_closure
++
++class SchemeControls(unittest.TestCase):
++ def setUp(self):
++  self.root=Path(os.environ['EP19_QUALIFICATION_ROOT'])/(self._testMethodName+'-'+uuid.uuid4().hex[:8]);self.root.mkdir()
++ def check(self,raw,context,base='/',accept=False):
++  case=self.root/uuid.uuid4().hex[:8];run=case/'run';out=run/'runtime/outputs/frontend';gate=run/'runtime/gates/FRONTEND_BUILD'
++  (out/'assets').mkdir(parents=True);(out/'.vite').mkdir();gate.mkdir(parents=True)
++  html='<script src="/assets/main.js"></script>';js='export default 1';css='a{color:red}'
++  manifest={'index.html':{'file':'assets/main.js','isEntry':True,'css':['assets/main.css']}}
++  if context=='html':html+='<script src="'+raw+'"></script>'
++  elif context=='js':js='import '+json.dumps(raw)+';'
++  elif context=='dynamic':js='import('+json.dumps(raw)+');'
++  elif context=='url':js='new URL('+json.dumps(raw)+', import.meta.url);'
++  elif context=='url_base':js='new URL("x.js", '+json.dumps(raw)+');'
++  elif context=='css':css='a{background:url("'+raw+'")}'
++  elif context=='css_import':css='@import "'+raw+'";'
++  elif context=='manifest':manifest['index.html']['assets']=[raw]
++  elif context=='base':base=raw
++  (out/'assets/local image.js').write_text('export default 1');(out/'assets/local image.css').write_text('x{color:red}')
++  (out/'index.html').write_text(html);(out/'assets/main.js').write_text(js);(out/'assets/main.css').write_text(css)
++  (out/'.vite/manifest.json').write_text(json.dumps(manifest));(gate/'native.log').write_text('built in 1s\n')
++  (gate/'resolution.json').write_text(json.dumps({'outDir':str(out),'base':base,'emptyOutDir':True}))
++  outcomes=[]
++  for name,fn in [('closure',lambda:vite_closure.validate(out,base,D/'tools',case/'closure.json')),('parser',lambda:parsers.parse('FRONTEND_BUILD',run,gate,case))]:
++   try:fn();actual='PASS'
++   except RuntimeError as ex:
++    actual='REJECT'
++    logs=list(case.rglob('*.native.log'));self.assertTrue(any('VITE_UNSUPPORTED_SCHEME' in p.read_text() or 'VITE_URL_CONTROL' in p.read_text() for p in logs),str(ex))
++   outcomes.append({'path':name,'expected':'PASS' if accept else 'REJECT','actual':actual})
++  (case/'control.json').write_text(json.dumps({'raw':raw,'context':context,'outcomes':outcomes},indent=2)+'\n')
++  self.assertTrue(all(x['actual']==x['expected'] for x in outcomes),outcomes)
++ def test_file_and_unsupported_schemes_rejected(self):
++  for context in ['html','js','dynamic','url','url_base','css','css_import','manifest','base']:
++   for raw in ['file:///tmp/outside.js','FiLe:///tmp/outside.js','ftp://example.test/a','javascript:alert(1)','blob:https://example.test/id','custom:asset']:
++    with self.subTest(context=context,raw=raw):self.check(raw,context)
++ def test_url_controls_and_nonhierarchical_bases_rejected(self):
++  for raw,context in [('fi\tle:///tmp/a','html'),('data:text/plain,a','base'),('data:text/plain,a','url_base'),('data:text/plain,a','manifest')]:
++   with self.subTest(raw=raw,context=context):self.check(raw,context)
++ def test_supported_external_and_data_references(self):
++  for raw in ['http://example.test/x','https://example.test/x','//example.test/x','data:text/javascript,export default 1']:
++   for context in ['html','js','dynamic','url','css','css_import']:
++    with self.subTest(raw=raw,context=context):self.check(raw,context,accept=True)
++  self.check('https://example.test/', 'url_base',accept=True)
++  self.check('/assets/local image.js', 'html',accept=True)
++  self.check('/assets/local%20image.css', 'css_import',accept=True)
++
++if __name__=='__main__':unittest.main(verbosity=2)
+--- /dev/null
++++ qualification/orchestration_controls.py
+@@ -0,0 +1,48 @@
++"""Local offline checks of orchestration rejection and independent cache preparation."""
++from pathlib import Path
++import json,os,sys,unittest,uuid
++from unittest.mock import patch
++import parent_orchestration as parent
++class Controls(unittest.TestCase):
++ def setUp(self):
++  self.root=Path(os.environ['EP19_QUALIFICATION_ROOT'])/(self._testMethodName+'-'+uuid.uuid4().hex[:8]);self.root.mkdir()
++ def stage(self,**changes):
++  log=self.root/'native.log';log.write_text('native fixture\n')
++  r={'evidence':{str(log):parent.h(log)},'native_exit':0,'source_drift':False,'helpers':parent.helpers(),'programs':parent.programs(),'raw_log':str(log),'log_sha256':parent.h(log)};r.update(changes)
++  parent.put(self.root/'controls-process.json',r)
++ def test_current_source_stage_binding(self):
++  self.stage();parent.validate_stage(self.root,'controls')
++ def test_stage_evidence_change_reject(self):
++  self.stage();(self.root/'native.log').write_text('altered')
++  with self.assertRaisesRegex(RuntimeError,'STAGE_LOG_CHANGED'):parent.validate_stage(self.root,'controls')
++ def test_changed_helper_evidence_reject(self):
++  self.stage(helpers={})
++  with self.assertRaisesRegex(RuntimeError,'CHANGED_HELPER'):parent.validate_stage(self.root,'controls')
++ def test_changed_program_evidence_reject(self):
++  self.stage(programs={})
++  with self.assertRaisesRegex(RuntimeError,'CHANGED_HELPER_OR_PROGRAM'):parent.validate_stage(self.root,'controls')
++ def test_absent_areas_cannot_assemble(self):
++  with self.assertRaises(FileNotFoundError):parent.assemble(self.root)
++  self.assertFalse((self.root/'QUALIFICATION.json').exists())
++ def test_native_failure_cannot_be_stamped(self):
++  self.stage(native_exit=7)
++  with self.assertRaisesRegex(RuntimeError,'STAGE_NOT_PASS'):parent.validate_stage(self.root,'controls')
++ def test_cache_copy_and_no_baseline_overwrite(self):
++  source=self.root/'source';source.mkdir();rows=[]
++  for i in range(4617):
++   p=source/str(i);p.write_text(str(i));rows.append({'path':p.name,'source_sha256':parent.h(p),'destination_sha256':parent.h(p)})
++  mat=self.root/'mapping.json';parent.put(mat,{'destination':str(source),'mapping':rows});run=self.root/'run'
++  with patch.object(parent,'MATERIALIZATION',mat):
++   dest=parent.copy_lean(run);self.assertNotEqual((source/'0').stat().st_ino,(dest/'0').stat().st_ino)
++   (source/'0').write_text('changed');self.assertEqual((dest/'0').read_text(),'0')
++   with self.assertRaisesRegex(RuntimeError,'LEAN_SOURCE_CHANGED'):parent.copy_lean(self.root/'other')
++   parent.put(run/'baseline.json',{'synthetic_only':True})
++   with self.assertRaisesRegex(RuntimeError,'CACHE_MUST_PRECEDE_BASELINE'):parent.copy_lean(run)
++ def test_historical_parent_focused_receipt_rejected_after_helper_change(self):
++  readback=parent.load(parent.D/'parent-verification-001/PARENT_READBACK.json')
++  with self.assertRaisesRegex(RuntimeError,'FROZEN_INPUT_CHANGED'):
++   parent.coverage.qualification_inputs(Path(readback['qualification_path'])/'QUALIFICATION.json')
++ def test_cache_links_reject(self):
++  p=self.root/'source';p.mkdir();(p/'file').write_text('x');(p/'link').symlink_to(p/'file')
++  with self.assertRaisesRegex(RuntimeError,'CACHE_LINK'):parent.regular_inventory(p)
++if __name__=='__main__':unittest.main(verbosity=2)
+--- /dev/null
++++ qualification/parent_orchestration.py
+@@ -0,0 +1,133 @@
++#!/usr/bin/env python3
++"""Append-only parent qualification/cache/decision orchestration. Never runs gates.
++
++Adapted from owner-clarified-execution-20260907T1120Z/runtime-completion-1/
++parent_orchestration.py and its native runtime/Lean source evidence.
++"""
++from pathlib import Path
++import argparse,json,os,shutil,subprocess,sys,time
++D=Path(__file__).resolve().parents[1];sys.path.insert(0,str(D/'executor'))
++import coverage,execution,runner
++h=coverage.digest;put=coverage.put
++SOURCE=execution.O/'owner-clarified-execution-20260907T1120Z'
++MATERIALIZATION=SOURCE/'LEAN_CACHE_MATERIALIZATION.json'
++AREAS=('collector','coverage','shadow','packaging','freshness','launch','dependency_preparation')
++
++def load(p):return json.loads(Path(p).read_text())
++def helpers():return coverage.seal(coverage.local_imports()[0])
++def programs():return coverage.seal([p for p in (D/'qualification').glob('*.py')])
++def exclusive(p):
++ p=Path(p).absolute()
++ if p.resolve()!=p or not p.is_relative_to(D):raise RuntimeError('OUTPUT_SCOPE')
++ return p
++
++def regular_inventory(root):
++ root=Path(root)
++ if root.resolve()!=root:raise RuntimeError('CACHE_ROOT_LINK')
++ rows={}
++ for p in root.rglob('*'):
++  if p.is_symlink() or not (p.is_file() or p.is_dir()):raise RuntimeError('CACHE_LINK_OR_SPECIAL '+str(p))
++  if p.is_file():
++   if p.stat().st_nlink!=1:raise RuntimeError('CACHE_HARDLINK '+str(p))
++   rows[str(p.relative_to(root))]=h(p)
++ return rows
++
++def copy_lean(run):
++ run=exclusive(run)
++ if (run/'baseline.json').exists():raise RuntimeError('CACHE_MUST_PRECEDE_BASELINE')
++ mat=load(MATERIALIZATION);source=Path(mat['destination']);expected={x['path']:x['destination_sha256'] for x in mat['mapping']}
++ if len(expected)!=4617 or any(x['source_sha256']!=x['destination_sha256'] for x in mat['mapping']):raise RuntimeError('LEAN_MATERIALIZATION_BINDING')
++ if regular_inventory(source)!=expected:raise RuntimeError('LEAN_SOURCE_CHANGED')
++ dest=run/'runtime/cache/backend/formal-tools/lean-4.19.0-linux'
++ if dest.exists():raise RuntimeError('CACHE_ALREADY_EXISTS_NEW_RUN_REQUIRED')
++ shutil.copytree(source,dest,symlinks=True)
++ if regular_inventory(dest)!=expected:raise RuntimeError('LEAN_COPY_CHANGED')
++ put(run/'lean-cache-preparation.json',{'source':str(source),'destination':str(dest),'files':expected,'materialization_sha256':h(MATERIALIZATION),'archive_reverified':False,'independent_byte_copy':True})
++ return dest
++
++def native(q,name,argv,env=None):
++ before=helpers();sources=programs();log=q/(name+'.log');start=time.time();rc=None;error=None
++ with log.open('xb') as f:
++  try:rc=subprocess.run(argv,cwd=D,env=env,stdout=f,stderr=subprocess.STDOUT).returncode
++  except OSError as ex:error=str(ex)
++ outputs=q/('controls-run' if name=='controls' else name+'-runtime')
++ evidence=[log]+([p for p in outputs.rglob('*') if p.is_file() and not p.is_symlink()] if outputs.exists() else [])
++ if name=='focused' and (q/'focused-pointer.json').exists():
++  evidence += [q/'focused-pointer.json',Path(load(q/'focused-pointer.json')['qualification'])]
++ receipt={'evidence':coverage.seal(evidence),'argv':list(map(str,argv)),'native_exit':rc,'error':error,'raw_log':str(log),'log_sha256':h(log),'start':start,'end':time.time(),'helpers':before,'programs':sources,'product_gate_execution':False}
++ drift=before!=helpers() or sources!=programs();receipt['source_drift']=drift
++ put(q/(name+'-process.json'),receipt)
++ if rc!=0 or drift:raise RuntimeError(name+' failed; native evidence retained at '+str(log))
++ return receipt
++
++def validate_stage(q,name):
++ p=q/(name+'-process.json');r=load(p)
++ if r.get('native_exit')!=0 or r.get('source_drift') is not False:raise RuntimeError('STAGE_NOT_PASS '+name)
++ if r['helpers']!=helpers() or r['programs']!=programs():raise RuntimeError('CHANGED_HELPER_OR_PROGRAM_EVIDENCE '+name)
++ if h(r['raw_log'])!=r['log_sha256']:raise RuntimeError('STAGE_LOG_CHANGED '+name)
++ if not r.get('evidence'):raise RuntimeError('STAGE_EVIDENCE_MISSING '+name)
++ coverage.check_seal(r['evidence'])
++ return r
++
++def assemble(q):
++ # No legacy PASS labels or evidence are transplanted onto changed helpers.
++ for stage in ('focused','controls','frontend','lean','formal'):validate_stage(q,stage)
++ focused_path=Path(load(q/'focused-pointer.json')['qualification']);coverage.qualification_inputs(focused_path);focused=load(focused_path)
++ if focused.get('real_gradle_instrumentation')!='PASS':raise RuntimeError('REAL_GRADLE_NOT_QUALIFIED')
++ controls=load(q/'controls-run/results.json')
++ if controls.get('result')!='PASS' or controls.get('skipped')!=0:raise RuntimeError('CONTROLS_NOT_PASS')
++ for area in AREAS:
++  evidence=controls['areas'].get(area,{})
++  if evidence.get('result')!='PASS' or not evidence.get('cases') or any(x['actual']!='PASS' for x in evidence['cases']):raise RuntimeError('AREA_NOT_EXERCISED '+area)
++ for area in ('frontend','lean','formal'):
++  if load(q/(area+'-runtime/RESULT.json')).get('result')!='PASS':raise RuntimeError('RUNTIME_NOT_PASS '+area)
++ front=load(q/'frontend-runtime/RESULT.json');lean=load(q/'lean-runtime/RESULT.json')
++ if any(front.get(k)!='PASS' for k in ('readonly','private_pid','xdg_runtime')) or lean.get('strict_collector')!='PASS':raise RuntimeError('INCOMPLETE_RUNTIME')
++ # Include all fixture evidence except explicitly recorded negative-fixture links.
++ paths=[p for p in q.rglob('*') if p.is_file() and not p.is_symlink()]
++ paths += [focused_path,MATERIALIZATION,*map(Path,programs())]
++ # Actual synthetic launch gates live in exclusive executor run namespaces.
++ for f in (q/'controls-run/controls/launch-data').glob('test_*/engineering-launch.json'):
++  run=runner.runpath(load(f)['run_id']);paths += [p for p in run.rglob('*') if p.is_file() and not p.is_symlink()]
++ links={str(p):str(p.readlink()) for p in q.rglob('*') if p.is_symlink()}
++ put(q/'fixture-links.json',{'negative_fixture_links_not_followed':links});paths.append(q/'fixture-links.json')
++ deps={**focused['dependencies'],**coverage.seal(paths),**helpers()}
++ raw=q/'controls.log';process=q/'controls-process.json';result=q/'controls-run/results.json'
++ receipt={**focused,'schema':'ep19-output-corrections-v2','helpers':helpers(),'dependencies':deps,
++  'qualification_program':str(Path(__file__).resolve()),'raw_log':str(raw),'process_receipt':str(process),'result_receipt':str(result),
++  **{area:'PASS' for area in AREAS},'frontend_boundary':'PASS','formal_boundary':'PASS','lean_runtime':'PASS',
++  'formal_boundary_receipt':str(q/'formal-runtime/RESULT.json'),'lean_runtime_receipt':str(q/'lean-runtime/RESULT.json'),
++  'formal_runtime_qualification':'PASS_SYNTHETIC_NATIVE_ONLY','runtime_area_receipts':{area:str(q/(area+'-runtime/RESULT.json')) for area in ('frontend','lean','formal')},
++  'focused_qualification':str(focused_path),'reuse':[],'independent_review':'REQUIRED/PENDING','product_gate_execution':False}
++ if not coverage.formal_boundary_qualified(receipt):raise RuntimeError('FORMAL_BOUNDARY_INCOMPLETE')
++ put(q/'QUALIFICATION.json',receipt);coverage.qualification_inputs(q/'QUALIFICATION.json')
++ print(q/'QUALIFICATION.json')
++
++def main():
++ p=argparse.ArgumentParser(description=__doc__);p.add_argument('stage',choices=['init','focused','controls','frontend','lean','formal','assemble','cache','decision']);p.add_argument('--attempt',type=Path);p.add_argument('--run-id');a=p.parse_args()
++ if a.stage in ('cache','decision'):
++  if not a.run_id:p.error('--run-id required')
++  run=runner.runpath(a.run_id)
++  if not (run/'prepare.json').is_file():raise RuntimeError('RUN_NOT_PREPARED')
++  if a.stage=='cache':print(copy_lean(run));return 0
++  runner.owner_authorization();current=runner.preflight(run,write=False);recorded=load(run/'preflight.json')
++  if current['result']!='ENGINEERING_READY' or recorded['result']!='ENGINEERING_READY' or recorded['engineering_blockers']!=[]:raise RuntimeError('NO_LAUNCH_DECISION '+repr(current['engineering_blockers']))
++  for k,v in {'run_id':run.name,'candidate':runner.SHA,'tree':runner.TREE,'base':runner.BASE}.items():
++   if recorded[k]!=v:raise RuntimeError('RECORDED_PREFLIGHT_IDENTITY')
++  decision={'engineering_execution_authorization':'OWNER_AUTHORIZED','owner_decision_sha256':runner.OWNER_SHA256,'independent_review':'PENDING',**runner.REVIEW_STATES,'run_id':run.name,'candidate':runner.SHA,'tree':runner.TREE,'base':runner.BASE,'seal_sha256':h(run/'seal.json'),'preflight_sha256':h(run/'preflight.json')}
++  put(run/'engineering-launch.json',decision);print(run/'engineering-launch.json');return 0
++ if not a.attempt:p.error('--attempt required')
++ q=exclusive(a.attempt)
++ if not q.is_relative_to(D/'qualification'):raise RuntimeError('ATTEMPT_SCOPE')
++ if a.stage=='init':
++  q.mkdir();put(q/'INIT.json',{'helpers':helpers(),'programs':programs(),'independent_review':'REQUIRED/PENDING','product_gate_execution':False});return 0
++ init=load(q/'INIT.json')
++ if init['helpers']!=helpers() or init['programs']!=programs():raise RuntimeError('SOURCE_CHANGED_NEW_ATTEMPT_REQUIRED')
++ if a.stage=='assemble':assemble(q);return 0
++ env={**os.environ,'PYTHONDONTWRITEBYTECODE':'1'}
++ if a.stage=='focused':argv=[sys.executable,'-B',str(D/'qualification/run.py'),'--require-real-gradle','--receipt-pointer',str(q/'focused-pointer.json')]
++ elif a.stage=='controls':
++  dest=q/'controls-run';dest.mkdir();env['EP19_QUALIFICATION_ROOT']=str(dest);argv=[sys.executable,'-B',str(D/'qualification/runtime_suite.py')]
++ else:argv=[sys.executable,'-B',str(D/'qualification/runtime_probe.py'),a.stage,'--output',str(q/(a.stage+'-runtime'))]
++ native(q,a.stage,argv,env);print(a.stage+': native qualification completed');return 0
++if __name__=='__main__':raise SystemExit(main())
+--- revision-preimage-001/qualification/run.py
++++ qualification/run.py
+@@ -5,10 +5,15 @@
+ D=Path(__file__).resolve().parents[1]
+ if '--child' not in sys.argv:
+  q=D/'qualification'/('attempt-'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'-'+uuid.uuid4().hex[:6]);q.mkdir()
++ hash_file=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
++ before={str(p):hash_file(p) for p in (D/'executor').iterdir() if p.is_file()}
++ before.update({str(p):hash_file(p) for p in (D/'qualification').glob('*.py')})
+  argv=[sys.executable,'-B',str(Path(__file__).resolve()),'--child']
+  with (q/'native.log').open('xb') as log:r=subprocess.run(argv,env={**os.environ,'EP19_QUALIFICATION_ROOT':str(q),'PYTHONDONTWRITEBYTECODE':'1','EP19_REQUIRE_REAL_GRADLE':'1' if '--require-real-gradle' in sys.argv else '0'},stdout=log,stderr=subprocess.STDOUT,cwd=D)
+  h=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+- process={'argv':argv,'native_exit':r.returncode,'raw_log':str(q/'native.log'),'log_sha256':h(q/'native.log'),'product_gate_execution':False}
++ drift=[p for p,v in before.items() if not Path(p).is_file() or h(Path(p))!=v]
++ wrapper_exit=r.returncode or int(bool(drift))
++ process={'source_drift':drift,'source_before':before,'wrapper_exit':wrapper_exit,'argv':argv,'native_exit':r.returncode,'raw_log':str(q/'native.log'),'log_sha256':h(q/'native.log'),'product_gate_execution':False}
+  (q/'process.json').write_text(json.dumps(process,indent=2)+'\n')
+  helpers={str(p):h(p) for p in (D/'executor').iterdir() if p.is_file()}
+  files=[p for root in [q,D/'executor',D/'tools'] for p in root.rglob('*') if p.is_file() and not p.is_symlink()]
+@@ -16,15 +21,21 @@
+   files += [p for p in run.glob('*.json') if p.is_file()]
+   files += [p for p in (run/'sources').glob('*-clone.native.log') if p.is_file()]
+   files += [p for p in (run/'runtime/gates').rglob('*') if p.is_file() and not p.is_symlink()]
+- files += [D/'qualification/run.py',D/'qualification/cases.py',D/'qualification/red.py']
++ files += [D/'qualification/run.py',D/'qualification/cases.py',D/'qualification/red.py',D/'qualification/defect_c.py']
+  # Native/fixture evidence and executable source closure; no historical results relabelled.
+  gradle_blocked=bool(list(q.rglob('REAL_GRADLE_BLOCKED.json')))
+- qualification={'real_gradle_instrumentation':'BLOCKED_RUNTIME_SOCKET_DENIED' if gradle_blocked else 'PASS','schema':'ep19-output-corrections-v2','result':'PASS' if r.returncode==0 else 'FAIL','helpers':helpers,'dependencies':{str(p):h(p) for p in files},'qualification_program':str(D/'qualification/run.py'),'raw_log':str(q/'native.log'),'process_receipt':str(q/'process.json'),'result_receipt':str(q/'results.json'),'product_gate_execution':False,'independent_review':'REQUIRED/PENDING','areas':['run_isolation','artifact_copy','compile_completeness','vite_closure','packaging'],'formal_runtime_qualification':'NOT_RUN_PARENT_REQUIRED'}
++ real_graphs=[json.loads(p.read_text()) for p in q.glob('test_B_real_gradle_generated_no_source_and_seal-*/run/runtime/gates/COMPILE/compile-graph.json')]
++ gradle_status='PASS' if wrapper_exit==0 and real_graphs and all(not g.get('synthetic_fixture') for g in real_graphs) else ('BLOCKED_RUNTIME_SOCKET_DENIED' if gradle_blocked else 'NOT_QUALIFIED')
++ qualification={'real_gradle_instrumentation':gradle_status,'schema':'ep19-output-corrections-v2','result':'PASS' if wrapper_exit==0 else 'FAIL','helpers':helpers,'dependencies':{str(p):h(p) for p in files},'qualification_program':str(D/'qualification/run.py'),'raw_log':str(q/'native.log'),'process_receipt':str(q/'process.json'),'result_receipt':str(q/'results.json'),'product_gate_execution':False,'independent_review':'REQUIRED/PENDING','areas':['run_isolation','artifact_copy','compile_completeness','vite_closure','packaging'],'formal_runtime_qualification':'NOT_RUN_PARENT_REQUIRED'}
+  (q/'QUALIFICATION.json').write_text(json.dumps(qualification,indent=2)+'\n')
+- print(q);print((q/'native.log').read_text()[-9000:]);raise SystemExit(r.returncode)
++ if '--receipt-pointer' in sys.argv:
++  pointer=Path(sys.argv[sys.argv.index('--receipt-pointer')+1]).absolute()
++  if pointer.resolve()!=pointer or not pointer.is_relative_to(D):raise RuntimeError('POINTER_SCOPE')
++  with pointer.open('x') as f:json.dump({'qualification':str(q/'QUALIFICATION.json'),'native_exit':r.returncode},f,indent=2)
++ print(q);print((q/'native.log').read_text()[-9000:]);raise SystemExit(wrapper_exit)
+ import unittest
+ sys.path.insert(0,str(D/'executor'));sys.path.insert(0,str(D/'qualification'))
+-import cases, test_continuation
++import cases, test_continuation, defect_c
+ q=Path(os.environ['EP19_QUALIFICATION_ROOT']);test_continuation.Q=q/'original-focused';test_continuation.Q.mkdir()
+ class Result(unittest.TextTestResult):
+  def __init__(self,*a,**k):super().__init__(*a,**k);self.cases=[]
+@@ -34,6 +45,7 @@
+  def addSubTest(self,t,sub,e):
+   super().addSubTest(t,sub,e);self.cases.append({'case':sub.id(),'expected':'Control satisfies stated acceptance/rejection','actual':'PASS' if e is None else 'FAIL','detail':None if e is None else self._exc_info_to_string(e,t)})
+ suite=unittest.defaultTestLoader.loadTestsFromTestCase(cases.Cases)
++suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(defect_c.SchemeControls))
+ # Existing original packaging and preservation controls, strictly synthetic fixtures.
+ for name in unittest.defaultTestLoader.getTestCaseNames(test_continuation.Controls):
+  if name.startswith('test_packaging_') or name in ['test_primary_transient_index_write_strict','test_instruction_runtime_metadata_drift_rejects','test_shadow_permitted_actual_observe_acceptance','test_shadow_missing_reconciler_rejects','test_shadow_semantic_delta_rejects','test_backend_untagged_detached_child_remains_observed','test_fresh_native_failure_reject','test_new_unexpected_missing_stays_failure']:
+--- /dev/null
++++ qualification/runtime_continuation.py
+@@ -0,0 +1,299 @@
++"""Bounded synthetic controls only. Fixtures and failed attempts are retained."""
++from pathlib import Path
++import errno, hashlib, json, os, subprocess, sys, unittest, uuid, warnings, zipfile
++from unittest.mock import patch
++import bindings, coverage, execution, freshness, observe, packaging, preservation, runner
++
++D=execution.D
++Q=D/'qualification/continuation-controls'
++Q.mkdir(exist_ok=True)
++def sha(b):return hashlib.sha256(b).hexdigest()
++class Controls(unittest.TestCase):
++    def setUp(self):
++        self.root=Q/(self._testMethodName+'-'+uuid.uuid4().hex);self.root.mkdir();self.addCleanup(self.receipt)
++    def receipt(self):
++        coverage.put(self.root/'control.json',{'test':self._testMethodName,'synthetic_only':True,'fixture_retained':True})
++    def target(self):
++        p=self.root/'allowed';p.mkdir();f=p/'target';f.write_bytes(b'allowed target bytes');return p,f
++    def capture(self,root,**kwargs):
++        r=preservation.Collector(roots=[root],expected_nonempty=[root],**kwargs).capture();coverage.put(self.root/('capture-'+uuid.uuid4().hex+'.json'),r);return r
++    def test_collector_nonowned_ancestor_and_correct_hash(self):
++        root,f=self.target();calls=[];native=os.open
++        def record(path,flags,*args,**kwargs):calls.append((str(path),flags));return native(path,flags,*args,**kwargs)
++        with patch('preservation.os.open',record):r=self.capture(root)
++        self.assertEqual(r['result'],'COMPLETE');self.assertEqual(r['entries'][str(f)]['sha256'],sha(f.read_bytes()))
++        self.assertNotEqual(Path('/').stat().st_uid,os.getuid())
++        flags=next(flags for p,flags in calls if p=='/');self.assertTrue(flags&os.O_PATH);self.assertFalse(flags&os.O_NOATIME)
++    def test_collector_symlink_escape(self):
++        root,f=self.target();(root/'escape').symlink_to(self.root/'outside');(self.root/'outside').write_text('outside')
++        r=self.capture(root);self.assertEqual(r['result'],'INCOMPLETE');self.assertNotIn(str(self.root/'outside'),r['entries'])
++    def test_collector_symlink_ancestor(self):
++        root,f=self.target();link=self.root/'link';link.symlink_to(root,target_is_directory=True)
++        r=preservation.Collector(files=[link/'target']).capture();self.assertEqual(r['result'],'INCOMPLETE')
++    def test_collector_empty_universe(self):
++        root=self.root/'empty';root.mkdir();self.assertEqual(self.capture(root)['result'],'INCOMPLETE')
++    def test_collector_expected_universe_mismatch(self):
++        root,f=self.target();self.assertEqual(self.capture(root,expected_files=[])['result'],'INCOMPLETE')
++    def test_collector_injected_read_oserror(self):
++        root,f=self.target()
++        def hook(phase,path):
++            if phase=='read':raise OSError(errno.EACCES,'INJECTED_READ_ERROR_NOT_NATIVE_PERMISSION_SYSCALL')
++        r=self.capture(root,hook=hook);self.assertEqual(r['native_exit'],1);self.assertEqual(r['errors'][0]['errno'],errno.EACCES)
++    def test_collector_injected_enumeration_oserror(self):
++        root,f=self.target()
++        def hook(phase,path):
++            if phase=='enumerate':raise OSError(errno.EACCES,'INJECTED_ENUMERATION_ERROR_NOT_NATIVE_PERMISSION_SYSCALL')
++        self.assertEqual(self.capture(root,hook=hook)['result'],'INCOMPLETE')
++    def test_collector_metadata_contract_no_restoration(self):
++        root,f=self.target();before=preservation.metadata(f.stat());r=self.capture(root)
++        self.assertEqual(before,preservation.metadata(f.stat()));self.assertNotIn('st_atime_ns',r['metadata_fields']);self.assertFalse(r['timestamp_restoration'])
++    def test_collector_file_replacement(self):
++        root,f=self.target()
++        def hook(phase,path):
++            if phase=='before_open' and path==f:f.rename(root/'old');f.write_bytes(b'allowed target bytes')
++        self.assertEqual(self.capture(root,hook=hook)['result'],'INCOMPLETE')
++    def test_collector_during_read_instability(self):
++        root,f=self.target()
++        def hook(phase,path):
++            if phase=='after_read' and path==f:f.write_bytes(b'new')
++        self.assertEqual(self.capture(root,hook=hook)['result'],'INCOMPLETE')
++    def test_collector_directory_replacement(self):
++        root,f=self.target()
++        def hook(phase,path):
++            if phase=='after_read' and path==root:root.rename(self.root/'old');root.mkdir()
++        self.assertEqual(self.capture(root,hook=hook)['result'],'INCOMPLETE')
++    def test_collector_ancestor_replacement(self):
++        root,f=self.target();parent=self.root/'parent';parent.mkdir();root.rename(parent/'allowed');root=parent/'allowed';f=root/'target'
++        def hook(phase,path):
++            if phase=='after_read' and path==f:parent.rename(self.root/'moved');parent.mkdir()
++        self.assertEqual(self.capture(root,hook=hook)['result'],'INCOMPLETE')
++    def test_collector_cli_incomplete_is_nonzero(self):
++        root=self.root/'empty';root.mkdir();cfg=self.root/'scope.json';cfg.write_text(json.dumps({'roots':[str(root)],'expected_nonempty':[str(root)]}))
++        cmd=[sys.executable,'-B',str(execution.H/'preservation.py'),'--scope',str(cfg),'--output',str(self.root/'native-receipt.json')]
++        r=subprocess.run(cmd,capture_output=True);(self.root/'native.log').write_bytes(r.stdout+r.stderr);self.assertEqual(r.returncode,1)
++    def observe(self,code,**kwargs):
++        p=self.root/'frozen';p.write_text('fixed');cmd=[sys.executable,'-B','-c',code]
++        r=observe.run(cmd,self.root,self.root/'native.log',[p],[],[],[],timeout=5,**kwargs)
++        coverage.put(self.root/'observation.json',r);return r
++    def test_native_failure_independent_wrapper(self):
++        r=self.observe('raise SystemExit(7)');self.assertEqual(r['native_exit'],7);self.assertEqual(r['wrapper_exit'],1)
++    def test_tracked_drift_actual_acceptance_path(self):
++        r=self.observe('from pathlib import Path;Path("frozen").write_text("changed")')
++        r.update(run_id='synthetic',gate='SYNTHETIC',candidate=execution.SHA,tree=execution.TREE)
++        with self.assertRaisesRegex(RuntimeError,'PRESERVATION_REJECT'):freshness.require_fresh_outputs([],{},r,'synthetic','SYNTHETIC',lambda:{'result':'PASS'})
++    def test_deep_new_subtree_rejected(self):
++        repo=self.root/'repo';(repo/'deep/empty').mkdir(parents=True);w=observe.Watch([], [repo],[],[])
++        try:
++            (repo/'deep/empty/new').mkdir();(repo/'deep/empty/new/x').write_text('new');w.drain();self.assertTrue(w.rejected());self.assertTrue(w.gaps)
++        finally:w.close()
++    def test_deep_deleted_directory_rejected(self):
++        repo=self.root/'repo';(repo/'deep/empty').mkdir(parents=True);w=observe.Watch([], [repo],[],[])
++        try:(repo/'deep/empty').rmdir();w.drain();self.assertTrue(w.rejected())
++        finally:w.close()
++    def test_instruction_runtime_metadata_drift_rejects(self):
++        root,f=self.target();w=observe.Watch([],[],[],[],enumeration_roots=[root])
++        try:f.chmod(0o600);w.drain();self.assertTrue(w.rejected())
++        finally:w.close()
++    def test_runtime_output_not_frozen(self):
++        repo=self.root/'repo';repo.mkdir();out=repo/'build';out.mkdir();w=observe.Watch([], [repo],[],[out])
++        try:(out/'log').write_text('grows');w.drain();self.assertFalse(w.rejected())
++        finally:w.close()
++    def shadow(self,variant):
++        root=self.root/'shadow';root.mkdir();controlled=root/'control';controlled.write_text('fixed')
++        def reconcile(events,tag):
++            import copy
++            import frozen_shadow_monitor as frozen
++            from shadow_binding import dh
++            before={'entries':[{'path':'control','stage':'0','mode':'100644','blob':'1'*40}],
++                    'index_semantic_sha256':'a'*64,'index_byte_sha256':'b'*64,'head':execution.SHA,'head_state':execution.SHA+'\n','refs':''}
++            after=copy.deepcopy(before);after['index_byte_sha256']='c'*64
++            if variant=='semantic':after['entries'][0]['blob']='2'*40;after['index_semantic_sha256']='d'*64
++            relative=[{**e,'path':str(Path(e['path']).relative_to(root))} for e in events if Path(e['path']).is_relative_to(root)]
++            content={'result':'PASS','checked':1,'mismatches':[]}
++            semantic=frozen.reconcile('SHADOW',before,after,relative,['control'],[])
++            p={'result':'PASS','run_binding':tag,'root':str(root),'semantic_check':semantic,'final_content_check':content,
++               'before_sha256':dh(before),'after_sha256':dh(after),'events_sha256':dh(relative),'final_content_sha256':dh(content),
++               'evidence':{'before':before,'after':after,'events':relative,'final_content':content}}
++            if variant=='wrong_digest':p['events_sha256']='0'*64
++            if variant=='content_missing':del p['final_content_check']
++            if variant=='content_fail':p['final_content_check']['result']='FAIL'
++            if variant=='pending':p['result']='NEEDS_RECONCILIATION'
++            if variant=='missing_evidence':del p['events_sha256']
++            return p
++        cmd=[sys.executable,'-B','-c','from pathlib import Path;p=Path('+repr(str(controlled))+');p.write_text("changed");p.write_text("fixed")']
++        r=observe.run(cmd,self.root,self.root/'native.log',[controlled],[root],[],[],shadow_root=root,shadow_declared=['control'],shadow_reconciler=None if variant=='missing' else reconcile,timeout=5)
++        coverage.put(self.root/'observation.json',r);return r
++    def test_shadow_permitted_actual_observe_acceptance(self):self.assertEqual(self.shadow('pass')['wrapper_exit'],0)
++    def test_shadow_missing_reconciler_rejects(self):self.assertEqual(self.shadow('missing')['wrapper_exit'],1)
++    def test_shadow_missing_bound_evidence_rejects(self):self.assertEqual(self.shadow('missing_evidence')['wrapper_exit'],1)
++    def test_shadow_semantic_delta_rejects(self):self.assertEqual(self.shadow('semantic')['wrapper_exit'],1)
++    def test_shadow_missing_content_rejects(self):self.assertEqual(self.shadow('content_missing')['wrapper_exit'],1)
++    def test_shadow_failed_content_rejects(self):self.assertEqual(self.shadow('content_fail')['wrapper_exit'],1)
++    def test_shadow_pending_never_passes(self):self.assertEqual(self.shadow('pending')['wrapper_exit'],1)
++    def manifest(self):
++        data=b'candidate static';blob=hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
++        m={'candidate':execution.SHA,'tree':execution.TREE,'transforms':'NONE_SUPPORTED','rows':[{'relative':'index.html','git_path':packaging.STATIC+'index.html','blob':blob,'sha256':sha(data),'mode':'100644'}]}
++        root=self.root/'resources/static';root.mkdir(parents=True);(root/'index.html').write_bytes(data)
++        return m,root,data
++    def zip(self,data,extra=(),prefix='BOOT-INF/classes/'):
++        p=self.root/('artifact-'+uuid.uuid4().hex+'.jar')
++        with warnings.catch_warnings():
++            warnings.simplefilter('ignore',UserWarning)
++            with zipfile.ZipFile(p,'w') as z:
++                z.writestr('META-INF/MANIFEST.MF','Manifest-Version: 1.0\nSpring-Boot-Classes: '+prefix+'\n')
++                z.writestr(prefix+'static/index.html',data)
++                for n,b in extra:z.writestr(n,b)
++        return p
++    def rule(self,prefix='BOOT-INF/classes/'):return {'task':':platform-app:bootJar','resources_task':':platform-app:processResources','boot_classes':prefix,'transforms':'NONE_SUPPORTED'}
++    def test_packaging_resources_and_zip_positive(self):
++        m,root,data=self.manifest();self.assertEqual(packaging.resources(m,root)['result'],'PASS');r=packaging.jar(m,self.zip(data),self.rule());self.assertEqual(r['result'],'PASS');coverage.put(self.root/'packaging.json',r)
++    def test_packaging_discovers_prefix(self):
++        m,root,data=self.manifest();prefix='ACTUAL/classes/';r=packaging.jar(m,self.zip(data,prefix=prefix),self.rule(prefix));self.assertEqual(r['discovered_prefix'],prefix)
++    def test_packaging_missing_resource(self):
++        m,root,data=self.manifest();(root/'index.html').unlink()
++        with self.assertRaises(RuntimeError):packaging.resources(m,root)
++    def test_packaging_extra_resource(self):
++        m,root,data=self.manifest();(root/'extra').write_text('extra')
++        with self.assertRaises(RuntimeError):packaging.resources(m,root)
++    def test_packaging_wrong_candidate(self):
++        m,root,data=self.manifest();m['candidate']='0'*40
++        with self.assertRaises(RuntimeError):packaging.resources(m,root)
++    def test_packaging_unsupported_transform(self):
++        m,root,data=self.manifest();m['transforms']='minify'
++        with self.assertRaises(RuntimeError):packaging.resources(m,root)
++    def test_packaging_hash_mismatch(self):
++        m,root,data=self.manifest()
++        with self.assertRaises(RuntimeError):packaging.jar(m,self.zip(b'wrong'),self.rule())
++    def test_packaging_zip_extra(self):
++        m,root,data=self.manifest()
++        with self.assertRaises(RuntimeError):packaging.jar(m,self.zip(data,[('BOOT-INF/classes/static/extra',b'x')]),self.rule())
++    def test_packaging_zip_duplicate(self):
++        m,root,data=self.manifest()
++        with self.assertRaisesRegex(RuntimeError,'DUPLICATE'):packaging.jar(m,self.zip(data,[('BOOT-INF/classes/static/index.html',data)]),self.rule())
++    def test_packaging_zip_conflict(self):
++        m,root,data=self.manifest()
++        with self.assertRaises(RuntimeError):packaging.jar(m,self.zip(data,[('BOOT-INF/classes/static/index.html/child',b'x')]),self.rule())
++    def fresh(self,kind):
++        output=self.root/'output.json';code='from pathlib import Path;Path("output.json").write_text(\'{"result":"PASS"}\')'
++        if kind=='missing':code='pass'
++        if kind=='native_failure':code='raise SystemExit(3)'
++        if kind=='stale':output.write_text('{"result":"PASS"}');code='pass'
++        before={str(output):'PRESENT' if output.exists() else 'ABSENT'}
++        process=self.observe(code);process.update(run_id='synthetic',gate='SYNTHETIC',candidate=execution.SHA,tree=execution.TREE)
++        if kind=='preservation':process['wrapper_exit']=1
++        def parser():
++            result=json.loads(output.read_text())
++            if kind=='incomplete':raise RuntimeError('INCOMPLETE_REQUIRED_OUTPUT')
++            if kind=='parser_pending':result['result']='PENDING'
++            return result
++        return freshness.require_fresh_outputs([output],before,process,'synthetic','SYNTHETIC',parser)
++    def test_fresh_output_positive_actual_path(self):self.assertEqual(self.fresh('pass')['result'],'PASS')
++    def test_fresh_missing_reject(self):
++        with self.assertRaises(RuntimeError):self.fresh('missing')
++    def test_fresh_stale_reject(self):
++        with self.assertRaises(RuntimeError):self.fresh('stale')
++    def test_fresh_native_failure_reject(self):
++        with self.assertRaises(RuntimeError):self.fresh('native_failure')
++    def test_fresh_incomplete_reject(self):
++        with self.assertRaises(RuntimeError):self.fresh('incomplete')
++    def test_fresh_unresolved_preservation_reject(self):
++        with self.assertRaises(RuntimeError):self.fresh('preservation')
++    def test_fresh_pending_parser_reject(self):
++        with self.assertRaises(RuntimeError):self.fresh('parser_pending')
++    def test_bindings_exact_all_29(self):
++        m=bindings.build(D/'outputs/continuation-runs/synthetic');old=json.loads((execution.O/'GATE_EXECUTION_MATRIX.json').read_text());self.assertEqual(m['order'],old['order']);self.assertEqual(len(m['gates']),29)
++        for n in m['order']:
++            self.assertEqual(m['gates'][n]['authoritative_command'],old['gates'][n]['command']);self.assertTrue(m['gates'][n]['parser']);self.assertTrue(m['gates'][n]['required'])
++    def test_detached_seal_rejects_mutation(self):
++        p=self.root/'input';p.write_text('old');seal=coverage.seal([p]);p.write_text('new')
++        with self.assertRaises(RuntimeError):coverage.check_seal(seal)
++    def test_dependency_missing_or_wrong_run(self):
++        with self.assertRaises(RuntimeError):freshness.dependency({'result':'PASS','run_id':'old'},'new')
++    def test_packaging_wrong_blob_rejected(self):
++        m,root,data=self.manifest();m['rows'][0]['blob']='0'*40
++        with self.assertRaisesRegex(RuntimeError,'WRONG_GIT_BLOB'):packaging.resources(m,root)
++    def test_packaging_missing_jar_rejects(self):
++        m,root,data=self.manifest()
++        with self.assertRaises(FileNotFoundError):packaging.jar(m,self.root/'not-built.jar',self.rule())
++    def test_packaging_missing_zip_static(self):
++        m,root,data=self.manifest();m['rows'][0].update(relative='missing.html',git_path=packaging.STATIC+'missing.html')
++        with self.assertRaises(RuntimeError):packaging.jar(m,self.zip(data),self.rule())
++    def test_primary_transient_index_write_strict(self):
++        import frozen_shadow_monitor as frozen
++        state={'entries':[],'index_semantic_sha256':'same','index_byte_sha256':'same','head':'same','head_state':'same','refs':'same'}
++        r=frozen.reconcile('PRIMARY',state,state,[{'path':'.git/index.lock'}],[],[])
++        self.assertEqual(r['result'],'FAIL_PRIMARY_GIT_METADATA_MUTATION')
++    def test_shadow_frozen_semantics_not_modified(self):
++        self.assertEqual(coverage.digest(execution.H/'frozen_shadow_monitor.py'),coverage.digest(execution.O/'inputs/original-shadow_monitor.py'))
++    def test_runtime_namespace_command_paths(self):
++        run=D/'outputs/continuation-runs/synthetic';m=bindings.build(run)
++        for gate in m['gates'].values():
++            for word in gate['command']:
++                self.assertNotIn(str(D/'outputs/backend'),word);self.assertNotIn(str(D/'outputs/frontend'),word)
++            self.assertTrue(gate['environment_namespaces']['TMPDIR'].startswith(str(run)))
++    def test_cleanup_preserves_preimage(self):
++        p=self.root/'output';p.write_bytes(b'old');rows=freshness.preserve_cleanup([p],self.root/'cleanup-preimages',[self.root])
++        self.assertFalse(p.exists());self.assertEqual(Path(rows[0]['preimage']).read_bytes(),b'old')
++    def test_readonly_registered_ancestor_replacement(self):
++        p=self.root/'parent';p.mkdir();f=p/'input';f.write_text('fixed');w=observe.Watch([f],[],[],[])
++        try:p.rename(self.root/'moved');p.mkdir();w.drain();self.assertTrue(w.rejected())
++        finally:w.close()
++    def test_shared_loose_object_pending_not_pass(self):
++        root=self.root/'git';(root/'objects/aa').mkdir(parents=True);w=observe.Watch([],[],[root],[],shared_git=root)
++        try:
++            f=root/'objects/aa'/('b'*38);f.write_bytes(b'not a git object');w.drain();w.resolve_shared();self.assertTrue(w.rejected())
++        finally:w.close()
++    def test_frontend_ref_lock_without_bound_target_rejected(self):
++        root=self.root/'git';(root/'refs/heads').mkdir(parents=True);ref=root/'refs/heads/frontend';ref.write_text('0'*40);w=observe.Watch([],[],[root],[],cross_lane=[ref],shared_git=root)
++        try:
++            lock=Path(str(ref)+'.lock');lock.write_text('0'*40);lock.unlink();w.drain();w.resolve_frontend_locks();self.assertTrue(w.rejected())
++        finally:w.close()
++    def test_frontend_native_readonly_and_private_pid(self):
++        import time
++        front=self.root/'front';front.mkdir();back=self.root/'back';back.mkdir()
++        code="""from pathlib import Path
++import errno,subprocess,sys
++front=Path(sys.argv[1]);back=Path(sys.argv[2]);(front/'allowed').write_text('allowed')
++try:
++ (back/'forbidden').write_text('forbidden')
++ raise AssertionError('ESCAPED_WRITE')
++except OSError as e:
++ assert e.errno==errno.EROFS,e
++child='import time;from pathlib import Path;time.sleep(.2);Path('+repr(str(front/'escaped'))+').write_text("escaped")'
++subprocess.Popen([sys.executable,'-B','-c',child],start_new_session=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
++print('FRONTEND_READONLY_PRIVATE_PID=PASS')
++"""
++        cmd=execution.frontend_sandbox([sys.executable,'-B','-c',code,str(front),str(back)],front,[front])
++        r=subprocess.run(cmd,capture_output=True);(self.root/'native.log').write_bytes(r.stdout+r.stderr)
++        coverage.put(self.root/'process.json',{'argv':cmd,'native_exit':r.returncode,'synthetic_only':True})
++        self.assertEqual(r.returncode,0,r.stderr.decode());time.sleep(.4)
++        self.assertFalse((back/'forbidden').exists());self.assertFalse((front/'escaped').exists());self.assertTrue((front/'allowed').is_file())
++    def test_changed_resolved_dependency_rejects(self):
++        with self.assertRaisesRegex(RuntimeError,'DEPENDENCY_CHANGED'):freshness.compare_dependencies({'a':{'sha256':'old'}},{'a':{'sha256':'new'}})
++    def test_new_resolved_dependency_is_explicit_output(self):
++        r=freshness.compare_dependencies({'a':{'sha256':'fixed'}},{'a':{'sha256':'fixed'},'b':{'sha256':'new'}})
++        self.assertEqual(r['unchanged_existing'],1);self.assertEqual(set(r['newly_resolved']),{'b'})
++    def test_source_bound_existing_absence_preserved(self):
++        absent=self.root/'historically-missing'
++        r=preservation.Collector(files=[absent],expected_missing=[absent]).capture()
++        self.assertEqual(r['result'],'COMPLETE');self.assertTrue(r['entries'][str(absent)]['expected_absence'])
++    def test_expected_absence_reappearance_rejects(self):
++        p=self.root/'historically-missing';p.write_text('unexpected repair')
++        self.assertEqual(preservation.Collector(files=[p],expected_missing=[p]).capture()['result'],'INCOMPLETE')
++    def test_new_unexpected_missing_stays_failure(self):
++        self.assertEqual(preservation.Collector(files=[self.root/'missing']).capture()['result'],'INCOMPLETE')
++    def test_missing_ancestor_not_expected_leaf_absence(self):
++        p=self.root/'missing-parent/leaf'
++        self.assertEqual(preservation.Collector(files=[p],expected_missing=[p]).capture()['result'],'INCOMPLETE')
++    def test_shadow_wrong_evidence_digest_rejects(self):self.assertEqual(self.shadow('wrong_digest')['wrapper_exit'],1)
++    def test_failed_dependency_stops_actual_graph_and_keeps_all_keys(self):
++        calls=[];failures=[]
++        def execute(name,results):calls.append(name);return {'result':'FAIL','native_exit':7,'wrapper_exit':1}
++        result,stopped=runner.execute_graph(['A','B','C'],execute,lambda name,r:failures.append(name),'synthetic')
++        self.assertTrue(stopped);self.assertEqual(calls,['A']);self.assertEqual(failures,['A']);self.assertEqual(set(result),{'A','B','C'});self.assertEqual(result['B']['result'],'NOT_RUN');self.assertEqual(result['C']['result'],'NOT_RUN')
++    def test_backend_untagged_detached_child_remains_observed(self):
++        p=self.root/'frozen'
++        child='import os,time;from pathlib import Path;os.environ.pop("EP19_GATE_SCOPE",None);os.setsid();os.chdir("/");time.sleep(.2);Path('+repr(str(p))+').write_text("late")'
++        parent='import subprocess,sys;subprocess.Popen([sys.executable,"-B","-c",'+repr(child)+'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)'
++        r=self.observe(parent);self.assertEqual(r['native_exit'],0);self.assertEqual(r['wrapper_exit'],1);self.assertEqual(r['owned_processes_remaining'],[])
++if __name__=='__main__':unittest.main(verbosity=2)
+--- /dev/null
++++ qualification/runtime_controls.py
+@@ -0,0 +1,328 @@
++"""Only bounded fixtures; actual runner.run_all/preflight decisions remain unmocked.
++
++The launch fixture substitutes data roots and gate bodies, not authorization,
++seal, baseline, coverage, qualification, candidate identity, or decision functions.
++A synthetic qualification PASS inside this fixture is never the real FORMAL result.
++"""
++from pathlib import Path
++import copy, hashlib, io, json, os, shutil, subprocess, sys, time, unittest, uuid, zlib
++from unittest.mock import patch
++import artifacts, namespaces
++import bindings, coverage, execution, freshness, observe, runner, frozen_shadow_monitor as frozen
++
++D=execution.D
++O=execution.O
++E=O/'owner-clarified-execution-20260907T1120Z'
++ATTEMPT=Path(os.environ['EP19_QUALIFICATION_DIR']).absolute()
++if not ATTEMPT.is_relative_to(D/'qualification') or ATTEMPT.resolve()!=ATTEMPT:
++    raise RuntimeError('QUALIFICATION_FIXTURE_SCOPE')
++ATTEMPT.mkdir(parents=True,exist_ok=False)
++
++def put(p,v):
++    p.parent.mkdir(parents=True,exist_ok=True)
++    coverage.put(p,v)
++
++def replace_json(p,v):p.write_text(json.dumps(v,indent=2)+'\n')
++def load(p):return json.loads(p.read_text())
++
++class LaunchControls(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        cls.mirror=ATTEMPT/'launch-data';cls.mirror.mkdir()
++        shutil.copytree(execution.H,cls.mirror/'owned')
++        shutil.copytree(O/'inputs',cls.mirror/'inputs')
++        cls.repo=cls.mirror/'candidate'
++        namespaces.clone(O/'sources/backend',cls.repo)
++        for name in ('GATE_EXECUTION_MATRIX.json',):shutil.copyfile(O/name,cls.mirror/name)
++        auth=cls.mirror/'owner-clarified-execution-20260907T1120Z';auth.mkdir()
++        for name in ('OWNER_DECISION.txt','OWNER_PROVENANCE.json'):shutil.copyfile(E/name,auth/name)
++        (auth/'ENGINEERING_MAPPING.md').write_text('SYNTHETIC FIXTURE MAPPING, NOT REAL COVERAGE\n')
++        (cls.mirror/'qualification').mkdir()
++        shutil.copyfile(O/'qualification/CONTINUATION_PRESERVATION_CONTRACT.md',cls.mirror/'qualification/CONTINUATION_PRESERVATION_CONTRACT.md')
++        cls.old={'protected':[],'allowed':[],'repositories':[],'metadata_roots':[],'cross_lane':[],
++                 'shared_git':None,'shadow_root':str(D/'sources/shadow-fixture'),'shadow_declared':[
++                 'typed-schema-module/jooq-baseline.properties','typed-schema-module/jooq-plain-sql-allowlist.txt',
++                 'typed-schema-module/jooq-dynamic-identifier-allowlist.txt']}
++        put(cls.mirror/'PROTECTION_SCOPE.json',cls.old)
++    def setUp(self):
++        self.root=self.mirror/self._testMethodName;self.root.mkdir()
++        self.patches=[patch.object(coverage,'O',self.mirror),patch.object(bindings,'O',self.mirror),patch.object(namespaces,'O',self.mirror),
++                      patch.object(runner,'O',self.mirror),patch.object(runner,'AUTHORITY',self.mirror/'owner-clarified-execution-20260907T1120Z'),
++                      patch.object(namespaces,'repos',return_value=[self.repo]),
++                      patch.object(namespaces,'mappings',return_value={str(O/'sources/backend'):str(self.repo)})]
++        for p in self.patches:p.start();self.addCleanup(p.stop)
++        self.run=runner.runpath('runtime-'+uuid.uuid4().hex);self.run.mkdir(parents=True);(self.run/'runtime').mkdir()
++        if self._testMethodName=='test_pending_review_actual_launch_and_completion':
++            namespaces.clone(O/'sources/backend',self.run/'sources/shadow-fixture')
++        init=self.run/'runtime/cache/backend/gradle/init.d';init.mkdir(parents=True)
++        shutil.copyfile(self.mirror/'owned/packaging.init.gradle',init/'ep19-packaging.gradle')
++        lean=self.run/'runtime/cache/backend/formal-tools/lean-4.19.0-linux/bin/lean';lean.parent.mkdir(parents=True);lean.write_text('SYNTHETIC TOOL PRESENCE ONLY; NEVER EXECUTED\n')
++        self.q=self.root/'qualification.json'
++        raw=self.root/'synthetic-native.log';raw.write_text('SYNTHETIC DATA FOR LAUNCH CONTROLS ONLY\n')
++        process=self.root/'synthetic-process.json';put(process,{'native_exit':0,'raw_log':str(raw),'log_sha256':coverage.digest(raw),'formal_wrapper_sha256':coverage.digest(self.mirror/'owned/execution.py')})
++        result=self.root/'synthetic-result.json';put(result,{'result':'PASS','tests':1,'failures':0,'errors':0})
++        program=self.root/'synthetic-program.py';program.write_text('# Synthetic closure target, never executed\n')
++        ledger=self.root/'synthetic-reuse.json';put(ledger,{'synthetic_only':True})
++        formal=self.root/'synthetic-formal-boundary.json';inv=load(self.mirror/'inputs/PROOF_GATE_INVENTORY.json')
++        put(formal,{'result':'PASS','synthetic_only':True,'container_ids':['synthetic-only-no-real-container'],'containers_remaining':[],
++                    'coq_image':inv['environment']['COQ_IMAGE'],'observed_coq_image_id':inv['coq_image_id_raw'],
++                    'script_sha256':inv['pins']['candidate/scripts/formal/validate-faof2.sh'],
++                    'formal_wrapper_sha256':coverage.digest(self.mirror/'owned/execution.py'),'probe_program':str(program),'process_receipts':[str(process)],
++                    **{k:'PASS' for k in ('namespace_tmp_probe','container_tool_visibility','namespace_bind_interpretation','output_path_provenance','container_cleanup','unchanged_source')}})
++        helpers=coverage.seal(coverage.local_imports()[0]);files={**helpers,**coverage.seal([raw,process,result,program,ledger,formal])}
++        put(self.q,{'schema':'ep19-owner-qualified-v1','result':'PASS','helpers':helpers,'dependencies':files,
++                    'formal_boundary_receipt':str(formal),'qualification_program':str(program),'raw_log':str(raw),'process_receipt':str(process),
++                    'result_receipt':str(result),'reuse_ledger':str(ledger),'product_gate_execution':False,'real_gradle_instrumentation':'PASS',
++                    **{k:'PASS' for k in ('frontend_boundary','formal_boundary','collector','coverage','shadow','packaging','freshness','launch')}})
++        put(self.run/'prepare.json',{'qualification':str(self.q)})
++        put(self.run/'bindings.json',bindings.build(self.run))
++        put(self.run/'namespaces.json',{'synthetic_fixture_mapping':str(self.repo)})
++        put(self.run/'identity.json',{'synthetic_scope':True})
++        put(self.run/'source-recovery.json',{'synthetic_scope':True})
++        py=Path(sys.executable).resolve();put(self.run/'toolchain.json',{'python3':{'path':str(py),'realpath':str(py),'sha256':coverage.digest(py)}})
++        inputs=coverage.qualification_inputs(self.q)+[self.mirror/'owner-clarified-execution-20260907T1120Z'/n for n in ('OWNER_DECISION.txt','OWNER_PROVENANCE.json','ENGINEERING_MAPPING.md')]
++        inputs += [self.mirror/n for n in ('GATE_EXECUTION_MATRIX.json','PROTECTION_SCOPE.json','qualification/CONTINUATION_PRESERVATION_CONTRACT.md')]
++        inputs += [p for p in (self.mirror/'inputs').rglob('*') if p.is_file()]
++        inputs += [init/'ep19-packaging.gradle',lean]
++        scope={**self.old,'protected':sorted(set(map(str,inputs))), 'allowed':[str(self.run/'runtime')],
++               'enumeration_roots':[],'pruned_roots':[],'expected_missing':[],
++               'frozen_roots':[str(init),str(self.run/'runtime/cache/backend/formal-tools')],
++               'instruction_capture':{'result':'COMPLETE','entries':{}},'synthetic_only':True}
++        scope=namespaces.scope_roles(scope,self.run)
++        put(self.run/'scope.json',scope)
++        put(self.run/'baseline.json',{'result':'COMPLETE','entries':observe.snapshot(scope['protected'])})
++        self.seal_inputs=inputs+[self.run/(n+'.json') for n in ('prepare','bindings','identity','source-recovery','toolchain','scope','baseline','namespaces')]
++        self.seal()
++        put(self.run/'preflight.json',{'result':'ENGINEERING_READY','engineering_blockers':[],'run_id':self.run.name,'candidate':execution.SHA,'tree':execution.TREE,'base':execution.BASE,'synthetic_only':True})
++        self.review=self.root/'engineering-launch.json'
++        self.decision={'engineering_execution_authorization':'OWNER_AUTHORIZED','owner_decision_sha256':runner.OWNER_SHA256,
++                       'independent_review':'PENDING',**runner.REVIEW_STATES,
++                       'run_id':self.run.name,'candidate':execution.SHA,'tree':execution.TREE,'base':execution.BASE}
++        self.bind_review()
++        self.calls=[]
++        def synthetic_gate(name,m,run,scope,sealed,results):
++            self.calls.append(name)
++            gate=run/'runtime/gates'/name;gate.mkdir(parents=True)
++            return artifacts.finalize({'result':'PASS','native_exit':0,'wrapper_exit':0,
++                'run_id':run.name,'gate':name,'candidate':execution.SHA,'tree':execution.TREE,
++                'synthetic_only':True},gate,[self.root/'synthetic-native.log'])
++        p=patch.object(runner,'run_gate',synthetic_gate);p.start();self.addCleanup(p.stop)
++    def seal(self):
++        replace_json(self.run/'seal.json',{'files':coverage.seal(self.seal_inputs),'run_id':self.run.name,'candidate':execution.SHA,'tree':execution.TREE,'base':execution.BASE})
++    def bind_review(self):
++        self.decision.update(seal_sha256=coverage.digest(self.run/'seal.json'),preflight_sha256=coverage.digest(self.run/'preflight.json'))
++        replace_json(self.review,self.decision)
++    def reject(self,reason):
++        with self.assertRaisesRegex((RuntimeError,FileNotFoundError),reason):runner.run_all(self.run,self.review)
++        self.assertEqual(self.calls,[]);self.assertFalse((self.run/'runtime/START.json').exists())
++    def test_pending_review_actual_launch_and_completion(self):
++        self.assertEqual(runner.run_all(self.run,self.review),0)
++        self.assertEqual(self.calls,load(self.run/'bindings.json')['order'])
++        r=load(self.run/'runtime/RESULTS.json')
++        self.assertEqual(r['independent_review'],'PENDING')
++        for k,v in runner.REVIEW_STATES.items():self.assertEqual(r[k],v)
++        with self.assertRaisesRegex(RuntimeError,'NO_RETRY'):runner.run_all(self.run,self.review)
++    def test_missing_execution_authorization(self):
++        self.decision.pop('engineering_execution_authorization');self.bind_review();self.reject('AUTHORIZATION_REQUIRED')
++    def test_unbound_owner_authorization(self):
++        self.decision['owner_decision_sha256']='0'*64;self.bind_review();self.reject('AUTHORIZATION_UNBOUND')
++    def test_failed_preflight(self):
++        p=load(self.run/'preflight.json');p['result']='ENGINEERING_PREFLIGHT_BLOCKED';replace_json(self.run/'preflight.json',p);self.bind_review();self.reject('PREFLIGHT_NOT_READY')
++    def test_incomplete_preflight(self):
++        p=load(self.run/'preflight.json');p.pop('engineering_blockers');replace_json(self.run/'preflight.json',p);self.bind_review();self.reject('PREFLIGHT_NOT_READY')
++    def test_wrong_candidate(self):
++        self.decision['candidate']='0'*40;self.bind_review();self.reject('IDENTITY_MISMATCH')
++    def test_wrong_tree(self):
++        self.decision['tree']='0'*40;self.bind_review();self.reject('IDENTITY_MISMATCH')
++    def test_wrong_base(self):
++        self.decision['base']='0'*40;self.bind_review();self.reject('IDENTITY_MISMATCH')
++    def test_independent_accept_cannot_be_fabricated(self):
++        self.decision['independent_review']='ACCEPT';self.bind_review();self.reject('STATES_MUST_STAY_SEPARATE')
++    def test_publication_cannot_be_granted(self):
++        self.decision['product_publication']='AUTHORIZED';self.bind_review();self.reject('STATES_MUST_STAY_SEPARATE')
++    def test_harness_replacement_cannot_be_granted(self):
++        self.decision['publication_harness_replacement']='AUTHORIZED';self.bind_review();self.reject('STATES_MUST_STAY_SEPARATE')
++    def test_unbound_preflight_receipt(self):
++        self.decision['preflight_sha256']='0'*64;replace_json(self.review,self.decision);self.reject('UNBOUND_ENGINEERING')
++    def test_qualification_program_changed(self):
++        (self.root/'synthetic-program.py').write_text('changed\n');self.reject('FROZEN_INPUT_CHANGED')
++    def test_qualification_raw_log_changed(self):
++        (self.root/'synthetic-native.log').write_text('changed\n');self.reject('FROZEN_INPUT_CHANGED')
++    def test_qualification_result_changed(self):
++        (self.root/'synthetic-result.json').write_text('{}\n');self.reject('FROZEN_INPUT_CHANGED')
++    def test_qualification_closure_missing(self):
++        q=load(self.q);q['dependencies'].pop(q['raw_log']);replace_json(self.q,q)
++        self.seal();self.bind_review();self.reject('CURRENT_TECHNICAL_PREFLIGHT_REJECT')
++    def test_current_formal_boundary_rejects_old_ready_record(self):
++        q=load(self.q);q['formal_boundary']='BLOCKED';replace_json(self.q,q)
++        self.seal();self.bind_review();self.reject('CURRENT_TECHNICAL_PREFLIGHT_REJECT')
++    def test_formal_pass_label_cannot_override_blocked_actual_receipt(self):
++        formal=self.root/'synthetic-formal-boundary.json';r=load(formal);r['result']='BLOCKED';replace_json(formal,r)
++        q=load(self.q);q['dependencies'][str(formal)]=coverage.digest(formal);replace_json(self.q,q)
++        self.seal();self.bind_review();self.reject('CURRENT_TECHNICAL_PREFLIGHT_REJECT')
++    def test_formal_pass_without_bound_process_evidence_rejects(self):
++        formal=self.root/'synthetic-formal-boundary.json';r=load(formal);r['process_receipts']=[];replace_json(formal,r)
++        q=load(self.q);q['dependencies'][str(formal)]=coverage.digest(formal);replace_json(self.q,q)
++        self.seal();self.bind_review();self.reject('CURRENT_TECHNICAL_PREFLIGHT_REJECT')
++    def test_current_baseline_rejects_old_ready_record(self):
++        b=load(self.run/'baseline.json');b['entries'].pop(next(iter(b['entries'])));replace_json(self.run/'baseline.json',b)
++        self.seal();self.bind_review();self.reject('CURRENT_TECHNICAL_PREFLIGHT_REJECT')
++    def test_runtime_init_changed_rejects(self):
++        (self.run/'runtime/cache/backend/gradle/init.d/ep19-packaging.gradle').write_text('changed\n');self.reject('FROZEN_INPUT_CHANGED')
++    def test_runtime_extra_init_rejects(self):
++        (self.run/'runtime/cache/backend/gradle/init.d/extra.gradle').write_text('new\n');self.reject('UNDECLARED_GRADLE_INIT')
++    def test_run_control_omitted_from_seal_rejects(self):
++        seal=load(self.run/'seal.json');seal['files'].pop(str(self.run/'bindings.json'))
++        replace_json(self.run/'seal.json',seal);self.bind_review();self.reject('CURRENT_TECHNICAL_PREFLIGHT_REJECT')
++    def test_missing_lean_rejects_current_preflight(self):
++        (self.run/'runtime/cache/backend/formal-tools/lean-4.19.0-linux/bin/lean').unlink();self.reject('lean')
++
++class PreservationControls(unittest.TestCase):
++    def setUp(self):
++        self.root=ATTEMPT/self._testMethodName;self.root.mkdir()
++    def observed(self,relative,shadow=False,variant='same',restore=True):
++        root=self.root/'repo';root.mkdir();(root/'.git').mkdir()
++        declared=['typed-schema-module/jooq-baseline.properties','typed-schema-module/jooq-plain-sql-allowlist.txt','typed-schema-module/jooq-dynamic-identifier-allowlist.txt']
++        tracked=[root/p for p in [*declared,'ordinary']]
++        for p in tracked:p.parent.mkdir(exist_ok=True);p.write_text('fixed')
++        for name in ('index','HEAD','config'):(root/'.git'/name).write_text('fixed')
++        target=root/relative;target.parent.mkdir(parents=True,exist_ok=True)
++        if not target.exists():target.write_text('fixed')
++        state={'entries':[{'path':str(p.relative_to(root)),'stage':'0','mode':'100644','blob':'1'*40} for p in tracked],
++               'index_semantic_sha256':'a'*64,'index_byte_sha256':'b'*64,'head':execution.SHA,'head_state':execution.SHA,'refs':'fixed'}
++        def reconcile(events,tag):
++            from shadow_binding import dh
++            after=copy.deepcopy(state)
++            if relative.startswith('.git/index'):after['index_byte_sha256']='c'*64
++            if variant in ('semantic','mode','stage','blob','add','remove'):
++                after['index_semantic_sha256']='d'*64
++                if variant=='mode':after['entries'][0]['mode']='100755'
++                elif variant=='stage':after['entries'][0]['stage']='1'
++                elif variant=='blob':after['entries'][0]['blob']='2'*40
++                elif variant=='add':after['entries'].append({'path':'extra','stage':'0','mode':'100644','blob':'1'*40})
++                elif variant=='remove':after['entries'].pop()
++            if variant=='head':after['head']='0'*40
++            if variant=='refs':after['refs']='changed'
++            relative_events=[{**e,'path':str(Path(e['path']).relative_to(root))} for e in events if Path(e['path']).is_relative_to(root)]
++            dirty=[str(p.relative_to(root)) for p in tracked if p.read_text()!='fixed']
++            content={'result':'FAIL' if dirty else 'PASS','checked':len(tracked),'mismatches':dirty}
++            semantic=frozen.reconcile('SHADOW',state,after,relative_events,declared,dirty)
++            evidence={'before':state,'after':after,'events':relative_events,'final_content':content}
++            return {'result':'PASS' if semantic['result']=='PASS' and not dirty else 'FAIL','run_binding':tag,'root':str(root),
++                    'semantic_check':semantic,'final_content_check':content,'evidence':evidence,
++                    **{k+'_sha256':dh(v) for k,v in evidence.items()}}
++        code='from pathlib import Path;p=Path('+repr(str(target))+');p.write_text("changed");'+('p.write_text("fixed")' if restore else '')
++        r=observe.run([sys.executable,'-B','-c',code],root,self.root/'native.log',tracked,[root],[root/'.git'],[],
++                      shadow_root=root if shadow else None,shadow_declared=declared,shadow_reconciler=reconcile if shadow else None,timeout=5)
++        put(self.root/'observation.json',r);return r
++    def test_primary_transient_content_event(self):self.assertEqual(self.observed('ordinary')['wrapper_exit'],1)
++    def test_primary_transient_index_event(self):self.assertEqual(self.observed('.git/index')['wrapper_exit'],1)
++    def test_primary_declared_shadow_path_still_rejects(self):self.assertEqual(self.observed('typed-schema-module/jooq-baseline.properties')['wrapper_exit'],1)
++    def test_shadow_index_semantic_refresh_allowed(self):self.assertEqual(self.observed('.git/index',True)['wrapper_exit'],0)
++    def test_shadow_index_lock_semantic_refresh_allowed(self):self.assertEqual(self.observed('.git/index.lock',True)['wrapper_exit'],0)
++    def test_shadow_all_declared_paths_restored(self):
++        for name in ('jooq-baseline.properties','jooq-plain-sql-allowlist.txt','jooq-dynamic-identifier-allowlist.txt'):
++            with self.subTest(name=name):
++                old=self.root;self.root=old/name;self.root.mkdir()
++                self.assertEqual(self.observed('typed-schema-module/'+name,True)['wrapper_exit'],0);self.root=old
++    def test_shadow_all_semantic_deltas_reject(self):
++        for variant in ('semantic','mode','stage','blob','add','remove','head','refs'):
++            with self.subTest(variant=variant):
++                old=self.root;self.root=old/variant;self.root.mkdir()
++                self.assertEqual(self.observed('.git/index',True,variant)['wrapper_exit'],1);self.root=old
++    def test_shadow_head_event_rejects_even_restored(self):self.assertEqual(self.observed('.git/HEAD',True)['wrapper_exit'],1)
++    def test_shadow_ref_event_rejects_even_restored(self):self.assertEqual(self.observed('.git/refs/heads/main',True)['wrapper_exit'],1)
++    def test_shadow_unclassified_metadata_rejects(self):self.assertEqual(self.observed('.git/config',True)['wrapper_exit'],1)
++    def test_shadow_undeclared_content_restored_rejects(self):self.assertEqual(self.observed('ordinary',True)['wrapper_exit'],1)
++    def test_shadow_final_declared_content_mismatch_rejects(self):self.assertEqual(self.observed('typed-schema-module/jooq-baseline.properties',True,restore=False)['wrapper_exit'],1)
++    def test_runtime_init_transient_write_rejects(self):
++        cache=self.root/'cache';init=cache/'gradle/init.d';init.mkdir(parents=True);f=init/'ep19.gradle';f.write_text('fixed')
++        cmd=[sys.executable,'-B','-c','from pathlib import Path;p=Path('+repr(str(f))+');p.write_text("change");p.write_text("fixed")']
++        r=observe.run(cmd,self.root,self.root/'native.log',[f],[],[],[cache],frozen_roots=[init]);put(self.root/'observation.json',r)
++        self.assertEqual(r['wrapper_exit'],1)
++    def test_runtime_new_init_rejects(self):
++        cache=self.root/'cache';init=cache/'gradle/init.d';init.mkdir(parents=True);f=init/'new.gradle'
++        cmd=[sys.executable,'-B','-c','from pathlib import Path;Path('+repr(str(f))+').write_text("new")']
++        r=observe.run(cmd,self.root,self.root/'native.log',[],[],[],[cache],frozen_roots=[init],enumeration_roots=[init]);put(self.root/'observation.json',r)
++        self.assertEqual(r['wrapper_exit'],1)
++    def test_shadow_missing_required_controls_reject_native_success(self):
++        import parsers
++        gate=self.root/'gate';gate.mkdir()
++        (gate/'native.log').write_text('OK: PFIRR1-B1 jOOQ authority verification is fail-closed and non-mutating\n')
++        process={'native_exit':0,'wrapper_exit':0,'run_id':'synthetic','gate':'SHADOW','candidate':execution.SHA,'tree':execution.TREE}
++        with self.assertRaisesRegex(RuntimeError,'SHADOW_EXPECTED_CONTROL_COUNT'):
++            freshness.require_fresh_outputs([],{},process,'synthetic','SHADOW',lambda:parsers.parse('SHADOW',self.root,gate,self.root))
++    def test_shadow_required_controls_accept_after_integrity_success(self):
++        import parsers
++        gate=self.root/'gate';gate.mkdir()
++        (gate/'native.log').write_text(''.join('PASS: control'+str(i)+' rejects missing authority and does not recreate file\n' for i in range(3))+
++                                      'OK: PFIRR1-B1 jOOQ authority verification is fail-closed and non-mutating\n')
++        process={'native_exit':0,'wrapper_exit':0,'run_id':'synthetic','gate':'SHADOW','candidate':execution.SHA,'tree':execution.TREE}
++        self.assertEqual(freshness.require_fresh_outputs([],{},process,'synthetic','SHADOW',lambda:parsers.parse('SHADOW',self.root,gate,self.root))['result'],'PASS')
++    def test_alternate_index_forbidden(self):
++        with self.assertRaisesRegex(RuntimeError,'ALTERNATE_INDEX_FORBIDDEN'):
++            observe.run([sys.executable,'-B','-c','pass'],self.root,self.root/'native.log',[],[],[],[],env={'GIT_INDEX_FILE':str(self.root/'index')})
++    def shared(self,variant):
++        # Hand-encoded synthetic Git objects; no commit/ref operation touches a repository.
++        g=self.root/'git';(g/'objects').mkdir(parents=True);(g/'refs/heads/agent').mkdir(parents=True)
++        (g/'HEAD').write_text('ref: refs/heads/agent/synthetic-frontend\n')
++        def obj(kind,data):
++            full=kind.encode()+b' '+str(len(data)).encode()+b'\0'+data;oid=hashlib.sha1(full).hexdigest()
++            p=g/'objects'/oid[:2]/oid[2:];p.parent.mkdir(exist_ok=True);p.write_bytes(zlib.compress(full));return oid,p
++        blob,bp=obj('blob',b'synthetic frontend');tree,tp=obj('tree',b'100644 file\0'+bytes.fromhex(blob))
++        commit,cp=obj('commit',('tree '+tree+'\nauthor Synthetic <synthetic@example.invalid> 1 +0000\ncommitter Synthetic <synthetic@example.invalid> 1 +0000\n\nfixture\n').encode())
++        ref=g/'refs/heads/agent/synthetic-frontend';ref.write_text(commit+'\n')
++        w=observe.Watch([],[],[g],[],cross_lane=[ref],shared_git=g)
++        try:
++            # Only the new object membership is synthetic; git reachability and
++            # zlib/content hashing in the actual resolver execute without mocks.
++            w.metadata_files.remove(bp)
++            if variant=='unreachable':
++                _,bp=obj('blob',b'unreachable')
++            if variant=='corrupt':bp.write_bytes(b'not a git object')
++            if variant=='symlink':
++                raw=bp.read_bytes();bp.unlink();target=self.root/'body';target.write_bytes(raw);bp.symlink_to(target)
++            w.events=[{'path':str(bp),'category':'PENDING_SHARED_OBJECT_SCOPE_PROOF','mask':8}]
++            w.resolve_shared();put(self.root/'shared-proof.json',{'events':w.events,'proof':w.shared_proof,'rejected':w.rejected()})
++            return w.events[0]['category']
++        finally:w.close()
++    def test_frontend_new_append_actual_observer_rejects_unknown_writer(self):
++        g=self.root/'git';(g/'objects').mkdir(parents=True);(g/'refs/heads/agent').mkdir(parents=True)
++        ref=g/'refs/heads/agent/synthetic-frontend'
++        (g/'HEAD').write_text('ref: refs/heads/agent/synthetic-frontend\n')
++        def encoded(kind,data):
++            body=kind.encode()+b' '+str(len(data)).encode()+b'\0'+data
++            oid=hashlib.sha1(body).hexdigest();p=g/'objects'/oid[:2]/oid[2:]
++            p.parent.mkdir(exist_ok=True);return oid,p,zlib.compress(body)
++        def commit(tree,parent=''):
++            return ('tree '+tree+'\n'+('parent '+parent+'\n' if parent else '')+
++                    'author Synthetic <synthetic@example.invalid> 1 +0000\ncommitter Synthetic <synthetic@example.invalid> 1 +0000\n\nfixture\n').encode()
++        tree,tp,raw=encoded('tree',b'');tp.write_bytes(raw)
++        base,bp,raw=encoded('commit',commit(tree));bp.write_bytes(raw);ref.write_text(base+'\n')
++        blob,p1,r1=encoded('blob',b'new frontend bytes')
++        tree,p2,r2=encoded('tree',b'100644 file\0'+bytes.fromhex(blob))
++        tip,p3,r3=encoded('commit',commit(tree,base))
++        plan=self.root/'append-input.json';put(plan,{'objects':{str(p):r.hex() for p,r in [(p1,r1),(p2,r2),(p3,r3)]},'ref':str(ref),'tip':tip})
++        code='import json;from pathlib import Path;p=json.loads(Path('+repr(str(plan))+').read_text());[Path(n).write_bytes(bytes.fromhex(b)) for n,b in p["objects"].items()];Path(p["ref"]).write_text(p["tip"]+"\\n")'
++        r=observe.run([sys.executable,'-B','-c',code],self.root,self.root/'native.log',[],[],[g],[],cross_lane=[ref],shared_git=g,timeout=5)
++        put(self.root/'observation.json',r)
++        self.assertEqual(r['wrapper_exit'],1,r)
++        self.assertTrue(any(e['category']=='REJECT_UNRESOLVED_SHARED_METADATA_SCOPE' for e in r['events']))
++    def test_frontend_reachable_new_object_still_rejects(self):self.assertEqual(self.shared('pass'),'REJECT_UNRESOLVED_SHARED_METADATA_SCOPE')
++    def test_frontend_unreachable_new_object_rejects(self):self.assertTrue(self.shared('unreachable').startswith('REJECT'))
++    def test_frontend_corrupt_new_object_rejects(self):self.assertTrue(self.shared('corrupt').startswith('REJECT'))
++    def test_frontend_symlink_new_object_rejects(self):self.assertTrue(self.shared('symlink').startswith('REJECT'))
++
++if __name__=='__main__':
++    # Re-execute existing controls with only their fixture destination redirected.
++    # The unknown-writer legacy test_contract is neither imported nor executed.
++    import test_continuation
++    test_continuation.Q=ATTEMPT/'recovered-controls';test_continuation.Q.mkdir()
++    suite=unittest.TestSuite([unittest.defaultTestLoader.loadTestsFromTestCase(test_continuation.Controls),
++                             unittest.defaultTestLoader.loadTestsFromTestCase(LaunchControls),
++                             unittest.defaultTestLoader.loadTestsFromTestCase(PreservationControls)])
++    result=unittest.TextTestRunner(verbosity=2).run(suite)
++    put(ATTEMPT/'RESULT.json',{'result':'PASS' if result.wasSuccessful() else 'FAIL','tests':result.testsRun,
++                             'failures':len(result.failures),'errors':len(result.errors),'skipped':len(result.skipped),
++                             'synthetic_only':True,'product_gates':'NOT_RUN'})
++    raise SystemExit(0 if result.wasSuccessful() else 1)
+--- /dev/null
++++ qualification/runtime_probe.py
+@@ -0,0 +1,101 @@
++"""Parent-only bounded native frontend, Lean and Coq probes; never product gates."""
++from pathlib import Path
++import argparse,json,os,subprocess,sys,time,traceback,uuid
++D=Path(__file__).resolve().parents[1];sys.path.insert(0,str(D/'executor'))
++import coverage,execution,namespaces,observe,preservation
++from parent_orchestration import copy_lean
++h=coverage.digest;put=coverage.put
++
++def main():
++ p=argparse.ArgumentParser();p.add_argument('area',choices=['frontend','lean','formal']);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
++ root=a.output.absolute()
++ if root.resolve()!=root or not root.is_relative_to(D/'qualification'):raise RuntimeError('PROBE_SCOPE')
++ root.mkdir();run=root/'run';run.mkdir();lane='frontend' if a.area=='frontend' else 'backend';env=execution.environment(lane,run)
++ receipts=[];wrapper=h(execution.H/'execution.py');owned=[];ids=[]
++ result={'result':'FAIL','probe_program':str(Path(__file__).resolve()),'formal_wrapper_sha256':wrapper,'process_receipts':receipts,'container_ids':ids,'product_gate_execution':False,'independent_review':'REQUIRED/PENDING'}
++ def call(name,cmd,frontend=False,timeout=120):
++  argv=execution.frontend_sandbox(cmd,run,[run/'runtime/cache/frontend',run/'runtime/tmp/frontend'],run) if frontend else execution.formal_sandbox(cmd,repo or run,run,env)
++  log=root/(name+'.log');start=time.time();rc=None;error=None
++  with log.open('xb') as f:
++   try:rc=subprocess.run(argv,env=env,stdout=f,stderr=subprocess.STDOUT,timeout=timeout).returncode
++   except (OSError,subprocess.TimeoutExpired) as ex:error=str(ex)
++  receipt=root/(name+'.json');put(receipt,{'argv':argv,'native_exit':rc,'error':error,'start':start,'end':time.time(),'raw_log':str(log),'log_sha256':h(log),'formal_wrapper_sha256':wrapper,'synthetic_only':True});receipts.append(str(receipt))
++  if rc!=0:raise RuntimeError(name+': '+str(rc)+' '+str(error))
++  return log.read_text()
++ before=None;repo=None
++ try:
++  if a.area=='frontend':
++   frozen=run/'frozen';frozen.write_text('fixed')
++   code='''import errno,os,subprocess,sys
++from pathlib import Path
++f=Path(sys.argv[1]);p=Path(os.environ['XDG_RUNTIME_DIR']);assert p.stat().st_mode&0o777==0o700
++(p/'marker').write_text('private')
++try: f.write_text('forbidden');raise AssertionError('ESCAPED_WRITE')
++except OSError as e: assert e.errno==errno.EROFS
++subprocess.Popen([sys.executable,'-B','-c',"import time;from pathlib import Path;time.sleep(.3);Path("+repr(str(p/'late'))+").write_text('late')"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
++print('READONLY_PRIVATE_PID_XDG_PASS')
++'''
++   call('frontend',[sys.executable,'-B','-c',code,str(frozen)],True);time.sleep(.5)
++   assert frozen.read_text()=='fixed' and (Path(env['XDG_RUNTIME_DIR'])/'marker').read_text()=='private'
++   assert not (Path(env['XDG_RUNTIME_DIR'])/'late').exists()
++   result.update(readonly='PASS',private_pid='PASS',xdg_runtime='PASS',result='PASS')
++  elif a.area=='lean':
++   copy_lean(run);dest=run/'runtime/cache/backend/formal-tools/lean-4.19.0-linux'
++   c=preservation.Collector(roots=[dest],expected_nonempty=[dest]).capture();put(root/'collector.json',c);assert c['result']=='COMPLETE'
++   synth=Path(env['TMPDIR'])/'Runtime.lean';synth.write_text('theorem synthetic_runtime_identity (n : Nat) : n = n := by rfl\n')
++   assert 'version 4.19.0' in call('lean-version',[str(dest/'bin/lean'),'--version'])
++   call('lean-compile',[str(dest/'bin/lean'),'--root='+str(synth.parent),'-o',str(synth.with_suffix('.olean')),str(synth)])
++   assert synth.with_suffix('.olean').stat().st_size>0
++   call('host-tmp',[sys.executable,'-B','-c','from pathlib import Path;Path("/tmp/runtime-marker").write_text("owned")'])
++   assert (Path(env['TMPDIR'])/'runtime-marker').read_text()=='owned'
++   result.update(result='PASS',output_sha256=h(synth.with_suffix('.olean')),strict_collector='PASS',host_tmp_provenance='PASS',archive_reverified=False)
++  else:
++   inv=json.loads((execution.O/'inputs/PROOF_GATE_INVENTORY.json').read_text());env.update(inv['environment'])
++   repo=run/'sources/backend';namespaces.clone(execution.O/'sources/backend',repo)
++   paths=execution.exact(repo)+[p for p in (repo/'.git').rglob('*') if p.is_file()]
++   before=observe.snapshot(paths);put(root/'source-before.json',before)
++   result.update(coq_image=inv['environment']['COQ_IMAGE'],script_sha256=h(repo/'scripts/formal/validate-faof2.sh'))
++   assert result['script_sha256']==inv['pins']['candidate/scripts/formal/validate-faof2.sh']
++   image=call('image-inspect',['podman','image','inspect',result['coq_image'],'--format','{{.Id}}']).strip()
++   assert image==inv['coq_image_id_raw'];result['observed_coq_image_id']=image
++   info=json.loads(call('engine-info',['podman','info','--format','json']));assert info['host']['security']['selinuxEnabled'] is False
++   result['selinux_enabled']=False
++   def container(name,tail):
++    label='ep19-qualification-'+uuid.uuid4().hex;cid=run/'runtime'/(name+'.cid');owned.append((label,cid))
++    text=call(name,['podman','run','--pull=never','--network=none','--name',label,'--cidfile',str(cid),*tail])
++    value=cid.read_text().strip();assert len(value)==64 and all(c in '0123456789abcdef' for c in value);ids.append(value)
++    return text
++   assert 'version 8.20.1' in container('coq-version',[image,'coqc','--version'])
++   synth=run/'runtime/synthetic';synth.mkdir();(synth/'Runtime.v').write_text('Theorem synthetic_runtime_identity : forall n : nat, n = n.\nProof. intros n. reflexivity. Qed.\n')
++   output=container('coq-compile',['-v',str(repo)+':/workspace:Z,ro','-v',str(synth)+':/synthetic:ro','-w','/workspace',image,'sh','-ec',
++    'test ! -w /workspace/scripts/formal/validate-faof2.sh; sha256sum /workspace/scripts/formal/validate-faof2.sh /synthetic/Runtime.v; coqc -dump-glob /tmp/Runtime.glob -o /tmp/Runtime.vo /synthetic/Runtime.v; test -s /tmp/Runtime.vo; sha256sum /tmp/Runtime.glob /tmp/Runtime.vo; cat /proc/self/mountinfo'])
++   assert result['script_sha256'] in output and h(synth/'Runtime.v') in output
++   assert not (Path(env['TMPDIR'])/'Runtime.vo').exists()
++   call('host-tmp',[sys.executable,'-B','-c','from pathlib import Path;Path("/tmp/host-marker").write_text("owned")'])
++   assert (Path(env['TMPDIR'])/'host-marker').read_text()=='owned'
++   result.update({k:'PASS' for k in ('namespace_tmp_probe','container_tool_visibility','namespace_bind_interpretation','output_path_provenance')})
++   result.update(result='PASS',container_output_location='Container-private /tmp; hashes and mountinfo captured before explicit owned-container removal. Host bwrap /tmp independently probed.')
++ except Exception as ex:result.update(result='FAIL',failure=str(ex),traceback=traceback.format_exc())
++ finally:
++  if a.area=='formal':
++   try:
++    for i,(label,cid) in enumerate(owned):
++     # Only randomly named containers created by this invocation may be removed.
++     if cid.exists():
++      value=cid.read_text().strip();assert len(value)==64 and all(c in '0123456789abcdef' for c in value)
++      if value not in ids:ids.append(value)
++      call('cleanup-'+str(i),['podman','rm','--force',value])
++     else:
++      exists=call('missing-cid-inspect-'+str(i),['podman','ps','-a','--filter','name=^'+label+'$','--format','json'])
++      assert json.loads(exists)==[], 'Uncaptured owned container; parent cleanup required: '+label
++    if owned:
++     remaining=json.loads(call('container-cleanup',['podman','ps','-a','--no-trunc','--format','json']))
++     assert not any(x.get('Id',x.get('ID')) in ids for x in remaining)
++     result.update(containers_remaining=[],container_cleanup='PASS')
++    if before is not None:
++     execution.exact(repo);after=observe.snapshot(list(before));put(root/'source-after.json',after);assert before==after
++     result['unchanged_source']='PASS'
++   except Exception as ex:result.update(result='FAIL',cleanup_or_source_failure=str(ex))
++  put(root/'RESULT.json',result)
++ print(json.dumps(result));return int(result['result']!='PASS')
++if __name__=='__main__':raise SystemExit(main())
+--- /dev/null
++++ qualification/runtime_suite.py
+@@ -0,0 +1,29 @@
++"""Fresh broader synthetic controls against the current executor; no evidence reuse."""
++from pathlib import Path
++import json,os,sys,unittest
++D=Path(__file__).resolve().parents[1];sys.path.insert(0,str(D/'executor'))
++import coverage
++Q=Path(os.environ['EP19_QUALIFICATION_ROOT']);os.environ['EP19_QUALIFICATION_DIR']=str(Q/'controls')
++import runtime_controls as owner, runtime_continuation as prior, orchestration_controls
++prior.Q=Q/'continuation';prior.Q.mkdir()
++class Result(unittest.TextTestResult):
++ def __init__(self,*a,**k):super().__init__(*a,**k);self.rows=[]
++ def addSuccess(self,t):super().addSuccess(t);self.rows.append({'case':t.id(),'actual':'PASS'})
++ def addFailure(self,t,e):super().addFailure(t,e);self.rows.append({'case':t.id(),'actual':'FAIL'})
++ def addError(self,t,e):super().addError(t,e);self.rows.append({'case':t.id(),'actual':'ERROR'})
++ def addSubTest(self,t,s,e):super().addSubTest(t,s,e);self.rows.append({'case':s.id(),'actual':'PASS' if e is None else 'FAIL'})
++suite=unittest.TestSuite()
++for cls in [prior.Controls,owner.LaunchControls,owner.PreservationControls,orchestration_controls.Controls]:
++ for n in unittest.defaultTestLoader.getTestCaseNames(cls):
++  if n!='test_frontend_native_readonly_and_private_pid':suite.addTest(cls(n))
++r=unittest.TextTestRunner(verbosity=2,resultclass=Result).run(suite)
++areas={
++ 'collector':[x for x in r.rows if '.test_collector_' in x['case']],
++ 'coverage':[x for x in r.rows if any(n in x['case'] for n in ['test_bindings_exact','test_detached_seal','test_deep_','test_instruction_','test_run_control_'])],
++ 'shadow':[x for x in r.rows if '.PreservationControls.' in x['case'] or '.test_shadow_' in x['case']],
++ 'packaging':[x for x in r.rows if '.test_packaging_' in x['case']],
++ 'freshness':[x for x in r.rows if '.test_fresh' in x['case'] or 'resolved_dependency' in x['case']],
++ 'dependency_preparation':[x for x in r.rows if x['case'].startswith('orchestration_controls.')],
++ 'launch':[x for x in r.rows if '.LaunchControls.' in x['case'] or 'test_failed_dependency_stops' in x['case']]}
++coverage.put(Q/'results.json',{'result':'PASS' if r.wasSuccessful() else 'FAIL','tests':r.testsRun,'failures':len(r.failures),'errors':len(r.errors),'skipped':len(r.skipped),'cases':r.rows,'areas':{k:{'result':'PASS' if v and all(x['actual']=='PASS' for x in v) else 'FAIL','cases':v} for k,v in areas.items()},'product_gate_execution':False,'fixture_gate_bodies':'synthetic only; actual run_all/preflight/authorization/seal/identity/artifact acceptance','reuse':[]})
++raise SystemExit(not r.wasSuccessful())

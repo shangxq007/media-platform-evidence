@@ -1,0 +1,1 @@
+import './style.css';import('./lazy.js').then(console.log);document.body.innerHTML='tiny';
