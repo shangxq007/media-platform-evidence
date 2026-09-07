@@ -1,0 +1,19 @@
+最终补充交付说明（不重写已封装报告和 ZIP）
+
+工程结果仍为 BLOCKED_EXACT_CANDIDATE_VALIDATION。后端原生 7973 个测试身份对账完整：7944 passed、29 expected skips，missing/unexpected/duplicate/failed/errored 均为 0；但共享工作区上的前端构建改变了冻结树的已跟踪静态资源，故完整 FCV 不被接受。当前候选 commit、脏执行工作区和失败证据均保留。
+
+交付后追加的有限保全观测又发现 .curator_ledger.jsonl 变化；最新观测差异为 .usage.json 与 .curator_ledger.jsonl 两个运行元数据路径。先前报告只描述其封装前的 .usage.json 观测，不应覆盖此追加披露。canonical tracked/index/HEAD/refs/worktree registrations、历史保护交付和已观测的两个初始 Skill 内容哈希仍无差异。另两个后来加载 Skill 只有最终哈希，没有伪造初始哈希。未写入 Skill/Memory 内容；writer NOT_ESTABLISHED。观测区间之外不声称连续保全。
+
+第一次证据发布已实际完成，15 个远端文件逐一回读并验证 SHA-256。不可变报告：
+https://github.com/shangxq007/media-platform-evidence/blob/bfd49515b78b499d42e2ad3acb113874e972de95/evidence/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/FINAL_REPORT.txt
+不可变审查包：
+https://raw.githubusercontent.com/shangxq007/media-platform-evidence/bfd49515b78b499d42e2ad3acb113874e972de95/evidence/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/REVIEW_PACKAGE.zip
+ZIP_SHA256=a2969caf4912858dfa0b5f7eacd27085ff1eb643156f9f1f7ab43e8ac070b69b
+
+本追加文件与 FINAL_DELIVERY_DISPOSITION.json、INSTRUCTION_IDENTITIES_FINAL.json、EVIDENCE_DELIVERY_RECEIPT.json 和追加扫描结果一起阅读。追加材料不在先前 ZIP 内；其内容有单独扫描和证据提交回读。没有重跑历史被禁止的扫描。
+
+下一授权仅针对外部门禁隔离与重新资格验证：保留候选 689ab9456461a8d19a72d059f5157092efc43aff 及当前脏目录；frontend 与 full backend 分别在独立 checkout 执行，重新执行精确候选 required gates，并审查 Pack-only 与旧整体 preservation 契约映射。尚不具备产品发布批准条件。
+PRODUCT_PUBLICATION=NOT_PERFORMED
+POST_PUBLICATION_SANITY=NOT_RUN
+EP19_CLOSED=NO
+INDEPENDENT_REVIEW=REQUIRED
