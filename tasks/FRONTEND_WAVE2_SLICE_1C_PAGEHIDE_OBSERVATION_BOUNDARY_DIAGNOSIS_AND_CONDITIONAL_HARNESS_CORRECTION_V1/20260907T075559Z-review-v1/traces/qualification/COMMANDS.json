@@ -1,0 +1,2903 @@
+[
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.495867+00:00",
+    "method": "Page.enable",
+    "params": {},
+    "result": {
+      "id": 1,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.497455+00:00",
+    "method": "Emulation.setFocusEmulationEnabled",
+    "params": {
+      "enabled": true
+    },
+    "result": {
+      "id": 2,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.498418+00:00",
+    "method": "Browser.getVersion",
+    "params": {},
+    "result": {
+      "id": 3,
+      "result": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/149.0.7827.55",
+        "revision": "@3188f8a607ae7e067593be8aab7f02d2451fec07",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+        "jsVersion": "14.9.207.21"
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.513274+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4196/lifecycle-away?fixture=sync"
+    },
+    "result": {
+      "id": 4,
+      "result": {
+        "frameId": "ED86687751C2065C5CC289F134A69889",
+        "loaderId": "42350F7F51E08C4FEBE59309A14C1C67",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.540092+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.readyState===\"complete\" && location.search===\"?fixture=sync\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 5,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.544077+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(() => {\n const ids=new WeakMap();let serial=0;\n const id=o=>{if(!ids.has(o))ids.set(o,++serial);return ids.get(o)};\n function fibers(){const el=document.getElementById('root');if(!el)return[];const key=Object.keys(el).find(k=>k.startsWith('__reactContainer$'));if(!key)return[];const f=el[key];const root=f.stateNode?.current||f;const out=[],q=[root];while(q.length){const x=q.pop();out.push(x);if(x.sibling)q.push(x.sibling);if(x.child)q.push(x.child)}return out}\n function stores(){return [...new Set(fibers().map(f=>f.memoizedProps?.value).filter(v=>v&&typeof v.getSnapshot==='function'&&typeof v.select==='function'))]}\n function snapshot(){return stores().map(s=>{const v=s.getSnapshot();return {owner:id(s),lifetime:id(v.lifetime),revision:v.revision,surfaceId:v.surfaceId,workspaceId:v.workspaceId,projectId:v.projectId,selectedRefs:v.selectedRefs,primaryRef:v.primaryRef,supported:v.supported}})}\n function router(){return fibers().map(f=>f.memoizedProps?.value).find(v=>v&&typeof v.navigate==='function'&&v.history&&v.state)}\n function proposals(){const rows=[];for(const f of fibers()){let h=f.memoizedState;let guard=0;while(h&&typeof h==='object'&&guard++<100){const p=h.memoizedState;if(p&&typeof p==='object'&&p.lifetime&&'intent' in p&&'revision' in p)rows.push({lifetime:id(p.lifetime),revision:p.revision,intent:p.intent,target:p.target});h=h.next}}return rows}\n const probe={documentId:crypto.randomUUID(),events:[],observations:[],snapshot,proposals,router};\n const record=(event,persisted)=>probe.events.push({event,persisted,path:location.pathname,at:performance.now(),snapshot:snapshot(),proposals:proposals(),selectedDom:[...document.querySelectorAll('[data-canvas-node][aria-pressed=\"true\"]')].map(e=>e.dataset.canvasNode),capture:probe.capture||[]});\n for(const type of ['pagehide','pageshow'])addEventListener(type,event=>queueMicrotask(()=>record(type,event.persisted)));\n document.addEventListener('gotpointercapture',e=>(probe.capture ||= []).push({type:e.type,id:e.pointerId}),true);\n document.addEventListener('lostpointercapture',e=>(probe.capture ||= []).push({type:e.type,id:e.pointerId}),true);\n probe.captureState=()=>[...document.querySelectorAll('.ff-workspace-canvas')].map(e=>({connected:e.isConnected,held:(probe.capture||[]).filter(x=>x.type==='gotpointercapture').some(x=>e.hasPointerCapture(x.id))}));\n new MutationObserver(()=>{const rows=snapshot();if(rows.length)probe.observations.push({path:location.pathname,hash:location.hash,search:location.search,shell:document.querySelector('.ff-app-shell')?.dataset.surface,snapshot:rows})}).observe(document,{subtree:true,childList:true,attributes:true});\n window.__lifecycleProbe=probe;\n})();",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 6,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.547744+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(() => {\n const ids=new WeakMap();let serial=0;const id=x=>{if(!ids.has(x))ids.set(x,++serial);return ids.get(x)};\n const rows=[],bound=[];let current=null,departure=null;const documentId=crypto.randomUUID();\n function stores(){const el=document.getElementById('root');if(!el)return[];const k=Object.keys(el).find(k=>k.startsWith('__reactContainer$'));if(!k)return[];const f=el[k],q=[f.stateNode?.current||f],found=[];while(q.length){const x=q.pop();if(x.memoizedProps?.value?.getSnapshot&&x.memoizedProps.value.select)found.push(x.memoizedProps.value);if(x.child)q.push(x.child);if(x.sibling)q.push(x.sibling)}return [...new Set(found)]}\n function snap(s){const v=s.getSnapshot();return {store:id(s),lifetime:id(v.lifetime),revision:v.revision,refs:v.selectedRefs,primary:v.primaryRef,agentOpen:v.agentOpen}}\n function dom(){return {capture:[...document.querySelectorAll('.ff-workspace-canvas')].map(e=>({held:[...new Set((window.__lifecycleProbe?.capture||[]).map(x=>x.id))].filter(n=>e.hasPointerCapture(n))})),preview:!!document.querySelector('[data-canvas-marquee]'),proposal:!!document.querySelector('[data-testid=agent-proposal]'),positions:[...document.querySelectorAll('[data-canvas-node]')].map(e=>({id:e.dataset.canvasNode,left:e.style.left,top:e.style.top}))}}\n function mark(kind,event=null,store=null){const row={seq:rows.length+1,kind,documentId,at:performance.now(),event:event?{id:id(event),type:event.type,trusted:event.isTrusted,persisted:typeof event.persisted==='boolean'?event.persisted:null,phase:event.eventPhase}:null,departure,armed:current,stores:(store?[store]:bound).map(snap),dom:dom()};rows.push(row);return row}\n function arm(reader=stores){const ss=reader();if(ss.length!==1)throw Error('expected exactly one store');const s=ss[0];if(!bound.includes(s)){bound.push(s);s.subscribe(()=>{const row=mark('notify',null,s);row.stack=new Error('same-store notification').stack})}current={documentId,...snap(s)};mark('armed');return current}\n const p={documentId,rows,arm,mark,snapshot:()=>bound.map(snap),dom};window.__boundary=p;\n for(const type of ['pagehide','pageshow'])addEventListener(type,e=>{if(type==='pagehide')departure={id:id(e),trusted:e.isTrusted,persisted:e.persisted};mark('early-'+type,e);if(type==='pagehide')rows[rows.length-1].originalSamples=JSON.parse(JSON.stringify(window.__lifecycleProbe.events));queueMicrotask(()=>mark('early-microtask-'+type,e))});\n for(const type of ['freeze','resume'])document.addEventListener(type,e=>mark(type,e),true);\n p.installLate=()=>{addEventListener('pagehide',e=>mark('capture-pagehide',e),true);addEventListener('pagehide',e=>mark('late-pagehide',e));mark('late-listeners-registered')};\n mark('installed-before-application');\n})();\n",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 7,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.551779+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{document.body.innerHTML='<div class=\"ff-workspace-canvas\"></div>';let state={lifetime:{},revision:2,selectedRefs:[{localId:'fixture'}],primaryRef:{localId:'fixture'},agentOpen:false};const listeners=new Set();window.fixtureStore={getSnapshot:()=>state,select:()=>{throw Error('fixture disallows select')},subscribe:fn=>(listeners.add(fn),()=>listeners.delete(fn))};window.fixtureRetire=()=>{state={...state,lifetime:{},revision:3,selectedRefs:[],primaryRef:null};listeners.forEach(fn=>fn())}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 8,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.554141+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__boundary.arm(()=>[fixtureStore])",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 9,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+            "store": 1,
+            "lifetime": 2,
+            "revision": 2,
+            "refs": [
+              {
+                "localId": "fixture"
+              }
+            ],
+            "primary": {
+              "localId": "fixture"
+            },
+            "agentOpen": false
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.556853+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "addEventListener('pagehide',fixtureRetire)",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 10,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.558947+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__boundary.installLate()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 11,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.560745+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__boundary.documentId",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 12,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "1f67dd84-7072-4a7c-a56c-c78789bbad38"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.570178+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4196/lifecycle-away?destination=sync"
+    },
+    "result": {
+      "id": 13,
+      "result": {
+        "frameId": "ED86687751C2065C5CC289F134A69889",
+        "loaderId": "5A799E53BC05E64CFA4E2F371C16340B",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.586233+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "location.search===\"?destination=sync\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 14,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.590937+00:00",
+    "method": "Page.getNavigationHistory",
+    "params": {},
+    "result": {
+      "id": 15,
+      "result": {
+        "currentIndex": 2,
+        "entries": [
+          {
+            "id": 2,
+            "url": "about:blank",
+            "userTypedURL": "about:blank",
+            "title": "",
+            "transitionType": "auto_toplevel"
+          },
+          {
+            "id": 4,
+            "url": "http://127.0.0.1:4196/lifecycle-away?fixture=sync",
+            "userTypedURL": "http://127.0.0.1:4196/lifecycle-away?fixture=sync",
+            "title": "External lifecycle fixture",
+            "transitionType": "typed"
+          },
+          {
+            "id": 6,
+            "url": "http://127.0.0.1:4196/lifecycle-away?destination=sync",
+            "userTypedURL": "http://127.0.0.1:4196/lifecycle-away?destination=sync",
+            "title": "External lifecycle fixture",
+            "transitionType": "typed"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.595116+00:00",
+    "method": "Page.navigateToHistoryEntry",
+    "params": {
+      "entryId": 4
+    },
+    "result": {
+      "id": 16,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.601808+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "typeof __boundary!==\"undefined\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 17,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.610170+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "({documentId:__boundary.documentId,rows:__boundary.rows})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 18,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+            "rows": [
+              {
+                "seq": 1,
+                "kind": "installed-before-application",
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "at": 46.400000002235174,
+                "event": null,
+                "departure": null,
+                "armed": null,
+                "stores": [],
+                "dom": {
+                  "capture": [],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 2,
+                "kind": "armed",
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "at": 52.900000002235174,
+                "event": null,
+                "departure": null,
+                "armed": {
+                  "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 3,
+                "kind": "late-listeners-registered",
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "at": 57.80000000074506,
+                "event": null,
+                "departure": null,
+                "armed": {
+                  "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 4,
+                "kind": "early-pagehide",
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "at": 72.40000000223517,
+                "event": {
+                  "id": 3,
+                  "type": "pagehide",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                },
+                "originalSamples": [
+                  {
+                    "event": "pagehide",
+                    "persisted": true,
+                    "path": "/lifecycle-away",
+                    "at": 72,
+                    "snapshot": [],
+                    "proposals": [],
+                    "selectedDom": [],
+                    "capture": []
+                  }
+                ]
+              },
+              {
+                "seq": 5,
+                "kind": "early-microtask-pagehide",
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "at": 72.5,
+                "event": {
+                  "id": 3,
+                  "type": "pagehide",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 6,
+                "kind": "notify",
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "at": 72.69999999925494,
+                "event": null,
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 4,
+                    "revision": 3,
+                    "refs": [],
+                    "primary": null,
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                },
+                "stack": "Error: same-store notification\n    at <anonymous>:8:217\n    at <anonymous>:1:492\n    at Set.forEach (<anonymous>)\n    at window.fixtureRetire (<anonymous>:1:480)"
+              },
+              {
+                "seq": 7,
+                "kind": "capture-pagehide",
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "at": 73,
+                "event": {
+                  "id": 3,
+                  "type": "pagehide",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 4,
+                    "revision": 3,
+                    "refs": [],
+                    "primary": null,
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 8,
+                "kind": "late-pagehide",
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "at": 73.10000000149012,
+                "event": {
+                  "id": 3,
+                  "type": "pagehide",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 4,
+                    "revision": 3,
+                    "refs": [],
+                    "primary": null,
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 9,
+                "kind": "freeze",
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "at": 80.10000000149012,
+                "event": {
+                  "id": 5,
+                  "type": "freeze",
+                  "trusted": true,
+                  "persisted": null,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 4,
+                    "revision": 3,
+                    "refs": [],
+                    "primary": null,
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 10,
+                "kind": "resume",
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "at": 96.40000000223517,
+                "event": {
+                  "id": 6,
+                  "type": "resume",
+                  "trusted": true,
+                  "persisted": null,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 4,
+                    "revision": 3,
+                    "refs": [],
+                    "primary": null,
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 11,
+                "kind": "early-pageshow",
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "at": 96.80000000074506,
+                "event": {
+                  "id": 7,
+                  "type": "pageshow",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 4,
+                    "revision": 3,
+                    "refs": [],
+                    "primary": null,
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 12,
+                "kind": "early-microtask-pageshow",
+                "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                "at": 96.90000000223517,
+                "event": {
+                  "id": 7,
+                  "type": "pageshow",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 4,
+                    "revision": 3,
+                    "refs": [],
+                    "primary": null,
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.619705+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4196/lifecycle-away?fixture=none"
+    },
+    "result": {
+      "id": 19,
+      "result": {
+        "frameId": "ED86687751C2065C5CC289F134A69889",
+        "loaderId": "7AF655C7429D642C4AF0FCB5698F7867",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.637056+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.readyState===\"complete\" && location.search===\"?fixture=none\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 20,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.643423+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(() => {\n const ids=new WeakMap();let serial=0;\n const id=o=>{if(!ids.has(o))ids.set(o,++serial);return ids.get(o)};\n function fibers(){const el=document.getElementById('root');if(!el)return[];const key=Object.keys(el).find(k=>k.startsWith('__reactContainer$'));if(!key)return[];const f=el[key];const root=f.stateNode?.current||f;const out=[],q=[root];while(q.length){const x=q.pop();out.push(x);if(x.sibling)q.push(x.sibling);if(x.child)q.push(x.child)}return out}\n function stores(){return [...new Set(fibers().map(f=>f.memoizedProps?.value).filter(v=>v&&typeof v.getSnapshot==='function'&&typeof v.select==='function'))]}\n function snapshot(){return stores().map(s=>{const v=s.getSnapshot();return {owner:id(s),lifetime:id(v.lifetime),revision:v.revision,surfaceId:v.surfaceId,workspaceId:v.workspaceId,projectId:v.projectId,selectedRefs:v.selectedRefs,primaryRef:v.primaryRef,supported:v.supported}})}\n function router(){return fibers().map(f=>f.memoizedProps?.value).find(v=>v&&typeof v.navigate==='function'&&v.history&&v.state)}\n function proposals(){const rows=[];for(const f of fibers()){let h=f.memoizedState;let guard=0;while(h&&typeof h==='object'&&guard++<100){const p=h.memoizedState;if(p&&typeof p==='object'&&p.lifetime&&'intent' in p&&'revision' in p)rows.push({lifetime:id(p.lifetime),revision:p.revision,intent:p.intent,target:p.target});h=h.next}}return rows}\n const probe={documentId:crypto.randomUUID(),events:[],observations:[],snapshot,proposals,router};\n const record=(event,persisted)=>probe.events.push({event,persisted,path:location.pathname,at:performance.now(),snapshot:snapshot(),proposals:proposals(),selectedDom:[...document.querySelectorAll('[data-canvas-node][aria-pressed=\"true\"]')].map(e=>e.dataset.canvasNode),capture:probe.capture||[]});\n for(const type of ['pagehide','pageshow'])addEventListener(type,event=>queueMicrotask(()=>record(type,event.persisted)));\n document.addEventListener('gotpointercapture',e=>(probe.capture ||= []).push({type:e.type,id:e.pointerId}),true);\n document.addEventListener('lostpointercapture',e=>(probe.capture ||= []).push({type:e.type,id:e.pointerId}),true);\n probe.captureState=()=>[...document.querySelectorAll('.ff-workspace-canvas')].map(e=>({connected:e.isConnected,held:(probe.capture||[]).filter(x=>x.type==='gotpointercapture').some(x=>e.hasPointerCapture(x.id))}));\n new MutationObserver(()=>{const rows=snapshot();if(rows.length)probe.observations.push({path:location.pathname,hash:location.hash,search:location.search,shell:document.querySelector('.ff-app-shell')?.dataset.surface,snapshot:rows})}).observe(document,{subtree:true,childList:true,attributes:true});\n window.__lifecycleProbe=probe;\n})();",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 21,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.647021+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(() => {\n const ids=new WeakMap();let serial=0;const id=x=>{if(!ids.has(x))ids.set(x,++serial);return ids.get(x)};\n const rows=[],bound=[];let current=null,departure=null;const documentId=crypto.randomUUID();\n function stores(){const el=document.getElementById('root');if(!el)return[];const k=Object.keys(el).find(k=>k.startsWith('__reactContainer$'));if(!k)return[];const f=el[k],q=[f.stateNode?.current||f],found=[];while(q.length){const x=q.pop();if(x.memoizedProps?.value?.getSnapshot&&x.memoizedProps.value.select)found.push(x.memoizedProps.value);if(x.child)q.push(x.child);if(x.sibling)q.push(x.sibling)}return [...new Set(found)]}\n function snap(s){const v=s.getSnapshot();return {store:id(s),lifetime:id(v.lifetime),revision:v.revision,refs:v.selectedRefs,primary:v.primaryRef,agentOpen:v.agentOpen}}\n function dom(){return {capture:[...document.querySelectorAll('.ff-workspace-canvas')].map(e=>({held:[...new Set((window.__lifecycleProbe?.capture||[]).map(x=>x.id))].filter(n=>e.hasPointerCapture(n))})),preview:!!document.querySelector('[data-canvas-marquee]'),proposal:!!document.querySelector('[data-testid=agent-proposal]'),positions:[...document.querySelectorAll('[data-canvas-node]')].map(e=>({id:e.dataset.canvasNode,left:e.style.left,top:e.style.top}))}}\n function mark(kind,event=null,store=null){const row={seq:rows.length+1,kind,documentId,at:performance.now(),event:event?{id:id(event),type:event.type,trusted:event.isTrusted,persisted:typeof event.persisted==='boolean'?event.persisted:null,phase:event.eventPhase}:null,departure,armed:current,stores:(store?[store]:bound).map(snap),dom:dom()};rows.push(row);return row}\n function arm(reader=stores){const ss=reader();if(ss.length!==1)throw Error('expected exactly one store');const s=ss[0];if(!bound.includes(s)){bound.push(s);s.subscribe(()=>{const row=mark('notify',null,s);row.stack=new Error('same-store notification').stack})}current={documentId,...snap(s)};mark('armed');return current}\n const p={documentId,rows,arm,mark,snapshot:()=>bound.map(snap),dom};window.__boundary=p;\n for(const type of ['pagehide','pageshow'])addEventListener(type,e=>{if(type==='pagehide')departure={id:id(e),trusted:e.isTrusted,persisted:e.persisted};mark('early-'+type,e);if(type==='pagehide')rows[rows.length-1].originalSamples=JSON.parse(JSON.stringify(window.__lifecycleProbe.events));queueMicrotask(()=>mark('early-microtask-'+type,e))});\n for(const type of ['freeze','resume'])document.addEventListener(type,e=>mark(type,e),true);\n p.installLate=()=>{addEventListener('pagehide',e=>mark('capture-pagehide',e),true);addEventListener('pagehide',e=>mark('late-pagehide',e));mark('late-listeners-registered')};\n mark('installed-before-application');\n})();\n",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 22,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.650331+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{document.body.innerHTML='<div class=\"ff-workspace-canvas\"></div>';let state={lifetime:{},revision:2,selectedRefs:[{localId:'fixture'}],primaryRef:{localId:'fixture'},agentOpen:false};const listeners=new Set();window.fixtureStore={getSnapshot:()=>state,select:()=>{throw Error('fixture disallows select')},subscribe:fn=>(listeners.add(fn),()=>listeners.delete(fn))};window.fixtureRetire=()=>{state={...state,lifetime:{},revision:3,selectedRefs:[],primaryRef:null};listeners.forEach(fn=>fn())}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 23,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.653267+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__boundary.arm(()=>[fixtureStore])",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 24,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+            "store": 1,
+            "lifetime": 2,
+            "revision": 2,
+            "refs": [
+              {
+                "localId": "fixture"
+              }
+            ],
+            "primary": {
+              "localId": "fixture"
+            },
+            "agentOpen": false
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.657831+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__boundary.installLate()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 25,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.660610+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__boundary.documentId",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 26,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "b44d7eee-8345-4e1e-987e-987e12a9e424"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.673108+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4196/lifecycle-away?destination=none"
+    },
+    "result": {
+      "id": 27,
+      "result": {
+        "frameId": "ED86687751C2065C5CC289F134A69889",
+        "loaderId": "922BF5052FDA2A83648B93FE191EA92A",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.689387+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "location.search===\"?destination=none\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 28,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.697738+00:00",
+    "method": "Page.getNavigationHistory",
+    "params": {},
+    "result": {
+      "id": 29,
+      "result": {
+        "currentIndex": 3,
+        "entries": [
+          {
+            "id": 2,
+            "url": "about:blank",
+            "userTypedURL": "about:blank",
+            "title": "",
+            "transitionType": "auto_toplevel"
+          },
+          {
+            "id": 4,
+            "url": "http://127.0.0.1:4196/lifecycle-away?fixture=sync",
+            "userTypedURL": "http://127.0.0.1:4196/lifecycle-away?fixture=sync",
+            "title": "External lifecycle fixture",
+            "transitionType": "typed"
+          },
+          {
+            "id": 8,
+            "url": "http://127.0.0.1:4196/lifecycle-away?fixture=none",
+            "userTypedURL": "http://127.0.0.1:4196/lifecycle-away?fixture=none",
+            "title": "External lifecycle fixture",
+            "transitionType": "typed"
+          },
+          {
+            "id": 10,
+            "url": "http://127.0.0.1:4196/lifecycle-away?destination=none",
+            "userTypedURL": "http://127.0.0.1:4196/lifecycle-away?destination=none",
+            "title": "External lifecycle fixture",
+            "transitionType": "typed"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.702011+00:00",
+    "method": "Page.navigateToHistoryEntry",
+    "params": {
+      "entryId": 8
+    },
+    "result": {
+      "id": 30,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.709738+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "typeof __boundary!==\"undefined\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 31,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.715181+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "({documentId:__boundary.documentId,rows:__boundary.rows})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 32,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+            "rows": [
+              {
+                "seq": 1,
+                "kind": "installed-before-application",
+                "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                "at": 33.30000000074506,
+                "event": null,
+                "departure": null,
+                "armed": null,
+                "stores": [],
+                "dom": {
+                  "capture": [],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 2,
+                "kind": "armed",
+                "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                "at": 39.600000001490116,
+                "event": null,
+                "departure": null,
+                "armed": {
+                  "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 3,
+                "kind": "late-listeners-registered",
+                "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                "at": 44.19999999925494,
+                "event": null,
+                "departure": null,
+                "armed": {
+                  "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 4,
+                "kind": "early-pagehide",
+                "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                "at": 62.5,
+                "event": {
+                  "id": 3,
+                  "type": "pagehide",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                },
+                "originalSamples": [
+                  {
+                    "event": "pagehide",
+                    "persisted": true,
+                    "path": "/lifecycle-away",
+                    "at": 62.400000002235174,
+                    "snapshot": [],
+                    "proposals": [],
+                    "selectedDom": [],
+                    "capture": []
+                  }
+                ]
+              },
+              {
+                "seq": 5,
+                "kind": "early-microtask-pagehide",
+                "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                "at": 62.600000001490116,
+                "event": {
+                  "id": 3,
+                  "type": "pagehide",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 6,
+                "kind": "capture-pagehide",
+                "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                "at": 62.69999999925494,
+                "event": {
+                  "id": 3,
+                  "type": "pagehide",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 7,
+                "kind": "late-pagehide",
+                "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                "at": 62.69999999925494,
+                "event": {
+                  "id": 3,
+                  "type": "pagehide",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 8,
+                "kind": "freeze",
+                "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                "at": 69.60000000149012,
+                "event": {
+                  "id": 4,
+                  "type": "freeze",
+                  "trusted": true,
+                  "persisted": null,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 9,
+                "kind": "resume",
+                "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                "at": 90.5,
+                "event": {
+                  "id": 5,
+                  "type": "resume",
+                  "trusted": true,
+                  "persisted": null,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 10,
+                "kind": "early-pageshow",
+                "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                "at": 90.80000000074506,
+                "event": {
+                  "id": 6,
+                  "type": "pageshow",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 11,
+                "kind": "early-microtask-pageshow",
+                "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                "at": 90.80000000074506,
+                "event": {
+                  "id": 6,
+                  "type": "pageshow",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.725036+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4196/lifecycle-away?fixture=restore_only"
+    },
+    "result": {
+      "id": 33,
+      "result": {
+        "frameId": "ED86687751C2065C5CC289F134A69889",
+        "loaderId": "45E7A9630FE434F3FEE7E01741A876C7",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.742157+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.readyState===\"complete\" && location.search===\"?fixture=restore_only\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 34,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.747409+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(() => {\n const ids=new WeakMap();let serial=0;\n const id=o=>{if(!ids.has(o))ids.set(o,++serial);return ids.get(o)};\n function fibers(){const el=document.getElementById('root');if(!el)return[];const key=Object.keys(el).find(k=>k.startsWith('__reactContainer$'));if(!key)return[];const f=el[key];const root=f.stateNode?.current||f;const out=[],q=[root];while(q.length){const x=q.pop();out.push(x);if(x.sibling)q.push(x.sibling);if(x.child)q.push(x.child)}return out}\n function stores(){return [...new Set(fibers().map(f=>f.memoizedProps?.value).filter(v=>v&&typeof v.getSnapshot==='function'&&typeof v.select==='function'))]}\n function snapshot(){return stores().map(s=>{const v=s.getSnapshot();return {owner:id(s),lifetime:id(v.lifetime),revision:v.revision,surfaceId:v.surfaceId,workspaceId:v.workspaceId,projectId:v.projectId,selectedRefs:v.selectedRefs,primaryRef:v.primaryRef,supported:v.supported}})}\n function router(){return fibers().map(f=>f.memoizedProps?.value).find(v=>v&&typeof v.navigate==='function'&&v.history&&v.state)}\n function proposals(){const rows=[];for(const f of fibers()){let h=f.memoizedState;let guard=0;while(h&&typeof h==='object'&&guard++<100){const p=h.memoizedState;if(p&&typeof p==='object'&&p.lifetime&&'intent' in p&&'revision' in p)rows.push({lifetime:id(p.lifetime),revision:p.revision,intent:p.intent,target:p.target});h=h.next}}return rows}\n const probe={documentId:crypto.randomUUID(),events:[],observations:[],snapshot,proposals,router};\n const record=(event,persisted)=>probe.events.push({event,persisted,path:location.pathname,at:performance.now(),snapshot:snapshot(),proposals:proposals(),selectedDom:[...document.querySelectorAll('[data-canvas-node][aria-pressed=\"true\"]')].map(e=>e.dataset.canvasNode),capture:probe.capture||[]});\n for(const type of ['pagehide','pageshow'])addEventListener(type,event=>queueMicrotask(()=>record(type,event.persisted)));\n document.addEventListener('gotpointercapture',e=>(probe.capture ||= []).push({type:e.type,id:e.pointerId}),true);\n document.addEventListener('lostpointercapture',e=>(probe.capture ||= []).push({type:e.type,id:e.pointerId}),true);\n probe.captureState=()=>[...document.querySelectorAll('.ff-workspace-canvas')].map(e=>({connected:e.isConnected,held:(probe.capture||[]).filter(x=>x.type==='gotpointercapture').some(x=>e.hasPointerCapture(x.id))}));\n new MutationObserver(()=>{const rows=snapshot();if(rows.length)probe.observations.push({path:location.pathname,hash:location.hash,search:location.search,shell:document.querySelector('.ff-app-shell')?.dataset.surface,snapshot:rows})}).observe(document,{subtree:true,childList:true,attributes:true});\n window.__lifecycleProbe=probe;\n})();",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 35,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.751868+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(() => {\n const ids=new WeakMap();let serial=0;const id=x=>{if(!ids.has(x))ids.set(x,++serial);return ids.get(x)};\n const rows=[],bound=[];let current=null,departure=null;const documentId=crypto.randomUUID();\n function stores(){const el=document.getElementById('root');if(!el)return[];const k=Object.keys(el).find(k=>k.startsWith('__reactContainer$'));if(!k)return[];const f=el[k],q=[f.stateNode?.current||f],found=[];while(q.length){const x=q.pop();if(x.memoizedProps?.value?.getSnapshot&&x.memoizedProps.value.select)found.push(x.memoizedProps.value);if(x.child)q.push(x.child);if(x.sibling)q.push(x.sibling)}return [...new Set(found)]}\n function snap(s){const v=s.getSnapshot();return {store:id(s),lifetime:id(v.lifetime),revision:v.revision,refs:v.selectedRefs,primary:v.primaryRef,agentOpen:v.agentOpen}}\n function dom(){return {capture:[...document.querySelectorAll('.ff-workspace-canvas')].map(e=>({held:[...new Set((window.__lifecycleProbe?.capture||[]).map(x=>x.id))].filter(n=>e.hasPointerCapture(n))})),preview:!!document.querySelector('[data-canvas-marquee]'),proposal:!!document.querySelector('[data-testid=agent-proposal]'),positions:[...document.querySelectorAll('[data-canvas-node]')].map(e=>({id:e.dataset.canvasNode,left:e.style.left,top:e.style.top}))}}\n function mark(kind,event=null,store=null){const row={seq:rows.length+1,kind,documentId,at:performance.now(),event:event?{id:id(event),type:event.type,trusted:event.isTrusted,persisted:typeof event.persisted==='boolean'?event.persisted:null,phase:event.eventPhase}:null,departure,armed:current,stores:(store?[store]:bound).map(snap),dom:dom()};rows.push(row);return row}\n function arm(reader=stores){const ss=reader();if(ss.length!==1)throw Error('expected exactly one store');const s=ss[0];if(!bound.includes(s)){bound.push(s);s.subscribe(()=>{const row=mark('notify',null,s);row.stack=new Error('same-store notification').stack})}current={documentId,...snap(s)};mark('armed');return current}\n const p={documentId,rows,arm,mark,snapshot:()=>bound.map(snap),dom};window.__boundary=p;\n for(const type of ['pagehide','pageshow'])addEventListener(type,e=>{if(type==='pagehide')departure={id:id(e),trusted:e.isTrusted,persisted:e.persisted};mark('early-'+type,e);if(type==='pagehide')rows[rows.length-1].originalSamples=JSON.parse(JSON.stringify(window.__lifecycleProbe.events));queueMicrotask(()=>mark('early-microtask-'+type,e))});\n for(const type of ['freeze','resume'])document.addEventListener(type,e=>mark(type,e),true);\n p.installLate=()=>{addEventListener('pagehide',e=>mark('capture-pagehide',e),true);addEventListener('pagehide',e=>mark('late-pagehide',e));mark('late-listeners-registered')};\n mark('installed-before-application');\n})();\n",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 36,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.757137+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{document.body.innerHTML='<div class=\"ff-workspace-canvas\"></div>';let state={lifetime:{},revision:2,selectedRefs:[{localId:'fixture'}],primaryRef:{localId:'fixture'},agentOpen:false};const listeners=new Set();window.fixtureStore={getSnapshot:()=>state,select:()=>{throw Error('fixture disallows select')},subscribe:fn=>(listeners.add(fn),()=>listeners.delete(fn))};window.fixtureRetire=()=>{state={...state,lifetime:{},revision:3,selectedRefs:[],primaryRef:null};listeners.forEach(fn=>fn())}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 37,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.760986+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__boundary.arm(()=>[fixtureStore])",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 38,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+            "store": 1,
+            "lifetime": 2,
+            "revision": 2,
+            "refs": [
+              {
+                "localId": "fixture"
+              }
+            ],
+            "primary": {
+              "localId": "fixture"
+            },
+            "agentOpen": false
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.765143+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "addEventListener('pageshow',e=>{if(e.persisted)fixtureRetire()})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 39,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.768884+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__boundary.installLate()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 40,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.772377+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__boundary.documentId",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 41,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "cbc4f29e-541b-4d68-a505-3a8ac5809527"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.784698+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4196/lifecycle-away?destination=restore_only"
+    },
+    "result": {
+      "id": 42,
+      "result": {
+        "frameId": "ED86687751C2065C5CC289F134A69889",
+        "loaderId": "382B2982516F1B6150A0263FC3800DBD",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.799548+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "location.search===\"?destination=restore_only\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 43,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.802979+00:00",
+    "method": "Page.getNavigationHistory",
+    "params": {},
+    "result": {
+      "id": 44,
+      "result": {
+        "currentIndex": 4,
+        "entries": [
+          {
+            "id": 2,
+            "url": "about:blank",
+            "userTypedURL": "about:blank",
+            "title": "",
+            "transitionType": "auto_toplevel"
+          },
+          {
+            "id": 4,
+            "url": "http://127.0.0.1:4196/lifecycle-away?fixture=sync",
+            "userTypedURL": "http://127.0.0.1:4196/lifecycle-away?fixture=sync",
+            "title": "External lifecycle fixture",
+            "transitionType": "typed"
+          },
+          {
+            "id": 8,
+            "url": "http://127.0.0.1:4196/lifecycle-away?fixture=none",
+            "userTypedURL": "http://127.0.0.1:4196/lifecycle-away?fixture=none",
+            "title": "External lifecycle fixture",
+            "transitionType": "typed"
+          },
+          {
+            "id": 12,
+            "url": "http://127.0.0.1:4196/lifecycle-away?fixture=restore_only",
+            "userTypedURL": "http://127.0.0.1:4196/lifecycle-away?fixture=restore_only",
+            "title": "External lifecycle fixture",
+            "transitionType": "typed"
+          },
+          {
+            "id": 14,
+            "url": "http://127.0.0.1:4196/lifecycle-away?destination=restore_only",
+            "userTypedURL": "http://127.0.0.1:4196/lifecycle-away?destination=restore_only",
+            "title": "External lifecycle fixture",
+            "transitionType": "typed"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.808018+00:00",
+    "method": "Page.navigateToHistoryEntry",
+    "params": {
+      "entryId": 12
+    },
+    "result": {
+      "id": 45,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.813536+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "typeof __boundary!==\"undefined\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 46,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.819900+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "({documentId:__boundary.documentId,rows:__boundary.rows})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 47,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+            "rows": [
+              {
+                "seq": 1,
+                "kind": "installed-before-application",
+                "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                "at": 31.600000001490116,
+                "event": null,
+                "departure": null,
+                "armed": null,
+                "stores": [],
+                "dom": {
+                  "capture": [],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 2,
+                "kind": "armed",
+                "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                "at": 40.69999999925494,
+                "event": null,
+                "departure": null,
+                "armed": {
+                  "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 3,
+                "kind": "late-listeners-registered",
+                "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                "at": 48.69999999925494,
+                "event": null,
+                "departure": null,
+                "armed": {
+                  "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 4,
+                "kind": "early-pagehide",
+                "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                "at": 67.60000000149012,
+                "event": {
+                  "id": 3,
+                  "type": "pagehide",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                },
+                "originalSamples": [
+                  {
+                    "event": "pagehide",
+                    "persisted": true,
+                    "path": "/lifecycle-away",
+                    "at": 67.40000000223517,
+                    "snapshot": [],
+                    "proposals": [],
+                    "selectedDom": [],
+                    "capture": []
+                  }
+                ]
+              },
+              {
+                "seq": 5,
+                "kind": "early-microtask-pagehide",
+                "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                "at": 67.60000000149012,
+                "event": {
+                  "id": 3,
+                  "type": "pagehide",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 6,
+                "kind": "capture-pagehide",
+                "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                "at": 67.69999999925494,
+                "event": {
+                  "id": 3,
+                  "type": "pagehide",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 7,
+                "kind": "late-pagehide",
+                "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                "at": 67.69999999925494,
+                "event": {
+                  "id": 3,
+                  "type": "pagehide",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 8,
+                "kind": "freeze",
+                "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                "at": 74.90000000223517,
+                "event": {
+                  "id": 4,
+                  "type": "freeze",
+                  "trusted": true,
+                  "persisted": null,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 9,
+                "kind": "resume",
+                "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                "at": 89.90000000223517,
+                "event": {
+                  "id": 5,
+                  "type": "resume",
+                  "trusted": true,
+                  "persisted": null,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 10,
+                "kind": "early-pageshow",
+                "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                "at": 90.19999999925494,
+                "event": {
+                  "id": 6,
+                  "type": "pageshow",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 11,
+                "kind": "early-microtask-pageshow",
+                "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                "at": 90.19999999925494,
+                "event": {
+                  "id": 6,
+                  "type": "pageshow",
+                  "trusted": true,
+                  "persisted": true,
+                  "phase": 2
+                },
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "refs": [
+                      {
+                        "localId": "fixture"
+                      }
+                    ],
+                    "primary": {
+                      "localId": "fixture"
+                    },
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                }
+              },
+              {
+                "seq": 12,
+                "kind": "notify",
+                "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                "at": 90.19999999925494,
+                "event": null,
+                "departure": {
+                  "id": 3,
+                  "trusted": true,
+                  "persisted": true
+                },
+                "armed": {
+                  "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+                  "store": 1,
+                  "lifetime": 2,
+                  "revision": 2,
+                  "refs": [
+                    {
+                      "localId": "fixture"
+                    }
+                  ],
+                  "primary": {
+                    "localId": "fixture"
+                  },
+                  "agentOpen": false
+                },
+                "stores": [
+                  {
+                    "store": 1,
+                    "lifetime": 7,
+                    "revision": 3,
+                    "refs": [],
+                    "primary": null,
+                    "agentOpen": false
+                  }
+                ],
+                "dom": {
+                  "capture": [
+                    {
+                      "held": []
+                    }
+                  ],
+                  "preview": false,
+                  "proposal": false,
+                  "positions": []
+                },
+                "stack": "Error: same-store notification\n    at <anonymous>:8:217\n    at <anonymous>:1:492\n    at Set.forEach (<anonymous>)\n    at window.fixtureRetire (<anonymous>:1:480)\n    at <anonymous>:1:48"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.838561+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__boundary.documentId",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 48,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "cbc4f29e-541b-4d68-a505-3a8ac5809527"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.844767+00:00",
+    "method": "Page.reload",
+    "params": {},
+    "result": {
+      "id": 49,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.864302+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.readyState===\"complete\" && typeof __boundary===\"undefined\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 50,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.869495+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(() => {\n const ids=new WeakMap();let serial=0;\n const id=o=>{if(!ids.has(o))ids.set(o,++serial);return ids.get(o)};\n function fibers(){const el=document.getElementById('root');if(!el)return[];const key=Object.keys(el).find(k=>k.startsWith('__reactContainer$'));if(!key)return[];const f=el[key];const root=f.stateNode?.current||f;const out=[],q=[root];while(q.length){const x=q.pop();out.push(x);if(x.sibling)q.push(x.sibling);if(x.child)q.push(x.child)}return out}\n function stores(){return [...new Set(fibers().map(f=>f.memoizedProps?.value).filter(v=>v&&typeof v.getSnapshot==='function'&&typeof v.select==='function'))]}\n function snapshot(){return stores().map(s=>{const v=s.getSnapshot();return {owner:id(s),lifetime:id(v.lifetime),revision:v.revision,surfaceId:v.surfaceId,workspaceId:v.workspaceId,projectId:v.projectId,selectedRefs:v.selectedRefs,primaryRef:v.primaryRef,supported:v.supported}})}\n function router(){return fibers().map(f=>f.memoizedProps?.value).find(v=>v&&typeof v.navigate==='function'&&v.history&&v.state)}\n function proposals(){const rows=[];for(const f of fibers()){let h=f.memoizedState;let guard=0;while(h&&typeof h==='object'&&guard++<100){const p=h.memoizedState;if(p&&typeof p==='object'&&p.lifetime&&'intent' in p&&'revision' in p)rows.push({lifetime:id(p.lifetime),revision:p.revision,intent:p.intent,target:p.target});h=h.next}}return rows}\n const probe={documentId:crypto.randomUUID(),events:[],observations:[],snapshot,proposals,router};\n const record=(event,persisted)=>probe.events.push({event,persisted,path:location.pathname,at:performance.now(),snapshot:snapshot(),proposals:proposals(),selectedDom:[...document.querySelectorAll('[data-canvas-node][aria-pressed=\"true\"]')].map(e=>e.dataset.canvasNode),capture:probe.capture||[]});\n for(const type of ['pagehide','pageshow'])addEventListener(type,event=>queueMicrotask(()=>record(type,event.persisted)));\n document.addEventListener('gotpointercapture',e=>(probe.capture ||= []).push({type:e.type,id:e.pointerId}),true);\n document.addEventListener('lostpointercapture',e=>(probe.capture ||= []).push({type:e.type,id:e.pointerId}),true);\n probe.captureState=()=>[...document.querySelectorAll('.ff-workspace-canvas')].map(e=>({connected:e.isConnected,held:(probe.capture||[]).filter(x=>x.type==='gotpointercapture').some(x=>e.hasPointerCapture(x.id))}));\n new MutationObserver(()=>{const rows=snapshot();if(rows.length)probe.observations.push({path:location.pathname,hash:location.hash,search:location.search,shell:document.querySelector('.ff-app-shell')?.dataset.surface,snapshot:rows})}).observe(document,{subtree:true,childList:true,attributes:true});\n window.__lifecycleProbe=probe;\n})();",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 51,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.875524+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(() => {\n const ids=new WeakMap();let serial=0;const id=x=>{if(!ids.has(x))ids.set(x,++serial);return ids.get(x)};\n const rows=[],bound=[];let current=null,departure=null;const documentId=crypto.randomUUID();\n function stores(){const el=document.getElementById('root');if(!el)return[];const k=Object.keys(el).find(k=>k.startsWith('__reactContainer$'));if(!k)return[];const f=el[k],q=[f.stateNode?.current||f],found=[];while(q.length){const x=q.pop();if(x.memoizedProps?.value?.getSnapshot&&x.memoizedProps.value.select)found.push(x.memoizedProps.value);if(x.child)q.push(x.child);if(x.sibling)q.push(x.sibling)}return [...new Set(found)]}\n function snap(s){const v=s.getSnapshot();return {store:id(s),lifetime:id(v.lifetime),revision:v.revision,refs:v.selectedRefs,primary:v.primaryRef,agentOpen:v.agentOpen}}\n function dom(){return {capture:[...document.querySelectorAll('.ff-workspace-canvas')].map(e=>({held:[...new Set((window.__lifecycleProbe?.capture||[]).map(x=>x.id))].filter(n=>e.hasPointerCapture(n))})),preview:!!document.querySelector('[data-canvas-marquee]'),proposal:!!document.querySelector('[data-testid=agent-proposal]'),positions:[...document.querySelectorAll('[data-canvas-node]')].map(e=>({id:e.dataset.canvasNode,left:e.style.left,top:e.style.top}))}}\n function mark(kind,event=null,store=null){const row={seq:rows.length+1,kind,documentId,at:performance.now(),event:event?{id:id(event),type:event.type,trusted:event.isTrusted,persisted:typeof event.persisted==='boolean'?event.persisted:null,phase:event.eventPhase}:null,departure,armed:current,stores:(store?[store]:bound).map(snap),dom:dom()};rows.push(row);return row}\n function arm(reader=stores){const ss=reader();if(ss.length!==1)throw Error('expected exactly one store');const s=ss[0];if(!bound.includes(s)){bound.push(s);s.subscribe(()=>{const row=mark('notify',null,s);row.stack=new Error('same-store notification').stack})}current={documentId,...snap(s)};mark('armed');return current}\n const p={documentId,rows,arm,mark,snapshot:()=>bound.map(snap),dom};window.__boundary=p;\n for(const type of ['pagehide','pageshow'])addEventListener(type,e=>{if(type==='pagehide')departure={id:id(e),trusted:e.isTrusted,persisted:e.persisted};mark('early-'+type,e);if(type==='pagehide')rows[rows.length-1].originalSamples=JSON.parse(JSON.stringify(window.__lifecycleProbe.events));queueMicrotask(()=>mark('early-microtask-'+type,e))});\n for(const type of ['freeze','resume'])document.addEventListener(type,e=>mark(type,e),true);\n p.installLate=()=>{addEventListener('pagehide',e=>mark('capture-pagehide',e),true);addEventListener('pagehide',e=>mark('late-pagehide',e));mark('late-listeners-registered')};\n mark('installed-before-application');\n})();\n",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 52,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T07:40:57.880206+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__boundary.documentId",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 53,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "ce398fac-629c-43e4-8c64-c72d0c9e4992"
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "[LOCAL_TASK_ROOT]/helpers/d2.py", line 10, in <module>
+    check('D2-before');b.reset();ready();b.click(P);b.wait('__lifecycleProbe.snapshot()[0].selectedRefs.length===1');stage=b.rect('.ff-workspace-canvas');x=stage['x']+8;y=stage['y']+8;b.mouse('mouseMoved',x,y);b.mouse('mousePressed',x,y);b.move(x+60,y+60);b.wait('!!document.querySelector(".ff-canvas-marquee")');pending=probe();assert pending['snapshot'][0]['selectedRefs'] and any(v['held'] for v in pending['capture']);
+                                                                                                                                                                                                                                                                ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[LOCAL_TASK_ROOT]/runs/D2/browser_helpers.py", line 36, in wait
+    raise AssertionError('precondition timeout: '+expression)
+AssertionError: precondition timeout: !!document.querySelector(".ff-canvas-marquee")

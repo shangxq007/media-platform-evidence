@@ -1,0 +1,271 @@
+{
+  "checks": [
+    {
+      "name": "sync",
+      "expected_accept": true,
+      "actual": {
+        "passed": true,
+        "errors": [],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+        "departure_event": 3,
+        "freeze_seq": 9,
+        "notification_sequences": [
+          6
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "none",
+      "expected_accept": false,
+      "actual": {
+        "passed": false,
+        "errors": [
+          "not_retired_at_freeze",
+          "missing_departure_retirement_notification",
+          "missing_same_event_post_retirement_pagehide"
+        ],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "b44d7eee-8345-4e1e-987e-987e12a9e424",
+        "departure_event": 3,
+        "freeze_seq": 8,
+        "notification_sequences": []
+      },
+      "passed": true
+    },
+    {
+      "name": "restore_only",
+      "expected_accept": false,
+      "actual": {
+        "passed": false,
+        "errors": [
+          "not_retired_at_freeze",
+          "missing_departure_retirement_notification",
+          "missing_same_event_post_retirement_pagehide"
+        ],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+        "departure_event": 3,
+        "freeze_seq": 8,
+        "notification_sequences": []
+      },
+      "passed": true
+    },
+    {
+      "name": "sampling_before_retirement",
+      "fixture_type": "STRUCTURED_NEGATIVE_DERIVATIVE_OF_ACTUAL_FIXTURE_TRACE",
+      "expected_accept": false,
+      "actual": {
+        "passed": false,
+        "errors": [
+          "not_retired_at_freeze"
+        ],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+        "departure_event": 3,
+        "freeze_seq": 9,
+        "notification_sequences": [
+          6
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "wrong_document",
+      "fixture_type": "STRUCTURED_NEGATIVE_DERIVATIVE_OF_ACTUAL_FIXTURE_TRACE",
+      "expected_accept": false,
+      "actual": {
+        "passed": false,
+        "errors": [
+          "wrong_document"
+        ],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "wrong-document",
+        "departure_event": 3,
+        "freeze_seq": 9,
+        "notification_sequences": [
+          6
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "wrong_store",
+      "fixture_type": "STRUCTURED_NEGATIVE_DERIVATIVE_OF_ACTUAL_FIXTURE_TRACE",
+      "expected_accept": false,
+      "actual": {
+        "passed": false,
+        "errors": [
+          "departure_store_binding",
+          "not_retired_at_freeze",
+          "missing_departure_retirement_notification",
+          "missing_same_event_post_retirement_pagehide"
+        ],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+        "departure_event": 3,
+        "freeze_seq": 9,
+        "notification_sequences": []
+      },
+      "passed": true
+    },
+    {
+      "name": "wrong_lifetime",
+      "fixture_type": "STRUCTURED_NEGATIVE_DERIVATIVE_OF_ACTUAL_FIXTURE_TRACE",
+      "expected_accept": false,
+      "actual": {
+        "passed": false,
+        "errors": [
+          "departure_store_binding",
+          "not_retired_at_freeze",
+          "missing_departure_retirement_notification",
+          "missing_same_event_post_retirement_pagehide"
+        ],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+        "departure_event": 3,
+        "freeze_seq": 9,
+        "notification_sequences": []
+      },
+      "passed": true
+    },
+    {
+      "name": "missing_rows",
+      "fixture_type": "STRUCTURED_NEGATIVE_DERIVATIVE_OF_ACTUAL_FIXTURE_TRACE",
+      "expected_accept": false,
+      "actual": {
+        "passed": false,
+        "errors": [
+          "missing_rows",
+          "exact_matching_departure_freeze_restore"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "truncated_rows",
+      "fixture_type": "STRUCTURED_NEGATIVE_DERIVATIVE_OF_ACTUAL_FIXTURE_TRACE",
+      "expected_accept": false,
+      "actual": {
+        "passed": false,
+        "errors": [
+          "exact_matching_departure_freeze_restore"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "missing_notification",
+      "fixture_type": "STRUCTURED_NEGATIVE_DERIVATIVE_OF_ACTUAL_FIXTURE_TRACE",
+      "expected_accept": false,
+      "actual": {
+        "passed": false,
+        "errors": [
+          "truncated_or_reordered_rows",
+          "missing_departure_retirement_notification"
+        ],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+        "departure_event": 3,
+        "freeze_seq": 9,
+        "notification_sequences": []
+      },
+      "passed": true
+    },
+    {
+      "name": "missing_freeze",
+      "fixture_type": "STRUCTURED_NEGATIVE_DERIVATIVE_OF_ACTUAL_FIXTURE_TRACE",
+      "expected_accept": false,
+      "actual": {
+        "passed": false,
+        "errors": [
+          "truncated_or_reordered_rows",
+          "exact_matching_departure_freeze_restore"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "preview_residue",
+      "fixture_type": "STRUCTURED_NEGATIVE_DERIVATIVE_OF_ACTUAL_FIXTURE_TRACE",
+      "expected_accept": false,
+      "actual": {
+        "passed": false,
+        "errors": [
+          "transient_dom_residue"
+        ],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+        "departure_event": 3,
+        "freeze_seq": 9,
+        "notification_sequences": [
+          6
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "capture_residue",
+      "fixture_type": "STRUCTURED_NEGATIVE_DERIVATIVE_OF_ACTUAL_FIXTURE_TRACE",
+      "expected_accept": false,
+      "actual": {
+        "passed": false,
+        "errors": [
+          "capture_missing_or_held"
+        ],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+        "departure_event": 3,
+        "freeze_seq": 9,
+        "notification_sequences": [
+          6
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "ordinary_reload_not_bfcache",
+      "fixture_type": "STRUCTURED_NEGATIVE_DERIVATIVE_OF_ACTUAL_FIXTURE_TRACE",
+      "expected_accept": false,
+      "actual": {
+        "passed": false,
+        "errors": [
+          "actual_bfcache_required"
+        ],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+        "departure_event": 3,
+        "freeze_seq": 9,
+        "notification_sequences": [
+          6
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "actual_full_reload_distinguished",
+      "old_document": "cbc4f29e-541b-4d68-a505-3a8ac5809527",
+      "new_document": "ce398fac-629c-43e4-8c64-c72d0c9e4992",
+      "expected_accept": false,
+      "actual": {
+        "passed": false,
+        "errors": [
+          "actual_bfcache_required"
+        ],
+        "boundary": "TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION",
+        "documentId": "1f67dd84-7072-4a7c-a56c-c78789bbad38",
+        "departure_event": 3,
+        "freeze_seq": 9,
+        "notification_sequences": [
+          6
+        ]
+      },
+      "passed": true
+    }
+  ],
+  "passed": 15,
+  "count": 15,
+  "fixture_mutations_only": true,
+  "negative_rejections_are_expected_not_product_failures": true
+}

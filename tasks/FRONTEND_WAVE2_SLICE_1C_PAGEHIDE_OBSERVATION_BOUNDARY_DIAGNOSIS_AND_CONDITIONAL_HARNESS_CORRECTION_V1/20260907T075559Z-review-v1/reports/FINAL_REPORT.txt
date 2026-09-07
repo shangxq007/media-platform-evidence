@@ -1,0 +1,99 @@
+TASK=FRONTEND_WAVE2_SLICE_1C_PAGEHIDE_OBSERVATION_BOUNDARY_DIAGNOSIS_AND_CONDITIONAL_HARNESS_CORRECTION_V1
+LANE=FRONTEND
+TASK_EXECUTION=COMPLETE_BOUNDED_DIAGNOSIS_CONDITIONAL_EXTERNAL_CORRECTION_AND_AFFECTED_VALIDATION
+FIXED_IMPLEMENTATION_TREE=00128d35b97775b97124ad1921053a0da282690d
+FIXED_SOURCE_MANIFEST_SHA256=3beacd5bb7d3a01be3499b3cd4eac2fc56bab4d6ddfefa135f8f19851dc24c53
+FIXED_BUILD_MANIFEST_SHA256=9644fe897b61e912e9c60bd467b6bf0aec5d497d66f362838e2d6f4750ba331e
+PRODUCT_CHANGED_PATHS=0
+BACKEND_CHANGES=0
+NEW_BACKEND_REQUIREMENTS=NONE
+CAUSE_CLASSIFICATION=OBSERVER_BOUNDARY_DEFECT
+ORIGINAL_PAGEHIDE_FAILURE_DISPOSITION=RETAINED_EARLY_SAMPLE_FAILURE; SUPERSEDED_MEASUREMENT_NOT_WAIVED_REQUIREMENT
+OBSERVATION_BOUNDARY=SAME_STORE_RETIREMENT_DURING_REAL_PAGEHIDE_CONFIRMED_AT_SUBSEQUENT_TRUSTED_FREEZE
+BEFORE_SUSPENSION_RETIREMENT_PROOF=ESTABLISHED_FOR_QUALIFIED_CHROMIUM_DEPARTURE_PATH
+OBSERVER_CORRECTION=NEW_EXTERNAL_LIFECYCLE_BOUNDARY_V2_AND_VALIDATOR
+OBSERVER_QUALIFICATION=15_EXECUTED_15_PASS
+DIAGNOSTIC_RUN_COUNT=3
+FRESH_LIFECYCLE_CHECKS=12_EXECUTED_12_PASS_0_FAIL
+REUSED_EVIDENCE=UNCHANGED_CANVAS97_FRONTEND370_ARCHITECTURE_CONTROLS120_GATES_NATIVE_CLICK11_ROUTE21_SUPPLEMENT6
+REMAINING_FAILED_CHECKS=0_CURRENT_REQUIRED_LIFECYCLE; HISTORICAL_FAILURE_RETAINED
+ACTUAL_BFCACHE_RESTORATION=ESTABLISHED
+H4_LEDGER_OWNER_DISPOSITION=UNRESOLVED
+TRACKED_DIST_POLICY_RECONCILIATION=UNRESOLVED
+SLICE_1C_ACCEPTED=NO_PENDING_INDEPENDENT_REVIEW
+PRODUCT_PUBLICATION=NOT_PERFORMED
+INDEPENDENT_REVIEW=REQUIRED
+
+DECISION AND SCOPE
+The current Owner accepted the prior Canvas correction within its reviewed scope. This task diagnoses and corrects an external sampling boundary, not product behavior. The original observer queued its sample in an early pagehide listener; in actual Chromium navigation that sample executes before the product retirement notification. The corrected evidence measures retirement during pagehide and confirms the already-empty owner/transient state at the following trusted document freeze callback. It does not use restored emptiness as a substitute and does not call a late listener the end of all dispatch work.
+Only this new external task directory and a separate evidence checkout are written. Product source/tests/dist, existing dependency installations, global configuration, credentials, installed Skills/Memory and prior evidence remain unchanged. No delegation, backend task/census/Pack/sanity action, product commit/freeze/merge/push, milestone closure, or invented backend requirement. Browser tests are mock-backed frontend validation, not backend integration.
+
+IDENTITY AND GOVERNANCE
+Accepted correction evidence commit c73104c5dc6be81eb41f173aa5f20f4d5d564e73, task manifest824f972cc2950af457ee11bd4c17d5db9e0a385f6c93fed6274b7bf64eb3f232. Its original directory and pending-review history are not rewritten; new Owner acceptance is provenance for this task.
+Frontend branch refs/heads/agent/frontend-wave2-product-ux-v1; HEAD f5e19cf53fd010eea2935dd29557e82a879e042c remains dirty and is not the implementation authority. The supplied implementation identity is a tree, not a product commit. All7948 fixed source entries matched the working frontend and accepted external snapshot. The four supplied source blobs, both supplied source/build manifest hashes, all eight build artifacts, prior public payload manifest and selected sealed local originals were verified before use. No rebuild or old-to-new bundle substitution.
+Relevant blobs: Canvas608efcf5ea23dc27e68ce04894b7ffa5062f7835; Canvas tests685f6c0ae98a75b5dc4c9efe69cbd5d4786ca57a; SelectionContext05e93cd94bbff6b2049869563b15d00df2e53913; modelc1f1337e993a5089fa5eed5b29054e3b6e21990b.
+Root AGENTS.md and [LOCAL_HOME]/Documents/03-大模型上下文-精简版.md were read. Current Owner scope overrides the generic candidate-freeze-before-verification instruction: no product commit/freeze is performed. Decisions, implementation, evidence and acceptance remain separate. No nested frontend instruction file required a different action.
+
+STATIC RECOVERY
+Frozen lifecycle-observer.js lines4-8 discover committed React stores and assign IDs from its own WeakMap. Line11 registers early pagehide/pageshow listeners and queueMicrotask(record). native_lifecycle.py line28 checks the samples after Back. Its bool(hide) guard does not prevent an empty per-event store collection from satisfying the nested all(); v2 explicitly requires one armed expected store and complete matching observations.
+SelectionContext.tsx lines14-19 set suspended and synchronously call flushSync(() => store.retireSelectionOwner('document')). model.ts lines67-73 set documentRetired/retired, clear adapter and publish a new lifetime with empty membership, primary and agentOpen. State update notifies subscribers synchronously. select rejects a retired owner and register cannot revive a document-retired store. The pagehide handler's flushSync also commits the rendered transient cleanup before it returns. These are source facts, not alone runtime ordering proof.
+The historical collection deviation was recovered: the collector retained failures and nonzero exit while continuing independent checks; it did not establish before-suspension proof. Those old traces and the exact failed predicate are included. No prior failure is edited or retroactively relabelled PASS.
+
+PROSPECTIVE PLAN AND ACTUAL EXECUTION
+The pre-native plan declared D1, conditional D2 and optional discriminating D3 as a ceiling. Preliminary reads preceded this declaration. No perfect historical command-declaration claim is made. Per-run plans contain actual commands, helper hashes, restricted environment, output paths and native exits. Source/build inputs are read-only within bubblewrap; only the run directory/private tmp are writable.
+D1 exit1: expected original pagehide assertion failure; collection completed before assertion. No Debugger domain. Same-store subscription, early listener/microtask, later listener, freeze/resume/pageshow and proposal DOM observations. Original failure and full trace preserved.
+D2 exit1: a new diagnostic selector was wrong (.ff-canvas-marquee rather than source-verified [data-canvas-marquee]). Its nonempty preview precondition timed out before navigation or debugger probes. This is a diagnostic-helper execution defect, not a product failure and not another instance of the original pagehide assertion. It consumes one diagnostic slot. D1 preview absence from that selector is INVALID and excluded from preview proof; D1 store/proposal/event observations remain usable.
+D3 exit1: last authorized diagnosis run, using a separately retained corrected diagnostic helper and source-verified selector. Nonempty native held-pointer capture and positive-area marquee were established. The original pagehide predicate again failed as expected while complete cleanup/freeze/restoration evidence was collected. No D4 occurred.
+D3 also enabled Debugger and set non-pausing conditional probes at compiled handler entry and the resolved return position in FoundationPages-BZ5M8zvA.js. Requested/resolved locations, possible breakpoints and source fragment are in DEBUGGER_PROBES.json. No product-handler-entry/product-handler-complete marker rows were observed. Consequently DIRECT HANDLER ENTRY/RETURN PROBE PROOF=NOT_ESTABLISHED. Do not infer non-execution from the unhit probes or claim paused execution proves normal timing. The base CDP helper records request/reply traffic but does not preserve every unsolicited debugger event; no zero-paused-event assertion is made. Both D1 without Debugger and D3 with Debugger actually restored via BFCache, but this does not prove zero debugger timing overhead.
+The generic D3 run PLAN incorrectly inherited expected_exit0; the prospective plan, original failure identity and actual native/wrapper exit1 remain authoritative evidence of the expected diagnostic outcome. That metadata mismatch is retained rather than silently rewritten. Qualification and final lifecycle plans expected and returned0.
+Qualification exit0:15 controls passed, including expected negative rejections. Final affected lifecycle exit0:12 identities executed and passed. Every native failure propagated as wrapper exit1; no collection wrapper converts it to success.
+
+SAME-DOCUMENT/SAME-STORE ORDERING
+Use tuple(documentId, diagnostic store ID), not bare numbers across documents or WeakMaps. The original observer IDs are a separate namespace. The diagnostic object reference is acquired from the unique committed store, retained in bound[], and subscribed directly; notification snapshots use that same physical object. No select/dispatch/reconcile/retire method is called or replaced by the observer. No second Selection authority is installed.
+D1 document b9b82d7e-837d-41a1-a567-63a794ba8496, diagnostic store2, selected lifetime3/revision2. Ordered rows:
+6 early-pagehide sees selected old owner; its originalSamples already contains the original failing pagehide microtask sample.
+7 the additional early microtask still sees selected lifetime3/revision2.
+8 synchronous same-store notification sees empty membership/primary, lifetime5/revision3 and agentOpen false. Stack includes model update, Object.T [as retireSelectionOwner], FoundationPages-BZ5M8zvA.js:1:15725, React flushSync and pagehide handler d at :1:15709. Proposal DOM is still present at the notification snapshot.
+9/10 later pagehide callbacks see that same empty retired lifetime and proposal UI gone.
+11 trusted document freeze sees the already-empty store and no proposal UI.
+12 resume, then13 real pageshow.persisted=true; same document actually returns from BFCache.
+This establishes that the old failed sample preceded the relevant retirement work. It does not depend on identifying two different WeakMap numeric IDs as equal.
+D3 document7680643b-3c02-43df-9375-614d6ff8057a, diagnostic store2/lifetime3/revision2 (a different identity tuple from D1): rows4/5/6/7 show capture pointer1 held and real marquee present. Row8 synchronous retirement notification shows capture released but preview still rendered. Rows9/10 show preview absent, capture released and geometry unchanged. Row11 trusted freeze confirms cleanup; actual BFCache restoration follows. This is nonvacuous preview/capture evidence, unlike D1's invalid preview selector.
+Handler entry and completion are bounded rather than directly logpoint-sampled: before the relevant notification the last early sample is selected; the notification stack proves execution within the product handler; the subsequent same native pagehide callback sees retired state and rendered cleanup. The fixed store's state updates notify synchronously, and no intervening contrary notification appears. Direct instruction-level entry/return timing remains NOT_ESTABLISHED and is not necessary to substitute restored state for departure proof.
+
+BOUNDARY SEMANTICS AND LIMITS
+Chrome documents that frozen pages suspend freezable tasks while already-running tasks, especially the freeze callback, can finish.[1] Therefore the report does NOT equate a freeze callback with an arbitrary future timer, nor assert it is the end of every pagehide callback or a globally quiescent process. The operative retirement notification and clean later-pagehide sample precede the subsequently observed freeze event. Freeze is a corroborating transition checkpoint; the correction does not defer product retirement into freeze. Actual cleanup is observed during the prior real pagehide dispatch, not manufactured after restoration.
+The new validator requires a nonempty armed Selection and one exact document/store/lifetime, ordered complete rows, one matching trusted persisted pagehide/freeze/restoration cycle, retirement notification during departure, empty same-store state at later same-event pagehide and freeze, absent proposal/marquee, a present Canvas capture collection with no held pointer, and real BFCache restoration. Missing stores/rows/freeze/notification, wrong identity or ordinary reload do not pass. No timer fallback or vacuous all()/every() is used as the cleanup proof.
+This is a qualified Chromium149.0.7827.55 path, not a cross-browser guarantee. It does not prove arbitrary task/process suspension or crash/discard behavior. Observer DOM reads, subscriptions, stack collection and extra callbacks have nonzero overhead; D1 and final lifecycle are debugger-free comparisons. This task proves the observed ordering under disclosed instrumentation, not absolute instrumentation noninterference.
+
+COMPETING HYPOTHESES
+OBSERVER_BOUNDARY_DEFECT: supported by original old sample preceding same-store notification and clean later pagehide/freeze in D1 and D3; fresh v2 run retains the old failing sample but passes the stronger departure proof.
+PRODUCT_LIFECYCLE_DEFECT (late/no retirement): contradicted on the fixed tested path by the synchronous product retirement stack and departure-time state changes before freeze. Restored empty Selection alone was never the argument.
+Wrong store/document: contradicted by retained physical store subscription, unique committed-store arming and stable document-qualified IDs. Separate documents/WeakMaps are never identified by coincident numbers.
+Environment/observer effects: D2's selector error is established and retained. D3 debugger probes did not establish direct handler markers. Actual BFCache remained available in D1, D3 and fresh lifecycle; observer neutrality outside these runs is not claimed.
+Smallest justified correction scope: external companion lifecycle-boundary-v2.js plus boundary_validator.py and one measurement binding in the external lifecycle runner. No product or contract change is necessary from this evidence.
+
+CONDITIONAL OBSERVER CORRECTION AND QUALIFICATION
+The original observer remains byte-identical and active, preserving its historical sample for comparison. A separately named companion retains explicit same-store/event identities and synchronous notifications and observes trusted document freeze. Fixture-only optional arm(reader) is used only on standalone /lifecycle-away qualification documents, never to replace the product store. Product runs use committed-fiber discovery.
+Qualification has15 controls: three actual isolated fixture navigation/BFCache cases (synchronous retirement accepted; none and retirement only on restoration rejected); eleven labelled structured negative derivatives of the actual fixture trace (early state, wrong document/store/lifetime, missing/truncated rows, missing notification/freeze, preview/capture residue, ordinary-reload flag); and an actual full-document reload identity control. Expected negative rejections are qualification PASS, not product acceptance failures. Fixture retirement mutates only the fixture store. It does not inject a deliberate defect or setter into the accepted application build. Full fixture traces and commands accompany the results.
+The real reload control confirms a new document ID; the real BFCache fixtures and affected lifecycle preserve document ID with pageshow.persisted=true. Synthetic or mutated receipt controls are explicitly not real product navigation evidence.
+
+AFFECTED VALIDATION AND REUSE
+Only the existing12-identity lifecycle sequence was executed freshly after qualification. AST identity comparison retains all12 names in order. Eleven old assertion bodies remain unchanged. The changed real-pagehide-retires-before-suspension measurement retains the requirement but replaces the early microtask predicate with the matched departure/freeze proof. Exact old/new mapping and runnable expanded program are included. This is not assertion weakening: it adds nonempty expected-store, event identity, notification, transient-state and actual-restoration prerequisites.
+Final proof document cfd39554-a87b-41e3-b420-7479a0c278c6: retirement notification sequence8, matched freeze sequence11, actual BFCache true. The superseded original microtask predicate remains false in the SAME fresh run and is explicitly saved, not silently turned green. Subsequent fresh-lifetime, Back/Forward, repeated restoration, stale-proposal disposal and full reload checks pass. Old document, retired old store and new restored owner remain separately recorded in the original observer namespace and the new bound-store namespace.
+Reused only, NOT fresh: Canvas97/97, frontend370/370, architecture controls120/120, typecheck/lint/guard/external build exit0, lint46 warnings, native click11/11, routes21/21 and supplement6/6. Exact source/build and qualified environment bind that reuse. Prior50-identity evidence stays49 pass/1 fail, raw56 with54 pass/2 fail. It is NOT rewritten as fresh50/50. This task adds two expected original-predicate diagnostic failures, one diagnostic precondition error,15 qualification controls and12 fresh lifecycle checks; those denominators are distinct.
+
+PRESERVATION, ENVIRONMENT AND TEARDOWN
+Pre/post source denominator7948: changed0. All eight accepted build artifacts and fixed manifest unchanged. Prior selected historical files/seals unchanged. Actual frontend branch/HEAD/index and dirty status remain unchanged; backend refs/HEAD/status were neither frozen nor compared. Verification is scoped interval readback, not continuous global monitoring.
+Existing Python3.13.14/websockets15.0.1 environment reverified: environment-manifest binding,65 installed-file hashes, wheel bytes/contents, source pins, API compatibility and real sync loopback exchange. Chrome149.0.7827.55 checked before launches and via CDP. No installation or upgrade.
+Five owned run directories/process groups: D1,D2,D3,qualification,lifecycle-v2. All launched parents were terminated if needed and waited, with final task ports4196/9267 closed. No pre-existing listener was killed. Timeouts and inherited readiness waits are collection bounds, not before-suspension proof. Source/build/prior evidence mounts were read-only. Task-issued Skill/Memory/configuration/credential writes0; product/backend changes0; delegation0.
+The documentation web-extract backend lacked extraction support; a direct HTTPS fetch recovered the official reference without changing configuration. This lookup failure is not a browser-test failure.
+
+PUBLIC EVIDENCE AND NEXT ACTION
+A new task/delivery directory is published to media-platform-evidence using a normal evidence-only commit/push. No prior task directory is altered. Public evidence includes all essential diagnostic raw traces/failures/native commands, source/bundle evidence, observer/validator changes, controls, affected lifecycle results, preservation and reuse mapping. BYTE_EXACT means unchanged bytes; REDACTED means explicit local-path aliases; DERIVED_SUMMARY identifies generated analysis; LOSSLESS_CHUNK parts reconstruct their declared parent exactly. Private profiles, credentials, Skills/Memory, full unrelated inventories and redundant auto-saved command copies are excluded. Local originals remain sealed under this task.
+The detached post-push receipt records the final commit, URLs, public manifest and actual remote readback without a self-hash cycle. No manual ZIP upload is required if that verified text channel succeeds. Public subset enables bounded lifecycle review, not replication of the complete private filesystem census.
+Next required action is independent Slice1C review of the new observer boundary, qualification, fresh lifecycle evidence and disclosed limitations. No new product or backend authorization is requested by this result. H4/tracked-dist stay unresolved; no product publication or milestone closure follows automatically.
+
+## Sources
+
+[1] https://developer.chrome.com/docs/web-platform/page-lifecycle-api — Chrome Page Lifecycle API

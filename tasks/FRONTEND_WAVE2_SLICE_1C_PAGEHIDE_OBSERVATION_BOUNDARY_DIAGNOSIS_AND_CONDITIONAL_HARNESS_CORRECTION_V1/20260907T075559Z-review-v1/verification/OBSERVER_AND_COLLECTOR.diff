@@ -1,0 +1,65 @@
+--- frozen/native_lifecycle.py
++++ external/LIFECYCLE_V2_PROGRAM.py
+@@ -3,6 +3,7 @@
+ from scope_check import check
+ b=CanvasBrowser();b.viewport(1440,1000)
+ b.raw('Page.addScriptToEvaluateOnNewDocument',{'source':(R/'lifecycle-observer.js').read_text()})
++b.raw('Page.addScriptToEvaluateOnNewDocument',{'source':(ROOT/'helpers/lifecycle-boundary-v2.js').read_text()})
+ P='[data-canvas-node="project-node"]'
+ def probe():return b.ev('({id:__lifecycleProbe.documentId,events:__lifecycleProbe.events,snapshot:__lifecycleProbe.snapshot(),proposals:__lifecycleProbe.proposals(),capture:__lifecycleProbe.captureState(),observations:__lifecycleProbe.observations})')
+ def ready():b.wait('document.querySelectorAll("[data-canvas-node]").length===2 && __lifecycleProbe.snapshot().length===1');time.sleep(.3)
+@@ -20,12 +21,15 @@
+  record('focus-is-not-selection','focus alone preserves Selection snapshot',{'before':same['snapshot'],'after':focus['snapshot']},same['snapshot']==focus['snapshot'],'DOM focus helper; no Selection mutation')
+  b.click('.ff-agent-launcher');b.wait('!!document.querySelector(".ff-agent-composer")');b.click('.ff-agent-composer button[type="submit"]');b.wait('!!document.querySelector("[data-testid=agent-proposal]")');pending=probe()
+  record('same-live-proposal-remains-current','proposal token equals current lifetime/revision before navigation',pending,bool(pending['proposals']) and all(p['lifetime']==pending['snapshot'][0]['lifetime'] and p['revision']==pending['snapshot'][0]['revision'] for p in pending['proposals']))
++ armed=b.ev('__boundary.arm()');b.ev('__boundary.installLate()')
+  b.raw('Page.navigate',{'url':'http://127.0.0.1:4196/lifecycle-away'});b.wait('document.title==="External lifecycle fixture"');away=probe()
+  record('full-document-navigation-no-selection','new document has no previous application Selection',away,away['id']!=pending['id'] and away['snapshot']==[])
+- back();restored=probe();hide=[e for e in restored['events'] if e['event']=='pagehide'];show=[e for e in restored['events'] if e['event']=='pageshow'];actual=restored['id']==pending['id'] and any(e['persisted'] for e in show)
++ back();restored=probe();boundary=b.ev('({documentId:__boundary.documentId,rows:__boundary.rows})');hide=[e for e in restored['events'] if e['event']=='pagehide'];show=[e for e in restored['events'] if e['event']=='pageshow'];actual=restored['id']==pending['id'] and any(e['persisted'] for e in show)
+  (R/'BF_CACHE_RUNTIME_OBSERVATIONS.json').write_text(json.dumps({'tree':T,'browser':b.browser_version,'before':pending,'after':restored,'actual_restoration':actual},indent=2))
+  record('real-bfcache-restoration-observed','same suspended document returns with real pageshow.persisted=true',{'document_preserved':restored['id']==pending['id'],'pagehide':hide,'pageshow':show},actual)
+- record('real-pagehide-retires-before-suspension','pagehide observed with no refs/primary and lifetime different from selected old lifetime',hide,bool(hide) and all(not s['selectedRefs'] and s['primaryRef'] is None and s['lifetime']!=pending['snapshot'][0]['lifetime'] for e in hide for s in e['snapshot']))
++ verdict=verify(boundary,armed,actual);old_measurement=bool(hide) and all(not v['selectedRefs'] and v['primaryRef'] is None and v['lifetime']!=pending['snapshot'][0]['lifetime'] for e in hide for v in e['snapshot'])
++ (R/'DEPARTURE_BOUNDARY_PROOF.json').write_text(json.dumps({'armed':armed,'trace':boundary,'actual_bfcache':actual,'verdict':verdict,'superseded_original_measurement_passed':old_measurement,'original_measurement_is_not_new_gate':True},indent=2))
++ record('real-pagehide-retires-before-suspension','matched same-store retirement during pagehide, empty transient state at trusted freeze before suspension, real BFCache return',verdict,verdict['passed'])
+  record('real-pageshow-fresh-lifetime','bfcache active Selection empty with fresh lifetime',restored,restored['snapshot'][0]['selectedRefs']==[] and restored['snapshot'][0]['primaryRef'] is None and restored['snapshot'][0]['lifetime']!=pending['snapshot'][0]['lifetime'])
+  record('back-does-not-restore-selection','browser Back restored navigation but not Selection snapshot',restored,restored['snapshot'][0]['selectedRefs']==[])
+  record('agent-proposal-stale-after-document-retirement','old proposal lifetime differs; retired conversation cannot apply old proposal',{'before':pending['proposals'],'after':restored['proposals'],'snapshot':restored['snapshot'],'proposal_ui_present':b.ev('!!document.querySelector("[data-testid=agent-proposal]")')},all(p['lifetime']!=restored['snapshot'][0]['lifetime'] for p in pending['proposals']) and not b.ev('!!document.querySelector("[data-testid=agent-proposal]")'))
+--- /dev/null
++++ external/lifecycle-boundary-v2.js
+@@ -0,0 +1,14 @@
++(() => {
++ const ids=new WeakMap();let serial=0;const id=x=>{if(!ids.has(x))ids.set(x,++serial);return ids.get(x)};
++ const rows=[],bound=[];let current=null,departure=null;const documentId=crypto.randomUUID();
++ function stores(){const el=document.getElementById('root');if(!el)return[];const k=Object.keys(el).find(k=>k.startsWith('__reactContainer$'));if(!k)return[];const f=el[k],q=[f.stateNode?.current||f],found=[];while(q.length){const x=q.pop();if(x.memoizedProps?.value?.getSnapshot&&x.memoizedProps.value.select)found.push(x.memoizedProps.value);if(x.child)q.push(x.child);if(x.sibling)q.push(x.sibling)}return [...new Set(found)]}
++ function snap(s){const v=s.getSnapshot();return {store:id(s),lifetime:id(v.lifetime),revision:v.revision,refs:v.selectedRefs,primary:v.primaryRef,agentOpen:v.agentOpen}}
++ function dom(){return {capture:[...document.querySelectorAll('.ff-workspace-canvas')].map(e=>({held:[...new Set((window.__lifecycleProbe?.capture||[]).map(x=>x.id))].filter(n=>e.hasPointerCapture(n))})),preview:!!document.querySelector('[data-canvas-marquee]'),proposal:!!document.querySelector('[data-testid=agent-proposal]'),positions:[...document.querySelectorAll('[data-canvas-node]')].map(e=>({id:e.dataset.canvasNode,left:e.style.left,top:e.style.top}))}}
++ function mark(kind,event=null,store=null){const row={seq:rows.length+1,kind,documentId,at:performance.now(),event:event?{id:id(event),type:event.type,trusted:event.isTrusted,persisted:typeof event.persisted==='boolean'?event.persisted:null,phase:event.eventPhase}:null,departure,armed:current,stores:(store?[store]:bound).map(snap),dom:dom()};rows.push(row);return row}
++ function arm(reader=stores){const ss=reader();if(ss.length!==1)throw Error('expected exactly one store');const s=ss[0];if(!bound.includes(s)){bound.push(s);s.subscribe(()=>{const row=mark('notify',null,s);row.stack=new Error('same-store notification').stack})}current={documentId,...snap(s)};mark('armed');return current}
++ const p={documentId,rows,arm,mark,snapshot:()=>bound.map(snap),dom};window.__boundary=p;
++ for(const type of ['pagehide','pageshow'])addEventListener(type,e=>{if(type==='pagehide')departure={id:id(e),trusted:e.isTrusted,persisted:e.persisted};mark('early-'+type,e);if(type==='pagehide')rows[rows.length-1].originalSamples=JSON.parse(JSON.stringify(window.__lifecycleProbe.events));queueMicrotask(()=>mark('early-microtask-'+type,e))});
++ for(const type of ['freeze','resume'])document.addEventListener(type,e=>mark(type,e),true);
++ p.installLate=()=>{addEventListener('pagehide',e=>mark('capture-pagehide',e),true);addEventListener('pagehide',e=>mark('late-pagehide',e));mark('late-listeners-registered')};
++ mark('installed-before-application');
++})();
+--- /dev/null
++++ external/boundary_validator.py
+@@ -0,0 +1,17 @@
++def verify(trace, expected, actual_restoration):
++ """Nonvacuous trusted pre-freeze departure proof; never a timer/end-of-pagehide claim."""
++ errors=[]
++ def need(ok,label):
++  if not ok:errors.append(label)
++ rows=trace.get('rows',[]);need(bool(rows),'missing_rows');need(trace.get('documentId')==expected.get('documentId'),'wrong_document');need(bool(expected.get('refs')) and expected.get('primary') is not None,'nonempty_initial_selection');need(bool(actual_restoration),'actual_bfcache_required');need([r.get('seq') for r in rows]==list(range(1,len(rows)+1)),'truncated_or_reordered_rows')
++ hides=[r for r in rows if r.get('kind')=='early-pagehide'];freezes=[r for r in rows if r.get('kind')=='freeze'];shows=[r for r in rows if r.get('kind')=='early-pageshow' and r.get('event',{}).get('persisted')];need(len(hides)==1 and len(freezes)==1 and len(shows)==1,'exact_matching_departure_freeze_restore')
++ if not hides or not freezes or not shows:return {'passed':False,'errors':errors}
++ hide,freeze,show=hides[0],freezes[0],shows[0];eid=hide.get('event',{}).get('id');need(hide['event'].get('trusted') is True and hide['event'].get('persisted') is True,'real_persisted_pagehide');need(freeze['event'].get('trusted') is True and show['event'].get('trusted') is True,'real_freeze_and_restore');need(hide['seq']<freeze['seq']<show['seq'],'departure_before_freeze_before_restore');need(freeze.get('departure',{}).get('id')==eid,'wrong_lifecycle_event')
++ def same(row):return row.get('documentId')==expected.get('documentId') and row.get('armed')==expected and len(row.get('stores',[]))==1 and row['stores'][0].get('store')==expected.get('store')
++ def retired(row):return same(row) and row['stores'][0].get('refs')==[] and row['stores'][0].get('primary') is None and row['stores'][0].get('lifetime')!=expected.get('lifetime') and row['stores'][0].get('revision',-1)>expected.get('revision',-1)
++ need(same(hide),'departure_store_binding');need(retired(freeze),'not_retired_at_freeze');notify=[r for r in rows if r.get('kind')=='notify' and hide['seq']<r['seq']<freeze['seq'] and retired(r)];need(bool(notify),'missing_departure_retirement_notification');late=[r for r in rows if r.get('kind')=='late-pagehide' and hide['seq']<r['seq']<freeze['seq']];need(len(late)==1 and retired(late[0]),'missing_same_event_post_retirement_pagehide');need(bool(late) and late[0].get('event',{}).get('id')==eid,'late_event_mismatch')
++ for row in late+[freeze]:
++  dom=row.get('dom',{});need(dom.get('preview') is False and dom.get('proposal') is False,'transient_dom_residue');cap=dom.get('capture');need(isinstance(cap,list) and len(cap)==1 and cap[0].get('held')==[],'capture_missing_or_held')
++ for row in rows:
++  if notify and notify[0]['seq']<=row['seq']<=show['seq'] and row.get('kind')=='notify':need(retired(row),'contradicting_late_notification')
++ return {'passed':not errors,'errors':errors,'boundary':'TRUSTED_DOCUMENT_FREEZE_CALLBACK_BEFORE_SUSPENSION_WITH_MATCHED_PAGEHIDE_AND_SAME_STORE_NOTIFICATION','documentId':trace.get('documentId'),'departure_event':eid,'freeze_seq':freeze['seq'],'notification_sequences':[r['seq'] for r in notify]}

@@ -1,0 +1,107 @@
+{
+  "kind": "DIAGNOSTIC_NOT_ACCEPTANCE",
+  "checks": [
+    {
+      "test_identity": "real-pagehide-retires-before-suspension",
+      "source_tree": "00128d35b97775b97124ad1921053a0da282690d",
+      "production_build_sha256": "9644fe897b61e912e9c60bd467b6bf0aec5d497d66f362838e2d6f4750ba331e",
+      "browser": "Chromium CDP headless",
+      "browser_version": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/149.0.7827.55",
+        "revision": "@3188f8a607ae7e067593be8aab7f02d2451fec07",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+        "jsVersion": "14.9.207.21"
+      },
+      "CDP_used": true,
+      "held_button_encoding": "button=left and buttons=1 for held mouseMoved",
+      "input_method": [
+        "Browser.getVersion",
+        "Debugger.enable",
+        "Debugger.getPossibleBreakpoints",
+        "Debugger.setBreakpoint",
+        "Debugger.setBreakpointByUrl",
+        "Emulation.setDeviceMetricsOverride",
+        "Emulation.setFocusEmulationEnabled",
+        "Input.dispatchMouseEvent",
+        "Page.addScriptToEvaluateOnNewDocument",
+        "Page.enable",
+        "Page.getNavigationHistory",
+        "Page.navigate",
+        "Page.navigateToHistoryEntry",
+        "Runtime.evaluate"
+      ],
+      "expected": "historical unchanged assertion; expected diagnostic failure",
+      "actual": [
+        {
+          "event": "pagehide",
+          "persisted": true,
+          "path": "/w/ux-workspace/projects/ux-project/canvas",
+          "at": 2062.89999999851,
+          "snapshot": [
+            {
+              "owner": 1,
+              "lifetime": 2,
+              "revision": 2,
+              "surfaceId": "canvas",
+              "workspaceId": "ux-workspace",
+              "projectId": "ux-project",
+              "selectedRefs": [
+                {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                }
+              ],
+              "primaryRef": {
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "kind": "NODE",
+                "localId": "project-node"
+              },
+              "supported": [
+                "rename",
+                "move",
+                "reveal"
+              ]
+            }
+          ],
+          "proposals": [],
+          "selectedDom": [
+            "project-node"
+          ],
+          "capture": [
+            {
+              "type": "gotpointercapture",
+              "id": 1
+            },
+            {
+              "type": "lostpointercapture",
+              "id": 1
+            },
+            {
+              "type": "gotpointercapture",
+              "id": 1
+            },
+            {
+              "type": "lostpointercapture",
+              "id": 1
+            }
+          ]
+        }
+      ],
+      "result": "FAIL",
+      "passed": false,
+      "synthetic_assistance": "CDP real document/history navigation and trusted pointer input; read-only React fiber/DOM lifetime observation; no synthetic lifecycle events",
+      "DOM_helper": true,
+      "focus_emulation": true,
+      "pointer_injection": true,
+      "capture_simulation": false,
+      "reason": "Synthetic API fixture; frontend presentation-only browser acceptance, no backend or physical-device evidence",
+      "timestamp": "2026-09-07T07:36:29.028762+00:00"
+    }
+  ]
+}
