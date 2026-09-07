@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_COMMAND_DISCOVERY_AND_ACCESSIBILITY_CONVERGENCE_V1/browser-smoke-02/palette_smoke.py", line 24, in <module>
+    palette();rec('open-search-focus',focused()['search'],focused())
+    ~~~~~~~^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_COMMAND_DISCOVERY_AND_ACCESSIBILITY_CONVERGENCE_V1/browser-smoke-02/palette_smoke.py", line 16, in palette
+    b.button('Commands ⌘K' if b.ev('document.documentElement.lang')=='en' else '命令 ⌘K')
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_COMMAND_DISCOVERY_AND_ACCESSIBILITY_CONVERGENCE_V1/browser-smoke-02/native_common.py", line 24, in button
+    self.ev('(()=>{document.querySelectorAll("[data-native-target]").forEach(e=>e.removeAttribute("data-native-target"));const e=Array.from(document.querySelectorAll("button")).find(e=>e.innerText.trim()==='+json.dumps(text)+');if(!e)throw Error("missing button");e.setAttribute("data-native-target","");e.scrollIntoView({block:"nearest"});})()');self.click('[data-native-target]');time.sleep(.3)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_COMMAND_DISCOVERY_AND_ACCESSIBILITY_CONVERGENCE_V1/browser-smoke-02/chromium_helpers.py", line 44, in ev
+    if r.get('exceptionDetails'):raise RuntimeError(r)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: {'result': {'type': 'object', 'subtype': 'error', 'className': 'Error', 'description': 'Error: missing button\n    at <anonymous>:1:226\n    at <anonymous>:1:328', 'objectId': '-7644188691754314187.2.1'}, 'exceptionDetails': {'exceptionId': 1, 'text': 'Uncaught', 'lineNumber': 0, 'columnNumber': 219, 'scriptId': '19', 'exception': {'type': 'object', 'subtype': 'error', 'className': 'Error', 'description': 'Error: missing button\n    at <anonymous>:1:226\n    at <anonymous>:1:328', 'objectId': '-7644188691754314187.2.2'}}}

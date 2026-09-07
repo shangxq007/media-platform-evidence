@@ -1,0 +1,350 @@
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ✓ src/localization/localization.test.tsx (13 tests) 177ms
+ ❯ src/components/app-shell/AppShell.test.tsx (21 tests | 8 failed) 704ms
+   ✓ shared application shell > switches Product UI locale from the shell selector 89ms
+   ✓ shared application shell > allows remote copy replacement without changing protected command availability 81ms
+   ✓ shared application shell > exposes keyboard-reachable navigation and named panel controls 41ms
+   ✓ shared application shell > opens a palette whose protected commands remain disabled 29ms
+   ✓ uses only horizontal Studio and leaves text-entry shortcuts alone 14ms
+   ✓ real AppShell unavailable descriptions in 'en' > localizes real missing access before and after the fail-closed adapter resolves 52ms
+   ✓ real AppShell unavailable descriptions in 'en' > localizes the unresolved project explanation 25ms
+   ✓ real AppShell unavailable descriptions in 'en' > localizes the hidden surface explanation ahead of unresolved project and access reasons 33ms
+   ✓ real AppShell unavailable descriptions in 'en' > preserves opaque server explanation verbatim: Denied by workspace policy P-42. 26ms
+   ✓ real AppShell unavailable descriptions in 'en' > preserves opaque server explanation verbatim: This surface is not discoverable at its current maturity. 35ms
+   ✓ real AppShell unavailable descriptions in 'en' > preserves opaque server explanation verbatim: A server-resolved Project context is required. 24ms
+   ✓ real AppShell unavailable descriptions in 'en' > preserves opaque server explanation verbatim: Effective access is not available from the server. This action is disabled. 21ms
+   ✓ real AppShell unavailable descriptions in 'en' > keeps canonical actions disabled with localized copy even for available access 27ms
+   × real AppShell unavailable descriptions in 'zh-CN' > localizes real missing access before and after the fail-closed adapter resolves 34ms
+     → expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 服务器尚未提供有…' // Object.is equality
+   × real AppShell unavailable descriptions in 'zh-CN' > localizes the unresolved project explanation 36ms
+     → expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 需要服务器已解析…' // Object.is equality
+   × real AppShell unavailable descriptions in 'zh-CN' > localizes the hidden surface explanation ahead of unresolved project and access reasons 22ms
+     → expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 此界面在当前成熟…' // Object.is equality
+   × real AppShell unavailable descriptions in 'zh-CN' > preserves opaque server explanation verbatim: Denied by workspace policy P-42. 26ms
+     → expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 Denied b…' // Object.is equality
+   × real AppShell unavailable descriptions in 'zh-CN' > preserves opaque server explanation verbatim: This surface is not discoverable at its current maturity. 22ms
+     → expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 This sur…' // Object.is equality
+   × real AppShell unavailable descriptions in 'zh-CN' > preserves opaque server explanation verbatim: A server-resolved Project context is required. 21ms
+     → expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 A server…' // Object.is equality
+   × real AppShell unavailable descriptions in 'zh-CN' > preserves opaque server explanation verbatim: Effective access is not available from the server. This action is disabled. 24ms
+     → expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 Effectiv…' // Object.is equality
+   × real AppShell unavailable descriptions in 'zh-CN' > keeps canonical actions disabled with localized copy even for available access 19ms
+     → expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。' // Object.is equality
+stderr | src/interaction/InteractionShell.test.tsx > keeps technical proposal evidence closed until diagnostics are explicitly opened
+AggregateError: 
+    at internalConnectMultiple (node:net:1135:18)
+    at afterConnectMultiple (node:net:1716:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:3000
+        at createConnectionError (node:net:1679:14)
+        at afterConnectMultiple (node:net:1709:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:3000
+        at createConnectionError (node:net:1679:14)
+        at afterConnectMultiple (node:net:1709:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+
+stderr | src/interaction/InteractionShell.test.tsx > keeps technical proposal evidence closed until diagnostics are explicitly opened
+AggregateError: 
+    at internalConnectMultiple (node:net:1135:18)
+    at afterConnectMultiple (node:net:1716:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:3000
+        at createConnectionError (node:net:1679:14)
+        at afterConnectMultiple (node:net:1709:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:3000
+        at createConnectionError (node:net:1679:14)
+        at afterConnectMultiple (node:net:1709:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+
+stderr | src/interaction/InteractionShell.test.tsx > keeps technical proposal evidence closed until diagnostics are explicitly opened
+AggregateError: 
+    at internalConnectMultiple (node:net:1135:18)
+    at afterConnectMultiple (node:net:1716:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:3000
+        at createConnectionError (node:net:1679:14)
+        at afterConnectMultiple (node:net:1709:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:3000
+        at createConnectionError (node:net:1679:14)
+        at afterConnectMultiple (node:net:1709:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+
+stderr | src/interaction/InteractionShell.test.tsx > Slice1C actual route query and hash preserve the same live exact owner and proposal; focus is independent
+AggregateError: 
+    at internalConnectMultiple (node:net:1135:18)
+    at afterConnectMultiple (node:net:1716:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:3000
+        at createConnectionError (node:net:1679:14)
+        at afterConnectMultiple (node:net:1709:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:3000
+        at createConnectionError (node:net:1679:14)
+        at afterConnectMultiple (node:net:1709:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+
+stderr | src/interaction/InteractionShell.test.tsx > Slice1C actual route query and hash preserve the same live exact owner and proposal; focus is independent
+AggregateError: 
+    at internalConnectMultiple (node:net:1135:18)
+    at afterConnectMultiple (node:net:1716:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:3000
+        at createConnectionError (node:net:1679:14)
+        at afterConnectMultiple (node:net:1709:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:3000
+        at createConnectionError (node:net:1679:14)
+        at afterConnectMultiple (node:net:1709:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+
+stderr | src/interaction/InteractionShell.test.tsx > Slice1C actual route query and hash preserve the same live exact owner and proposal; focus is independent
+AggregateError: 
+    at internalConnectMultiple (node:net:1135:18)
+    at afterConnectMultiple (node:net:1716:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:3000
+        at createConnectionError (node:net:1679:14)
+        at afterConnectMultiple (node:net:1709:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:3000
+        at createConnectionError (node:net:1679:14)
+        at afterConnectMultiple (node:net:1709:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+
+stderr | src/interaction/InteractionShell.test.tsx > Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/p/unsupported expose no old owner
+Warning: A notFoundError was encountered on the route with ID "__root__", but a notFoundComponent option was not configured, nor was a router level defaultNotFoundComponent configured. Consider configuring at least one of these to avoid TanStack Router's overly generic defaultNotFoundComponent (<p>Not Found</p>)
+
+stderr | src/interaction/InteractionShell.test.tsx > Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/canvas expose no old owner
+Warning: A notFoundError was encountered on the route with ID "__root__", but a notFoundComponent option was not configured, nor was a router level defaultNotFoundComponent configured. Consider configuring at least one of these to avoid TanStack Router's overly generic defaultNotFoundComponent (<p>Not Found</p>)
+
+ ✓ src/interaction/InteractionShell.test.tsx (45 tests) 2668ms
+   ✓ Slice1C actual route query and hash preserve the same live exact owner and proposal; focus is independent  398ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/app-shell/AppShell.test.tsx > real AppShell unavailable descriptions in 'zh-CN' > localizes real missing access before and after the fail-closed adapter resolves
+AssertionError: expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 服务器尚未提供有…' // Object.is equality
+
+Expected: "此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 服务器尚未提供有效访问权限信息。此操作已禁用。"
+Received: "This change cannot be applied here yet. A connected server preview and confirmation flow is required; use the existing timeline advanced controls for supported operations. Effective access is not available from the server. This action is disabled."
+
+ ❯ expectDisabledDescription src/components/app-shell/AppShell.test.tsx:99:37
+     97|     const description = document.getElementById(button.getAttribute('a…
+     98|     expect(description).not.toBeNull()
+     99|     expect(description.textContent).toBe(reason)
+       |                                     ^
+    100|     expect(button.contains(description)).toBe(false)
+    101|     expect(description.closest('details')).toBeNull()
+ ❯ src/components/app-shell/AppShell.test.tsx:112:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  src/components/app-shell/AppShell.test.tsx > real AppShell unavailable descriptions in 'zh-CN' > localizes the unresolved project explanation
+AssertionError: expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 需要服务器已解析…' // Object.is equality
+
+Expected: "此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 需要服务器已解析的项目上下文。"
+Received: "This change cannot be applied here yet. A connected server preview and confirmation flow is required; use the existing timeline advanced controls for supported operations. A server-resolved Project context is required."
+
+ ❯ expectDisabledDescription src/components/app-shell/AppShell.test.tsx:99:37
+     97|     const description = document.getElementById(button.getAttribute('a…
+     98|     expect(description).not.toBeNull()
+     99|     expect(description.textContent).toBe(reason)
+       |                                     ^
+    100|     expect(button.contains(description)).toBe(false)
+    101|     expect(description.closest('details')).toBeNull()
+ ❯ src/components/app-shell/AppShell.test.tsx:120:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  src/components/app-shell/AppShell.test.tsx > real AppShell unavailable descriptions in 'zh-CN' > localizes the hidden surface explanation ahead of unresolved project and access reasons
+AssertionError: expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 此界面在当前成熟…' // Object.is equality
+
+Expected: "此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 此界面在当前成熟度下尚未开放。"
+Received: "This change cannot be applied here yet. A connected server preview and confirmation flow is required; use the existing timeline advanced controls for supported operations. This surface is not discoverable at its current maturity."
+
+ ❯ expectDisabledDescription src/components/app-shell/AppShell.test.tsx:99:37
+     97|     const description = document.getElementById(button.getAttribute('a…
+     98|     expect(description).not.toBeNull()
+     99|     expect(description.textContent).toBe(reason)
+       |                                     ^
+    100|     expect(button.contains(description)).toBe(false)
+    101|     expect(description.closest('details')).toBeNull()
+ ❯ src/components/app-shell/AppShell.test.tsx:126:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  src/components/app-shell/AppShell.test.tsx > real AppShell unavailable descriptions in 'zh-CN' > preserves opaque server explanation verbatim: Denied by workspace policy P-42.
+AssertionError: expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 Denied b…' // Object.is equality
+
+Expected: "此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 Denied by workspace policy P-42."
+Received: "This change cannot be applied here yet. A connected server preview and confirmation flow is required; use the existing timeline advanced controls for supported operations. Denied by workspace policy P-42."
+
+ ❯ expectDisabledDescription src/components/app-shell/AppShell.test.tsx:99:37
+     97|     const description = document.getElementById(button.getAttribute('a…
+     98|     expect(description).not.toBeNull()
+     99|     expect(description.textContent).toBe(reason)
+       |                                     ^
+    100|     expect(button.contains(description)).toBe(false)
+    101|     expect(description.closest('details')).toBeNull()
+ ❯ src/components/app-shell/AppShell.test.tsx:137:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  src/components/app-shell/AppShell.test.tsx > real AppShell unavailable descriptions in 'zh-CN' > preserves opaque server explanation verbatim: This surface is not discoverable at its current maturity.
+AssertionError: expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 This sur…' // Object.is equality
+
+Expected: "此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 This surface is not discoverable at its current maturity."
+Received: "This change cannot be applied here yet. A connected server preview and confirmation flow is required; use the existing timeline advanced controls for supported operations. This surface is not discoverable at its current maturity."
+
+ ❯ expectDisabledDescription src/components/app-shell/AppShell.test.tsx:99:37
+     97|     const description = document.getElementById(button.getAttribute('a…
+     98|     expect(description).not.toBeNull()
+     99|     expect(description.textContent).toBe(reason)
+       |                                     ^
+    100|     expect(button.contains(description)).toBe(false)
+    101|     expect(description.closest('details')).toBeNull()
+ ❯ src/components/app-shell/AppShell.test.tsx:137:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  src/components/app-shell/AppShell.test.tsx > real AppShell unavailable descriptions in 'zh-CN' > preserves opaque server explanation verbatim: A server-resolved Project context is required.
+AssertionError: expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 A server…' // Object.is equality
+
+Expected: "此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 A server-resolved Project context is required."
+Received: "This change cannot be applied here yet. A connected server preview and confirmation flow is required; use the existing timeline advanced controls for supported operations. A server-resolved Project context is required."
+
+ ❯ expectDisabledDescription src/components/app-shell/AppShell.test.tsx:99:37
+     97|     const description = document.getElementById(button.getAttribute('a…
+     98|     expect(description).not.toBeNull()
+     99|     expect(description.textContent).toBe(reason)
+       |                                     ^
+    100|     expect(button.contains(description)).toBe(false)
+    101|     expect(description.closest('details')).toBeNull()
+ ❯ src/components/app-shell/AppShell.test.tsx:137:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  src/components/app-shell/AppShell.test.tsx > real AppShell unavailable descriptions in 'zh-CN' > preserves opaque server explanation verbatim: Effective access is not available from the server. This action is disabled.
+AssertionError: expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 Effectiv…' // Object.is equality
+
+Expected: "此处尚无法应用此更改。需要已连接的服务器预览和确认流程。 Effective access is not available from the server. This action is disabled."
+Received: "This change cannot be applied here yet. A connected server preview and confirmation flow is required; use the existing timeline advanced controls for supported operations. Effective access is not available from the server. This action is disabled."
+
+ ❯ expectDisabledDescription src/components/app-shell/AppShell.test.tsx:99:37
+     97|     const description = document.getElementById(button.getAttribute('a…
+     98|     expect(description).not.toBeNull()
+     99|     expect(description.textContent).toBe(reason)
+       |                                     ^
+    100|     expect(button.contains(description)).toBe(false)
+    101|     expect(description.closest('details')).toBeNull()
+ ❯ src/components/app-shell/AppShell.test.tsx:137:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  src/components/app-shell/AppShell.test.tsx > real AppShell unavailable descriptions in 'zh-CN' > keeps canonical actions disabled with localized copy even for available access
+AssertionError: expected 'This change cannot be applied here ye…' to be '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。' // Object.is equality
+
+Expected: "此处尚无法应用此更改。需要已连接的服务器预览和确认流程。"
+Received: "This change cannot be applied here yet. A connected server preview and confirmation flow is required; use the existing timeline advanced controls for supported operations."
+
+ ❯ expectDisabledDescription src/components/app-shell/AppShell.test.tsx:99:37
+     97|     const description = document.getElementById(button.getAttribute('a…
+     98|     expect(description).not.toBeNull()
+     99|     expect(description.textContent).toBe(reason)
+       |                                     ^
+    100|     expect(button.contains(description)).toBe(false)
+    101|     expect(description.closest('details')).toBeNull()
+ ❯ src/components/app-shell/AppShell.test.tsx:143:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  8 failed | 71 passed (79)
+   Start at  18:17:16
+   Duration  5.87s (transform 1.71s, setup 0ms, collect 3.90s, tests 3.55s, environment 817ms, prepare 370ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_COMMAND_DISCOVERY_AND_ACCESSIBILITY_CONVERGENCE_V1/LOCALE_RED.json

@@ -1,0 +1,591 @@
+diff --git a/frontend/src/components/app-shell/AppShell.test.tsx b/frontend/src/components/app-shell/AppShell.test.tsx
+index 1d1b9f22..9361606f 100644
+--- a/frontend/src/components/app-shell/AppShell.test.tsx
++++ b/frontend/src/components/app-shell/AppShell.test.tsx
+@@ -1,9 +1,13 @@
+ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+-import { fireEvent, render, screen, within } from '@testing-library/react'
+-import { describe, expect, it } from 'vitest'
++import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
++import { describe, expect, it, vi } from 'vitest'
+ import { ProductAppShell } from './AppShell'
+ import type { ProjectContextValue } from '../../foundation/projectContext'
+ import { LocalizationProvider, createCatalog } from '../../localization'
++import { commandRegistry } from '../../foundation/commandRegistry'
++import { platformQueryKeys } from '../../foundation/platformClient'
++import { unknownAccess, type EffectiveAccessEntry } from '../../foundation/effectiveAccess'
++import { useInteractionStore } from '../../interaction/SelectionContext'
+ 
+ const project: ProjectContextValue = {
+   workspaceId: 'workspace-1', tenantId: null, projectId: 'project-1', project: { kind: 'PROJECT', id: 'project-1' },
+@@ -69,3 +73,74 @@ it('uses only horizontal Studio and leaves text-entry shortcuts alone', () => {
+   expect((input as HTMLInputElement).value).toBe('Keep this')
+   window.history.replaceState(null, '', '/')
+ })
++
++
++describe.each([
++  { locale: 'en' as const, create: 'Create project', apply: 'Apply timeline operation', canonical: 'This change cannot be applied here yet. A connected server preview and confirmation flow is required; use the existing timeline advanced controls for supported operations.', hidden: 'This surface is not discoverable at its current maturity.', unresolved: 'A server-resolved Project context is required.', missing: 'Effective access is not available from the server. This action is disabled.' },
++  { locale: 'zh-CN' as const, create: '创建项目', apply: '应用时间线操作', canonical: '此处尚无法应用此更改。需要已连接的服务器预览和确认流程。', hidden: '此界面在当前成熟度下尚未开放。', unresolved: '需要服务器已解析的项目上下文。', missing: '服务器尚未提供有效访问权限信息。此操作已禁用。' },
++])('real AppShell unavailable descriptions in $locale', copy => {
++  function setup(surfaceId: 'nle' | 'storyboard', resolved: boolean, entry?: EffectiveAccessEntry) {
++    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false, refetchOnMount: false } } })
++    const accessKey = platformQueryKeys.effectiveAccess(commandRegistry.flatMap(command => command.requiredAccessKey ? [command.requiredAccessKey] : []))
++    if (entry) queryClient.setQueryData(accessKey, { [entry.key]: entry })
++    let store!: ReturnType<typeof useInteractionStore>
++    function Probe() { store = useInteractionStore(); return null }
++    render(<LocalizationProvider initialLocale={copy.locale}><QueryClientProvider client={queryClient}><ProductAppShell surfaceId={surfaceId} workspaceId="workspace-1" project={{ ...project, status: resolved ? 'RESOLVED' : 'BLOCKED' }}><Probe /></ProductAppShell></QueryClientProvider></LocalizationProvider>)
++    const dispatch = vi.spyOn(store, 'dispatch')
++    fireEvent.keyDown(window, { key: 'k', ctrlKey: true })
++    return { queryClient, accessKey, dispatch }
++  }
++
++  function expectDisabledDescription(label: string, reason: string) {
++    const button = screen.getByRole('button', { name: name => name === label || name.startsWith(`${label} `) }) as HTMLButtonElement
++    expect(button.disabled).toBe(true)
++    const description = document.getElementById(button.getAttribute('aria-describedby')!)!
++    expect(description).not.toBeNull()
++    expect(description.textContent).toBe(reason)
++    expect(button.contains(description)).toBe(false)
++    expect(description.closest('details')).toBeNull()
++    fireEvent.click(button)
++    fireEvent.keyDown(button, { key: 'Enter' })
++    fireEvent.keyUp(button, { key: 'Enter' })
++    fireEvent.keyDown(button, { key: ' ' })
++    fireEvent.keyUp(button, { key: ' ' })
++    expect(screen.getByRole('dialog')).toBeTruthy()
++  }
++
++  it('localizes real missing access before and after the fail-closed adapter resolves', async () => {
++    const { queryClient, accessKey, dispatch } = setup('nle', true)
++    expectDisabledDescription(copy.create, `${copy.canonical} ${copy.missing}`)
++    await waitFor(() => expect(queryClient.getQueryState(accessKey)?.status).toBe('success'))
++    expectDisabledDescription(copy.apply, `${copy.canonical} ${copy.missing}`)
++    expect(dispatch).not.toHaveBeenCalled()
++  })
++
++  it('localizes the unresolved project explanation', () => {
++    const { dispatch } = setup('nle', false)
++    expectDisabledDescription(copy.apply, `${copy.canonical} ${copy.unresolved}`)
++    expect(dispatch).not.toHaveBeenCalled()
++  })
++
++  it('localizes the hidden surface explanation ahead of unresolved project and access reasons', () => {
++    const { dispatch } = setup('storyboard', false)
++    expectDisabledDescription(copy.apply, `${copy.canonical} ${copy.hidden}`)
++    expect(dispatch).not.toHaveBeenCalled()
++  })
++
++  it.each([
++    'Denied by workspace policy P-42.',
++    'This surface is not discoverable at its current maturity.',
++    'A server-resolved Project context is required.',
++    'Effective access is not available from the server. This action is disabled.',
++  ])('preserves opaque server explanation verbatim: %s', explanation => {
++    const { dispatch } = setup('nle', true, { ...unknownAccess('timeline.operation.apply'), source: 'SERVER', status: 'POLICY_DENIED', explanation })
++    expectDisabledDescription(copy.apply, `${copy.canonical} ${explanation}`)
++    expect(dispatch).not.toHaveBeenCalled()
++  })
++
++  it('keeps canonical actions disabled with localized copy even for available access', () => {
++    const { dispatch } = setup('nle', true, { ...unknownAccess('timeline.operation.apply'), source: 'SERVER', status: 'AVAILABLE', explanation: 'Server allows invocation.' })
++    expectDisabledDescription(copy.apply, copy.canonical)
++    expect(dispatch).not.toHaveBeenCalled()
++  })
++})
+diff --git a/frontend/src/components/app-shell/AppShell.tsx b/frontend/src/components/app-shell/AppShell.tsx
+index be872fb4..cf713220 100644
+--- a/frontend/src/components/app-shell/AppShell.tsx
++++ b/frontend/src/components/app-shell/AppShell.tsx
+@@ -5,10 +5,15 @@ import { useEffectiveAccessCatalog } from '../../foundation/platformClient'
+ import { surfaceRegistry, getSurface, type SurfaceId } from '../../foundation/surfaceRegistry'
+ import { SelectionProvider, useInteractionStore } from '../../interaction/SelectionContext'
+ import { AgentLauncher, AgentShell, SelectionInspector, useSelectionCommands } from '../../interaction/InteractionShell'
+-import { canonicalRejection } from '../../interaction/model'
+ import type { ProjectContextValue } from '../../foundation/projectContext'
+ import { useTranslation, type SupportedLocale } from '../../localization'
+ 
++const localAvailabilityMessageKeys: Readonly<Record<string, string>> = {
++  'This surface is not discoverable at its current maturity.': 'shell.commandHiddenSurface',
++  'A server-resolved Project context is required.': 'shell.commandUnresolvedProject',
++  'Effective access is not available from the server. This action is disabled.': 'shell.commandMissingAccess',
++}
++
+ export function WorkspaceHeader({ workspaceId, project }: { workspaceId?: string; project?: ProjectContextValue }) {
+   const { locale, setLocale, t } = useTranslation()
+   return (
+@@ -75,7 +80,14 @@ function ShellContent({ surfaceId, workspaceId, project, children, shortcutOverr
+   const selectionCommands = useSelectionCommands()
+   const paletteActions = [...selectionCommands.map(action => ({ ...action, onSelect: () => { setPaletteOpen(false); action.onSelect() } })), ...commandRegistry.filter(command => command.id !== 'navigation.command-palette.open').map(command => {
+     const availability = getCommandAvailability(command, { surfaceId, hasResolvedProject: project?.status === 'RESOLVED', accessCatalog: access.data })
+-    return { id: command.id, label: t(`shell.command.${command.id}`), shortcut: getShortcut(command, shortcutOverrides), disabledReason: availability.available ? canonicalRejection : `${canonicalRejection} ${availability.reason}`, onSelect: () => { store.dispatch({ category: 'CANONICAL_SEMANTIC', type: 'semantic', commandId: command.id }, 'COMMAND') } }
++    const accessEntry = command.requiredAccessKey ? access.data?.[command.requiredAccessKey] : undefined
++    // Identify the explanation's origin only; getCommandAvailability remains the availability authority.
++    // Server text stays verbatim even when it happens to match a known local message.
++    const serverExplanation = surface.maturity !== 'HIDDEN' && (!command.projectRequired || project?.status === 'RESOLVED') && accessEntry?.source === 'SERVER' && availability.reason === accessEntry.explanation
++    const reasonKey = serverExplanation ? undefined : localAvailabilityMessageKeys[availability.reason]
++    const reason = reasonKey ? t(reasonKey) : availability.reason
++    const canonicalUnavailable = t('agent.canonicalUnavailable')
++    return { id: command.id, label: t(`shell.command.${command.id}`), shortcut: getShortcut(command, shortcutOverrides), disabledReason: availability.available ? canonicalUnavailable : `${canonicalUnavailable} ${reason}`, onSelect: () => { store.dispatch({ category: 'CANONICAL_SEMANTIC', type: 'semantic', commandId: command.id }, 'COMMAND') } }
+   })]
+ 
+   return (
+diff --git a/frontend/src/components/design-system/index.tsx b/frontend/src/components/design-system/index.tsx
+index b132d878..2ab71696 100644
+--- a/frontend/src/components/design-system/index.tsx
++++ b/frontend/src/components/design-system/index.tsx
+@@ -1,10 +1,12 @@
+ import { InteractionDialog } from '../../interaction/InteractionDialog'
+ import { useTranslation } from '../../localization'
+ import {
++  useId,
++  useLayoutEffect,
+   useRef,
+   useState,
+   type ButtonHTMLAttributes,
+-  type InputHTMLAttributes,
++  type ComponentPropsWithRef,
+   type KeyboardEvent,
+   type ReactNode,
+ } from 'react'
+@@ -19,11 +21,11 @@ export function IconButton({ label, icon, ...props }: ButtonHTMLAttributes<HTMLB
+   return <button className="ff-icon-button" aria-label={label} title={label} {...props}>{icon}</button>
+ }
+ 
+-export function Input(props: InputHTMLAttributes<HTMLInputElement>) {
++export function Input(props: ComponentPropsWithRef<'input'>) {
+   return <input className={`ff-input ${props.className ?? ''}`} {...props} />
+ }
+ 
+-export function Search({ label = 'Search', ...props }: InputHTMLAttributes<HTMLInputElement> & { label?: string }) {
++export function Search({ label = 'Search', ...props }: ComponentPropsWithRef<'input'> & { label?: string }) {
+   return <Input type="search" aria-label={label} placeholder={props.placeholder ?? 'Search'} {...props} />
+ }
+ 
+@@ -158,10 +160,73 @@ export function CommandPalette({ open, actions, onClose }: { open: boolean; acti
+ function PaletteContent({ actions, onClose }: { actions: readonly PaletteAction[]; onClose: () => void }) {
+   const [query, setQuery] = useState('')
+   const { t } = useTranslation()
++  const id = useId()
++  const input = useRef<HTMLInputElement>(null)
++  const buttons = useRef(new Map<string, HTMLButtonElement>())
++  const activeId = useRef<string | null>(null)
++  const composing = useRef(false)
++  const composingActivationKeys = useRef(new Set<string>())
+   const visible = actions.filter(action => action.label.toLowerCase().includes(query.toLowerCase()))
+-  return <InteractionDialog title={t('shell.commandPalette')} onClose={onClose} className="ff-command-palette">
+-    <Search label={t('shell.searchCommands')} value={query} onChange={event => setQuery(event.target.value)} placeholder={t('shell.typeCommand')} />
+-    <ul>{visible.map(action => <li key={action.id}><button type="button" disabled={Boolean(action.disabledReason)} onClick={action.onSelect}><span>{action.label}</span>{action.shortcut ? <kbd>{action.shortcut}</kbd> : null}</button>{action.disabledReason ? <><p>{t('shell.commandUnavailable')}</p><details><summary>{t('shell.technicalDetails')}</summary><p>{action.disabledReason}</p></details></> : null}</li>)}</ul>
+-    {!visible.length ? <p>{t('shell.noMatchingCommands')}</p> : null}
++  const enabled = visible.filter(action => !action.disabledReason)
++  const currentActions = useRef(visible)
++  useLayoutEffect(() => {
++    currentActions.current = visible
++    if (activeId.current !== null && !enabled.some(action => action.id === activeId.current)) {
++      activeId.current = null
++      input.current?.focus()
++    }
++  })
++  const guardComposition = (event: KeyboardEvent<HTMLDivElement>) => {
++    // Space activates on release, which can arrive after compositionend.
++    const blockedRelease = event.type === 'keyup' && composingActivationKeys.current.delete(event.key)
++    const isComposing = composing.current || event.nativeEvent.isComposing || event.nativeEvent.keyCode === 229
++    if (!isComposing && !blockedRelease) return
++    // Keep composed text native, but isolate IME keys from the dialog and shell.
++    event.stopPropagation()
++    if (event.target instanceof HTMLButtonElement && (event.key === 'Enter' || event.key === ' ')) {
++      if (event.type === 'keydown') composingActivationKeys.current.add(event.key)
++      event.preventDefault()
++    }
++  }
++  const navigate = (event: KeyboardEvent<HTMLInputElement | HTMLButtonElement>, fromId?: string) => {
++    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return
++    const currentIndex = fromId === undefined ? -1 : enabled.findIndex(action => action.id === fromId)
++    if (fromId !== undefined && currentIndex < 0) return
++    let nextIndex: number
++    if (event.key === 'ArrowDown') nextIndex = fromId === undefined ? 0 : Math.min(currentIndex + 1, enabled.length - 1)
++    else if (event.key === 'ArrowUp') nextIndex = fromId === undefined ? enabled.length - 1 : Math.max(currentIndex - 1, 0)
++    else if (fromId !== undefined && event.key === 'Home') nextIndex = 0
++    else if (fromId !== undefined && event.key === 'End') nextIndex = enabled.length - 1
++    else return // Enter/Space activate only through the result button's native click.
++    event.preventDefault()
++    const next = enabled[nextIndex]
++    if (next) buttons.current.get(next.id)?.focus()
++  }
++  return <InteractionDialog title={t('shell.commandPalette')} closeLabel={t('shell.closeCommandPalette')} onClose={onClose} className="ff-command-palette">
++    <div className="ff-command-content" onCompositionStart={() => { composing.current = true }} onCompositionEnd={() => { composing.current = false }} onKeyDownCapture={guardComposition} onKeyUpCapture={guardComposition} onBlur={event => {
++      if (event.relatedTarget && !Array.from(buttons.current.values()).includes(event.relatedTarget as HTMLButtonElement)) activeId.current = null
++    }}>
++      <Search ref={input} data-dialog-entry aria-describedby={`${id}-help`} label={t('shell.searchCommands')} value={query} onChange={event => {
++        setQuery(event.target.value)
++        activeId.current = null
++        input.current?.focus()
++      }} onKeyDown={event => navigate(event)} placeholder={t('shell.typeCommand')} />
++      <p id={`${id}-help`} className="ff-command-help">{t('shell.commandNavigationHelp')}</p>
++      <p role="status" className="ff-command-status">{visible.length ? t('shell.commandResultCount', { count: visible.length, available: enabled.length }) : t('shell.noMatchingCommands')}</p>
++      <ul>{visible.map(action => <li key={action.id}>
++        <button type="button" disabled={Boolean(action.disabledReason)} aria-describedby={action.disabledReason ? `${id}-reason-${action.id}` : undefined} ref={element => {
++          if (element) buttons.current.set(action.id, element)
++          else buttons.current.delete(action.id)
++        }} onFocus={event => {
++          activeId.current = action.id
++          event.currentTarget.scrollIntoView?.({ block: 'nearest' })
++        }} onKeyDown={event => navigate(event, action.id)} onClick={event => {
++          const current = currentActions.current.find(candidate => candidate.id === action.id)
++          if (composing.current || !event.currentTarget.isConnected || buttons.current.get(action.id) !== event.currentTarget || !current || current.disabledReason) return
++          current.onSelect()
++        }}><span>{action.label}</span>{action.shortcut ? <kbd>{action.shortcut}</kbd> : null}</button>
++        {action.disabledReason ? <><p id={`${id}-reason-${action.id}`}>{action.disabledReason}</p><details><summary>{t('shell.technicalDetails')}</summary><p>{t('shell.commandUnavailable')}</p></details></> : null}
++      </li>)}</ul>
++    </div>
+   </InteractionDialog>
+ }
+diff --git a/frontend/src/interaction/InteractionShell.test.tsx b/frontend/src/interaction/InteractionShell.test.tsx
+index bbfc026f..138d2bc5 100644
+--- a/frontend/src/interaction/InteractionShell.test.tsx
++++ b/frontend/src/interaction/InteractionShell.test.tsx
+@@ -13,6 +13,7 @@ import { SelectionProvider, useInteractionStore, useSelection, useSurfaceAdapter
+ import { AgentLauncher, AgentShell, SelectionInspector, SelectionActionBar, useSelectionCommands } from './InteractionShell'
+ import { applyProposal, createProposal, type InteractionStore, type SelectionScope, type SelectionState } from './model'
+ import { LocalizationProvider } from '../localization'
++import { CommandPalette, type PaletteAction } from '../components/design-system'
+ 
+ function setup(surface: 'canvas' | 'nle' = 'canvas') {
+   vi.spyOn(platformClient.workspace, 'getHome').mockResolvedValue({ workspace: { id: 'w', name: 'Workspace' }, tenantId: null, recentProjects: [{ id: 'p', name: 'Project' }] })
+@@ -569,3 +570,247 @@ it.each(['drag', 'marquee', 'pan'] as const)('Slice1C actual route commit cancel
+   expect(app.current().getSnapshot().selectedRefs).toEqual([])
+   assertRouteObservations()
+ })
++
++
++// DOM event simulation verifies handler/default ownership, not native browser key synthesis or OS IME.
++function paletteFixture() {
++  const first = vi.fn(), last = vi.fn(), unavailable = vi.fn(), close = vi.fn()
++  const actions: PaletteAction[] = [
++    { id: 'first', label: 'First target', onSelect: first },
++    { id: 'blocked', label: 'Blocked target', disabledReason: 'Unavailable fixture reason', onSelect: unavailable },
++    { id: 'last', label: 'Last target', onSelect: last },
++  ]
++  const content = (next = actions) => <CommandPalette open actions={next} onClose={close} />
++  const view = render(content())
++  return { ...view, actions, content, first, last, unavailable, close, input: screen.getByRole('searchbox') }
++}
++it('palette enters search, clamps enabled arrows, owns result Home/End and scrolls focused buttons', () => {
++  const p = paletteFixture()
++  const first = screen.getByRole('button', { name: 'First target' }), last = screen.getByRole('button', { name: 'Last target' })
++  const scroll = vi.fn()
++  Object.defineProperty(first, 'scrollIntoView', { configurable: true, value: scroll })
++  expect(document.activeElement).toBe(p.input)
++  fireEvent.keyDown(p.input, { key: 'ArrowDown' })
++  expect(document.activeElement).toBe(first)
++  expect(scroll).toHaveBeenCalledWith({ block: 'nearest' })
++  fireEvent.keyDown(first, { key: 'ArrowUp' })
++  expect(document.activeElement).toBe(first)
++  fireEvent.keyDown(first, { key: 'ArrowDown' })
++  expect(document.activeElement).toBe(last)
++  fireEvent.keyDown(last, { key: 'ArrowDown' })
++  expect(document.activeElement).toBe(last)
++  fireEvent.keyDown(last, { key: 'Home' })
++  expect(document.activeElement).toBe(first)
++  fireEvent.keyDown(first, { key: 'End' })
++  expect(document.activeElement).toBe(last)
++  act(() => p.input.focus())
++  fireEvent.keyDown(p.input, { key: 'ArrowUp' })
++  expect(document.activeElement).toBe(last)
++  expect(p.first).not.toHaveBeenCalled()
++  expect(p.last).not.toHaveBeenCalled()
++})
++it('palette preserves editing and modified keys; input Enter is inert and native result click executes once', () => {
++  const p = paletteFixture()
++  for (const key of ['Home', 'End', ' ', 'a', 'ArrowLeft', 'ArrowRight', 'Tab']) expect(fireEvent.keyDown(p.input, { key })).toBe(true)
++  for (const modifier of ['ctrlKey', 'metaKey', 'altKey', 'shiftKey']) {
++    for (const key of ['ArrowDown', 'ArrowUp', 'Home', 'End', 'Enter', ' ']) expect(fireEvent.keyDown(p.input, { key, [modifier]: true })).toBe(true)
++  }
++  fireEvent.keyDown(p.input, { key: 'Enter' })
++  expect(p.first).not.toHaveBeenCalled()
++  const first = screen.getByRole('button', { name: 'First target' })
++  for (const key of ['Enter', ' ']) {
++    expect(fireEvent.keyDown(first, { key })).toBe(true)
++    expect(fireEvent.keyUp(first, { key })).toBe(true)
++    expect(p.first).toHaveBeenCalledTimes(key === 'Enter' ? 0 : 1)
++    fireEvent.click(first, { detail: 0 }) // Explicit simulated native click, no browser proof.
++  }
++  expect(p.first).toHaveBeenCalledTimes(2)
++  fireEvent.click(first, { detail: 1 })
++  expect(p.first).toHaveBeenCalledTimes(3)
++  fireEvent.click(screen.getByRole('button', { name: 'Blocked target' }))
++  expect(p.unavailable).not.toHaveBeenCalled()
++})
++it('palette reconciles filter, no-match, all-unavailable and removed or disabled active results', () => {
++  const p = paletteFixture()
++  fireEvent.keyDown(p.input, { key: 'ArrowDown' })
++  const removed = screen.getByRole('button', { name: 'First target' })
++  p.rerender(p.content(p.actions.slice(1)))
++  expect(document.activeElement).toBe(p.input)
++  fireEvent.click(removed)
++  expect(p.first).not.toHaveBeenCalled()
++  fireEvent.keyDown(p.input, { key: 'ArrowDown' })
++  p.rerender(p.content(p.actions.slice(1).map(action => ({ ...action, disabledReason: 'Now unavailable' }))))
++  expect(document.activeElement).toBe(p.input)
++  fireEvent.keyDown(p.input, { key: 'ArrowDown' })
++  fireEvent.keyDown(p.input, { key: 'Enter' })
++  expect(p.last).not.toHaveBeenCalled()
++  expect(screen.getByRole('status').textContent).toBe('2 commands found; 0 available.')
++  fireEvent.change(p.input, { target: { value: 'no such target' } })
++  expect(screen.getByRole('status').textContent).toBe('No matching commands.')
++  fireEvent.keyDown(p.input, { key: 'ArrowUp' })
++  fireEvent.keyDown(p.input, { key: 'Enter' })
++  expect(document.activeElement).toBe(p.input)
++  expect(p.last).not.toHaveBeenCalled()
++})
++it('palette resolves replacement by stable ID despite label and order changes', () => {
++  const p = paletteFixture(), replacement = vi.fn()
++  fireEvent.keyDown(p.input, { key: 'ArrowDown' })
++  const button = screen.getByRole('button', { name: 'First target' })
++  p.rerender(p.content([p.actions[2], { id: 'first', label: '当前目标', onSelect: replacement }]))
++  expect(document.activeElement).toBe(button)
++  expect(button.textContent).toBe('当前目标')
++  fireEvent.click(button)
++  expect(replacement).toHaveBeenCalledTimes(1)
++  expect(p.first).not.toHaveBeenCalled()
++  fireEvent.change(p.input, { target: { value: 'Last' } })
++  expect(document.activeElement).toBe(p.input)
++  fireEvent.click(button)
++  expect(replacement).toHaveBeenCalledTimes(1)
++  fireEvent.keyDown(p.input, { key: 'ArrowDown' })
++  expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Last target' }))
++})
++it.each(['events', 'native', 'legacy'])('palette blocks simulated IME navigation, activation and Escape (%s)', mode => {
++  const p = paletteFixture(), first = screen.getByRole('button', { name: 'First target' })
++  const extra = mode === 'native' ? { isComposing: true } : mode === 'legacy' ? { keyCode: 229 } : {}
++  if (mode === 'events') fireEvent.compositionStart(p.input)
++  for (const key of ['ArrowDown', 'ArrowUp', 'Home', 'End', 'Escape', 'Enter']) fireEvent.keyDown(p.input, { key, ...extra })
++  expect(document.activeElement).toBe(p.input)
++  expect(p.close).not.toHaveBeenCalled()
++  expect(fireEvent.keyDown(p.input, { key: ' ', ...extra })).toBe(true)
++  fireEvent.change(p.input, { target: { value: 'target' } })
++  expect((p.input as HTMLInputElement).value).toBe('target')
++  act(() => first.focus())
++  for (const key of ['Enter', ' ']) {
++    expect(fireEvent.keyDown(first, { key, ...extra })).toBe(false)
++    expect(fireEvent.keyUp(first, { key, ...extra })).toBe(false)
++  }
++  if (mode === 'events') {
++    fireEvent.click(first, { detail: 0 })
++    expect(p.first).not.toHaveBeenCalled()
++    fireEvent.compositionEnd(p.input)
++  }
++  expect(p.first).not.toHaveBeenCalled()
++  fireEvent.keyDown(first, { key: 'ArrowDown' })
++  expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Last target' }))
++})
++it.each([
++  ['en', 'Search commands', 'Close command palette', '3 commands found; 2 available.', 'No matching commands.', 'Use Up and Down'],
++  ['zh-CN', '搜索命令', '关闭命令面板', '找到 3 个命令；2 个可用。', '没有匹配的命令。', '使用上、下方向键'],
++] as const)('palette has localized purpose, one live status and external unavailable descriptions in %s', (locale, search, close, count, empty, help) => {
++  render(<LocalizationProvider initialLocale={locale}><CommandPalette open onClose={() => {}} actions={[
++    { id: 'a', label: 'Same', onSelect: vi.fn() }, { id: 'b', label: 'Same', onSelect: vi.fn() },
++    { id: 'blocked', label: 'Unavailable', disabledReason: 'Specific reason', onSelect: vi.fn() },
++  ]} /></LocalizationProvider>)
++  const dialog = screen.getByRole('dialog'), input = screen.getByRole('searchbox', { name: search })
++  expect(screen.getByRole('button', { name: close })).toBeTruthy()
++  expect(screen.getByRole('status').textContent).toBe(count)
++  expect(dialog.querySelectorAll('[role="status"], [aria-live]')).toHaveLength(1)
++  const description = document.getElementById(input.getAttribute('aria-describedby')!)!
++  expect(description.textContent).toContain(help)
++  const disabled = screen.getByRole('button', { name: 'Unavailable' })
++  const reason = document.getElementById(disabled.getAttribute('aria-describedby')!)!
++  expect(reason.textContent).toContain('Specific reason')
++  expect(disabled.contains(reason)).toBe(false)
++  expect(reason.closest('details')).toBeNull()
++  expect(dialog.querySelector('[role="combobox"], [role="listbox"], [role="application"]')).toBeNull()
++  fireEvent.change(input, { target: { value: 'missing' } })
++  expect(screen.getByRole('status').textContent).toBe(empty)
++})
++it('palette retains dialog Tab boundary trap, Escape and launcher restoration', async () => {
++  setup()
++  await screen.findByRole('button', { name: 'Local composition note' })
++  const launcher = screen.getByRole('button', { name: /Commands/ })
++  act(() => launcher.focus())
++  fireEvent.click(launcher)
++  expect(document.activeElement).toBe(screen.getByRole('searchbox'))
++  const close = screen.getByRole('button', { name: 'Close command palette' })
++  act(() => close.focus())
++  fireEvent.keyDown(close, { key: 'Tab', shiftKey: true })
++  const last = document.activeElement!
++  expect(last.tagName).toBe('SUMMARY')
++  fireEvent.keyDown(last, { key: 'Tab' })
++  expect(document.activeElement).toBe(close)
++  fireEvent.keyDown(close, { key: 'Escape' })
++  expect(screen.queryByRole('dialog')).toBeNull()
++  expect(document.activeElement).toBe(launcher)
++})
++it('palette selection projections reject retained closures and dispatch current primary/query without focus selection changes', () => {
++  let store!: InteractionStore, commands!: PaletteAction[]
++  const handle = vi.fn(() => true)
++  function Probe() {
++    store = useInteractionStore()
++    useSurfaceAdapter({ objects: () => [{ id: 'one', title: 'One', kind: 'NODE' }, { id: 'two', title: 'Two', kind: 'NODE' }], supports: ['reveal', 'compare-revisions'], handle })
++    commands = useSelectionCommands()
++    return <CommandPalette open actions={commands} onClose={() => {}} />
++  }
++  const content = (projectId: string) => <SelectionProvider scope={{ projectId, surfaceId: 'canvas' }}><Probe /></SelectionProvider>
++  const view = render(content('p'))
++  act(() => store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: ['one'] }))
++  const old = commands.find(action => action.id === 'selection.reveal')!
++  act(() => {
++    store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: ['two'] })
++    old.onSelect() // Before React reprojects: stale captured primary must not reach the adapter.
++  })
++  expect(handle).not.toHaveBeenCalled()
++  const snapshot = store.getSnapshot(), dispatch = vi.spyOn(store, 'dispatch')
++  fireEvent.keyDown(screen.getByRole('searchbox'), { key: 'ArrowDown' })
++  fireEvent.keyDown(document.activeElement!, { key: 'ArrowDown' })
++  expect(store.getSnapshot()).toBe(snapshot)
++  expect(dispatch).not.toHaveBeenCalled()
++  fireEvent.click(screen.getByRole('button', { name: 'Reveal node: Two' }))
++  expect(dispatch).toHaveBeenCalledWith({ category: 'WORKSPACE_PRESENTATION', type: 'reveal', targetId: 'two' }, 'COMMAND')
++  act(() => store.setRevisionPair({ from: 'r1', to: 'r2' }))
++  const compare = commands.find(action => action.id === 'review.compare')!
++  fireEvent.click(screen.getByRole('button', { name: compare.label }))
++  expect(dispatch).toHaveBeenCalledWith({ category: 'READ_ONLY_QUERY', type: 'compare-revisions', pair: { from: 'r1', to: 'r2' } }, 'COMMAND')
++  const staleAsk = commands.find(action => action.id === 'agent.open')!
++  view.rerender(content('p2'))
++  act(() => staleAsk.onSelect())
++  expect(store.getSnapshot().agentOpen).toBe(false)
++  fireEvent.click(screen.getByRole('button', { name: /Ask Agent about/ }))
++  expect(store.getSnapshot().agentOpen).toBe(true)
++  expect(store.dispatch({ category: 'CANONICAL_SEMANTIC', type: 'semantic', commandId: 'apply' }).ok).toBe(false)
++})
++
++it('palette suppresses a simulated composing Space release after composition ends', () => {
++  const p = paletteFixture()
++  const first = screen.getByRole('button', { name: 'First target' })
++  act(() => first.focus())
++  fireEvent.compositionStart(p.input)
++  expect(fireEvent.keyDown(first, { key: ' ' })).toBe(false)
++  fireEvent.compositionEnd(p.input)
++  expect(fireEvent.keyUp(first, { key: ' ' })).toBe(false)
++  expect(p.first).not.toHaveBeenCalled()
++  expect(fireEvent.keyDown(first, { key: ' ' })).toBe(true)
++  expect(fireEvent.keyUp(first, { key: ' ' })).toBe(true)
++  fireEvent.click(first, { detail: 0 }) // Simulated click only; browser default synthesis is external.
++  expect(p.first).toHaveBeenCalledTimes(1)
++})
++it('retained Selection commands reject changed revisions before dispatch, including untargeted actions', () => {
++  let store!: InteractionStore, commands!: PaletteAction[]
++  function Probe() {
++    store = useInteractionStore()
++    useSurfaceAdapter({ objects: () => [{ id: 'one', title: 'One', kind: 'NODE' }, { id: 'two', title: 'Two', kind: 'NODE' }], supports: ['reveal', 'compare-revisions'], handle: () => true })
++    commands = useSelectionCommands()
++    return <CommandPalette open actions={commands} onClose={() => {}} />
++  }
++  render(<SelectionProvider scope={{ projectId: 'p', surfaceId: 'canvas' }}><Probe /></SelectionProvider>)
++  act(() => {
++    store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: ['one', 'two'], primaryId: 'one' })
++    store.setRevisionPair({ from: 'r1', to: 'r2' })
++  })
++  const retained = commands
++  const dispatch = vi.spyOn(store, 'dispatch')
++  act(() => {
++    store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: ['one', 'two'], primaryId: 'two' })
++    store.setRevisionPair({ from: 'r2', to: 'r3' })
++    dispatch.mockClear()
++    retained.forEach(command => command.onSelect())
++  })
++  expect(dispatch).not.toHaveBeenCalled()
++  expect(store.getSnapshot().primarySelectedObject?.id).toBe('two')
++  expect(store.getSnapshot().selectedObjects).toHaveLength(2)
++  expect(store.getSnapshot().agentOpen).toBe(false)
++  fireEvent.click(screen.getByRole('button', { name: 'Reveal node: Two' }))
++  expect(dispatch).toHaveBeenCalledWith({ category: 'WORKSPACE_PRESENTATION', type: 'reveal', targetId: 'two' }, 'COMMAND')
++})
+diff --git a/frontend/src/interaction/InteractionShell.tsx b/frontend/src/interaction/InteractionShell.tsx
+index 07bbdf8f..88ffee15 100644
+--- a/frontend/src/interaction/InteractionShell.tsx
++++ b/frontend/src/interaction/InteractionShell.tsx
+@@ -107,7 +107,12 @@ export function useSelectionCommands(): PaletteAction[] {
+   const selection = useSelection(), store = useInteractionStore()
+   const { t } = useTranslation()
+   const selected = selection.primarySelectedObject
+-  const command = (id: string, label: string, action: ProductAction): PaletteAction => ({ id, label, onSelect: () => { store.dispatch(action, 'COMMAND' satisfies InvocationSource) } })
++  const command = (id: string, label: string, action: ProductAction): PaletteAction => ({ id, label, onSelect: () => {
++    // A retained projection must not apply its captured target to a newer context.
++    const current = store.getSnapshot()
++    if (current.lifetime !== selection.lifetime || current.revision !== selection.revision) return
++    store.dispatch(action, 'COMMAND' satisfies InvocationSource)
++  } })
+   const pluralTarget = selection.selectedObjects.every(object => object.kind === 'CLIP') ? 'agent.selectedClips' : 'agent.selectedObjects'
+   const labelTarget = selection.selectedObjects.length > 1 ? t(pluralTarget, { count: selection.selectedObjects.length }) : `${selected ? t(`agent.kindLower${selected.kind}`) : ''}: ${selected?.title}`
+   const actions: PaletteAction[] = selected ? [command('selection.inspect', t('agent.commandInspect', { target: labelTarget }), { category: 'LOCAL_EPHEMERAL', type: 'inspect', open: true }), ...(selection.supported.includes('reveal') ? [command('selection.reveal', t('agent.commandReveal', { target: `${t(`agent.kindLower${selected.kind}`)}: ${selected.title}` }), { category: 'WORKSPACE_PRESENTATION', type: 'reveal', targetId: selected.id })] : []), command('selection.clear', t('agent.clearSelection'), { category: 'LOCAL_EPHEMERAL', type: 'select', ids: [] })] : []
+diff --git a/frontend/src/localization/catalogs.ts b/frontend/src/localization/catalogs.ts
+index 122e6eba..f52a83e9 100644
+--- a/frontend/src/localization/catalogs.ts
++++ b/frontend/src/localization/catalogs.ts
+@@ -20,6 +20,12 @@ const englishNamespaces: CatalogNamespaces = {
+     navigation: message('Navigation'), navigationDrawerSurfaces: message('Navigation drawer surfaces'), toggleAssetBrowser: message('Toggle asset browser'),
+     commands: message('Commands'), skipToMain: message('Skip to main content'), assetBrowser: message('Asset browser'), assets: message('Assets'),
+     commandPalette: message('Command palette'), searchCommands: message('Search commands'), typeCommand: message('Type a command…'), noMatchingCommands: message('No matching commands.'),
++    closeCommandPalette: message('Close command palette'),
++    commandHiddenSurface: message('This surface is not discoverable at its current maturity.'),
++    commandUnresolvedProject: message('A server-resolved Project context is required.'),
++    commandMissingAccess: message('Effective access is not available from the server. This action is disabled.'),
++    commandNavigationHelp: message('Use Up and Down to focus available commands; Home and End move to the first and last result. Press Enter or Space on a command to run it. Tab moves between controls; Escape closes.'),
++    commandResultCount: message('{count} commands found; {available} available.', ['count', 'available']),
+     commandUnavailable: message('This action is not ready here. A connected, authorized application flow is required.'), technicalDetails: message('Technical details'),
+     'command.project.create': message('Create project'), 'command.render.open': message('Open render entry'),
+     'command.timeline.operation.apply': message('Apply timeline operation'), 'command.canvas.reference.add': message('Add canvas reference'),
+@@ -130,6 +136,12 @@ const chineseNamespaces: CatalogNamespaces = {
+     production: message('制作'), panelControls: message('面板控件'), navigation: message('导航'), navigationDrawerSurfaces: message('导航抽屉界面'),
+     toggleAssetBrowser: message('切换素材浏览器'), commands: message('命令'), skipToMain: message('跳到主要内容'), assetBrowser: message('素材浏览器'),
+     commandPalette: message('命令面板'), searchCommands: message('搜索命令'), typeCommand: message('输入命令…'), noMatchingCommands: message('没有匹配的命令。'),
++    closeCommandPalette: message('关闭命令面板'),
++    commandHiddenSurface: message('此界面在当前成熟度下尚未开放。'),
++    commandUnresolvedProject: message('需要服务器已解析的项目上下文。'),
++    commandMissingAccess: message('服务器尚未提供有效访问权限信息。此操作已禁用。'),
++    commandNavigationHelp: message('使用上、下方向键聚焦可用命令；在命令上使用 Home 和 End 移至首个和末个结果。按 Enter 或空格执行聚焦的命令。Tab 切换控件；Escape 关闭面板。'),
++    commandResultCount: message('找到 {count} 个命令；{available} 个可用。', ['count', 'available']),
+     commandUnavailable: message('此操作尚未就绪，需要已连接且获授权的应用流程。'), technicalDetails: message('技术详情'),
+     'command.project.create': message('创建项目'), 'command.render.open': message('打开渲染入口'),
+     'command.timeline.operation.apply': message('应用时间线操作'), 'command.canvas.reference.add': message('添加画布引用'),
+diff --git a/frontend/src/localization/source-manifest.json b/frontend/src/localization/source-manifest.json
+index c5828b75..c3aaccc4 100644
+--- a/frontend/src/localization/source-manifest.json
++++ b/frontend/src/localization/source-manifest.json
+@@ -10,6 +10,15 @@
+     "common.localeChinese",
+     "shell.commands",
+     "shell.commandPalette",
++    "shell.searchCommands",
++    "shell.typeCommand",
++    "shell.closeCommandPalette",
++    "shell.commandHiddenSurface",
++    "shell.commandUnresolvedProject",
++    "shell.commandMissingAccess",
++    "shell.commandNavigationHelp",
++    "shell.commandResultCount",
++    "shell.noMatchingCommands",
+     "shell.command.project.create",
+     "shell.command.render.open",
+     "shell.command.timeline.operation.apply",
+diff --git a/frontend/src/styles/foundation.css b/frontend/src/styles/foundation.css
+index d7c68303..cfe63ed1 100644
+--- a/frontend/src/styles/foundation.css
++++ b/frontend/src/styles/foundation.css
+@@ -371,7 +371,15 @@ kbd { padding: 1px var(--space-1); border: 1px solid var(--border-default); bord
+ .ff-synthetic-note, .ff-unavailable-action p { font-size: 12px; }
+ .ff-unavailable-action { margin-top: 14px; border-top: 1px solid var(--border-subtle); padding-top: 12px; }
+ .ff-agent-proposal-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+-.ff-command-palette ul { list-style: none; padding: 0; }
++.ff-interaction-dialog.ff-command-palette { display: flex; flex-direction: column; overflow: hidden; }
++.ff-command-palette .ff-dialog-heading { flex: 0 0 auto; }
++.ff-command-content { display: flex; flex-direction: column; min-height: 0; }
++.ff-command-content > .ff-input, .ff-command-help, .ff-command-status { flex: 0 0 auto; }
++.ff-command-help, .ff-command-status { font-size: 12px; margin: 6px 0; }
++.ff-command-palette ul { min-height: 0; overscroll-behavior: contain; list-style: none; padding: 3px; }
++.ff-command-palette li button:focus-visible { outline: 2px solid var(--accent-400); outline-offset: -2px; background: var(--surface-4); }
++.ff-command-palette li button span { min-width: 0; overflow-wrap: anywhere; }
++.ff-command-palette li button kbd { flex-shrink: 0; margin-left: 8px; }
+ .ff-command-palette li p, .ff-command-palette details { font-size: 12px; margin: 4px 0 10px; }
+ .ff-synthetic-clip-fixture { margin-top: 6px; font-size: 12px; }
+ .ff-synthetic-clip-fixture > label { display: flex; align-items: center; gap: 8px; }

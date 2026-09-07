@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_COMMAND_DISCOVERY_AND_ACCESSIBILITY_CONVERGENCE_V1/browser-smoke-04/palette_smoke.py", line 25, in <module>
+    palette();rec('open-search-focus',focused()['search'],focused())
+              ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_COMMAND_DISCOVERY_AND_ACCESSIBILITY_CONVERGENCE_V1/browser-smoke-04/palette_smoke.py", line 7, in rec
+    def rec(name,ok,actual=None):b.record(name,'Current bounded palette contract',actual,ok,assistance='Reused Chromium CDP trusted keys/pointer; Input.insertText for search text; synthetic read-only HTTP fixtures; DOM geometry/ARIA reads; focus emulation; DOM locale change helper')
+                                 ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_COMMAND_DISCOVERY_AND_ACCESSIBILITY_CONVERGENCE_V1/browser-smoke-04/native_common.py", line 27, in record
+    row={'test_identity':name,'source_tree':T,'production_build_sha256':json.loads((R/'BUILD_ARTIFACT_BOUNDARY.json').read_text())['build_manifest_sha256'],'browser':'Chromium CDP headless','browser_version':self.browser_version,'CDP_used':True,'held_button_encoding':'button=left and buttons=1 for held mouseMoved','input_method':sorted(set(c['method'] for c in commands)),'expected':expected,'actual':actual,'result':'PASS' if passed else 'FAIL','passed':bool(passed),'synthetic_assistance':assistance,'DOM_helper':True,'focus_emulation':True,'pointer_injection':any(c['method']=='Input.dispatchMouseEvent' for c in commands),'capture_simulation':simulation,'reason':'Synthetic API fixture; frontend presentation-only browser acceptance, no backend or physical-device evidence','timestamp':now()}
+                                                                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib64/python3.13/pathlib/_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.13/pathlib/_abc.py", line 632, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.13/pathlib/_local.py", line 537, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_COMMAND_DISCOVERY_AND_ACCESSIBILITY_CONVERGENCE_V1/browser-smoke-04/BUILD_ARTIFACT_BOUNDARY.json'

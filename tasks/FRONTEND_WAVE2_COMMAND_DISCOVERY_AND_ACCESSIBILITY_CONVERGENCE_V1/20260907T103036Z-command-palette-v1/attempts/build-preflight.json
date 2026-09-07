@@ -1,0 +1,36 @@
+{
+  "name": "build-preflight",
+  "command": [
+    "node",
+    "--input-type=module",
+    "-e",
+    "const {resolveConfig}=await import('vite');const c=await resolveConfig({configLoader:'runner',build:{outDir:\"/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_COMMAND_DISCOVERY_AND_ACCESSIBILITY_CONVERGENCE_V1/build\",emptyOutDir:true}},'build');console.log(JSON.stringify({root:c.root,outDir:c.build.outDir,emptyOutDir:c.build.emptyOutDir,plugins:c.plugins.map(p=>p.name)},null,2));"
+  ],
+  "containment": [
+    "bwrap",
+    "--die-with-parent",
+    "--ro-bind",
+    "/",
+    "/",
+    "--bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_COMMAND_DISCOVERY_AND_ACCESSIBILITY_CONVERGENCE_V1",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_COMMAND_DISCOVERY_AND_ACCESSIBILITY_CONVERGENCE_V1",
+    "--ro-bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_COMMAND_DISCOVERY_AND_ACCESSIBILITY_CONVERGENCE_V1/snapshot",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_COMMAND_DISCOVERY_AND_ACCESSIBILITY_CONVERGENCE_V1/snapshot",
+    "--ro-bind",
+    "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules",
+    "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules",
+    "--proc",
+    "/proc",
+    "--dev",
+    "/dev",
+    "--tmpfs",
+    "/tmp",
+    "--chdir",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_COMMAND_DISCOVERY_AND_ACCESSIBILITY_CONVERGENCE_V1/snapshot/frontend",
+    "--"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 0.6666715145111084
+}
