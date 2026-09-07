@@ -1,0 +1,65 @@
+{
+  "task": "FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1",
+  "decision": "IMPLEMENTED_AND_VALIDATED_BOUNDED; INDEPENDENT_REVIEW_REQUIRED",
+  "evidence_commit": "e18b98413069deb983f5d9785fdafb8f9d9c4ba0",
+  "task_path": "tasks/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1/20260907T135548Z-notification-inbox-v1",
+  "manifest_sha256": "42b5ee08df4990bd379c239ff2f02a01027f4e88d2346897f1e21c56061ffb56",
+  "remote_verification": {
+    "status": "PASS",
+    "evidence_commit": "e18b98413069deb983f5d9785fdafb8f9d9c4ba0",
+    "remote_tip_at_verification": "e18b98413069deb983f5d9785fdafb8f9d9c4ba0",
+    "anonymous_fetch": true,
+    "public_files": 361,
+    "manifest_entries": 360,
+    "hash_differences": 0,
+    "path_differences": 0,
+    "manifest_sha256": "42b5ee08df4990bd379c239ff2f02a01027f4e88d2346897f1e21c56061ffb56"
+  },
+  "raw_readback": [
+    {
+      "url": "https://raw.githubusercontent.com/shangxq007/media-platform-evidence/e18b98413069deb983f5d9785fdafb8f9d9c4ba0/tasks/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1/20260907T135548Z-notification-inbox-v1/INDEX.md",
+      "status": 200,
+      "sha256": "aa887187e0e2f11e3c5f72942d29ed7cd745177f677866c8e80daef561cdfbb6",
+      "bytes": 2669
+    },
+    {
+      "url": "https://raw.githubusercontent.com/shangxq007/media-platform-evidence/e18b98413069deb983f5d9785fdafb8f9d9c4ba0/tasks/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1/20260907T135548Z-notification-inbox-v1/MANIFEST.json",
+      "status": 200,
+      "sha256": "42b5ee08df4990bd379c239ff2f02a01027f4e88d2346897f1e21c56061ffb56",
+      "bytes": 63034
+    }
+  ],
+  "preservation": {
+    "baseline_tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "final_tree": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "head": "f5e19cf53fd010eea2935dd29557e82a879e042c",
+    "branch": "refs/heads/agent/frontend-wave2-product-ux-v1",
+    "real_index_sha256": "675115408e86deb10531d0a973cd0372d48458cf17ddb0bb9e6c52858c2fa18e",
+    "unchanged_baseline_files": 970,
+    "task_changed_paths": 15,
+    "product_changed_paths": 11,
+    "documentation_changed_paths": 4,
+    "new_paths": 6,
+    "h4_changed": 0,
+    "tracked_dist_changes": 0,
+    "backend_static_changes": 0,
+    "backend_source_changes": 0,
+    "future_notification_requirements_unchanged": true,
+    "broad_backend_lane_stationarity_required": false,
+    "containment": "writers and verification ran with read-only non-allowlisted root; no product Git writes",
+    "scope_limit": "frontend registered worktree, not independent backend lane runtime"
+  },
+  "skill_memory_disclosure": {
+    "skill_writes_after_payload_seal": 1,
+    "memory_writes": 0,
+    "skill": "github-auth",
+    "sha256_after": "4b6c01edc766c83db462d36c65a820dafc7718a91c4c01397fd7b9cc34bf5e48",
+    "reason": "Record minimal transient evidence authentication and unset GIT_CURL_VERBOSE; value 0 still enables tracing",
+    "payload_statement_scope": "IMPLEMENTATION_REPORT.md and PUBLIC_SAFETY.json recorded zero writes at payload seal; this later additive procedural write is disclosed here without rewriting sealed evidence",
+    "credential_values_logged": 0,
+    "git_trace_observation": "Git emitted verbose metadata with authorization value redacted; no raw credential value was emitted. Subsequent verification uses unset tracing variables."
+  },
+  "final_report_sha256": "0744f03bf958007c0eb13d9bd9a176d19a0ac3104f60852abd81e6640ac56fd8",
+  "product_publication": "NOT_PERFORMED",
+  "stop": true
+}
