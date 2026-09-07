@@ -1,0 +1,178 @@
+diff --git a/frontend/src/product/canvas/WorkspaceCanvas.test.tsx b/frontend/src/product/canvas/WorkspaceCanvas.test.tsx
+index 6359cfc6..685f6c0a 100644
+--- a/frontend/src/product/canvas/WorkspaceCanvas.test.tsx
++++ b/frontend/src/product/canvas/WorkspaceCanvas.test.tsx
+@@ -313,6 +313,73 @@ function pointerFixture() {
+   return { stage, project, note, pointer, capture, release, captured }
+ }
+ 
++describe('Slice1C node-origin captured click', () => {
++  it.each([
++    ['stage', 0, 'single'], ['viewport', 2, 'single'], ['stage', 2, 'group'], ['viewport', 0, 'group'],
++  ] as const)('completes %s-targeted delta %s plain click from %s selection and permits the next background gesture', async (target, delta, membership) => {
++    setup(); await screen.findByText('First project')
++    const { stage, project, note, pointer } = pointerFixture()
++    fireEvent.click(project)
++    if (membership === 'group') fireEvent.click(note, { ctrlKey: true })
++    const background = target === 'stage' ? stage : stage.querySelector('.ff-canvas-viewport')!
++    pointer('pointerDown', project, 100, 100)
++    expect(activeStore.getSnapshot().selectedRefs).toHaveLength(membership === 'group' ? 2 : 1)
++    pointer('pointerMove', stage, 100 + delta, 100 + delta)
++    pointer('pointerUp', stage, 100 + delta, 100 + delta)
++    fireEvent.click(background, { detail: 1, clientX: 100 + delta, clientY: 100 + delta })
++    // Existing plain node activation replaces membership; only a completed drag preserves the group.
++    expect(activeStore.getSnapshot().selectedRefs.map(ref => ref.localId)).toEqual(['project-node'])
++    expect(project.style.left).toBe('120px'); expect(note.style.left).toBe('430px')
++    pointer('pointerDown', background, 0, 0); pointer('pointerUp', stage, 0, 0)
++    fireEvent.click(background, { detail: 1 })
++    expect(activeStore.getSnapshot().selectedRefs).toEqual([])
++  })
++  it('discards an undelivered completion on a new pointer interaction or keyboard activation', async () => {
++    setup(); await screen.findByText('First project')
++    const { stage, project, note, pointer } = pointerFixture()
++    pointer('pointerDown', project, 100, 100); pointer('pointerUp', stage, 100, 100)
++    // No click delivered for the first gesture; a later node interaction must own its own result.
++    pointer('pointerDown', note, 200, 200); pointer('pointerUp', stage, 200, 200)
++    fireEvent.click(stage, { detail: 1, clientX: 200, clientY: 200 })
++    expect(activeStore.getSnapshot().selectedRefs.map(ref => ref.localId)).toEqual(['note-node'])
++    pointer('pointerDown', note, 200, 200); pointer('pointerUp', stage, 200, 200)
++    fireEvent.keyDown(project, { key: 'Enter' }); fireEvent.click(project, { detail: 0 })
++    expect(activeStore.getSnapshot().selectedRefs.map(ref => ref.localId)).toEqual(['project-node'])
++    fireEvent.click(stage, { detail: 1 })
++    expect(activeStore.getSnapshot().selectedRefs).toEqual([])
++  })
++  it.each(['revision', 'pointerCancel', 'lostPointerCapture'] as const)('never revives node intent after %s and does not suppress a later node interaction', async reason => {
++    setup(); await screen.findByText('First project')
++    const { stage, project, note, pointer } = pointerFixture()
++    pointer('pointerDown', project, 100, 100)
++    if (reason === 'revision') {
++      pointer('pointerUp', stage, 100, 100)
++      act(() => activeStore.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: [] }))
++    } else {
++      pointer(reason, stage, 100, 100); pointer('pointerUp', stage, 100, 100)
++    }
++    const before = activeStore.getSnapshot()
++    fireEvent.click(stage, { detail: 1, clientX: 100, clientY: 100 })
++    expect(activeStore.getSnapshot()).toBe(before)
++    pointer('pointerDown', note, 200, 200); pointer('pointerUp', stage, 200, 200)
++    fireEvent.click(stage, { detail: 1, clientX: 200, clientY: 200 })
++    expect(activeStore.getSnapshot().selectedRefs.map(ref => ref.localId)).toEqual(['note-node'])
++  })
++  it('retains initial node selection when the zero-movement click targets the capturing stage', async () => {
++    setup(); await screen.findByText('First project')
++    const { stage, project, pointer, captured } = pointerFixture()
++    pointer('pointerDown', project, 100, 100)
++    expect(captured.has(7)).toBe(true)
++    const selected = activeStore.getSnapshot()
++    expect(selected.selectedRefs.map(ref => ref.localId)).toEqual(['project-node'])
++    pointer('pointerUp', stage, 100, 100)
++    fireEvent.click(stage, { detail: 1, clientX: 100, clientY: 100 })
++    expect(activeStore.getSnapshot().selectedRefs).toEqual(selected.selectedRefs)
++    expect(activeStore.getSnapshot().revision).toBe(selected.revision)
++    expect(captured.has(7)).toBe(false)
++  })
++})
++
+ describe('Slice1B selection layout correction', () => {
+   afterEach(() => vi.unstubAllGlobals())
+ 
+diff --git a/frontend/src/product/canvas/WorkspaceCanvas.tsx b/frontend/src/product/canvas/WorkspaceCanvas.tsx
+index 59853dd5..608efcf5 100644
+--- a/frontend/src/product/canvas/WorkspaceCanvas.tsx
++++ b/frontend/src/product/canvas/WorkspaceCanvas.tsx
+@@ -1,4 +1,4 @@
+-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
++import { useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type MouseEvent, type PointerEvent } from 'react'
+ import { flushSync } from 'react-dom'
+ import { Badge, Button } from '../../components/design-system'
+ import { useProjectContext } from '../../foundation/projectContext'
+@@ -11,6 +11,7 @@ import { useTranslation } from '../../localization'
+ 
+ interface CanvasGesture {
+   kind: 'drag' | 'marquee' | 'pan'
++  nodeId?: string
+   union: boolean
+   pointerId: number
+   capture: HTMLDivElement
+@@ -54,7 +55,9 @@ function CanvasSession() {
+   const [previewPoint, setPreviewPoint] = useState<CanvasPoint | null>(null)
+   const [mode, setMode] = useState<'select' | 'pan'>('select')
+   const suppressClick = useRef(false)
++  const completedNodeClick = useRef<(Pick<CanvasGesture, 'owner' | 'context' | 'pointerId'> & { nodeId: string }) | null>(null)
+   const cancelGesture = useCallback(() => {
++    completedNodeClick.current = null
+     const active = gesture.current
+     gesture.current = null
+     setPreviewNodes(null)
+@@ -102,6 +105,7 @@ function CanvasSession() {
+   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+     if (gesture.current) return
+     suppressClick.current = false
++    completedNodeClick.current = null
+     if (event.button !== 0 || event.isPrimary === false || event.pointerType === 'touch' || event.altKey || event.shiftKey) return
+     const target = event.target as HTMLElement
+     if (target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"])')) return
+@@ -124,7 +128,7 @@ function CanvasSession() {
+     const bounds = event.currentTarget.getBoundingClientRect()
+     const origin = drawingOrigin(event.currentTarget, bounds), startScreen = { x: event.clientX, y: event.clientY }
+     const startLocal = screenToCanvas(startScreen, origin, { x: current.viewportX, y: current.viewportY }, current.zoom)
+-    const active: CanvasGesture = { kind, union: event.ctrlKey || event.metaKey, pointerId: event.pointerId, capture: event.currentTarget, owner: store, context, refs, originals, canvas: current, startScreen, startLocal, origin, outerBounds: bounds, moved: false }
++    const active: CanvasGesture = { kind, nodeId, union: event.ctrlKey || event.metaKey, pointerId: event.pointerId, capture: event.currentTarget, owner: store, context, refs, originals, canvas: current, startScreen, startLocal, origin, outerBounds: bounds, moved: false }
+     gesture.current = active
+     try { event.currentTarget.setPointerCapture(event.pointerId) } catch { cancelGesture(); return }
+     // Focus remains visible; captured camera changes (including focus reveal) cancel the gesture.
+@@ -154,7 +158,10 @@ function CanvasSession() {
+     if (!gestureContextCurrent(active) || gesture.current) return
+     suppressClick.current = active.moved
+     if (active.kind === 'drag') {
+-      if (!active.moved) return
++      if (!active.moved) {
++        if (active.nodeId) completedNodeClick.current = { owner: active.owner, context: active.context, pointerId: active.pointerId, nodeId: active.nodeId }
++        return
++      }
+       setCanvas(current => moveCanvasGroup(current, active.originals, delta))
+       store.reconcile()
+     } else if (active.kind === 'pan' && active.moved) {
+@@ -169,6 +176,24 @@ function CanvasSession() {
+       suppressClick.current = true
+     }
+   }
++  const onClickCapture = (event: MouseEvent<HTMLDivElement>) => {
++    const completed = completedNodeClick.current, suppressed = suppressClick.current
++    // One completion owns at most its next click; keyboard activation never consumes pointer intent.
++    completedNodeClick.current = null
++    suppressClick.current = false
++    if (event.detail === 0) return
++    const samePointer = !('pointerId' in event.nativeEvent) || event.nativeEvent.pointerId === completed?.pointerId
++    const sameTarget = isEmptyTarget(event.target) || (event.target as HTMLElement).closest<HTMLElement>('[data-canvas-node]')?.dataset.canvasNode === completed?.nodeId
++    if (completed && samePointer && sameTarget) {
++      event.preventDefault(); event.stopPropagation()
++      const current = store.getSnapshot()
++      // Capture can retarget the click to the stage. Preserve ordinary node activation,
++      // including collapsing a group on a plain click, without reviving stale context.
++      if (completed.owner === store && completed.context.lifetime === current.lifetime && completed.context.revision === current.revision) selectNode(completed.nodeId, false)
++    } else if (suppressed) {
++      event.preventDefault(); event.stopPropagation()
++    }
++  }
+   const displayNodes = previewNodes ?? canvas.nodes
+   const active = gesture.current
+   const previewPan = active?.kind === 'pan' && previewPoint ? { x: previewPoint.x - active.startScreen.x, y: previewPoint.y - active.startScreen.y } : { x: 0, y: 0 }
+@@ -223,6 +248,8 @@ function CanvasSession() {
+     return () => observer.disconnect()
+   }, [selection.primarySelectedObject?.id])
+   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
++    completedNodeClick.current = null
++    if (!gesture.current) suppressClick.current = false
+     const target = event.target as HTMLElement
+     if (target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"])')) return
+     const nodeId = target.closest<HTMLButtonElement>('[data-canvas-node]')?.dataset.canvasNode
+@@ -273,7 +300,7 @@ function CanvasSession() {
+     <details className="ff-compact-details"><summary>{t('canvas.controls')}</summary><p className="ff-canvas-guidance" id="canvas-keyboard-help"><Badge>{t('agent.localOnly')}</Badge> {t('canvas.keyboardHelp')}</p><Button disabled title={t('canvas.relationshipUnavailable')}>{t('canvas.relationship')}</Button></details>
+     <p className="ff-canvas-guidance" id="canvas-pointer-help">{t('canvas.pointerHelp')}</p>
+     <div className="ff-canvas-layout" data-selected={Boolean(selected)}>
+-      <div ref={stage} className="ff-workspace-canvas" role="region" aria-label={t('canvas.workspace')} aria-describedby="canvas-keyboard-help canvas-pointer-help" tabIndex={0} onKeyDown={onKeyDown} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerCancel={event => { if (gesture.current?.pointerId === event.pointerId) cancelGesture() }} onLostPointerCapture={event => { if (gesture.current?.pointerId === event.pointerId) cancelGesture() }} onClickCapture={event => { if (suppressClick.current && event.detail !== 0) { suppressClick.current = false; event.preventDefault(); event.stopPropagation() } }} onClick={event => { if (isEmptyTarget(event.target)) clear() }} style={{ backgroundSize: `${24 * canvas.zoom}px ${24 * canvas.zoom}px` }}>
++      <div ref={stage} className="ff-workspace-canvas" role="region" aria-label={t('canvas.workspace')} aria-describedby="canvas-keyboard-help canvas-pointer-help" tabIndex={0} onKeyDown={onKeyDown} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerCancel={event => { if (gesture.current?.pointerId === event.pointerId) cancelGesture() }} onLostPointerCapture={event => { if (gesture.current?.pointerId === event.pointerId) cancelGesture() }} onClickCapture={onClickCapture} onClick={event => { if (isEmptyTarget(event.target)) clear() }} style={{ backgroundSize: `${24 * canvas.zoom}px ${24 * canvas.zoom}px` }}>
+         {/* Keep the rendered transform equal to the camera, even when pointerdown follows a camera command. */}
+         <div ref={viewport} className="ff-canvas-viewport" style={{ transition: 'none', transform: `translate(${canvas.viewportX + previewPan.x}px, ${canvas.viewportY + previewPan.y}px) scale(${canvas.zoom})` }}>
+           {canvas.edges.map(edge => {

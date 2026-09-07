@@ -1,0 +1,15 @@
+transition_id	from_scope	to_scope	route_change_kind	surface_change	selection_scope_change	selection_action	lifetime_action	revision_action	agent_proposal_action	focus_action	reason
+A	same W/P/S	same W/P/S	representation only	NO	NO	PRESERVE if active owner/adapter survive; reconcile	SAME unless owner retired	NOOP if exact snapshot; reconcile may increment	VALID only if lifetime/revision exact	may move, never synthesize selection	D03,D09
+B	W/P/canvas	W/P/nle; review; workflow; any other S	surface change	YES	YES	EMPTY, never carry refs	NEW	provider carried+1 or fresh owner0	STALE/discard	new surface focus	D04
+C	W/P1/S	W/P2/S	project change	NO	YES	EMPTY	NEW	carried+1 or fresh owner0	STALE	new project DOM	D05
+D	W1/P/S	W2/P/S	workspace change	MAYBE	YES	EMPTY	NEW	carried+1 or fresh owner0	STALE	new workspace DOM	D06
+E	W/P/S	W/P/S	owner/adapter retired and remounted	NO	NO	EMPTY, no restore	NEW	adapter cleanup+1; new owner may0	STALE	new mount focus	D07,D22
+F	active scope	Back target	Back	TARGET_DEPENDENT	TARGET_DEPENDENT	apply A-E, never history snapshot	scope/retirement rule	normal rule	normal lifetime rule	history focus separate	D08
+G	active scope	Forward target	Forward	TARGET_DEPENDENT	TARGET_DEPENDENT	apply A-E, never history snapshot	scope/retirement rule	normal rule	normal lifetime rule	history focus separate	D08
+H	W/P/S	W/P/S	query/hash only	NO	NO	PRESERVE if live owner valid	SAME unless retired	equal snapshot no-op	VALID if exact	hash/skip target may focus	D09
+I	W/P/S	W/P/S	Inspector/Agent local modal; no actual subroute	NO	NO	PRESERVE	SAME	UI flags do not invalidate by themselves	VALID if exact	dialog focus contract	D10,D16
+J	valid old scope	invalid/unavailable target	invalid target	UNKNOWN	DO_NOT_SPECULATE	NO active old membership exposed	RETIRE old owner	invalidation; no invented target revision	STALE	unavailable/error surface	D11
+K	old committed scope	pending target	committed unresolved navigation	PENDING	PENDING	UNAVAILABLE, no speculative refs	RETIRE old when target differs/owner retires	normal invalidation	STALE after retirement	loading shell focus	D12,D13
+L	old scope	old scope	navigation aborted before commit	NO	NO	PRESERVE and reconcile	SAME unless separately invalidated	normal reconcile	VALID only if exact	may return focus	D13
+M	document leaving	history-restored document	pagehide/bfcache pageshow	TARGET_DEPENDENT	TARGET_DEPENDENT	EMPTY on reactivation; no suspended snapshot reuse	NEW after retirement	fresh owner0 or explicit invalidation	STALE/discard	reactivated surface focus	D08
+N	same W/P/S active	same W/P/S with invalid adapter/projection	async projection invalidation	NO	NO	PRUNE or EMPTY via Selection subsystem	NEW if adapter retirement; otherwise same	increment when acceptance-relevant	STALE when changed	do not pick replacement by focus	D03,D07,D15

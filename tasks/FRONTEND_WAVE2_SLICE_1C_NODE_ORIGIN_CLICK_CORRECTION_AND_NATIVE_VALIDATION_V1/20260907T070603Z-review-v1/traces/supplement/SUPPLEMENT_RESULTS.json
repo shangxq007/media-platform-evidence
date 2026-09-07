@@ -1,0 +1,888 @@
+{
+  "checks": [
+    {
+      "test_identity": "T17-no-role-application",
+      "source_tree": "00128d35b97775b97124ad1921053a0da282690d",
+      "production_build_sha256": "9644fe897b61e912e9c60bd467b6bf0aec5d497d66f362838e2d6f4750ba331e",
+      "browser": "Chromium CDP headless",
+      "browser_version": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/149.0.7827.55",
+        "revision": "@3188f8a607ae7e067593be8aab7f02d2451fec07",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+        "jsVersion": "14.9.207.21"
+      },
+      "CDP_used": true,
+      "held_button_encoding": "button=left and buttons=1 for held mouseMoved",
+      "input_method": [
+        "Browser.getVersion",
+        "Emulation.setDeviceMetricsOverride",
+        "Emulation.setFocusEmulationEnabled",
+        "Input.dispatchMouseEvent",
+        "Page.addScriptToEvaluateOnNewDocument",
+        "Page.enable",
+        "Page.navigate",
+        "Runtime.evaluate"
+      ],
+      "expected": "Frozen T17 keyboard ownership / T14 preview and accepted marquee behavior",
+      "actual": {
+        "role_application_present": false
+      },
+      "result": "PASS",
+      "passed": true,
+      "synthetic_assistance": "DOM geometry reads and focus emulation; CDP trusted mouse/key input",
+      "DOM_helper": true,
+      "focus_emulation": true,
+      "pointer_injection": true,
+      "capture_simulation": false,
+      "reason": "Synthetic API fixture; frontend presentation-only browser acceptance, no backend or physical-device evidence",
+      "timestamp": "2026-09-07T06:47:10.484733+00:00"
+    },
+    {
+      "test_identity": "T17-native-delete-no-route-selection-layer",
+      "source_tree": "00128d35b97775b97124ad1921053a0da282690d",
+      "production_build_sha256": "9644fe897b61e912e9c60bd467b6bf0aec5d497d66f362838e2d6f4750ba331e",
+      "browser": "Chromium CDP headless",
+      "browser_version": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/149.0.7827.55",
+        "revision": "@3188f8a607ae7e067593be8aab7f02d2451fec07",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+        "jsVersion": "14.9.207.21"
+      },
+      "CDP_used": true,
+      "held_button_encoding": "button=left and buttons=1 for held mouseMoved",
+      "input_method": [
+        "Input.dispatchKeyEvent",
+        "Runtime.evaluate"
+      ],
+      "expected": "Frozen T17 keyboard ownership / T14 preview and accepted marquee behavior",
+      "actual": {
+        "before": [
+          {
+            "owner": 1,
+            "lifetime": 2,
+            "revision": 2,
+            "surfaceId": "canvas",
+            "workspaceId": "ux-workspace",
+            "projectId": "ux-project",
+            "selectedRefs": [
+              {
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "kind": "NODE",
+                "localId": "project-node"
+              }
+            ],
+            "primaryRef": {
+              "surfaceId": "canvas",
+              "workspaceId": "ux-workspace",
+              "projectId": "ux-project",
+              "kind": "NODE",
+              "localId": "project-node"
+            },
+            "supported": [
+              "rename",
+              "move",
+              "reveal"
+            ]
+          }
+        ],
+        "after": [
+          {
+            "owner": 1,
+            "lifetime": 2,
+            "revision": 2,
+            "surfaceId": "canvas",
+            "workspaceId": "ux-workspace",
+            "projectId": "ux-project",
+            "selectedRefs": [
+              {
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "kind": "NODE",
+                "localId": "project-node"
+              }
+            ],
+            "primaryRef": {
+              "surfaceId": "canvas",
+              "workspaceId": "ux-workspace",
+              "projectId": "ux-project",
+              "kind": "NODE",
+              "localId": "project-node"
+            },
+            "supported": [
+              "rename",
+              "move",
+              "reveal"
+            ]
+          }
+        ],
+        "keys": [
+          {
+            "key": "Delete",
+            "isTrusted": true,
+            "target": "BUTTON",
+            "isComposing": false
+          }
+        ]
+      },
+      "result": "PASS",
+      "passed": true,
+      "synthetic_assistance": "DOM geometry reads and focus emulation; CDP trusted mouse/key input",
+      "DOM_helper": true,
+      "focus_emulation": true,
+      "pointer_injection": false,
+      "capture_simulation": false,
+      "reason": "Synthetic API fixture; frontend presentation-only browser acceptance, no backend or physical-device evidence",
+      "timestamp": "2026-09-07T06:47:10.512196+00:00"
+    },
+    {
+      "test_identity": "T17-native-editable-arrow-escape-ownership",
+      "source_tree": "00128d35b97775b97124ad1921053a0da282690d",
+      "production_build_sha256": "9644fe897b61e912e9c60bd467b6bf0aec5d497d66f362838e2d6f4750ba331e",
+      "browser": "Chromium CDP headless",
+      "browser_version": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/149.0.7827.55",
+        "revision": "@3188f8a607ae7e067593be8aab7f02d2451fec07",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+        "jsVersion": "14.9.207.21"
+      },
+      "CDP_used": true,
+      "held_button_encoding": "button=left and buttons=1 for held mouseMoved",
+      "input_method": [
+        "Input.dispatchKeyEvent",
+        "Input.dispatchMouseEvent",
+        "Runtime.evaluate"
+      ],
+      "expected": "Frozen T17 keyboard ownership / T14 preview and accepted marquee behavior",
+      "actual": {
+        "before": [
+          {
+            "owner": 1,
+            "lifetime": 2,
+            "revision": 2,
+            "surfaceId": "canvas",
+            "workspaceId": "ux-workspace",
+            "projectId": "ux-project",
+            "selectedRefs": [
+              {
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "kind": "NODE",
+                "localId": "project-node"
+              }
+            ],
+            "primaryRef": {
+              "surfaceId": "canvas",
+              "workspaceId": "ux-workspace",
+              "projectId": "ux-project",
+              "kind": "NODE",
+              "localId": "project-node"
+            },
+            "supported": [
+              "rename",
+              "move",
+              "reveal"
+            ]
+          }
+        ],
+        "after": [
+          {
+            "owner": 1,
+            "lifetime": 2,
+            "revision": 2,
+            "surfaceId": "canvas",
+            "workspaceId": "ux-workspace",
+            "projectId": "ux-project",
+            "selectedRefs": [
+              {
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "kind": "NODE",
+                "localId": "project-node"
+              }
+            ],
+            "primaryRef": {
+              "surfaceId": "canvas",
+              "workspaceId": "ux-workspace",
+              "projectId": "ux-project",
+              "kind": "NODE",
+              "localId": "project-node"
+            },
+            "supported": [
+              "rename",
+              "move",
+              "reveal"
+            ]
+          }
+        ],
+        "keys": [
+          {
+            "key": "Delete",
+            "isTrusted": true,
+            "target": "BUTTON",
+            "isComposing": false
+          },
+          {
+            "key": "ArrowLeft",
+            "isTrusted": true,
+            "target": "INPUT",
+            "isComposing": false
+          },
+          {
+            "key": "Escape",
+            "isTrusted": true,
+            "target": "INPUT",
+            "isComposing": false
+          }
+        ],
+        "physical_OS_IME": "NOT_RUN; synthetic exclusions covered in fresh unit suite"
+      },
+      "result": "PASS",
+      "passed": true,
+      "synthetic_assistance": "DOM geometry reads and focus emulation; CDP trusted mouse/key input",
+      "DOM_helper": true,
+      "focus_emulation": true,
+      "pointer_injection": true,
+      "capture_simulation": false,
+      "reason": "Synthetic API fixture; frontend presentation-only browser acceptance, no backend or physical-device evidence",
+      "timestamp": "2026-09-07T06:47:11.024707+00:00"
+    },
+    {
+      "test_identity": "positive-area-native-marquee",
+      "source_tree": "00128d35b97775b97124ad1921053a0da282690d",
+      "production_build_sha256": "9644fe897b61e912e9c60bd467b6bf0aec5d497d66f362838e2d6f4750ba331e",
+      "browser": "Chromium CDP headless",
+      "browser_version": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/149.0.7827.55",
+        "revision": "@3188f8a607ae7e067593be8aab7f02d2451fec07",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+        "jsVersion": "14.9.207.21"
+      },
+      "CDP_used": true,
+      "held_button_encoding": "button=left and buttons=1 for held mouseMoved",
+      "input_method": [
+        "Input.dispatchMouseEvent",
+        "Runtime.evaluate"
+      ],
+      "expected": "Frozen T17 keyboard ownership / T14 preview and accepted marquee behavior",
+      "actual": [
+        {
+          "owner": 1,
+          "lifetime": 2,
+          "revision": 3,
+          "surfaceId": "canvas",
+          "workspaceId": "ux-workspace",
+          "projectId": "ux-project",
+          "selectedRefs": [
+            {
+              "surfaceId": "canvas",
+              "workspaceId": "ux-workspace",
+              "projectId": "ux-project",
+              "kind": "NODE",
+              "localId": "project-node"
+            },
+            {
+              "surfaceId": "canvas",
+              "workspaceId": "ux-workspace",
+              "projectId": "ux-project",
+              "kind": "NODE",
+              "localId": "note-node"
+            }
+          ],
+          "primaryRef": {
+            "surfaceId": "canvas",
+            "workspaceId": "ux-workspace",
+            "projectId": "ux-project",
+            "kind": "NODE",
+            "localId": "project-node"
+          },
+          "supported": [
+            "rename",
+            "move",
+            "reveal"
+          ]
+        }
+      ],
+      "result": "PASS",
+      "passed": true,
+      "synthetic_assistance": "DOM geometry reads and focus emulation; CDP trusted mouse/key input",
+      "DOM_helper": true,
+      "focus_emulation": true,
+      "pointer_injection": true,
+      "capture_simulation": false,
+      "reason": "Synthetic API fixture; frontend presentation-only browser acceptance, no backend or physical-device evidence",
+      "timestamp": "2026-09-07T06:47:11.654365+00:00"
+    },
+    {
+      "test_identity": "T14-positive-preview-precondition",
+      "source_tree": "00128d35b97775b97124ad1921053a0da282690d",
+      "production_build_sha256": "9644fe897b61e912e9c60bd467b6bf0aec5d497d66f362838e2d6f4750ba331e",
+      "browser": "Chromium CDP headless",
+      "browser_version": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/149.0.7827.55",
+        "revision": "@3188f8a607ae7e067593be8aab7f02d2451fec07",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+        "jsVersion": "14.9.207.21"
+      },
+      "CDP_used": true,
+      "held_button_encoding": "button=left and buttons=1 for held mouseMoved",
+      "input_method": [
+        "Input.dispatchMouseEvent",
+        "Runtime.evaluate"
+      ],
+      "expected": "Frozen T17 keyboard ownership / T14 preview and accepted marquee behavior",
+      "actual": {
+        "snapshot": [
+          {
+            "owner": 1,
+            "lifetime": 2,
+            "revision": 3,
+            "surfaceId": "canvas",
+            "workspaceId": "ux-workspace",
+            "projectId": "ux-project",
+            "selectedRefs": [
+              {
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "kind": "NODE",
+                "localId": "project-node"
+              },
+              {
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "kind": "NODE",
+                "localId": "note-node"
+              }
+            ],
+            "primaryRef": {
+              "surfaceId": "canvas",
+              "workspaceId": "ux-workspace",
+              "projectId": "ux-project",
+              "kind": "NODE",
+              "localId": "project-node"
+            },
+            "supported": [
+              "rename",
+              "move",
+              "reveal"
+            ]
+          }
+        ],
+        "events": [
+          {
+            "event": "pageshow",
+            "persisted": false,
+            "path": "/w/ux-workspace/projects/ux-project/canvas",
+            "at": 156.60000000149012,
+            "snapshot": [],
+            "proposals": [],
+            "selectedDom": [],
+            "capture": []
+          }
+        ],
+        "capture": [
+          {
+            "connected": true,
+            "held": true
+          }
+        ],
+        "observations": [
+          {
+            "path": "/w/ux-workspace/projects/ux-project/canvas",
+            "hash": "",
+            "search": "",
+            "shell": "canvas",
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 1,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [],
+                "primaryRef": null,
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ]
+          },
+          {
+            "path": "/w/ux-workspace/projects/ux-project/canvas",
+            "hash": "",
+            "search": "",
+            "shell": "canvas",
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ]
+          },
+          {
+            "path": "/w/ux-workspace/projects/ux-project/canvas",
+            "hash": "",
+            "search": "",
+            "shell": "canvas",
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ]
+          },
+          {
+            "path": "/w/ux-workspace/projects/ux-project/canvas",
+            "hash": "",
+            "search": "",
+            "shell": "canvas",
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 3,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  },
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "note-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ]
+          },
+          {
+            "path": "/w/ux-workspace/projects/ux-project/canvas",
+            "hash": "",
+            "search": "",
+            "shell": "canvas",
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 3,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  },
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "note-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ]
+          }
+        ],
+        "proposals": [],
+        "path": "/w/ux-workspace/projects/ux-project/canvas"
+      },
+      "result": "PASS",
+      "passed": true,
+      "synthetic_assistance": "DOM geometry reads and focus emulation; CDP trusted mouse/key input",
+      "DOM_helper": true,
+      "focus_emulation": true,
+      "pointer_injection": true,
+      "capture_simulation": false,
+      "reason": "Synthetic API fixture; frontend presentation-only browser acceptance, no backend or physical-device evidence",
+      "timestamp": "2026-09-07T06:47:11.955692+00:00"
+    },
+    {
+      "test_identity": "T14-preview-residue-after-navigation",
+      "source_tree": "00128d35b97775b97124ad1921053a0da282690d",
+      "production_build_sha256": "9644fe897b61e912e9c60bd467b6bf0aec5d497d66f362838e2d6f4750ba331e",
+      "browser": "Chromium CDP headless",
+      "browser_version": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/149.0.7827.55",
+        "revision": "@3188f8a607ae7e067593be8aab7f02d2451fec07",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+        "jsVersion": "14.9.207.21"
+      },
+      "CDP_used": true,
+      "held_button_encoding": "button=left and buttons=1 for held mouseMoved",
+      "input_method": [
+        "Input.dispatchMouseEvent",
+        "Runtime.evaluate"
+      ],
+      "expected": "Frozen T17 keyboard ownership / T14 preview and accepted marquee behavior",
+      "actual": {
+        "snapshot": [
+          {
+            "owner": 3,
+            "lifetime": 4,
+            "revision": 1,
+            "surfaceId": "canvas",
+            "workspaceId": "ux-workspace",
+            "projectId": "other",
+            "selectedRefs": [],
+            "primaryRef": null,
+            "supported": [
+              "rename",
+              "move",
+              "reveal"
+            ]
+          }
+        ],
+        "events": [
+          {
+            "event": "pageshow",
+            "persisted": false,
+            "path": "/w/ux-workspace/projects/ux-project/canvas",
+            "at": 156.60000000149012,
+            "snapshot": [],
+            "proposals": [],
+            "selectedDom": [],
+            "capture": []
+          }
+        ],
+        "capture": [
+          {
+            "connected": true,
+            "held": false
+          }
+        ],
+        "observations": [
+          {
+            "path": "/w/ux-workspace/projects/ux-project/canvas",
+            "hash": "",
+            "search": "",
+            "shell": "canvas",
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 1,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [],
+                "primaryRef": null,
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ]
+          },
+          {
+            "path": "/w/ux-workspace/projects/ux-project/canvas",
+            "hash": "",
+            "search": "",
+            "shell": "canvas",
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ]
+          },
+          {
+            "path": "/w/ux-workspace/projects/ux-project/canvas",
+            "hash": "",
+            "search": "",
+            "shell": "canvas",
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ]
+          },
+          {
+            "path": "/w/ux-workspace/projects/ux-project/canvas",
+            "hash": "",
+            "search": "",
+            "shell": "canvas",
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 3,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  },
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "note-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ]
+          },
+          {
+            "path": "/w/ux-workspace/projects/ux-project/canvas",
+            "hash": "",
+            "search": "",
+            "shell": "canvas",
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 3,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  },
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "note-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ]
+          },
+          {
+            "path": "/w/ux-workspace/projects/other/canvas",
+            "hash": "",
+            "search": "",
+            "shell": "canvas",
+            "snapshot": [
+              {
+                "owner": 3,
+                "lifetime": 4,
+                "revision": 1,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "other",
+                "selectedRefs": [],
+                "primaryRef": null,
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ]
+          }
+        ],
+        "proposals": [],
+        "path": "/w/ux-workspace/projects/other/canvas"
+      },
+      "result": "PASS",
+      "passed": true,
+      "synthetic_assistance": "DOM geometry reads and focus emulation; CDP trusted mouse/key input",
+      "DOM_helper": true,
+      "focus_emulation": true,
+      "pointer_injection": true,
+      "capture_simulation": false,
+      "reason": "Synthetic API fixture; frontend presentation-only browser acceptance, no backend or physical-device evidence",
+      "timestamp": "2026-09-07T06:47:13.039342+00:00"
+    }
+  ],
+  "expected": [
+    "T17-no-role-application",
+    "T17-native-delete-no-route-selection-layer",
+    "T17-native-editable-arrow-escape-ownership",
+    "positive-area-native-marquee",
+    "T14-positive-preview-precondition",
+    "T14-preview-residue-after-navigation"
+  ],
+  "exit": 0
+}

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "[LOCAL_TASK_ROOT]/native/routes/native_routes.py", line 30, in <module>
+    b.ev('window.__oldStage=document.querySelector(".ff-workspace-canvas")')
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[LOCAL_TASK_ROOT]/native/routes/chromium_helpers.py", line 43, in ev
+    r=self.raw('Runtime.evaluate',{'expression':expression,'returnByValue':True,'awaitPromise':True})
+  File "[LOCAL_TASK_ROOT]/native/routes/chromium_helpers.py", line 19, in raw
+    if 'error' in r:raise RuntimeError(r)
+                    ^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: {'id': 93, 'error': {'code': -32000, 'message': 'Object reference chain is too long'}}

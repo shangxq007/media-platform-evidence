@@ -1,0 +1,2628 @@
+{
+  "schema_version": "1.0",
+  "task": "FRONTEND_WAVE2_SLICE_1C_NODE_ORIGIN_CLICK_CORRECTION_AND_NATIVE_VALIDATION_V1",
+  "delivery_id": "20260907T070603Z-review-v1",
+  "claimed_outcome": {
+    "correction": "IMPLEMENTED_WITH_FRESH_VALIDATION",
+    "browser_continuation": "ONE_UNRESOLVED_FAILURE",
+    "slice_1c_accepted": false
+  },
+  "independent_review": "PENDING",
+  "independent_review_required": true,
+  "accepted_diagnosis": {
+    "owner_accepted_this_task": true,
+    "evidence_commit": "0ceb2c25aa72a5e6d40730e9a895e64a1d41360f",
+    "manifest_sha256": "008f4d518f4447c1d6b8715543cb5e1a895d307a21d2dd73725d73050ab0e399",
+    "previous_directory_unmodified": true
+  },
+  "source_identity": {
+    "baseline_tree": "ffeec76721e7334325a4a4c9f3aaea84174d0cb4",
+    "corrected_tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "source_manifest_sha256": "3beacd5bb7d3a01be3499b3cd4eac2fc56bab4d6ddfefa135f8f19851dc24c53",
+    "full_source_entry_count": 7948,
+    "reviewed_source_rows": [
+      {
+        "path": "frontend/src/product/canvas/WorkspaceCanvas.tsx",
+        "sha256": "5d505f0dc1362154bcd59bdf9ca6966b2ee1836ddf98371c942570d8995c44ba",
+        "git_blob": "608efcf5ea23dc27e68ce04894b7ffa5062f7835",
+        "bytes": 23455
+      },
+      {
+        "path": "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+        "sha256": "051a43ab154ef1384f45aa8de3f940ab61f242538d1c54b9ae773affea3a6f7f",
+        "git_blob": "685f6c0ae98a75b5dc4c9efe69cbd5d4786ca57a",
+        "bytes": 54216
+      },
+      {
+        "path": "frontend/src/product/canvas/model.ts",
+        "sha256": "d9391a500540cace3fd2adf0b39f337dc735f7f695f359653f940b7abc6994c3",
+        "git_blob": "a679873945dbf2829773ae4462fc642ab52ab76d",
+        "bytes": 7425
+      },
+      {
+        "path": "frontend/src/interaction/model.ts",
+        "sha256": "bff063f2346274c771b9dd834650e66338b5b8291a004dfe9e406b3f0ff5bc19",
+        "git_blob": "c1f1337e993a5089fa5eed5b29054e3b6e21990b",
+        "bytes": 16549
+      },
+      {
+        "path": "frontend/src/interaction/SelectionContext.tsx",
+        "sha256": "86c1869dcaef397c67b268d6eedcebc89960947e12a6dd842adbe6e953170f29",
+        "git_blob": "05e93cd94bbff6b2049869563b15d00df2e53913",
+        "bytes": 2870
+      },
+      {
+        "path": "frontend/src/interaction/InteractionShell.tsx",
+        "sha256": "85f35d1294652d4de1b7a266909b2d924f13247f7ac995a3b9231894e8c29412",
+        "git_blob": "07bbdf8ff49c7fe301bf5e271f12d6542ff8e235",
+        "bytes": 15103
+      },
+      {
+        "path": "frontend/src/components/app-shell/AppShell.tsx",
+        "sha256": "04e7c42eeaeaa7e89b01d1182293bde3cecb073597fd739e3e59cc1002c28a46",
+        "git_blob": "be872fb44139b8a32ddcac05440920f7878e755a",
+        "bytes": 8646
+      },
+      {
+        "path": "frontend/src/app/routeTree.tsx",
+        "sha256": "ba59c36d8b253746710887e07cb6de4f7218e03b778e4b4dfb1f4946a5dfd762",
+        "git_blob": "ad15f28d55b384e26c81c9d6a95afca9f38dccf0",
+        "bytes": 8082
+      },
+      {
+        "path": "frontend/src/surfaces/FoundationPages.tsx",
+        "sha256": "7509bd3cec6f73fa3ba8a9238688a5aad0eaf2fafde28b0c84c8a9dd2f59ce55",
+        "git_blob": "f7b790ddcd3d5a529cbc43c744381f2bbf6578d5",
+        "bytes": 18755
+      },
+      {
+        "path": "frontend/scripts/frontend-architecture-guard.mjs",
+        "sha256": "15cd0b5e2a3fbf05dec327405d65547dc67edaa7ac0516c5f34365aaec3dd061",
+        "git_blob": "fdf8dad03c9cdf2b5b9e60944e1ad8e4ce1c196f",
+        "bytes": 47610
+      },
+      {
+        "path": "frontend/scripts/frontend-architecture-guard.test.mjs",
+        "sha256": "b57f854258ac6f3ad6e837259109c1b9d1f16de79a6b9ae4128cce0618e0dcad",
+        "git_blob": "666fdeaa58baf982fbd0497d20eda586484dba6e",
+        "bytes": 45385
+      },
+      {
+        "path": "frontend/package.json",
+        "sha256": "b8adfcfe288730204eeeaab1ca9ff4cc3d9a569e0ad9f19e4b224bfd8b167e27",
+        "git_blob": "32573324b76c5f04ea1c0ea34a0be31e9c09484f",
+        "bytes": 1894
+      },
+      {
+        "path": "frontend/vite.config.ts",
+        "sha256": "894c73bd2226b14f3647d972870c899c6165ff99981827d60f91b74e4c2c2a1f",
+        "git_blob": "8145b8e1e569737a2d5cc5421bf2591226153e6c",
+        "bytes": 686
+      },
+      {
+        "path": "frontend/vitest.config.ts",
+        "sha256": "c46ee960840081b81030967135fc4d957a42ddbe90e1413eeb7f7f31771e56d4",
+        "git_blob": "18251afc24a997298e3383140ce1095b36ac6b4b",
+        "bytes": 908
+      }
+    ],
+    "tree_is_not_commit": true
+  },
+  "counts": {
+    "expected": 50,
+    "executed": 50,
+    "passed": 49,
+    "failed": 1,
+    "not_run": 0,
+    "raw_executions": 56,
+    "raw_passed": 54,
+    "raw_failed": 2,
+    "scope": "Distinct native check identities; repeated lifecycle first six remain separately counted as raw executions; full frontend unit/control gates not added to this denominator."
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "Two-file node-origin correction, no backend/source authority expansion",
+      "evidence": [
+        "verification/correction.patch",
+        "source/current/frontend/src/product/canvas/WorkspaceCanvas.tsx",
+        "verification/PRESERVATION_FINAL.json"
+      ]
+    },
+    {
+      "id": "C2",
+      "claim": "Expected pre-fix regression failure then green and full exact-tree gates",
+      "evidence": [
+        "gates/red-tests.json",
+        "gates/green-tests.json",
+        "gates/canvas-tests.json",
+        "gates/full-tests.json",
+        "gates/TEST_IDENTITIES.json",
+        "gates/guard-controls.log"
+      ]
+    },
+    {
+      "id": "C3",
+      "claim": "11 native click checks pass with actual captured stage click and no empty node-click write",
+      "evidence": [
+        "traces/click/CLICK_RESULTS.json",
+        "traces/click/FINAL_NATIVE_TRACE.json.parts/part-001.txt",
+        "traces/click/FINAL_NATIVE_TRACE.json.parts/part-002.txt",
+        "traces/click/FINAL_NATIVE_TRACE.json.parts/part-003.txt",
+        "traces/click/FINAL_NATIVE_TRACE.json.parts/part-004.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-001.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-002.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-003.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-004.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-005.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-006.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-007.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-008.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-009.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-010.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-011.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-012.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-013.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-014.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-015.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-016.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-017.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-018.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-019.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-020.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-021.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-022.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-023.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-024.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-025.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-026.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-027.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-028.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-029.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-030.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-031.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-032.txt",
+        "traces/click/EVENT_STORE_TIMELINE.jsonl.parts/part-001.txt",
+        "traces/click/EVENT_STORE_TIMELINE.jsonl.parts/part-002.txt"
+      ]
+    },
+    {
+      "id": "C4",
+      "claim": "21 route checks, preserving initial CDP serialization failure and explicit collector change",
+      "evidence": [
+        "traces/routes/native.log",
+        "traces/routes/NATIVE_ROUTE_RESULTS.json",
+        "traces/routes--collect/NATIVE_ROUTE_RESULTS.json",
+        "traces/routes--collect/COLLECTION_CHANGE.json"
+      ]
+    },
+    {
+      "id": "C5",
+      "claim": "Actual BFCache restoration but pagehide-sampling assertion remains FAIL",
+      "evidence": [
+        "traces/lifecycle--preflight2/BROWSER_LIFECYCLE_FAILURE.json",
+        "traces/lifecycle--collect/BF_CACHE_RUNTIME_OBSERVATIONS.json",
+        "traces/lifecycle--collect/NATIVE_LIFECYCLE_RESULTS.json",
+        "traces/lifecycle--collect/COLLECTED_FAILURES.json",
+        "plans/bound-harness/lifecycle-observer.js",
+        "source/current/frontend/src/interaction/SelectionContext.tsx"
+      ]
+    },
+    {
+      "id": "C6",
+      "claim": "T17 native keyboard and nonvacuous preview checks",
+      "evidence": [
+        "traces/supplement/SUPPLEMENT_RESULTS.json",
+        "traces/supplement/SUPPLEMENT_TRACE.json.parts/part-001.txt",
+        "traces/supplement/SUPPLEMENT_TRACE.json.parts/part-002.txt"
+      ]
+    },
+    {
+      "id": "C7",
+      "claim": "Current build/environment bindings, owned teardown and original failure preservation",
+      "evidence": [
+        "verification/BUILD_MANIFEST.sha256",
+        "verification/ENVIRONMENT_QUALIFICATION.json",
+        "verification/HARNESS_BINDING_CHANGES.json",
+        "traces/click/TEARDOWN.json",
+        "traces/click/TEARDOWN_FOLLOWUP.json",
+        "traces/supplement/TEARDOWN.json"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "source": "delivery/FINAL_REPORT.txt",
+      "original_sha256": "661e28f8f929da60d2eb6c76074baf0510fcc3fa042ba592ea539c80ecb193e0",
+      "original_bytes": 17496,
+      "public_sha256": "c07080b008d18d2484e4e5db6f64fb2c8f9d441026c02b1699bd286558c7c1fc",
+      "public_bytes": 17498,
+      "classification": "REDACTED",
+      "parts": [
+        "reports/FINAL_REPORT.txt"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_HOME]": 1
+      }
+    },
+    {
+      "source": "PROSPECTIVE_PLAN.txt",
+      "original_sha256": "45394eae54305b2168cd94b3af0ad4c82f7500dea1fd7015c4a2218c5236116c",
+      "original_bytes": 2281,
+      "public_sha256": "45394eae54305b2168cd94b3af0ad4c82f7500dea1fd7015c4a2218c5236116c",
+      "public_bytes": 2281,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/PROSPECTIVE_PLAN.txt"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "delivery/CLICK_EVENT_STORE_TIMELINE.jsonl",
+      "original_sha256": "7bf79efa402757a85a0559fb8501dfc6aca1421c234aabedb821d1682199f2d0",
+      "original_bytes": 438096,
+      "public_sha256": "7bf79efa402757a85a0559fb8501dfc6aca1421c234aabedb821d1682199f2d0",
+      "public_bytes": 438096,
+      "classification": "DERIVED_SUMMARY",
+      "parts": [
+        "traces/click/EVENT_STORE_TIMELINE.jsonl.parts/part-001.txt",
+        "traces/click/EVENT_STORE_TIMELINE.jsonl.parts/part-002.txt"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "gates/TEST_IDENTITIES.json",
+      "original_sha256": "ebc582fabdb7bb29de2dd7f77e0fd5493212df7ddfb311eb10853e9003130ced",
+      "original_bytes": 94580,
+      "public_sha256": "ebc582fabdb7bb29de2dd7f77e0fd5493212df7ddfb311eb10853e9003130ced",
+      "public_bytes": 94580,
+      "classification": "DERIVED_SUMMARY",
+      "parts": [
+        "gates/TEST_IDENTITIES.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "gates/build.json",
+      "original_sha256": "284f1582b27b019a750375b95ceb58170b25c04a7b681cac4ec7e3d9904889cc",
+      "original_bytes": 317,
+      "public_sha256": "ba328075218d39e4b13e5efa97a909fb415630f91d0d46f1334875a4d0fa320d",
+      "public_bytes": 215,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/build.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 1
+      }
+    },
+    {
+      "source": "gates/build.log",
+      "original_sha256": "afaac86d443a35e409384ef4a8becb01daf6972aacbf599cd43bfe002168bbe0",
+      "original_bytes": 1102,
+      "public_sha256": "afaac86d443a35e409384ef4a8becb01daf6972aacbf599cd43bfe002168bbe0",
+      "public_bytes": 1102,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "gates/build.log"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "gates/build.plan.json",
+      "original_sha256": "5c8b1574753632eb7fb788ca28d392608a8e36ce4f8e55a7ca8911c326e0ebf4",
+      "original_bytes": 1655,
+      "public_sha256": "fbc134dc3a1310ee1e421be98d7fef41fc6d5c73fbc5b098824257bb515ef5b4",
+      "public_bytes": 737,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/build.plan.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 9
+      }
+    },
+    {
+      "source": "gates/canvas-tests.json",
+      "original_sha256": "12d7694ed9125fb916d908c071f3770b70667b810d506fbf5b1d332ca17d28e9",
+      "original_bytes": 34272,
+      "public_sha256": "0f7654874fb1aa0f6ce0af2e0a7a109de5dc18aef1ac8746dd67f7aaf4fc6a03",
+      "public_bytes": 34170,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/canvas-tests.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 1
+      }
+    },
+    {
+      "source": "gates/canvas.json",
+      "original_sha256": "443487d864247cf63189ffb8fd32c8665c9719d6f4f6ac6eeb4dad05f9089bd6",
+      "original_bytes": 385,
+      "public_sha256": "193a86662e6c371416c881e1ca37623dc5da73893b99e6b247e25b8cbfa0bc02",
+      "public_bytes": 283,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/canvas.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 1
+      }
+    },
+    {
+      "source": "gates/canvas.log",
+      "original_sha256": "349511da8176dd722f9b21437b53284563fcb59ff88da203e41515f4502d961b",
+      "original_bytes": 167,
+      "public_sha256": "47f9bd6714ef8122d2467a91a45e75796fb4b0eca6ec3a6edabedd2f3055efb9",
+      "public_bytes": 65,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/canvas.log"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 1
+      }
+    },
+    {
+      "source": "gates/canvas.plan.json",
+      "original_sha256": "0f0768e274ab34a1f621457cba2d3f37708a1b3c22c56525ff65edb87f5ab54c",
+      "original_bytes": 1722,
+      "public_sha256": "13b2a55180310eb4508663aab357e1a01b9de6529864626b7e87eef4b97e7ead",
+      "public_bytes": 804,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/canvas.plan.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 9
+      }
+    },
+    {
+      "source": "gates/discovery-tests.json",
+      "original_sha256": "7ec168a461042be16e8144ebeb703fc56839d11251ccf12e5d76923f8d14068a",
+      "original_bytes": 119011,
+      "public_sha256": "33864e79857652d82b31121801b6449683a0de86038b906ed65517d30a5dd2c6",
+      "public_bytes": 81271,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/discovery-tests.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 370
+      }
+    },
+    {
+      "source": "gates/discovery.json",
+      "original_sha256": "6c08ad74533d38d12d1e7be56fe4b9cc057699fc1b5d36b2f4e72e7258d54de1",
+      "original_bytes": 313,
+      "public_sha256": "f8cba5c4b1cc7532670e1a59e45e980c0cead3b8ae55a0fe0fc39027d1bd1c7e",
+      "public_bytes": 211,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/discovery.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 1
+      }
+    },
+    {
+      "source": "gates/discovery.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "public_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "public_bytes": 0,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "gates/discovery.log"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "gates/discovery.plan.json",
+      "original_sha256": "ebe823ebe149cb9f2c447a7fd4bb302e3f728dc952dde33082641dcc2cc594a0",
+      "original_bytes": 1646,
+      "public_sha256": "8fd1652e8597fe72c99dc3ee09442c32a6582f07bd7d0984b70a36576e309858",
+      "public_bytes": 728,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/discovery.plan.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 9
+      }
+    },
+    {
+      "source": "gates/full-tests.json",
+      "original_sha256": "67b0aa92ff3c7467977b53ee6dca938f76e7ea5ee4996890ced1efad5d3cd7de",
+      "original_bytes": 131358,
+      "public_sha256": "493ec284eebc0d21ca0744cf83dab259d99b6531b078dc173a0be8e662028561",
+      "public_bytes": 128502,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/full-tests.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 28
+      }
+    },
+    {
+      "source": "gates/full.json",
+      "original_sha256": "5c0dbb9dd4302e8d8ce9bcbc997837a29cd40e2f1c2262672cc09aa8cd19d6d6",
+      "original_bytes": 353,
+      "public_sha256": "70bc765d8f9884a5098f6171b98db604f731f8fd21928bf54ba623ac3e01e7a3",
+      "public_bytes": 251,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/full.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 1
+      }
+    },
+    {
+      "source": "gates/full.log",
+      "original_sha256": "1ca3b411badc48bf9e969cd2f0022426c11396a5586636f3da2932d7e5a7ee95",
+      "original_bytes": 165,
+      "public_sha256": "0a805019215bd2a3c6dd72408f0ff00760bc29b311da23ba624b74d1e1a93034",
+      "public_bytes": 63,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/full.log"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 1
+      }
+    },
+    {
+      "source": "gates/full.plan.json",
+      "original_sha256": "12d948f276f855f0ae306a9053343544eaf1f51c5de7e045001ac08a2aa71a0f",
+      "original_bytes": 1691,
+      "public_sha256": "0a9b7ac6f862bedb324e0380425ed25ff0690fc8ce8f7f8555da4e9ed2cbcecc",
+      "public_bytes": 773,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/full.plan.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 9
+      }
+    },
+    {
+      "source": "gates/green-tests.json",
+      "original_sha256": "8603abc989a7fdc0a8ab7d8d8598f496f0b7ee4434dd3d97ce4648914a2ee3bf",
+      "original_bytes": 28618,
+      "public_sha256": "49aa9723c86741fbcf9cf417b4bc9327f67b0c3feb43df4a6112be26d8f94115",
+      "public_bytes": 28516,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/green-tests.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 1
+      }
+    },
+    {
+      "source": "gates/green.json",
+      "original_sha256": "75e05be9edcc63931cb590d2a1b8d66a350ee8162f29dbaed2f037500c306dd2",
+      "original_bytes": 435,
+      "public_sha256": "02e0b6a4c0770f9ffed0dfb40f1da84cf7ec979624bd7273667b90de5aa59421",
+      "public_bytes": 333,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/green.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 1
+      }
+    },
+    {
+      "source": "gates/green.log",
+      "original_sha256": "e609ffa74337772fad1cd0c7ac501e94afd15b47efbc6f349604ee57130a0458",
+      "original_bytes": 166,
+      "public_sha256": "b84ae69b0dc3bc5b9f1fdf170cad8fccccaafc1373527298ae252d17855b691d",
+      "public_bytes": 64,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/green.log"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 1
+      }
+    },
+    {
+      "source": "gates/green.plan.json",
+      "original_sha256": "4c2ae4922e0a0edc052cf36b823e28e8b2fb3e1840442e22b79c0d86e11600fb",
+      "original_bytes": 1773,
+      "public_sha256": "ee870404d2b736de7edd538bfa7f6ff177cca4134e694213ad65a58721779cb2",
+      "public_bytes": 855,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/green.plan.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 9
+      }
+    },
+    {
+      "source": "gates/guard-controls.json",
+      "original_sha256": "ee025ad73791251992fa8934c7ed8ce1546ecbb7f6d847602be93bb11f836bce",
+      "original_bytes": 159,
+      "public_sha256": "ee025ad73791251992fa8934c7ed8ce1546ecbb7f6d847602be93bb11f836bce",
+      "public_bytes": 159,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "gates/guard-controls.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "gates/guard-controls.log",
+      "original_sha256": "e9923739de8309a8cec04c79872351e5b66d45e0b2d4da48f1f6e74d1015b398",
+      "original_bytes": 34077,
+      "public_sha256": "e9923739de8309a8cec04c79872351e5b66d45e0b2d4da48f1f6e74d1015b398",
+      "public_bytes": 34077,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "gates/guard-controls.log"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "gates/guard-controls.plan.json",
+      "original_sha256": "94d0455b733f4aeb427c901c2a6ea35d06034488b6f9b00916aae818f58b27e5",
+      "original_bytes": 1487,
+      "public_sha256": "81e03b5a805cd56c1d590fb21e0ae2b83fb3b18e242310718d96755f1bd4df8d",
+      "public_bytes": 671,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/guard-controls.plan.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 8
+      }
+    },
+    {
+      "source": "gates/guard.json",
+      "original_sha256": "b55f2c5ee3fa8669e69a2aa42465bb2427388a6a42eb521e8dc2d832090b1ef4",
+      "original_bytes": 145,
+      "public_sha256": "b55f2c5ee3fa8669e69a2aa42465bb2427388a6a42eb521e8dc2d832090b1ef4",
+      "public_bytes": 145,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "gates/guard.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "gates/guard.log",
+      "original_sha256": "b8914318a586b93727627d9cce1f9cec2b259e233f30cbcd8cfe88c68d1d1492",
+      "original_bytes": 2900,
+      "public_sha256": "b8914318a586b93727627d9cce1f9cec2b259e233f30cbcd8cfe88c68d1d1492",
+      "public_bytes": 2900,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "gates/guard.log"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "gates/guard.plan.json",
+      "original_sha256": "cb5620a1b88b06bac2d476969f076b4be7b515126a3f89f90170d339cd14da06",
+      "original_bytes": 1482,
+      "public_sha256": "e6c881432d990553b962d17d5e60299fb32ee16fa2552988a1a91551ff5ef00e",
+      "public_bytes": 666,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/guard.plan.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 8
+      }
+    },
+    {
+      "source": "gates/lint.json",
+      "original_sha256": "c81b5e6abaa2dd7ab89aa73913f1daeef610c52813bda59b679cfeb2c33ae0be",
+      "original_bytes": 149,
+      "public_sha256": "c81b5e6abaa2dd7ab89aa73913f1daeef610c52813bda59b679cfeb2c33ae0be",
+      "public_bytes": 149,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "gates/lint.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "gates/lint.log",
+      "original_sha256": "e221dcc01fe34c6f4d290f269c6db66e6c3c10665c2bebd4cf8f93ce317598d4",
+      "original_bytes": 8889,
+      "public_sha256": "a9f5285d69a7d97e1329a045c9586c74b8fbb7db08cbe5d5d5be89f73ed5dc24",
+      "public_bytes": 6645,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/lint.log"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 22
+      }
+    },
+    {
+      "source": "gates/lint.plan.json",
+      "original_sha256": "46d542aab5b28b9f3ad5908f4ca56b783ab672a1196d7ac90ac5de8224c4185b",
+      "original_bytes": 1487,
+      "public_sha256": "0eb403e12af375eaa89a61e27f174b10bb23c0af0c8fa8df423290e1e1ec6002",
+      "public_bytes": 671,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/lint.plan.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 8
+      }
+    },
+    {
+      "source": "gates/red-tests.json",
+      "original_sha256": "1ecb30ecf747f7aa4a98eedb685e405c2eec592124ffd07c7450fb73acb00317",
+      "original_bytes": 29106,
+      "public_sha256": "ff513b7de43da24798785406735618df6b746c8e59a1b1af54832538164707dc",
+      "public_bytes": 28800,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/red-tests.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 3
+      }
+    },
+    {
+      "source": "gates/red.json",
+      "original_sha256": "a42f90239b7437d8c06c293261dfbe2d32a007d64a599d6881c640832fa19d67",
+      "original_bytes": 431,
+      "public_sha256": "cefebc7ef40bf7704a820e7f590c72315c070b8a385fabec4b288eca6dd703de",
+      "public_bytes": 329,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/red.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 1
+      }
+    },
+    {
+      "source": "gates/red.log",
+      "original_sha256": "a308aae70d992207ecdc9c9b26e25c97de6d779939c46b01e4e0b4289dbd816a",
+      "original_bytes": 164,
+      "public_sha256": "eeff36274861e4a1aff0056ce4f50066b6ef99abfd33a813c7bc0863ffbeb74c",
+      "public_bytes": 62,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/red.log"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 1
+      }
+    },
+    {
+      "source": "gates/red.plan.json",
+      "original_sha256": "feec59af4befbfd732c310292a74d2e7f6e4c769f62e962394ca9b5ba8ff48f2",
+      "original_bytes": 1771,
+      "public_sha256": "0c75dff3ebb668dbbc6c4ea08da8ecd0a664b6d09b3a9ed9da5ec219027687ff",
+      "public_bytes": 853,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/red.plan.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 9
+      }
+    },
+    {
+      "source": "gates/resolve-build.json",
+      "original_sha256": "4dac2813daf75300ee721a4f4254f1c23f022663d12fe1fdb14104940fa61ea7",
+      "original_bytes": 568,
+      "public_sha256": "4f5c4dd301d6b9b19cdf5a85d46852e087ce6af7448691602ae0d068d65dfd3f",
+      "public_bytes": 364,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/resolve-build.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 2
+      }
+    },
+    {
+      "source": "gates/resolve-build.log",
+      "original_sha256": "7f475498eb6c9fd457b9542e103804e19b8ac7e2fe8bd568bae08311f44f2a17",
+      "original_bytes": 126,
+      "public_sha256": "ed477e9557d445bcb50696d5bb25a7f650eb7f9e94cf7f94f907086fb486f94f",
+      "public_bytes": 24,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/resolve-build.log"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 1
+      }
+    },
+    {
+      "source": "gates/resolve-build.plan.json",
+      "original_sha256": "998ff375bba91dbcb370a8390c06a8741b665a2261afa06276bf27e6b40a665f",
+      "original_bytes": 1897,
+      "public_sha256": "c55074ab09515348eb42d5f9a17613dc5d284a14dbc992ea83c7024ed758112e",
+      "public_bytes": 877,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/resolve-build.plan.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 10
+      }
+    },
+    {
+      "source": "gates/typecheck.json",
+      "original_sha256": "412271118d8b28093658e1f97263a7f68e0754ec13eb5841a4d8f223355f890a",
+      "original_bytes": 156,
+      "public_sha256": "412271118d8b28093658e1f97263a7f68e0754ec13eb5841a4d8f223355f890a",
+      "public_bytes": 156,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "gates/typecheck.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "gates/typecheck.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "public_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "public_bytes": 0,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "gates/typecheck.log"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "gates/typecheck.plan.json",
+      "original_sha256": "d19089b5c365d626bab1dba40c7eb45e4a439dc42acfe4545d0cbfbca11df707",
+      "original_bytes": 1490,
+      "public_sha256": "da224f24783cbf11057e838b6d45e910ad1a7221df5d10611f69e5f5fa4fab96",
+      "public_bytes": 674,
+      "classification": "REDACTED",
+      "parts": [
+        "gates/typecheck.plan.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 8
+      }
+    },
+    {
+      "source": "inputs/corrected-tree.txt",
+      "original_sha256": "3d3bddbff9be92838c310002400ad5fd5a9b1abf46900c91995bd9958e1b6d0c",
+      "original_bytes": 41,
+      "public_sha256": "3d3bddbff9be92838c310002400ad5fd5a9b1abf46900c91995bd9958e1b6d0c",
+      "public_bytes": 41,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "verification/corrected-tree.txt"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "inputs/correction.patch",
+      "original_sha256": "6656cf21868542e95fe9a1633e7e5477984554199cb8c403b052e594dc26f861",
+      "original_bytes": 13057,
+      "public_sha256": "6656cf21868542e95fe9a1633e7e5477984554199cb8c403b052e594dc26f861",
+      "public_bytes": 13057,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "verification/correction.patch"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "inputs/BUILD_MANIFEST.sha256",
+      "original_sha256": "9644fe897b61e912e9c60bd467b6bf0aec5d497d66f362838e2d6f4750ba331e",
+      "original_bytes": 759,
+      "public_sha256": "9644fe897b61e912e9c60bd467b6bf0aec5d497d66f362838e2d6f4750ba331e",
+      "public_bytes": 759,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "verification/BUILD_MANIFEST.sha256"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "inputs/PRESERVATION_FINAL.json",
+      "original_sha256": "6d20307259ac62981afac7da97076335ec1753f5fbbe4eb6289fb900555be17e",
+      "original_bytes": 419,
+      "public_sha256": "6d20307259ac62981afac7da97076335ec1753f5fbbe4eb6289fb900555be17e",
+      "public_bytes": 419,
+      "classification": "DERIVED_SUMMARY",
+      "parts": [
+        "verification/PRESERVATION_FINAL.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "inputs/NATIVE_CHECK_INDEX.json",
+      "original_sha256": "9a57917c02aeb67d22c313a2a2c4ddbcedf2f91e6a8b09f4202d7658bf15a9ae",
+      "original_bytes": 16113,
+      "public_sha256": "9a57917c02aeb67d22c313a2a2c4ddbcedf2f91e6a8b09f4202d7658bf15a9ae",
+      "public_bytes": 16113,
+      "classification": "DERIVED_SUMMARY",
+      "parts": [
+        "verification/NATIVE_CHECK_INDEX.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "inputs/ENVIRONMENT_QUALIFICATION.json",
+      "original_sha256": "c0798be9fce345f2d9e0fd55f4ab062889eb48b9a693ce7f34fb4962fc723d91",
+      "original_bytes": 1295,
+      "public_sha256": "865728ecf4bbc102157d302f545050145d651c4efcf1c2991dae480155617165",
+      "public_bytes": 1101,
+      "classification": "REDACTED",
+      "parts": [
+        "verification/ENVIRONMENT_QUALIFICATION.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 1,
+        "[LOCAL_AUDIT_ROOT]/": 4
+      }
+    },
+    {
+      "source": "inputs/HARNESS_BINDING_CHANGES.json",
+      "original_sha256": "d9f9867698e4edced1da1b4b2c17f4b03cbc974562d717229f7d7fa60fb8f9fa",
+      "original_bytes": 1216,
+      "public_sha256": "d9f9867698e4edced1da1b4b2c17f4b03cbc974562d717229f7d7fa60fb8f9fa",
+      "public_bytes": 1216,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "verification/HARNESS_BINDING_CHANGES.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "inputs/EXTERNAL_RUNNER_QUALIFICATION.json",
+      "original_sha256": "ace188dbc0111b4af2c233dd0d54bc9b018ffff33ed60d9a0407f2820886f34a",
+      "original_bytes": 872,
+      "public_sha256": "ace188dbc0111b4af2c233dd0d54bc9b018ffff33ed60d9a0407f2820886f34a",
+      "public_bytes": 872,
+      "classification": "DERIVED_SUMMARY",
+      "parts": [
+        "verification/EXTERNAL_RUNNER_QUALIFICATION.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "inputs/NODE_ENVIRONMENT.json",
+      "original_sha256": "4e012243d9555ef8fc7c3ac407762aae1e3596b147fd8f30686d75304e1be441",
+      "original_bytes": 1844,
+      "public_sha256": "4e012243d9555ef8fc7c3ac407762aae1e3596b147fd8f30686d75304e1be441",
+      "public_bytes": 1844,
+      "classification": "DERIVED_SUMMARY",
+      "parts": [
+        "verification/NODE_ENVIRONMENT.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "inputs/run_native_initial.py",
+      "original_sha256": "0f4bf950b40fa47961e13e97723ec731544e1411e2654584a3d4b539c7c1973f",
+      "original_bytes": 3857,
+      "public_sha256": "ed3b3327fe6eb900b4695d06e3d4b24206ec521ed6a9ead555bb7269effb6aed",
+      "public_bytes": 3805,
+      "classification": "REDACTED",
+      "parts": [
+        "verification/run_native_initial.py"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_FRONTEND_WORKTREE]": 1,
+        "[LOCAL_HOME]": 1
+      }
+    },
+    {
+      "source": "inputs/run_native_v2.py",
+      "original_sha256": "253af0b2bda0807f92a9766e9f11635897a307329ac559602f69972f5d860e43",
+      "original_bytes": 4210,
+      "public_sha256": "e08c308f278aebd48d2fe6b7f48d8295c1a1125de05485d5802868f1a35ccced",
+      "public_bytes": 4158,
+      "classification": "REDACTED",
+      "parts": [
+        "verification/run_native_v2.py"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_FRONTEND_WORKTREE]": 1,
+        "[LOCAL_HOME]": 1
+      }
+    },
+    {
+      "source": "inputs/run_native_v3.py",
+      "original_sha256": "27a37f50e834e4032b23591e67d66cabc65b1a87724833dbe9a022469ceabfb5",
+      "original_bytes": 4317,
+      "public_sha256": "ffc8ce5e920c663b985869c1fb5ad740fdefb20d41e88b4d78795e5f1d8de789",
+      "public_bytes": 4265,
+      "classification": "REDACTED",
+      "parts": [
+        "verification/run_native_v3.py"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_FRONTEND_WORKTREE]": 1,
+        "[LOCAL_HOME]": 1
+      }
+    },
+    {
+      "source": "inputs/WorkspaceCanvas.tsx",
+      "original_sha256": "1e4f45600e2a32666ab892bbd738aa06f6ce8af24ca53d037079a38597c53ec7",
+      "original_bytes": 21833,
+      "public_sha256": "1e4f45600e2a32666ab892bbd738aa06f6ce8af24ca53d037079a38597c53ec7",
+      "public_bytes": 21833,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/before/WorkspaceCanvas.tsx"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "inputs/WorkspaceCanvas.test.tsx",
+      "original_sha256": "4da62f92048166160736e1a428e011fbb60a0a081035381dbf88764e75df9cce",
+      "original_bytes": 49907,
+      "public_sha256": "4da62f92048166160736e1a428e011fbb60a0a081035381dbf88764e75df9cce",
+      "public_bytes": 49907,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/before/WorkspaceCanvas.test.tsx"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "snapshot/frontend/src/product/canvas/WorkspaceCanvas.tsx",
+      "original_sha256": "5d505f0dc1362154bcd59bdf9ca6966b2ee1836ddf98371c942570d8995c44ba",
+      "original_bytes": 23455,
+      "public_sha256": "5d505f0dc1362154bcd59bdf9ca6966b2ee1836ddf98371c942570d8995c44ba",
+      "public_bytes": 23455,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/current/frontend/src/product/canvas/WorkspaceCanvas.tsx"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "snapshot/frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      "original_sha256": "051a43ab154ef1384f45aa8de3f940ab61f242538d1c54b9ae773affea3a6f7f",
+      "original_bytes": 54216,
+      "public_sha256": "051a43ab154ef1384f45aa8de3f940ab61f242538d1c54b9ae773affea3a6f7f",
+      "public_bytes": 54216,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/current/frontend/src/product/canvas/WorkspaceCanvas.test.tsx"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "snapshot/frontend/src/product/canvas/model.ts",
+      "original_sha256": "d9391a500540cace3fd2adf0b39f337dc735f7f695f359653f940b7abc6994c3",
+      "original_bytes": 7425,
+      "public_sha256": "d9391a500540cace3fd2adf0b39f337dc735f7f695f359653f940b7abc6994c3",
+      "public_bytes": 7425,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/current/frontend/src/product/canvas/model.ts"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "snapshot/frontend/src/interaction/model.ts",
+      "original_sha256": "bff063f2346274c771b9dd834650e66338b5b8291a004dfe9e406b3f0ff5bc19",
+      "original_bytes": 16549,
+      "public_sha256": "bff063f2346274c771b9dd834650e66338b5b8291a004dfe9e406b3f0ff5bc19",
+      "public_bytes": 16549,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/current/frontend/src/interaction/model.ts"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "snapshot/frontend/src/interaction/SelectionContext.tsx",
+      "original_sha256": "86c1869dcaef397c67b268d6eedcebc89960947e12a6dd842adbe6e953170f29",
+      "original_bytes": 2870,
+      "public_sha256": "86c1869dcaef397c67b268d6eedcebc89960947e12a6dd842adbe6e953170f29",
+      "public_bytes": 2870,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/current/frontend/src/interaction/SelectionContext.tsx"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "snapshot/frontend/src/interaction/InteractionShell.tsx",
+      "original_sha256": "85f35d1294652d4de1b7a266909b2d924f13247f7ac995a3b9231894e8c29412",
+      "original_bytes": 15103,
+      "public_sha256": "85f35d1294652d4de1b7a266909b2d924f13247f7ac995a3b9231894e8c29412",
+      "public_bytes": 15103,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/current/frontend/src/interaction/InteractionShell.tsx"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "snapshot/frontend/src/components/app-shell/AppShell.tsx",
+      "original_sha256": "04e7c42eeaeaa7e89b01d1182293bde3cecb073597fd739e3e59cc1002c28a46",
+      "original_bytes": 8646,
+      "public_sha256": "04e7c42eeaeaa7e89b01d1182293bde3cecb073597fd739e3e59cc1002c28a46",
+      "public_bytes": 8646,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/current/frontend/src/components/app-shell/AppShell.tsx"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "snapshot/frontend/src/app/routeTree.tsx",
+      "original_sha256": "ba59c36d8b253746710887e07cb6de4f7218e03b778e4b4dfb1f4946a5dfd762",
+      "original_bytes": 8082,
+      "public_sha256": "ba59c36d8b253746710887e07cb6de4f7218e03b778e4b4dfb1f4946a5dfd762",
+      "public_bytes": 8082,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/current/frontend/src/app/routeTree.tsx"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "snapshot/frontend/src/surfaces/FoundationPages.tsx",
+      "original_sha256": "7509bd3cec6f73fa3ba8a9238688a5aad0eaf2fafde28b0c84c8a9dd2f59ce55",
+      "original_bytes": 18755,
+      "public_sha256": "7509bd3cec6f73fa3ba8a9238688a5aad0eaf2fafde28b0c84c8a9dd2f59ce55",
+      "public_bytes": 18755,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/current/frontend/src/surfaces/FoundationPages.tsx"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "snapshot/frontend/scripts/frontend-architecture-guard.mjs",
+      "original_sha256": "15cd0b5e2a3fbf05dec327405d65547dc67edaa7ac0516c5f34365aaec3dd061",
+      "original_bytes": 47610,
+      "public_sha256": "15cd0b5e2a3fbf05dec327405d65547dc67edaa7ac0516c5f34365aaec3dd061",
+      "public_bytes": 47610,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/current/frontend/scripts/frontend-architecture-guard.mjs"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "snapshot/frontend/scripts/frontend-architecture-guard.test.mjs",
+      "original_sha256": "b57f854258ac6f3ad6e837259109c1b9d1f16de79a6b9ae4128cce0618e0dcad",
+      "original_bytes": 45385,
+      "public_sha256": "b57f854258ac6f3ad6e837259109c1b9d1f16de79a6b9ae4128cce0618e0dcad",
+      "public_bytes": 45385,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/current/frontend/scripts/frontend-architecture-guard.test.mjs"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "snapshot/frontend/package.json",
+      "original_sha256": "b8adfcfe288730204eeeaab1ca9ff4cc3d9a569e0ad9f19e4b224bfd8b167e27",
+      "original_bytes": 1894,
+      "public_sha256": "b8adfcfe288730204eeeaab1ca9ff4cc3d9a569e0ad9f19e4b224bfd8b167e27",
+      "public_bytes": 1894,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/current/frontend/package.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "snapshot/frontend/vite.config.ts",
+      "original_sha256": "894c73bd2226b14f3647d972870c899c6165ff99981827d60f91b74e4c2c2a1f",
+      "original_bytes": 686,
+      "public_sha256": "894c73bd2226b14f3647d972870c899c6165ff99981827d60f91b74e4c2c2a1f",
+      "public_bytes": 686,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/current/frontend/vite.config.ts"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "snapshot/frontend/vitest.config.ts",
+      "original_sha256": "c46ee960840081b81030967135fc4d957a42ddbe90e1413eeb7f7f31771e56d4",
+      "original_bytes": 908,
+      "public_sha256": "c46ee960840081b81030967135fc4d957a42ddbe90e1413eeb7f7f31771e56d4",
+      "public_bytes": 908,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/current/frontend/vitest.config.ts"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "delivery/SOURCE_IDENTITY.json",
+      "original_sha256": "6146dfdd3694f2d6a3389e0bb4f03bb26f9b7eeeec4ba188ea4f3994c0177c08",
+      "original_bytes": 3630,
+      "public_sha256": "6146dfdd3694f2d6a3389e0bb4f03bb26f9b7eeeec4ba188ea4f3994c0177c08",
+      "public_bytes": 3630,
+      "classification": "DERIVED_SUMMARY",
+      "parts": [
+        "source/SOURCE_IDENTITY.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "build/assets/FoundationPages-BZ5M8zvA.js",
+      "original_sha256": "91ad38ea160cff8724101116da5f010d17f13925e645f3b829d1d5799ccf6a77",
+      "original_bytes": 51007,
+      "public_sha256": "91ad38ea160cff8724101116da5f010d17f13925e645f3b829d1d5799ccf6a77",
+      "public_bytes": 51007,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "build/assets/FoundationPages-BZ5M8zvA.js"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "build/assets/NleWorkspace-C6SFzW_Q.js",
+      "original_sha256": "af70f48172793d345656f166a356220be5cc6e56b9e5c3bbb9a849eb3e7e2e6d",
+      "original_bytes": 34647,
+      "public_sha256": "af70f48172793d345656f166a356220be5cc6e56b9e5c3bbb9a849eb3e7e2e6d",
+      "public_bytes": 34647,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "build/assets/NleWorkspace-C6SFzW_Q.js"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "build/assets/ReviewWorkspace-CIE0ywya.js",
+      "original_sha256": "eb5eb7c9469ca53fe833ca326ccc94c432dc353136931dd5c65534e5eb2c4c5e",
+      "original_bytes": 5526,
+      "public_sha256": "eb5eb7c9469ca53fe833ca326ccc94c432dc353136931dd5c65534e5eb2c4c5e",
+      "public_bytes": 5526,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "build/assets/ReviewWorkspace-CIE0ywya.js"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "build/assets/SemanticDiff-Bdt0PJzi.js",
+      "original_sha256": "cd803f801febc593cc9d09fe7626f974c9d727c3ddea7112ae8ac6087c6db7b4",
+      "original_bytes": 7658,
+      "public_sha256": "cd803f801febc593cc9d09fe7626f974c9d727c3ddea7112ae8ac6087c6db7b4",
+      "public_bytes": 7658,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "build/assets/SemanticDiff-Bdt0PJzi.js"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "build/assets/WorkspaceCanvas-Dkcf9Dwz.js",
+      "original_sha256": "349c27c1f07a4157bc274d39076a894732e661ce2c43bd9dbad0d8406d036f75",
+      "original_bytes": 15862,
+      "public_sha256": "349c27c1f07a4157bc274d39076a894732e661ce2c43bd9dbad0d8406d036f75",
+      "public_bytes": 15862,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "build/assets/WorkspaceCanvas-Dkcf9Dwz.js"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "build/assets/index-BFy9JujC.js",
+      "original_sha256": "d88f763ee82afdb8c2959270c72e80ec479bf5cb5a86e79de6e1bf5e9e1c3387",
+      "original_bytes": 638776,
+      "public_sha256": "d88f763ee82afdb8c2959270c72e80ec479bf5cb5a86e79de6e1bf5e9e1c3387",
+      "public_bytes": 638776,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "build/assets/index-BFy9JujC.js.parts/part-001.txt",
+        "build/assets/index-BFy9JujC.js.parts/part-002.txt",
+        "build/assets/index-BFy9JujC.js.parts/part-003.txt"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "build/assets/index-CKrXmiQL.css",
+      "original_sha256": "57fb76e73904d9d6c9992f9d09bb61710177b78e5fe9d62f38aff5e20cb5f445",
+      "original_bytes": 75547,
+      "public_sha256": "57fb76e73904d9d6c9992f9d09bb61710177b78e5fe9d62f38aff5e20cb5f445",
+      "public_bytes": 75547,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "build/assets/index-CKrXmiQL.css"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "build/index.html",
+      "original_sha256": "0e7f562117fcd6f8b9aa59a821d2f3af98c55752b7b13770758d1c35da9173b6",
+      "original_bytes": 512,
+      "public_sha256": "0e7f562117fcd6f8b9aa59a821d2f3af98c55752b7b13770758d1c35da9173b6",
+      "public_bytes": 512,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "build/index.html"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "helpers/gate.py",
+      "original_sha256": "cede168295eed48aa7a91b085ee125fd932bd8d4b62d9f639455b9196c78f6eb",
+      "original_bytes": 1266,
+      "public_sha256": "3b8baaf7c52e298f09b3e6e70244d2abdc77f079bf1bc2fbff6332f65ab7c1ac",
+      "public_bytes": 1212,
+      "classification": "REDACTED",
+      "parts": [
+        "plans/helpers/gate.py"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_FRONTEND_WORKTREE]": 1
+      }
+    },
+    {
+      "source": "helpers/native_click_v1.py",
+      "original_sha256": "bf6518b8bc514c4ff57d2760735c1f7b0a74b75d94fc3c3241fb6254825547e5",
+      "original_bytes": 4456,
+      "public_sha256": "bf6518b8bc514c4ff57d2760735c1f7b0a74b75d94fc3c3241fb6254825547e5",
+      "public_bytes": 4456,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/helpers/native_click_v1.py"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "helpers/native_continue_v1.py",
+      "original_sha256": "583fb660ac3e7e6239d20a588ace1792049375c638982b6b99e38ba8ee9adda3",
+      "original_bytes": 1834,
+      "public_sha256": "583fb660ac3e7e6239d20a588ace1792049375c638982b6b99e38ba8ee9adda3",
+      "public_bytes": 1834,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/helpers/native_continue_v1.py"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "helpers/native_supplement_v1.py",
+      "original_sha256": "5ecf700cea99aac89522969f04752fab1cac8901ed330a3eadf40a5560eb9e69",
+      "original_bytes": 3473,
+      "public_sha256": "5ecf700cea99aac89522969f04752fab1cac8901ed330a3eadf40a5560eb9e69",
+      "public_bytes": 3473,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/helpers/native_supplement_v1.py"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "helpers/passive.js",
+      "original_sha256": "cdd39f7f82b268b25652e6b291e07c0a7af24657380e104ceca22a87e826978f",
+      "original_bytes": 4455,
+      "public_sha256": "cdd39f7f82b268b25652e6b291e07c0a7af24657380e104ceca22a87e826978f",
+      "public_bytes": 4455,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/helpers/passive.js"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "helpers/prepare_native.py",
+      "original_sha256": "b3aab81b095e314ec9311aca718e030f48afffaaa358a24027d5e0f4f7262975",
+      "original_bytes": 4952,
+      "public_sha256": "b3aab81b095e314ec9311aca718e030f48afffaaa358a24027d5e0f4f7262975",
+      "public_bytes": 4952,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/helpers/prepare_native.py"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "helpers/run_native.py",
+      "original_sha256": "1309006ad34ffc6284cdf31d5e6297ef4a94f3d4ddfff685a44e62d4be76c42a",
+      "original_bytes": 4409,
+      "public_sha256": "d9fbcdf8b1dc53ac956d3c88880908a779eaa198525e4386a0c78907a8957ca2",
+      "public_bytes": 4357,
+      "classification": "REDACTED",
+      "parts": [
+        "plans/helpers/run_native.py"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_FRONTEND_WORKTREE]": 1,
+        "[LOCAL_HOME]": 1
+      }
+    },
+    {
+      "source": "harness/BUILD_ARTIFACT_BOUNDARY.json",
+      "original_sha256": "f1283efb66b176b68a22306da2350f54955ad794dcc26070355cd6ff3545fea3",
+      "original_bytes": 955,
+      "public_sha256": "f1283efb66b176b68a22306da2350f54955ad794dcc26070355cd6ff3545fea3",
+      "public_bytes": 955,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/bound-harness/BUILD_ARTIFACT_BOUNDARY.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "harness/TREE_BINDING.json",
+      "original_sha256": "097d8f3d244f83512af81891ab3dc5465fc62077b7ec11aa1b8b2a8ccf34e7f6",
+      "original_bytes": 218,
+      "public_sha256": "097d8f3d244f83512af81891ab3dc5465fc62077b7ec11aa1b8b2a8ccf34e7f6",
+      "public_bytes": 218,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/bound-harness/TREE_BINDING.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "harness/browser_helpers.py",
+      "original_sha256": "f0eabf7d8748b156a3347cff9a2da20d6d737b7e931771eba0550edd4cf57f59",
+      "original_bytes": 3553,
+      "public_sha256": "f0eabf7d8748b156a3347cff9a2da20d6d737b7e931771eba0550edd4cf57f59",
+      "public_bytes": 3553,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/bound-harness/browser_helpers.py"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "harness/chromium_helpers.py",
+      "original_sha256": "9ef13ad361d82ebf1b1dfaf2563c8b4a4e238b848163785d0c8c359ded560a7a",
+      "original_bytes": 3736,
+      "public_sha256": "9ef13ad361d82ebf1b1dfaf2563c8b4a4e238b848163785d0c8c359ded560a7a",
+      "public_bytes": 3736,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/bound-harness/chromium_helpers.py"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "harness/control.py",
+      "original_sha256": "e8e707bf3601f4446463d940fb202609be41f5bb9ee2f222c5d6263e38ddecae",
+      "original_bytes": 305,
+      "public_sha256": "e8e707bf3601f4446463d940fb202609be41f5bb9ee2f222c5d6263e38ddecae",
+      "public_bytes": 305,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/bound-harness/control.py"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "harness/environment_preflight.py",
+      "original_sha256": "8085e6ea643139925154c94e0bec1b9bff1cf6f1d6ebc6d24e17a1f054576e9f",
+      "original_bytes": 3154,
+      "public_sha256": "8085e6ea643139925154c94e0bec1b9bff1cf6f1d6ebc6d24e17a1f054576e9f",
+      "public_bytes": 3154,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/bound-harness/environment_preflight.py"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "harness/fixture-server.py",
+      "original_sha256": "849d904dca87f31fb03e9ed49400f4be4814c76aa121862acdac65ee7bd80200",
+      "original_bytes": 5163,
+      "public_sha256": "849d904dca87f31fb03e9ed49400f4be4814c76aa121862acdac65ee7bd80200",
+      "public_bytes": 5163,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/bound-harness/fixture-server.py"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "harness/lifecycle-observer.js",
+      "original_sha256": "931a58aa5b81b2afe417ac2b81ba94b30f1256c76cba0a4a01c4d59a57f17c56",
+      "original_bytes": 2684,
+      "public_sha256": "931a58aa5b81b2afe417ac2b81ba94b30f1256c76cba0a4a01c4d59a57f17c56",
+      "public_bytes": 2684,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/bound-harness/lifecycle-observer.js"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "harness/native_common.py",
+      "original_sha256": "cd3e94f76b34ea890942bec0e3574f2ffb81d48c0da83185640979cd21f623bf",
+      "original_bytes": 3878,
+      "public_sha256": "cd3e94f76b34ea890942bec0e3574f2ffb81d48c0da83185640979cd21f623bf",
+      "public_bytes": 3878,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/bound-harness/native_common.py"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "harness/native_lifecycle.py",
+      "original_sha256": "c2f9c4e1a4b964e881991fea374b0be9e3ba81114ee2f3b9d3e9f8629e4cba5e",
+      "original_bytes": 5947,
+      "public_sha256": "c2f9c4e1a4b964e881991fea374b0be9e3ba81114ee2f3b9d3e9f8629e4cba5e",
+      "public_bytes": 5947,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/bound-harness/native_lifecycle.py"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "harness/native_routes.py",
+      "original_sha256": "ceb60c7944ce405e36fe3fb7f22c80b12dfe2bc5f8018b8aa03d061b5153cf60",
+      "original_bytes": 4001,
+      "public_sha256": "ceb60c7944ce405e36fe3fb7f22c80b12dfe2bc5f8018b8aa03d061b5153cf60",
+      "public_bytes": 4001,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "plans/bound-harness/native_routes.py"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "harness/scope_check.py",
+      "original_sha256": "8e18c2745401dff17b79564e7b68ceb04c0c6b833692653b1f28020026720a68",
+      "original_bytes": 894,
+      "public_sha256": "6a1ae87da8118e122db4dd5d23ab45a0472dd569b815f3a758eed402ca2849a0",
+      "public_bytes": 792,
+      "classification": "REDACTED",
+      "parts": [
+        "plans/bound-harness/scope_check.py"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 1
+      }
+    },
+    {
+      "source": "native/click/CLICK_COMMANDS.json",
+      "original_sha256": "3ddaea8b90031a4fc81d4ed66b0fe22533a58fd909d0d7df1801e77205df8242",
+      "original_bytes": 7753301,
+      "public_sha256": "3ddaea8b90031a4fc81d4ed66b0fe22533a58fd909d0d7df1801e77205df8242",
+      "public_bytes": 7753301,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/click/CLICK_COMMANDS.json.parts/part-001.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-002.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-003.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-004.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-005.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-006.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-007.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-008.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-009.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-010.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-011.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-012.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-013.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-014.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-015.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-016.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-017.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-018.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-019.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-020.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-021.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-022.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-023.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-024.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-025.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-026.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-027.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-028.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-029.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-030.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-031.txt",
+        "traces/click/CLICK_COMMANDS.json.parts/part-032.txt"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/click/CLICK_RESULTS.json",
+      "original_sha256": "bdb05efbf235fe68dcb6b70689752d7816ff0144942adb867c0caff9e9548c53",
+      "original_bytes": 25983,
+      "public_sha256": "bdb05efbf235fe68dcb6b70689752d7816ff0144942adb867c0caff9e9548c53",
+      "public_bytes": 25983,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/click/CLICK_RESULTS.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/click/CLICK_TRACES.json",
+      "original_sha256": "7275d8caf6456251f59352258d15b7c9ccabdf2fa290a9cf1e24ba9cc9597841",
+      "original_bytes": 5317264,
+      "public_sha256": "7275d8caf6456251f59352258d15b7c9ccabdf2fa290a9cf1e24ba9cc9597841",
+      "public_bytes": 5317264,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/click/CLICK_TRACES.json.parts/part-001.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-002.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-003.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-004.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-005.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-006.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-007.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-008.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-009.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-010.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-011.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-012.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-013.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-014.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-015.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-016.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-017.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-018.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-019.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-020.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-021.txt",
+        "traces/click/CLICK_TRACES.json.parts/part-022.txt"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/click/CONTAINMENT.json",
+      "original_sha256": "360c39296b40e8e5ed1d428d4bac8f88df2d022a54403826b16c02a6888a6b8a",
+      "original_bytes": 515,
+      "public_sha256": "c746adbbe23075aa185bbb1c97237b2321528fdb75c59e4585a66513f2bd4870",
+      "public_bytes": 234,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/click/CONTAINMENT.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 2,
+        "[LOCAL_AUDIT_ROOT]/": 1,
+        "[LOCAL_FRONTEND_WORKTREE]": 1
+      }
+    },
+    {
+      "source": "native/click/EXPECTED_CHECKS.json",
+      "original_sha256": "c0d622f6873d1a7cf855f3c4aae9d42f0b86aca45e80e484f16e0647670b19f1",
+      "original_bytes": 357,
+      "public_sha256": "c0d622f6873d1a7cf855f3c4aae9d42f0b86aca45e80e484f16e0647670b19f1",
+      "public_bytes": 357,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/click/EXPECTED_CHECKS.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/click/FINAL_NATIVE_TRACE.json",
+      "original_sha256": "4de0eb61b7cea9ea3ea12279e71c8d1606ac0bd0cd5013fbd87f712ac46872dc",
+      "original_bytes": 797401,
+      "public_sha256": "4de0eb61b7cea9ea3ea12279e71c8d1606ac0bd0cd5013fbd87f712ac46872dc",
+      "public_bytes": 797401,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/click/FINAL_NATIVE_TRACE.json.parts/part-001.txt",
+        "traces/click/FINAL_NATIVE_TRACE.json.parts/part-002.txt",
+        "traces/click/FINAL_NATIVE_TRACE.json.parts/part-003.txt",
+        "traces/click/FINAL_NATIVE_TRACE.json.parts/part-004.txt"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/click/HEALTH.json",
+      "original_sha256": "fc0131a8f27c29179c9b8d12701971586865855452df50085cbcc574a8aeb8d0",
+      "original_bytes": 507,
+      "public_sha256": "fc0131a8f27c29179c9b8d12701971586865855452df50085cbcc574a8aeb8d0",
+      "public_bytes": 507,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/click/HEALTH.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/click/PLAN.json",
+      "original_sha256": "fb53dc770b83af59191036c09104d814dc97542a8367aa96444b51e7c7ce0367",
+      "original_bytes": 16737,
+      "public_sha256": "dd99d90eca578016336f25329f010ece8385a84274c35d68160eb56e12f97ef6",
+      "public_bytes": 7717,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/click/PLAN.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 88,
+        "[LOCAL_AUDIT_ROOT]/": 2,
+        "[LOCAL_HOME]": 1
+      }
+    },
+    {
+      "source": "native/click/TEARDOWN.json",
+      "original_sha256": "3f0a2e00ef43f0eb4194ead99de28c246e78617f0c5eedbfcd1c818fadfad051",
+      "original_bytes": 486,
+      "public_sha256": "3f0a2e00ef43f0eb4194ead99de28c246e78617f0c5eedbfcd1c818fadfad051",
+      "public_bytes": 486,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/click/TEARDOWN.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/click/TEARDOWN_FOLLOWUP.json",
+      "original_sha256": "d061a9df26560e5505feb30a61e9b1b692a482b1609da86740ca28a268132e6f",
+      "original_bytes": 276,
+      "public_sha256": "d061a9df26560e5505feb30a61e9b1b692a482b1609da86740ca28a268132e6f",
+      "public_bytes": 276,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/click/TEARDOWN_FOLLOWUP.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/click/fixture.log",
+      "original_sha256": "af408f07aba2f196c7921c3fe49e94d205d49e09e20b91621d0e4f1fc9a35c1d",
+      "original_bytes": 673,
+      "public_sha256": "af408f07aba2f196c7921c3fe49e94d205d49e09e20b91621d0e4f1fc9a35c1d",
+      "public_bytes": 673,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/click/fixture.log"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/click/native.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "public_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "public_bytes": 0,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/click/native.log"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/routes/CONTAINMENT.json",
+      "original_sha256": "360c39296b40e8e5ed1d428d4bac8f88df2d022a54403826b16c02a6888a6b8a",
+      "original_bytes": 515,
+      "public_sha256": "c746adbbe23075aa185bbb1c97237b2321528fdb75c59e4585a66513f2bd4870",
+      "public_bytes": 234,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/routes/CONTAINMENT.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 2,
+        "[LOCAL_AUDIT_ROOT]/": 1,
+        "[LOCAL_FRONTEND_WORKTREE]": 1
+      }
+    },
+    {
+      "source": "native/routes/HEALTH.json",
+      "original_sha256": "55334ff193bdb843e5578451efaee514f51599b22067736f6ea726632d872aa4",
+      "original_bytes": 507,
+      "public_sha256": "55334ff193bdb843e5578451efaee514f51599b22067736f6ea726632d872aa4",
+      "public_bytes": 507,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/routes/HEALTH.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/routes/NATIVE_ROUTE_COMMANDS.json",
+      "original_sha256": "fc47fd7005b696d47d5fe6e12e3d306daf588cda8fd4a86aaccc3fb7436edb23",
+      "original_bytes": 92851,
+      "public_sha256": "fc47fd7005b696d47d5fe6e12e3d306daf588cda8fd4a86aaccc3fb7436edb23",
+      "public_bytes": 92851,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/routes/NATIVE_ROUTE_COMMANDS.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/routes/NATIVE_ROUTE_RESULTS.json",
+      "original_sha256": "60f0eb3716b2ea211c129838fde830dd11f1211e9557255239d36c180e6426ef",
+      "original_bytes": 71185,
+      "public_sha256": "60f0eb3716b2ea211c129838fde830dd11f1211e9557255239d36c180e6426ef",
+      "public_bytes": 71185,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/routes/NATIVE_ROUTE_RESULTS.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/routes/PLAN.json",
+      "original_sha256": "43f4eaf929f8d92a49276810294b0d77d792abbeff03afbcddfed5a31db97d92",
+      "original_bytes": 16684,
+      "public_sha256": "705da53cdd1553e9ee27326e5f4184431485efd8004c0212592192c573bfdef0",
+      "public_bytes": 7766,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/routes/PLAN.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 87,
+        "[LOCAL_AUDIT_ROOT]/": 2,
+        "[LOCAL_HOME]": 1
+      }
+    },
+    {
+      "source": "native/routes/TEARDOWN.json",
+      "original_sha256": "827d0e172782581db87107f095e9c68973efe550f817efd59e2e5d99cf621a0a",
+      "original_bytes": 511,
+      "public_sha256": "827d0e172782581db87107f095e9c68973efe550f817efd59e2e5d99cf621a0a",
+      "public_bytes": 511,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/routes/TEARDOWN.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/routes/fixture.log",
+      "original_sha256": "0a221e9e1263348d01223a403dc6df9d8125895dbb15c2555e6b172a1b9497ec",
+      "original_bytes": 1147,
+      "public_sha256": "0a221e9e1263348d01223a403dc6df9d8125895dbb15c2555e6b172a1b9497ec",
+      "public_bytes": 1147,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/routes/fixture.log"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/routes/native.log",
+      "original_sha256": "d73daf108d57246e757766a1bd677acf64efa91cfaacd4a37cdac4a418d43a74",
+      "original_bytes": 1017,
+      "public_sha256": "4271aa7dbc52c29ee380598e068c2029069cb531c2886496003109b7a77263ad",
+      "public_bytes": 711,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/routes/native.log"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 3
+      }
+    },
+    {
+      "source": "native/lifecycle/PLAN.json",
+      "original_sha256": "f4a50803abd42f5c58bc31573e0938b4906715e680a53d77197bbe5d3670f074",
+      "original_bytes": 16945,
+      "public_sha256": "b4f324fc5fac0cca67eff2d973f994d5867fdd779fad6ee0a9b4dc19f48f7675",
+      "public_bytes": 8027,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/lifecycle/PLAN.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 87,
+        "[LOCAL_AUDIT_ROOT]/": 2,
+        "[LOCAL_HOME]": 1
+      }
+    },
+    {
+      "source": "native/lifecycle--preflight2/BF_CACHE_RUNTIME_OBSERVATIONS.json",
+      "original_sha256": "5d1000cdfea2f9f07b4c1828887d99dbbdc915345150737c5c561aa19fffad43",
+      "original_bytes": 17604,
+      "public_sha256": "5d1000cdfea2f9f07b4c1828887d99dbbdc915345150737c5c561aa19fffad43",
+      "public_bytes": 17604,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/lifecycle--preflight2/BF_CACHE_RUNTIME_OBSERVATIONS.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/lifecycle--preflight2/BROWSER_LIFECYCLE_FAILURE.json",
+      "original_sha256": "972f770a5e4da77eb601610fbdbe3810f72b0b693832a94bc8fc1ffbddf3fc0d",
+      "original_bytes": 3527,
+      "public_sha256": "f6c40eb15240e74c809886d98d7d4f8fd6d73ffc80f3e6fd7cac462d04f26fc5",
+      "public_bytes": 3221,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/lifecycle--preflight2/BROWSER_LIFECYCLE_FAILURE.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 3
+      }
+    },
+    {
+      "source": "native/lifecycle--preflight2/BROWSER_LIFECYCLE_RAW_LOG.txt",
+      "original_sha256": "9153181643022c19dbfd588eb1213be38e94383c3796eb42743eb9a12d04f254",
+      "original_bytes": 59901,
+      "public_sha256": "9153181643022c19dbfd588eb1213be38e94383c3796eb42743eb9a12d04f254",
+      "public_bytes": 59901,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/lifecycle--preflight2/BROWSER_LIFECYCLE_RAW_LOG.txt"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/lifecycle--preflight2/CONTAINMENT.json",
+      "original_sha256": "360c39296b40e8e5ed1d428d4bac8f88df2d022a54403826b16c02a6888a6b8a",
+      "original_bytes": 515,
+      "public_sha256": "c746adbbe23075aa185bbb1c97237b2321528fdb75c59e4585a66513f2bd4870",
+      "public_bytes": 234,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/lifecycle--preflight2/CONTAINMENT.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 2,
+        "[LOCAL_AUDIT_ROOT]/": 1,
+        "[LOCAL_FRONTEND_WORKTREE]": 1
+      }
+    },
+    {
+      "source": "native/lifecycle--preflight2/HEALTH.json",
+      "original_sha256": "d6bbf3f79da33be817be3a42e961647fc4fe3af2a344c02ce48bf02e48ebf224",
+      "original_bytes": 507,
+      "public_sha256": "d6bbf3f79da33be817be3a42e961647fc4fe3af2a344c02ce48bf02e48ebf224",
+      "public_bytes": 507,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/lifecycle--preflight2/HEALTH.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/lifecycle--preflight2/NATIVE_LIFECYCLE_RESULTS.json",
+      "original_sha256": "2f0441570062d1f0a033519232674998a19c4d02a66ee206c032cffac1e365ae",
+      "original_bytes": 32324,
+      "public_sha256": "2f0441570062d1f0a033519232674998a19c4d02a66ee206c032cffac1e365ae",
+      "public_bytes": 32324,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/lifecycle--preflight2/NATIVE_LIFECYCLE_RESULTS.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/lifecycle--preflight2/PLAN.json",
+      "original_sha256": "335fbcd3495558472ca1011f79bcc221574978f65302ae0c1e6c198be9fcf6af",
+      "original_bytes": 17977,
+      "public_sha256": "5df3dd62ece4c51cf84e227f371b8dc3c6c86f59c9780195c703425b4b2e9f2a",
+      "public_bytes": 9059,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/lifecycle--preflight2/PLAN.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 87,
+        "[LOCAL_AUDIT_ROOT]/": 2,
+        "[LOCAL_HOME]": 1
+      }
+    },
+    {
+      "source": "native/lifecycle--preflight2/SCOPE_TRIPWIRE.jsonl",
+      "original_sha256": "0b8cb3293f1385e26b733934949706d154f82d95cdbae6ffedce924ea9702af6",
+      "original_bytes": 213,
+      "public_sha256": "0b8cb3293f1385e26b733934949706d154f82d95cdbae6ffedce924ea9702af6",
+      "public_bytes": 213,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/lifecycle--preflight2/SCOPE_TRIPWIRE.jsonl"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/lifecycle--preflight2/TEARDOWN.json",
+      "original_sha256": "c12e86846748ccfc26f6e1b2a760d9e337b921d97d4a7daeb0b86296ff6f1bdf",
+      "original_bytes": 511,
+      "public_sha256": "c12e86846748ccfc26f6e1b2a760d9e337b921d97d4a7daeb0b86296ff6f1bdf",
+      "public_bytes": 511,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/lifecycle--preflight2/TEARDOWN.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/lifecycle--preflight2/fixture.log",
+      "original_sha256": "bc751dbd8ad9bd607feb2139ec97d3df4e2a8b2174955dfcc2fb6b8087eebd41",
+      "original_bytes": 818,
+      "public_sha256": "bc751dbd8ad9bd607feb2139ec97d3df4e2a8b2174955dfcc2fb6b8087eebd41",
+      "public_bytes": 818,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/lifecycle--preflight2/fixture.log"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/lifecycle--preflight2/native.log",
+      "original_sha256": "5b70ce3e1a509479cba9ed1ee5b62205269c003317d90554764a37b7eddfe42e",
+      "original_bytes": 2403,
+      "public_sha256": "b90e49bcdec49a3fcea77bc231e1a09386fa4a29092373ed9a4d09592c093e50",
+      "public_bytes": 2097,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/lifecycle--preflight2/native.log"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 3
+      }
+    },
+    {
+      "source": "native/routes--collect/COLLECTED_FAILURES.json",
+      "original_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "original_bytes": 2,
+      "public_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "public_bytes": 2,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/routes--collect/COLLECTED_FAILURES.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/routes--collect/COLLECTION_CHANGE.json",
+      "original_sha256": "d7aad092e852d788678733a67c4590e61f5cb9df2c867650f81d247edbf92e25",
+      "original_bytes": 283,
+      "public_sha256": "d7aad092e852d788678733a67c4590e61f5cb9df2c867650f81d247edbf92e25",
+      "public_bytes": 283,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/routes--collect/COLLECTION_CHANGE.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/routes--collect/CONTAINMENT.json",
+      "original_sha256": "360c39296b40e8e5ed1d428d4bac8f88df2d022a54403826b16c02a6888a6b8a",
+      "original_bytes": 515,
+      "public_sha256": "c746adbbe23075aa185bbb1c97237b2321528fdb75c59e4585a66513f2bd4870",
+      "public_bytes": 234,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/routes--collect/CONTAINMENT.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 2,
+        "[LOCAL_AUDIT_ROOT]/": 1,
+        "[LOCAL_FRONTEND_WORKTREE]": 1
+      }
+    },
+    {
+      "source": "native/routes--collect/HEALTH.json",
+      "original_sha256": "fd00ffbbcabf4d0b8657d80a9ea3121bcbef72193ae248c76684aedd813783b4",
+      "original_bytes": 507,
+      "public_sha256": "fd00ffbbcabf4d0b8657d80a9ea3121bcbef72193ae248c76684aedd813783b4",
+      "public_bytes": 507,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/routes--collect/HEALTH.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/routes--collect/NATIVE_ROUTE_COMMANDS.json",
+      "original_sha256": "15209cc881e97cff541f909e20cfa158ab87a2fa922d204b9b605735fa6069dc",
+      "original_bytes": 172678,
+      "public_sha256": "15209cc881e97cff541f909e20cfa158ab87a2fa922d204b9b605735fa6069dc",
+      "public_bytes": 172678,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/routes--collect/NATIVE_ROUTE_COMMANDS.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/routes--collect/NATIVE_ROUTE_RESULTS.json",
+      "original_sha256": "5ab18f414cd4aec14d72ba2e19aaa0c645ef37a0f4a0b645b1477eafe5aa1ea4",
+      "original_bytes": 138817,
+      "public_sha256": "5ab18f414cd4aec14d72ba2e19aaa0c645ef37a0f4a0b645b1477eafe5aa1ea4",
+      "public_bytes": 138817,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/routes--collect/NATIVE_ROUTE_RESULTS.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/routes--collect/PLAN.json",
+      "original_sha256": "298e97b9ec7279ea410f405ea1277f2b316209f3c69d115ce09d5e8e0b7e60f2",
+      "original_bytes": 17713,
+      "public_sha256": "063567231aceee2c8991aaf1a8be40dd4d74c2c35df4b24c1f2b3becbf73a66d",
+      "public_bytes": 8693,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/routes--collect/PLAN.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 88,
+        "[LOCAL_AUDIT_ROOT]/": 2,
+        "[LOCAL_HOME]": 1
+      }
+    },
+    {
+      "source": "native/routes--collect/TEARDOWN.json",
+      "original_sha256": "373419d90f6deb4d498398b105f61b74fa110a5edb9f31116e86b2062e71cc08",
+      "original_bytes": 511,
+      "public_sha256": "373419d90f6deb4d498398b105f61b74fa110a5edb9f31116e86b2062e71cc08",
+      "public_bytes": 511,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/routes--collect/TEARDOWN.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/routes--collect/fixture.log",
+      "original_sha256": "f872e69e7f87947973a65931b12a68ae36b1ff9e4a82170cbebc3418478fa2ba",
+      "original_bytes": 1305,
+      "public_sha256": "f872e69e7f87947973a65931b12a68ae36b1ff9e4a82170cbebc3418478fa2ba",
+      "public_bytes": 1305,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/routes--collect/fixture.log"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/routes--collect/native.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "public_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "public_bytes": 0,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/routes--collect/native.log"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/lifecycle--collect/BF_CACHE_RUNTIME_OBSERVATIONS.json",
+      "original_sha256": "b4b4154e47aca74eeae400adbdaf8131986e86d90b831358682c09a648d00cd2",
+      "original_bytes": 17618,
+      "public_sha256": "b4b4154e47aca74eeae400adbdaf8131986e86d90b831358682c09a648d00cd2",
+      "public_bytes": 17618,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/lifecycle--collect/BF_CACHE_RUNTIME_OBSERVATIONS.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/lifecycle--collect/BROWSER_LIFECYCLE_RAW_LOG.txt",
+      "original_sha256": "dabc35d47780134ae98be255dc9202ac52e2c36c358ea04e6ebb8607c4c7f0e4",
+      "original_bytes": 116669,
+      "public_sha256": "dabc35d47780134ae98be255dc9202ac52e2c36c358ea04e6ebb8607c4c7f0e4",
+      "public_bytes": 116669,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/lifecycle--collect/BROWSER_LIFECYCLE_RAW_LOG.txt"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/lifecycle--collect/COLLECTED_FAILURES.json",
+      "original_sha256": "b7756efde81d4e2df0ce3fd61cc49cd4735608b0708ba3ae1baafbf68ffcf7cc",
+      "original_bytes": 2814,
+      "public_sha256": "5582e6c27e4ab829c12d5dd7e79be2d28366589168f2b3f0eb2f927877e997ed",
+      "public_bytes": 2406,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/lifecycle--collect/COLLECTED_FAILURES.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 4
+      }
+    },
+    {
+      "source": "native/lifecycle--collect/CONTAINMENT.json",
+      "original_sha256": "360c39296b40e8e5ed1d428d4bac8f88df2d022a54403826b16c02a6888a6b8a",
+      "original_bytes": 515,
+      "public_sha256": "c746adbbe23075aa185bbb1c97237b2321528fdb75c59e4585a66513f2bd4870",
+      "public_bytes": 234,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/lifecycle--collect/CONTAINMENT.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 2,
+        "[LOCAL_AUDIT_ROOT]/": 1,
+        "[LOCAL_FRONTEND_WORKTREE]": 1
+      }
+    },
+    {
+      "source": "native/lifecycle--collect/HEALTH.json",
+      "original_sha256": "edc3664bddc56be6bc5a201127081dac7112b4656625436718d5881a997d0658",
+      "original_bytes": 507,
+      "public_sha256": "edc3664bddc56be6bc5a201127081dac7112b4656625436718d5881a997d0658",
+      "public_bytes": 507,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/lifecycle--collect/HEALTH.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/lifecycle--collect/NATIVE_LIFECYCLE_RESULTS.json",
+      "original_sha256": "4d41231c71ab82da86fec45ed8060a35bba0fcaaba67c3ef38cf2933ba3cd8c4",
+      "original_bytes": 104367,
+      "public_sha256": "4d41231c71ab82da86fec45ed8060a35bba0fcaaba67c3ef38cf2933ba3cd8c4",
+      "public_bytes": 104367,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/lifecycle--collect/NATIVE_LIFECYCLE_RESULTS.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/lifecycle--collect/PLAN.json",
+      "original_sha256": "9bb27c8cc2bda8d01b3b0ba568f4550b3948b1cb70c2474df5057ff5cdb83eb5",
+      "original_bytes": 17974,
+      "public_sha256": "a6f7458ce7a51d02e10e8e1a3c7c15326f360b8b4226acf0c884433b3948dcb7",
+      "public_bytes": 8954,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/lifecycle--collect/PLAN.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 88,
+        "[LOCAL_AUDIT_ROOT]/": 2,
+        "[LOCAL_HOME]": 1
+      }
+    },
+    {
+      "source": "native/lifecycle--collect/SCOPE_TRIPWIRE.jsonl",
+      "original_sha256": "85004d378e5a31e9da7b14c653822d585b0478c5dedb54cc6b57497121f6c555",
+      "original_bytes": 425,
+      "public_sha256": "85004d378e5a31e9da7b14c653822d585b0478c5dedb54cc6b57497121f6c555",
+      "public_bytes": 425,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/lifecycle--collect/SCOPE_TRIPWIRE.jsonl"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/lifecycle--collect/TEARDOWN.json",
+      "original_sha256": "99cb207dc856eb797e81989fa5d948d0d0923953f5e2558dd6f315c32a41591f",
+      "original_bytes": 511,
+      "public_sha256": "99cb207dc856eb797e81989fa5d948d0d0923953f5e2558dd6f315c32a41591f",
+      "public_bytes": 511,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/lifecycle--collect/TEARDOWN.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/lifecycle--collect/fixture.log",
+      "original_sha256": "1b157452e417d927b6ab6df76c71d6da58d0ef3736f6d544ba5f8ef3dd24b967",
+      "original_bytes": 1018,
+      "public_sha256": "1b157452e417d927b6ab6df76c71d6da58d0ef3736f6d544ba5f8ef3dd24b967",
+      "public_bytes": 1018,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/lifecycle--collect/fixture.log"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/lifecycle--collect/native.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "public_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "public_bytes": 0,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/lifecycle--collect/native.log"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/supplement/CONTAINMENT.json",
+      "original_sha256": "360c39296b40e8e5ed1d428d4bac8f88df2d022a54403826b16c02a6888a6b8a",
+      "original_bytes": 515,
+      "public_sha256": "c746adbbe23075aa185bbb1c97237b2321528fdb75c59e4585a66513f2bd4870",
+      "public_bytes": 234,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/supplement/CONTAINMENT.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 2,
+        "[LOCAL_AUDIT_ROOT]/": 1,
+        "[LOCAL_FRONTEND_WORKTREE]": 1
+      }
+    },
+    {
+      "source": "native/supplement/EXPECTED_CHECKS.json",
+      "original_sha256": "3a626431b35ea07dd223c642e1b8ebe4f3942a96908d3ec9a61988c2e7560952",
+      "original_bytes": 242,
+      "public_sha256": "3a626431b35ea07dd223c642e1b8ebe4f3942a96908d3ec9a61988c2e7560952",
+      "public_bytes": 242,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/supplement/EXPECTED_CHECKS.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/supplement/HEALTH.json",
+      "original_sha256": "c7c0b7bf34e39724b5c107112b7ae3e48f59a41088c1839e37d1a7e4699443b7",
+      "original_bytes": 507,
+      "public_sha256": "c7c0b7bf34e39724b5c107112b7ae3e48f59a41088c1839e37d1a7e4699443b7",
+      "public_bytes": 507,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/supplement/HEALTH.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/supplement/PLAN.json",
+      "original_sha256": "a9b8e5d0cf695bf88ac2769095ddc6c672cab4bbd74c42ae140123fe442e77d4",
+      "original_bytes": 17368,
+      "public_sha256": "f4b7ba761894a0d03299d1f8bee2e0bd811e777287a094a18382fe832b5506a7",
+      "public_bytes": 8348,
+      "classification": "REDACTED",
+      "parts": [
+        "traces/supplement/PLAN.json"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_TASK_ROOT]": 88,
+        "[LOCAL_AUDIT_ROOT]/": 2,
+        "[LOCAL_HOME]": 1
+      }
+    },
+    {
+      "source": "native/supplement/SUPPLEMENT_COMMANDS.json",
+      "original_sha256": "208715e244f22e4d63a99e1669eede59d828b7feac8fe7758e18f4d483dd2781",
+      "original_bytes": 557851,
+      "public_sha256": "208715e244f22e4d63a99e1669eede59d828b7feac8fe7758e18f4d483dd2781",
+      "public_bytes": 557851,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/supplement/SUPPLEMENT_COMMANDS.json.parts/part-001.txt",
+        "traces/supplement/SUPPLEMENT_COMMANDS.json.parts/part-002.txt",
+        "traces/supplement/SUPPLEMENT_COMMANDS.json.parts/part-003.txt"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/supplement/SUPPLEMENT_RESULTS.json",
+      "original_sha256": "0f354028559bcba2ea4bac61ea09f2b5120a60f48109b0efa741fe4aa4ef1c4c",
+      "original_bytes": 29359,
+      "public_sha256": "0f354028559bcba2ea4bac61ea09f2b5120a60f48109b0efa741fe4aa4ef1c4c",
+      "public_bytes": 29359,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/supplement/SUPPLEMENT_RESULTS.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/supplement/SUPPLEMENT_TRACE.json",
+      "original_sha256": "633a3799267a53c6e5713970df4ab6e6f7d37166690ee75924b24c1c31b40cc8",
+      "original_bytes": 331880,
+      "public_sha256": "633a3799267a53c6e5713970df4ab6e6f7d37166690ee75924b24c1c31b40cc8",
+      "public_bytes": 331880,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/supplement/SUPPLEMENT_TRACE.json.parts/part-001.txt",
+        "traces/supplement/SUPPLEMENT_TRACE.json.parts/part-002.txt"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/supplement/TEARDOWN.json",
+      "original_sha256": "45ceef72a94dadd05838850cf833e96932dd38b5a84aafbe76046f2a6c66737f",
+      "original_bytes": 511,
+      "public_sha256": "45ceef72a94dadd05838850cf833e96932dd38b5a84aafbe76046f2a6c66737f",
+      "public_bytes": 511,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/supplement/TEARDOWN.json"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/supplement/fixture.log",
+      "original_sha256": "708a382fc5753ab065a7c46332a9c1e52c6f13dbb3392c7d5e1b80cb06a8d525",
+      "original_bytes": 673,
+      "public_sha256": "708a382fc5753ab065a7c46332a9c1e52c6f13dbb3392c7d5e1b80cb06a8d525",
+      "public_bytes": 673,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/supplement/fixture.log"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "native/supplement/native.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "public_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "public_bytes": 0,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "traces/supplement/native.log"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "historical-audit/FRONTEND_WAVE2_SLICE_1C_NATIVE_SELECTION_PRECONDITION_CAUSAL_DIAGNOSIS_V1/inputs/contracts/FRONTEND_WAVE2_SLICE_1C_ROUTE_SELECTION_LIFETIME_DECISION_RECOVERY_V1/ROUTE_SELECTION_UX_CONTRACT.md",
+      "original_sha256": "525af1a74a8ce16b831a7e8c7b55b77b08ce444dd44ae84938378ef5563140c0",
+      "original_bytes": 6060,
+      "public_sha256": "525af1a74a8ce16b831a7e8c7b55b77b08ce444dd44ae84938378ef5563140c0",
+      "public_bytes": 6060,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/contracts/FRONTEND_WAVE2_SLICE_1C_ROUTE_SELECTION_LIFETIME_DECISION_RECOVERY_V1/ROUTE_SELECTION_UX_CONTRACT.md"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "historical-audit/FRONTEND_WAVE2_SLICE_1C_NATIVE_SELECTION_PRECONDITION_CAUSAL_DIAGNOSIS_V1/inputs/contracts/FRONTEND_WAVE2_SLICE_1C_ROUTE_SELECTION_LIFETIME_DECISION_RECOVERY_V1/ROUTE_SELECTION_LIFETIME_DECISIONS.tsv",
+      "original_sha256": "9e35e5ca8f1d0ba1f736aa41877d1fc36af6ba2b864817cb1c436d38e8ab2eb7",
+      "original_bytes": 17182,
+      "public_sha256": "9e35e5ca8f1d0ba1f736aa41877d1fc36af6ba2b864817cb1c436d38e8ab2eb7",
+      "public_bytes": 17182,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/contracts/FRONTEND_WAVE2_SLICE_1C_ROUTE_SELECTION_LIFETIME_DECISION_RECOVERY_V1/ROUTE_SELECTION_LIFETIME_DECISIONS.tsv"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "historical-audit/FRONTEND_WAVE2_SLICE_1C_NATIVE_SELECTION_PRECONDITION_CAUSAL_DIAGNOSIS_V1/inputs/contracts/FRONTEND_WAVE2_SLICE_1C_ROUTE_SELECTION_LIFETIME_DECISION_RECOVERY_V1/ROUTE_SELECTION_LIFETIME_TEST_PLAN.tsv",
+      "original_sha256": "bf201f75e19a9715cefb3fb41fbcbf3ab07d116234cbe3662b73b0f4c3275e51",
+      "original_bytes": 10835,
+      "public_sha256": "bf201f75e19a9715cefb3fb41fbcbf3ab07d116234cbe3662b73b0f4c3275e51",
+      "public_bytes": 10835,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/contracts/FRONTEND_WAVE2_SLICE_1C_ROUTE_SELECTION_LIFETIME_DECISION_RECOVERY_V1/ROUTE_SELECTION_LIFETIME_TEST_PLAN.tsv"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "historical-audit/FRONTEND_WAVE2_SLICE_1C_NATIVE_SELECTION_PRECONDITION_CAUSAL_DIAGNOSIS_V1/inputs/contracts/FRONTEND_WAVE2_SLICE_1C_ROUTE_SELECTION_LIFETIME_DECISION_RECOVERY_V1/ROUTE_TRANSITION_MATRIX.tsv",
+      "original_sha256": "b1817d843bc4e938881a4a18d1c3b5a78c94dfa8e0d1d70a8e61d69f3ecefe91",
+      "original_bytes": 2830,
+      "public_sha256": "b1817d843bc4e938881a4a18d1c3b5a78c94dfa8e0d1d70a8e61d69f3ecefe91",
+      "public_bytes": 2830,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/contracts/FRONTEND_WAVE2_SLICE_1C_ROUTE_SELECTION_LIFETIME_DECISION_RECOVERY_V1/ROUTE_TRANSITION_MATRIX.tsv"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    },
+    {
+      "source": "historical-audit/FRONTEND_WAVE2_SLICE_1C_NATIVE_SELECTION_PRECONDITION_CAUSAL_DIAGNOSIS_V1/inputs/contracts/FRONTEND_WAVE2_SLICE_1C_ROUTE_SELECTION_LIFETIME_BOUNDED_IMPLEMENTATION_V1/WRITER_TASK.txt",
+      "original_sha256": "f159787729eaaa85a895368699d63dc5775fdb0b9efb7be609da085978750249",
+      "original_bytes": 8642,
+      "public_sha256": "6dd8aafd7800abc99a5a6de7857dd6228a44ba8a15cd87d011a276a738656e4e",
+      "public_bytes": 8519,
+      "classification": "REDACTED",
+      "parts": [
+        "source/contracts/FRONTEND_WAVE2_SLICE_1C_ROUTE_SELECTION_LIFETIME_BOUNDED_IMPLEMENTATION_V1/WRITER_TASK.txt"
+      ],
+      "original_bytes_reconstructable": false,
+      "path_aliases": {
+        "[LOCAL_AUDIT_ROOT]/": 3,
+        "[LOCAL_FRONTEND_WORKTREE]": 1
+      }
+    },
+    {
+      "source": "historical-audit/FRONTEND_WAVE2_SLICE_1C_NATIVE_SELECTION_PRECONDITION_CAUSAL_DIAGNOSIS_V1/inputs/contracts/FRONTEND_WAVE2_SELECTION_INVARIANTS_AND_CANVAS_MULTI_SELECTION_BOUNDED_IMPLEMENTATION_V1/SCOPED_PRESENTATION_REF_MODEL.md",
+      "original_sha256": "593b271bface6af335fc334944c1b43d2c082e3628ba772a92b0ba059f5980d2",
+      "original_bytes": 4935,
+      "public_sha256": "593b271bface6af335fc334944c1b43d2c082e3628ba772a92b0ba059f5980d2",
+      "public_bytes": 4935,
+      "classification": "BYTE_EXACT",
+      "parts": [
+        "source/contracts/FRONTEND_WAVE2_SELECTION_INVARIANTS_AND_CANVAS_MULTI_SELECTION_BOUNDED_IMPLEMENTATION_V1/SCOPED_PRESENTATION_REF_MODEL.md"
+      ],
+      "original_bytes_reconstructable": true,
+      "path_aliases": {}
+    }
+  ],
+  "file_provenance": "provenance/FILES.json",
+  "manifest": "MANIFEST.sha256",
+  "limitations": [
+    "Public payload is sufficient to inspect the bounded correction, executed assertions and retained failures, not to accept Slice1C.",
+    "The pagehide observation boundary remains unresolved; actual restored empty state is not a substitute for the failed requirement.",
+    "Local paths are aliased; original/public SHA256 and bytes are separate. Helpers with aliases are review copies, not turnkey scripts.",
+    "Private browser profiles, Memory/Skills, full source-path census and unrelated worktree inventories are omitted. Full private filesystem preservation cannot be independently repeated from this subset.",
+    "Physical OS IME/touch/screen-reader and actual backend integration not run. Counts50 refer only to the enumerated native contract identities.",
+    "Raw multi-megabyte JSON files are delivered in ordered UTF-8-safe chunks; concatenate without separators. A part need not be valid JSON. The event timeline is a record-preserving derived projection backed by the full trace.",
+    "Late lifecycle collection retains the failed original assertion and exit1. It is not a green replacement run."
+  ],
+  "status": {
+    "SLICE_1C_ACCEPTED": "NO_PENDING_INDEPENDENT_REVIEW",
+    "H4_LEDGER_OWNER_DISPOSITION": "UNRESOLVED",
+    "TRACKED_DIST_POLICY_RECONCILIATION": "UNRESOLVED",
+    "BACKEND_CHANGES": 0,
+    "NEW_BACKEND_REQUIREMENTS": "NONE",
+    "PRODUCT_COMMIT_MERGE_PUSH_PUBLICATION": "NOT_PERFORMED"
+  }
+}

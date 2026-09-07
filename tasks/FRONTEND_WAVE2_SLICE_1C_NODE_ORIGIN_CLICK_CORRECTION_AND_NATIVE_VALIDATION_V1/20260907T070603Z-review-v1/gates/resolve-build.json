@@ -1,0 +1,11 @@
+{
+  "name": "resolve-build",
+  "command": [
+    "node",
+    "--input-type=module",
+    "-e",
+    "import {resolveConfig} from 'vite'; const c=await resolveConfig({build:{outDir:\"[LOCAL_TASK_ROOT]/build\"}},'build'); console.log(c.build.outDir); if(c.build.outDir!==\"[LOCAL_TASK_ROOT]/build\") process.exit(1);"
+  ],
+  "exit": 0,
+  "seconds": 0.7168216705322266
+}

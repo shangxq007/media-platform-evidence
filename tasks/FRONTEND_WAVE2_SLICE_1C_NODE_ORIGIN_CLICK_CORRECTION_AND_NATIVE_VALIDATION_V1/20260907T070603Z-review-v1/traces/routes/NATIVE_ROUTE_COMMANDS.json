@@ -1,0 +1,3025 @@
+[
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:57.239398+00:00",
+    "method": "Page.enable",
+    "params": {},
+    "result": {
+      "id": 1,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:57.240949+00:00",
+    "method": "Emulation.setFocusEmulationEnabled",
+    "params": {
+      "enabled": true
+    },
+    "result": {
+      "id": 2,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:57.241882+00:00",
+    "method": "Browser.getVersion",
+    "params": {},
+    "result": {
+      "id": 3,
+      "result": {
+        "protocolVersion": "1.3",
+        "product": "Chrome/149.0.7827.55",
+        "revision": "@3188f8a607ae7e067593be8aab7f02d2451fec07",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+        "jsVersion": "14.9.207.21"
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:57.243503+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 4,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:57.245621+00:00",
+    "method": "Page.addScriptToEvaluateOnNewDocument",
+    "params": {
+      "source": "(() => {\n const ids=new WeakMap();let serial=0;\n const id=o=>{if(!ids.has(o))ids.set(o,++serial);return ids.get(o)};\n function fibers(){const el=document.getElementById('root');if(!el)return[];const key=Object.keys(el).find(k=>k.startsWith('__reactContainer$'));if(!key)return[];const f=el[key];const root=f.stateNode?.current||f;const out=[],q=[root];while(q.length){const x=q.pop();out.push(x);if(x.sibling)q.push(x.sibling);if(x.child)q.push(x.child)}return out}\n function stores(){return [...new Set(fibers().map(f=>f.memoizedProps?.value).filter(v=>v&&typeof v.getSnapshot==='function'&&typeof v.select==='function'))]}\n function snapshot(){return stores().map(s=>{const v=s.getSnapshot();return {owner:id(s),lifetime:id(v.lifetime),revision:v.revision,surfaceId:v.surfaceId,workspaceId:v.workspaceId,projectId:v.projectId,selectedRefs:v.selectedRefs,primaryRef:v.primaryRef,supported:v.supported}})}\n function router(){return fibers().map(f=>f.memoizedProps?.value).find(v=>v&&typeof v.navigate==='function'&&v.history&&v.state)}\n function proposals(){const rows=[];for(const f of fibers()){let h=f.memoizedState;let guard=0;while(h&&typeof h==='object'&&guard++<100){const p=h.memoizedState;if(p&&typeof p==='object'&&p.lifetime&&'intent' in p&&'revision' in p)rows.push({lifetime:id(p.lifetime),revision:p.revision,intent:p.intent,target:p.target});h=h.next}}return rows}\n const probe={documentId:crypto.randomUUID(),events:[],observations:[],snapshot,proposals,router};\n const record=(event,persisted)=>probe.events.push({event,persisted,path:location.pathname,at:performance.now(),snapshot:snapshot(),proposals:proposals(),selectedDom:[...document.querySelectorAll('[data-canvas-node][aria-pressed=\"true\"]')].map(e=>e.dataset.canvasNode),capture:probe.capture||[]});\n for(const type of ['pagehide','pageshow'])addEventListener(type,event=>queueMicrotask(()=>record(type,event.persisted)));\n document.addEventListener('gotpointercapture',e=>(probe.capture ||= []).push({type:e.type,id:e.pointerId}),true);\n document.addEventListener('lostpointercapture',e=>(probe.capture ||= []).push({type:e.type,id:e.pointerId}),true);\n probe.captureState=()=>[...document.querySelectorAll('.ff-workspace-canvas')].map(e=>({connected:e.isConnected,held:(probe.capture||[]).filter(x=>x.type==='gotpointercapture').some(x=>e.hasPointerCapture(x.id))}));\n new MutationObserver(()=>{const rows=snapshot();if(rows.length)probe.observations.push({path:location.pathname,hash:location.hash,search:location.search,shell:document.querySelector('.ff-app-shell')?.dataset.surface,snapshot:rows})}).observe(document,{subtree:true,childList:true,attributes:true});\n window.__lifecycleProbe=probe;\n})();"
+    },
+    "result": {
+      "id": 5,
+      "result": {
+        "identifier": "1"
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:57.270427+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4196/w/ux-workspace/projects/ux-project/canvas"
+    },
+    "result": {
+      "id": 6,
+      "result": {
+        "frameId": "481513888CC06C9C295D2140E7EBC50E",
+        "loaderId": "8433AA3485B47BC344CDB3DE22A31E4E",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:57.577675+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 7,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:57.736531+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 8,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:57.911261+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 9,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:57.917512+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"[data-canvas-node]\").length===2",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 10,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:57.920592+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 11,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:57.925245+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 12,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:58.427971+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__captureEvents=[];document.querySelector(\".ff-workspace-canvas\").addEventListener(\"gotpointercapture\",e=>window.__captureEvents.push({type:e.type,id:e.pointerId}));document.querySelector(\".ff-workspace-canvas\").addEventListener(\"lostpointercapture\",e=>window.__captureEvents.push({type:e.type,id:e.pointerId}));",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 13,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:58.430500+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 14,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":566,\"y\":625.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:58.435712+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 566,
+      "y": 626,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 15,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:58.456672+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 566,
+      "y": 626,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 16,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:58.466073+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 566,
+      "y": 626,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 17,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:58.820636+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "({snapshot:__lifecycleProbe.snapshot(),events:__lifecycleProbe.events,capture:__lifecycleProbe.captureState(),observations:__lifecycleProbe.observations,proposals:__lifecycleProbe.proposals(),path:location.pathname})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 18,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ],
+            "events": [
+              {
+                "event": "pageshow",
+                "persisted": false,
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "at": 162.5,
+                "snapshot": [],
+                "proposals": [],
+                "selectedDom": [],
+                "capture": []
+              }
+            ],
+            "capture": [
+              {
+                "connected": true,
+                "held": false
+              }
+            ],
+            "observations": [
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 1,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [],
+                    "primaryRef": null,
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [
+                      {
+                        "surfaceId": "canvas",
+                        "workspaceId": "ux-workspace",
+                        "projectId": "ux-project",
+                        "kind": "NODE",
+                        "localId": "project-node"
+                      }
+                    ],
+                    "primaryRef": {
+                      "surfaceId": "canvas",
+                      "workspaceId": "ux-workspace",
+                      "projectId": "ux-project",
+                      "kind": "NODE",
+                      "localId": "project-node"
+                    },
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "proposals": [],
+            "path": "/w/ux-workspace/projects/ux-project/canvas"
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:58.835881+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__lifecycleProbe.router().navigate({to:location.pathname,search:{view:\"wide\"}})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 19,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:58.841561+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "({snapshot:__lifecycleProbe.snapshot(),events:__lifecycleProbe.events,capture:__lifecycleProbe.captureState(),observations:__lifecycleProbe.observations,proposals:__lifecycleProbe.proposals(),path:location.pathname})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 20,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ],
+            "events": [
+              {
+                "event": "pageshow",
+                "persisted": false,
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "at": 162.5,
+                "snapshot": [],
+                "proposals": [],
+                "selectedDom": [],
+                "capture": []
+              }
+            ],
+            "capture": [
+              {
+                "connected": true,
+                "held": false
+              }
+            ],
+            "observations": [
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 1,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [],
+                    "primaryRef": null,
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [
+                      {
+                        "surfaceId": "canvas",
+                        "workspaceId": "ux-workspace",
+                        "projectId": "ux-project",
+                        "kind": "NODE",
+                        "localId": "project-node"
+                      }
+                    ],
+                    "primaryRef": {
+                      "surfaceId": "canvas",
+                      "workspaceId": "ux-workspace",
+                      "projectId": "ux-project",
+                      "kind": "NODE",
+                      "localId": "project-node"
+                    },
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "?view=wide",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [
+                      {
+                        "surfaceId": "canvas",
+                        "workspaceId": "ux-workspace",
+                        "projectId": "ux-project",
+                        "kind": "NODE",
+                        "localId": "project-node"
+                      }
+                    ],
+                    "primaryRef": {
+                      "surfaceId": "canvas",
+                      "workspaceId": "ux-workspace",
+                      "projectId": "ux-project",
+                      "kind": "NODE",
+                      "localId": "project-node"
+                    },
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "proposals": [],
+            "path": "/w/ux-workspace/projects/ux-project/canvas"
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:58.857154+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4196/w/ux-workspace/projects/ux-project/canvas"
+    },
+    "result": {
+      "id": 21,
+      "result": {
+        "frameId": "481513888CC06C9C295D2140E7EBC50E",
+        "loaderId": "26974B406D3413BD19C17A6CF15B3F01",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:59.161181+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 22,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:59.314443+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 23,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:59.317165+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"[data-canvas-node]\").length===2",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 24,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:59.320096+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 25,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:59.322461+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 26,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:59.825671+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__captureEvents=[];document.querySelector(\".ff-workspace-canvas\").addEventListener(\"gotpointercapture\",e=>window.__captureEvents.push({type:e.type,id:e.pointerId}));document.querySelector(\".ff-workspace-canvas\").addEventListener(\"lostpointercapture\",e=>window.__captureEvents.push({type:e.type,id:e.pointerId}));",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 27,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:59.828690+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 28,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":566,\"y\":625.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:59.833334+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 566,
+      "y": 626,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 29,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:59.847795+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 566,
+      "y": 626,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 30,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:21:59.852189+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 566,
+      "y": 626,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 31,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:00.206816+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "({snapshot:__lifecycleProbe.snapshot(),events:__lifecycleProbe.events,capture:__lifecycleProbe.captureState(),observations:__lifecycleProbe.observations,proposals:__lifecycleProbe.proposals(),path:location.pathname})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 32,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ],
+            "events": [
+              {
+                "event": "pageshow",
+                "persisted": false,
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "at": 72.79999999888241,
+                "snapshot": [],
+                "proposals": [],
+                "selectedDom": [],
+                "capture": []
+              }
+            ],
+            "capture": [
+              {
+                "connected": true,
+                "held": false
+              }
+            ],
+            "observations": [
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 1,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [],
+                    "primaryRef": null,
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [
+                      {
+                        "surfaceId": "canvas",
+                        "workspaceId": "ux-workspace",
+                        "projectId": "ux-project",
+                        "kind": "NODE",
+                        "localId": "project-node"
+                      }
+                    ],
+                    "primaryRef": {
+                      "surfaceId": "canvas",
+                      "workspaceId": "ux-workspace",
+                      "projectId": "ux-project",
+                      "kind": "NODE",
+                      "localId": "project-node"
+                    },
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "proposals": [],
+            "path": "/w/ux-workspace/projects/ux-project/canvas"
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:00.218608+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__lifecycleProbe.router().navigate({to:location.pathname,hash:\"main-content\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 33,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:00.224403+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "({snapshot:__lifecycleProbe.snapshot(),events:__lifecycleProbe.events,capture:__lifecycleProbe.captureState(),observations:__lifecycleProbe.observations,proposals:__lifecycleProbe.proposals(),path:location.pathname})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 34,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ],
+            "events": [
+              {
+                "event": "pageshow",
+                "persisted": false,
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "at": 72.79999999888241,
+                "snapshot": [],
+                "proposals": [],
+                "selectedDom": [],
+                "capture": []
+              }
+            ],
+            "capture": [
+              {
+                "connected": true,
+                "held": false
+              }
+            ],
+            "observations": [
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 1,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [],
+                    "primaryRef": null,
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [
+                      {
+                        "surfaceId": "canvas",
+                        "workspaceId": "ux-workspace",
+                        "projectId": "ux-project",
+                        "kind": "NODE",
+                        "localId": "project-node"
+                      }
+                    ],
+                    "primaryRef": {
+                      "surfaceId": "canvas",
+                      "workspaceId": "ux-workspace",
+                      "projectId": "ux-project",
+                      "kind": "NODE",
+                      "localId": "project-node"
+                    },
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "#main-content",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [
+                      {
+                        "surfaceId": "canvas",
+                        "workspaceId": "ux-workspace",
+                        "projectId": "ux-project",
+                        "kind": "NODE",
+                        "localId": "project-node"
+                      }
+                    ],
+                    "primaryRef": {
+                      "surfaceId": "canvas",
+                      "workspaceId": "ux-workspace",
+                      "projectId": "ux-project",
+                      "kind": "NODE",
+                      "localId": "project-node"
+                    },
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "proposals": [],
+            "path": "/w/ux-workspace/projects/ux-project/canvas"
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:00.239442+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4196/w/ux-workspace/projects/ux-project/canvas"
+    },
+    "result": {
+      "id": 35,
+      "result": {
+        "frameId": "481513888CC06C9C295D2140E7EBC50E",
+        "loaderId": "66D589D61D604CE1B2872645D7C1B313",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:00.543189+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 36,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:00.696962+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 37,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:00.700247+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"[data-canvas-node]\").length===2",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 38,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:00.703952+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 39,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:00.706882+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 40,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:01.210485+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__captureEvents=[];document.querySelector(\".ff-workspace-canvas\").addEventListener(\"gotpointercapture\",e=>window.__captureEvents.push({type:e.type,id:e.pointerId}));document.querySelector(\".ff-workspace-canvas\").addEventListener(\"lostpointercapture\",e=>window.__captureEvents.push({type:e.type,id:e.pointerId}));",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 41,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:01.214062+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 42,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":566,\"y\":625.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:01.219345+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 566,
+      "y": 626,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 43,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:01.234442+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 566,
+      "y": 626,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 44,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:01.240070+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 566,
+      "y": 626,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 45,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:01.595077+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "({snapshot:__lifecycleProbe.snapshot(),events:__lifecycleProbe.events,capture:__lifecycleProbe.captureState(),observations:__lifecycleProbe.observations,proposals:__lifecycleProbe.proposals(),path:location.pathname})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 46,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ],
+            "events": [
+              {
+                "event": "pageshow",
+                "persisted": false,
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "at": 70.20000000111759,
+                "snapshot": [],
+                "proposals": [],
+                "selectedDom": [],
+                "capture": []
+              }
+            ],
+            "capture": [
+              {
+                "connected": true,
+                "held": false
+              }
+            ],
+            "observations": [
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 1,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [],
+                    "primaryRef": null,
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [
+                      {
+                        "surfaceId": "canvas",
+                        "workspaceId": "ux-workspace",
+                        "projectId": "ux-project",
+                        "kind": "NODE",
+                        "localId": "project-node"
+                      }
+                    ],
+                    "primaryRef": {
+                      "surfaceId": "canvas",
+                      "workspaceId": "ux-workspace",
+                      "projectId": "ux-project",
+                      "kind": "NODE",
+                      "localId": "project-node"
+                    },
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "proposals": [],
+            "path": "/w/ux-workspace/projects/ux-project/canvas"
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:01.608845+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__lifecycleProbe.router().navigate({to:\"/w/ux-workspace/projects/ux-project/workflow\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 47,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:02.314584+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "({snapshot:__lifecycleProbe.snapshot(),events:__lifecycleProbe.events,capture:__lifecycleProbe.captureState(),observations:__lifecycleProbe.observations,proposals:__lifecycleProbe.proposals(),path:location.pathname})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 48,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "snapshot": [
+              {
+                "owner": 3,
+                "lifetime": 4,
+                "revision": 0,
+                "surfaceId": "workflow",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [],
+                "primaryRef": null,
+                "supported": []
+              }
+            ],
+            "events": [
+              {
+                "event": "pageshow",
+                "persisted": false,
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "at": 70.20000000111759,
+                "snapshot": [],
+                "proposals": [],
+                "selectedDom": [],
+                "capture": []
+              }
+            ],
+            "capture": [],
+            "observations": [
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 1,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [],
+                    "primaryRef": null,
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [
+                      {
+                        "surfaceId": "canvas",
+                        "workspaceId": "ux-workspace",
+                        "projectId": "ux-project",
+                        "kind": "NODE",
+                        "localId": "project-node"
+                      }
+                    ],
+                    "primaryRef": {
+                      "surfaceId": "canvas",
+                      "workspaceId": "ux-workspace",
+                      "projectId": "ux-project",
+                      "kind": "NODE",
+                      "localId": "project-node"
+                    },
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/ux-workspace/projects/ux-project/workflow",
+                "hash": "",
+                "search": "",
+                "shell": "workflow",
+                "snapshot": [
+                  {
+                    "owner": 3,
+                    "lifetime": 4,
+                    "revision": 0,
+                    "surfaceId": "workflow",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [],
+                    "primaryRef": null,
+                    "supported": []
+                  }
+                ]
+              }
+            ],
+            "proposals": [],
+            "path": "/w/ux-workspace/projects/ux-project/workflow"
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:02.335326+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4196/w/ux-workspace/projects/ux-project/canvas"
+    },
+    "result": {
+      "id": 49,
+      "result": {
+        "frameId": "481513888CC06C9C295D2140E7EBC50E",
+        "loaderId": "C36E9B8E0A45DEA133F3BF8F08884377",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:02.639506+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 50,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:02.793860+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 51,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:02.797904+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"[data-canvas-node]\").length===2",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 52,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:02.802254+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 53,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:02.810590+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 54,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:03.314729+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__captureEvents=[];document.querySelector(\".ff-workspace-canvas\").addEventListener(\"gotpointercapture\",e=>window.__captureEvents.push({type:e.type,id:e.pointerId}));document.querySelector(\".ff-workspace-canvas\").addEventListener(\"lostpointercapture\",e=>window.__captureEvents.push({type:e.type,id:e.pointerId}));",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 55,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:03.318677+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 56,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":566,\"y\":625.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:03.324215+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 566,
+      "y": 626,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 57,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:03.339901+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 566,
+      "y": 626,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 58,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:03.345303+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 566,
+      "y": 626,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 59,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:03.702264+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "({snapshot:__lifecycleProbe.snapshot(),events:__lifecycleProbe.events,capture:__lifecycleProbe.captureState(),observations:__lifecycleProbe.observations,proposals:__lifecycleProbe.proposals(),path:location.pathname})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 60,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ],
+            "events": [
+              {
+                "event": "pageshow",
+                "persisted": false,
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "at": 73.90000000037253,
+                "snapshot": [],
+                "proposals": [],
+                "selectedDom": [],
+                "capture": []
+              }
+            ],
+            "capture": [
+              {
+                "connected": true,
+                "held": false
+              }
+            ],
+            "observations": [
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 1,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [],
+                    "primaryRef": null,
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [
+                      {
+                        "surfaceId": "canvas",
+                        "workspaceId": "ux-workspace",
+                        "projectId": "ux-project",
+                        "kind": "NODE",
+                        "localId": "project-node"
+                      }
+                    ],
+                    "primaryRef": {
+                      "surfaceId": "canvas",
+                      "workspaceId": "ux-workspace",
+                      "projectId": "ux-project",
+                      "kind": "NODE",
+                      "localId": "project-node"
+                    },
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "proposals": [],
+            "path": "/w/ux-workspace/projects/ux-project/canvas"
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:03.725666+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__lifecycleProbe.router().navigate({to:\"/w/ux-workspace/projects/other/canvas\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 61,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:04.431350+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "({snapshot:__lifecycleProbe.snapshot(),events:__lifecycleProbe.events,capture:__lifecycleProbe.captureState(),observations:__lifecycleProbe.observations,proposals:__lifecycleProbe.proposals(),path:location.pathname})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 62,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "snapshot": [
+              {
+                "owner": 3,
+                "lifetime": 4,
+                "revision": 1,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "other",
+                "selectedRefs": [],
+                "primaryRef": null,
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ],
+            "events": [
+              {
+                "event": "pageshow",
+                "persisted": false,
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "at": 73.90000000037253,
+                "snapshot": [],
+                "proposals": [],
+                "selectedDom": [],
+                "capture": []
+              }
+            ],
+            "capture": [
+              {
+                "connected": true,
+                "held": false
+              }
+            ],
+            "observations": [
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 1,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [],
+                    "primaryRef": null,
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [
+                      {
+                        "surfaceId": "canvas",
+                        "workspaceId": "ux-workspace",
+                        "projectId": "ux-project",
+                        "kind": "NODE",
+                        "localId": "project-node"
+                      }
+                    ],
+                    "primaryRef": {
+                      "surfaceId": "canvas",
+                      "workspaceId": "ux-workspace",
+                      "projectId": "ux-project",
+                      "kind": "NODE",
+                      "localId": "project-node"
+                    },
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/ux-workspace/projects/other/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 3,
+                    "lifetime": 4,
+                    "revision": 1,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "other",
+                    "selectedRefs": [],
+                    "primaryRef": null,
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "proposals": [],
+            "path": "/w/ux-workspace/projects/other/canvas"
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:04.451185+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4196/w/ux-workspace/projects/ux-project/canvas"
+    },
+    "result": {
+      "id": 63,
+      "result": {
+        "frameId": "481513888CC06C9C295D2140E7EBC50E",
+        "loaderId": "D252CA47B704980AD0CB0C91E21A4B78",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:04.762349+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 64,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:04.916804+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 65,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:04.920986+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"[data-canvas-node]\").length===2",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 66,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:04.925576+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 67,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:04.929580+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 68,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:05.433948+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__captureEvents=[];document.querySelector(\".ff-workspace-canvas\").addEventListener(\"gotpointercapture\",e=>window.__captureEvents.push({type:e.type,id:e.pointerId}));document.querySelector(\".ff-workspace-canvas\").addEventListener(\"lostpointercapture\",e=>window.__captureEvents.push({type:e.type,id:e.pointerId}));",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 69,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:05.438298+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 70,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":566,\"y\":625.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:05.444172+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 566,
+      "y": 626,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 71,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:05.459954+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 566,
+      "y": 626,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 72,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:05.465528+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 566,
+      "y": 626,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 73,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:05.823277+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "({snapshot:__lifecycleProbe.snapshot(),events:__lifecycleProbe.events,capture:__lifecycleProbe.captureState(),observations:__lifecycleProbe.observations,proposals:__lifecycleProbe.proposals(),path:location.pathname})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 74,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ],
+            "events": [
+              {
+                "event": "pageshow",
+                "persisted": false,
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "at": 63.600000001490116,
+                "snapshot": [],
+                "proposals": [],
+                "selectedDom": [],
+                "capture": []
+              }
+            ],
+            "capture": [
+              {
+                "connected": true,
+                "held": false
+              }
+            ],
+            "observations": [
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 1,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [],
+                    "primaryRef": null,
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [
+                      {
+                        "surfaceId": "canvas",
+                        "workspaceId": "ux-workspace",
+                        "projectId": "ux-project",
+                        "kind": "NODE",
+                        "localId": "project-node"
+                      }
+                    ],
+                    "primaryRef": {
+                      "surfaceId": "canvas",
+                      "workspaceId": "ux-workspace",
+                      "projectId": "ux-project",
+                      "kind": "NODE",
+                      "localId": "project-node"
+                    },
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "proposals": [],
+            "path": "/w/ux-workspace/projects/ux-project/canvas"
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:05.837482+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "__lifecycleProbe.router().navigate({to:\"/w/other/projects/ux-project/canvas\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 75,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:06.545862+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "({snapshot:__lifecycleProbe.snapshot(),events:__lifecycleProbe.events,capture:__lifecycleProbe.captureState(),observations:__lifecycleProbe.observations,proposals:__lifecycleProbe.proposals(),path:location.pathname})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 76,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "snapshot": [
+              {
+                "owner": 3,
+                "lifetime": 4,
+                "revision": 1,
+                "surfaceId": "canvas",
+                "workspaceId": "other",
+                "projectId": "ux-project",
+                "selectedRefs": [],
+                "primaryRef": null,
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ],
+            "events": [
+              {
+                "event": "pageshow",
+                "persisted": false,
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "at": 63.600000001490116,
+                "snapshot": [],
+                "proposals": [],
+                "selectedDom": [],
+                "capture": []
+              }
+            ],
+            "capture": [
+              {
+                "connected": true,
+                "held": false
+              }
+            ],
+            "observations": [
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 1,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [],
+                    "primaryRef": null,
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [
+                      {
+                        "surfaceId": "canvas",
+                        "workspaceId": "ux-workspace",
+                        "projectId": "ux-project",
+                        "kind": "NODE",
+                        "localId": "project-node"
+                      }
+                    ],
+                    "primaryRef": {
+                      "surfaceId": "canvas",
+                      "workspaceId": "ux-workspace",
+                      "projectId": "ux-project",
+                      "kind": "NODE",
+                      "localId": "project-node"
+                    },
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/other/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 3,
+                    "lifetime": 4,
+                    "revision": 1,
+                    "surfaceId": "canvas",
+                    "workspaceId": "other",
+                    "projectId": "ux-project",
+                    "selectedRefs": [],
+                    "primaryRef": null,
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "proposals": [],
+            "path": "/w/other/projects/ux-project/canvas"
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:06.564891+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4196/w/ux-workspace/projects/ux-project/canvas"
+    },
+    "result": {
+      "id": 77,
+      "result": {
+        "frameId": "481513888CC06C9C295D2140E7EBC50E",
+        "loaderId": "32DC7931C09BDAB686941D2B8C92D81E",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:06.872918+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 78,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:07.028076+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 79,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:07.032678+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"[data-canvas-node]\").length===2",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 80,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:07.037396+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 81,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:07.041771+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 82,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:07.546563+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__captureEvents=[];document.querySelector(\".ff-workspace-canvas\").addEventListener(\"gotpointercapture\",e=>window.__captureEvents.push({type:e.type,id:e.pointerId}));document.querySelector(\".ff-workspace-canvas\").addEventListener(\"lostpointercapture\",e=>window.__captureEvents.push({type:e.type,id:e.pointerId}));",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 83,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:07.551298+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 84,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":566,\"y\":625.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:07.557502+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 566,
+      "y": 626,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 85,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:07.571139+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 566,
+      "y": 626,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 86,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:07.577959+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 566,
+      "y": 626,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 87,
+      "result": {}
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:07.936622+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "({snapshot:__lifecycleProbe.snapshot(),events:__lifecycleProbe.events,capture:__lifecycleProbe.captureState(),observations:__lifecycleProbe.observations,proposals:__lifecycleProbe.proposals(),path:location.pathname})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 88,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "snapshot": [
+              {
+                "owner": 1,
+                "lifetime": 2,
+                "revision": 2,
+                "surfaceId": "canvas",
+                "workspaceId": "ux-workspace",
+                "projectId": "ux-project",
+                "selectedRefs": [
+                  {
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "kind": "NODE",
+                    "localId": "project-node"
+                  }
+                ],
+                "primaryRef": {
+                  "surfaceId": "canvas",
+                  "workspaceId": "ux-workspace",
+                  "projectId": "ux-project",
+                  "kind": "NODE",
+                  "localId": "project-node"
+                },
+                "supported": [
+                  "rename",
+                  "move",
+                  "reveal"
+                ]
+              }
+            ],
+            "events": [
+              {
+                "event": "pageshow",
+                "persisted": false,
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "at": 75.69999999925494,
+                "snapshot": [],
+                "proposals": [],
+                "selectedDom": [],
+                "capture": []
+              }
+            ],
+            "capture": [
+              {
+                "connected": true,
+                "held": false
+              }
+            ],
+            "observations": [
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 1,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [],
+                    "primaryRef": null,
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              },
+              {
+                "path": "/w/ux-workspace/projects/ux-project/canvas",
+                "hash": "",
+                "search": "",
+                "shell": "canvas",
+                "snapshot": [
+                  {
+                    "owner": 1,
+                    "lifetime": 2,
+                    "revision": 2,
+                    "surfaceId": "canvas",
+                    "workspaceId": "ux-workspace",
+                    "projectId": "ux-project",
+                    "selectedRefs": [
+                      {
+                        "surfaceId": "canvas",
+                        "workspaceId": "ux-workspace",
+                        "projectId": "ux-project",
+                        "kind": "NODE",
+                        "localId": "project-node"
+                      }
+                    ],
+                    "primaryRef": {
+                      "surfaceId": "canvas",
+                      "workspaceId": "ux-workspace",
+                      "projectId": "ux-project",
+                      "kind": "NODE",
+                      "localId": "project-node"
+                    },
+                    "supported": [
+                      "rename",
+                      "move",
+                      "reveal"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "proposals": [],
+            "path": "/w/ux-workspace/projects/ux-project/canvas"
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:07.942530+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "Array.from(document.querySelectorAll(\"[data-canvas-node]\"),e=>({id:e.dataset.canvasNode,x:parseFloat(e.style.left),y:parseFloat(e.style.top),selected:e.getAttribute(\"aria-pressed\")===\"true\"}))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 89,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": [
+            {
+              "id": "project-node",
+              "x": 120,
+              "y": 90,
+              "selected": true
+            },
+            {
+              "id": "note-node",
+              "x": 430,
+              "y": 230,
+              "selected": false
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:07.948026+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const m=new DOMMatrix(getComputedStyle(document.querySelector(\".ff-canvas-viewport\")).transform);return {zoom:m.a,x:m.e,y:m.f}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 90,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "zoom": 1,
+            "x": 306,
+            "y": 20
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:07.952678+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=document.querySelector(\".ff-workspace-canvas\").getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 91,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 24,
+            "y": 476.59375,
+            "w": 1097,
+            "h": 520
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:07.957245+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\").getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 92,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 451,
+            "y": 587.59375,
+            "w": 230,
+            "h": 160
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "00128d35b97775b97124ad1921053a0da282690d",
+    "timestamp": "2026-09-07T06:22:07.976083+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__oldStage=document.querySelector(\".ff-workspace-canvas\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 93,
+      "error": {
+        "code": -32000,
+        "message": "Object reference chain is too long"
+      }
+    }
+  }
+]

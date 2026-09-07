@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "[LOCAL_TASK_ROOT]/native/lifecycle--preflight2/native_lifecycle.py", line 28, in <module>
+    record('real-pagehide-retires-before-suspension','pagehide observed with no refs/primary and lifetime different from selected old lifetime',hide,bool(hide) and all(not s['selectedRefs'] and s['primaryRef'] is None and s['lifetime']!=pending['snapshot'][0]['lifetime'] for e in hide for s in e['snapshot']))
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[LOCAL_TASK_ROOT]/native/lifecycle--preflight2/native_lifecycle.py", line 10, in record
+    b.record(name,expected,actual,ok,assistance=assistance)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[LOCAL_TASK_ROOT]/native/lifecycle--preflight2/native_common.py", line 29, in record
+    assert passed,(name,expected,actual)
+           ^^^^^^
+AssertionError: ('real-pagehide-retires-before-suspension', 'pagehide observed with no refs/primary and lifetime different from selected old lifetime', [{'event': 'pagehide', 'persisted': True, 'path': '/w/ux-workspace/projects/ux-project/canvas', 'at': 2705.2000000011176, 'snapshot': [{'owner': 1, 'lifetime': 2, 'revision': 2, 'surfaceId': 'canvas', 'workspaceId': 'ux-workspace', 'projectId': 'ux-project', 'selectedRefs': [{'surfaceId': 'canvas', 'workspaceId': 'ux-workspace', 'projectId': 'ux-project', 'kind': 'NODE', 'localId': 'project-node'}], 'primaryRef': {'surfaceId': 'canvas', 'workspaceId': 'ux-workspace', 'projectId': 'ux-project', 'kind': 'NODE', 'localId': 'project-node'}, 'supported': ['rename', 'move', 'reveal']}], 'proposals': [{'lifetime': 2, 'revision': 2, 'intent': 'inspect', 'target': 'NODE: Project reference'}], 'selectedDom': ['project-node'], 'capture': [{'type': 'gotpointercapture', 'id': 1}, {'type': 'lostpointercapture', 'id': 1}]}])

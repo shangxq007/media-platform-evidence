@@ -1,0 +1,33 @@
+{
+  "command": [
+    "bwrap",
+    "--die-with-parent",
+    "--ro-bind",
+    "/",
+    "/",
+    "--bind",
+    "[LOCAL_TASK_ROOT]",
+    "[LOCAL_TASK_ROOT]",
+    "--ro-bind",
+    "[LOCAL_TASK_ROOT]/snapshot",
+    "[LOCAL_TASK_ROOT]/snapshot",
+    "--bind",
+    "[LOCAL_TASK_ROOT]/snapshot/frontend/node_modules",
+    "[LOCAL_TASK_ROOT]/snapshot/frontend/node_modules",
+    "--proc",
+    "/proc",
+    "--dev",
+    "/dev",
+    "--tmpfs",
+    "/tmp",
+    "--chdir",
+    "[LOCAL_TASK_ROOT]/snapshot/frontend",
+    "--",
+    "node",
+    "node_modules/typescript/bin/tsc",
+    "--noEmit"
+  ],
+  "expected_exit": 0,
+  "source_mount": "read-only",
+  "output_root": "[LOCAL_TASK_ROOT]"
+}
