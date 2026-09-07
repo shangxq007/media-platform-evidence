@@ -1,0 +1,43 @@
+{
+  "name": "targeted-final",
+  "command": [
+    "./node_modules/.bin/vitest",
+    "run",
+    "src/product/notifications/adapter.test.ts",
+    "src/product/notifications/NotificationInbox.test.tsx",
+    "src/components/app-shell/AppShell.test.tsx",
+    "src/localization/localization.test.tsx",
+    "--configLoader",
+    "runner",
+    "--no-cache",
+    "--reporter=json",
+    "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1/TARGETED_FINAL.json"
+  ],
+  "containment": [
+    "bwrap",
+    "--die-with-parent",
+    "--ro-bind",
+    "/",
+    "/",
+    "--bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1",
+    "--ro-bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1/snapshot",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1/snapshot",
+    "--ro-bind",
+    "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules",
+    "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules",
+    "--proc",
+    "/proc",
+    "--dev",
+    "/dev",
+    "--tmpfs",
+    "/tmp",
+    "--chdir",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1/snapshot/frontend",
+    "--"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 4.329019069671631
+}

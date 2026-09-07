@@ -1,0 +1,10 @@
+# Bounded source review correction — same Owner scope
+Read WRITER_TASK.md and NAVIGATION_REVIEW_NOTE.md. Apply after initial writer finishes, preserve meaningful RED/GREEN attempts; exact allowlist unchanged. No full suite/build/browser/Git or docs writes.
+
+1. Navigation must actually expose supported existing local fixture target, not merely a status that no resource opened. Use a safe typed local app route with explicit simulated origin and existing destination permission checks. Existing receiver can serve simulated-workspace/project dashboard; coordinate via report. Do not infer routes or grant auth. Add actual href assertions and unsupported/missing/denied/cross-tenant/ambiguous target tests.
+2. Verify close during unresolved mutation ignoring AbortSignal then reopen: old mutationLock/busy must not indefinitely disable new-session interactions. Use exact operation epoch/ownership so old finally cannot unlock a newer mutation. Test an old unresolved promise, reopening and a new mutation, then old completion; no stale success or unlock.
+3. Native Chromium may remove focus when a focused read button becomes disabled. Before async mutation capture focused-row intent and reconcile disappearance without stealing focus if the user moved elsewhere. Unit focus under disabled buttons alone is not native proof; keep current explicit no-focus-theft tests.
+4. typeLabel currently uses ordinary object dictionary lookup; keys such as __proto__, constructor, toString must also yield neutral unknown-type label. Add adversarial unknown types test, use own-property lookup or safe mapping.
+5. Additional tests: refresh-v-refresh inversion, pending list across principal/tenant/logout transition (not only mutation), read-all vs single overlap both directions, unknown count versus known zero UI, read-all success across limited loaded page, post-mutation refresh failure. Keep tests behavioral/nonvacuous and exact context/receipts validated.
+
+Normal bounded correction authorized. Stop on genuine tool denial or concrete out-of-scope dependency. Provide WRITER_CORRECTION_REPORT.md including raw commands/results and exact files.

@@ -1,0 +1,977 @@
+[
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:56.415093+00:00",
+    "method": "Network.enable",
+    "params": {},
+    "result": {
+      "id": 1,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:56.416255+00:00",
+    "method": "Page.enable",
+    "params": {},
+    "result": {
+      "id": 2,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:56.417428+00:00",
+    "method": "Emulation.setFocusEmulationEnabled",
+    "params": {
+      "enabled": true
+    },
+    "result": {
+      "id": 3,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:56.418603+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 4,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:56.432550+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/w/simulated-workspace/projects/simulated-project/overview?notificationFixture=1"
+    },
+    "result": {
+      "id": 5,
+      "result": {
+        "frameId": "6E2B940340E45CA6EF95E4BAEC1BB899",
+        "loaderId": "C55D13B2F370D67F1B816B190A113C1E",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:56.744840+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 6,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:56.897130+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 7,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.162094+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 8,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.175288+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 9,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.177176+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 10,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.179073+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-notification-entry\").length===1 && !document.querySelector(\".ff-notification-count\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 11,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.181194+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-notification-entry\").scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 12,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.183223+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-notification-entry\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 13,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":1330.171875,\"y\":75}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.188149+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 1330,
+      "y": 75,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 14,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.191086+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 1330,
+      "y": 75,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 15,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.241962+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 1330,
+      "y": 75,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 16,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.394674+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-notification-inbox\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 17,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.396866+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-notification-list li\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 18,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.399696+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"2\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 19,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.402060+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-notification-origin\").textContent.includes(\"SIMULATED\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 20,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.404260+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-notification-inbox\").contains(document.activeElement)",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 21,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.406505+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-notification-list [data-notification-id=\\\"simulated-1\\\"] .ff-notification-title\").scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 22,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.408544+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-notification-list [data-notification-id=\\\"simulated-1\\\"] .ff-notification-title\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 23,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":657.3125,\"y\":497}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.411929+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 657,
+      "y": 497,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 24,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.414839+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 657,
+      "y": 497,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 25,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.427814+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 657,
+      "y": 497,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 26,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.580877+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-notification-body\").textContent.includes(\"No media was rendered.\") && !document.querySelector(\".ff-notification-inbox img\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 27,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.583963+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"2\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 28,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.587076+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const d=document.querySelector(\".ff-notification-inbox\"),r=d.getBoundingClientRect();return r.left>=-1 && r.right<=innerWidth+1 && r.top>=-1 && r.bottom<=innerHeight+1 && d.scrollWidth<=d.clientWidth+1 && document.documentElement.scrollWidth<=innerWidth+1})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 29,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.769766+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.776270+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-notification-controls [role=group] button:nth-child(2)\").scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 31,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.779021+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-notification-controls [role=group] button:nth-child(2)\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 32,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":528.6953125,\"y\":283}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.783064+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 529,
+      "y": 283,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 33,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.786484+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 529,
+      "y": 283,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 34,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.802088+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 529,
+      "y": 283,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 35,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.955118+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-notification-list li\").length===2",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 36,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.957993+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-notification-controls [aria-pressed=true]\")[0].textContent===\"Unread\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 37,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.961408+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-notification-list [data-notification-id=\\\"simulated-1\\\"] button:last-child\").scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 38,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.964037+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-notification-list [data-notification-id=\\\"simulated-1\\\"] button:last-child\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 39,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":941.3125,\"y\":497}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.968104+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 941,
+      "y": 497,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 40,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.971746+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 941,
+      "y": 497,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 41,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:57.993871+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 941,
+      "y": 497,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 42,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:58.146788+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!document.querySelector(\".ff-notification-list [data-notification-id=simulated-1]\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 43,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:58.149357+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"1\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 44,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:58.152764+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement===document.querySelector(\".ff-notification-controls [aria-pressed=true]\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 45,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:58.155928+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-notification-controls > button:last-child\").scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 46,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:58.158426+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-notification-controls > button:last-child\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 47,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":850.140625,\"y\":283}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:58.162146+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 850,
+      "y": 283,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 48,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:58.165434+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 850,
+      "y": 283,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 49,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:58.183194+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 850,
+      "y": 283,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 50,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:58.336358+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"0\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 51,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:58.339153+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-notification-list li\").length===0",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 52,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:58.487507+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:58.493936+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Escape",
+      "code": "Escape",
+      "windowsVirtualKeyCode": 27,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 54,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:58.496795+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Escape",
+      "code": "Escape",
+      "windowsVirtualKeyCode": 27,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 55,
+      "result": {}
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:58.649962+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!document.querySelector(\".ff-notification-inbox\") && document.activeElement===document.querySelector(\".ff-notification-entry\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 56,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "timestamp": "2026-09-07T13:42:58.805470+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  }
+]

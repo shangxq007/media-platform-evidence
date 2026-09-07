@@ -1,0 +1,98 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:44:07.242741+00:00",
+    "name": "desktop-en-single-entry-unknown-before-query",
+    "expression": "document.querySelectorAll(\".ff-notification-entry\").length===1 && !document.querySelector(\".ff-notification-count\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:44:07.468738+00:00",
+    "name": "desktop-en-known-global-count",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"2\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:44:07.471479+00:00",
+    "name": "desktop-en-simulation-visible",
+    "expression": "document.querySelector(\".ff-notification-origin\").textContent.includes(\"SIMULATED\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:44:07.474145+00:00",
+    "name": "desktop-en-focus-contained",
+    "expression": "document.querySelector(\".ff-notification-inbox\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:44:07.654823+00:00",
+    "name": "desktop-en-opaque-full-detail",
+    "expression": "document.querySelector(\".ff-notification-body\").textContent.includes(\"No media was rendered.\") && !document.querySelector(\".ff-notification-inbox img\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:44:07.657739+00:00",
+    "name": "desktop-en-detail-does-not-mark",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"2\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:44:07.660909+00:00",
+    "name": "desktop-en-layout",
+    "expression": "(()=>{const d=document.querySelector(\".ff-notification-inbox\"),r=d.getBoundingClientRect();return r.left>=-1 && r.right<=innerWidth+1 && r.top>=-1 && r.bottom<=innerHeight+1 && d.scrollWidth<=d.clientWidth+1 && document.documentElement.scrollWidth<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:44:08.023262+00:00",
+    "name": "desktop-en-unread-filter",
+    "expression": "document.querySelectorAll(\".ff-notification-controls [aria-pressed=true]\")[0].textContent===\"Unread\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:44:08.215468+00:00",
+    "name": "desktop-en-confirmed-single-count",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:44:08.218740+00:00",
+    "name": "desktop-en-disappearing-row-focus",
+    "expression": "document.activeElement===document.querySelector(\".ff-notification-controls [aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:44:08.407229+00:00",
+    "name": "desktop-en-inbox-wide-read-all",
+    "expression": "document.querySelectorAll(\".ff-notification-list li\").length===0",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "039bedca1a0056eb613ee695c1afcaf1aff20385",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:44:08.735249+00:00",
+    "name": "desktop-en-escape-restore",
+    "expression": "!document.querySelector(\".ff-notification-inbox\") && document.activeElement===document.querySelector(\".ff-notification-entry\")",
+    "passed": false,
+    "value": false
+  }
+]

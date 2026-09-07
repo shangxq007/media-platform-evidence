@@ -1,0 +1,514 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:06.795588+00:00",
+    "name": "desktop-en-single-entry-unknown-before-query",
+    "expression": "document.querySelectorAll(\".ff-notification-entry\").length===1 && !document.querySelector(\".ff-notification-count\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:07.032772+00:00",
+    "name": "desktop-en-known-global-count",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"2\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:07.035551+00:00",
+    "name": "desktop-en-simulation-visible",
+    "expression": "document.querySelector(\".ff-notification-origin\").textContent.includes(\"SIMULATED\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:07.038338+00:00",
+    "name": "desktop-en-focus-contained",
+    "expression": "document.querySelector(\".ff-notification-inbox\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:07.217704+00:00",
+    "name": "desktop-en-opaque-full-detail",
+    "expression": "document.querySelector(\".ff-notification-body\").textContent.includes(\"No media was rendered.\") && !document.querySelector(\".ff-notification-inbox img\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:07.220621+00:00",
+    "name": "desktop-en-detail-does-not-mark",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"2\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:07.223831+00:00",
+    "name": "desktop-en-layout",
+    "expression": "(()=>{const d=document.querySelector(\".ff-notification-inbox\"),r=d.getBoundingClientRect();return r.left>=-1 && r.right<=innerWidth+1 && r.top>=-1 && r.bottom<=innerHeight+1 && d.scrollWidth<=d.clientWidth+1 && document.documentElement.scrollWidth<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:07.587184+00:00",
+    "name": "desktop-en-unread-filter",
+    "expression": "document.querySelectorAll(\".ff-notification-controls [aria-pressed=true]\")[0].textContent===\"Unread\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:07.779934+00:00",
+    "name": "desktop-en-confirmed-single-count",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:07.783200+00:00",
+    "name": "desktop-en-disappearing-row-focus",
+    "expression": "document.activeElement===document.querySelector(\".ff-notification-controls [aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:07.969801+00:00",
+    "name": "desktop-en-inbox-wide-read-all",
+    "expression": "document.querySelectorAll(\".ff-notification-list li\").length===0",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:08.290527+00:00",
+    "name": "desktop-en-escape-restore",
+    "expression": "!document.querySelector(\".ff-notification-inbox\") && document.activeElement===document.querySelector(\".ff-notification-entry\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:08.463245+00:00",
+    "name": "desktop-en-native-keyboard-reopen",
+    "expression": "document.querySelector(\".ff-notification-inbox\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:08.781886+00:00",
+    "name": "desktop-en-native-tab-contained",
+    "expression": "document.querySelector(\".ff-notification-inbox\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:09.455548+00:00",
+    "name": "narrow-en-single-entry-unknown-before-query",
+    "expression": "document.querySelectorAll(\".ff-notification-entry\").length===1 && !document.querySelector(\".ff-notification-count\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:09.653862+00:00",
+    "name": "narrow-en-known-global-count",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"2\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:09.657736+00:00",
+    "name": "narrow-en-simulation-visible",
+    "expression": "document.querySelector(\".ff-notification-origin\").textContent.includes(\"SIMULATED\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:09.661309+00:00",
+    "name": "narrow-en-focus-contained",
+    "expression": "document.querySelector(\".ff-notification-inbox\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:09.842723+00:00",
+    "name": "narrow-en-opaque-full-detail",
+    "expression": "document.querySelector(\".ff-notification-body\").textContent.includes(\"No media was rendered.\") && !document.querySelector(\".ff-notification-inbox img\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:09.846637+00:00",
+    "name": "narrow-en-detail-does-not-mark",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"2\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:09.850680+00:00",
+    "name": "narrow-en-layout",
+    "expression": "(()=>{const d=document.querySelector(\".ff-notification-inbox\"),r=d.getBoundingClientRect();return r.left>=-1 && r.right<=innerWidth+1 && r.top>=-1 && r.bottom<=innerHeight+1 && d.scrollWidth<=d.clientWidth+1 && document.documentElement.scrollWidth<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:10.103853+00:00",
+    "name": "narrow-en-unread-filter",
+    "expression": "document.querySelectorAll(\".ff-notification-controls [aria-pressed=true]\")[0].textContent===\"Unread\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:10.299041+00:00",
+    "name": "narrow-en-confirmed-single-count",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:10.303193+00:00",
+    "name": "narrow-en-disappearing-row-focus",
+    "expression": "document.activeElement===document.querySelector(\".ff-notification-controls [aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:10.495468+00:00",
+    "name": "narrow-en-inbox-wide-read-all",
+    "expression": "document.querySelectorAll(\".ff-notification-list li\").length===0",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:10.738326+00:00",
+    "name": "narrow-en-escape-restore",
+    "expression": "!document.querySelector(\".ff-notification-inbox\") && document.activeElement===document.querySelector(\".ff-notification-entry\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:10.914463+00:00",
+    "name": "narrow-en-native-keyboard-reopen",
+    "expression": "document.querySelector(\".ff-notification-inbox\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:11.236295+00:00",
+    "name": "narrow-en-native-tab-contained",
+    "expression": "document.querySelector(\".ff-notification-inbox\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:11.996850+00:00",
+    "name": "desktop-zh-CN-single-entry-unknown-before-query",
+    "expression": "document.querySelectorAll(\".ff-notification-entry\").length===1 && !document.querySelector(\".ff-notification-count\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:12.230970+00:00",
+    "name": "desktop-zh-CN-known-global-count",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"2\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:12.235825+00:00",
+    "name": "desktop-zh-CN-simulation-visible",
+    "expression": "document.querySelector(\".ff-notification-origin\").textContent.includes(\"\\u6a21\\u62df\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:12.240192+00:00",
+    "name": "desktop-zh-CN-focus-contained",
+    "expression": "document.querySelector(\".ff-notification-inbox\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:12.430588+00:00",
+    "name": "desktop-zh-CN-opaque-full-detail",
+    "expression": "document.querySelector(\".ff-notification-body\").textContent.includes(\"No media was rendered.\") && !document.querySelector(\".ff-notification-inbox img\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:12.435697+00:00",
+    "name": "desktop-zh-CN-detail-does-not-mark",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"2\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:12.441689+00:00",
+    "name": "desktop-zh-CN-layout",
+    "expression": "(()=>{const d=document.querySelector(\".ff-notification-inbox\"),r=d.getBoundingClientRect();return r.left>=-1 && r.right<=innerWidth+1 && r.top>=-1 && r.bottom<=innerHeight+1 && d.scrollWidth<=d.clientWidth+1 && document.documentElement.scrollWidth<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:12.805890+00:00",
+    "name": "desktop-zh-CN-unread-filter",
+    "expression": "document.querySelectorAll(\".ff-notification-controls [aria-pressed=true]\")[0].textContent===\"\\u672a\\u8bfb\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:13.010965+00:00",
+    "name": "desktop-zh-CN-confirmed-single-count",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:13.015714+00:00",
+    "name": "desktop-zh-CN-disappearing-row-focus",
+    "expression": "document.activeElement===document.querySelector(\".ff-notification-controls [aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:13.213038+00:00",
+    "name": "desktop-zh-CN-inbox-wide-read-all",
+    "expression": "document.querySelectorAll(\".ff-notification-list li\").length===0",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:13.557018+00:00",
+    "name": "desktop-zh-CN-escape-restore",
+    "expression": "!document.querySelector(\".ff-notification-inbox\") && document.activeElement===document.querySelector(\".ff-notification-entry\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:13.741082+00:00",
+    "name": "desktop-zh-CN-native-keyboard-reopen",
+    "expression": "document.querySelector(\".ff-notification-inbox\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:14.070784+00:00",
+    "name": "desktop-zh-CN-native-tab-contained",
+    "expression": "document.querySelector(\".ff-notification-inbox\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:14.794020+00:00",
+    "name": "narrow-zh-CN-single-entry-unknown-before-query",
+    "expression": "document.querySelectorAll(\".ff-notification-entry\").length===1 && !document.querySelector(\".ff-notification-count\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:15.006837+00:00",
+    "name": "narrow-zh-CN-known-global-count",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"2\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:15.012045+00:00",
+    "name": "narrow-zh-CN-simulation-visible",
+    "expression": "document.querySelector(\".ff-notification-origin\").textContent.includes(\"\\u6a21\\u62df\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:15.016475+00:00",
+    "name": "narrow-zh-CN-focus-contained",
+    "expression": "document.querySelector(\".ff-notification-inbox\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:15.204981+00:00",
+    "name": "narrow-zh-CN-opaque-full-detail",
+    "expression": "document.querySelector(\".ff-notification-body\").textContent.includes(\"No media was rendered.\") && !document.querySelector(\".ff-notification-inbox img\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:15.211513+00:00",
+    "name": "narrow-zh-CN-detail-does-not-mark",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"2\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:15.217826+00:00",
+    "name": "narrow-zh-CN-layout",
+    "expression": "(()=>{const d=document.querySelector(\".ff-notification-inbox\"),r=d.getBoundingClientRect();return r.left>=-1 && r.right<=innerWidth+1 && r.top>=-1 && r.bottom<=innerHeight+1 && d.scrollWidth<=d.clientWidth+1 && document.documentElement.scrollWidth<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:15.500727+00:00",
+    "name": "narrow-zh-CN-unread-filter",
+    "expression": "document.querySelectorAll(\".ff-notification-controls [aria-pressed=true]\")[0].textContent===\"\\u672a\\u8bfb\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:15.709403+00:00",
+    "name": "narrow-zh-CN-confirmed-single-count",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:15.715158+00:00",
+    "name": "narrow-zh-CN-disappearing-row-focus",
+    "expression": "document.activeElement===document.querySelector(\".ff-notification-controls [aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:15.917862+00:00",
+    "name": "narrow-zh-CN-inbox-wide-read-all",
+    "expression": "document.querySelectorAll(\".ff-notification-list li\").length===0",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:16.175597+00:00",
+    "name": "narrow-zh-CN-escape-restore",
+    "expression": "!document.querySelector(\".ff-notification-inbox\") && document.activeElement===document.querySelector(\".ff-notification-entry\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:16.362237+00:00",
+    "name": "narrow-zh-CN-native-keyboard-reopen",
+    "expression": "document.querySelector(\".ff-notification-inbox\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:16.696355+00:00",
+    "name": "narrow-zh-CN-native-tab-contained",
+    "expression": "document.querySelector(\".ff-notification-inbox\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:17.828792+00:00",
+    "name": "read-failure-retains-unread",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"2\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:18.220529+00:00",
+    "name": "read-all-failure-no-false-zero",
+    "expression": "document.querySelector(\".ff-notification-count\")?.textContent===\"2\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:19.109943+00:00",
+    "name": "ordinary-path-unavailable",
+    "expression": "!document.querySelector(\".ff-notification-list\") && !document.querySelector(\".ff-notification-count\") && document.querySelector(\".ff-notification-origin\").textContent.toLowerCase().includes(\"connection unavailable\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:19.959649+00:00",
+    "name": "denied-no-messages",
+    "expression": "!document.querySelector(\".ff-notification-list\") && !document.querySelector(\".ff-notification-count\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:20.826934+00:00",
+    "name": "unknown-no-messages",
+    "expression": "!document.querySelector(\".ff-notification-list\") && !document.querySelector(\".ff-notification-count\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:21.935404+00:00",
+    "name": "safe-fixture-target",
+    "expression": "(()=>{const u=new URL(document.querySelector(\".ff-notification-detail a[href]\").href);return u.origin===location.origin && /^\\/w\\/[^/]+\\/projects\\/[^/]+\\/(overview|review)$/.test(u.pathname)})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:22.507870+00:00",
+    "name": "target-existing-provisional-boundary",
+    "expression": "document.body.textContent.includes(\"Provisional presentation\") && document.body.textContent.includes(\"simulated-project\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+    "VALIDATION_TIMESTAMP": "2026-09-07T13:52:22.660112+00:00",
+    "name": "target-navigation-executed",
+    "expression": "location.pathname===\"/w/simulated-workspace/projects/simulated-project/overview\"",
+    "passed": true,
+    "value": true
+  }
+]

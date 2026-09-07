@@ -1,0 +1,169 @@
+# 行为—源码—执行测试映射
+
+身份来自FULL_UNIT.json的实际assertion records；无名称拆分猜测。受控竞态为单元测试，浏览器输入分别见NATIVE_COMMANDS。架构guard是静态边界/路径分类检查，不能证明真实授权、后端集成或屏幕阅读器行为。
+
+## NotificationInbox.test.tsx — 64 passed
+
+- notification inbox interaction / default entry makes no mount query and explains unknown unread/unavailable, with dialog keyboard restoration — passed
+- notification inbox interaction / opens full text separately from read and related actions; renders unknown types and invalid times neutrally — passed
+- notification inbox interaction / reports partial loaded items separately from the global count and read-all scope — passed
+- notification inbox interaction / requires confirmed reads, suppresses duplicate and read-all overlap synchronously, then re-queries — passed
+- notification inbox interaction / retains unread on failed or invalid receipt undefined without automatic mutation retry — passed
+- notification inbox interaction / retains unread on failed or invalid receipt { error: 'NOT_FOUND' } without automatic mutation retry — passed
+- notification inbox interaction / retains unread on failed or invalid receipt throw without automatic mutation retry — passed
+- notification inbox interaction / retains unread on failed or invalid receipt wrong-id without automatic mutation retry — passed
+- notification inbox interaction / retains unread on failed or invalid receipt denied without automatic mutation retry — passed
+- notification inbox interaction / retains unread on failed or invalid receipt not-found without automatic mutation retry — passed
+- notification inbox interaction / never enables page-only read-all and reconciles inbox-wide partial failure — passed
+- notification inbox interaction / disables unsupported single and read-all operations — passed
+- notification inbox interaction / keeps latest refresh/filter result when older requests finish last — passed
+- notification inbox interaction / does not steal focus on refresh; moves focus only when the focused unread row disappears — passed
+- notification inbox interaction / hides old content synchronously on principalId change and drops old mutation completion — passed
+- notification inbox interaction / hides old content synchronously on tenantId change and drops old mutation completion — passed
+- notification inbox interaction / hides old content synchronously on sessionId change and drops old mutation completion — passed
+- notification inbox interaction / hides old content synchronously on access change and drops old mutation completion — passed
+- notification inbox interaction / invalidates close/unmount work, refetches on reopen and never presents a late read result — passed
+- notification inbox interaction / does not query or expose data for denied access — passed
+- notification inbox interaction / does not query or expose data for unknown access — passed
+- notification inbox interaction / shows empty/error states without substituting simulation after real failure — passed
+- notification inbox interaction / persistently discloses simulation and related navigation cannot grant real app permissions — passed
+- notification inbox interaction / localizes Chinese entry, detail, filters, statuses and simulation while preserving original content — passed
+- notification request ownership regressions / keeps the last concurrent refresh and ignores a late error — passed
+- notification request ownership regressions / reconciles a confirmed mutation against the active filter after an overlapping refresh — passed
+- notification request ownership regressions / suppresses single read during read-all and never restores old data on reconciliation failure — passed
+- notification request ownership regressions / does not steal focus when the user moves away before an unread mutation finishes — passed
+- notification request ownership regressions / drops pending lists on logout, adapter replacement and unmount — passed
+- notification request ownership regressions / treats a loaded unknown count as unknown and keeps read-all explicitly inbox-wide — passed
+- notification request ownership regressions / has exact Tab wrapping and backdrop restoration without detail focus theft — passed
+- notification request ownership regressions / uses existing typed related links for real injected sources while retaining target permission failures — passed
+- notification request ownership regressions / rejects calendar-invalid timestamps instead of rolling them forward — passed
+- bounded review corrections / labels adversarial unknown type __proto__ neutrally — passed
+- bounded review corrections / labels adversarial unknown type constructor neutrally — passed
+- bounded review corrections / labels adversarial unknown type toString neutrally — passed
+- bounded review corrections / reopens while an aborted mutation ignores cancellation; old completion cannot unlock the new mutation — passed
+- bounded review corrections / reconciles disabled-button focus loss, moved-away=false (modeled browser blur) — passed
+- bounded review corrections / reconciles disabled-button focus loss, moved-away=true (modeled browser blur) — passed
+- bounded review corrections / retains a newer successful refresh when an older valid successful snapshot completes last — passed
+- bounded review corrections / drops valid pending lists across principalId transition even after reopening — passed
+- bounded review corrections / drops valid pending lists across tenantId transition even after reopening — passed
+- bounded review corrections / drops valid pending lists across logout transition even after reopening — passed
+- bounded review corrections / serializes single-first overlap before React disables controls — passed
+- bounded review corrections / serializes all-first overlap before React disables controls — passed
+- bounded review corrections / distinguishes loaded unknown from known zero and confirms inbox-wide reads beyond a limited page — passed
+- bounded review corrections / clears confirmation/count if the fresh query after single succeeds with an invalid context — passed
+- bounded review corrections / clears confirmation/count if the fresh query after all succeeds with an invalid context — passed
+- bounded review corrections / does not expose a link for a missing target — passed
+- bounded review corrections / does not expose a link for a denied target — passed
+- bounded review corrections / does not expose a link for a unknown target — passed
+- bounded review corrections / does not expose a link for a unsupported target — passed
+- bounded review corrections / does not expose a link for a cross-tenant target — passed
+- bounded review corrections / does not expose a link for a ambiguous target — passed
+- toolbar read-all focus correction / keeps keyboard focus through disabled toolbar blur and en read-all success — passed
+- toolbar read-all focus correction / keeps keyboard focus through disabled toolbar blur and en read-all failure — passed
+- toolbar read-all focus correction / keeps keyboard focus through disabled toolbar blur and zh-CN read-all success — passed
+- toolbar read-all focus correction / keeps keyboard focus through disabled toolbar blur and zh-CN read-all failure — passed
+- toolbar read-all focus correction / does not reclaim focus after moving away during read-all success, later blur=false — passed
+- toolbar read-all focus correction / does not reclaim focus after moving away during read-all success, later blur=true — passed
+- toolbar read-all focus correction / does not reclaim focus after moving away during read-all failure, later blur=false — passed
+- toolbar read-all focus correction / does not reclaim focus after moving away during read-all failure, later blur=true — passed
+- toolbar read-all focus correction / closes from actual focus while read-all is pending and ignores its late completion — passed
+- toolbar read-all focus correction / does not move another valid control when read-all is activated without toolbar focus — passed
+## adapter.test.ts — 44 passed
+
+- frontend inbox consumption contract (not a server DTO) / preserves opaque content and keeps global unread independent of a bounded list — passed
+- frontend inbox consumption contract (not a server DTO) / rejects malformed or foreign list envelopes 0 — passed
+- frontend inbox consumption contract (not a server DTO) / rejects malformed or foreign list envelopes 1 — passed
+- frontend inbox consumption contract (not a server DTO) / rejects malformed or foreign list envelopes 2 — passed
+- frontend inbox consumption contract (not a server DTO) / rejects malformed or foreign list envelopes 3 — passed
+- frontend inbox consumption contract (not a server DTO) / rejects malformed or foreign list envelopes 4 — passed
+- frontend inbox consumption contract (not a server DTO) / rejects malformed or foreign list envelopes 5 — passed
+- frontend inbox consumption contract (not a server DTO) / rejects malformed or foreign list envelopes 6 — passed
+- frontend inbox consumption contract (not a server DTO) / rejects malformed or foreign list envelopes 7 — passed
+- frontend inbox consumption contract (not a server DTO) / rejects malformed or foreign list envelopes 8 — passed
+- frontend inbox consumption contract (not a server DTO) / rejects malformed or foreign list envelopes 9 — passed
+- frontend inbox consumption contract (not a server DTO) / rejects a read item in an unread query and a global count below loaded unread — passed
+- frontend inbox consumption contract (not a server DTO) / preserves exact denied failures — passed
+- frontend inbox consumption contract (not a server DTO) / preserves exact unavailable failures — passed
+- frontend inbox consumption contract (not a server DTO) / preserves exact error failures — passed
+- frontend inbox consumption contract (not a server DTO) / preserves exact not-found failures — passed
+- frontend inbox consumption contract (not a server DTO) / does not accept HTTP success or wrong item/context as mutation confirmation 0 — passed
+- frontend inbox consumption contract (not a server DTO) / does not accept HTTP success or wrong item/context as mutation confirmation 1 — passed
+- frontend inbox consumption contract (not a server DTO) / does not accept HTTP success or wrong item/context as mutation confirmation 2 — passed
+- frontend inbox consumption contract (not a server DTO) / does not accept HTTP success or wrong item/context as mutation confirmation 3 — passed
+- frontend inbox consumption contract (not a server DTO) / does not accept HTTP success or wrong item/context as mutation confirmation 4 — passed
+- frontend inbox consumption contract (not a server DTO) / does not accept HTTP success or wrong item/context as mutation confirmation 5 — passed
+- frontend inbox consumption contract (not a server DTO) / accepts only exact single-read receipts and explicitly inbox-wide partial results — passed
+- typed related navigation / maps only an explicit existing target and preserves destination authorization — passed
+- typed related navigation / rejects untyped, ambiguous or foreign targets 0 — passed
+- typed related navigation / rejects untyped, ambiguous or foreign targets 1 — passed
+- typed related navigation / rejects untyped, ambiguous or foreign targets 2 — passed
+- typed related navigation / rejects untyped, ambiguous or foreign targets 3 — passed
+- typed related navigation / rejects untyped, ambiguous or foreign targets 4 — passed
+- typed related navigation / rejects untyped, ambiguous or foreign targets 5 — passed
+- typed related navigation / rejects untyped, ambiguous or foreign targets 6 — passed
+- typed related navigation / rejects untyped, ambiguous or foreign targets 7 — passed
+- typed related navigation / rejects untyped, ambiguous or foreign targets 8 — passed
+- typed related navigation / rejects explicit adapter workspace mismatches without filtering the inbox by current project — passed
+- typed related navigation / explains missing target results — passed
+- typed related navigation / explains denied target results — passed
+- typed related navigation / explains unknown target results — passed
+- unavailable and explicit simulation boundaries / never queries HTTP or derives a real inbox from apparent local identities — passed
+- unavailable and explicit simulation boundaries / requires exact localhost opt-in; fixture does not touch auth, storage or transport — passed
+- unavailable and explicit simulation boundaries / fixture scopes read state to its own exact session and never relaxes denied/unknown access — passed
+- simulated related navigation isolation / links only the fixed local fixture overview with explicit simulation opt-in — passed
+- simulated related navigation isolation / cannot route a simulated receipt to another destination 0 — passed
+- simulated related navigation isolation / cannot route a simulated receipt to another destination 1 — passed
+- simulated related navigation isolation / cannot route a simulated receipt to another destination 2 — passed
+## AppShell.test.tsx — 36 passed
+
+- shared application shell / switches Product UI locale from the shell selector — passed
+- shared application shell / allows remote copy replacement without changing protected command availability — passed
+- shared application shell / exposes keyboard-reachable navigation and named panel controls — passed
+- shared application shell / opens a palette whose protected commands remain disabled — passed
+- uses only horizontal Studio and leaves text-entry shortcuts alone — passed
+- real AppShell unavailable descriptions in 'en' / localizes real missing access before and after the fail-closed adapter resolves — passed
+- real AppShell unavailable descriptions in 'en' / localizes the unresolved project explanation — passed
+- real AppShell unavailable descriptions in 'en' / localizes the hidden surface explanation ahead of unresolved project and access reasons — passed
+- real AppShell unavailable descriptions in 'en' / preserves opaque server explanation verbatim: Denied by workspace policy P-42. — passed
+- real AppShell unavailable descriptions in 'en' / preserves opaque server explanation verbatim: This surface is not discoverable at its current maturity. — passed
+- real AppShell unavailable descriptions in 'en' / preserves opaque server explanation verbatim: A server-resolved Project context is required. — passed
+- real AppShell unavailable descriptions in 'en' / preserves opaque server explanation verbatim: Effective access is not available from the server. This action is disabled. — passed
+- real AppShell unavailable descriptions in 'en' / keeps canonical actions disabled with localized copy even for available access — passed
+- real AppShell unavailable descriptions in 'zh-CN' / localizes real missing access before and after the fail-closed adapter resolves — passed
+- real AppShell unavailable descriptions in 'zh-CN' / localizes the unresolved project explanation — passed
+- real AppShell unavailable descriptions in 'zh-CN' / localizes the hidden surface explanation ahead of unresolved project and access reasons — passed
+- real AppShell unavailable descriptions in 'zh-CN' / preserves opaque server explanation verbatim: Denied by workspace policy P-42. — passed
+- real AppShell unavailable descriptions in 'zh-CN' / preserves opaque server explanation verbatim: This surface is not discoverable at its current maturity. — passed
+- real AppShell unavailable descriptions in 'zh-CN' / preserves opaque server explanation verbatim: A server-resolved Project context is required. — passed
+- real AppShell unavailable descriptions in 'zh-CN' / preserves opaque server explanation verbatim: Effective access is not available from the server. This action is disabled. — passed
+- real AppShell unavailable descriptions in 'zh-CN' / keeps canonical actions disabled with localized copy even for available access — passed
+- shared notification entry / has exactly one fail-closed entry on workspace — passed
+- shared notification entry / has exactly one fail-closed entry on project-overview — passed
+- shared notification entry / has exactly one fail-closed entry on nle — passed
+- shared notification entry / has exactly one fail-closed entry on canvas — passed
+- shared notification entry / has exactly one fail-closed entry on storyboard — passed
+- shared notification entry / has exactly one fail-closed entry on screenplay — passed
+- shared notification entry / has exactly one fail-closed entry on agent — passed
+- shared notification entry / has exactly one fail-closed entry on workflow — passed
+- shared notification entry / has exactly one fail-closed entry on recipe — passed
+- shared notification entry / has exactly one fail-closed entry on review — passed
+- shared notification entry / has exactly one fail-closed entry on production — passed
+- shared notification entry / has exactly one fail-closed entry on operations — passed
+- shared notification entry / has exactly one fail-closed entry on admin — passed
+- shared notification entry / has exactly one fail-closed entry on developer — passed
+- shared notification entry / keeps inbox identity independent of project and preserves Selection on opening, detail and read — passed
+## localization.test.tsx — 13 passed
+
+- localization runtime / renders bundled English and Chinese, switches at runtime, formats values, and falls back per key — passed
+- localization runtime / uses an explicit development marker for an unknown key — passed
+- localization runtime / validates required interpolation parameters and ignores extras — passed
+- localization runtime / keeps synchronous bundled copy through remote outage and invalid payloads, then accepts valid remote copy — passed
+- localization runtime / prevents a stale locale request from replacing the current locale — passed
+- localization runtime / loads a fresh-object provider once per unresolved locale and reuses resolved cache entries — passed
+- localization runtime / honors an injected resolved cache without refreshing it — passed
+- localization runtime / rejects validly digested remote keys and parameter contracts that diverge from English — passed
+- catalog contract / provides bundled catalogs through a concrete synchronous provider boundary — passed
+- catalog contract / uses the standard SHA-256 digest algorithm — passed
+- catalog contract / rejects schema and catalog version mismatches, unknown fields, HTML, malformed locale/namespaces/digest/params, and digest tampering — passed
+- catalog contract / contains malformed and prototype-key inputs and permits repeated placeholders under one parameter contract — passed
+- catalog contract / guards every required source key — passed

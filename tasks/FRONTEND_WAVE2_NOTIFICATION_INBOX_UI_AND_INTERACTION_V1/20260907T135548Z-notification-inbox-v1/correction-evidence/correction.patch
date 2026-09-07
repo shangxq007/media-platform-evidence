@@ -1,0 +1,405 @@
+--- before/frontend/src/localization/catalogs.ts
++++ after/frontend/src/localization/catalogs.ts
+@@ -51,7 +51,7 @@
+     'notifications.markRead': message("Mark as read"),
+     'notifications.detail': message("Notification detail"),
+     'notifications.openResource': message("Open related resource"),
+-    'notifications.simulatedTarget': message("Simulated destination only. No real resource was opened."),
++    'notifications.simulatedTarget': message("Opens the simulated project overview. No real account or resource permission is granted."),
+     'notifications.destinationChecks': message("The destination checks current resource access. This notification does not grant permission."),
+     'notifications.unsupportedTarget': message("This related destination is not supported yet."),
+     'notifications.targetMissing': message("The related resource is missing or was deleted."),
+@@ -307,7 +307,7 @@
+     'notifications.markRead': message("标为已读"),
+     'notifications.detail': message("通知详情"),
+     'notifications.openResource': message("打开相关资源"),
+-    'notifications.simulatedTarget': message("仅为模拟目标，未打开真实资源。"),
++    'notifications.simulatedTarget': message("打开模拟项目概览，不授予真实账号或资源权限。"),
+     'notifications.destinationChecks': message("目标页面将检查当前资源访问权限。此通知不授予权限。"),
+     'notifications.unsupportedTarget': message("尚不支持此相关目标。"),
+     'notifications.targetMissing': message("相关资源不存在或已删除。"),
+--- before/frontend/src/product/notifications/adapter.test.ts
++++ after/frontend/src/product/notifications/adapter.test.ts
+@@ -98,3 +98,16 @@
+     }
+   })
+ })
++
++
++describe('simulated related navigation isolation', () => {
++  const target = { kind: 'project-overview', tenantId: 't1', workspaceId: 'simulated-workspace', projectId: 'simulated-project', availability: 'available' }
++  it('links only the fixed local fixture overview with explicit simulation opt-in', () => {
++    expect(resolveTarget(target, context, 'simulated')).toEqual({ href: '/w/simulated-workspace/projects/simulated-project/overview?notificationFixture=1' })
++    expect(resolveTarget(target, context, 'real')).toEqual({ href: '/w/simulated-workspace/projects/simulated-project/overview' })
++    expect(resolveTarget(target, context, 'unavailable')).toEqual({ reason: 'unsupportedTarget' })
++  })
++  it.each([{ projectId: 'real-project' }, { workspaceId: 'real-workspace' }, { kind: 'review' }])('cannot route a simulated receipt to another destination %#', overrides => {
++    expect(resolveTarget({ ...target, ...overrides }, context, 'simulated')).toEqual({ reason: 'unsupportedTarget' })
++  })
++})
+--- before/frontend/src/product/notifications/NotificationInbox.test.tsx
++++ after/frontend/src/product/notifications/NotificationInbox.test.tsx
+@@ -3,7 +3,7 @@
+ import { NotificationInbox } from './NotificationInbox'
+ import { createNotificationFixture } from './fixture'
+ import { LocalizationProvider } from '../../localization'
+-import type { InboxSource, ListRequest, MutationRequest } from './types'
++import { parseList, parseMutation, type InboxSource, type ListRequest, type MutationRequest } from './types'
+ 
+ function deferred<T = unknown>() { let resolve!: (value: T) => void; const promise = new Promise<T>(done => { resolve = done }); return { promise, resolve } }
+ function setup(source = createNotificationFixture(), locale: 'en' | 'zh-CN' = 'en') {
+@@ -160,9 +160,8 @@
+     setup(); await screen.findByRole('listitem', { name: 'Preview is ready' })
+     fireEvent.click(screen.getByRole('button', { name: 'Read notification: Preview is ready' }))
+     expect(screen.getAllByText(/SIMULATED/).length).toBeGreaterThan(0)
+-    fireEvent.click(screen.getByRole('button', { name: 'Open related resource' }))
+-    expect(screen.getByRole('status').textContent).toContain('Simulated destination only. No real resource was opened.')
+-    expect(screen.queryByRole('link', { name: 'Open related resource' })).toBeNull()
++    expect(screen.getByRole('link', { name: 'Open related resource' }).getAttribute('href')).toBe('/w/simulated-workspace/projects/simulated-project/overview?notificationFixture=1')
++    expect(screen.getByText('The destination checks current resource access. This notification does not grant permission.')).toBeTruthy()
+   })
+   it('localizes Chinese entry, detail, filters, statuses and simulation while preserving original content', async () => {
+     setup(createNotificationFixture(), 'zh-CN')
+@@ -271,7 +270,7 @@
+     const source = createNotificationFixture(); source.adapter.origin = 'real'
+     setup(source); await screen.findByRole('listitem', { name: 'Preview is ready' })
+     fireEvent.click(screen.getByRole('button', { name: 'Read notification: Preview is ready' }))
+-    expect(screen.getByRole('link', { name: 'Open related resource' }).getAttribute('href')).toBe('/w/simulated-workspace/projects/simulated-project/review')
++    expect(screen.getByRole('link', { name: 'Open related resource' }).getAttribute('href')).toBe('/w/simulated-workspace/projects/simulated-project/overview')
+     expect(screen.getByText('The destination checks current resource access. This notification does not grant permission.')).toBeTruthy()
+   })
+   it('rejects calendar-invalid timestamps instead of rolling them forward', async () => {
+@@ -286,3 +285,166 @@
+     expect(row().querySelector('time')).toBeNull()
+   })
+ })
++
++
++describe('bounded review corrections', () => {
++  it.each(['__proto__', 'constructor', 'toString'])('labels adversarial unknown type %s neutrally', async type => {
++    const source = createNotificationFixture({ limit: 1 }); const original = source.adapter.list
++    vi.spyOn(source.adapter, 'list').mockImplementation(async (request, signal) => {
++      const page = parseList(await original(request, signal), request)
++      if (page.status !== 'ok') throw new Error('Expected fixture page')
++      return { ...page, items: page.items.map(item => ({ ...item, content: { ...item.content, type } })) }
++    })
++    setup(source); await screen.findByRole('listitem')
++    expect(within(row()).getByText('Other notification')).toBeTruthy()
++  })
++  it('reopens while an aborted mutation ignores cancellation; old completion cannot unlock the new mutation', async () => {
++    const source = createNotificationFixture(); const old = deferred(); const fresh = deferred()
++    let oldRequest!: MutationRequest; let freshRequest!: MutationRequest; let oldSignal!: AbortSignal
++    const read = vi.spyOn(source.adapter, 'markRead')
++      .mockImplementationOnce((req, signal) => { oldRequest = req; oldSignal = signal; return old.promise })
++      .mockImplementationOnce(req => { freshRequest = req; return fresh.promise })
++    const all = vi.spyOn(source.adapter, 'markAllRead'); const list = vi.spyOn(source.adapter, 'list')
++    setup(source); await screen.findByRole('listitem', { name: 'Preview is ready' }); clickRead()
++    fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' })
++    expect(oldSignal.aborted).toBe(true)
++    fireEvent.click(screen.getByRole('button', { name: /Notifications/ }))
++    await screen.findByRole('listitem', { name: 'Preview is ready' })
++    expect((within(row()).getByRole('button', { name: 'Mark as read' }) as HTMLButtonElement).disabled).toBe(false)
++    clickRead(); expect(read).toHaveBeenCalledTimes(2)
++    expect(freshRequest.requestId).not.toBe(oldRequest.requestId)
++    const receipt = { status: 'ok', ...oldRequest, read: true }
++    expect(parseMutation(receipt, oldRequest).status).toBe('ok')
++    await act(async () => old.resolve(receipt))
++    expect(screen.getByRole('status').textContent).toBe('Waiting for read confirmation…')
++    expect(list).toHaveBeenCalledTimes(2)
++    expect((within(row()).getByRole('button', { name: 'Mark as read' }) as HTMLButtonElement).disabled).toBe(true)
++    act(() => { clickRead(); screen.getByRole('button', { name: 'Mark entire inbox as read' }).click() })
++    expect(read).toHaveBeenCalledTimes(2); expect(all).not.toHaveBeenCalled()
++    await act(async () => fresh.resolve({ status: 'denied', context: freshRequest.context, requestId: freshRequest.requestId }))
++    expect(screen.getByRole('status').textContent).toMatch(/denied/i)
++    expect(within(row()).getByText('Unread')).toBeTruthy()
++    expect((within(row()).getByRole('button', { name: 'Mark as read' }) as HTMLButtonElement).disabled).toBe(false)
++  })
++  it.each([false, true])('reconciles disabled-button focus loss, moved-away=%s (modeled browser blur)', async movedAway => {
++    const source = createNotificationFixture(); const pending = deferred(); const original = source.adapter.markRead
++    let request!: MutationRequest
++    vi.spyOn(source.adapter, 'markRead').mockImplementation(req => { request = req; return pending.promise })
++    setup(source); await screen.findByRole('listitem', { name: 'Preview is ready' })
++    fireEvent.click(screen.getByRole('button', { name: 'Unread' }))
++    await screen.findByRole('listitem', { name: 'Preview is ready' })
++    const mark = within(row()).getByRole('button', { name: 'Mark as read' }); mark.focus(); clickRead()
++    // happy-dom does not implement Chromium's disabled-control focus loss.
++    // Explicit blur models that input; Hermes still owns native browser proof.
++    expect((mark as HTMLButtonElement).disabled).toBe(true)
++    // happy-dom also refuses blur() on disabled elements. Temporarily remove
++    // that DOM flag solely to deliver blur, then restore it before resolution.
++    ;(mark as HTMLButtonElement).disabled = false; mark.blur(); (mark as HTMLButtonElement).disabled = true
++    expect(document.activeElement).toBe(document.body)
++    if (movedAway) { const refresh = screen.getByRole('button', { name: 'Refresh notifications' }); refresh.focus(); refresh.blur() }
++    await act(async () => pending.resolve(await original(request, new AbortController().signal)))
++    await waitFor(() => expect(screen.queryByRole('listitem', { name: 'Preview is ready' })).toBeNull())
++    expect(document.activeElement).toBe(movedAway ? document.body : screen.getByRole('button', { name: 'Unread', pressed: true }))
++  })
++  it('retains a newer successful refresh when an older valid successful snapshot completes last', async () => {
++    const source = createNotificationFixture(); const original = source.adapter.list
++    setup(source); await screen.findByRole('listitem', { name: 'Preview is ready' })
++    const old = deferred(); const fresh = deferred(); let oldRequest!: ListRequest; let freshRequest!: ListRequest
++    vi.spyOn(source.adapter, 'list').mockImplementationOnce(req => { oldRequest = req; return old.promise })
++      .mockImplementationOnce(req => { freshRequest = req; return fresh.promise })
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh notifications' }))
++    const oldPage = parseList(await original(oldRequest, new AbortController().signal), oldRequest)
++    const mutation: MutationRequest = { context: source.context, requestId: 'external-read', operation: { kind: 'all', scope: 'inbox' } }
++    expect(parseMutation(await source.adapter.markAllRead(mutation, new AbortController().signal), mutation).status).toBe('ok')
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh notifications' }))
++    const freshPage = parseList(await original(freshRequest, new AbortController().signal), freshRequest)
++    await act(async () => fresh.resolve(freshPage))
++    expect(screen.getByRole('button', { name: 'Notifications · 0 unread in inbox' })).toBeTruthy()
++    await act(async () => old.resolve(oldPage))
++    expect(within(row()).getByText('Read')).toBeTruthy()
++    expect(screen.getByRole('button', { name: 'Notifications · 0 unread in inbox' })).toBeTruthy()
++  })
++  it.each(['principalId', 'tenantId', 'logout'] as const)('drops valid pending lists across %s transition even after reopening', async key => {
++    const source = createNotificationFixture(); const original = source.adapter.list; const pending = deferred()
++    let request!: ListRequest; let signal!: AbortSignal
++    vi.spyOn(source.adapter, 'list').mockImplementationOnce((req, abort) => { request = req; signal = abort; return pending.promise })
++    const view = setup(source)
++    const next: InboxSource = { ...source, context: { ...source.context, ...(key === 'logout' ? { principalId: null, access: 'unknown' as const } : { [key]: 'changed' }) } }
++    view.rerender(<LocalizationProvider initialLocale="en"><NotificationInbox source={next} /></LocalizationProvider>)
++    expect(signal.aborted).toBe(true); expect(screen.queryByRole('dialog')).toBeNull()
++    fireEvent.click(screen.getByRole('button', { name: /Notifications/ }))
++    await waitFor(() => expect(screen.getByRole('status').textContent).toMatch(/denied|unknown/i))
++    const receipt = parseList(await original(request, new AbortController().signal), request)
++    expect(receipt.status).toBe('ok')
++    await act(async () => pending.resolve(receipt))
++    expect(screen.queryByRole('listitem')).toBeNull()
++    expect(screen.getByRole('button', { name: /unread count unknown/ })).toBeTruthy()
++    expect(screen.getByRole('status').textContent).toMatch(/denied|unknown/i)
++  })
++  it.each(['single', 'all'] as const)('serializes %s-first overlap before React disables controls', async first => {
++    const source = createNotificationFixture(); const pending = deferred(); let request!: MutationRequest
++    const method = first === 'single' ? 'markRead' : 'markAllRead'; const original = source.adapter[method]
++    const active = vi.spyOn(source.adapter, method).mockImplementation((req, signal) => { expect(signal.aborted).toBe(false); request = req; return pending.promise })
++    const other = vi.spyOn(source.adapter, first === 'single' ? 'markAllRead' : 'markRead')
++    setup(source); await screen.findByRole('listitem', { name: 'Preview is ready' })
++    const single = within(row()).getByRole('button', { name: 'Mark as read' }); const all = screen.getByRole('button', { name: 'Mark entire inbox as read' })
++    act(() => { (first === 'single' ? single : all).click(); (first === 'single' ? all : single).click() })
++    expect(active).toHaveBeenCalledTimes(1); expect(other).not.toHaveBeenCalled()
++    expect(request.context).toEqual(source.context); expect(request.operation.kind).toBe(first)
++    await act(async () => pending.resolve(await original(request, new AbortController().signal)))
++    await waitFor(() => expect(within(row()).getByText('Read')).toBeTruthy())
++  })
++  it('distinguishes loaded unknown from known zero and confirms inbox-wide reads beyond a limited page', async () => {
++    const source = createNotificationFixture({ limit: 1 }); const original = source.adapter.list
++    const list = vi.spyOn(source.adapter, 'list').mockImplementationOnce(async (request, signal) => {
++      const page = parseList(await original(request, signal), request)
++      return { ...page, unread: { kind: 'unknown' } }
++    })
++    const all = vi.spyOn(source.adapter, 'markAllRead')
++    setup(source); await screen.findByRole('listitem')
++    expect(screen.getByRole('button', { name: /unread count unknown/ })).toBeTruthy()
++    expect(screen.getAllByRole('listitem')).toHaveLength(1)
++    expect((screen.getByRole('button', { name: 'Mark entire inbox as read' }) as HTMLButtonElement).disabled).toBe(false)
++    fireEvent.click(screen.getByRole('button', { name: 'Mark entire inbox as read' }))
++    await screen.findByRole('button', { name: 'Notifications · 0 unread in inbox' })
++    const request = all.mock.calls[0][0]
++    expect(request.operation).toEqual({ kind: 'all', scope: 'inbox' })
++    expect(parseMutation(await all.mock.results[0].value, request)).toMatchObject({ status: 'ok', readIds: ['simulated-1', 'simulated-2'], failures: [] })
++    expect(list).toHaveBeenCalledTimes(2)
++    expect(screen.queryByText('Unread count is unknown. Loaded items are not the inbox total.')).toBeNull()
++    expect((screen.getByRole('button', { name: 'Mark entire inbox as read' }) as HTMLButtonElement).disabled).toBe(true)
++    fireEvent.click(screen.getByRole('button', { name: 'Unread' }))
++    await screen.findByText('No notifications in this snapshot.')
++    expect(screen.queryByRole('listitem')).toBeNull()
++  })
++  it.each(['single', 'all'] as const)('clears confirmation/count if the fresh query after %s succeeds with an invalid context', async kind => {
++    const source = createNotificationFixture(); const method = kind === 'single' ? 'markRead' : 'markAllRead'
++    const mutation = vi.spyOn(source.adapter, method)
++    setup(source); await screen.findByRole('listitem', { name: 'Preview is ready' })
++    vi.spyOn(source.adapter, 'list').mockImplementation(async request => ({ status: 'denied', requestId: request.requestId, context: { ...request.context, tenantId: 'foreign' }, explanation: 'Foreign explanation' }))
++    if (kind === 'single') clickRead(); else fireEvent.click(screen.getByRole('button', { name: 'Mark entire inbox as read' }))
++    await waitFor(() => expect(screen.getByRole('status').textContent).toBe('Notifications could not be loaded. Refresh to try again.'))
++    expect(parseMutation(await mutation.mock.results[0].value, mutation.mock.calls[0][0]).status).toBe('ok')
++    expect(mutation).toHaveBeenCalledTimes(1)
++    expect(screen.queryByRole('listitem')).toBeNull(); expect(screen.queryByText('Foreign explanation')).toBeNull()
++    expect(screen.getByRole('button', { name: /unread count unknown/ })).toBeTruthy()
++  })
++  it.each([
++    ['missing', { availability: 'missing' }, 'The related resource is missing or was deleted.'],
++    ['denied', { availability: 'denied' }, 'Access to the related resource was denied.'],
++    ['unknown', { availability: 'unknown' }, 'Access to the related resource is unknown.'],
++    ['unsupported', { kind: 'other' }, 'This related destination is not supported yet.'],
++    ['cross-tenant', { tenantId: 'foreign' }, 'This related destination is not supported yet.'],
++    ['ambiguous', { projectId: ['one', 'two'] }, 'This related destination is not supported yet.'],
++  ])('does not expose a link for a %s target', async (_name, overrides, explanation) => {
++    const source = createNotificationFixture({ limit: 1 }); const original = source.adapter.list
++    vi.spyOn(source.adapter, 'list').mockImplementation(async (request, signal) => {
++      const page = parseList(await original(request, signal), request)
++      if (page.status !== 'ok') throw new Error('Expected fixture page')
++      return { ...page, items: page.items.map(item => ({ ...item, target: { ...(item.target as object), ...(overrides as object) } })) }
++    })
++    setup(source); fireEvent.click(await screen.findByRole('button', { name: 'Read notification: Preview is ready' }))
++    expect(screen.queryByRole('link', { name: 'Open related resource' })).toBeNull()
++    expect(within(screen.getByRole('region', { name: 'Notification detail' })).getByText(explanation as string)).toBeTruthy()
++  })
++})
+--- before/frontend/src/product/notifications/types.ts
++++ after/frontend/src/product/notifications/types.ts
+@@ -87,14 +87,20 @@
+ }).strict()
+ export type InboxTarget = z.infer<typeof targetSchema>
+ export type TargetResult = { href: string } | { reason: 'unsupportedTarget' | 'targetMissing' | 'targetDenied' | 'targetUnknown' }
+-export function resolveTarget(input: unknown, context: InboxContext): TargetResult {
++export function resolveTarget(input: unknown, context: InboxContext, origin: InboxAdapter['origin'] = 'real'): TargetResult {
+   const parsed = targetSchema.safeParse(input)
+-  if (!parsed.success || context.access !== 'allowed' || !context.principalId || parsed.data.tenantId !== context.tenantId
++  if (!parsed.success || origin === 'unavailable' || context.access !== 'allowed' || !context.principalId || parsed.data.tenantId !== context.tenantId
+     || (context.workspaceId !== undefined && parsed.data.workspaceId !== context.workspaceId)) return { reason: 'unsupportedTarget' }
+   const target = parsed.data
+   if (target.availability === 'missing') return { reason: 'targetMissing' }
+   if (target.availability === 'denied') return { reason: 'targetDenied' }
+   if (target.availability === 'unknown') return { reason: 'targetUnknown' }
++  // Simulation can open exactly the existing provisional overview. No fixture
++  // payload can route to a real identity or turn the destination's checks off.
++  if (origin === 'simulated') {
++    if (target.kind !== 'project-overview' || target.workspaceId !== 'simulated-workspace' || target.projectId !== 'simulated-project') return { reason: 'unsupportedTarget' }
++    return { href: '/w/simulated-workspace/projects/simulated-project/overview?notificationFixture=1' }
++  }
+   return { href: `/w/${encodeURIComponent(target.workspaceId)}/projects/${encodeURIComponent(target.projectId)}/${target.kind === 'review' ? 'review' : 'overview'}` }
+ }
+ 
+--- before/frontend/src/product/notifications/fixture.ts
++++ after/frontend/src/product/notifications/fixture.ts
+@@ -13,7 +13,7 @@
+   }
+   let items: InboxItem[] = options.empty ? [] : [
+     { id: 'simulated-1', content: { title: 'Preview is ready', body: 'A simulated preview is ready.\nNo media was rendered.', type: 'render.completed', createdAt: '2026-09-07T10:00:00Z' }, read: false,
+-      target: { kind: 'review', tenantId: context.tenantId, workspaceId: 'simulated-workspace', projectId: 'simulated-project', availability: 'available' } },
++      target: { kind: 'project-overview', tenantId: context.tenantId, workspaceId: 'simulated-workspace', projectId: 'simulated-project', availability: 'available' } },
+     { id: 'simulated-2', content: { title: '<img src=x onerror=alert(1)>', body: 'Original opaque text 原文', type: 'future.event', createdAt: 'invalid' }, read: false, target: { kind: 'unknown' } },
+     { id: 'simulated-3', content: { title: 'Earlier update', body: 'This in-memory notification was already read.', type: 'system.announcement', createdAt: null }, read: true },
+   ]
+--- before/frontend/src/product/notifications/NotificationInbox.tsx
++++ after/frontend/src/product/notifications/NotificationInbox.tsx
+@@ -43,7 +43,8 @@
+   const sequence = useRef(0)
+   const queryController = useRef<AbortController | null>(null)
+   const mutationController = useRef<AbortController | null>(null)
+-  const mutationLock = useRef(false)
++  const mutationOwner = useRef<AbortController | null>(null)
++  const focusedRow = useRef<{ element: HTMLElement; id: string } | null>(null)
+   const filterButton = useRef<HTMLButtonElement>(null)
+   const focusAfter = useRef<HTMLElement | null>(null)
+   const latestPage = useRef<InboxPage | null>(null)
+@@ -53,7 +54,21 @@
+ 
+   useLayoutEffect(() => {
+     live.current = true
+-    return () => { live.current = false; isOpen.current = false; generation.current += 1; queryController.current?.abort(); mutationController.current?.abort() }
++    // Disabling a focused button may return native focus to body. Preserve its
++    // row intent, but permanently cancel it when the user focuses/clicks elsewhere.
++    const cancelMovedFocus = (event: Event) => {
++      const intent = focusedRow.current
++      if (intent && event.target !== intent.element && (event.type === 'pointerdown' || event.target !== document.body)) focusedRow.current = null
++    }
++    document.addEventListener('focusin', cancelMovedFocus)
++    document.addEventListener('pointerdown', cancelMovedFocus)
++    return () => {
++      live.current = false; isOpen.current = false; generation.current += 1
++      queryController.current?.abort(); mutationController.current?.abort()
++      mutationOwner.current = null; focusedRow.current = null
++      document.removeEventListener('focusin', cancelMovedFocus)
++      document.removeEventListener('pointerdown', cancelMovedFocus)
++    }
+   }, [])
+   useLayoutEffect(() => {
+     const previous = focusAfter.current
+@@ -77,8 +92,11 @@
+         setNotice({ key: result.status === 'not-found' ? 'notFound' : result.status, explanation: result.explanation })
+         return
+       }
+-      const focused = document.activeElement as HTMLElement | null
++      const active = document.activeElement as HTMLElement | null
++      const intent = focusedRow.current
++      const focused = active === document.body && intent ? intent.element : active
+       const focusedId = focused?.closest<HTMLElement>('[data-notification-id]')?.dataset.notificationId
++      focusedRow.current = null
+       if (nextFilter === 'unread' && focusedId && !result.items.some(item => item.id === focusedId)) focusAfter.current = focused
+       latestPage.current = result; setPage(result); setStatus('ready')
+       setDetailId(id => result.items.some(item => item.id === id) ? id : null)
+@@ -98,28 +116,34 @@
+   function close() {
+     isOpen.current = false; generation.current += 1
+     queryController.current?.abort(); mutationController.current?.abort()
++    mutationOwner.current = null; focusedRow.current = null; focusAfter.current = null; setBusy(false)
+     setOpen(false); setPage(null); latestPage.current = null; setDetailId(null); setStatus('idle'); setNotice(null)
+   }
+   function changeFilter(next: InboxFilter) {
+     if (activeFilter.current === next) return
++    focusedRow.current = null
+     activeFilter.current = next; setFilter(next); setPage(null); latestPage.current = null; setDetailId(null)
+     void query(next)
+   }
+   async function mark(operation: MutationRequest['operation']) {
+     const currentPage = latestPage.current
+     const supported = operation.kind === 'single' ? source.adapter.capabilities.singleRead && source.adapter.markRead : source.adapter.capabilities.readAll === 'inbox' && source.adapter.markAllRead
+-    if (!allowed || !isOpen.current || mutationLock.current || status !== 'ready' || !currentPage || !supported) return
++    if (!allowed || !isOpen.current || mutationOwner.current || status !== 'ready' || !currentPage || !supported) return
+     if (operation.kind === 'single' && !currentPage.items.some(item => item.id === operation.id && !item.read)) return
+     // One synchronous lock serializes single and inbox-wide changes, including
+     // double activation before React commits disabled controls.
+-    mutationLock.current = true; setBusy(true); setNotice({ key: 'marking' })
++    const focused = document.activeElement as HTMLElement | null
++    const focusedId = focused?.closest<HTMLElement>('[data-notification-id]')?.dataset.notificationId
++    focusedRow.current = focused && focusedId ? { element: focused, id: focusedId } : null
++    const controller = new AbortController()
++    mutationOwner.current = controller; mutationController.current = controller
++    setBusy(true); setNotice({ key: 'marking' })
+     const current = ++generation.current
+     queryController.current?.abort()
+-    const controller = new AbortController(); mutationController.current = controller
+     const request: MutationRequest = { context: source.context, requestId: `read-${++sequence.current}`, operation }
+     try {
+       const result = parseMutation(await supported.call(source.adapter, request, controller.signal), request)
+-      if (!live.current || !isOpen.current || controller.signal.aborted) return
++      if (!live.current || !isOpen.current || controller.signal.aborted || mutationOwner.current !== controller) return
+       if (result.status === 'ok' || result.status === 'partial') {
+         // Never patch/decrement locally. Refresh the active filter, even if a
+         // refresh/filter request overlapped the mutation, to reconcile its result.
+@@ -130,8 +154,12 @@
+     } catch {
+       if (live.current && isOpen.current && !controller.signal.aborted && current === generation.current) setNotice({ key: 'readError' })
+     } finally {
+-      mutationLock.current = false
+-      if (live.current) setBusy(false)
++      // Only this operation can release its lock. Close retires ownership even
++      // if the adapter ignores abort; its late finally cannot unlock a new read.
++      if (mutationOwner.current === controller) {
++        mutationOwner.current = null
++        if (live.current) setBusy(false)
++      }
+     }
+   }
+ 
+@@ -142,7 +170,7 @@
+   const activeStatus = !allowed ? initialStatus : status
+   const statusKey = !allowed ? initialStatus : status === 'loading' ? 'loading' : notice?.key ?? (status === 'ready' ? (visiblePage?.items.length ? 'loaded' : 'empty') : status === 'idle' ? 'loading' : status)
+   const readDisabled = !allowed || busy || status !== 'ready'
+-  const target = detail ? resolveTarget(detail.target, source.context) : null
++  const target = detail ? resolveTarget(detail.target, source.context, source.adapter.origin) : null
+   function timestamp(item: InboxItem) {
+     const value = item.content.createdAt
+     const date = notificationDate(value)
+@@ -150,7 +178,7 @@
+   }
+   function typeLabel(item: InboxItem) {
+     const keys: Record<string, string> = { 'render.completed': 'typeRender', 'review.requested': 'typeReview', 'system.announcement': 'typeAnnouncement' }
+-    return text(keys[item.content.type] ?? 'typeOther')
++    return text(Object.prototype.hasOwnProperty.call(keys, item.content.type) ? keys[item.content.type] : 'typeOther')
+   }
+   return <>
+     <button type="button" className="ff-notification-entry" aria-label={entryLabel} aria-describedby={source.adapter.origin === 'simulated' ? originId : undefined} aria-haspopup="dialog" aria-expanded={open} onClick={() => { isOpen.current = true; setOpen(true) }}>
+@@ -183,9 +211,7 @@
+       </> : null}
+       {detail ? <section className="ff-notification-detail" aria-label={text('detail')} data-notification-id={detail.id}>
+         <h3>{detail.content.title || text('untitled')}</h3><p className="ff-notification-body">{detail.content.body}</p>
+-        {target && 'href' in target ? source.adapter.origin === 'simulated'
+-          ? <button type="button" onClick={() => setNotice({ key: 'simulatedTarget' })}>{text('openResource')}</button>
+-          : <><p>{text('destinationChecks')}</p><a href={target.href}>{text('openResource')}</a></>
++        {target && 'href' in target ? <>{source.adapter.origin === 'simulated' ? <p>{text('simulatedTarget')}</p> : null}<p>{text('destinationChecks')}</p><a href={target.href}>{text('openResource')}</a></>
+           : <p>{text(target && 'reason' in target ? target.reason : 'unsupportedTarget')}</p>}
+       </section> : null}
+     </InteractionDialog> : null}

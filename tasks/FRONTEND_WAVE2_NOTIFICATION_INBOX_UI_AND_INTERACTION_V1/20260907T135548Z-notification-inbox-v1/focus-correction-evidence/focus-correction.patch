@@ -1,0 +1,131 @@
+--- a/frontend/src/product/notifications/NotificationInbox.tsx
++++ b/frontend/src/product/notifications/NotificationInbox.tsx
+@@ -46,6 +46,7 @@
+   const mutationOwner = useRef<AbortController | null>(null)
+   const focusedRow = useRef<{ element: HTMLElement; id: string } | null>(null)
+   const filterButton = useRef<HTMLButtonElement>(null)
++  const readAllButton = useRef<HTMLButtonElement>(null)
+   const focusAfter = useRef<HTMLElement | null>(null)
+   const latestPage = useRef<InboxPage | null>(null)
+   const allowed = canQuery(source)
+@@ -137,6 +138,10 @@
+     focusedRow.current = focused && focusedId ? { element: focused, id: focusedId } : null
+     const controller = new AbortController()
+     mutationOwner.current = controller; mutationController.current = controller
++    // Native disable can blur the toolbar to BODY, outside the dialog's keys.
++    // Transfer only its current focus before disabling, to a stable control.
++    // No deferred restoration can reclaim focus after the user moves away.
++    if (focused === readAllButton.current) filterButton.current?.focus()
+     setBusy(true); setNotice({ key: 'marking' })
+     const current = ++generation.current
+     queryController.current?.abort()
+@@ -193,7 +198,7 @@
+           {(['all', 'unread'] as const).map(value => <button key={value} ref={value === filter ? filterButton : undefined} type="button" aria-pressed={filter === value} onClick={() => changeFilter(value)}>{text(value)}</button>)}
+         </div>
+         <button type="button" disabled={!allowed} onClick={() => void query(activeFilter.current)}>{text('refresh')}</button>
+-        <button type="button" disabled={readDisabled || !source.adapter.markAllRead || source.adapter.capabilities.readAll !== 'inbox' || (count === 0)} onClick={() => void mark({ kind: 'all', scope: 'inbox' })}>{text('readAll')}</button>
++        <button ref={readAllButton} type="button" disabled={readDisabled || !source.adapter.markAllRead || source.adapter.capabilities.readAll !== 'inbox' || (count === 0)} onClick={() => void mark({ kind: 'all', scope: 'inbox' })}>{text('readAll')}</button>
+       </div>
+       {source.adapter.capabilities.readAll !== 'inbox' ? <p>{text('readAllUnsupported')}</p> : <p>{text('readAllScope')}</p>}
+       {!source.adapter.capabilities.singleRead ? <p>{text('singleUnsupported')}</p> : null}
+--- a/frontend/src/product/notifications/NotificationInbox.test.tsx
++++ b/frontend/src/product/notifications/NotificationInbox.test.tsx
+@@ -448,3 +448,98 @@
+     expect(within(screen.getByRole('region', { name: 'Notification detail' })).getByText(explanation as string)).toBeTruthy()
+   })
+ })
++
++
++describe('toolbar read-all focus correction', () => {
++  function modelDisabledToolbarBlur(button: HTMLButtonElement) {
++    expect(button.disabled).toBe(true)
++    // happy-dom neither blurs on disable nor permits blur() while disabled.
++    // Model Chromium's focus loss only if the toolbar still owns focus. A
++    // synchronous transfer to a stable control must survive this modeled input.
++    if (document.activeElement === button) {
++      button.disabled = false; button.blur(); button.disabled = true
++    }
++  }
++  async function openUnread(source: InboxSource, locale: 'en' | 'zh-CN' = 'en') {
++    render(<LocalizationProvider initialLocale={locale}><NotificationInbox source={source} /></LocalizationProvider>)
++    const entry = screen.getByRole('button', { name: locale === 'en' ? /Notifications/ : /通知/ })
++    entry.focus(); fireEvent.click(entry)
++    await screen.findByRole('listitem', { name: 'Preview is ready' })
++    const filter = screen.getByRole('button', { name: locale === 'en' ? 'Unread' : '未读' })
++    filter.focus(); fireEvent.click(filter)
++    await screen.findByRole('listitem', { name: 'Preview is ready' })
++    const toolbar = screen.getByRole('button', { name: locale === 'en' ? 'Mark entire inbox as read' : '将整个收件箱标为已读' }) as HTMLButtonElement
++    return { entry, filter, toolbar }
++  }
++  it.each([
++    ['en', 'success'], ['en', 'failure'], ['zh-CN', 'success'], ['zh-CN', 'failure'],
++  ] as const)('keeps keyboard focus through disabled toolbar blur and %s read-all %s', async (locale, outcome) => {
++    const source = createNotificationFixture(); const pending = deferred(); const reconciliation = deferred()
++    const originalRead = source.adapter.markAllRead; const originalList = source.adapter.list
++    let request!: MutationRequest; let listRequest!: ListRequest
++    const mutation = vi.spyOn(source.adapter, 'markAllRead').mockImplementation(req => { request = req; return pending.promise })
++    const { entry, filter, toolbar } = await openUnread(source, locale)
++    const list = vi.spyOn(source.adapter, 'list').mockImplementation(req => { listRequest = req; return reconciliation.promise })
++    toolbar.focus(); fireEvent.click(toolbar); modelDisabledToolbarBlur(toolbar)
++    expect(document.activeElement).toBe(filter)
++    expect(screen.getAllByRole('listitem')).toHaveLength(2)
++    if (outcome === 'success') {
++      await act(async () => pending.resolve(await originalRead(request, new AbortController().signal)))
++      expect(list).toHaveBeenCalledTimes(1)
++      expect(toolbar.disabled).toBe(true)
++      expect(document.activeElement).toBe(filter)
++      await act(async () => reconciliation.resolve(await originalList(listRequest, new AbortController().signal)))
++      expect(screen.queryByRole('listitem')).toBeNull()
++      expect(screen.getByRole('button', { name: locale === 'en' ? 'Notifications · 0 unread in inbox' : '通知 · 收件箱有 0 条未读' })).toBe(entry)
++      expect(toolbar.disabled).toBe(true)
++    } else {
++      await act(async () => pending.resolve({ status: 'error', context: request.context, requestId: request.requestId }))
++      expect(list).not.toHaveBeenCalled()
++      expect(screen.getAllByRole('listitem')).toHaveLength(2)
++      expect(screen.getByRole('button', { name: locale === 'en' ? 'Notifications · 2 unread in inbox' : '通知 · 收件箱有 2 条未读' })).toBe(entry)
++      expect(toolbar.disabled).toBe(false)
++    }
++    expect(mutation).toHaveBeenCalledTimes(1)
++    expect(document.activeElement).toBe(filter)
++    // Dispatch on actual focus: targeting the dialog directly hides BODY loss.
++    fireEvent.keyDown(document.activeElement!, { key: 'Escape', keyCode: 27 })
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(document.activeElement).toBe(entry)
++  })
++  it.each([
++    ['success', false], ['success', true], ['failure', false], ['failure', true],
++  ] as const)('does not reclaim focus after moving away during read-all %s, later blur=%s', async (outcome, blur) => {
++    const source = createNotificationFixture(); const pending = deferred(); const original = source.adapter.markAllRead
++    let request!: MutationRequest
++    vi.spyOn(source.adapter, 'markAllRead').mockImplementation(req => { request = req; return pending.promise })
++    const { toolbar } = await openUnread(source)
++    toolbar.focus(); fireEvent.click(toolbar); modelDisabledToolbarBlur(toolbar)
++    const refresh = screen.getByRole('button', { name: 'Refresh notifications' })
++    refresh.focus(); if (blur) refresh.blur()
++    await act(async () => pending.resolve(outcome === 'success' ? await original(request, new AbortController().signal) : { status: 'error', context: request.context, requestId: request.requestId }))
++    expect(screen.getByRole('button', { name: outcome === 'success' ? 'Notifications · 0 unread in inbox' : 'Notifications · 2 unread in inbox' })).toBeTruthy()
++    expect(document.activeElement).toBe(blur ? document.body : refresh)
++  })
++  it('closes from actual focus while read-all is pending and ignores its late completion', async () => {
++    const source = createNotificationFixture(); const pending = deferred(); let request!: MutationRequest; let signal!: AbortSignal
++    vi.spyOn(source.adapter, 'markAllRead').mockImplementation((req, abort) => { request = req; signal = abort; return pending.promise })
++    const { entry, toolbar } = await openUnread(source)
++    toolbar.focus(); fireEvent.click(toolbar); modelDisabledToolbarBlur(toolbar)
++    fireEvent.keyDown(document.activeElement!, { key: 'Escape', keyCode: 27 })
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(document.activeElement).toBe(entry); expect(signal.aborted).toBe(true)
++    await act(async () => pending.resolve({ status: 'error', context: request.context, requestId: request.requestId }))
++    expect(screen.queryByRole('dialog')).toBeNull(); expect(document.activeElement).toBe(entry)
++  })
++  it('does not move another valid control when read-all is activated without toolbar focus', async () => {
++    const source = createNotificationFixture(); const pending = deferred(); const original = source.adapter.markAllRead
++    let request!: MutationRequest
++    vi.spyOn(source.adapter, 'markAllRead').mockImplementation(req => { request = req; return pending.promise })
++    const { toolbar } = await openUnread(source)
++    const refresh = screen.getByRole('button', { name: 'Refresh notifications' }); refresh.focus()
++    fireEvent.click(toolbar); modelDisabledToolbarBlur(toolbar)
++    expect(document.activeElement).toBe(refresh)
++    await act(async () => pending.resolve(await original(request, new AbortController().signal)))
++    expect(screen.queryByRole('listitem')).toBeNull(); expect(document.activeElement).toBe(refresh)
++  })
++})

@@ -1,0 +1,39 @@
+{
+  "name": "build-preflight",
+  "command": [
+    "node",
+    "--input-type=module",
+    "-e",
+    "import {resolveConfig} from 'vite';import path from 'node:path';const c=await resolveConfig({configLoader:'bundle'},'build');console.log(JSON.stringify({root:c.root,outDir:c.build.outDir,resolvedDefaultOutput:path.resolve(c.root,c.build.outDir),plannedExternalOutput:\"/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1/build\",emptyOutDir:false},null,2));"
+  ],
+  "containment": [
+    "bwrap",
+    "--die-with-parent",
+    "--ro-bind",
+    "/",
+    "/",
+    "--bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1",
+    "--ro-bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1/snapshot",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1/snapshot",
+    "--ro-bind",
+    "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules",
+    "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules",
+    "--proc",
+    "/proc",
+    "--dev",
+    "/dev",
+    "--tmpfs",
+    "/tmp",
+    "--chdir",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1/snapshot/frontend",
+    "--bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1/vite-temp",
+    "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/.vite-temp",
+    "--"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.7170228958129883
+}
