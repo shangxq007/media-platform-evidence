@@ -1,0 +1,34 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:54:13.683636+00:00",
+    "name": "desktop-en-explicit-empty-start",
+    "expression": "[...document.querySelectorAll(\".ff-review-compare-controls select\")].every(e=>e.value===\"\") && document.querySelector(\".ff-review-compare-controls button\").disabled",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:54:15.198615+00:00",
+    "name": "desktop-en-native-ordered-selection",
+    "expression": "(()=>{const s=document.querySelectorAll(\".ff-review-compare-controls select\");return s[0].value.startsWith(\"review-1-\") && s[1].value.startsWith(\"review-2-\") && !document.querySelector(\".ff-review-compare-controls button\").disabled})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:54:15.359421+00:00",
+    "name": "desktop-en-tab-to-compare-visible-focus",
+    "expression": "document.activeElement===document.querySelector(\".ff-review-compare-controls button\") && document.activeElement.matches(\":focus-visible\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:54:15.537723+00:00",
+    "name": "desktop-en-result-and-focus-stable",
+    "expression": "document.body.textContent.includes(\"fixture-added-clip-\") && document.activeElement===document.querySelector(\".ff-review-compare-controls button\")",
+    "passed": false,
+    "value": false
+  }
+]

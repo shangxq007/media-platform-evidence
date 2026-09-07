@@ -1,0 +1,1151 @@
+diff --git a/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md b/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+index b4b7d720..d1c80d23 100644
+--- a/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
++++ b/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+@@ -283,3 +283,71 @@ F2 should consume the existing scoped APIs through one typed `platform-client`,
+ then open separately authorized backend tasks only for ledger entries that block
+ the selected vertical slice. Start with FB-GAP-001 and FB-GAP-002 because they
+ govern the shared shell and all later surfaces.
++
++
++## Wave2 notification integration observations — append-forward, source-only
++
++Task `FRONTEND_WAVE2_FOCUSED_REVIEW_UX_CONVERGENCE_V1` authorizes this bounded
++addition. Historical F0/F1 entries and their status remain unchanged. These
++entries compare frontend implementation tree `43038f740997d0ebb3a8c67f293da7edab563fdb`
++with backend Git-object reference `86d6aef94fd5e58da552e97c11473cff6eca734e`
++(the observed local origin/main, not a claim of newest remote or parallel backend candidate).
++No active backend worktree, notification endpoint, provider test, browser permission
++or notification credential was accessed. Full source/blob/line provenance is in
++the external task package `inventory/NOTIFICATION_CAPABILITY_INVENTORY.md`.
++
++These are four linked consumer requirements, not eight separate work items.
++The corresponding detailed rows are in
++`frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv`.
++No entry authorizes backend or notification UI implementation; all are
++**nonblocking for this focused read-only Review acceptance**. Existing
++FB-GAP-002 governs shared authorization expectations. Missing frontend pages
++alone are not classified as missing backend capabilities.
++
++### FB-GAP-010 — Read a durable user inbox, unread count, and mark one/all notifications read
++
++| Field | Source-confirmed observation / integration requirement |
++|---|---|
++| Consumer record | UXW2-NTF-001 |
++| Existing contract and exact gap | Axios /api/v1 wrappers expect paginated items,total,page,size,unreadCount; reference /api/me/notifications/inbox accepts limit and returns List; read-all service has no inspected Controller mapping; single-read returns ordinary error map on missing ID; legacy /me/notifications is a stub |
++| Desired bounded alignment | One accepted scoped inbox request/envelope/read-state contract; align existing frontend wrapper rather than invent pagination totals |
++| Permissions / failure behavior | Authenticated principal-owned inbox with explicit tenant isolation, exact read outcomes and supported traversal/limit; reject missing/denied without fake success |
++| Mock boundary | No notification mock or UI added; source-only reference, Review mocks are unrelated |
++| Integration acceptance | Future contract/TCP tests bind exact client/server paths including prefix, envelope, params, unread/read-all behavior, missing/denied outcomes and cross-user/tenant isolation |
++| Blocking disposition | BLOCKS_NOTIFICATION_INBOX; nonblocking for focused Review; no backend lane assignment or implementation authorization |
++
++### FB-GAP-011 — Configure notification subscriptions, preferences, and channel bindings
++
++| Field | Source-confirmed observation / integration requirement |
++|---|---|
++| Consumer record | UXW2-NTF-002 |
++| Existing contract and exact gap | Binding create returns three fields not full binding; subscription update returns three fields and defaults can contain null; batch returns List not results/errors; preference GET/PUT omit declared identities/full fields and Partial updates can default flags to true |
++| Desired bounded alignment | Align existing preference/subscription/binding DTOs and update/partial-failure semantics before any UI integration |
++| Permissions / failure behavior | Principal-scoped current-user settings; backend controls critical-event rules and channel validation; defined non-disclosing denied/validation/missing outcomes; public DTO must not leak destination secrets |
++| Mock boundary | No settings UI or transport calls; design/contract candidate remains candidate |
++| Integration acceptance | Future contract tests verify every request/response/nullability/update-preservation rule, batch failure semantics, critical restrictions, destination redaction and ownership; no live delivery in frontend mocks |
++| Blocking disposition | BLOCKS_NOTIFICATION_SETTINGS; nonblocking for focused Review; no backend lane assignment or implementation authorization |
++
++### FB-GAP-012 — Inspect/configure notification event definitions and delivery records; prepare explicit administrative notification input
++
++| Field | Source-confirmed observation / integration requirement |
++|---|---|
++| Consumer record | UXW2-NTF-003 |
++| Existing contract and exact gap | Frontend event-definitions/delivery-logs/providers differ from backend events/deliveries/provider-status; list/object/metrics envelopes differ; detail ignores notificationId; publishEvent sends type/tenantId but backend requires eventType/subjectId |
++| Desired bounded alignment | Accepted admin event/delivery queries and exact target/publish input contract; no speculative announcement workflow |
++| Permissions / failure behavior | Server-enforced administrator and tenant/resource scope; explicit filtered IDs and pagination capabilities; preserve typed forbidden/not-found/unsupported failures; existing FB-GAP-002 applies |
++| Mock boundary | No admin notification UI or calls added; absent UI alone is not an endpoint gap |
++| Integration acceptance | Future contract and authorization tests resolve route/payload/envelope differences, exact-ID detail filtering, non-disclosing cross-tenant denial and explicit target validation; separate authorization for announcements/targeting |
++| Blocking disposition | BLOCKS_NOTIFICATION_ADMIN_INTEGRATION; nonblocking for focused Review; no backend lane assignment or implementation authorization |
++
++### FB-GAP-013 — Receive a real email/SMS/webhook notification or verify/test/retry a bound channel
++
++| Field | Source-confirmed observation / integration requirement |
++|---|---|
++| Consumer record | UXW2-NTF-004 |
++| Existing contract and exact gap | Email/SMS/Webhook providers return SENT without external transport; binding verify writes VERIFIED without challenge; test only checks/audits and Controller says TEST_SENT; retry only returns RETRY_QUEUED; Novu transport code exists but live integration unestablished |
++| Desired bounded alignment | Truthful simulated/accepted/sent/delivered/failed boundaries and separately authorized real delivery/verification/retry integration |
++| Permissions / failure behavior | Authenticated scoped verified destination and explicit delivery/test authority; no browser/Agent escalation; real failures cannot become empty or success; no secret exposure |
++| Mock boundary | Local provider SENT and persisted MOCK are simulation, not external delivery; this task sends nothing |
++| Integration acceptance | Future backend-owned controlled integration validates actual transport/challenge/attempt and readback, authorization, failure/retry semantics, destination safety and simulated labeling; actual external tests require separate consent |
++| Blocking disposition | BLOCKS_REAL_NOTIFICATION_DELIVERY; nonblocking for focused Review; no backend lane assignment or implementation authorization |
+diff --git a/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv b/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+index bd9c7e5d..fc54e516 100644
+--- a/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
++++ b/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+@@ -6,3 +6,7 @@ UXW1-004	Watch and scrub an actual timeline	No decoded media access or authorita
+ UXW1-005	Use overview, visual changes, conversation, checks or merge in Review	Only history and server semantic comparison are integrated	Scoped review projections and separately authorized merge command	Typed revision-pair review projections and capability/access reasons; any future merge follows a canonical server-owned preview/confirm contract	BLOCKS_EXTENDED_REVIEW	NO	YES	Unavailable section states and disabled merge action in production; existing scripted history/compare gateways in tests only	Unavailable review tabs should not imply fabricated discussion, checks or merge authority	Empty/loading/error states are defined per projection; revision-pair scope is validated; no client merge or inferred HEAD; authorization is enforced by server	PROPOSED
+ UXW1-006	Discover and prepare a multi-clip adjustment	The Wave 1 two-clip selection is synthetic and has no operation discovery or preparation contract	Authorized action discovery plus operation prepare and preview	Revision-scoped selected-object references, available actions, validation warnings and a server-owned preview result; no client audio-gain authority	BLOCKS_FUTURE_MULTI_CLIP_PREPARE	NO	YES	The UI names Adjust audio as unavailable and the Chinese two-clip request produces a synthetic proposal only	Creators need an honest route from selection to a reviewable change	Discovery rejects stale, unauthorized or incompatible selected objects; preview identifies exact targets and warnings before any execute request	PROPOSED
+ UXW1-007	Execute a prepared creator change	No real authorization or canonical execution evidence is connected to Agent or the synthetic fixtures	Authorized operation execute with authoritative readback	Prepared-operation token or equivalent server-owned reference, explicit confirmation, authorization outcome and revision readback; client does not infer permissions	BLOCKS_FUTURE_CREATOR_EXECUTION	NO	YES	Canonical Apply is disabled with a creator-first explanation; existing Add Media Clip gateway remains its own established path	A proposal must not look executable without a server decision	Execute is accepted only after server preview and confirmation; stale context is rejected; final revision is read back authoritatively	PROPOSED
++UXW2-NTF-001	Read a durable user inbox, unread count, and mark one/all notifications read	FB-GAP-010; reference 86d6aef94fd5e58da552e97c11473cff6eca734e; Axios /api/v1 wrappers expect paginated items,total,page,size,unreadCount; reference /api/me/notifications/inbox accepts limit and returns List; read-all service has no inspected Controller mapping; single-read returns ordinary error map on missing ID; legacy /me/notifications is a stub	One accepted scoped inbox request/envelope/read-state contract; align existing frontend wrapper rather than invent pagination totals	Authenticated principal-owned inbox with explicit tenant isolation, exact read outcomes and supported traversal/limit; reject missing/denied without fake success	BLOCKS_NOTIFICATION_INBOX	NO	YES	No notification mock or UI added; source-only reference, Review mocks are unrelated	Read and unread state must describe actual persisted notifications	Future contract/TCP tests bind exact client/server paths including prefix, envelope, params, unread/read-all behavior, missing/denied outcomes and cross-user/tenant isolation	PROPOSED_SOURCE_CONFIRMED_NONBLOCKING_FOR_REVIEW
++UXW2-NTF-002	Configure notification subscriptions, preferences, and channel bindings	FB-GAP-011; reference 86d6aef94fd5e58da552e97c11473cff6eca734e; Binding create returns three fields not full binding; subscription update returns three fields and defaults can contain null; batch returns List not results/errors; preference GET/PUT omit declared identities/full fields and Partial updates can default flags to true	Align existing preference/subscription/binding DTOs and update/partial-failure semantics before any UI integration	Principal-scoped current-user settings; backend controls critical-event rules and channel validation; defined non-disclosing denied/validation/missing outcomes; public DTO must not leak destination secrets	BLOCKS_NOTIFICATION_SETTINGS	NO	YES	No settings UI or transport calls; design/contract candidate remains candidate	Settings must not silently reset flags or report nonexistent verification	Future contract tests verify every request/response/nullability/update-preservation rule, batch failure semantics, critical restrictions, destination redaction and ownership; no live delivery in frontend mocks	PROPOSED_SOURCE_CONFIRMED_NONBLOCKING_FOR_REVIEW
++UXW2-NTF-003	Inspect/configure notification event definitions and delivery records; prepare explicit administrative notification input	FB-GAP-012; reference 86d6aef94fd5e58da552e97c11473cff6eca734e; Frontend event-definitions/delivery-logs/providers differ from backend events/deliveries/provider-status; list/object/metrics envelopes differ; detail ignores notificationId; publishEvent sends type/tenantId but backend requires eventType/subjectId	Accepted admin event/delivery queries and exact target/publish input contract; no speculative announcement workflow	Server-enforced administrator and tenant/resource scope; explicit filtered IDs and pagination capabilities; preserve typed forbidden/not-found/unsupported failures; existing FB-GAP-002 applies	BLOCKS_NOTIFICATION_ADMIN_INTEGRATION	NO	YES	No admin notification UI or calls added; absent UI alone is not an endpoint gap	Admin labels and guessed target IDs cannot confer authority or prove a notification was sent	Future contract and authorization tests resolve route/payload/envelope differences, exact-ID detail filtering, non-disclosing cross-tenant denial and explicit target validation; separate authorization for announcements/targeting	PROPOSED_SOURCE_CONFIRMED_NONBLOCKING_FOR_REVIEW
++UXW2-NTF-004	Receive a real email/SMS/webhook notification or verify/test/retry a bound channel	FB-GAP-013; reference 86d6aef94fd5e58da552e97c11473cff6eca734e; Email/SMS/Webhook providers return SENT without external transport; binding verify writes VERIFIED without challenge; test only checks/audits and Controller says TEST_SENT; retry only returns RETRY_QUEUED; Novu transport code exists but live integration unestablished	Truthful simulated/accepted/sent/delivered/failed boundaries and separately authorized real delivery/verification/retry integration	Authenticated scoped verified destination and explicit delivery/test authority; no browser/Agent escalation; real failures cannot become empty or success; no secret exposure	BLOCKS_REAL_NOTIFICATION_DELIVERY	NO	YES	Local provider SENT and persisted MOCK are simulation, not external delivery; this task sends nothing	Users must not mistake source stubs or admin receipts for delivery	Future backend-owned controlled integration validates actual transport/challenge/attempt and readback, authorization, failure/retry semantics, destination safety and simulated labeling; actual external tests require separate consent	PROPOSED_SOURCE_CONFIRMED_NONBLOCKING_FOR_REVIEW
+diff --git a/frontend/src/localization/catalogs.ts b/frontend/src/localization/catalogs.ts
+index f52a83e9..7555aa55 100644
+--- a/frontend/src/localization/catalogs.ts
++++ b/frontend/src/localization/catalogs.ts
+@@ -115,6 +115,96 @@ const englishNamespaces: CatalogNamespaces = {
+     workspace: message('Timeline workspace'), playbackControls: message('Timeline playback controls'), keyboardControls: message('Timeline keyboard controls'),
+   },
+   review: {
++    "overview": message("Overview"),
++    "visual": message("Visual Changes"),
++    "conversation": message("Conversation"),
++    "checks": message("Checks"),
++    "projectDetails": message("Project and workspace IDs"),
++    "workspaceId": message("Workspace ID"),
++    "projectId": message("Project ID"),
++    "sections": message("Review sections"),
++    "direction": message("From is the starting revision; To is the revision you compare it with. Choose the order, then compare. Reversing the pair changes the direction. This view does not apply or merge changes."),
++    "history": message("Revision history"),
++    "loadingHistory": message("Loading revision history…"),
++    "loadingChoices": message("Loading revision choices and change summary"),
++    "historyFailed": message("We couldn’t load revision history."),
++    "historyRetryHelp": message("Try again to choose revisions."),
++    "historyBlockedHelp": message("Retry is unavailable for this response. Check access or project availability before returning to Review."),
++    "retryHistory": message("Retry history"),
++    "noRevisions": message("No revisions available"),
++    "noRevisionsHelp": message("No revisions were returned for this project. Comparison needs two distinct revisions."),
++    "refreshHistory": message("Refresh history"),
++    "oneRevision": message("Only one distinct revision is available. Comparison needs two."),
++    "from": message("From revision"),
++    "to": message("To revision"),
++    "selectRevision": message("Select revision"),
++    "comparing": message("Comparing…"),
++    "retryComparison": message("Retry comparison"),
++    "compare": message("Compare revisions"),
++    "mergeDisabled": message("Merge unavailable"),
++    "selectedPair": message("Selected revision pair"),
++    "requestedPair": message("Requested revision pair"),
++    "pairDetails": message("Revision IDs"),
++    "comparisonFailed": message("We couldn’t compare these revisions."),
++    "comparisonRetryHelp": message("Retry comparison above."),
++    "comparisonBlockedHelp": message("Retry is unavailable for this pair. Check access or choose a different pair."),
++    "loadingComparison": message("Loading revision comparison…"),
++    "loaded": message("Comparison loaded."),
++    "loadedNoEntities": message("Comparison loaded; no entity details were returned."),
++    "needsHistory": message("Comparison needs two distinct revisions from the available history."),
++    "chooseBoth": message("Choose a From revision and a To revision."),
++    "chooseFrom": message("Choose a From revision."),
++    "chooseTo": message("Choose a To revision."),
++    "chooseDifferent": message("Choose different revisions; the current pair is the same revision."),
++    "chooseKnown": message("Choose revisions from the available history."),
++    "ready": message("Ready to compare. Select Compare revisions to load changes in this order."),
++    "revisionNumber": message("Revision {number}", ["number"]),
++    "technical": message("Technical details"),
++    "comparisonTechnical": message("Comparison technical details"),
++    "serverComparison": message("Server comparison"),
++    "failureMismatch": message("The returned comparison does not match the requested revision pair."),
++    "sectionUnavailable": message("{section} unavailable", ["section"]),
++    "sectionUnavailableHelp": message("This review section is not available yet."),
++    "failure.STALE_BASE_REVISION": message("The starting revision is no longer current."),
++    "failure.STALE_TARGET_REF": message("The target reference has changed."),
++    "failure.PLAN_CHANGED": message("The server plan has changed."),
++    "failure.AUTHORIZATION_DENIED": message("You do not have permission for this request."),
++    "failure.AUTHORIZATION_CONTEXT_MISMATCH": message("The authorization context does not match this request."),
++    "failure.TENANT_CONTEXT_MISMATCH": message("The tenant context does not match this request."),
++    "failure.UNAUTHENTICATED": message("Sign in to access this request."),
++    "failure.VALIDATION": message("The request or server response could not be validated."),
++    "failure.UNSUPPORTED": message("The server does not support this request."),
++    "failure.CONFLICT": message("A conflict prevented this request."),
++    "failure.NOT_FOUND": message("The requested revisions or project are not available."),
++    "failure.UNAVAILABLE": message("The comparison service is temporarily unavailable."),
++    "failure.NETWORK": message("A network problem prevented loading."),
++    "failure.UNKNOWN": message("The request failed for an unrecognized reason."),
++    "diff.all": message("All actions"),
++    "diff.added": message("Added"),
++    "diff.removed": message("Removed"),
++    "diff.modified": message("Modified"),
++    "diff.clip": message("Clip"),
++    "diff.track": message("Track"),
++    "diff.asset": message("Asset"),
++    "diff.notLoaded": message("No server comparison loaded"),
++    "diff.notLoadedHelp": message("Choose two revisions and compare to see their changes."),
++    "diff.resultPair": message("Server result revision pair"),
++    "diff.action": message("Action"),
++    "diff.server": message("Server comparison"),
++    "diff.limited": message("Server summary limited"),
++    "diff.summary": message("Server change summary"),
++    "diff.tracks": message("Tracks added / removed / changed"),
++    "diff.clips": message("Clips added / removed / changed"),
++    "diff.assets": message("Assets added / removed"),
++    "diff.unsupported": message("Summary unavailable"),
++    "diff.unsupportedHelp": message("The server does not support a summary for this pair. This does not mean there are no changes. Any returned entity details appear below."),
++    "diff.filteredEmpty": message("No matching entity changes"),
++    "diff.filteredEmptyHelp": message("No returned entities match this action filter. Choose All actions to see every returned entity."),
++    "diff.zero": message("No changes reported"),
++    "diff.zeroHelp": message("The supported server summary reports zero in every counter and returns no entity changes."),
++    "diff.noEntities": message("No entity details returned"),
++    "diff.noEntitiesHelp": message("The server returned no entity details for this pair. This does not establish that there are no changes."),
++
+     eyebrow: message('Review & collaboration'), title: message('Project review'), description: message('Choose two revisions to see what changed. Review does not apply or merge changes.'),
+     panel: message('Semantic Changes'), missingInZh: message('English fallback proof'),
+   },
+@@ -221,7 +311,97 @@ const chineseNamespaces: CatalogNamespaces = {
+     zoomIn: message("放大"),
+     resetViewport: message("重置视口"), eyebrow: message('创作 · 画布'), title: message('无限画布'), description: message('排列本地呈现节点，而不更改规范媒体。'), workspace: message('无限画布工作区'), localComposition: message('本地合成') },
+   timeline: { eyebrow: message('创作 · 非线性编辑'), title: message('时间线编辑器'), description: message('浏览时间线，并在应用前预览更改。'), workspace: message('时间线工作区'), playbackControls: message('时间线播放控件'), keyboardControls: message('时间线键盘控件') },
+-  review: { eyebrow: message('创作 · 审阅'), title: message('审阅工作区'), description: message('检查修订证据并留下限定范围的审阅反馈。'), panel: message('修订审阅') },
++  review: {
++    "overview": message("概览"),
++    "visual": message("视觉更改"),
++    "conversation": message("讨论"),
++    "checks": message("检查"),
++    "projectDetails": message("项目与工作区标识"),
++    "workspaceId": message("工作区标识"),
++    "projectId": message("项目标识"),
++    "sections": message("审阅分区"),
++    "direction": message("起始修订是比较的出发点，目标修订是与其比较的版本。选择顺序后再比较；交换修订会改变比较方向。此视图不会应用或合并更改。"),
++    "history": message("修订历史"),
++    "loadingHistory": message("正在加载修订历史…"),
++    "loadingChoices": message("正在加载修订选项与更改摘要"),
++    "historyFailed": message("无法加载修订历史。"),
++    "historyRetryHelp": message("请重试以选择修订。"),
++    "historyBlockedHelp": message("此响应不允许重试。请确认访问权限或项目可用性后返回审阅。"),
++    "retryHistory": message("重试加载历史"),
++    "noRevisions": message("暂无修订"),
++    "noRevisionsHelp": message("服务器未返回此项目的修订。比较需要两个不同的修订。"),
++    "refreshHistory": message("刷新历史"),
++    "oneRevision": message("仅有一个不同的修订。比较需要两个修订。"),
++    "from": message("起始修订"),
++    "to": message("目标修订"),
++    "selectRevision": message("选择修订"),
++    "comparing": message("正在比较…"),
++    "retryComparison": message("重试比较"),
++    "compare": message("比较修订"),
++    "mergeDisabled": message("合并暂不可用"),
++    "selectedPair": message("已选修订对"),
++    "requestedPair": message("正在请求的修订对"),
++    "pairDetails": message("修订标识"),
++    "comparisonFailed": message("无法比较这些修订。"),
++    "comparisonRetryHelp": message("请使用上方按钮重试比较。"),
++    "comparisonBlockedHelp": message("此修订对不允许重试。请确认访问权限或选择其他修订对。"),
++    "loadingComparison": message("正在加载修订比较…"),
++    "loaded": message("比较已加载。"),
++    "loadedNoEntities": message("比较已加载，未返回实体详情。"),
++    "needsHistory": message("请先获取包含两个不同修订的历史。"),
++    "chooseBoth": message("请选择起始修订和目标修订。"),
++    "chooseFrom": message("请选择起始修订。"),
++    "chooseTo": message("请选择目标修订。"),
++    "chooseDifferent": message("请选择不同修订；当前两项为同一修订。"),
++    "chooseKnown": message("请从可用历史中选择修订。"),
++    "ready": message("已准备好比较。点击“比较修订”以按此顺序加载更改。"),
++    "revisionNumber": message("修订 {number}", ["number"]),
++    "technical": message("技术详情"),
++    "comparisonTechnical": message("比较技术详情"),
++    "serverComparison": message("服务器比较"),
++    "failureMismatch": message("返回的比较与请求的修订对不匹配。"),
++    "sectionUnavailable": message("{section}暂不可用", ["section"]),
++    "sectionUnavailableHelp": message("此审阅分区尚未开放。"),
++    "failure.STALE_BASE_REVISION": message("起始修订已不是当前版本。"),
++    "failure.STALE_TARGET_REF": message("目标引用已更改。"),
++    "failure.PLAN_CHANGED": message("服务器计划已更改。"),
++    "failure.AUTHORIZATION_DENIED": message("您没有权限执行此请求。"),
++    "failure.AUTHORIZATION_CONTEXT_MISMATCH": message("授权上下文与此请求不匹配。"),
++    "failure.TENANT_CONTEXT_MISMATCH": message("租户上下文与此请求不匹配。"),
++    "failure.UNAUTHENTICATED": message("请登录以访问此请求。"),
++    "failure.VALIDATION": message("无法验证请求或服务器响应。"),
++    "failure.UNSUPPORTED": message("服务器不支持此请求。"),
++    "failure.CONFLICT": message("冲突阻止了此请求。"),
++    "failure.NOT_FOUND": message("请求的修订或项目不可用。"),
++    "failure.UNAVAILABLE": message("比较服务暂时不可用。"),
++    "failure.NETWORK": message("网络问题导致加载失败。"),
++    "failure.UNKNOWN": message("请求因未知原因失败。"),
++    "diff.all": message("全部操作"),
++    "diff.added": message("新增"),
++    "diff.removed": message("移除"),
++    "diff.modified": message("修改"),
++    "diff.clip": message("片段"),
++    "diff.track": message("轨道"),
++    "diff.asset": message("素材"),
++    "diff.notLoaded": message("尚未加载服务器比较"),
++    "diff.notLoadedHelp": message("请选择两个修订并比较，以查看更改。"),
++    "diff.resultPair": message("服务器结果修订对"),
++    "diff.action": message("操作"),
++    "diff.server": message("服务器比较"),
++    "diff.limited": message("服务器摘要受限"),
++    "diff.summary": message("服务器更改摘要"),
++    "diff.tracks": message("新增 / 移除 / 修改轨道"),
++    "diff.clips": message("新增 / 移除 / 修改片段"),
++    "diff.assets": message("新增 / 移除素材"),
++    "diff.unsupported": message("摘要不可用"),
++    "diff.unsupportedHelp": message("服务器不支持此修订对的摘要。这并不表示没有更改。返回的实体详情显示在下方。"),
++    "diff.filteredEmpty": message("没有匹配的实体更改"),
++    "diff.filteredEmptyHelp": message("返回的实体中没有匹配此操作筛选的项。选择“全部操作”查看所有返回的实体。"),
++    "diff.zero": message("未报告更改"),
++    "diff.zeroHelp": message("服务器支持的摘要中所有计数均为零，且未返回实体更改。"),
++    "diff.noEntities": message("未返回实体详情"),
++    "diff.noEntitiesHelp": message("服务器未返回此修订对的实体详情。这不能证明没有更改。"),
++ eyebrow: message('创作 · 审阅'), title: message('审阅工作区'), description: message('选择两个修订以查看更改。审阅不会应用或合并更改。'), panel: message('语义更改') },
+   workflow: {}, render: {}, settings: {}, errors: {},
+ }
+ 
+diff --git a/frontend/src/localization/source-manifest.json b/frontend/src/localization/source-manifest.json
+index c3aaccc4..3b7eb8c4 100644
+--- a/frontend/src/localization/source-manifest.json
++++ b/frontend/src/localization/source-manifest.json
+@@ -88,6 +88,97 @@
+     "agent.kindLANE",
+     "agent.kindLowerNODE",
+     "agent.kindLowerCLIP",
+-    "agent.kindLowerLANE"
++    "agent.kindLowerLANE",
++    "review.overview",
++    "review.visual",
++    "review.conversation",
++    "review.checks",
++    "review.projectDetails",
++    "review.workspaceId",
++    "review.projectId",
++    "review.sections",
++    "review.direction",
++    "review.history",
++    "review.loadingHistory",
++    "review.loadingChoices",
++    "review.historyFailed",
++    "review.historyRetryHelp",
++    "review.historyBlockedHelp",
++    "review.retryHistory",
++    "review.noRevisions",
++    "review.noRevisionsHelp",
++    "review.refreshHistory",
++    "review.oneRevision",
++    "review.from",
++    "review.to",
++    "review.selectRevision",
++    "review.comparing",
++    "review.retryComparison",
++    "review.compare",
++    "review.mergeDisabled",
++    "review.selectedPair",
++    "review.requestedPair",
++    "review.pairDetails",
++    "review.comparisonFailed",
++    "review.comparisonRetryHelp",
++    "review.comparisonBlockedHelp",
++    "review.loadingComparison",
++    "review.loaded",
++    "review.loadedNoEntities",
++    "review.needsHistory",
++    "review.chooseBoth",
++    "review.chooseFrom",
++    "review.chooseTo",
++    "review.chooseDifferent",
++    "review.chooseKnown",
++    "review.ready",
++    "review.revisionNumber",
++    "review.technical",
++    "review.comparisonTechnical",
++    "review.serverComparison",
++    "review.failureMismatch",
++    "review.sectionUnavailable",
++    "review.sectionUnavailableHelp",
++    "review.failure.STALE_BASE_REVISION",
++    "review.failure.STALE_TARGET_REF",
++    "review.failure.PLAN_CHANGED",
++    "review.failure.AUTHORIZATION_DENIED",
++    "review.failure.AUTHORIZATION_CONTEXT_MISMATCH",
++    "review.failure.TENANT_CONTEXT_MISMATCH",
++    "review.failure.UNAUTHENTICATED",
++    "review.failure.VALIDATION",
++    "review.failure.UNSUPPORTED",
++    "review.failure.CONFLICT",
++    "review.failure.NOT_FOUND",
++    "review.failure.UNAVAILABLE",
++    "review.failure.NETWORK",
++    "review.failure.UNKNOWN",
++    "review.diff.all",
++    "review.diff.added",
++    "review.diff.removed",
++    "review.diff.modified",
++    "review.diff.clip",
++    "review.diff.track",
++    "review.diff.asset",
++    "review.diff.notLoaded",
++    "review.diff.notLoadedHelp",
++    "review.diff.resultPair",
++    "review.diff.action",
++    "review.diff.server",
++    "review.diff.limited",
++    "review.diff.summary",
++    "review.diff.tracks",
++    "review.diff.clips",
++    "review.diff.assets",
++    "review.diff.unsupported",
++    "review.diff.unsupportedHelp",
++    "review.diff.filteredEmpty",
++    "review.diff.filteredEmptyHelp",
++    "review.diff.zero",
++    "review.diff.zeroHelp",
++    "review.diff.noEntities",
++    "review.diff.noEntitiesHelp",
++    "review.eyebrow",
++    "review.panel"
+   ]
+ }
+diff --git a/frontend/src/product/review/ReviewWorkspace.test.tsx b/frontend/src/product/review/ReviewWorkspace.test.tsx
+index 4cfd2704..e7d820ee 100644
+--- a/frontend/src/product/review/ReviewWorkspace.test.tsx
++++ b/frontend/src/product/review/ReviewWorkspace.test.tsx
+@@ -1,11 +1,12 @@
+-import { SelectionProvider } from '../../interaction/SelectionContext'
++import { LocalizationProvider } from '../../localization'
++import { SelectionProvider, useInteractionStore } from '../../interaction/SelectionContext'
+ import { AgentLauncher, AgentShell, SelectionInspector } from '../../interaction/InteractionShell'
+ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
+ import { afterEach, describe, expect, it, vi } from 'vitest'
+ import { platformClient } from '../../foundation/platformClient'
+ import { ProjectContextProvider } from '../../foundation/projectContext'
+-import type { GatewayResult, RevisionComparison, RevisionDetail, RevisionListEntry } from '../timeline/gateways'
++import type { GatewayFailureCode, GatewayResult, RevisionComparison, RevisionDetail, RevisionListEntry } from '../timeline/gateways'
+ import { ScriptedTimelineQueryGateway, mockFailure } from '../timeline/testing/mocks'
+ import { contentHash, projectId, revisionId, timelineId } from '../timeline/types'
+ import { ReviewWorkspace } from './ReviewWorkspace'
+@@ -58,7 +59,7 @@ describe('Review comparison request ownership', () => {
+       .mockImplementationOnce(async () => older.promise)
+       .mockImplementationOnce(async () => newer.promise)
+     const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
+-    render(<QueryClientProvider client={client}><ProjectContextProvider workspaceId="workspace-1" projectId="project-1"><SelectionProvider scope={{ surfaceId: 'review', workspaceId: "workspace-1", projectId: "project-1" }}><ReviewWorkspace queryGateway={queries} /><SelectionInspector /><AgentLauncher /><AgentShell /></SelectionProvider></ProjectContextProvider></QueryClientProvider>)
++    render(<QueryClientProvider client={client}><ProjectContextProvider workspaceId="workspace-1" projectId="project-1"><SelectionProvider scope={{ surfaceId: 'review', workspaceId: "workspace-1", projectId: "project-1" }}><ReviewWorkspace queryGateway={queries} /><DispatchProbe /><SelectionInspector /><AgentLauncher /><AgentShell /></SelectionProvider></ProjectContextProvider></QueryClientProvider>)
+ 
+     expect((await screen.findAllByRole('option', { name: /revision-R0/ })).length).toBe(2)
+     fireEvent.change(screen.getByLabelText('From revision'), { target: { value: 'revision-R0' } })
+@@ -85,7 +86,7 @@ describe('Review comparison request ownership', () => {
+       detail: { ok: true, value: detail }, comparison: { ok: true, value: comparison(revision0, revision1, 'clip-1') },
+     })
+     const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
+-    render(<QueryClientProvider client={client}><ProjectContextProvider workspaceId="workspace-1" projectId="project-1"><SelectionProvider scope={{ surfaceId: 'review', workspaceId: "workspace-1", projectId: "project-1" }}><ReviewWorkspace queryGateway={queries} /><SelectionInspector /><AgentLauncher /><AgentShell /></SelectionProvider></ProjectContextProvider></QueryClientProvider>)
++    render(<QueryClientProvider client={client}><ProjectContextProvider workspaceId="workspace-1" projectId="project-1"><SelectionProvider scope={{ surfaceId: 'review', workspaceId: "workspace-1", projectId: "project-1" }}><ReviewWorkspace queryGateway={queries} /><DispatchProbe /><SelectionInspector /><AgentLauncher /><AgentShell /></SelectionProvider></ProjectContextProvider></QueryClientProvider>)
+ 
+     expect((await screen.findAllByRole('option', { name: /revision-R0/ })).length).toBe(2)
+     const semantic = screen.getByRole('tab', { name: 'Semantic Changes' })
+@@ -111,11 +112,16 @@ describe('Review comparison request ownership', () => {
+   })
+ })
+ 
++function DispatchProbe() {
++  const store = useInteractionStore()
++  return <button onClick={() => { const pair = store.getSnapshot().revisionPair; if (pair) store.dispatch({ category: 'READ_ONLY_QUERY', type: 'compare-revisions', pair }) }}>Dispatch current pair</button>
++}
++
+ function reviewSetup() {
+   vi.spyOn(platformClient.workspace, 'getHome').mockResolvedValue({ workspace: { id: 'workspace-1', name: 'Editorial' }, tenantId: 'tenant-1', recentProjects: [] })
+   const queries = new ScriptedTimelineQueryGateway({ head: { ok: true, value: head }, history: { ok: true, value: [revision0, revision1] }, detail: { ok: true, value: detail }, comparison: { ok: true, value: comparison(revision0, revision1, 'clip-result') } })
+   const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
+-  const content = (workspaceId = 'workspace-1', projectId = 'project-1') => <QueryClientProvider client={client}><ProjectContextProvider workspaceId={workspaceId} projectId={projectId}><SelectionProvider scope={{ surfaceId: 'review', workspaceId: workspaceId, projectId: projectId }}><ReviewWorkspace queryGateway={queries} /><SelectionInspector /><AgentLauncher /><AgentShell /></SelectionProvider></ProjectContextProvider></QueryClientProvider>
++  const content = (workspaceId = 'workspace-1', projectId = 'project-1') => <QueryClientProvider client={client}><ProjectContextProvider workspaceId={workspaceId} projectId={projectId}><SelectionProvider scope={{ surfaceId: 'review', workspaceId: workspaceId, projectId: projectId }}><ReviewWorkspace queryGateway={queries} /><DispatchProbe /><SelectionInspector /><AgentLauncher /><AgentShell /></SelectionProvider></ProjectContextProvider></QueryClientProvider>
+   return { queries, content }
+ }
+ 
+@@ -153,7 +159,8 @@ describe('Review loading, retry and invalidation', () => {
+     vi.spyOn(queries, 'listRevisions').mockResolvedValueOnce(mockFailure('UNAVAILABLE')).mockResolvedValueOnce({ ok: true, value: [revision0, revision0] })
+     render(content())
+     expect((await screen.findByRole('alert')).textContent).toContain('Try again')
+-    expect(screen.getByText(/UNAVAILABLE/).closest('details')).toBeTruthy()
++    expect(screen.getAllByText('UNAVAILABLE')).toHaveLength(2)
++    expect(screen.getAllByText('UNAVAILABLE').every(element => element.closest('details'))).toBe(true)
+     fireEvent.click(screen.getByRole('button', { name: 'Retry history' }))
+     await screen.findByText(/Only one distinct revision/)
+     expect(disabled('Compare revisions')).toBe(true)
+@@ -175,18 +182,20 @@ describe('Review loading, retry and invalidation', () => {
+     expect(screen.queryByText('clip-result')).toBeNull()
+     expect(disabled('Comparing…')).toBe(true)
+     fireEvent.click(screen.getByRole('button', { name: 'Comparing…' }))
++    fireEvent.click(screen.getByRole('button', { name: 'Dispatch current pair' }))
+     expect(spy).toHaveBeenCalledTimes(2)
+     await act(async () => pending.reject(new Error('offline')))
+     expect(screen.getByRole('alert').textContent).toContain('Retry comparison')
+     expect(screen.queryByText('clip-result')).toBeNull()
+     spy.mockResolvedValueOnce(mockFailure('UNAVAILABLE'))
+     fireEvent.click(screen.getByRole('button', { name: 'Retry comparison' }))
+-    await waitFor(() => expect(screen.getByText(/UNAVAILABLE/).closest('details')).toBeTruthy())
++    await waitFor(() => expect(screen.getAllByText('UNAVAILABLE')).toHaveLength(2))
++    expect(screen.getAllByText('UNAVAILABLE').every(element => element.closest('details'))).toBe(true)
+     expect(screen.getByRole('alert').textContent).toContain('Retry comparison')
+     spy.mockResolvedValueOnce({ ok: true, value: { ...comparison(revision0, revision1, 'unused'), entityChanges: [] } })
+     fireEvent.click(screen.getByRole('button', { name: 'Retry comparison' }))
+-    await screen.findByText('Comparison loaded with no entity changes.')
+-    expect(screen.getByText('No matching entity changes')).toBeTruthy()
++    await screen.findByText('Comparison loaded; no entity details were returned.')
++    expect(screen.getByText('No changes reported')).toBeTruthy()
+   })
+ 
+   it.each(['project', 'workspace'])('discards old history and comparisons after %s scope changes', async scope => {
+@@ -244,3 +253,302 @@ it('uses the explicit Review pair as Agent read-only context and invokes the exi
+   fireEvent.click(screen.getByRole('button', { name: 'Ask Agent' }))
+   expect(screen.getByTestId('agent-context').textContent).not.toContain('Revision pair')
+ })
++
++
++describe('Focused Review UX contract', () => {
++  afterEach(() => vi.restoreAllMocks())
++
++  it('shows projected name, route IDs and full readable history without choosing or querying automatically', async () => {
++    const { queries, content } = reviewSetup()
++    vi.mocked(platformClient.workspace.getHome).mockResolvedValue({ workspace: { id: 'workspace-1', name: 'Editorial' }, tenantId: 'tenant-1', recentProjects: [{ id: 'project-1', name: 'Launch film' }] })
++    queries.historyResult = { ok: true, value: Array.from({ length: 85 }, (_, index) => ({ ...revision0, id: revisionId(`revision-${index}`), revisionNumber: index + 1, message: `Edit ${index}` })) }
++    const compare = vi.spyOn(queries, 'compare')
++    render(content())
++    await screen.findByText('Launch film')
++    expect(screen.getByText('workspace-1').closest('details')).toBeTruthy()
++    expect(screen.getByText('project-1').closest('details')).toBeTruthy()
++    expect(screen.getAllByRole('option', { name: /Edit 84/ })).toHaveLength(2)
++    expect(screen.getAllByRole('option', { name: /Jan 1, 2026/ })).toHaveLength(170)
++    expect((screen.getByLabelText('From revision') as HTMLSelectElement).value).toBe('')
++    expect(compare).not.toHaveBeenCalled()
++    expect(screen.getByText(/From is the starting revision/)).toBeTruthy()
++  })
++
++  it('explains missing, same and unknown choices, forwards reverse order explicitly, and binds the server result', async () => {
++    const { queries, content } = reviewSetup()
++    const compare = vi.spyOn(queries, 'compare').mockResolvedValue({ ok: true, value: comparison(revision1, revision0, 'reverse-clip') })
++    render(content())
++    await screen.findAllByRole('option', { name: /revision-R0/ })
++    expect(screen.getByText('Choose a From revision and a To revision.')).toBeTruthy()
++    fireEvent.change(screen.getByLabelText('From revision'), { target: { value: revision1.id } })
++    expect(screen.getByText('Choose a To revision.')).toBeTruthy()
++    fireEvent.change(screen.getByLabelText('To revision'), { target: { value: revision1.id } })
++    expect(screen.getByText('Choose different revisions; the current pair is the same revision.')).toBeTruthy()
++    const select = screen.getByLabelText('To revision') as HTMLSelectElement
++    const unknown = document.createElement('option')
++    unknown.textContent = 'Unknown revision'
++    unknown.value = 'unknown-id'
++    select.append(unknown)
++    fireEvent.change(select, { target: { value: 'unknown-id' } })
++    expect(screen.getByText('Choose revisions from the available history.')).toBeTruthy()
++    fireEvent.click(screen.getByRole('button', { name: 'Dispatch current pair' }))
++    expect(compare).not.toHaveBeenCalled()
++    fireEvent.change(select, { target: { value: revision0.id } })
++    expect(compare).not.toHaveBeenCalled()
++    expect(screen.getByLabelText('Selected revision pair').textContent).toContain('From revision: Revision 2 → To revision: Revision 1')
++    fireEvent.click(screen.getByRole('button', { name: 'Compare revisions' }))
++    await screen.findByText('reverse-clip')
++    expect(compare).toHaveBeenCalledExactlyOnceWith(projectId('project-1'), revision1.id, revision0.id)
++    expect(screen.getByLabelText('Server result revision pair').textContent).toContain('From revision: Revision 2 → To revision: Revision 1')
++  })
++
++  it.each(['AUTHORIZATION_DENIED', 'UNSUPPORTED', 'UNAVAILABLE', 'NETWORK'] as GatewayFailureCode[])('honors both retryable values for %s in history and comparison, including dispatch', async code => {
++    for (const retryable of [false, true]) {
++      const { queries, content } = reviewSetup()
++      const failure = { ok: false as const, code, message: 'Opaque server message', details: ['opaque diagnostic 甲'], retryable }
++      const history = vi.spyOn(queries, 'listRevisions').mockResolvedValueOnce(failure)
++      const view = render(content())
++      await screen.findByRole('alert')
++      expect(screen.getByText('opaque diagnostic 甲').closest('details')).toBeTruthy()
++      expect(screen.getByText('Opaque server message').closest('details')).toBeTruthy()
++      expect(screen.queryByRole('button', { name: 'Retry history' }) !== null).toBe(retryable)
++      if (retryable) {
++        fireEvent.click(screen.getByRole('button', { name: 'Retry history' }))
++        await choosePair()
++        expect(history).toHaveBeenCalledTimes(2)
++      }
++      view.unmount()
++      const next = reviewSetup()
++      const compare = vi.spyOn(next.queries, 'compare').mockResolvedValueOnce(failure)
++      const nextView = render(next.content())
++      await choosePair()
++      fireEvent.click(screen.getByRole('button', { name: 'Compare revisions' }))
++      await screen.findByRole('alert')
++      expect(screen.getByText('opaque diagnostic 甲').closest('details')).toBeTruthy()
++      if (retryable) {
++        expect(disabled('Retry comparison')).toBe(false)
++        fireEvent.click(screen.getByRole('button', { name: 'Retry comparison' }))
++        await screen.findByText('clip-result')
++        expect(compare).toHaveBeenCalledTimes(2)
++      } else {
++        expect(screen.queryByRole('button', { name: 'Retry comparison' })).toBeNull()
++        expect(disabled('Compare revisions')).toBe(true)
++        fireEvent.click(screen.getByRole('button', { name: 'Compare revisions' }))
++        fireEvent.click(screen.getByRole('button', { name: 'Dispatch current pair' }))
++        expect(compare).toHaveBeenCalledTimes(1)
++        fireEvent.change(screen.getByLabelText('From revision'), { target: { value: revision1.id } })
++        fireEvent.change(screen.getByLabelText('To revision'), { target: { value: revision0.id } })
++        compare.mockResolvedValueOnce({ ok: true, value: comparison(revision1, revision0, 'new-pair') })
++        fireEvent.click(screen.getByRole('button', { name: 'Compare revisions' }))
++        await screen.findByText('new-pair')
++        expect(compare).toHaveBeenCalledTimes(2)
++        fireEvent.change(screen.getByLabelText('From revision'), { target: { value: revision0.id } })
++        fireEvent.change(screen.getByLabelText('To revision'), { target: { value: revision1.id } })
++        expect(screen.queryByRole('alert')).toBeNull()
++        expect(screen.queryByText('opaque diagnostic 甲')).toBeNull()
++        expect(disabled('Compare revisions')).toBe(false)
++        expect(compare).toHaveBeenCalledTimes(2)
++        fireEvent.click(screen.getByRole('button', { name: 'Dispatch current pair' }))
++        await screen.findByText('clip-result')
++        expect(compare).toHaveBeenCalledTimes(3)
++        expect(compare).toHaveBeenLastCalledWith(projectId('project-1'), revision0.id, revision1.id)
++      }
++      nextView.unmount()
++    }
++  })
++
++  it('rejects a scripted mismatched response without displaying its diff', async () => {
++    const { queries, content } = reviewSetup()
++    queries.comparisonResult = { ok: true, value: comparison(revision1, revision0, 'wrong-result') }
++    render(content())
++    await choosePair()
++    fireEvent.click(screen.getByRole('button', { name: 'Compare revisions' }))
++    expect((await screen.findByRole('alert')).textContent).toContain('does not match')
++    expect(screen.queryByText('wrong-result')).toBeNull()
++  })
++
++  it('keeps newer success when an older comparison rejects', async () => {
++    const { queries, content } = reviewSetup()
++    const older = deferred<GatewayResult<RevisionComparison>>()
++    vi.spyOn(queries, 'compare').mockImplementationOnce(() => older.promise).mockResolvedValueOnce({ ok: true, value: comparison(revision1, revision0, 'new-success') })
++    render(content())
++    await choosePair()
++    fireEvent.click(screen.getByRole('button', { name: 'Compare revisions' }))
++    fireEvent.change(screen.getByLabelText('From revision'), { target: { value: revision1.id } })
++    fireEvent.change(screen.getByLabelText('To revision'), { target: { value: revision0.id } })
++    fireEvent.click(screen.getByRole('button', { name: 'Compare revisions' }))
++    await screen.findByText('new-success')
++    await act(async () => older.reject(new Error('old failure')))
++    expect(screen.getByText('new-success')).toBeTruthy()
++    expect(screen.queryByRole('alert')).toBeNull()
++  })
++
++  it.each(['project', 'workspace', 'unmount'])('ignores rejected history and comparison completions after %s retirement', async scope => {
++    for (const phase of ['history', 'comparison']) {
++      const { queries, content } = reviewSetup()
++      const late = deferred<never>()
++      if (phase === 'history') vi.spyOn(queries, 'listRevisions').mockImplementationOnce(() => late.promise)
++      else vi.spyOn(queries, 'compare').mockImplementationOnce(() => late.promise)
++      const view = render(content())
++      if (phase === 'comparison') {
++        await choosePair()
++        fireEvent.click(screen.getByRole('button', { name: 'Compare revisions' }))
++      }
++      if (scope === 'unmount') view.unmount()
++      else {
++        view.rerender(scope === 'project' ? content('workspace-1', 'project-2') : content('workspace-2', 'project-1'))
++        await choosePair()
++      }
++      await act(async () => late.reject(new Error('retired failure')))
++      expect(screen.queryByRole('alert')).toBeNull()
++      if (scope !== 'unmount') expect(disabled('Compare revisions')).toBe(false)
++      view.unmount()
++    }
++  })
++
++  it('keeps filter focus and complete entities without requesting again', async () => {
++    const { queries, content } = reviewSetup()
++    queries.comparisonResult = { ok: true, value: { ...comparison(revision0, revision1, 'unused'), entityChanges: Array.from({ length: 125 }, (_, i) => ({ kind: 'CLIP', entityId: `entity-${i}`, action: i % 2 ? 'ADDED' : 'MODIFIED' })) } }
++    const compare = vi.spyOn(queries, 'compare')
++    render(content())
++    await choosePair()
++    fireEvent.click(screen.getByRole('button', { name: 'Compare revisions' }))
++    await screen.findByText('entity-124')
++    expect(screen.getAllByRole('listitem')).toHaveLength(125)
++    const filter = screen.getByLabelText('Action')
++    filter.focus()
++    fireEvent.change(filter, { target: { value: 'ADDED' } })
++    expect(document.activeElement).toBe(filter)
++    expect(screen.queryByText('entity-124')).toBeNull()
++    expect(compare).toHaveBeenCalledTimes(1)
++  })
++
++  it('localizes Review controls, states, tabs and technical labels in Chinese with opaque diagnostics', async () => {
++    const { queries, content } = reviewSetup()
++    queries.comparisonResult = { ok: false, code: 'AUTHORIZATION_DENIED', message: 'opaque denial', details: ['opaque detail'], retryable: false }
++    render(<LocalizationProvider initialLocale="zh-CN">{content()}</LocalizationProvider>)
++    await screen.findAllByRole('option', { name: /Base/ })
++    const tab = screen.getByRole('tab', { name: '语义更改' })
++    const panel = screen.getByRole('tabpanel', { name: '语义更改' })
++    expect(tab.getAttribute('aria-controls')).toBe(panel.id)
++    expect(panel.getAttribute('aria-labelledby')).toBe(tab.id)
++    fireEvent.change(screen.getByLabelText('起始修订'), { target: { value: revision0.id } })
++    fireEvent.change(screen.getByLabelText('目标修订'), { target: { value: revision1.id } })
++    fireEvent.click(screen.getByRole('button', { name: '比较修订' }))
++    expect((await screen.findByRole('alert')).textContent).toContain('没有权限')
++    expect(screen.getByText('比较技术详情')).toBeTruthy()
++    expect(screen.getByText('opaque detail').closest('details')).toBeTruthy()
++    fireEvent.click(screen.getByRole('tab', { name: '讨论' }))
++    expect(screen.getByText('讨论暂不可用')).toBeTruthy()
++    expect(screen.queryByText(/bounded product slice/)).toBeNull()
++  })
++})
++
++
++it.each(['history', 'comparison'])('retires successful %s completion on unmount without reviving a later session', async phase => {
++  const { queries, content } = reviewSetup()
++  const oldHistory = deferred<GatewayResult<readonly RevisionListEntry[]>>()
++  const oldComparison = deferred<GatewayResult<RevisionComparison>>()
++  if (phase === 'history') vi.spyOn(queries, 'listRevisions').mockImplementationOnce(() => oldHistory.promise)
++  else vi.spyOn(queries, 'compare').mockImplementationOnce(() => oldComparison.promise)
++  const view = render(content())
++  if (phase === 'comparison') {
++    await choosePair()
++    fireEvent.click(screen.getByRole('button', { name: 'Compare revisions' }))
++  }
++  view.unmount()
++  render(content())
++  await choosePair()
++  await act(async () => {
++    oldHistory.resolve({ ok: true, value: [] })
++    oldComparison.resolve({ ok: true, value: comparison(revision0, revision1, 'retired-clip') })
++  })
++  expect(screen.queryByText('retired-clip')).toBeNull()
++  expect(screen.queryByText('No revisions available')).toBeNull()
++  expect(screen.queryByRole('alert')).toBeNull()
++  expect(disabled('Compare revisions')).toBe(false)
++})
++
++const failureCopy: Array<[GatewayFailureCode, string, string]> = [
++  ['STALE_BASE_REVISION', 'starting revision is no longer current', '起始修订已不是当前版本'],
++  ['STALE_TARGET_REF', 'target reference has changed', '目标引用已更改'],
++  ['PLAN_CHANGED', 'server plan has changed', '服务器计划已更改'],
++  ['AUTHORIZATION_DENIED', 'do not have permission', '没有权限'],
++  ['AUTHORIZATION_CONTEXT_MISMATCH', 'authorization context does not match', '授权上下文与此请求不匹配'],
++  ['TENANT_CONTEXT_MISMATCH', 'tenant context does not match', '租户上下文与此请求不匹配'],
++  ['UNAUTHENTICATED', 'Sign in', '请登录'],
++  ['VALIDATION', 'could not be validated', '无法验证'],
++  ['UNSUPPORTED', 'does not support', '不支持'],
++  ['CONFLICT', 'conflict prevented', '冲突阻止'],
++  ['NOT_FOUND', 'revisions or project are not available', '修订或项目不可用'],
++  ['UNAVAILABLE', 'temporarily unavailable', '暂时不可用'],
++  ['NETWORK', 'network problem', '网络问题'],
++  ['UNKNOWN', 'unrecognized reason', '未知原因'],
++]
++
++it.each(failureCopy)('explains actual %s failure in both locales without translating server diagnostics', async (code, en, zh) => {
++  for (const locale of ['en', 'zh-CN'] as const) {
++    const { queries, content } = reviewSetup()
++    queries.historyResult = { ok: false, code, message: 'server:opaque', details: ['server:detail'], retryable: false }
++    const view = render(<LocalizationProvider initialLocale={locale}>{content()}</LocalizationProvider>)
++    expect((await screen.findByRole('alert')).textContent).toContain(locale === 'en' ? en : zh)
++    expect(screen.getByText('server:opaque').closest('details')).toBeTruthy()
++    expect(screen.getByText('server:detail').closest('details')).toBeTruthy()
++    expect(screen.getByText(code).closest('details')).toBeTruthy()
++    view.unmount()
++  }
++})
++
++
++it.each([
++  { supported: false, assetsAdded: 0, title: 'Summary unavailable' },
++  { supported: true, assetsAdded: 0, title: 'No changes reported' },
++  { supported: true, assetsAdded: 3, title: 'No entity details returned' },
++])('keeps loaded status distinct from summary conclusions ($supported, $assetsAdded)', async ({ supported, assetsAdded, title }) => {
++  const { queries, content } = reviewSetup()
++  queries.comparisonResult = { ok: true, value: { ...comparison(revision0, revision1, 'unused'), summary: { ...summary, supported, assetsAdded }, entityChanges: [] } }
++  render(content())
++  await choosePair()
++  fireEvent.click(screen.getByRole('button', { name: 'Compare revisions' }))
++  await screen.findByText('Comparison loaded; no entity details were returned.')
++  expect(screen.getByText(title)).toBeTruthy()
++  if (!supported || assetsAdded) expect(screen.queryByText('No changes reported')).toBeNull()
++  expect(screen.queryByText('No matching entity changes')).toBeNull()
++})
++
++
++it.each(['en', 'zh-CN'] as const)('shows readable selected, requested and result direction with disclosed full IDs in %s', async locale => {
++  const { queries, content } = reviewSetup()
++  const from = { ...revision1, id: revisionId(`from-${'a'.repeat(59)}`), revisionNumber: 84, message: 'Full projected message '.repeat(20) }
++  const to = { ...revision0, id: revisionId(`to-${'b'.repeat(61)}`), revisionNumber: 12 }
++  queries.historyResult = { ok: true, value: [from, to] }
++  const pending = deferred<GatewayResult<RevisionComparison>>()
++  const compare = vi.spyOn(queries, 'compare').mockImplementationOnce(() => pending.promise)
++  render(<LocalizationProvider initialLocale={locale}>{content()}</LocalizationProvider>)
++  const zh = locale === 'zh-CN'
++  await screen.findAllByRole('option', { name: new RegExp(from.id) })
++  expect(screen.getAllByRole('option', { name: new RegExp(from.id) })[0].textContent).toContain(from.message)
++  fireEvent.change(screen.getByLabelText(zh ? '起始修订' : 'From revision'), { target: { value: from.id } })
++  fireEvent.change(screen.getByLabelText(zh ? '目标修订' : 'To revision'), { target: { value: to.id } })
++  const assertPair = (label: string) => {
++    const pair = screen.getByLabelText(label)
++    expect(pair.textContent).toContain(zh ? '起始修订: 修订 84 → 目标修订: 修订 12' : 'From revision: Revision 84 → To revision: Revision 12')
++    expect(pair.textContent).not.toContain(from.id)
++    expect(pair.textContent).not.toContain(to.id)
++    const details = document.getElementById(pair.getAttribute('aria-details') ?? '') as HTMLDetailsElement
++    expect(details?.tagName).toBe('DETAILS')
++    expect(details.open).toBe(false)
++    expect(details.querySelector('summary')?.textContent).toBe(zh ? '修订标识' : 'Revision IDs')
++    expect(Array.from(details.querySelectorAll('code'), code => code.textContent)).toEqual([from.id, to.id])
++    fireEvent.click(details.querySelector('summary')!)
++    expect(details.open).toBe(true)
++    fireEvent.click(details.querySelector('summary')!)
++  }
++  assertPair(zh ? '已选修订对' : 'Selected revision pair')
++  expect(compare).not.toHaveBeenCalled()
++  fireEvent.click(screen.getByRole('button', { name: zh ? '比较修订' : 'Compare revisions' }))
++  assertPair(zh ? '正在请求的修订对' : 'Requested revision pair')
++  expect(compare).toHaveBeenCalledExactlyOnceWith(projectId('project-1'), from.id, to.id)
++  await act(async () => pending.resolve({ ok: true, value: comparison(from, to, 'readable-pair-result') }))
++  assertPair(zh ? '服务器结果修订对' : 'Server result revision pair')
++})
+diff --git a/frontend/src/product/review/ReviewWorkspace.tsx b/frontend/src/product/review/ReviewWorkspace.tsx
+index 938fcbb6..d8d58f44 100644
+--- a/frontend/src/product/review/ReviewWorkspace.tsx
++++ b/frontend/src/product/review/ReviewWorkspace.tsx
+@@ -4,13 +4,25 @@ import { Badge, Button, EmptyState, Panel, Skeleton, Tabs } from '../../componen
+ import { useProjectContext } from '../../foundation/projectContext'
+ import { PageHeading, ProjectFrame } from '../../surfaces/FoundationPages'
+ import { SemanticDiff } from '../timeline/SemanticDiff'
+-import type { RevisionComparison, RevisionListEntry, TimelineQueryGateway } from '../timeline/gateways'
++import type { GatewayFailure, RevisionComparison, RevisionListEntry, TimelineQueryGateway } from '../timeline/gateways'
+ import { useInteractionStore, useSurfaceAdapter } from '../../interaction/SelectionContext'
+ import { projectId } from '../timeline/types'
+ import { useTranslation } from '../../localization'
+ 
+ const sections = ['Overview', 'Visual Changes', 'Semantic Changes', 'Conversation', 'Checks'] as const
+-const chooseMessage = 'Choose two different revisions to compare their changes.'
++const sectionKeys = ['overview', 'visual', 'panel', 'conversation', 'checks'] as const
++
++type ReviewFailure = { kind: 'gateway'; failure: GatewayFailure } | { kind: 'network' } | { kind: 'mismatch' }
++const retryable = (error: ReviewFailure) => error.kind === 'network' || (error.kind === 'gateway' && error.failure.retryable)
++
++function FailureDetails({ error, comparison = false }: { error: ReviewFailure; comparison?: boolean }) {
++  const { t } = useTranslation()
++  if (error.kind !== 'gateway') return null
++  return <details><summary>{t(comparison ? 'review.comparisonTechnical' : 'review.technical')}</summary>
++    <code>{error.failure.code}</code><p>{error.failure.message}</p>
++    {error.failure.details.map((detail, index) => <p key={index}>{detail}</p>)}
++  </details>
++}
+ 
+ export function ReviewWorkspace({ queryGateway }: { queryGateway: TimelineQueryGateway }) {
+   const project = useProjectContext()
+@@ -19,21 +31,20 @@ export function ReviewWorkspace({ queryGateway }: { queryGateway: TimelineQueryG
+ 
+ function ReviewSession({ queryGateway }: { queryGateway: TimelineQueryGateway }) {
+   const project = useProjectContext()
+-  const { t } = useTranslation()
++  const { t, formatDate } = useTranslation()
+   const store = useInteractionStore()
+   const tabsId = useId()
+   const [active, setActive] = useState<string>('Semantic Changes')
+   const [history, setHistory] = useState<readonly RevisionListEntry[]>([])
+   const [historyState, setHistoryState] = useState<'LOADING' | 'READY' | 'ERROR'>('LOADING')
+-  const [historyError, setHistoryError] = useState('')
++  const [historyError, setHistoryError] = useState<ReviewFailure | null>(null)
+   const [retry, setRetry] = useState(0)
+   const [from, setFrom] = useState('')
+   const [to, setTo] = useState('')
+   const [comparison, setComparison] = useState<RevisionComparison | null>(null)
+   const [filter, setFilter] = useState('ALL')
+   const [pending, setPending] = useState(false)
+-  const [compareError, setCompareError] = useState(false)
+-  const [message, setMessage] = useState(chooseMessage)
++  const [compareError, setCompareError] = useState<ReviewFailure | null>(null)
+   const comparisonGeneration = useRef(0)
+   const pendingRequest = useRef(false)
+ 
+@@ -43,14 +54,13 @@ function ReviewSession({ queryGateway }: { queryGateway: TimelineQueryGateway })
+     pendingRequest.current = false
+     setPending(false)
+     setHistoryState('LOADING')
+-    setHistoryError('')
++    setHistoryError(null)
+     setHistory([])
+     setFrom('')
+     setTo('')
+     store.setRevisionPair(undefined)
+     setComparison(null)
+-    setCompareError(false)
+-    setMessage(chooseMessage)
++    setCompareError(null)
+     const load = async () => {
+       try {
+         const result = await queryGateway.listRevisions(projectId(project.projectId))
+@@ -59,16 +69,18 @@ function ReviewSession({ queryGateway }: { queryGateway: TimelineQueryGateway })
+           // Repeated entries do not create a second distinct revision.
+           setHistory(result.value.filter((item, index, entries) => entries.findIndex(entry => entry.id === item.id) === index))
+           setHistoryState('READY')
+-        } else { setHistoryError(`${result.code}: ${result.message}`); setHistoryState('ERROR') }
++        } else { setHistoryError({ kind: 'gateway', failure: result }); setHistoryState('ERROR') }
+       } catch {
+-        if (activeRequest) { setHistoryError('Revision history could not be loaded. Try again.'); setHistoryState('ERROR') }
++        if (activeRequest) { setHistoryError({ kind: 'network' }); setHistoryState('ERROR') }
+       }
+     }
+     void load()
+     return () => { activeRequest = false; comparisonGeneration.current += 1; pendingRequest.current = false }
+   }, [project.projectId, queryGateway, retry, store])
+ 
+-  const canCompare = historyState === 'READY' && history.length >= 2 && from !== to && history.some(item => item.id === from) && history.some(item => item.id === to)
++  const validPair = historyState === 'READY' && history.length >= 2 && from !== to && history.some(item => item.id === from) && history.some(item => item.id === to)
++  // Only the unchanged current failure suppresses a repeat; pair edits clear it.
++  const canCompare = validPair && !(compareError && !retryable(compareError))
+   const compare = async () => {
+     if (!canCompare || pendingRequest.current) return
+     const fromRevision = history.find(item => item.id === from)!
+@@ -78,15 +90,16 @@ function ReviewSession({ queryGateway }: { queryGateway: TimelineQueryGateway })
+     setPending(true)
+     setComparison(null)
+     setFilter('ALL')
+-    setCompareError(false)
+-    setMessage('Loading revision comparison…')
++    setCompareError(null)
+     try {
+       const result = await queryGateway.compare(projectId(project.projectId), fromRevision.id, toRevision.id)
+       if (comparisonGeneration.current !== generation) return
+-      if (result.ok) { setComparison(result.value); setMessage(result.value.entityChanges.length ? 'Comparison loaded.' : 'Comparison loaded with no entity changes.'); }
+-      else { setCompareError(true); setMessage(`${result.code}: ${result.message}`) }
++      if (result.ok) {
++        if (result.value.fromRevision.id !== fromRevision.id || result.value.toRevision.id !== toRevision.id) setCompareError({ kind: 'mismatch' })
++        else setComparison(result.value)
++      } else setCompareError({ kind: 'gateway', failure: result })
+     } catch {
+-      if (comparisonGeneration.current === generation) { setCompareError(true); setMessage('Revision comparison could not be loaded. Retry comparison.'); }
++      if (comparisonGeneration.current === generation) setCompareError({ kind: 'network' })
+     } finally {
+       if (comparisonGeneration.current === generation) { pendingRequest.current = false; setPending(false) }
+     }
+@@ -100,40 +113,68 @@ function ReviewSession({ queryGateway }: { queryGateway: TimelineQueryGateway })
+   const requestComparison = () => { if (canCompare) store.dispatch({ category: 'READ_ONLY_QUERY', type: 'compare-revisions', pair: { from, to } }) }
+ 
+   const changeRevision = (side: 'from' | 'to', value: string) => {
++    if (value === (side === 'from' ? from : to)) return
+     comparisonGeneration.current += 1
+     pendingRequest.current = false
+     setPending(false)
+     setComparison(null)
+     setFilter('ALL')
+-    setCompareError(false)
+-    setMessage(chooseMessage)
+     if (side === 'from') setFrom(value)
+     else setTo(value)
+     const pair = { from: side === 'from' ? value : from, to: side === 'to' ? value : to }
++    setCompareError(null)
+     store.setRevisionPair(pair.from && pair.to && pair.from !== pair.to && history.some(item => item.id === pair.from) && history.some(item => item.id === pair.to) ? pair : undefined)
+   }
+ 
+-  return <>
++  const failureExplanation = (error: ReviewFailure) => t(error.kind === 'gateway' ? `review.failure.${error.failure.code}` : error.kind === 'network' ? 'review.failure.NETWORK' : 'review.failureMismatch')
++  const choiceHelp = !from && !to ? 'chooseBoth' : !from ? 'chooseFrom' : !to ? 'chooseTo' : from === to ? 'chooseDifferent' : !validPair ? 'chooseKnown' : 'ready'
++  const revisionLabel = (item: RevisionListEntry) => {
++    const date = new Date(item.createdAt)
++    const readableDate = item.createdAt && Number.isFinite(date.getTime()) ? formatDate(date, { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' }) : item.createdAt
++    return [t('review.revisionNumber', { number: item.revisionNumber }), item.message, readableDate, item.id].filter(Boolean).join(' · ')
++  }
++
++  const selectedFrom = history.find(item => item.id === from)
++  const selectedTo = history.find(item => item.id === to)
++
++  return <div className="ff-review-workspace">
+     <PageHeading eyebrow={t('review.eyebrow')} title={t('review.title')} description={t('review.description')} />
+-    <Tabs label="Review sections" activeId={active} onChange={setActive} tabs={sections.map((label, index) => ({ id: label, label, tabId: `${tabsId}-tab-${index}`, panelId: `${tabsId}-panel-${index}` }))} />
++    {project.projectName ? <h2>{project.projectName}</h2> : null}
++    <details className="ff-review-identities"><summary>{t('review.projectDetails')}</summary>
++      <dl><dt>{t('review.workspaceId')}</dt><dd><code>{project.workspaceId}</code></dd><dt>{t('review.projectId')}</dt><dd><code>{project.projectId}</code></dd></dl>
++    </details>
++    <Tabs label={t('review.sections')} activeId={active} onChange={setActive} tabs={sections.map((label, index) => ({ id: label, label: t(`review.${sectionKeys[index]}`), tabId: `${tabsId}-tab-${index}`, panelId: `${tabsId}-panel-${index}` }))} />
+     {sections.map((section, index) => <div key={section} role="tabpanel" id={`${tabsId}-panel-${index}`} aria-labelledby={`${tabsId}-tab-${index}`} hidden={active !== section} tabIndex={0}>
+-      {active === section ? <Panel title={section}>{section === 'Semantic Changes' ? <>
+-        <div aria-label="Revision history" aria-busy={historyState === 'LOADING'}>
+-          {historyState === 'LOADING' ? <><p role="status">Loading revision history…</p><Skeleton label="Loading revision choices and change summary" /></> : null}
+-          {historyState === 'ERROR' ? <><p role="alert">We couldn’t load revision history. Try again to choose revisions.</p><Button onClick={() => setRetry(value => value + 1)}>Retry history</Button><details><summary>Technical details</summary><p>{historyError}</p></details></> : null}
+-          {historyState === 'READY' && history.length === 0 ? <EmptyState title="No revisions available" description="No revisions were returned for this project. Comparison needs two distinct revisions." action={<Button onClick={() => setRetry(value => value + 1)}>Refresh history</Button>} /> : null}
+-          {historyState === 'READY' && history.length === 1 ? <p role="status">Only one distinct revision is available. Comparison needs two.<Button onClick={() => setRetry(value => value + 1)}>Refresh history</Button></p> : null}
++      {active === section ? <Panel title={t(`review.${sectionKeys[index]}`)}>{section === 'Semantic Changes' ? <>
++        <p id={`${tabsId}-direction`}>{t('review.direction')}</p>
++        <div aria-label={t('review.history')} aria-busy={historyState === 'LOADING'}>
++          {historyState === 'LOADING' ? <><p role="status">{t('review.loadingHistory')}</p><Skeleton label={t('review.loadingChoices')} /></> : null}
++          {historyState === 'ERROR' && historyError ? <>
++            <p role="alert">{t('review.historyFailed')} {failureExplanation(historyError)} {t(retryable(historyError) ? 'review.historyRetryHelp' : 'review.historyBlockedHelp')}</p>
++            {retryable(historyError) ? <Button onClick={() => setRetry(value => value + 1)}>{t('review.retryHistory')}</Button> : null}
++            <FailureDetails error={historyError} />
++          </> : null}
++          {historyState === 'READY' && history.length === 0 ? <EmptyState title={t('review.noRevisions')} description={t('review.noRevisionsHelp')} action={<Button onClick={() => setRetry(value => value + 1)}>{t('review.refreshHistory')}</Button>} /> : null}
++          {historyState === 'READY' && history.length === 1 ? <p role="status">{t('review.oneRevision')}<Button onClick={() => setRetry(value => value + 1)}>{t('review.refreshHistory')}</Button></p> : null}
+           <div className="ff-review-compare-controls">
+-            {(['from', 'to'] as const).map(side => <label key={side}>{side === 'from' ? 'From revision' : 'To revision'}<select disabled={historyState !== 'READY' || history.length < 2} value={side === 'from' ? from : to} onChange={event => changeRevision(side, event.target.value)}><option value="">Select revision</option>{history.map(item => <option key={item.id} value={item.id}>r{item.revisionNumber} · {item.id}</option>)}</select></label>)}
+-            <Button disabled={!canCompare || pending} onClick={requestComparison}>{pending ? 'Comparing…' : compareError ? 'Retry comparison' : 'Compare revisions'}</Button><Badge tone="warning">MERGE DISABLED</Badge>
++            {(['from', 'to'] as const).map(side => <label key={side}>{t(side === 'from' ? 'review.from' : 'review.to')}<select aria-describedby={`${tabsId}-direction ${tabsId}-comparison-status`} disabled={historyState !== 'READY' || history.length < 2} value={side === 'from' ? from : to} onChange={event => changeRevision(side, event.target.value)}><option value="">{t('review.selectRevision')}</option>{history.map(item => <option key={item.id} value={item.id}>{revisionLabel(item)}</option>)}</select></label>)}
++            <Button aria-describedby={`${tabsId}-comparison-status`} disabled={!canCompare || pending} onClick={requestComparison}>{t(pending ? 'review.comparing' : compareError && retryable(compareError) ? 'review.retryComparison' : 'review.compare')}</Button><Badge tone="warning">{t('review.mergeDisabled')}</Badge>
+           </div>
+         </div>
+-        <p role={compareError ? 'alert' : 'status'}>{compareError ? 'We couldn’t compare these revisions. Retry comparison above.' : message}</p>{compareError ? <details><summary>Comparison technical details</summary><p>{message}</p></details> : null}
+-        <details className="ff-compact-details"><summary>How comparison works</summary><p>Semantic changes are a formatted server comparison. Timeline retains revision and merge authority. No client diff is computed; merge resolution is unavailable.</p></details>
+-        <div aria-label="Server comparison" aria-busy={pending}><SemanticDiff comparison={comparison} actionFilter={filter} onActionFilterChange={setFilter} /></div>
+-      </> : <EmptyState title={`${section} unavailable`} description="This bounded product slice does not fabricate a review projection." />}</Panel> : null}
++        {from && to ? <>
++          <p aria-label={t(pending ? 'review.requestedPair' : 'review.selectedPair')} aria-details={`${tabsId}-pair-details`}>{t(pending ? 'review.requestedPair' : 'review.selectedPair')}: {t('review.from')}: {selectedFrom ? t('review.revisionNumber', { number: selectedFrom.revisionNumber }) : t('review.selectRevision')} → {t('review.to')}: {selectedTo ? t('review.revisionNumber', { number: selectedTo.revisionNumber }) : t('review.selectRevision')}</p>
++          <details id={`${tabsId}-pair-details`}><summary>{t('review.pairDetails')}</summary>
++            <dl><dt>{t('review.from')}</dt><dd><code>{from}</code></dd><dt>{t('review.to')}</dt><dd><code>{to}</code></dd></dl>
++          </details>
++        </> : null}
++        <p id={`${tabsId}-comparison-status`} role={compareError ? 'alert' : 'status'}>{compareError
++          ? <>{t('review.comparisonFailed')} {failureExplanation(compareError)} {t(retryable(compareError) ? 'review.comparisonRetryHelp' : 'review.comparisonBlockedHelp')}</>
++          : pending ? t('review.loadingComparison') : comparison ? t(comparison.entityChanges.length ? 'review.loaded' : 'review.loadedNoEntities') : historyState === 'READY' && history.length >= 2 ? t(`review.${choiceHelp}`) : t('review.needsHistory')}</p>
++        {compareError ? <FailureDetails error={compareError} comparison /> : null}
++        <div aria-label={t('review.serverComparison')} aria-busy={pending}><SemanticDiff comparison={comparison} actionFilter={filter} onActionFilterChange={setFilter} /></div>
++      </> : <EmptyState title={t('review.sectionUnavailable', { section: t(`review.${sectionKeys[index]}`) })} description={t('review.sectionUnavailableHelp')} />}</Panel> : null}
+     </div>)}
+-  </>
++  </div>
+ }
+ 
+ export function ReviewPage({ queryGateway = defaultTimelineQueryGateway }: { queryGateway?: TimelineQueryGateway }) {
+diff --git a/frontend/src/product/timeline/SemanticDiff.test.tsx b/frontend/src/product/timeline/SemanticDiff.test.tsx
+index a082b27f..b29cf34e 100644
+--- a/frontend/src/product/timeline/SemanticDiff.test.tsx
++++ b/frontend/src/product/timeline/SemanticDiff.test.tsx
+@@ -1,3 +1,4 @@
++import { LocalizationProvider } from '../../localization'
+ import { fireEvent, render, screen } from '@testing-library/react'
+ import { describe, expect, it, vi } from 'vitest'
+ import type { RevisionComparison, RevisionListEntry } from './gateways'
+@@ -25,3 +26,58 @@ describe('server semantic diff presentation', () => {
+     expect(onFilter).toHaveBeenCalledWith('added')
+   })
+ })
++
++
++describe('SemanticDiff truthful empty and localized projections', () => {
++  it('shows supplied asset counters and exact ordered server identities', () => {
++    render(<SemanticDiff comparison={comparison} actionFilter="ALL" onActionFilterChange={vi.fn()} />)
++    expect(screen.getByText('Assets added / removed').parentElement?.textContent).toContain('1 / 0')
++    const pair = screen.getByLabelText('Server result revision pair')
++    expect(pair.textContent).toContain('From revision: Revision 1 → To revision: Revision 2')
++    expect(pair.textContent).not.toContain('revision-R0')
++    const details = document.getElementById(pair.getAttribute('aria-details') ?? '') as HTMLDetailsElement
++    expect(details?.tagName).toBe('DETAILS')
++    expect(details.open).toBe(false)
++    expect(Array.from(details.querySelectorAll('code'), code => code.textContent)).toEqual(['revision-R0', 'revision-R1'])
++  })
++
++  it.each([
++    { supported: false, nonzero: false, title: 'Summary unavailable', absent: 'No changes reported' },
++    { supported: true, nonzero: false, title: 'No changes reported', absent: 'No matching entity changes' },
++    { supported: true, nonzero: true, title: 'No entity details returned', absent: 'No changes reported' },
++  ])('distinguishes summary support=$supported, nonzero=$nonzero with no entities', ({ supported, nonzero, title, absent }) => {
++    const summary = { supported, tracksAdded: 0, tracksRemoved: 0, tracksModified: 0, clipsAdded: 0, clipsRemoved: 0, clipsModified: 0, assetsAdded: nonzero ? 2 : 0, assetsRemoved: 0 }
++    render(<SemanticDiff comparison={{ ...comparison, summary, entityChanges: [] }} actionFilter="ALL" onActionFilterChange={vi.fn()} />)
++    expect(screen.getByText(title)).toBeTruthy()
++    expect(screen.queryByText(absent)).toBeNull()
++    if (!supported) expect(screen.queryByText('Tracks added / removed / changed')).toBeNull()
++  })
++
++  it('distinguishes a filtered empty list from server empty and preserves unknown opaque values', () => {
++    const input = { ...comparison, entityChanges: [{ kind: 'SERVER_KIND_甲', action: 'server-action-甲', entityId: 'entity-甲' }] }
++    const view = render(<SemanticDiff comparison={input} actionFilter="ADDED" onActionFilterChange={vi.fn()} />)
++    expect(screen.getByText('No matching entity changes')).toBeTruthy()
++    expect(screen.queryByText('No changes reported')).toBeNull()
++    view.rerender(<SemanticDiff comparison={input} actionFilter="ALL" onActionFilterChange={vi.fn()} />)
++    expect(screen.getByText('SERVER_KIND_甲')).toBeTruthy()
++    expect(screen.getByRole('option', { name: 'server-action-甲' }).getAttribute('value')).toBe('server-action-甲')
++    expect(screen.getByText('entity-甲')).toBeTruthy()
++  })
++
++  it('shows entity details even when summary is unsupported', () => {
++    render(<SemanticDiff comparison={{ ...comparison, summary: { ...comparison.summary, supported: false } }} actionFilter="ALL" onActionFilterChange={vi.fn()} />)
++    expect(screen.getByText('Summary unavailable')).toBeTruthy()
++    expect(screen.getByText('clip-1')).toBeTruthy()
++    expect(screen.queryByText('No changes reported')).toBeNull()
++  })
++
++  it('localizes Chinese labels while keeping action values and server IDs unchanged', () => {
++    const change = vi.fn()
++    render(<LocalizationProvider initialLocale="zh-CN"><SemanticDiff comparison={comparison} actionFilter="ALL" onActionFilterChange={change} /></LocalizationProvider>)
++    expect(screen.getByText('新增 / 移除素材')).toBeTruthy()
++    expect(screen.getByRole('option', { name: '新增' }).getAttribute('value')).toBe('added')
++    fireEvent.change(screen.getByLabelText('操作'), { target: { value: 'added' } })
++    expect(change).toHaveBeenCalledWith('added')
++    expect(screen.getByText('clip-1')).toBeTruthy()
++  })
++})
+diff --git a/frontend/src/product/timeline/SemanticDiff.tsx b/frontend/src/product/timeline/SemanticDiff.tsx
+index 0aaa6606..55a84488 100644
+--- a/frontend/src/product/timeline/SemanticDiff.tsx
++++ b/frontend/src/product/timeline/SemanticDiff.tsx
+@@ -1,32 +1,52 @@
+-import { useMemo } from 'react'
++import { useId, useMemo } from 'react'
+ import { Badge, EmptyState, PropertyRow } from '../../components/design-system'
++import { useTranslation } from '../../localization'
+ import type { RevisionComparison } from './gateways'
+ 
++const actionKeys: Readonly<Record<string, string>> = { ALL: 'all', ADDED: 'added', added: 'added', REMOVED: 'removed', removed: 'removed', MODIFIED: 'modified', modified: 'modified' }
++const kindKeys: Readonly<Record<string, string>> = { CLIP: 'clip', TRACK: 'track', ASSET: 'asset' }
++
+ export function SemanticDiff({ comparison, actionFilter, onActionFilterChange }: {
+   comparison: RevisionComparison | null
+   actionFilter: string
+   onActionFilterChange: (action: string) => void
+ }) {
++  const { t } = useTranslation()
++  const pairDetailsId = useId()
+   const actions = useMemo(() => comparison
+-    ? ['ALL', ...Array.from(new Set(comparison.entityChanges.map(change => change.action))).sort()]
++    ? ['ALL', ...Array.from(new Set(comparison.entityChanges.map(change => change.action))).filter(action => action !== 'ALL').sort()]
+     : ['ALL'], [comparison])
+   const visible = comparison?.entityChanges.filter(change => actionFilter === 'ALL' || change.action === actionFilter) ?? []
++  const actionLabel = (action: string) => Object.prototype.hasOwnProperty.call(actionKeys, action) ? t(`review.diff.${actionKeys[action]}`) : action
++  const kindLabel = (kind: string) => Object.prototype.hasOwnProperty.call(kindKeys, kind) ? t(`review.diff.${kindKeys[kind]}`) : kind
+ 
+   if (!comparison) {
+-    return <EmptyState title="No server comparison loaded" description="Select explicit revisions and request a server comparison. No client diff is computed." />
++    return <EmptyState title={t('review.diff.notLoaded')} description={t('review.diff.notLoadedHelp')} />
+   }
+ 
++  const summary = comparison.summary
++  // Only classify the supplied summary's display state; never derive a diff from entities.
++  const zeroSummary = summary.supported && [summary.tracksAdded, summary.tracksRemoved, summary.tracksModified,
++    summary.clipsAdded, summary.clipsRemoved, summary.clipsModified, summary.assetsAdded, summary.assetsRemoved].every(count => count === 0)
++  const emptyKey = comparison.entityChanges.length ? 'filteredEmpty' : zeroSummary ? 'zero' : 'noEntities'
++
+   return (
+     <div className="ff-semantic-diff">
++      <p aria-label={t('review.diff.resultPair')} aria-details={pairDetailsId}>{t('review.diff.resultPair')}: {t('review.from')}: {t('review.revisionNumber', { number: comparison.fromRevision.revisionNumber })} → {t('review.to')}: {t('review.revisionNumber', { number: comparison.toRevision.revisionNumber })}</p>
++      <details id={pairDetailsId}><summary>{t('review.pairDetails')}</summary>
++        <dl><dt>{t('review.from')}</dt><dd><code>{comparison.fromRevision.id}</code></dd><dt>{t('review.to')}</dt><dd><code>{comparison.toRevision.id}</code></dd></dl>
++      </details>
+       <div className="ff-table-toolbar">
+-        <label>Action <select value={actionFilter} onChange={event => onActionFilterChange(event.target.value)}>{actions.map(action => <option key={action}>{action}</option>)}</select></label>
+-        <Badge tone={comparison.summary.supported ? 'info' : 'warning'}>{comparison.summary.supported ? 'SERVER SEMANTIC DIFF' : 'SERVER SUMMARY LIMITED'}</Badge>
+-      </div>
+-      <div className="ff-diff-summary" aria-label="Server change summary">
+-        <PropertyRow label="Tracks added / removed / changed"><span>{comparison.summary.tracksAdded} / {comparison.summary.tracksRemoved} / {comparison.summary.tracksModified}</span></PropertyRow>
+-        <PropertyRow label="Clips added / removed / changed"><span>{comparison.summary.clipsAdded} / {comparison.summary.clipsRemoved} / {comparison.summary.clipsModified}</span></PropertyRow>
++        <label>{t('review.diff.action')} <select value={actionFilter} onChange={event => onActionFilterChange(event.target.value)}>{actions.map(action => <option key={action} value={action}>{actionLabel(action)}</option>)}</select></label>
++        <Badge tone={summary.supported ? 'info' : 'warning'}>{t(summary.supported ? 'review.diff.server' : 'review.diff.limited')}</Badge>
+       </div>
+-      {visible.length ? <ul className="ff-entity-change-list">{visible.map(change => <li key={`${change.kind}:${change.entityId}:${change.action}`}><Badge>{change.action}</Badge><strong>{change.kind}</strong><code>{change.entityId}</code></li>)}</ul> : <EmptyState title="No matching entity changes" description="The server comparison returned no entities for this presentation filter." />}
++      {summary.supported ? <div className="ff-diff-summary" aria-label={t('review.diff.summary')}>
++        <PropertyRow label={t('review.diff.tracks')}><span>{summary.tracksAdded} / {summary.tracksRemoved} / {summary.tracksModified}</span></PropertyRow>
++        <PropertyRow label={t('review.diff.clips')}><span>{summary.clipsAdded} / {summary.clipsRemoved} / {summary.clipsModified}</span></PropertyRow>
++        <PropertyRow label={t('review.diff.assets')}><span>{summary.assetsAdded} / {summary.assetsRemoved}</span></PropertyRow>
++      </div> : <EmptyState title={t('review.diff.unsupported')} description={t('review.diff.unsupportedHelp')} />}
++      {visible.length ? <ul className="ff-entity-change-list">{visible.map((change, index) => <li key={JSON.stringify([change.kind, change.entityId, change.action, index])}><Badge>{actionLabel(change.action)}</Badge><strong>{kindLabel(change.kind)}</strong><code>{change.entityId}</code></li>)}</ul>
++        : <EmptyState title={t(`review.diff.${emptyKey}`)} description={t(`review.diff.${emptyKey}Help`)} />}
+     </div>
+   )
+ }
+diff --git a/frontend/src/styles/foundation.css b/frontend/src/styles/foundation.css
+index cfe63ed1..93029d86 100644
+--- a/frontend/src/styles/foundation.css
++++ b/frontend/src/styles/foundation.css
+@@ -421,3 +421,24 @@ kbd { padding: 1px var(--space-1); border: 1px solid var(--border-default); bord
+   .ff-nle-stage .ff-canonical-track { min-height: 54px; }
+ }
+ .ff-playhead-scrubber { display: flex; flex-direction: column; gap: 4px; }
++
++/* Review and its shared NLE comparison: retain complete server identities at all widths. */
++.ff-review-workspace { min-width: 0; }
++.ff-review-workspace p, .ff-review-workspace h2, .ff-review-workspace code,
++.ff-review-workspace details, .ff-semantic-diff p, .ff-semantic-diff strong,
++.ff-semantic-diff .ff-badge { overflow-wrap: anywhere; }
++.ff-review-identities { margin-bottom: var(--space-3); }
++.ff-review-identities dd { margin-inline-start: 0; }
++.ff-review-workspace .ff-review-compare-controls select { min-width: 0; max-width: 100%; }
++.ff-semantic-diff .ff-entity-change-list li { grid-template-columns: minmax(0, auto) minmax(0, .5fr) minmax(0, 1fr); }
++.ff-semantic-diff .ff-entity-change-list code { overflow: visible; text-overflow: clip; white-space: normal; overflow-wrap: anywhere; }
++.ff-semantic-diff .ff-table-toolbar { flex-wrap: wrap; }
++.ff-semantic-diff .ff-table-toolbar label { min-width: 0; max-width: 100%; }
++.ff-semantic-diff .ff-table-toolbar select { min-width: 0; max-width: 100%; }
++@media (max-width: 600px) {
++  .ff-review-workspace .ff-review-compare-controls { align-items: stretch; }
++  .ff-review-workspace .ff-review-compare-controls label { flex-basis: 100%; }
++  .ff-semantic-diff .ff-entity-change-list li { grid-template-columns: minmax(0, 1fr); }
++  .ff-semantic-diff .ff-entity-change-list code { grid-column: 1 / -1; }
++  .ff-semantic-diff .ff-property-row { grid-template-columns: minmax(0, 1fr); }
++}

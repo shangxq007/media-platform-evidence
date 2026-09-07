@@ -1,0 +1,38 @@
+{
+  "name": "type-app",
+  "command": [
+    "./node_modules/.bin/tsc",
+    "--noEmit",
+    "-p",
+    "tsconfig.app.json",
+    "--incremental",
+    "false"
+  ],
+  "containment": [
+    "bwrap",
+    "--die-with-parent",
+    "--ro-bind",
+    "/",
+    "/",
+    "--bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_FOCUSED_REVIEW_UX_CONVERGENCE_V1",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_FOCUSED_REVIEW_UX_CONVERGENCE_V1",
+    "--ro-bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_FOCUSED_REVIEW_UX_CONVERGENCE_V1/snapshot",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_FOCUSED_REVIEW_UX_CONVERGENCE_V1/snapshot",
+    "--ro-bind",
+    "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules",
+    "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules",
+    "--proc",
+    "/proc",
+    "--dev",
+    "/dev",
+    "--tmpfs",
+    "/tmp",
+    "--chdir",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_FOCUSED_REVIEW_UX_CONVERGENCE_V1/snapshot/frontend",
+    "--"
+  ],
+  "exit_code": 2,
+  "elapsed_seconds": 8.440723657608032
+}

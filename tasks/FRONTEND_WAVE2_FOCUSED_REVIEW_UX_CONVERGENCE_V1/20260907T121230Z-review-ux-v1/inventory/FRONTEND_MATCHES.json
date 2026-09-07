@@ -1,0 +1,126 @@
+[
+  {
+    "path": "frontend/src/api/me.ts",
+    "matches": [
+      "98:export interface NotificationItem {",
+      "225:async getMyNotifications(page = 0, size = 20, status?: string): Promise<{ notifications: NotificationItem[]; total: number; page: number; size: number; unreadCount: number }> {",
+      "226:const { data } = await api.get('/me/notifications', { params: { page, size, status } })",
+      "230:async markNotificationRead(id: string): Promise<void> {",
+      "231:await api.post(`/me/notifications/${id}/read`)",
+      "244:// Notification channel bindings",
+      "245:async getNotificationChannels(): Promise<NotificationChannelBinding[]> {",
+      "246:const { data } = await api.get('/me/notification-channels')",
+      "249:async bindNotificationChannel(channelType: string, destination: string, webhookSecret?: string): Promise<NotificationChannelBinding> {",
+      "250:const { data } = await api.post('/me/notification-channels', { channelType, destination, webhookSecret })",
+      "253:async verifyNotificationChannel(bindingId: string): Promise<void> {",
+      "254:await api.post(`/me/notification-channels/${bindingId}/verify`)",
+      "256:async testNotificationChannel(bindingId: string): Promise<void> {",
+      "257:await api.post(`/me/notification-channels/${bindingId}/test`)",
+      "259:async disableNotificationChannel(bindingId: string): Promise<void> {",
+      "260:await api.post(`/me/notification-channels/${bindingId}/disable`)",
+      "262:async deleteNotificationChannel(bindingId: string): Promise<void> {",
+      "263:await api.delete(`/me/notification-channels/${bindingId}`)",
+      "265:// Notification subscriptions",
+      "266:async getNotificationSubscriptions(): Promise<NotificationSubscription[]> {",
+      "267:const { data } = await api.get('/me/notification-subscriptions')",
+      "270:async updateNotificationSubscription(eventKey: string, enabled: boolean, channels?: string[]): Promise<NotificationSubscription> {",
+      "271:const { data } = await api.put(`/me/notification-subscriptions/${eventKey}`, { enabled, channels })",
+      "274:async batchUpdateNotificationSubscriptions(updates: Array<{ eventKey: string; enabled: boolean; channels?: string[] }>): Promise<{ results: NotificationSubscription[]; errors: Array<{ eventKey: string; errorCode: string; message: string }> }> {",
+      "275:const { data } = await api.post('/me/notification-subscriptions/batch-update', { updates })",
+      "278:// Notification preferences",
+      "279:async getNotificationPreferences(): Promise<NotificationPreference> {",
+      "280:const { data } = await api.get('/me/notification-preferences')",
+      "283:async updateNotificationPreferences(prefs: Partial<NotificationPreference>): Promise<NotificationPreference> {",
+      "284:const { data } = await api.put('/me/notification-preferences', prefs)",
+      "287:// Notification inbox",
+      "288:async getNotificationInbox(page = 0, size = 20): Promise<{ items: NotificationInboxItem[]; total: number; page: number; size: number; unreadCount: number }> {",
+      "289:const { data } = await api.get('/me/notifications/inbox', { params: { page, size } })",
+      "292:async markInboxNotificationRead(id: string): Promise<void> {",
+      "293:await api.post(`/me/notifications/inbox/${id}/read`)",
+      "295:async markAllInboxNotificationsRead(): Promise<void> {",
+      "296:await api.post('/me/notifications/inbox/read-all')",
+      "298:// Notification event catalog",
+      "299:async getNotificationEventCatalog(): Promise<NotificationEventCatalogItem[]> {",
+      "300:const { data } = await api.get('/notifications/events')",
+      "305:export interface NotificationChannelBinding {",
+      "320:export interface NotificationSubscription {",
+      "332:export interface NotificationPreference {",
+      "345:export interface NotificationInboxItem {",
+      "362:export interface NotificationEventCatalogItem {"
+    ]
+  },
+  {
+    "path": "frontend/src/api/admin/notification.ts",
+    "matches": [
+      "3:export interface AdminNotification {",
+      "12:export interface NotificationDelivery {",
+      "14:notificationId?: string",
+      "20:export interface NotificationEventDefinition {",
+      "37:export interface NotificationDeliveryLog {",
+      "40:notificationId: string",
+      "52:export interface NotificationProviderStatus {",
+      "62:export const NotificationAPI = {",
+      "63:async listNotifications(tenantId: string): Promise<AdminNotification[]> {",
+      "64:const { data } = await api.get(`/tenants/${tenantId}/notifications`)",
+      "67:async getNotification(tenantId: string, notificationId: string): Promise<AdminNotification> {",
+      "68:const { data } = await api.get(`/tenants/${tenantId}/notifications/${notificationId}`)",
+      "71:async getDeliveries(tenantId: string, notificationId: string): Promise<NotificationDelivery[]> {",
+      "72:const { data } = await api.get(`/tenants/${tenantId}/notifications/${notificationId}/deliveries`)",
+      "75:async retryNotification(tenantId: string, notificationId: string): Promise<void> {",
+      "76:await api.post(`/tenants/${tenantId}/notifications/${notificationId}/retry`)",
+      "83:await api.post('/notifications/events', event)",
+      "87:async getEventDefinitions(): Promise<NotificationEventDefinition[]> {",
+      "88:const { data } = await api.get('/admin/notifications/event-definitions')",
+      "91:async createEventDefinition(def: Omit<NotificationEventDefinition, 'archived' | 'createdAt' | 'updatedAt'>): Promise<NotificationEventDefinition> {",
+      "92:const { data } = await api.post('/admin/notifications/event-definitions', def)",
+      "95:async updateEventDefinition(eventKey: string, def: Partial<NotificationEventDefinition>): Promise<NotificationEventDefinition> {",
+      "96:const { data } = await api.put(`/admin/notifications/event-definitions/${eventKey}`, def)",
+      "100:await api.post(`/admin/notifications/event-definitions/${eventKey}/archive`)",
+      "111:} = {}): Promise<{ items: NotificationDeliveryLog[]; total: number; page: number; size: number }> {",
+      "112:const { data } = await api.get('/admin/notifications/delivery-logs', { params })",
+      "116:await api.post(`/admin/notifications/delivery-logs/${logId}/retry`)",
+      "120:async getProviderStatus(): Promise<NotificationProviderStatus[]> {",
+      "121:const { data } = await api.get('/admin/notifications/providers')"
+    ]
+  },
+  {
+    "path": "frontend/src/components/design-system/index.tsx",
+    "matches": [
+      "152:export function Toast({ title, message, onDismiss }: { title: string; message: string; onDismiss?: () => void }) {",
+      "153:return <div className=\"ff-toast\" role=\"status\"><div><strong>{title}</strong><p>{message}</p></div>{onDismiss ? <IconButton label=\"Dismiss notification\" icon=\"×\" onClick={onDismiss} /> : null}</div>"
+    ]
+  },
+  {
+    "path": "frontend/src/interaction/SelectionContext.tsx",
+    "matches": [
+      "17:// The store notification releases Canvas capture; flushSync also discards rendered preview."
+    ]
+  },
+  {
+    "path": "frontend/src/utils/i18n.ts",
+    "matches": [
+      "53:// Notification",
+      "54:'NOTIFICATION-404-001': 'Notification event not found',",
+      "56:'NOTIFICATION-404-003': 'Notification subscription not found',",
+      "57:'NOTIFICATION-400-001': 'Failed to update notification subscription',",
+      "58:'NOTIFICATION-404-004': 'Notification channel not found',",
+      "59:'NOTIFICATION-400-002': 'Unsupported notification channel',",
+      "65:'NOTIFICATION-503-001': 'Notification provider unavailable',",
+      "67:'NOTIFICATION-400-007': 'Notification delivery failed',",
+      "68:'NOTIFICATION-400-008': 'Notification delivery retry exhausted',",
+      "69:'NOTIFICATION-403-003': 'You do not have permission to manage this notification',",
+      "70:'NOTIFICATION-403-004': 'Required entitlement not granted for this notification feature',",
+      "71:'NOTIFICATION-429-001': 'Notification quota exceeded',",
+      "72:'NOTIFICATION-403-001': 'Critical notifications cannot be disabled',",
+      "73:'NOTIFICATION-400-009': 'Invalid notification preference',",
+      "75:'NOTIFICATION-403-006': 'Admin permission required for this notification operation',",
+      "76:'NOTIFICATION-FALLBACK': 'Using local notification provider (Novu not configured)',"
+    ]
+  },
+  {
+    "path": "frontend/src/utils/openreplay.ts",
+    "matches": [
+      "86:captureNotifications: true,"
+    ]
+  }
+]

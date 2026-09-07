@@ -1,0 +1,112 @@
+{
+  "execution": "full-frontend-final",
+  "test_count": 21,
+  "passed": 21,
+  "tests": [
+    {
+      "file": "src/localization/localization.test.tsx",
+      "name": "localization runtime renders bundled English and Chinese, switches at runtime, formats values, and falls back per key",
+      "status": "passed"
+    },
+    {
+      "file": "src/localization/localization.test.tsx",
+      "name": "localization runtime uses an explicit development marker for an unknown key",
+      "status": "passed"
+    },
+    {
+      "file": "src/localization/localization.test.tsx",
+      "name": "localization runtime validates required interpolation parameters and ignores extras",
+      "status": "passed"
+    },
+    {
+      "file": "src/localization/localization.test.tsx",
+      "name": "localization runtime keeps synchronous bundled copy through remote outage and invalid payloads, then accepts valid remote copy",
+      "status": "passed"
+    },
+    {
+      "file": "src/localization/localization.test.tsx",
+      "name": "localization runtime prevents a stale locale request from replacing the current locale",
+      "status": "passed"
+    },
+    {
+      "file": "src/localization/localization.test.tsx",
+      "name": "localization runtime loads a fresh-object provider once per unresolved locale and reuses resolved cache entries",
+      "status": "passed"
+    },
+    {
+      "file": "src/localization/localization.test.tsx",
+      "name": "localization runtime honors an injected resolved cache without refreshing it",
+      "status": "passed"
+    },
+    {
+      "file": "src/localization/localization.test.tsx",
+      "name": "localization runtime rejects validly digested remote keys and parameter contracts that diverge from English",
+      "status": "passed"
+    },
+    {
+      "file": "src/localization/localization.test.tsx",
+      "name": "catalog contract provides bundled catalogs through a concrete synchronous provider boundary",
+      "status": "passed"
+    },
+    {
+      "file": "src/localization/localization.test.tsx",
+      "name": "catalog contract uses the standard SHA-256 digest algorithm",
+      "status": "passed"
+    },
+    {
+      "file": "src/localization/localization.test.tsx",
+      "name": "catalog contract rejects schema and catalog version mismatches, unknown fields, HTML, malformed locale/namespaces/digest/params, and digest tampering",
+      "status": "passed"
+    },
+    {
+      "file": "src/localization/localization.test.tsx",
+      "name": "catalog contract contains malformed and prototype-key inputs and permits repeated placeholders under one parameter contract",
+      "status": "passed"
+    },
+    {
+      "file": "src/localization/localization.test.tsx",
+      "name": "catalog contract guards every required source key",
+      "status": "passed"
+    },
+    {
+      "file": "src/integrations/localization/config.test.ts",
+      "name": "localization integration composition is disabled when public delivery configuration is absent or incomplete",
+      "status": "passed"
+    },
+    {
+      "file": "src/integrations/localization/config.test.ts",
+      "name": "localization integration composition constructs only a validated credential-free public adapter",
+      "status": "passed"
+    },
+    {
+      "file": "src/integrations/localization/adapters/TolgeeRemoteCatalogAdapter.test.ts",
+      "name": "Tolgee public Content Delivery adapter validates a strict versioned manifest",
+      "status": "passed"
+    },
+    {
+      "file": "src/integrations/localization/adapters/TolgeeRemoteCatalogAdapter.test.ts",
+      "name": "Tolgee public Content Delivery adapter fetches the documented namespaced namespace/locale.json routes without credentials",
+      "status": "passed"
+    },
+    {
+      "file": "src/integrations/localization/adapters/TolgeeRemoteCatalogAdapter.test.ts",
+      "name": "Tolgee public Content Delivery adapter invokes the default platform fetch with the global receiver",
+      "status": "passed"
+    },
+    {
+      "file": "src/integrations/localization/adapters/TolgeeRemoteCatalogAdapter.test.ts",
+      "name": "Tolgee public Content Delivery adapter rejects well-shaped TMS contracts that alter source params or introduce TMS-owned keys",
+      "status": "passed"
+    },
+    {
+      "file": "src/integrations/localization/adapters/TolgeeRemoteCatalogAdapter.test.ts",
+      "name": "Tolgee public Content Delivery adapter rejects invalid, outage, and digest-mismatched delivery without returning a catalog",
+      "status": "passed"
+    },
+    {
+      "file": "src/integrations/localization/adapters/TolgeeRemoteCatalogAdapter.test.ts",
+      "name": "Tolgee public Content Delivery adapter rejects arbitrary or insecure delivery configuration",
+      "status": "passed"
+    }
+  ]
+}

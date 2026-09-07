@@ -1,0 +1,314 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:32.485662+00:00",
+    "name": "desktop-en-explicit-empty-start",
+    "expression": "[...document.querySelectorAll(\".ff-review-compare-controls select\")].every(e=>e.value===\"\") && document.querySelector(\".ff-review-compare-controls button\").disabled",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:33.997073+00:00",
+    "name": "desktop-en-native-ordered-selection",
+    "expression": "(()=>{const s=document.querySelectorAll(\".ff-review-compare-controls select\");return s[0].value.startsWith(\"review-1-\") && s[1].value.startsWith(\"review-2-\") && !document.querySelector(\".ff-review-compare-controls button\").disabled})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:34.157270+00:00",
+    "name": "desktop-en-tab-to-compare-visible-focus",
+    "expression": "document.activeElement===document.querySelector(\".ff-review-compare-controls button\") && document.activeElement.matches(\":focus-visible\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:34.419709+00:00",
+    "name": "desktop-en-keyboard-leave-pending-button",
+    "expression": "document.activeElement===document.querySelectorAll(\".ff-review-compare-controls select\")[1]",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:34.886361+00:00",
+    "name": "desktop-en-result-does-not-steal-focus",
+    "expression": "document.body.textContent.includes(\"fixture-added-clip-\") && document.activeElement===document.querySelectorAll(\".ff-review-compare-controls select\")[1]",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:34.890001+00:00",
+    "name": "desktop-en-long-label-layout",
+    "expression": "(()=>{const root=document.querySelector(\".ff-review-compare-controls\");return !!root && root.getBoundingClientRect().right<=innerWidth+1 && [...root.querySelectorAll(\"select\")].every(e=>e.getBoundingClientRect().width>40 && e.getBoundingClientRect().right<=innerWidth+1) && document.documentElement.scrollWidth<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:35.572224+00:00",
+    "name": "desktop-en-filter-local-result",
+    "expression": "document.querySelector(\".ff-semantic-diff select\").value===\"MODIFIED\" && document.body.textContent.includes(\"fixture-modified-track\") && !document.querySelector(\".ff-entity-change-list\")?.textContent.includes(\"fixture-added-clip-\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:35.724129+00:00",
+    "name": "desktop-en-labels-and-tab-links",
+    "expression": "(()=>{const c=document.querySelector(\".ff-review-compare-controls\");const tab=document.querySelector(\"[role=tab][aria-selected=true]\");const panel=document.getElementById(tab.getAttribute(\"aria-controls\"));return [...c.querySelectorAll(\"select\")].every(s=>s.labels.length>0) && panel?.getAttribute(\"aria-labelledby\")===tab.id})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:36.238085+00:00",
+    "name": "narrow-en-explicit-empty-start",
+    "expression": "[...document.querySelectorAll(\".ff-review-compare-controls select\")].every(e=>e.value===\"\") && document.querySelector(\".ff-review-compare-controls button\").disabled",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:37.768231+00:00",
+    "name": "narrow-en-native-ordered-selection",
+    "expression": "(()=>{const s=document.querySelectorAll(\".ff-review-compare-controls select\");return s[0].value.startsWith(\"review-1-\") && s[1].value.startsWith(\"review-2-\") && !document.querySelector(\".ff-review-compare-controls button\").disabled})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:37.930907+00:00",
+    "name": "narrow-en-tab-to-compare-visible-focus",
+    "expression": "document.activeElement===document.querySelector(\".ff-review-compare-controls button\") && document.activeElement.matches(\":focus-visible\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:38.194076+00:00",
+    "name": "narrow-en-keyboard-leave-pending-button",
+    "expression": "document.activeElement===document.querySelectorAll(\".ff-review-compare-controls select\")[1]",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:38.664707+00:00",
+    "name": "narrow-en-result-does-not-steal-focus",
+    "expression": "document.body.textContent.includes(\"fixture-added-clip-\") && document.activeElement===document.querySelectorAll(\".ff-review-compare-controls select\")[1]",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:38.669248+00:00",
+    "name": "narrow-en-long-label-layout",
+    "expression": "(()=>{const root=document.querySelector(\".ff-review-compare-controls\");return !!root && root.getBoundingClientRect().right<=innerWidth+1 && [...root.querySelectorAll(\"select\")].every(e=>e.getBoundingClientRect().width>40 && e.getBoundingClientRect().right<=innerWidth+1) && document.documentElement.scrollWidth<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:39.287795+00:00",
+    "name": "narrow-en-filter-local-result",
+    "expression": "document.querySelector(\".ff-semantic-diff select\").value===\"MODIFIED\" && document.body.textContent.includes(\"fixture-modified-track\") && !document.querySelector(\".ff-entity-change-list\")?.textContent.includes(\"fixture-added-clip-\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:39.363967+00:00",
+    "name": "narrow-en-labels-and-tab-links",
+    "expression": "(()=>{const c=document.querySelector(\".ff-review-compare-controls\");const tab=document.querySelector(\"[role=tab][aria-selected=true]\");const panel=document.getElementById(tab.getAttribute(\"aria-controls\"));return [...c.querySelectorAll(\"select\")].every(s=>s.labels.length>0) && panel?.getAttribute(\"aria-labelledby\")===tab.id})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:39.946817+00:00",
+    "name": "desktop-zh-CN-explicit-empty-start",
+    "expression": "[...document.querySelectorAll(\".ff-review-compare-controls select\")].every(e=>e.value===\"\") && document.querySelector(\".ff-review-compare-controls button\").disabled",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:41.516742+00:00",
+    "name": "desktop-zh-CN-native-ordered-selection",
+    "expression": "(()=>{const s=document.querySelectorAll(\".ff-review-compare-controls select\");return s[0].value.startsWith(\"review-1-\") && s[1].value.startsWith(\"review-2-\") && !document.querySelector(\".ff-review-compare-controls button\").disabled})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:41.683145+00:00",
+    "name": "desktop-zh-CN-tab-to-compare-visible-focus",
+    "expression": "document.activeElement===document.querySelector(\".ff-review-compare-controls button\") && document.activeElement.matches(\":focus-visible\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:41.951808+00:00",
+    "name": "desktop-zh-CN-keyboard-leave-pending-button",
+    "expression": "document.activeElement===document.querySelectorAll(\".ff-review-compare-controls select\")[1]",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:42.427224+00:00",
+    "name": "desktop-zh-CN-result-does-not-steal-focus",
+    "expression": "document.body.textContent.includes(\"fixture-added-clip-\") && document.activeElement===document.querySelectorAll(\".ff-review-compare-controls select\")[1]",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:42.432793+00:00",
+    "name": "desktop-zh-CN-long-label-layout",
+    "expression": "(()=>{const root=document.querySelector(\".ff-review-compare-controls\");return !!root && root.getBoundingClientRect().right<=innerWidth+1 && [...root.querySelectorAll(\"select\")].every(e=>e.getBoundingClientRect().width>40 && e.getBoundingClientRect().right<=innerWidth+1) && document.documentElement.scrollWidth<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:43.124200+00:00",
+    "name": "desktop-zh-CN-filter-local-result",
+    "expression": "document.querySelector(\".ff-semantic-diff select\").value===\"MODIFIED\" && document.body.textContent.includes(\"fixture-modified-track\") && !document.querySelector(\".ff-entity-change-list\")?.textContent.includes(\"fixture-added-clip-\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:43.273224+00:00",
+    "name": "desktop-zh-CN-labels-and-tab-links",
+    "expression": "(()=>{const c=document.querySelector(\".ff-review-compare-controls\");const tab=document.querySelector(\"[role=tab][aria-selected=true]\");const panel=document.getElementById(tab.getAttribute(\"aria-controls\"));return [...c.querySelectorAll(\"select\")].every(s=>s.labels.length>0) && panel?.getAttribute(\"aria-labelledby\")===tab.id})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:43.278513+00:00",
+    "name": "desktop-zh-CN-localized-flow",
+    "expression": "!document.querySelector(\".ff-review-compare-controls\").textContent.includes(\"From revision\") && !document.querySelector(\".ff-semantic-diff\").textContent.includes(\"Tracks added\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:43.837119+00:00",
+    "name": "narrow-zh-CN-explicit-empty-start",
+    "expression": "[...document.querySelectorAll(\".ff-review-compare-controls select\")].every(e=>e.value===\"\") && document.querySelector(\".ff-review-compare-controls button\").disabled",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:45.420205+00:00",
+    "name": "narrow-zh-CN-native-ordered-selection",
+    "expression": "(()=>{const s=document.querySelectorAll(\".ff-review-compare-controls select\");return s[0].value.startsWith(\"review-1-\") && s[1].value.startsWith(\"review-2-\") && !document.querySelector(\".ff-review-compare-controls button\").disabled})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:45.589414+00:00",
+    "name": "narrow-zh-CN-tab-to-compare-visible-focus",
+    "expression": "document.activeElement===document.querySelector(\".ff-review-compare-controls button\") && document.activeElement.matches(\":focus-visible\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:45.863459+00:00",
+    "name": "narrow-zh-CN-keyboard-leave-pending-button",
+    "expression": "document.activeElement===document.querySelectorAll(\".ff-review-compare-controls select\")[1]",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:46.343856+00:00",
+    "name": "narrow-zh-CN-result-does-not-steal-focus",
+    "expression": "document.body.textContent.includes(\"fixture-added-clip-\") && document.activeElement===document.querySelectorAll(\".ff-review-compare-controls select\")[1]",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:46.350418+00:00",
+    "name": "narrow-zh-CN-long-label-layout",
+    "expression": "(()=>{const root=document.querySelector(\".ff-review-compare-controls\");return !!root && root.getBoundingClientRect().right<=innerWidth+1 && [...root.querySelectorAll(\"select\")].every(e=>e.getBoundingClientRect().width>40 && e.getBoundingClientRect().right<=innerWidth+1) && document.documentElement.scrollWidth<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:46.988147+00:00",
+    "name": "narrow-zh-CN-filter-local-result",
+    "expression": "document.querySelector(\".ff-semantic-diff select\").value===\"MODIFIED\" && document.body.textContent.includes(\"fixture-modified-track\") && !document.querySelector(\".ff-entity-change-list\")?.textContent.includes(\"fixture-added-clip-\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:47.068935+00:00",
+    "name": "narrow-zh-CN-labels-and-tab-links",
+    "expression": "(()=>{const c=document.querySelector(\".ff-review-compare-controls\");const tab=document.querySelector(\"[role=tab][aria-selected=true]\");const panel=document.getElementById(tab.getAttribute(\"aria-controls\"));return [...c.querySelectorAll(\"select\")].every(s=>s.labels.length>0) && panel?.getAttribute(\"aria-labelledby\")===tab.id})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:47.074765+00:00",
+    "name": "narrow-zh-CN-localized-flow",
+    "expression": "!document.querySelector(\".ff-review-compare-controls\").textContent.includes(\"From revision\") && !document.querySelector(\".ff-semantic-diff\").textContent.includes(\"Tracks added\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:47.813313+00:00",
+    "name": "failed-refresh-clears-prior-success",
+    "expression": "!document.querySelector(\".ff-entity-change-list\") && !!document.querySelector(\"[role=alert]\") && !document.querySelector(\".ff-review-compare-controls button\").disabled",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:48.661010+00:00",
+    "name": "retry-success",
+    "expression": "!!document.querySelector(\".ff-entity-change-list\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:49.354734+00:00",
+    "name": "denied-not-retryable",
+    "expression": "document.querySelector(\".ff-review-compare-controls button\").disabled && !document.querySelector(\".ff-entity-change-list\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:51.238197+00:00",
+    "name": "unsupported-not-zero-success",
+    "expression": "!document.querySelector(\".ff-entity-change-list\") && document.querySelector(\".ff-semantic-diff\").textContent.toLowerCase().includes(\"summary\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "VALIDATION_TIMESTAMP": "2026-09-07T11:58:52.082876+00:00",
+    "name": "supported-no-changes",
+    "expression": "!document.querySelector(\".ff-entity-change-list\")",
+    "passed": true,
+    "value": true
+  }
+]

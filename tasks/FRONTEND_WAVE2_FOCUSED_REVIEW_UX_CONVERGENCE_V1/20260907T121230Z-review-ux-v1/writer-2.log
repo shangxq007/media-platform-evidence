@@ -1,0 +1,12 @@
+I’ll read the task record and applicable repository instructions, then implement the authorized changes and run the required checks.
+The task limits edits to seven files and requires focused RED/GREEN tests, with no Git mutations or broader gates. I’ll preserve the existing dispatcher and request cleanup while adding regression coverage for retry suppression, result identity, empty states, and localization.
+The new tests cover reverse ordering, stale failures, adapter retry suppression, and the distinct empty states. The first test command ran from the wrong directory and did not start Vitest; that error is preserved in the log. The focused RED run is now running from `frontend`.
+The RED run completed: 30 tests, with 16 expected failures and 14 passes. The implementation now preserves gateway diagnostics, gates retries by `retryable`, and checks response revision IDs before displaying results. Next I’ll finish localization and narrow-screen styling, then run GREEN.
+The first GREEN attempt passed 27 of 30 tests. The remaining failures were test issues: code and message now appear separately in technical details, and this test environment lacks the `Option` constructor. I’ve corrected those assertions and fixtures, and added coverage for every gateway failure code in both locales. The next focused run is underway.
+All 46 focused tests passed. During the final source review, I found one wording issue: “no entity changes” could imply no changes when the server summary is unsupported. I’m tightening that status to “no entity details were returned” and adding an integration regression. Preexisting modified files outside the allowlist still match their starting hashes.
+The final focused run passed all 49 tests. The parent’s 520-path inventory shows changes only in the seven authorized files; the Git index, branch, HEAD, stash, and 16 preexisting modified files outside the allowlist are unchanged. I’m writing the handoff report with the test logs, source hashes, and remaining parent-run gates.
+Implemented the bounded Review UX task across the seven authorized files, preserving preexisting changes.
+
+Final focused tests: **49 passed, 0 failed**. No Git mutations performed; broader acceptance gates remain parent-owned.
+
+[Writer report](/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_FOCUSED_REVIEW_UX_CONVERGENCE_V1/WRITER_REPORT.md) includes changes, verification results, and limits.

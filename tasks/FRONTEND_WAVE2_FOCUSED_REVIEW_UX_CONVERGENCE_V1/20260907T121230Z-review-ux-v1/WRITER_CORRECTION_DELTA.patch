@@ -1,0 +1,249 @@
+--- before/frontend/src/localization/catalogs.ts
++++ after/frontend/src/localization/catalogs.ts
+@@ -144,6 +144,7 @@
+     "mergeDisabled": message("Merge unavailable"),
+     "selectedPair": message("Selected revision pair"),
+     "requestedPair": message("Requested revision pair"),
++    "pairDetails": message("Revision IDs"),
+     "comparisonFailed": message("We couldn’t compare these revisions."),
+     "comparisonRetryHelp": message("Retry comparison above."),
+     "comparisonBlockedHelp": message("Retry is unavailable for this pair. Check access or choose a different pair."),
+@@ -340,6 +341,7 @@
+     "mergeDisabled": message("合并暂不可用"),
+     "selectedPair": message("已选修订对"),
+     "requestedPair": message("正在请求的修订对"),
++    "pairDetails": message("修订标识"),
+     "comparisonFailed": message("无法比较这些修订。"),
+     "comparisonRetryHelp": message("请使用上方按钮重试比较。"),
+     "comparisonBlockedHelp": message("此修订对不允许重试。请确认访问权限或选择其他修订对。"),
+--- before/frontend/src/localization/source-manifest.json
++++ after/frontend/src/localization/source-manifest.json
+@@ -118,6 +118,7 @@
+     "review.mergeDisabled",
+     "review.selectedPair",
+     "review.requestedPair",
++    "review.pairDetails",
+     "review.comparisonFailed",
+     "review.comparisonRetryHelp",
+     "review.comparisonBlockedHelp",
+--- before/frontend/src/product/review/ReviewWorkspace.test.tsx
++++ after/frontend/src/product/review/ReviewWorkspace.test.tsx
+@@ -295,11 +295,11 @@
+     expect(compare).not.toHaveBeenCalled()
+     fireEvent.change(select, { target: { value: revision0.id } })
+     expect(compare).not.toHaveBeenCalled()
+-    expect(screen.getByLabelText('Selected revision pair').textContent).toContain('revision-R1 → revision-R0')
++    expect(screen.getByLabelText('Selected revision pair').textContent).toContain('From revision: Revision 2 → To revision: Revision 1')
+     fireEvent.click(screen.getByRole('button', { name: 'Compare revisions' }))
+     await screen.findByText('reverse-clip')
+     expect(compare).toHaveBeenCalledExactlyOnceWith(projectId('project-1'), revision1.id, revision0.id)
+-    expect(screen.getByLabelText('Server result revision pair').textContent).toContain('revision-R1 → revision-R0')
++    expect(screen.getByLabelText('Server result revision pair').textContent).toContain('From revision: Revision 2 → To revision: Revision 1')
+   })
+ 
+   it.each(['AUTHORIZATION_DENIED', 'UNSUPPORTED', 'UNAVAILABLE', 'NETWORK'] as GatewayFailureCode[])('honors both retryable values for %s in history and comparison, including dispatch', async code => {
+@@ -333,6 +333,7 @@
+       } else {
+         expect(screen.queryByRole('button', { name: 'Retry comparison' })).toBeNull()
+         expect(disabled('Compare revisions')).toBe(true)
++        fireEvent.click(screen.getByRole('button', { name: 'Compare revisions' }))
+         fireEvent.click(screen.getByRole('button', { name: 'Dispatch current pair' }))
+         expect(compare).toHaveBeenCalledTimes(1)
+         fireEvent.change(screen.getByLabelText('From revision'), { target: { value: revision1.id } })
+@@ -343,9 +344,14 @@
+         expect(compare).toHaveBeenCalledTimes(2)
+         fireEvent.change(screen.getByLabelText('From revision'), { target: { value: revision0.id } })
+         fireEvent.change(screen.getByLabelText('To revision'), { target: { value: revision1.id } })
++        expect(screen.queryByRole('alert')).toBeNull()
++        expect(screen.queryByText('opaque diagnostic 甲')).toBeNull()
++        expect(disabled('Compare revisions')).toBe(false)
++        expect(compare).toHaveBeenCalledTimes(2)
+         fireEvent.click(screen.getByRole('button', { name: 'Dispatch current pair' }))
+-        expect(compare).toHaveBeenCalledTimes(2)
+-        expect(disabled('Compare revisions')).toBe(true)
++        await screen.findByText('clip-result')
++        expect(compare).toHaveBeenCalledTimes(3)
++        expect(compare).toHaveBeenLastCalledWith(projectId('project-1'), revision0.id, revision1.id)
+       }
+       nextView.unmount()
+     }
+@@ -509,3 +515,40 @@
+   if (!supported || assetsAdded) expect(screen.queryByText('No changes reported')).toBeNull()
+   expect(screen.queryByText('No matching entity changes')).toBeNull()
+ })
++
++
++it.each(['en', 'zh-CN'] as const)('shows readable selected, requested and result direction with disclosed full IDs in %s', async locale => {
++  const { queries, content } = reviewSetup()
++  const from = { ...revision1, id: revisionId(`from-${'a'.repeat(59)}`), revisionNumber: 84, message: 'Full projected message '.repeat(20) }
++  const to = { ...revision0, id: revisionId(`to-${'b'.repeat(61)}`), revisionNumber: 12 }
++  queries.historyResult = { ok: true, value: [from, to] }
++  const pending = deferred<GatewayResult<RevisionComparison>>()
++  const compare = vi.spyOn(queries, 'compare').mockImplementationOnce(() => pending.promise)
++  render(<LocalizationProvider initialLocale={locale}>{content()}</LocalizationProvider>)
++  const zh = locale === 'zh-CN'
++  await screen.findAllByRole('option', { name: new RegExp(from.id) })
++  expect(screen.getAllByRole('option', { name: new RegExp(from.id) })[0].textContent).toContain(from.message)
++  fireEvent.change(screen.getByLabelText(zh ? '起始修订' : 'From revision'), { target: { value: from.id } })
++  fireEvent.change(screen.getByLabelText(zh ? '目标修订' : 'To revision'), { target: { value: to.id } })
++  const assertPair = (label: string) => {
++    const pair = screen.getByLabelText(label)
++    expect(pair.textContent).toContain(zh ? '起始修订: 修订 84 → 目标修订: 修订 12' : 'From revision: Revision 84 → To revision: Revision 12')
++    expect(pair.textContent).not.toContain(from.id)
++    expect(pair.textContent).not.toContain(to.id)
++    const details = document.getElementById(pair.getAttribute('aria-details') ?? '') as HTMLDetailsElement
++    expect(details?.tagName).toBe('DETAILS')
++    expect(details.open).toBe(false)
++    expect(details.querySelector('summary')?.textContent).toBe(zh ? '修订标识' : 'Revision IDs')
++    expect(Array.from(details.querySelectorAll('code'), code => code.textContent)).toEqual([from.id, to.id])
++    fireEvent.click(details.querySelector('summary')!)
++    expect(details.open).toBe(true)
++    fireEvent.click(details.querySelector('summary')!)
++  }
++  assertPair(zh ? '已选修订对' : 'Selected revision pair')
++  expect(compare).not.toHaveBeenCalled()
++  fireEvent.click(screen.getByRole('button', { name: zh ? '比较修订' : 'Compare revisions' }))
++  assertPair(zh ? '正在请求的修订对' : 'Requested revision pair')
++  expect(compare).toHaveBeenCalledExactlyOnceWith(projectId('project-1'), from.id, to.id)
++  await act(async () => pending.resolve({ ok: true, value: comparison(from, to, 'readable-pair-result') }))
++  assertPair(zh ? '服务器结果修订对' : 'Server result revision pair')
++})
+--- before/frontend/src/product/review/ReviewWorkspace.tsx
++++ after/frontend/src/product/review/ReviewWorkspace.tsx
+@@ -47,14 +47,11 @@
+   const [compareError, setCompareError] = useState<ReviewFailure | null>(null)
+   const comparisonGeneration = useRef(0)
+   const pendingRequest = useRef(false)
+-  // A nonretryable response suppresses this exact ordered pair for this history/session.
+-  const blockedPairs = useRef(new Map<string, ReviewFailure>())
+ 
+   useEffect(() => {
+     let activeRequest = true
+     comparisonGeneration.current += 1
+     pendingRequest.current = false
+-    blockedPairs.current.clear()
+     setPending(false)
+     setHistoryState('LOADING')
+     setHistoryError(null)
+@@ -82,10 +79,10 @@
+   }, [project.projectId, queryGateway, retry, store])
+ 
+   const validPair = historyState === 'READY' && history.length >= 2 && from !== to && history.some(item => item.id === from) && history.some(item => item.id === to)
++  // Only the unchanged current failure suppresses a repeat; pair edits clear it.
+   const canCompare = validPair && !(compareError && !retryable(compareError))
+   const compare = async () => {
+-    const pairKey = JSON.stringify([from, to])
+-    if (!canCompare || pendingRequest.current || blockedPairs.current.has(pairKey)) return
++    if (!canCompare || pendingRequest.current) return
+     const fromRevision = history.find(item => item.id === from)!
+     const toRevision = history.find(item => item.id === to)!
+     const generation = ++comparisonGeneration.current
+@@ -94,26 +91,22 @@
+     setComparison(null)
+     setFilter('ALL')
+     setCompareError(null)
+-    const fail = (error: ReviewFailure) => {
+-      if (!retryable(error)) blockedPairs.current.set(pairKey, error)
+-      setCompareError(error)
+-    }
+     try {
+       const result = await queryGateway.compare(projectId(project.projectId), fromRevision.id, toRevision.id)
+       if (comparisonGeneration.current !== generation) return
+       if (result.ok) {
+-        if (result.value.fromRevision.id !== fromRevision.id || result.value.toRevision.id !== toRevision.id) fail({ kind: 'mismatch' })
++        if (result.value.fromRevision.id !== fromRevision.id || result.value.toRevision.id !== toRevision.id) setCompareError({ kind: 'mismatch' })
+         else setComparison(result.value)
+-      } else fail({ kind: 'gateway', failure: result })
++      } else setCompareError({ kind: 'gateway', failure: result })
+     } catch {
+-      if (comparisonGeneration.current === generation) fail({ kind: 'network' })
++      if (comparisonGeneration.current === generation) setCompareError({ kind: 'network' })
+     } finally {
+       if (comparisonGeneration.current === generation) { pendingRequest.current = false; setPending(false) }
+     }
+   }
+ 
+   useSurfaceAdapter({ objects: () => [], supports: ['compare-revisions'], handle: action => {
+-    if (action.type !== 'compare-revisions' || !canCompare || pendingRequest.current || blockedPairs.current.has(JSON.stringify([from, to])) || action.pair.from !== from || action.pair.to !== to) return false
++    if (action.type !== 'compare-revisions' || !canCompare || pendingRequest.current || action.pair.from !== from || action.pair.to !== to) return false
+     void compare()
+     return true
+   } })
+@@ -129,7 +122,7 @@
+     if (side === 'from') setFrom(value)
+     else setTo(value)
+     const pair = { from: side === 'from' ? value : from, to: side === 'to' ? value : to }
+-    setCompareError(blockedPairs.current.get(JSON.stringify([pair.from, pair.to])) ?? null)
++    setCompareError(null)
+     store.setRevisionPair(pair.from && pair.to && pair.from !== pair.to && history.some(item => item.id === pair.from) && history.some(item => item.id === pair.to) ? pair : undefined)
+   }
+ 
+@@ -140,6 +133,9 @@
+     const readableDate = item.createdAt && Number.isFinite(date.getTime()) ? formatDate(date, { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' }) : item.createdAt
+     return [t('review.revisionNumber', { number: item.revisionNumber }), item.message, readableDate, item.id].filter(Boolean).join(' · ')
+   }
++
++  const selectedFrom = history.find(item => item.id === from)
++  const selectedTo = history.find(item => item.id === to)
+ 
+   return <div className="ff-review-workspace">
+     <PageHeading eyebrow={t('review.eyebrow')} title={t('review.title')} description={t('review.description')} />
+@@ -165,7 +161,12 @@
+             <Button aria-describedby={`${tabsId}-comparison-status`} disabled={!canCompare || pending} onClick={requestComparison}>{t(pending ? 'review.comparing' : compareError && retryable(compareError) ? 'review.retryComparison' : 'review.compare')}</Button><Badge tone="warning">{t('review.mergeDisabled')}</Badge>
+           </div>
+         </div>
+-        {from && to ? <p aria-label={t(pending ? 'review.requestedPair' : 'review.selectedPair')}>{t(pending ? 'review.requestedPair' : 'review.selectedPair')}: <code>{from} → {to}</code></p> : null}
++        {from && to ? <>
++          <p aria-label={t(pending ? 'review.requestedPair' : 'review.selectedPair')} aria-details={`${tabsId}-pair-details`}>{t(pending ? 'review.requestedPair' : 'review.selectedPair')}: {t('review.from')}: {selectedFrom ? t('review.revisionNumber', { number: selectedFrom.revisionNumber }) : t('review.selectRevision')} → {t('review.to')}: {selectedTo ? t('review.revisionNumber', { number: selectedTo.revisionNumber }) : t('review.selectRevision')}</p>
++          <details id={`${tabsId}-pair-details`}><summary>{t('review.pairDetails')}</summary>
++            <dl><dt>{t('review.from')}</dt><dd><code>{from}</code></dd><dt>{t('review.to')}</dt><dd><code>{to}</code></dd></dl>
++          </details>
++        </> : null}
+         <p id={`${tabsId}-comparison-status`} role={compareError ? 'alert' : 'status'}>{compareError
+           ? <>{t('review.comparisonFailed')} {failureExplanation(compareError)} {t(retryable(compareError) ? 'review.comparisonRetryHelp' : 'review.comparisonBlockedHelp')}</>
+           : pending ? t('review.loadingComparison') : comparison ? t(comparison.entityChanges.length ? 'review.loaded' : 'review.loadedNoEntities') : historyState === 'READY' && history.length >= 2 ? t(`review.${choiceHelp}`) : t('review.needsHistory')}</p>
+--- before/frontend/src/product/timeline/SemanticDiff.test.tsx
++++ after/frontend/src/product/timeline/SemanticDiff.test.tsx
+@@ -32,7 +32,13 @@
+   it('shows supplied asset counters and exact ordered server identities', () => {
+     render(<SemanticDiff comparison={comparison} actionFilter="ALL" onActionFilterChange={vi.fn()} />)
+     expect(screen.getByText('Assets added / removed').parentElement?.textContent).toContain('1 / 0')
+-    expect(screen.getByLabelText('Server result revision pair').textContent).toContain('revision-R0 → revision-R1')
++    const pair = screen.getByLabelText('Server result revision pair')
++    expect(pair.textContent).toContain('From revision: Revision 1 → To revision: Revision 2')
++    expect(pair.textContent).not.toContain('revision-R0')
++    const details = document.getElementById(pair.getAttribute('aria-details') ?? '') as HTMLDetailsElement
++    expect(details?.tagName).toBe('DETAILS')
++    expect(details.open).toBe(false)
++    expect(Array.from(details.querySelectorAll('code'), code => code.textContent)).toEqual(['revision-R0', 'revision-R1'])
+   })
+ 
+   it.each([
+--- before/frontend/src/product/timeline/SemanticDiff.tsx
++++ after/frontend/src/product/timeline/SemanticDiff.tsx
+@@ -1,4 +1,4 @@
+-import { useMemo } from 'react'
++import { useId, useMemo } from 'react'
+ import { Badge, EmptyState, PropertyRow } from '../../components/design-system'
+ import { useTranslation } from '../../localization'
+ import type { RevisionComparison } from './gateways'
+@@ -12,6 +12,7 @@
+   onActionFilterChange: (action: string) => void
+ }) {
+   const { t } = useTranslation()
++  const pairDetailsId = useId()
+   const actions = useMemo(() => comparison
+     ? ['ALL', ...Array.from(new Set(comparison.entityChanges.map(change => change.action))).filter(action => action !== 'ALL').sort()]
+     : ['ALL'], [comparison])
+@@ -31,7 +32,10 @@
+ 
+   return (
+     <div className="ff-semantic-diff">
+-      <p aria-label={t('review.diff.resultPair')}>{t('review.diff.resultPair')}: <code>{comparison.fromRevision.id} → {comparison.toRevision.id}</code></p>
++      <p aria-label={t('review.diff.resultPair')} aria-details={pairDetailsId}>{t('review.diff.resultPair')}: {t('review.from')}: {t('review.revisionNumber', { number: comparison.fromRevision.revisionNumber })} → {t('review.to')}: {t('review.revisionNumber', { number: comparison.toRevision.revisionNumber })}</p>
++      <details id={pairDetailsId}><summary>{t('review.pairDetails')}</summary>
++        <dl><dt>{t('review.from')}</dt><dd><code>{comparison.fromRevision.id}</code></dd><dt>{t('review.to')}</dt><dd><code>{comparison.toRevision.id}</code></dd></dl>
++      </details>
+       <div className="ff-table-toolbar">
+         <label>{t('review.diff.action')} <select value={actionFilter} onChange={event => onActionFilterChange(event.target.value)}>{actions.map(action => <option key={action} value={action}>{actionLabel(action)}</option>)}</select></label>
+         <Badge tone={summary.supported ? 'info' : 'warning'}>{t(summary.supported ? 'review.diff.server' : 'review.diff.limited')}</Badge>

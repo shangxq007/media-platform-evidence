@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_FOCUSED_REVIEW_UX_CONVERGENCE_V1/browser-smoke-02/review_smoke.py", line 35, in <module>
+    rec(tag+'-result-and-focus-stable','document.body.textContent.includes("fixture-added-clip-") && document.activeElement===document.querySelector(".ff-review-compare-controls button")')
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_FOCUSED_REVIEW_UX_CONVERGENCE_V1/browser-smoke-02/review_smoke.py", line 12, in rec
+    def rec(name,expression):b.check(name,expression)
+                             ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_FOCUSED_REVIEW_UX_CONVERGENCE_V1/browser-smoke-02/browser_helpers.py", line 30, in check
+    assert p,(name,v)
+           ^
+AssertionError: ('desktop-en-result-and-focus-stable', False)

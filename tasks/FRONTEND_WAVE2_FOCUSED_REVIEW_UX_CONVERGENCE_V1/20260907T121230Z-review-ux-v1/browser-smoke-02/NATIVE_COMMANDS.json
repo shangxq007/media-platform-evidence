@@ -1,0 +1,736 @@
+[
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:12.921177+00:00",
+    "method": "Page.enable",
+    "params": {},
+    "result": {
+      "id": 1,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:12.922731+00:00",
+    "method": "Emulation.setFocusEmulationEnabled",
+    "params": {
+      "enabled": true
+    },
+    "result": {
+      "id": 2,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:12.924404+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 3,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:12.947401+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4196/w/ux-workspace/projects/ux-project/review"
+    },
+    "result": {
+      "id": 4,
+      "result": {
+        "frameId": "E5137618ADE0308213F9AE8E8A325E13",
+        "loaderId": "AD6A4451D9A8A5143D286642678B3277",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:13.261517+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 5,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:13.414385+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 6,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:13.647040+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 7,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:13.677070+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 8,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:13.679176+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 9,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:13.681040+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-review-compare-controls select option\").length===8",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 10,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:13.683048+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "[...document.querySelectorAll(\".ff-review-compare-controls select\")].every(e=>e.value===\"\") && document.querySelector(\".ff-review-compare-controls button\").disabled",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 11,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:13.685366+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-review-compare-controls label:nth-of-type(1) select\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 12,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:13.768538+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-review-compare-controls label:nth-of-type(1) select\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 13,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":308.2734375,\"y\":548.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:13.774139+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 308,
+      "y": 549,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 14,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:13.795294+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 308,
+      "y": 549,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 15,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:13.798496+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 308,
+      "y": 549,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 16,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:13.951614+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Home",
+      "code": "Home",
+      "windowsVirtualKeyCode": 36
+    },
+    "result": {
+      "id": 17,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:13.953634+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Home",
+      "code": "Home",
+      "windowsVirtualKeyCode": 36
+    },
+    "result": {
+      "id": 18,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:14.037175+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "ArrowDown",
+      "code": "ArrowDown",
+      "windowsVirtualKeyCode": 40,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 19,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:14.039616+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "ArrowDown",
+      "code": "ArrowDown",
+      "windowsVirtualKeyCode": 40,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 20,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:14.204656+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 21,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:14.207655+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 22,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:14.360991+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-review-compare-controls label:nth-of-type(2) select\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 23,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:14.444005+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-review-compare-controls label:nth-of-type(2) select\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 24,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":854.8203125,\"y\":548.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:14.449335+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 855,
+      "y": 549,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 25,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:14.469367+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 855,
+      "y": 549,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 26,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:14.472287+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 855,
+      "y": 549,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 27,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:14.625128+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Home",
+      "code": "Home",
+      "windowsVirtualKeyCode": 36
+    },
+    "result": {
+      "id": 28,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:14.627532+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Home",
+      "code": "Home",
+      "windowsVirtualKeyCode": 36
+    },
+    "result": {
+      "id": 29,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:14.711290+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "ArrowDown",
+      "code": "ArrowDown",
+      "windowsVirtualKeyCode": 40,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 30,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:14.714216+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "ArrowDown",
+      "code": "ArrowDown",
+      "windowsVirtualKeyCode": 40,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 31,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:14.867125+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "ArrowDown",
+      "code": "ArrowDown",
+      "windowsVirtualKeyCode": 40,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 32,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:14.869964+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "ArrowDown",
+      "code": "ArrowDown",
+      "windowsVirtualKeyCode": 40,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 33,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:15.041735+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 34,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:15.043760+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 35,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:15.197587+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const s=document.querySelectorAll(\".ff-review-compare-controls select\");return s[0].value.startsWith(\"review-1-\") && s[1].value.startsWith(\"review-2-\") && !document.querySelector(\".ff-review-compare-controls button\").disabled})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 36,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:15.202251+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 37,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:15.204356+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 38,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:15.357541+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement===document.querySelector(\".ff-review-compare-controls button\") && document.activeElement.matches(\":focus-visible\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 39,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:15.378193+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 40,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:15.380264+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 41,
+      "result": {}
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:15.533537+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.includes(\"fixture-modified-track\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 42,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:15.536136+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.includes(\"fixture-added-clip-\") && document.activeElement===document.querySelector(\".ff-review-compare-controls button\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 43,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "5c19a1045c3382140c62a84cf74ba3d4ec47e354",
+    "timestamp": "2026-09-07T11:54:15.695532+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  }
+]

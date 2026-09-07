@@ -1,0 +1,13 @@
+I’ll read the original task and review correction, check the applicable repository instructions, and apply the bounded follow-up.
+The correction narrows two parts of the existing implementation: remove the cached pair denials, and show revision numbers as the main pair labels with full IDs in disclosures. The current failed pair will still suppress nonretryable repeats. I’ll add focused regressions first and preserve the earlier evidence.
+The first correction run found the expected failures in denial caching and pair labels. It also caught an invalid test fixture: revision IDs are limited to 64 characters. I’ll use IDs at that limit, retain the long message check, and rerun RED before changing the implementation.
+The focused tests pass: 51 passed, 0 failed. Pair edits now clear the current failure, and revisiting a pair permits a fresh explicit gateway query. Selected, pending, and result labels show revision numbers, with full IDs in associated English/Chinese disclosures. I’m checking the correction’s file scope and writing the handoff report.
+Applied the bounded follow-up:
+
+- Removed cached pair denials; unchanged nonretryable failures still block repeats.
+- Pair labels show revision numbers, with full IDs in localized disclosures.
+- Focused tests: **51 passed, 0 failed**.
+
+Prior changes and evidence preserved. No commits or broader runs.
+
+[Correction report](/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_FOCUSED_REVIEW_UX_CONVERGENCE_V1/WRITER_CORRECTION_REPORT.md)
