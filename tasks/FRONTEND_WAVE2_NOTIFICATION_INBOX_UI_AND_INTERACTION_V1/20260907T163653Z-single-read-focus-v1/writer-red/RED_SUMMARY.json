@@ -1,0 +1,79 @@
+{
+  "stage": "writer-red-test-only",
+  "baseline_tree_owner_verified": "a8dc8bd3a0e4119e0a3a6bc8cdd18ed9ff789f72",
+  "changed_product_files": [
+    "frontend/src/product/notifications/NotificationInbox.test.tsx"
+  ],
+  "production_source_unchanged": true,
+  "production_source_sha256": "9c8fe17ec79523d04a42b4c6c214b0942e0c25de345866d7b869ff0252ca5861",
+  "initial_attempt": {
+    "exit": 1,
+    "collection_reached": false,
+    "reason": "Vite bundled-config EROFS under read-only node_modules/.vite-temp",
+    "log": "focused-vitest.log",
+    "command_record": "focused-vitest.command.txt",
+    "exit_record": "focused-vitest.exit.txt"
+  },
+  "targeted_runner_attempt": {
+    "exit": 1,
+    "collection_reached": true,
+    "config": "existing frontend/vitest.config.ts via built-in configLoader=runner",
+    "json": "focused-vitest-runner.json",
+    "log": "focused-vitest-runner.log",
+    "command_record": "focused-vitest-runner.command.txt",
+    "exit_record": "focused-vitest-runner.exit.txt",
+    "counts": {
+      "numTotalTestSuites": 6,
+      "numPassedTestSuites": 4,
+      "numFailedTestSuites": 2,
+      "numPendingTestSuites": 0,
+      "numTotalTests": 77,
+      "numPassedTests": 68,
+      "numFailedTests": 9,
+      "numPendingTests": 0,
+      "numTodoTests": 0
+    }
+  },
+  "classification": {
+    "preexisting_tests": {
+      "total": 64,
+      "passed": 64,
+      "failed": 0
+    },
+    "new_single_read_tests": {
+      "total": 13,
+      "passed": 4,
+      "failed": 9
+    },
+    "existing_read_all_focus_tests": {
+      "total": 10,
+      "passed": 10,
+      "failed": 0
+    },
+    "existing_lock_overlap_tests": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0
+    }
+  },
+  "genuine_red": [
+    "single-read focus continuity correction keeps enabled same-row focus while an All single read is pending and after the retained row reconciles",
+    "single-read focus continuity correction moves focus from an unread row to the active Unread filter only when reconciliation removes that row",
+    "single-read focus continuity correction closes from actual enabled focus while a single read is pending and restores the launcher",
+    "single-read focus continuity correction retains enabled same-row focus after deferred single-read failure",
+    "single-read focus continuity correction retains enabled same-row focus after deferred single-read invalid",
+    "single-read focus continuity correction retains enabled same-row focus after deferred single-read reject",
+    "single-read focus continuity correction keeps same-row focus during reconciliation loading and falls back when reconciliation fails closed",
+    "single-read focus continuity correction cannot let an old closed read unlock or focus over a newer reopened read"
+  ],
+  "modeled_native_red": [
+    "single-read focus continuity correction survives narrowly modeled native blur without leaving All single-read focus on BODY"
+  ],
+  "passing_new_regression_protections": [
+    "single-read focus continuity correction does not reclaim focus after the user deliberately moves during a single read",
+    "single-read focus continuity correction does not move focus for programmatic single-read activation from another valid control",
+    "single-read focus continuity correction retires old single-read focus intent on context",
+    "single-read focus continuity correction retires old single-read focus intent on unmount"
+  ],
+  "setup_or_runtime_failures_in_targeted_runner_attempt": []
+}

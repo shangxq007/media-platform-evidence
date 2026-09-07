@@ -1,0 +1,26 @@
+
+> media-platform-frontend@0.1.0 test
+> vitest run src/product/notifications/NotificationInbox.test.tsx --reporter=json --outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NOTIFICATION_INBOX_UI_AND_INTERACTION_V1/single-read-focus-continuity-v1/writer-red/focused-vitest.json
+
+failed to load config from /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/vitest.config.ts
+
+⎯⎯⎯⎯⎯⎯⎯ Startup Error ⎯⎯⎯⎯⎯⎯⎯⎯
+Error: EROFS: read-only file system, open '/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/.vite-temp/vitest.config.ts.timestamp-1788797016822-425d88be3c03f.mjs'
+    at async open (node:internal/fs/promises:639:25)
+    at async Object.writeFile (node:internal/fs/promises:1222:14)
+    at async loadConfigFromBundledFile (file:///home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:49588:5)
+    at async bundleAndLoadConfigFile (file:///home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:49433:22)
+    at async loadConfigFromFile (file:///home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:49396:44)
+    at async resolveConfig (file:///home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:48891:24)
+    at async _createServer (file:///home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:38478:66)
+    at async createViteServer (file:///home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/vitest/dist/chunks/cli-api.DWGBtMmz.js:6921:17)
+    at async createVitest (file:///home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/vitest/dist/chunks/cli-api.DWGBtMmz.js:10212:17)
+    at async prepareVitest (file:///home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/vitest/dist/chunks/cli-api.DWGBtMmz.js:10551:14) {
+  errno: -30,
+  code: 'EROFS',
+  syscall: 'open',
+  path: '/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/.vite-temp/vitest.config.ts.timestamp-1788797016822-425d88be3c03f.mjs'
+}
+
+
+

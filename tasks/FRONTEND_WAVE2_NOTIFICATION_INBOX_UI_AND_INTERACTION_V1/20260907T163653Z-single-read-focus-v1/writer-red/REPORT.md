@@ -1,0 +1,9 @@
+# Writer RED report
+
+Stage 1 is test-only. The only changed product file is `frontend/src/product/notifications/NotificationInbox.test.tsx`. `NotificationInbox.tsx` remains byte-identical to the Owner-verified baseline SHA-256 `9c8fe17ec79523d04a42b4c6c214b0942e0c25de345866d7b869ff0252ca5861`.
+
+The focused JSON run collected 77 tests: 68 passed, 9 failed, 0 pending, 0 todo. All 64 pre-existing tests passed. The added single-read group contains 13 tests: 4 passing regression protections and 9 expected RED focus assertions. Eight genuine RED cases observe the disabled single-read button retaining focus instead of transferring to the enabled same-row detail control. One supplemental modeled-native case observes BODY after narrowly modeling Chromium's disabled-button blur. This model is explicitly labeled and runs only when the exact disabled read button remains `document.activeElement`.
+
+Passing baseline protections include deliberate user movement, programmatic activation without focus theft, context retirement, unmount retirement, all 10 existing read-all focus cases, and the 3 existing close/reopen plus synchronous overlap/lock cases. The RED tests also specify retained All-row focus, Unread-row removal fallback, Escape from actual enabled focus with launcher restoration, deferred failure/invalid/rejection, reconciliation loading/failure, and old-close/reopen focus ownership.
+
+The first command exited 1 before collection because Vite's default bundled config loader attempted a write in read-only `node_modules/.vite-temp`; its command, log, and exit are preserved. The bounded retry used Vite's built-in `--configLoader=runner` with the existing repository config unchanged. It reached assertions and exited 1 solely for the 9 expected RED assertions. No product correction was implemented, no Git mutation was performed, and no full suite/build/typecheck was run.

@@ -1,0 +1,203 @@
+--- baseline/frontend/src/product/notifications/NotificationInbox.test.tsx
++++ writer-red/frontend/src/product/notifications/NotificationInbox.test.tsx
+@@ -5,7 +5,7 @@
+ import { LocalizationProvider } from '../../localization'
+ import { parseList, parseMutation, type InboxSource, type ListRequest, type MutationRequest } from './types'
+ 
+-function deferred<T = unknown>() { let resolve!: (value: T) => void; const promise = new Promise<T>(done => { resolve = done }); return { promise, resolve } }
++function deferred<T = unknown>() { let resolve!: (value: T) => void; let reject!: (reason?: unknown) => void; const promise = new Promise<T>((done, fail) => { resolve = done; reject = fail }); return { promise, resolve, reject } }
+ function setup(source = createNotificationFixture(), locale: 'en' | 'zh-CN' = 'en') {
+   const view = render(<LocalizationProvider initialLocale={locale}><NotificationInbox source={source} /></LocalizationProvider>)
+   fireEvent.click(screen.getByRole('button', { name: locale === 'en' ? /Notifications/ : /通知/ }))
+@@ -449,6 +449,191 @@
+   })
+ })
+ 
++
++
++describe('single-read focus continuity correction', () => {
++  function expectStableFocus(element: HTMLElement) {
++    expect(document.activeElement).toBe(element)
++    expect(element.isConnected).toBe(true)
++    expect((element as HTMLButtonElement).disabled).toBe(false)
++  }
++  function modelNativeDisabledReadBlur(button: HTMLButtonElement) {
++    expect(button.disabled).toBe(true)
++    // MODELED NATIVE LIMITATION: happy-dom neither blurs a newly disabled
++    // focused button nor permits blur() while it remains disabled. Supplement
++    // the stable-focus assertions by modeling Chromium blur only when this
++    // exact disabled single-read button still owns focus.
++    if (document.activeElement === button) {
++      button.disabled = false; button.blur(); button.disabled = true
++    }
++  }
++  async function openForSingleRead(source: InboxSource, filter: 'all' | 'unread' = 'all') {
++    const view = render(<LocalizationProvider initialLocale="en"><NotificationInbox source={source} /></LocalizationProvider>)
++    const entry = screen.getByRole('button', { name: /Notifications/ })
++    entry.focus(); fireEvent.click(entry)
++    await screen.findByRole('listitem', { name: 'Preview is ready' })
++    const activeFilter = screen.getByRole('button', { name: filter === 'all' ? 'All' : 'Unread' })
++    if (filter === 'unread') {
++      activeFilter.focus(); fireEvent.click(activeFilter)
++      await screen.findByRole('listitem', { name: 'Preview is ready' })
++    }
++    const item = row()
++    return {
++      ...view,
++      entry,
++      filter: activeFilter,
++      title: within(item).getByRole('button', { name: 'Read notification: Preview is ready' }),
++      read: within(item).getByRole('button', { name: 'Mark as read' }) as HTMLButtonElement,
++    }
++  }
++
++  it('keeps enabled same-row focus while an All single read is pending and after the retained row reconciles', async () => {
++    const source = createNotificationFixture(); const mutation = deferred(); const reconciliation = deferred()
++    const originalRead = source.adapter.markRead; const originalList = source.adapter.list
++    let request!: MutationRequest; let listRequest!: ListRequest
++    vi.spyOn(source.adapter, 'markRead').mockImplementation(req => { request = req; return mutation.promise })
++    const { title, read } = await openForSingleRead(source)
++    const list = vi.spyOn(source.adapter, 'list').mockImplementation(req => { listRequest = req; return reconciliation.promise })
++    read.focus(); fireEvent.click(read)
++    expect(read.disabled).toBe(true); expectStableFocus(title)
++    await act(async () => mutation.resolve(await originalRead(request, new AbortController().signal)))
++    expect(list).toHaveBeenCalledTimes(1); expectStableFocus(title)
++    await act(async () => reconciliation.resolve(await originalList(listRequest, new AbortController().signal)))
++    expect(within(row()).getByText('Read')).toBeTruthy()
++    expectStableFocus(screen.getByRole('button', { name: 'Read notification: Preview is ready' }))
++  })
++
++  it('survives narrowly modeled native blur without leaving All single-read focus on BODY', async () => {
++    const source = createNotificationFixture(); const pending = deferred(); let request!: MutationRequest
++    vi.spyOn(source.adapter, 'markRead').mockImplementation(req => { request = req; return pending.promise })
++    const { title, read } = await openForSingleRead(source)
++    read.focus(); fireEvent.click(read); modelNativeDisabledReadBlur(read)
++    expectStableFocus(title)
++    await act(async () => pending.resolve({ status: 'error', context: request.context, requestId: request.requestId }))
++    expectStableFocus(title)
++  })
++
++  it('moves focus from an unread row to the active Unread filter only when reconciliation removes that row', async () => {
++    const source = createNotificationFixture(); const pending = deferred(); const originalRead = source.adapter.markRead
++    let request!: MutationRequest
++    vi.spyOn(source.adapter, 'markRead').mockImplementation(req => { request = req; return pending.promise })
++    const { filter, title, read } = await openForSingleRead(source, 'unread')
++    read.focus(); fireEvent.click(read)
++    expectStableFocus(title)
++    await act(async () => pending.resolve(await originalRead(request, new AbortController().signal)))
++    await waitFor(() => expect(screen.queryByRole('listitem', { name: 'Preview is ready' })).toBeNull())
++    expectStableFocus(filter)
++  })
++
++  it('closes from actual enabled focus while a single read is pending and restores the launcher', async () => {
++    const source = createNotificationFixture(); const pending = deferred(); let request!: MutationRequest; let signal!: AbortSignal
++    vi.spyOn(source.adapter, 'markRead').mockImplementation((req, abort) => { request = req; signal = abort; return pending.promise })
++    const { entry, title, read } = await openForSingleRead(source)
++    read.focus(); fireEvent.click(read); expectStableFocus(title)
++    fireEvent.keyDown(document.activeElement!, { key: 'Escape', keyCode: 27 })
++    expect(screen.queryByRole('dialog')).toBeNull(); expect(document.activeElement).toBe(entry); expect(signal.aborted).toBe(true)
++    await act(async () => pending.resolve({ status: 'error', context: request.context, requestId: request.requestId }))
++    expect(screen.queryByRole('dialog')).toBeNull(); expect(document.activeElement).toBe(entry)
++  })
++
++  it.each(['failure', 'invalid', 'reject'] as const)('retains enabled same-row focus after deferred single-read %s', async outcome => {
++    const source = createNotificationFixture(); const pending = deferred(); let request!: MutationRequest
++    const list = vi.spyOn(source.adapter, 'list')
++    vi.spyOn(source.adapter, 'markRead').mockImplementation(req => { request = req; return pending.promise })
++    const { title, read } = await openForSingleRead(source)
++    read.focus(); fireEvent.click(read); expectStableFocus(title)
++    if (outcome === 'failure') {
++      await act(async () => pending.resolve({ status: 'error', context: request.context, requestId: request.requestId }))
++    } else if (outcome === 'invalid') {
++      await act(async () => pending.resolve({ status: 'ok', context: request.context, requestId: request.requestId, operation: { kind: 'single', id: 'foreign' }, read: true }))
++    } else {
++      await act(async () => pending.reject(new Error('controlled rejection')))
++    }
++    expect(screen.getByRole('status').textContent).toContain('could not be marked as read')
++    expect(within(row()).getByText('Unread')).toBeTruthy(); expect(list).toHaveBeenCalledTimes(1)
++    expectStableFocus(title)
++  })
++
++  it('keeps same-row focus during reconciliation loading and falls back when reconciliation fails closed', async () => {
++    const source = createNotificationFixture(); const mutation = deferred(); const reconciliation = deferred()
++    const originalRead = source.adapter.markRead; let request!: MutationRequest
++    vi.spyOn(source.adapter, 'markRead').mockImplementation(req => { request = req; return mutation.promise })
++    const { filter, title, read } = await openForSingleRead(source)
++    vi.spyOn(source.adapter, 'list').mockReturnValue(reconciliation.promise)
++    read.focus(); fireEvent.click(read); expectStableFocus(title)
++    await act(async () => mutation.resolve(await originalRead(request, new AbortController().signal)))
++    expect(screen.getByRole('status').textContent).toContain('Loading notifications')
++    expect(row()).toBeTruthy(); expectStableFocus(title)
++    await act(async () => reconciliation.reject(new Error('controlled reconciliation failure')))
++    await waitFor(() => expect(screen.queryByRole('listitem')).toBeNull())
++    expect(screen.getByRole('status').textContent).toContain('Notifications could not be loaded')
++    expectStableFocus(filter)
++  })
++
++  it('does not reclaim focus after the user deliberately moves during a single read', async () => {
++    const source = createNotificationFixture(); const pending = deferred(); const originalRead = source.adapter.markRead
++    let request!: MutationRequest
++    vi.spyOn(source.adapter, 'markRead').mockImplementation(req => { request = req; return pending.promise })
++    const { read } = await openForSingleRead(source)
++    read.focus(); fireEvent.click(read)
++    const refresh = screen.getByRole('button', { name: 'Refresh notifications' }); refresh.focus()
++    await act(async () => pending.resolve(await originalRead(request, new AbortController().signal)))
++    await waitFor(() => expect(within(row()).getByText('Read')).toBeTruthy())
++    expectStableFocus(refresh)
++  })
++
++  it('does not move focus for programmatic single-read activation from another valid control', async () => {
++    const source = createNotificationFixture(); const pending = deferred(); let request!: MutationRequest
++    vi.spyOn(source.adapter, 'markRead').mockImplementation(req => { request = req; return pending.promise })
++    const { read } = await openForSingleRead(source)
++    const refresh = screen.getByRole('button', { name: 'Refresh notifications' }); refresh.focus()
++    read.click(); expectStableFocus(refresh)
++    await act(async () => pending.resolve({ status: 'error', context: request.context, requestId: request.requestId }))
++    expectStableFocus(refresh)
++  })
++
++  it('cannot let an old closed read unlock or focus over a newer reopened read', async () => {
++    const source = createNotificationFixture(); const old = deferred(); const fresh = deferred()
++    let oldRequest!: MutationRequest; let freshRequest!: MutationRequest
++    const readMutation = vi.spyOn(source.adapter, 'markRead')
++      .mockImplementationOnce(req => { oldRequest = req; return old.promise })
++      .mockImplementationOnce(req => { freshRequest = req; return fresh.promise })
++    const allMutation = vi.spyOn(source.adapter, 'markAllRead')
++    const first = await openForSingleRead(source)
++    first.read.focus(); fireEvent.click(first.read); expectStableFocus(first.title)
++    fireEvent.keyDown(document.activeElement!, { key: 'Escape', keyCode: 27 })
++    expect(document.activeElement).toBe(first.entry)
++    fireEvent.click(first.entry); await screen.findByRole('listitem', { name: 'Preview is ready' })
++    const freshTitle = screen.getByRole('button', { name: 'Read notification: Preview is ready' })
++    const freshRead = within(row()).getByRole('button', { name: 'Mark as read' }) as HTMLButtonElement
++    freshRead.focus(); fireEvent.click(freshRead); expectStableFocus(freshTitle)
++    await act(async () => old.resolve({ status: 'ok', context: oldRequest.context, requestId: oldRequest.requestId, operation: oldRequest.operation, read: true }))
++    expect(screen.getByRole('status').textContent).toBe('Waiting for read confirmation…')
++    expect(freshRead.disabled).toBe(true); expectStableFocus(freshTitle)
++    act(() => { freshRead.click(); screen.getByRole('button', { name: 'Mark entire inbox as read' }).click() })
++    expect(readMutation).toHaveBeenCalledTimes(2); expect(allMutation).not.toHaveBeenCalled()
++    await act(async () => fresh.resolve({ status: 'error', context: freshRequest.context, requestId: freshRequest.requestId }))
++    expectStableFocus(freshTitle)
++  })
++
++  it.each(['context', 'unmount'] as const)('retires old single-read focus intent on %s', async transition => {
++    const source = createNotificationFixture(); const pending = deferred(); let request!: MutationRequest
++    vi.spyOn(source.adapter, 'markRead').mockImplementation(req => { request = req; return pending.promise })
++    const view = await openForSingleRead(source)
++    view.read.focus(); fireEvent.click(view.read)
++    if (transition === 'context') {
++      const next = { ...source, context: { ...source.context, sessionId: 'replacement-session' } }
++      view.rerender(<LocalizationProvider initialLocale="en"><NotificationInbox source={next} /></LocalizationProvider>)
++      expect(screen.queryByRole('dialog')).toBeNull()
++    } else {
++      view.unmount(); expect(screen.queryByRole('button')).toBeNull()
++    }
++    expect(document.activeElement).toBe(document.body)
++    await act(async () => pending.resolve({ status: 'ok', context: request.context, requestId: request.requestId, operation: request.operation, read: true }))
++    expect(document.activeElement).toBe(document.body); expect(screen.queryByRole('dialog')).toBeNull()
++  })
++})
++
+ 
+ describe('toolbar read-all focus correction', () => {
+   function modelDisabledToolbarBlur(button: HTMLButtonElement) {
