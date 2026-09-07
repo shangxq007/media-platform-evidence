@@ -1,0 +1,987 @@
+
+> media-platform-frontend@0.1.0 test
+> vitest run --configLoader=runner --no-cache src/product/projects/source.test.ts src/product/projects/ProjectBrowser.test.tsx --reporter=default --reporter=json --outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1/writer/red-01-results.json
+
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ❯ src/product/projects/source.test.ts (26 tests | 18 failed) 38ms
+   × recent Project frontend consumption proposal > reuses ProjectSummary, searches name and description literally, and sorts by name with an ID tie-break 17ms
+     → expected [ { id: 'id-z', …(4) }, …(2) ] to deeply equal [ { id: 'id-z', …(4) } ]
+   × recent Project frontend consumption proposal > keeps projected statuses opaque and uses them only as literal local filter values 2ms
+     → expected [] to deeply equal [ 'future::READY', '未定义状态' ]
+   ✓ recent Project frontend consumption proposal > accepts only an owned, bounded, recent snapshot without claiming a full inventory 0ms
+   × recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 0 3ms
+     → expected [Function] to throw an error
+   × recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 1 1ms
+     → expected [Function] to throw an error
+   × recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 2 1ms
+     → expected [Function] to throw an error
+   × recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 3 1ms
+     → expected [Function] to throw an error
+   × recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 4 0ms
+     → expected [Function] to throw an error
+   × recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 5 1ms
+     → expected [Function] to throw an error
+   × recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 6 1ms
+     → expected [Function] to throw an error
+   × recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 7 0ms
+     → expected [Function] to throw an error
+   × recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 8 0ms
+     → expected [Function] to throw an error
+   × recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 9 0ms
+     → expected [Function] to throw an error
+   × recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 10 0ms
+     → expected [Function] to throw an error
+   × recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 11 0ms
+     → expected [Function] to throw an error
+   ✓ recent Project frontend consumption proposal > preserves exact unavailable failures with opaque explanations 0ms
+   ✓ recent Project frontend consumption proposal > preserves exact denied failures with opaque explanations 0ms
+   ✓ recent Project frontend consumption proposal > preserves exact unknown failures with opaque explanations 0ms
+   ✓ recent Project frontend consumption proposal > preserves exact unsupported failures with opaque explanations 0ms
+   ✓ recent Project frontend consumption proposal > preserves exact error failures with opaque explanations 0ms
+   ✓ recent Project frontend consumption proposal > keys every principal, tenant, session, workspace and access projection change 0ms
+   × recent Project frontend consumption proposal > consumes established EffectiveAccess statuses without manufacturing availability 2ms
+     → expected 'ready' to be 'denied' // Object.is equality
+   ✓ source boundaries > defaults unavailable without HTTP, storage-derived auth, or an adapter fallback 2ms
+   × source boundaries > requires the exact localhost projectsFixture=1 opt-in and never touches auth, storage or transport 1ms
+     → Cannot read properties of null (reading 'adapter')
+   × source boundaries > fixture cannot relax POLICY_DENIED access 1ms
+     → expected { status: 'unavailable', …(2) } to match object { status: 'denied' }
+(6 matching properties omitted from actual)
+   × source boundaries > fixture cannot relax UNKNOWN_FAIL_CLOSED access 1ms
+     → expected { status: 'unavailable', …(2) } to match object { status: 'unknown' }
+(6 matching properties omitted from actual)
+ ❯ src/product/projects/ProjectBrowser.test.tsx (18 tests | 17 failed) 15183ms
+   × Workspace recent Project discovery and inspection > searches literal name and description content, filters opaque statuses, sorts deterministically, and resets no matches 1044ms
+     → Unable to find role="button" and name "Inspect Alpha project"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > distinguishes an empty recent snapshot from local no matches 1009ms
+     → Unable to find role="heading" and name "No recent projects in this snapshot"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > inspects the exact item in a read-only dialog, renders opaque text safely, and restores launcher focus after Escape 1010ms
+     → Unable to find role="button" and name "Inspect Alpha project"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > supports cancel, retry and refresh; each new request clears content and late cancelled replies stay hidden 17ms
+     → Unable to find an accessible element with the role "status" and name "Loading recent projects"
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "Projects":
+  [36m<h1 />[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > clears content and presents the exact unavailable failure without simulation fallback 1008ms
+     → Unable to find role="button" and name "Inspect Alpha project"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > clears content and presents the exact denied failure without simulation fallback 1006ms
+     → Unable to find role="button" and name "Inspect Alpha project"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > clears content and presents the exact unknown failure without simulation fallback 1006ms
+     → Unable to find role="button" and name "Inspect Alpha project"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > clears content and presents the exact unsupported failure without simulation fallback 1006ms
+     → Unable to find role="button" and name "Inspect Alpha project"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > clears content and presents the exact error failure without simulation fallback 1010ms
+     → Unable to find role="button" and name "Inspect Alpha project"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > treats malformed and mismatched success receipts as errors and exposes no returned content 1008ms
+     → Unable to find role="heading" and name "Recent projects error"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > synchronously hides old content on principalId change and ignores the old late reply 1007ms
+     → Unable to find role="button" and name "Inspect Alpha project"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > synchronously hides old content on tenantId change and ignores the old late reply 1005ms
+     → Unable to find role="button" and name "Inspect Alpha project"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > synchronously hides old content on sessionId change and ignores the old late reply 1005ms
+     → Unable to find role="button" and name "Inspect Alpha project"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > synchronously hides old content on workspaceId change and ignores the old late reply 1004ms
+     → Unable to find role="button" and name "Inspect Alpha project"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > drops late replies after adapter replacement and unmount 1011ms
+     → Unable to find role="heading" and name "No recent projects in this snapshot"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   ✓ Workspace recent Project discovery and inspection > does not query denied or unknown projections and presents no content 11ms
+   × Workspace recent Project discovery and inspection > is unavailable by default and persistently identifies the localhost fixture as simulated and read-only 8ms
+     → Unable to find an accessible element with the role "heading" and name "Recent projects unavailable"
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "Projects":
+  [36m<h1 />[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > localizes the full Projects UI in zh-CN while preserving projected names, descriptions and statuses 1004ms
+     → Unable to find role="heading" and name "最近项目"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 35 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > searches literal name and description content, filters opaque statuses, sorts deterministically, and resets no matches
+TestingLibraryElementError: Unable to find role="button" and name "Inspect Alpha project"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/product/projects/ProjectBrowser.test.tsx:21:18
+     19|   it('searches literal name and description content, filters opaque st…
+     20|     setup()
+     21|     await screen.findByRole('button', { name: 'Inspect Alpha project' …
+       |                  ^
+     22|     expect(screen.getAllByRole('button', { name: /^Inspect / }).map(bu…
+     23|     fireEvent.change(screen.getByRole('searchbox', { name: 'Search rec…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/35]⎯
+
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > distinguishes an empty recent snapshot from local no matches
+TestingLibraryElementError: Unable to find role="heading" and name "No recent projects in this snapshot"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/product/projects/ProjectBrowser.test.tsx:41:25
+     39|   it('distinguishes an empty recent snapshot from local no matches', a…
+     40|     setup(createProjectsFixture({ workspaceId: 'workspace-1', empty: t…
+     41|     expect(await screen.findByRole('heading', { name: 'No recent proje…
+       |                         ^
+     42|     expect(screen.queryByRole('button', { name: 'Reset filters' })).to…
+     43|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/35]⎯
+
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > inspects the exact item in a read-only dialog, renders opaque text safely, and restores launcher focus after Escape
+TestingLibraryElementError: Unable to find role="button" and name "Inspect Alpha project"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/product/projects/ProjectBrowser.test.tsx:47:36
+     45|   it('inspects the exact item in a read-only dialog, renders opaque te…
+     46|     setup()
+     47|     const launchers = await screen.findAllByRole('button', { name: 'In…
+       |                                    ^
+     48|     launchers[1].focus(); fireEvent.click(launchers[1])
+     49|     const dialog = screen.getByRole('dialog', { name: 'Project details…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/35]⎯
+
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > supports cancel, retry and refresh; each new request clears content and late cancelled replies stay hidden
+TestingLibraryElementError: Unable to find an accessible element with the role "status" and name "Loading recent projects"
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "Projects":
+  [36m<h1 />[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/product/projects/ProjectBrowser.test.tsx:65:19
+     63|     vi.spyOn(source.adapter, 'listRecent').mockImplementationOnce(requ…
+     64|     setup(source)
+     65|     expect(screen.getByRole('status', { name: 'Loading recent projects…
+       |                   ^
+     66|     fireEvent.click(screen.getByRole('button', { name: 'Cancel loading…
+     67|     expect(screen.getByText('Loading cancelled.')).toBeTruthy()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/35]⎯
+
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > clears content and presents the exact unavailable failure without simulation fallback
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > clears content and presents the exact denied failure without simulation fallback
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > clears content and presents the exact unknown failure without simulation fallback
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > clears content and presents the exact unsupported failure without simulation fallback
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > clears content and presents the exact error failure without simulation fallback
+TestingLibraryElementError: Unable to find role="button" and name "Inspect Alpha project"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/product/projects/ProjectBrowser.test.tsx:85:18
+     83|     source.adapter.origin = 'real'
+     84|     setup(source)
+     85|     await screen.findByRole('button', { name: 'Inspect Alpha project' …
+       |                  ^
+     86|     vi.spyOn(source.adapter, 'listRecent').mockImplementation(async re…
+     87|     fireEvent.click(screen.getByRole('button', { name: 'Refresh recent…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/35]⎯
+
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > treats malformed and mismatched success receipts as errors and exposes no returned content
+TestingLibraryElementError: Unable to find role="heading" and name "Recent projects error"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/product/projects/ProjectBrowser.test.tsx:101:25
+     99|     }))
+    100|     setup(source)
+    101|     expect(await screen.findByRole('heading', { name: 'Recent projects…
+       |                         ^
+    102|     expect(screen.queryByText('Must stay hidden')).toBeNull()
+    103|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/35]⎯
+
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > synchronously hides old content on principalId change and ignores the old late reply
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > synchronously hides old content on tenantId change and ignores the old late reply
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > synchronously hides old content on sessionId change and ignores the old late reply
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > synchronously hides old content on workspaceId change and ignores the old late reply
+TestingLibraryElementError: Unable to find role="button" and name "Inspect Alpha project"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/product/projects/ProjectBrowser.test.tsx:108:18
+    106|     const source = createProjectsFixture({ workspaceId: 'workspace-1' …
+    107|     const view = setup(source)
+    108|     await screen.findByRole('button', { name: 'Inspect Alpha project' …
+       |                  ^
+    109|     const pending = deferred()
+    110|     const next: ProjectsSource = { ...source, scope: { ...source.scope…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/35]⎯
+
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > drops late replies after adapter replacement and unmount
+TestingLibraryElementError: Unable to find role="heading" and name "No recent projects in this snapshot"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/product/projects/ProjectBrowser.test.tsx:125:25
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/35]⎯
+
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > is unavailable by default and persistently identifies the localhost fixture as simulated and read-only
+TestingLibraryElementError: Unable to find an accessible element with the role "heading" and name "Recent projects unavailable"
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "Projects":
+  [36m<h1 />[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/product/projects/ProjectBrowser.test.tsx:144:19
+    142|   it('is unavailable by default and persistently identifies the localh…
+    143|     const unavailable = setup(undefined)
+    144|     expect(screen.getByRole('heading', { name: 'Recent projects unavai…
+       |                   ^
+    145|     unavailable.unmount()
+    146|     setup()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/35]⎯
+
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > localizes the full Projects UI in zh-CN while preserving projected names, descriptions and statuses
+TestingLibraryElementError: Unable to find role="heading" and name "最近项目"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section>[39m
+      [36m<h1>[39m
+        [0mProjects[0m
+      [36m</h1>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/product/projects/ProjectBrowser.test.tsx:156:25
+    154|   it('localizes the full Projects UI in zh-CN while preserving project…
+    155|     setup(createProjectsFixture({ workspaceId: 'workspace-1' }), 'zh-C…
+    156|     expect(await screen.findByRole('heading', { name: '最近项目' })).toBeT…
+       |                         ^
+    157|     expect(screen.getByRole('searchbox', { name: '搜索最近项目' })).toBeTrut…
+    158|     expect(screen.getByText(/模拟项目数据/)).toBeTruthy()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/35]⎯
+
+ FAIL  src/product/projects/source.test.ts > recent Project frontend consumption proposal > reuses ProjectSummary, searches name and description literally, and sorts by name with an ID tie-break
+AssertionError: expected [ { id: 'id-z', …(4) }, …(2) ] to deeply equal [ { id: 'id-z', …(4) } ]
+
+- Expected
++ Received
+
+@@ -4,6 +4,20 @@
+      "id": "id-z",
+      "name": "Zulu",
+      "status": "future::READY",
+      "tenantId": "tenant-1",
+    },
++   {
++     "description": "<b>opaque</b>",
++     "id": "id-b",
++     "name": "Alpha",
++     "status": "未定义状态",
++     "tenantId": "tenant-1",
++   },
++   {
++     "description": null,
++     "id": "id-a",
++     "name": "Alpha",
++     "status": "未定义状态",
++     "tenantId": "tenant-1",
++   },
+  ]
+
+ ❯ src/product/projects/source.test.ts:36:95
+     34|   it('reuses ProjectSummary, searches name and description literally, …
+     35|     const existingViewType: ProjectSummary = items[0]
+     36|     expect(selectProjects(items, { query: 'Launch literal', status: ''…
+       |                                                                                               ^
+     37|     expect(selectProjects(items, { query: '<b>opaque</b>', status: '',…
+     38|     expect(selectProjects(items, { query: '', status: '', order: 'name…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/35]⎯
+
+ FAIL  src/product/projects/source.test.ts > recent Project frontend consumption proposal > keeps projected statuses opaque and uses them only as literal local filter values
+AssertionError: expected [] to deeply equal [ 'future::READY', '未定义状态' ]
+
+- Expected
++ Received
+
+- [
+-   "future::READY",
+-   "未定义状态",
+- ]
++ []
+
+ ❯ src/product/projects/source.test.ts:43:40
+     41| 
+     42|   it('keeps projected statuses opaque and uses them only as literal lo…
+     43|     expect(projectStatusValues(items)).toEqual(['future::READY', '未定义状…
+       |                                        ^
+     44|     expect(selectProjects(items, { query: '', status: '未定义状态', order: …
+     45|     expect(selectProjects(items, { query: '', status: 'READY', order: …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/35]⎯
+
+ FAIL  src/product/projects/source.test.ts > recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 0
+ FAIL  src/product/projects/source.test.ts > recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 1
+ FAIL  src/product/projects/source.test.ts > recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 2
+ FAIL  src/product/projects/source.test.ts > recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 3
+ FAIL  src/product/projects/source.test.ts > recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 4
+ FAIL  src/product/projects/source.test.ts > recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 5
+ FAIL  src/product/projects/source.test.ts > recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 6
+ FAIL  src/product/projects/source.test.ts > recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 7
+ FAIL  src/product/projects/source.test.ts > recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 8
+ FAIL  src/product/projects/source.test.ts > recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 9
+ FAIL  src/product/projects/source.test.ts > recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 10
+ FAIL  src/product/projects/source.test.ts > recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 11
+AssertionError: expected [Function] to throw an error
+ ❯ src/product/projects/source.test.ts:66:55
+     64|     { ...receipt(), boundary: { kind: 'recent', limit: 0, limited: fal…
+     65|   ])('rejects malformed, duplicate, foreign, mismatched or unbounded r…
+     66|     expect(() => parseRecentProjects(input, request)).toThrow()
+       |                                                       ^
+     67|   })
+     68| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/35]⎯
+
+ FAIL  src/product/projects/source.test.ts > recent Project frontend consumption proposal > consumes established EffectiveAccess statuses without manufacturing availability
+AssertionError: expected 'ready' to be 'denied' // Object.is equality
+
+Expected: "denied"
+Received: "ready"
+
+ ❯ src/product/projects/source.test.ts:88:80
+     86|   it('consumes established EffectiveAccess statuses without manufactur…
+     87|     expect(accessDisposition(context)).toBe('ready')
+     88|     expect(accessDisposition({ ...context, access: access('POLICY_DENI…
+       |                                                                                ^
+     89|     expect(accessDisposition({ ...context, access: access('NOT_ENTITLE…
+     90|     expect(accessDisposition({ ...context, access: access('UNKNOWN_FAI…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/35]⎯
+
+ FAIL  src/product/projects/source.test.ts > source boundaries > requires the exact localhost projectsFixture=1 opt-in and never touches auth, storage or transport
+TypeError: Cannot read properties of null (reading 'adapter')
+ ❯ src/product/projects/source.test.ts:114:19
+    112|     const fetch = vi.spyOn(globalThis, 'fetch')
+    113|     const setItem = vi.spyOn(Storage.prototype, 'setItem')
+    114|     expect(source.adapter.origin).toBe('simulated')
+       |                   ^
+    115|     expect(source.scope).toMatchObject({ principalId: 'simulated-proje…
+    116|     await source.adapter.listRecent({ scope: source.scope, requestId: …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/35]⎯
+
+ FAIL  src/product/projects/source.test.ts > source boundaries > fixture cannot relax POLICY_DENIED access
+AssertionError: expected { status: 'unavailable', …(2) } to match object { status: 'denied' }
+(6 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "status": "denied",
++   "status": "unavailable",
+  }
+
+ ❯ src/product/projects/source.test.ts:124:116
+    122|   it.each(['POLICY_DENIED', 'UNKNOWN_FAIL_CLOSED'] as const)('fixture …
+    123|     const source = createProjectsFixture({ workspaceId: 'workspace-1',…
+    124|     expect(await source.adapter.listRecent({ scope: source.scope, requ…
+       |                                                                                                                    ^
+    125|   })
+    126| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/35]⎯
+
+ FAIL  src/product/projects/source.test.ts > source boundaries > fixture cannot relax UNKNOWN_FAIL_CLOSED access
+AssertionError: expected { status: 'unavailable', …(2) } to match object { status: 'unknown' }
+(6 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "status": "unknown",
++   "status": "unavailable",
+  }
+
+ ❯ src/product/projects/source.test.ts:124:116
+    122|   it.each(['POLICY_DENIED', 'UNKNOWN_FAIL_CLOSED'] as const)('fixture …
+    123|     const source = createProjectsFixture({ workspaceId: 'workspace-1',…
+    124|     expect(await source.adapter.listRecent({ scope: source.scope, requ…
+       |                                                                                                                    ^
+    125|   })
+    126| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/35]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  35 failed | 9 passed (44)
+   Start at  01:30:57
+   Duration  16.54s (transform 325ms, setup 0ms, collect 594ms, tests 15.22s, environment 525ms, prepare 182ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1/writer/red-01-results.json

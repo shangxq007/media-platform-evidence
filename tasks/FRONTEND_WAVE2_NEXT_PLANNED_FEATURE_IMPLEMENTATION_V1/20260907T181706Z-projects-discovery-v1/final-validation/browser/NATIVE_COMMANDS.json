@@ -1,0 +1,5165 @@
+[
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:02.455825+00:00",
+    "method": "Network.enable",
+    "params": {},
+    "result": {
+      "id": 1,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:02.456793+00:00",
+    "method": "Page.enable",
+    "params": {},
+    "result": {
+      "id": 2,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:02.457647+00:00",
+    "method": "Emulation.setFocusEmulationEnabled",
+    "params": {
+      "enabled": true
+    },
+    "result": {
+      "id": 3,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:02.458846+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 4,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:02.472977+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/w/simulated-workspace/projects"
+    },
+    "result": {
+      "id": 5,
+      "result": {
+        "frameId": "D276C66FA05ED59A2C2FD71749A84677",
+        "loaderId": "FBE36F722B692EAF5F9BB268B74F8A81",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:02.786465+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 6,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:02.938899+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 7,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.131692+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 8,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.136583+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 9,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.138487+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 10,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.140348+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-project-browser\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 11,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.142265+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"Recent projects unavailable\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 12,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.144541+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!document.querySelector(\".ff-project-browser-list\") && !document.querySelector(\".ff-project-browser\").textContent.includes(\"SIMULATED PROJECT DATA\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 13,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.275894+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.279553+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 15,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.289078+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/w/simulated-workspace/projects?projectsFixture=1"
+    },
+    "result": {
+      "id": 16,
+      "result": {
+        "frameId": "D276C66FA05ED59A2C2FD71749A84677",
+        "loaderId": "B9E457DA1C5B9D3DBCCEFE9767CECD8D",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.594155+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 17,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.746488+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 18,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.749546+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 19,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.751730+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 20,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.754005+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-project-browser\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 21,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.756523+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length>0",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 22,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.758891+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length===3",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 23,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.761630+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"SIMULATED PROJECT DATA\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 24,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.764280+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"not a full project inventory\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 25,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.767059+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "Array.from(document.querySelectorAll(\".ff-project-browser-list button\")).map(e=>e.getAttribute(\"aria-label\")).join(\"|\")===\"Inspect Alpha project|Inspect Alpha project|Inspect Zeta <project>\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 26,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.892966+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.897581+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser input[type=search]\").scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 28,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.900319+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-project-browser input[type=search]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 29,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":234,\"y\":334}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.905369+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 234,
+      "y": 334,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 30,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.910313+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 234,
+      "y": 334,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 31,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:03.914265+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 234,
+      "y": 334,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 32,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.068164+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Control",
+      "code": "ControlLeft",
+      "windowsVirtualKeyCode": 17,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 33,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.071005+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 34,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.073843+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 35,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.076569+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Control",
+      "code": "ControlLeft",
+      "windowsVirtualKeyCode": 17,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 36,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.080002+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Backspace",
+      "code": "Backspace",
+      "windowsVirtualKeyCode": 8
+    },
+    "result": {
+      "id": 37,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.082733+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Backspace",
+      "code": "Backspace",
+      "windowsVirtualKeyCode": 8
+    },
+    "result": {
+      "id": 38,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.095888+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "d",
+      "code": "KeyD",
+      "windowsVirtualKeyCode": 68,
+      "modifiers": 0,
+      "text": "d",
+      "unmodifiedText": "d"
+    },
+    "result": {
+      "id": 39,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.098907+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "d",
+      "code": "KeyD",
+      "windowsVirtualKeyCode": 68,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 40,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.259201+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "e",
+      "code": "KeyE",
+      "windowsVirtualKeyCode": 69,
+      "modifiers": 0,
+      "text": "e",
+      "unmodifiedText": "e"
+    },
+    "result": {
+      "id": 41,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.262417+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "e",
+      "code": "KeyE",
+      "windowsVirtualKeyCode": 69,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 42,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.422382+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "s",
+      "code": "KeyS",
+      "windowsVirtualKeyCode": 83,
+      "modifiers": 0,
+      "text": "s",
+      "unmodifiedText": "s"
+    },
+    "result": {
+      "id": 43,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.427918+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "s",
+      "code": "KeyS",
+      "windowsVirtualKeyCode": 83,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 44,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.588297+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "c",
+      "code": "KeyC",
+      "windowsVirtualKeyCode": 67,
+      "modifiers": 0,
+      "text": "c",
+      "unmodifiedText": "c"
+    },
+    "result": {
+      "id": 45,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.590906+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "c",
+      "code": "KeyC",
+      "windowsVirtualKeyCode": 67,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 46,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.750540+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "r",
+      "code": "KeyR",
+      "windowsVirtualKeyCode": 82,
+      "modifiers": 0,
+      "text": "r",
+      "unmodifiedText": "r"
+    },
+    "result": {
+      "id": 47,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.753167+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "r",
+      "code": "KeyR",
+      "windowsVirtualKeyCode": 82,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 48,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.912355+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "i",
+      "code": "KeyI",
+      "windowsVirtualKeyCode": 73,
+      "modifiers": 0,
+      "text": "i",
+      "unmodifiedText": "i"
+    },
+    "result": {
+      "id": 49,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:04.915137+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "i",
+      "code": "KeyI",
+      "windowsVirtualKeyCode": 73,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 50,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:05.074370+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "p",
+      "code": "KeyP",
+      "windowsVirtualKeyCode": 80,
+      "modifiers": 0,
+      "text": "p",
+      "unmodifiedText": "p"
+    },
+    "result": {
+      "id": 51,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:05.077408+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "p",
+      "code": "KeyP",
+      "windowsVirtualKeyCode": 80,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 52,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:05.236334+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "t",
+      "code": "KeyT",
+      "windowsVirtualKeyCode": 84,
+      "modifiers": 0,
+      "text": "t",
+      "unmodifiedText": "t"
+    },
+    "result": {
+      "id": 53,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:05.239042+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "t",
+      "code": "KeyT",
+      "windowsVirtualKeyCode": 84,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 54,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:05.398254+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "i",
+      "code": "KeyI",
+      "windowsVirtualKeyCode": 73,
+      "modifiers": 0,
+      "text": "i",
+      "unmodifiedText": "i"
+    },
+    "result": {
+      "id": 55,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:05.401393+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "i",
+      "code": "KeyI",
+      "windowsVirtualKeyCode": 73,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 56,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:05.560563+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "o",
+      "code": "KeyO",
+      "windowsVirtualKeyCode": 79,
+      "modifiers": 0,
+      "text": "o",
+      "unmodifiedText": "o"
+    },
+    "result": {
+      "id": 57,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:05.563726+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "o",
+      "code": "KeyO",
+      "windowsVirtualKeyCode": 79,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 58,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:05.723083+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "n",
+      "code": "KeyN",
+      "windowsVirtualKeyCode": 78,
+      "modifiers": 0,
+      "text": "n",
+      "unmodifiedText": "n"
+    },
+    "result": {
+      "id": 59,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:05.725667+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "n",
+      "code": "KeyN",
+      "windowsVirtualKeyCode": 78,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 60,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:05.886109+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": " ",
+      "code": "Space",
+      "windowsVirtualKeyCode": 32,
+      "modifiers": 0,
+      "text": " ",
+      "unmodifiedText": " "
+    },
+    "result": {
+      "id": 61,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:05.889487+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": " ",
+      "code": "Space",
+      "windowsVirtualKeyCode": 32,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 62,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:06.048097+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "l",
+      "code": "KeyL",
+      "windowsVirtualKeyCode": 76,
+      "modifiers": 0,
+      "text": "l",
+      "unmodifiedText": "l"
+    },
+    "result": {
+      "id": 63,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:06.050798+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "l",
+      "code": "KeyL",
+      "windowsVirtualKeyCode": 76,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 64,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:06.209650+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "i",
+      "code": "KeyI",
+      "windowsVirtualKeyCode": 73,
+      "modifiers": 0,
+      "text": "i",
+      "unmodifiedText": "i"
+    },
+    "result": {
+      "id": 65,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:06.212552+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "i",
+      "code": "KeyI",
+      "windowsVirtualKeyCode": 73,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 66,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:06.371012+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "t",
+      "code": "KeyT",
+      "windowsVirtualKeyCode": 84,
+      "modifiers": 0,
+      "text": "t",
+      "unmodifiedText": "t"
+    },
+    "result": {
+      "id": 67,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:06.373922+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "t",
+      "code": "KeyT",
+      "windowsVirtualKeyCode": 84,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 68,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:06.532316+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "e",
+      "code": "KeyE",
+      "windowsVirtualKeyCode": 69,
+      "modifiers": 0,
+      "text": "e",
+      "unmodifiedText": "e"
+    },
+    "result": {
+      "id": 69,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:06.535296+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "e",
+      "code": "KeyE",
+      "windowsVirtualKeyCode": 69,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 70,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:06.693611+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "r",
+      "code": "KeyR",
+      "windowsVirtualKeyCode": 82,
+      "modifiers": 0,
+      "text": "r",
+      "unmodifiedText": "r"
+    },
+    "result": {
+      "id": 71,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:06.696586+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "r",
+      "code": "KeyR",
+      "windowsVirtualKeyCode": 82,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 72,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:06.855231+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 0,
+      "text": "a",
+      "unmodifiedText": "a"
+    },
+    "result": {
+      "id": 73,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:06.857881+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 74,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.016589+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "l",
+      "code": "KeyL",
+      "windowsVirtualKeyCode": 76,
+      "modifiers": 0,
+      "text": "l",
+      "unmodifiedText": "l"
+    },
+    "result": {
+      "id": 75,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.019530+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "l",
+      "code": "KeyL",
+      "windowsVirtualKeyCode": 76,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 76,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.173370+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length===1 && document.querySelector(\".ff-project-browser-list\").textContent.includes(\"Zeta <project>\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 77,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.177001+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser input[type=search]\").scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 78,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.180252+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-project-browser input[type=search]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 79,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":234,\"y\":334}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.183973+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 234,
+      "y": 334,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 80,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.187614+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 234,
+      "y": 334,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 81,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.191024+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 234,
+      "y": 334,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 82,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.344653+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Control",
+      "code": "ControlLeft",
+      "windowsVirtualKeyCode": 17,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 83,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.348508+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 84,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.351372+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 85,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.354551+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Control",
+      "code": "ControlLeft",
+      "windowsVirtualKeyCode": 17,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 86,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.366353+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Backspace",
+      "code": "Backspace",
+      "windowsVirtualKeyCode": 8
+    },
+    "result": {
+      "id": 87,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.369548+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Backspace",
+      "code": "Backspace",
+      "windowsVirtualKeyCode": 8
+    },
+    "result": {
+      "id": 88,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.387391+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "m",
+      "code": "KeyM",
+      "windowsVirtualKeyCode": 77,
+      "modifiers": 0,
+      "text": "m",
+      "unmodifiedText": "m"
+    },
+    "result": {
+      "id": 89,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.390588+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "m",
+      "code": "KeyM",
+      "windowsVirtualKeyCode": 77,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 90,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.549654+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "i",
+      "code": "KeyI",
+      "windowsVirtualKeyCode": 73,
+      "modifiers": 0,
+      "text": "i",
+      "unmodifiedText": "i"
+    },
+    "result": {
+      "id": 91,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.553099+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "i",
+      "code": "KeyI",
+      "windowsVirtualKeyCode": 73,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 92,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.711554+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "s",
+      "code": "KeyS",
+      "windowsVirtualKeyCode": 83,
+      "modifiers": 0,
+      "text": "s",
+      "unmodifiedText": "s"
+    },
+    "result": {
+      "id": 93,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.714996+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "s",
+      "code": "KeyS",
+      "windowsVirtualKeyCode": 83,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 94,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.873354+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "s",
+      "code": "KeyS",
+      "windowsVirtualKeyCode": 83,
+      "modifiers": 0,
+      "text": "s",
+      "unmodifiedText": "s"
+    },
+    "result": {
+      "id": 95,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:07.876600+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "s",
+      "code": "KeyS",
+      "windowsVirtualKeyCode": 83,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 96,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:08.035104+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "i",
+      "code": "KeyI",
+      "windowsVirtualKeyCode": 73,
+      "modifiers": 0,
+      "text": "i",
+      "unmodifiedText": "i"
+    },
+    "result": {
+      "id": 97,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:08.038162+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "i",
+      "code": "KeyI",
+      "windowsVirtualKeyCode": 73,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 98,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:08.196912+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "n",
+      "code": "KeyN",
+      "windowsVirtualKeyCode": 78,
+      "modifiers": 0,
+      "text": "n",
+      "unmodifiedText": "n"
+    },
+    "result": {
+      "id": 99,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:08.200143+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "n",
+      "code": "KeyN",
+      "windowsVirtualKeyCode": 78,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 100,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:08.358612+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "g",
+      "code": "KeyG",
+      "windowsVirtualKeyCode": 71,
+      "modifiers": 0,
+      "text": "g",
+      "unmodifiedText": "g"
+    },
+    "result": {
+      "id": 101,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:08.361725+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "g",
+      "code": "KeyG",
+      "windowsVirtualKeyCode": 71,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 102,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:08.520192+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "-",
+      "code": "Key-",
+      "windowsVirtualKeyCode": 45,
+      "modifiers": 0,
+      "text": "-",
+      "unmodifiedText": "-"
+    },
+    "result": {
+      "id": 103,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:08.523328+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "-",
+      "code": "Key-",
+      "windowsVirtualKeyCode": 45,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 104,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:08.681793+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "q",
+      "code": "KeyQ",
+      "windowsVirtualKeyCode": 81,
+      "modifiers": 0,
+      "text": "q",
+      "unmodifiedText": "q"
+    },
+    "result": {
+      "id": 105,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:08.684999+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "q",
+      "code": "KeyQ",
+      "windowsVirtualKeyCode": 81,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 106,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:08.843706+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "u",
+      "code": "KeyU",
+      "windowsVirtualKeyCode": 85,
+      "modifiers": 0,
+      "text": "u",
+      "unmodifiedText": "u"
+    },
+    "result": {
+      "id": 107,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:08.846975+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "u",
+      "code": "KeyU",
+      "windowsVirtualKeyCode": 85,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 108,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.005617+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "e",
+      "code": "KeyE",
+      "windowsVirtualKeyCode": 69,
+      "modifiers": 0,
+      "text": "e",
+      "unmodifiedText": "e"
+    },
+    "result": {
+      "id": 109,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.008984+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "e",
+      "code": "KeyE",
+      "windowsVirtualKeyCode": 69,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 110,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.167518+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "r",
+      "code": "KeyR",
+      "windowsVirtualKeyCode": 82,
+      "modifiers": 0,
+      "text": "r",
+      "unmodifiedText": "r"
+    },
+    "result": {
+      "id": 111,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.171057+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "r",
+      "code": "KeyR",
+      "windowsVirtualKeyCode": 82,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 112,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.329880+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "y",
+      "code": "KeyY",
+      "windowsVirtualKeyCode": 89,
+      "modifiers": 0,
+      "text": "y",
+      "unmodifiedText": "y"
+    },
+    "result": {
+      "id": 113,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.333196+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "y",
+      "code": "KeyY",
+      "windowsVirtualKeyCode": 89,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 114,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.487384+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"No matching recent projects\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 115,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.492015+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(Array.from(document.querySelectorAll(\".ff-project-browser button\")).find(e=>(e.getAttribute(\"aria-label\")||e.textContent.trim())===\"Reset filters\")).scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 116,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.496245+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=(Array.from(document.querySelectorAll(\".ff-project-browser button\")).find(e=>(e.getAttribute(\"aria-label\")||e.textContent.trim())===\"Reset filters\")).getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 117,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 92.3515625,
+            "y": 533
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.504412+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 92.3515625,
+      "y": 533,
+      "button": "left",
+      "clickCount": 1
+    },
+    "result": {
+      "id": 118,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.517528+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 92.3515625,
+      "y": 533,
+      "button": "left",
+      "clickCount": 1
+    },
+    "result": {
+      "id": 119,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.521568+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length>0",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 120,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.525712+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length===3",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 121,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.530117+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-controls select\").scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 122,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.534251+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-project-controls select\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 123,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":536,\"y\":337}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.546968+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 536,
+      "y": 337,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 124,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.569800+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 536,
+      "y": 337,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 125,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.574032+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 536,
+      "y": 337,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 126,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.728811+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "ArrowDown",
+      "code": "ArrowDown",
+      "windowsVirtualKeyCode": 40,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 127,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.732642+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "ArrowDown",
+      "code": "ArrowDown",
+      "windowsVirtualKeyCode": 40,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 128,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.894548+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 129,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:09.898494+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 130,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.052871+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length===2",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 131,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.057353+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-controls select\").scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 132,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.061466+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-project-controls select\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 133,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":536,\"y\":337}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.066027+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 536,
+      "y": 337,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 134,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.085401+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 536,
+      "y": 337,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 135,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.089725+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 536,
+      "y": 337,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 136,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.244660+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "ArrowUp",
+      "code": "ArrowUp",
+      "windowsVirtualKeyCode": 38,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 137,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.248827+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "ArrowUp",
+      "code": "ArrowUp",
+      "windowsVirtualKeyCode": 38,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 138,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.411257+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 139,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.415125+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 140,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.569814+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-controls label:last-child select\").scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 141,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.574122+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-project-controls label:last-child select\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 142,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":680.0234375,\"y\":337}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.580303+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 680,
+      "y": 337,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 143,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.601354+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 680,
+      "y": 337,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 144,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.605482+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 680,
+      "y": 337,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 145,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.760562+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "ArrowDown",
+      "code": "ArrowDown",
+      "windowsVirtualKeyCode": 40,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 146,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.764623+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "ArrowDown",
+      "code": "ArrowDown",
+      "windowsVirtualKeyCode": 40,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 147,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.927404+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 148,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:10.931619+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 149,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.086498+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser-list button\").getAttribute(\"aria-label\")===\"Inspect Zeta <project>\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 150,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.091291+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement===document.querySelector(\".ff-project-browser-list button[aria-label=\\\"Inspect Zeta <project>\\\"]\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 151,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.097223+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 152,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.101079+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 153,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.255606+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement===document.querySelector(\".ff-project-browser-list button[aria-label=\\\"Inspect Zeta <project>\\\"]\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 154,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.279580+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 155,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.283872+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 156,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.438651+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-project-detail\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 157,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.443197+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-detail\").textContent.includes(\"project-zeta\") && document.querySelector(\".ff-project-detail\").textContent.includes(\"description literal 原文\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 158,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.448682+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!document.querySelector(\".ff-project-detail project\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 159,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.454848+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 160,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.459179+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 161,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.614128+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.activeElement.closest(\".ff-project-detail\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 162,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.748235+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.771796+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Escape",
+      "code": "Escape",
+      "windowsVirtualKeyCode": 27,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 164,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.776723+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Escape",
+      "code": "Escape",
+      "windowsVirtualKeyCode": 27,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 165,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.932586+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!document.querySelector(\".ff-project-detail\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 166,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.938463+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement===document.querySelector(\".ff-project-browser-list button[aria-label=\\\"Inspect Zeta <project>\\\"]\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 167,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.945365+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{let e=document.querySelector('.ff-project-browser');let f=e[Object.keys(e).find(k=>k.startsWith('__reactFiber$'))];while(f&&!f.memoizedProps?.source?.adapter)f=f.return;if(!f)throw Error('No Projects source');const source=f.memoizedProps.source;if(source.adapter.origin!=='simulated')throw Error('Refuse real source');const adapter=source.adapter,original=adapter.listRecent;const h=window.__projectsHarness={source,adapter,original,hold:true,pending:[],outcome:'ok'};adapter.listRecent=function(request,signal){if(h.hold)return new Promise((resolve,reject)=>h.pending.push({request,signal,resolve,reject}));if(h.outcome!=='ok')return Promise.resolve({status:h.outcome,scope:request.scope,requestId:request.requestId,explanation:'Controlled simulated failure'});return original(request,signal)};h.finish=async index=>{const p=h.pending[index];p.resolve(await original(p.request,new AbortController().signal))};return {origin:adapter.origin,scope:source.scope}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 168,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "origin": "simulated",
+            "scope": {
+              "principalId": "simulated-project-reader",
+              "tenantId": "simulated-project-tenant",
+              "sessionId": "simulated-project-session",
+              "workspaceId": "simulated-workspace"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.950609+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(Array.from(document.querySelectorAll(\".ff-project-browser button\")).find(e=>(e.getAttribute(\"aria-label\")||e.textContent.trim())===\"Refresh recent projects\")).scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 169,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.955522+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=(Array.from(document.querySelectorAll(\".ff-project-browser button\")).find(e=>(e.getAttribute(\"aria-label\")||e.textContent.trim())===\"Refresh recent projects\")).getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 170,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 1335.96875,
+            "y": 132
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.962441+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 1335.96875,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1
+    },
+    "result": {
+      "id": 171,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.974030+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 1335.96875,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1
+    },
+    "result": {
+      "id": 172,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.979280+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__projectsHarness.pending.length===1",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 173,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.984125+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!document.querySelector(\".ff-project-browser-list\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 174,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:11.989392+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.activeElement.closest(\".ff-project-browser\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 175,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.109416+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.116566+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(Array.from(document.querySelectorAll(\".ff-project-browser button\")).find(e=>(e.getAttribute(\"aria-label\")||e.textContent.trim())===\"Cancel loading\")).scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 177,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.122172+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=(Array.from(document.querySelectorAll(\".ff-project-browser button\")).find(e=>(e.getAttribute(\"aria-label\")||e.textContent.trim())===\"Cancel loading\")).getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 178,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 1360.3203125,
+            "y": 132
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.128016+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 1360.3203125,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1
+    },
+    "result": {
+      "id": 179,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.137855+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 1360.3203125,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1
+    },
+    "result": {
+      "id": 180,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.143168+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"Loading cancelled.\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 181,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.148709+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.activeElement.closest(\".ff-project-browser\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 182,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.154932+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__projectsHarness.finish(0)",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 183,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.159208+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!document.querySelector(\".ff-project-browser-list\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 184,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.164085+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__projectsHarness.hold=false",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 185,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.168824+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(Array.from(document.querySelectorAll(\".ff-project-browser button\")).find(e=>(e.getAttribute(\"aria-label\")||e.textContent.trim())===\"Retry loading\")).scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 186,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.173118+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=(Array.from(document.querySelectorAll(\".ff-project-browser button\")).find(e=>(e.getAttribute(\"aria-label\")||e.textContent.trim())===\"Retry loading\")).getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 187,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 1364.65625,
+            "y": 132
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.177746+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 1364.65625,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1
+    },
+    "result": {
+      "id": 188,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.194871+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 1364.65625,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1
+    },
+    "result": {
+      "id": 189,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.199882+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length>0",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 190,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.204776+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length===3",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 191,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.210490+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__projectsHarness.outcome=\"error\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 192,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "error"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.215166+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(Array.from(document.querySelectorAll(\".ff-project-browser button\")).find(e=>(e.getAttribute(\"aria-label\")||e.textContent.trim())===\"Refresh recent projects\")).scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 193,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.219909+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=(Array.from(document.querySelectorAll(\".ff-project-browser button\")).find(e=>(e.getAttribute(\"aria-label\")||e.textContent.trim())===\"Refresh recent projects\")).getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 194,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 1335.96875,
+            "y": 132
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.224831+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 1335.96875,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1
+    },
+    "result": {
+      "id": 195,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.238590+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 1335.96875,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1
+    },
+    "result": {
+      "id": 196,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.243932+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"Recent projects error\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 197,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.249123+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!document.querySelector(\".ff-project-browser-list\") && !document.querySelector(\".ff-project-browser\").textContent.includes(\"No recent projects in this snapshot\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 198,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.372212+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.379280+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__projectsHarness.outcome=\"ok\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 200,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "ok"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.384809+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(Array.from(document.querySelectorAll(\".ff-project-browser button\")).find(e=>(e.getAttribute(\"aria-label\")||e.textContent.trim())===\"Retry loading\")).scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 201,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.390238+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=(Array.from(document.querySelectorAll(\".ff-project-browser button\")).find(e=>(e.getAttribute(\"aria-label\")||e.textContent.trim())===\"Retry loading\")).getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 202,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 1364.65625,
+            "y": 132
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.395191+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 1364.65625,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1
+    },
+    "result": {
+      "id": 203,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.412901+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 1364.65625,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1
+    },
+    "result": {
+      "id": 204,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.418186+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length>0",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 205,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.422977+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 206,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.441269+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/w/simulated-workspace/projects?projectsFixture=1&projectsFixtureFailure=denied"
+    },
+    "result": {
+      "id": 207,
+      "result": {
+        "frameId": "D276C66FA05ED59A2C2FD71749A84677",
+        "loaderId": "944CED4BF4A977CBEB7DE4B7DECEEDDC",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.761406+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 208,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.917461+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 209,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.923907+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 210,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.929583+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 211,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.935402+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-project-browser\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 212,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.940462+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"Recent projects denied\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 213,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:12.945283+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!document.querySelector(\".ff-project-browser-list\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 214,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:13.081037+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:13.087393+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 216,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:13.101670+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/w/simulated-workspace/projects?projectsFixture=1&projectsFixtureFailure=unknown"
+    },
+    "result": {
+      "id": 217,
+      "result": {
+        "frameId": "D276C66FA05ED59A2C2FD71749A84677",
+        "loaderId": "9B19DB965FC803A191DA32431AFF512F",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:13.412890+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 218,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:13.569108+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 219,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:13.575561+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 220,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:13.581475+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 221,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:13.587174+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-project-browser\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 222,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:13.592957+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"Recent projects access unknown\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 223,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:13.597474+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!document.querySelector(\".ff-project-browser-list\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 224,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:13.710021+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:13.716967+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 226,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:13.731195+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/w/simulated-workspace/projects?projectsFixture=1&projectsFixtureFailure=unsupported"
+    },
+    "result": {
+      "id": 227,
+      "result": {
+        "frameId": "D276C66FA05ED59A2C2FD71749A84677",
+        "loaderId": "69307B3FCC2F9D51DA9D46F096F64D5D",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.052967+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 228,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.209707+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 229,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.216647+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 230,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.222912+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 231,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.228985+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-project-browser\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 232,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.234275+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"Recent projects unsupported\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 233,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.239526+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!document.querySelector(\".ff-project-browser-list\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 234,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.362421+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.369599+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 236,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.384685+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/w/simulated-workspace/projects?projectsFixture=1&projectsFixtureFailure=unavailable"
+    },
+    "result": {
+      "id": 237,
+      "result": {
+        "frameId": "D276C66FA05ED59A2C2FD71749A84677",
+        "loaderId": "054621E0496DBFA5C6A7C18B7AF08DF4",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.698070+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 238,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.854796+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 239,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.861916+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 240,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.868112+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 241,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.873524+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-project-browser\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 242,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.878477+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"Recent projects unavailable\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 243,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.885884+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!document.querySelector(\".ff-project-browser-list\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 244,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.994515+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:14.997980+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 246,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:15.009038+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/w/simulated-workspace/projects?projectsFixture=1&projectsFixtureFailure=error"
+    },
+    "result": {
+      "id": 247,
+      "result": {
+        "frameId": "D276C66FA05ED59A2C2FD71749A84677",
+        "loaderId": "662AE84A5DEE0C5EC98F6F2747654724",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:15.334221+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 248,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:15.491196+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 249,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:15.498407+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 250,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:15.504722+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 251,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:15.513069+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-project-browser\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 252,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:15.518894+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"Recent projects error\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 253,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:15.523532+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!document.querySelector(\".ff-project-browser-list\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 254,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:15.645272+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:15.652675+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 256,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:15.667464+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/w/simulated-workspace/projects?projectsFixture=1&projectsFixtureEmpty=1"
+    },
+    "result": {
+      "id": 257,
+      "result": {
+        "frameId": "D276C66FA05ED59A2C2FD71749A84677",
+        "loaderId": "0D27B1FB9EF87F5A04BA7C8C4CD9B6DB",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:15.980191+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 258,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.137247+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 259,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.144696+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 260,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.151168+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 261,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.156977+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-project-browser\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 262,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.162317+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"No recent projects in this snapshot\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 263,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.167171+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!document.querySelector(\".ff-project-browser-list\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 264,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.285283+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.293257+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 266,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.308573+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/w/simulated-workspace/projects?projectsFixture=1&projectsFixtureLimited=1"
+    },
+    "result": {
+      "id": 267,
+      "result": {
+        "frameId": "D276C66FA05ED59A2C2FD71749A84677",
+        "loaderId": "3FD5F5D1A3921442D61A7439E0F38FDD",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.631254+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 268,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.788543+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 269,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.796003+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 270,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.803226+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 271,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.809691+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-project-browser\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 272,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.816068+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length>0",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 273,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.821234+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length===1",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 274,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.951035+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:16.984247+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 276,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.003004+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/w/simulated-workspace/projects?projectsFixture=1"
+    },
+    "result": {
+      "id": 277,
+      "result": {
+        "frameId": "D276C66FA05ED59A2C2FD71749A84677",
+        "loaderId": "4BA45E68D18C9B14753BB324CE1AF986",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.314622+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 278,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.471998+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 279,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.490949+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"zh-CN\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 280,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.555022+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"zh-CN\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 281,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.562022+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-project-browser\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 282,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.569016+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length>0",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 283,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.575841+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-browser h1\").textContent===\"最近项目\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 284,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.582162+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.scrollWidth<=window.innerWidth+1",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 285,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.649821+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.658933+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(Array.from(document.querySelectorAll(\".ff-project-browser button\")).find(e=>(e.getAttribute(\"aria-label\")||e.textContent.trim())===\"\\u68c0\\u67e5 Zeta <project>\")).scrollIntoView({block:\"nearest\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 287,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.666512+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=(Array.from(document.querySelectorAll(\".ff-project-browser button\")).find(e=>(e.getAttribute(\"aria-label\")||e.textContent.trim())===\"\\u68c0\\u67e5 Zeta <project>\")).getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 288,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 58,
+            "y": 826
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.676021+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 58,
+      "y": 826,
+      "button": "left",
+      "clickCount": 1
+    },
+    "result": {
+      "id": 289,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.702520+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 58,
+      "y": 826,
+      "button": "left",
+      "clickCount": 1
+    },
+    "result": {
+      "id": 290,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.710362+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-project-detail\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 291,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.717604+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-detail\").textContent.includes(\"项目详情\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 292,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.725130+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-project-detail\").textContent.includes(\"description literal 原文\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 293,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.730889+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=document.querySelector(\".ff-project-detail\").getBoundingClientRect();return r.left>=0 && r.right<=window.innerWidth+1})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 294,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.796054+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.812894+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Escape",
+      "code": "Escape",
+      "windowsVirtualKeyCode": 27,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 296,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.819748+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Escape",
+      "code": "Escape",
+      "windowsVirtualKeyCode": 27,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 297,
+      "result": {}
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.977506+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!document.querySelector(\".ff-project-detail\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 298,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "timestamp": "2026-09-07T18:10:17.986364+00:00",
+    "method": "Browser.close",
+    "params": {},
+    "result": {
+      "id": 299,
+      "result": {}
+    }
+  }
+]

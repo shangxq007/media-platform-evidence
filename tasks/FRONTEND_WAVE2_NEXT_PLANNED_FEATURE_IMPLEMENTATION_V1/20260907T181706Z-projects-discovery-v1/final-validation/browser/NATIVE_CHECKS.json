@@ -1,0 +1,254 @@
+[
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "ordinary-unavailable",
+    "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"Recent projects unavailable\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "ordinary-no-fixture",
+    "expression": "!document.querySelector(\".ff-project-browser-list\") && !document.querySelector(\".ff-project-browser\").textContent.includes(\"SIMULATED PROJECT DATA\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "three-recent-items",
+    "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length===3",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "simulation-disclosed",
+    "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"SIMULATED PROJECT DATA\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "not-full-inventory",
+    "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"not a full project inventory\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "default-name-order",
+    "expression": "Array.from(document.querySelectorAll(\".ff-project-browser-list button\")).map(e=>e.getAttribute(\"aria-label\")).join(\"|\")===\"Inspect Alpha project|Inspect Alpha project|Inspect Zeta <project>\"",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "description-search",
+    "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length===1 && document.querySelector(\".ff-project-browser-list\").textContent.includes(\"Zeta <project>\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "no-match-distinct",
+    "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"No matching recent projects\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "reset-restores-three",
+    "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length===3",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "native-status-filter",
+    "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length===2",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "native-desc-sort",
+    "expression": "document.querySelector(\".ff-project-browser-list button\").getAttribute(\"aria-label\")===\"Inspect Zeta <project>\"",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "native-enter-exact-details",
+    "expression": "document.querySelector(\".ff-project-detail\").textContent.includes(\"project-zeta\") && document.querySelector(\".ff-project-detail\").textContent.includes(\"description literal 原文\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "opaque-no-markup",
+    "expression": "!document.querySelector(\".ff-project-detail project\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "native-tab-contained",
+    "expression": "!!document.activeElement.closest(\".ff-project-detail\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "native-escape-closes",
+    "expression": "!document.querySelector(\".ff-project-detail\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "native-launcher-restored",
+    "expression": "document.activeElement===document.querySelector(\".ff-project-browser-list button[aria-label=\\\"Inspect Zeta <project>\\\"]\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "refresh-clears-old-data",
+    "expression": "!document.querySelector(\".ff-project-browser-list\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "pending-focus-in-workflow",
+    "expression": "!!document.activeElement.closest(\".ff-project-browser\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "cancelled-distinct",
+    "expression": "document.querySelector(\".ff-project-browser\").textContent.includes(\"Loading cancelled.\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "cancel-focus-in-workflow",
+    "expression": "!!document.activeElement.closest(\".ff-project-browser\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "late-cancelled-result-hidden",
+    "expression": "!document.querySelector(\".ff-project-browser-list\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "retry-real-fixture-result",
+    "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length===3",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "failure-not-empty",
+    "expression": "!document.querySelector(\".ff-project-browser-list\") && !document.querySelector(\".ff-project-browser\").textContent.includes(\"No recent projects in this snapshot\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "failure-state-denied",
+    "expression": "!document.querySelector(\".ff-project-browser-list\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "failure-state-unknown",
+    "expression": "!document.querySelector(\".ff-project-browser-list\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "failure-state-unsupported",
+    "expression": "!document.querySelector(\".ff-project-browser-list\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "failure-state-unavailable",
+    "expression": "!document.querySelector(\".ff-project-browser-list\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "failure-state-error",
+    "expression": "!document.querySelector(\".ff-project-browser-list\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "loaded-empty",
+    "expression": "!document.querySelector(\".ff-project-browser-list\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "limited-one",
+    "expression": "document.querySelectorAll(\".ff-project-browser-list li\").length===1",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "chinese-title",
+    "expression": "document.querySelector(\".ff-project-browser h1\").textContent===\"最近项目\"",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "narrow-no-document-overflow",
+    "expression": "document.documentElement.scrollWidth<=window.innerWidth+1",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "chinese-details",
+    "expression": "document.querySelector(\".ff-project-detail\").textContent.includes(\"项目详情\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "opaque-chinese-content-retained",
+    "expression": "document.querySelector(\".ff-project-detail\").textContent.includes(\"description literal 原文\")",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "narrow-dialog-bounded",
+    "expression": "(()=>{const r=document.querySelector(\".ff-project-detail\").getBoundingClientRect();return r.left>=0 && r.right<=window.innerWidth+1})()",
+    "value": true,
+    "passed": true
+  },
+  {
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "name": "narrow-escape-closes",
+    "expression": "!document.querySelector(\".ff-project-detail\")",
+    "value": true,
+    "passed": true
+  }
+]

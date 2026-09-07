@@ -1,0 +1,109 @@
+{
+  "TASK": "FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1",
+  "LANE": "FRONTEND",
+  "FRONTEND_BRANCH": "refs/heads/agent/frontend-wave2-product-ux-v1",
+  "SELECTED_FEATURE": "Workspace recent-project discovery and inspection",
+  "PLAN_SOURCE_AND_ITEM": "docs/architecture/governance/frontend-foundation-checkpoint-a-implementation-v1.md:250–265 / Compact surface design records / Workspace / PRIMARY_ACTIONS: search Projects, inspect recent work; IA Six surface families / Workspace–Home supports finding Projects",
+  "BASELINE_IMPLEMENTATION_TREE": "c1d45edff185a99f3a961a9b29598ea2b34d0f18",
+  "FINAL_IMPLEMENTATION_TREE": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+  "PRODUCT_HEAD": "f5e19cf53fd010eea2935dd29557e82a879e042c",
+  "USER_VISIBLE_OUTCOME": "在现有 Projects 入口查找、筛选、排序与只读检查最近项目快照；完整加载/取消/刷新/重试及失败状态。普通未配置不可用；显式 localhost fixture 可演示。",
+  "ACCEPTANCE_CRITERIA_RESULTS": {
+    "1": "PASS within explicit frontend/fixture/Chromium boundary",
+    "2": "PASS within explicit frontend/fixture/Chromium boundary",
+    "3": "PASS within explicit frontend/fixture/Chromium boundary",
+    "4": "PASS within explicit frontend/fixture/Chromium boundary",
+    "5": "PASS within explicit frontend/fixture/Chromium boundary",
+    "6": "PASS within explicit frontend/fixture/Chromium boundary",
+    "7": "PASS within explicit frontend/fixture/Chromium boundary",
+    "8": "PASS within explicit frontend/fixture/Chromium boundary",
+    "9": "PASS within explicit frontend/fixture/Chromium boundary"
+  },
+  "PRODUCT_CHANGED_PATHS": 10,
+  "DOCUMENTATION_CHANGED_PATHS": 5,
+  "NEW_PATH_CLASSIFICATION": {
+    "frontend/src/product/projects/ProjectBrowser.tsx": "SCOPED_READ_ONLY_RECENT_PROJECT_DISCOVERY_AND_LOCAL_INSPECTION",
+    "frontend/src/product/projects/source.ts": "FRONTEND_RECENT_PROJECT_CONSUMPTION_PROPOSAL_NOT_SERVER_AUTHORITY",
+    "frontend/src/product/projects/fixture.ts": "EXPLICIT_LOCALHOST_SIMULATED_READ_ONLY_RECENT_PROJECT_FIXTURE",
+    "frontend/src/product/projects/ProjectBrowser.test.tsx": "RECENT_PROJECT_INTERACTION_LIFECYCLE_LOCALIZATION_REGRESSION",
+    "frontend/src/product/projects/source.test.ts": "RECENT_PROJECT_RECEIPT_SCOPE_AND_PRESENTATION_FILTER_TESTS"
+  },
+  "UNIFIED_ENTRY_AND_ACTION_INTEGRATION": "Existing Projects route and Home navigation; shared AppShell, design primitives and InteractionDialog. One page-local LOCAL_EPHEMERAL inspection dispatcher; no new command registry, canonical action or Selection store.",
+  "PERMISSION_AND_AVAILABILITY_BOUNDARIES": "Existing EffectiveAccess vocabulary; real source requires SERVER plus frontend-proposed project.recent.query key; explicit simulation uses its own fixture key/source. Unknown/denied/unavailable/unsupported/error distinct. No Open/Create or server authorization claim.",
+  "ASYNC_CONTEXT_ISOLATION": "Principal/tenant/session/Workspace/source/access/request and mounted lifetime isolation; valid old receipt tests cover replacement, logout, context transitions, cancellation, unmount. No unrelated media Selection coupling.",
+  "LOCALIZATION_AND_ACCESSIBILITY": "English/zh-CN; native Tab/Enter/Escape, pointer, filter controls, focus trapping/restoration and stable Refresh–Cancel–Retry button; 1440×1000 desktop/390×844 emulated narrow. No physical-device or screen-reader speech claim.",
+  "MOCK_AND_REAL_DATA_BOUNDARIES": "Explicit localhost projectsFixture=1 only; no production query/command. Ordinary unavailable, never mock fallback after real-adapter failure; ephemeral state not persistence. WorkspaceHome legacy query untouched.",
+  "BACKEND_REQUIREMENTS_UPDATED": [
+    "UXW1-001 in frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv",
+    "FB-GAP-001 clarification in docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md; FB-GAP-009 related"
+  ],
+  "NEW_BACKEND_REQUIREMENTS": "NONE: no new requirement ID or backend implementation; existing read-only scoped snapshot dependency clarified.",
+  "TARGETED_TEST_RESULTS": {
+    "passed": 232,
+    "failed": 0,
+    "writer_projects_focused": 53
+  },
+  "FULL_TEST_IDENTITY_ACCOUNTING": {
+    "baseline": 576,
+    "final": 630,
+    "files": 32,
+    "passed": 630,
+    "failures": 0,
+    "skips": 0,
+    "added": 54,
+    "removed": 0,
+    "duplicates": 0
+  },
+  "REQUIRED_FRONTEND_GATES": {
+    "targeted-final": 0,
+    "type-policy": 0,
+    "lint": 0,
+    "architecture": 0,
+    "architecture-controls": 0,
+    "full-frontend-final": 0,
+    "build-final": 0
+  },
+  "ARCHITECTURE_CONTROLS": {
+    "passed": 120,
+    "failed": 0
+  },
+  "LINT": {
+    "existing_warnings": 46,
+    "new_diagnostics": 0,
+    "removed_diagnostics": 0
+  },
+  "FOCUSED_BROWSER_RESULTS": {
+    "assertion_exit": 0,
+    "harness_error": null,
+    "tree": "0b76ac9352ad40fc155c7203ed69f6362b0db89f",
+    "checks": 36,
+    "passed": 36,
+    "failed": [],
+    "native_inputs": "CDP pointer/Tab/Enter/Escape/arrows/text key events",
+    "assistance": [
+      "CDP focus emulation",
+      "DOM locale and scrollIntoView",
+      "explicit simulated adapter via React fiber for held/failure query; no product-byte mutation"
+    ],
+    "physical_device": false,
+    "screen_reader_speech": false
+  },
+  "BUILD_MANIFEST_SHA256": "b5246980b450e1aef495f9b6f5c096d0f623a6ee0320ade21e7f6ea63b1b44fd",
+  "BACKEND_CHANGES": 0,
+  "TRACKED_DIST_CHANGES": 0,
+  "BACKEND_STATIC_CHANGES": 0,
+  "REAL_INTEGRATION_PERFORMED": "NO",
+  "REAL_BACKEND_REQUESTS": 0,
+  "PROJECTS_HTTP_QUERIES": 0,
+  "FUTURE_BOUNDED_INTEGRATION_SCENARIO": "Pin frontend tree 0b76ac9352ad40fc155c7203ed69f6362b0db89f and its served build; separately agree/pin one backend authenticated recent-project snapshot adapter capability. Controlled two-principal/two-tenant data with one permitted Workspace, one denied and one limited snapshot. Expect only safe allowed summaries, explicit limited flag, no cross-scope late result after logout/switch and truthful denied/error; no Open/Create/canonical writes. Backend version and proposal acceptance not yet selected; does not block unrelated UI development.",
+  "HISTORICAL_EVIDENCE_PRESERVED": "YES; 674 baseline public/build files rechecked, no differences; all prior attempts retained; backend lane not required stationary",
+  "PRODUCT_PUBLICATION": "NOT_PERFORMED",
+  "INDEPENDENT_REVIEW": "REQUIRED",
+  "EVIDENCE_DELIVERY_STATUS": "LOCAL_PACKAGE_PREPARATION",
+  "EVIDENCE_COMMIT_SHA": null,
+  "REVIEW_INDEX_URL": null,
+  "PUBLIC_MANIFEST_SHA256": null,
+  "REMOTE_VERIFICATION": "NOT_YET_RUN",
+  "SKILL_MEMORY_BODY_WRITES": 0,
+  "STOP": "YES"
+}

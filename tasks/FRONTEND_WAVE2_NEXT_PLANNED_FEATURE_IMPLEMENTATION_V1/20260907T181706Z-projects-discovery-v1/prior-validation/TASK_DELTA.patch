@@ -1,0 +1,1225 @@
+diff --git a/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md b/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+index f5b3661e..828b5624 100644
+--- a/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
++++ b/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+@@ -80,6 +80,21 @@ Evidence:
+   `frontend/src/routes/app/renders/RenderResultsListPage.tsx` currently derive a
+   Project from dashboard `recentProjects[0]`.
+ 
++#### Frontend recent-project discovery clarification (UXW1-001; 2026-09-08)
++
++This append-forward clarification belongs to `FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1`; it does not change the historical backend findings above or authorize a backend lane. Linked recent-work composition gap: FB-GAP-009. No new backend requirement ID, endpoint, server DTO or Operation key is established.
++
++| Field | Bounded consumer requirement |
++|---|---|
++| User scenario / consumer | Find a recently projected Project by name/description, filter opaque projected status, sort names locally and inspect its projected summary in `frontend/src/product/projects/ProjectBrowser.tsx` on the existing Workspace Projects route. Opening/creating a canonical Project is excluded. |
++| Query semantics | Read a bounded recent-project snapshot. Local filtering/sorting applies only to returned items, not a full Project inventory or server search. Inspection is local presentation of the same item, not a canonical detail fetch. |
++| Identity / scope | A future authenticated application source must bind principal, tenant, session generation, explicit Workspace and request identity. Workspace membership and destination-resource authorization remain server-owned; neither a recent-item entry nor a local fixture grants them. Logout, changed principal/tenant/session/Workspace and replaced source retire pending work. |
++| Proposed input / output (UNAGREED) | Frontend consumption proposal: scoped request identity; existing ProjectSummary-shaped safe id/name/description/status/createdAt, optional matching tenant, explicit complete/limited recent-snapshot metadata and echoed request/scope. The implementation source is the exact frontend proposal, not an accepted server DTO. No raw transport, storage coordinates or secrets. |
++| Permission / availability / errors | Consume established EffectiveAccess status/reason/factors, preserving unknown versus denied versus unavailable/unsupported/failure. A simulated projection is explanatory only. Wrong-scope, duplicate, malformed or stale successful responses fail closed; failed refresh cannot masquerade as empty or retain sensitive stale detail. Server explanations and item strings remain opaque content. |
++| Pagination / concurrency / persistence | No invented cursor, total or global completeness. Any future traversal needs separately agreed query semantics. Abort and request-generation checks suppress late results even if a source ignores cancellation. No mutation, client canonical persistence or localStorage Project database. |
++| Current frontend / mock boundary | The bounded Projects consumer accepts an explicitly injected application source, with an explicit localhost-only simulated fixture for frontend validation. Ordinary unconfigured behavior is unavailable; no real adapter is silently inferred from the older dashboard wrapper. WorkspaceHome and its existing query remain unchanged. This intentional Projects-route transition replaces legacy session-unscoped dashboard cards; it does not claim that the dashboard endpoint itself is absent or newly disproved. |
++| Future limited integration acceptance | Pin the accepted frontend tree and one separately accepted backend build/adapter. Use one principal, tenant, Workspace and two controlled recent Projects plus denied/wrong-scope fixtures. Query and inspect one result; verify exact scope, limited-result labeling, failure clearing, logout/session-change cancellation and no Project-open/canonical mutation. No notification, Timeline or whole-platform readiness prerequisite. |
++
+ ### FB-GAP-002 — Five-factor effective-access projection
+ 
+ | Field | Value |
+diff --git a/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv b/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv
+index 5f507f56..e66f51e4 100644
+--- a/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv
++++ b/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv
+@@ -193,3 +193,6 @@ frontend/src/product/notifications/types.ts	ACTIVE	POST_H4_ADDITION	NOTIFICATION
+ frontend/src/product/notifications/unavailable.ts	ACTIVE	POST_H4_ADDITION	NOTIFICATION_INBOX_BOUNDED_FRONTEND_CONSUMER
+ frontend/src/product/notifications/fixture.ts	ACTIVE	POST_H4_ADDITION	NOTIFICATION_INBOX_BOUNDED_FRONTEND_CONSUMER
+ frontend/src/product/notifications/NotificationInbox.tsx	ACTIVE	POST_H4_ADDITION	NOTIFICATION_INBOX_BOUNDED_FRONTEND_CONSUMER
++frontend/src/product/projects/ProjectBrowser.tsx	ACTIVE	POST_H4_ADDITION	SCOPED_READ_ONLY_RECENT_PROJECT_DISCOVERY_AND_LOCAL_INSPECTION
++frontend/src/product/projects/source.ts	ACTIVE	POST_H4_ADDITION	FRONTEND_RECENT_PROJECT_CONSUMPTION_PROPOSAL_NOT_SERVER_AUTHORITY
++frontend/src/product/projects/fixture.ts	ACTIVE	POST_H4_ADDITION	EXPLICIT_LOCALHOST_SIMULATED_READ_ONLY_RECENT_PROJECT_FIXTURE
+diff --git a/docs/architecture/governance/frontend-product-path-classification-v1.tsv b/docs/architecture/governance/frontend-product-path-classification-v1.tsv
+index e546a261..19acfc53 100644
+--- a/docs/architecture/governance/frontend-product-path-classification-v1.tsv
++++ b/docs/architecture/governance/frontend-product-path-classification-v1.tsv
+@@ -521,3 +521,8 @@ frontend/src/product/notifications/fixture.ts	REUSE	EXPLICIT_SIMULATED_IN_MEMORY
+ frontend/src/product/notifications/NotificationInbox.tsx	REUSE	SHARED_PRINCIPAL_OWNED_INBOX_PRESENTATION
+ frontend/src/product/notifications/NotificationInbox.test.tsx	REUSE	NOTIFICATION_INTERACTION_AND_CONTEXT_ISOLATION_EVIDENCE
+ frontend/src/product/notifications/adapter.test.ts	REUSE	NOTIFICATION_BOUNDARY_RECEIPT_AND_NAVIGATION_EVIDENCE
++frontend/src/product/projects/ProjectBrowser.tsx	REUSE	SCOPED_READ_ONLY_RECENT_PROJECT_DISCOVERY_AND_LOCAL_INSPECTION
++frontend/src/product/projects/source.ts	REUSE	FRONTEND_RECENT_PROJECT_CONSUMPTION_PROPOSAL_NOT_SERVER_AUTHORITY
++frontend/src/product/projects/fixture.ts	REUSE	EXPLICIT_LOCALHOST_SIMULATED_READ_ONLY_RECENT_PROJECT_FIXTURE
++frontend/src/product/projects/ProjectBrowser.test.tsx	REUSE	RECENT_PROJECT_INTERACTION_LIFECYCLE_LOCALIZATION_REGRESSION
++frontend/src/product/projects/source.test.ts	REUSE	RECENT_PROJECT_RECEIPT_SCOPE_AND_PRESENTATION_FILTER_TESTS
+diff --git a/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv b/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+index e096fdf0..152702c2 100644
+--- a/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
++++ b/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+@@ -1,5 +1,5 @@
+ REQUEST_ID	USER_FLOW	CURRENT_GAP	DESIRED_CAPABILITY	DESIRED_APPLICATION_CONTRACT	BLOCKING_LEVEL	WAVE1_FRONTEND_FREEZE_BLOCKING	FUTURE_PRODUCT_CAPABILITY_BLOCKING	MOCK_BEHAVIOR	UX_REASON	ACCEPTANCE_CRITERIA	STATUS
+-UXW1-001	Open a project from a workspace	Workspace-to-project relationship cannot be verified by the current context projection (FB-GAP-001)	Authenticated workspace project membership projection	Typed application projection of scoped project identity and display name with non-disclosing denied/not-found responses; no client tenant override	BLOCKS_VERIFIED_PROJECT_CONTEXT	NO	YES	Existing workspace getHome fake is used only in tests; production retains blocked context notice	Users need trustworthy scope and understandable access boundaries	Server validates authenticated membership; invalid scope fails closed without resource disclosure; route metadata alone never grants command access	PROPOSED
++UXW1-001	Open a project from a workspace; find and inspect a bounded recent-project snapshot	Workspace-to-project relationship cannot be verified by the current context projection (FB-GAP-001); Projects discovery requires an explicitly authenticated principal/tenant/session/Workspace-bound source; existing dashboard wrapper is not proof of that complete lifecycle boundary	Authenticated workspace project membership projection	Typed application projection of scoped project identity and display name with non-disclosing denied/not-found responses; no client tenant override; clarified UNAGREED recent-query consumption proposal and selective-integration criteria in FB-GAP-001 recent-project clarification, linked FB-GAP-009; echoed request/scope and complete/limited snapshot; no invented endpoint or DTO	BLOCKS_VERIFIED_PROJECT_CONTEXT	NO	YES	Existing workspace getHome fake is used only in tests; production retains blocked context notice; new Projects consumer uses a separate explicitly injected read-only application source and localhost-only simulated fixture; ordinary unconfigured Projects path unavailable, no HTTP or mock fallback. Existing WorkspaceHome query unchanged; no Project opening/creation/persistence	Users need trustworthy scope and understandable access boundaries	Server validates authenticated membership; invalid scope fails closed without resource disclosure; route metadata alone never grants command access; additionally reject stale/malformed/duplicate or mismatched recent snapshots, preserve unknown/denied/unsupported/unavailable/failure distinctions, cancel across source/principal/tenant/session/Workspace changes; local search/sort/detail is not server search, canonical detail or authorization	PROPOSED_CLARIFIED_FRONTEND_RECENT_PROJECT_DISCOVERY_REAL_INTEGRATION_NOT_ESTABLISHED
+ UXW1-002	Return to a canvas arrangement	Local titles, selection and placement are discarded on navigation, including intentionally local creator presentation preferences	Optional scoped presentation layout persistence	Versioned workspace/project presentation document containing local node placement, labels and approved non-semantic UI preferences separately from semantic references; authorization and concurrency checks; no canonical edges or identity writes	BLOCKS_PRESENTATION_PERSISTENCE	NO	YES	No persistence fake or endpoint; local in-memory state is visibly marked not saved	Users may expect arrangements and local presentation preferences to survive navigation	Reload restores only authorized project layout and approved presentation preferences; concurrent save conflicts are explicit; semantic identity and relationships remain unchanged	PROPOSED
+ UXW1-003	Browse media before previewing Add Media Clip	Existing asset gateway cannot project complete canonical logical source pins	Safe source-pin browser projection	Application projection of logical media asset, stream and artifact IDs, content digest and exact media bounds required by the existing command; no physical locations	BLOCKS_GUIDED_MEDIA_SELECTION	NO	YES	Existing unavailable asset gateway reused; scripted operation gateways stay in tests; advanced manual pin form retained	Manual opaque IDs are difficult to discover and validate	Selected media supplies a complete server-validated pin; stale or unauthorized pins fail closed; preview-before-apply remains required	PROPOSED
+ UXW1-004	Watch and scrub an actual timeline	No decoded media access or authoritative track/clip geometry projection	Authorized timeline playback and geometry read model	Revision-scoped track/clip projection with exact time basis plus safe short-lived media access abstraction; timing and ownership supplied by server	BLOCKS_REAL_PLAYBACK_AND_CLIP_EDITING	NO	YES	Production explicitly offers only a bounded 0–20 local-step simulation with placeholder V1/A1 lanes and two explicitly synthetic clips (opening and closing); no mock media or invented clip edits	Users must distinguish layout exploration from a playable edit	Playback matches the selected projected revision and exact time basis; denied access is explicit; UI never derives canonical geometry from local simulation	PROPOSED
+diff --git a/frontend/governance/UX_WAVE_1_REVIEW.md b/frontend/governance/UX_WAVE_1_REVIEW.md
+index d2e44f05..c0c29a96 100644
+--- a/frontend/governance/UX_WAVE_1_REVIEW.md
++++ b/frontend/governance/UX_WAVE_1_REVIEW.md
+@@ -112,3 +112,16 @@ Statuses are relative to the supplied base: M = modified, D = removed by the sco
+ | A | `frontend/governance/UX_WAVE_1_REVIEW.md` | Review governance / capability proposal |
+ | A | `frontend/src/product/canvas/WorkspaceCanvas.test.tsx` | Interaction / regression test |
+ | A | `frontend/src/product/canvas/model.test.ts` | Interaction / regression test |
++
++
++## Owner continuation status — read-only recent Projects (2026-09-08)
++
++This appendix preserves all historical review conclusions above. It records the current Owner direction; it is not a new acceptance ledger or Slice number.
++
++- Notification focus correction `c1d45edff185a99f3a961a9b29598ea2b34d0f18` is Owner-accepted within its recorded Chromium scope; evidence `16848a46bf15e1cfff38ce869b86454f18a6e3b6`, public manifest `baa499b7eacdf6d1fe6df4d30b4617eeb14333f2fd780c716fc47d3084bf2a1e`. Its regression coverage is retained, not reopened.
++- Current task: `FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1`. Selected existing IA §3.3 Workspace primary action “搜索 Projects、检查最近工作”, bounded to the established Projects list route and read-only discovery/inspection. This is not the whole roadmap or canonical Project opening.
++- Frontend behavior: local literal search, opaque status filter, deterministic name sort, reset, one shared read-only detail dialog, refresh/cancel/retry, bounded/limited snapshot and distinct unavailable/unknown/denied/unsupported/error/empty outcomes. Local presentation is not a server Revision or persisted result.
++- Ordinary Projects loading remains unavailable until a correctly scoped authenticated adapter is supplied; the old dashboard wrapper cannot establish this consumer's identity/permission/receipt guarantees. The existing Home consumer is unchanged. Explicit localhost fixture data demonstrates the new flow without real authentication or transport.
++- Dependency disposition: clarify existing `UXW1-001` / `FB-GAP-001` (related `FB-GAP-009`), add no requirement ID, endpoint or Operation contract. Future integration is a separately authorized single read-only recent-snapshot path.
++- Status: unfrozen local feature increment; independent review required. Exact final identities, executed gates and additive delivery receipt belong to the external task report at `/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1/FINAL_REPORT.md`.
++- Boundaries: no product freeze/commit/index change/merge/push/deployment, no real integration, no backend EP19 work; historical H4 and formal Slice1C status/publication gates unchanged.
+diff --git a/frontend/src/app/routeTree.test.tsx b/frontend/src/app/routeTree.test.tsx
+index d979e454..b49b1bdb 100644
+--- a/frontend/src/app/routeTree.test.tsx
++++ b/frontend/src/app/routeTree.test.tsx
+@@ -102,6 +102,17 @@ describe('runtime route registration and deep-link restoration', () => {
+     expect((screen.getByRole('button', { name: 'Open' }) as HTMLButtonElement).disabled).toBe(true)
+   })
+ 
++  it('routes the existing Projects destination to the fail-closed recent-project browser without using Workspace home as its source', async () => {
++    const home = vi.spyOn(platformClient.workspace, 'getHome')
++    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } })
++    const history = createMemoryHistory({ initialEntries: ['/w/workspace-1/projects'] })
++    const router = createRouter({ routeTree, history, context: { queryClient } })
++    render(<QueryClientProvider client={queryClient}><RouterProvider router={router} /></QueryClientProvider>)
++    expect(await screen.findByRole('heading', { name: 'Recent projects unavailable' })).toBeTruthy()
++    expect(screen.getByText(/no authenticated, session-bound recent-project source/i)).toBeTruthy()
++    expect(home).not.toHaveBeenCalled()
++  })
++
+   it('handles Workspace API errors without inventing an empty state', async () => {
+     vi.spyOn(platformClient.workspace, 'getHome').mockRejectedValue(new Error('offline'))
+     const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } })
+diff --git a/frontend/src/localization/catalogs.ts b/frontend/src/localization/catalogs.ts
+index 17fd64e8..36a7b8ab 100644
+--- a/frontend/src/localization/catalogs.ts
++++ b/frontend/src/localization/catalogs.ts
+@@ -62,6 +62,58 @@ const englishNamespaces: CatalogNamespaces = {
+     'notifications.typeReview': message("Review request"),
+     'notifications.typeAnnouncement': message("Announcement"),
+     'notifications.typeOther': message("Other notification"),
++    'projects.region': message('Workspace recent projects'),
++    'projects.eyebrow': message('Workspace · read-only'),
++    'projects.title': message('Recent projects'),
++    'projects.description': message('Find and inspect a bounded snapshot of recent work. This view cannot open, create, or change projects.'),
++    'projects.originSimulated': message('SIMULATED PROJECT DATA · localhost fixture only · no real account or permission'),
++    'projects.originReal': message('CONNECTED READ-ONLY SOURCE · access is supplied by the host application'),
++    'projects.originUnavailable': message('PROJECT SOURCE UNAVAILABLE · no request was sent'),
++    'projects.boundary': message('This is a recent snapshot, not a full project inventory. Project opening and creation remain unavailable.'),
++    'projects.refresh': message('Refresh recent projects'),
++    'projects.loadingTitle': message('Loading recent projects'),
++    'projects.loadingLabel': message('Loading recent projects'),
++    'projects.cancel': message('Cancel loading'),
++    'projects.cancelledTitle': message('Recent project loading cancelled'),
++    'projects.cancelledBody': message('Loading cancelled.'),
++    'projects.retry': message('Retry loading'),
++    'projects.failureUnavailableTitle': message('Recent projects unavailable'),
++    'projects.failureUnavailableBody': message('No authenticated, session-bound recent-project source is configured for this view.'),
++    'projects.failureDeniedTitle': message('Recent projects denied'),
++    'projects.failureDeniedBody': message('The supplied effective-access projection denied this read-only request.'),
++    'projects.failureUnknownTitle': message('Recent projects access unknown'),
++    'projects.failureUnknownBody': message('Access could not be established, so the recent-project request remained fail-closed.'),
++    'projects.failureUnsupportedTitle': message('Recent projects unsupported'),
++    'projects.failureUnsupportedBody': message('The connected source does not support this bounded recent-project request.'),
++    'projects.failureErrorTitle': message('Recent projects error'),
++    'projects.failureErrorBody': message('The recent-project snapshot could not be validated or loaded.'),
++    'projects.search': message('Search recent projects'),
++    'projects.searchPlaceholder': message('Search name or description'),
++    'projects.statusLabel': message('Projected status'),
++    'projects.allStatuses': message('All projected statuses'),
++    'projects.sortLabel': message('Sort recent projects'),
++    'projects.sortAscending': message('Name A–Z'),
++    'projects.sortDescending': message('Name Z–A'),
++    'projects.snapshotLimited': message('{count} recent projects loaded · limited snapshot; more may exist.', ['count']),
++    'projects.snapshotRecent': message('{count} recent projects loaded · bounded recent snapshot.', ['count']),
++    'projects.emptyTitle': message('No recent projects in this snapshot'),
++    'projects.emptyBody': message('The source returned an empty recent-work snapshot. This does not establish that the workspace has no projects.'),
++    'projects.noMatchesTitle': message('No matching recent projects'),
++    'projects.noMatchesBody': message('No item in the loaded recent snapshot matches the current local filters.'),
++    'projects.reset': message('Reset filters'),
++    'projects.list': message('Recent project snapshot'),
++    'projects.noDescription': message('No description projected.'),
++    'projects.statusUnknown': message('Status not projected'),
++    'projects.inspect': message('Inspect'),
++    'projects.inspectNamed': message('Inspect {name}', ['name']),
++    'projects.detailTitle': message('Project details'),
++    'projects.detailClose': message('Close project details'),
++    'projects.detailReadOnly': message('Read-only local inspection'),
++    'projects.detailId': message('Project ID'),
++    'projects.detailStatus': message('Projected status'),
++    'projects.detailCreated': message('Projected creation time'),
++    'projects.notProjected': message('Not projected'),
++    'projects.detailLimit': message('Inspection does not establish canonical availability or permission to open this project.'),
+     brandHome: message('Media Platform home'), brand: message('Media Platform'), creativeWorkspace: message('Creative workspace'),
+     globalNavigation: message('Global navigation'), projectNavigation: message('Project navigation'), projectSurfaceSwitcher: message('Project surface switcher'),
+     workspace: message('Workspace'), operations: message('Operations'), admin: message('Admin'), developer: message('Developer'),
+@@ -318,6 +370,58 @@ const chineseNamespaces: CatalogNamespaces = {
+     'notifications.typeReview': message("审阅请求"),
+     'notifications.typeAnnouncement': message("公告"),
+     'notifications.typeOther': message("其他通知"),
++    'projects.region': message('工作区最近项目'),
++    'projects.eyebrow': message('工作区 · 只读'),
++    'projects.title': message('最近项目'),
++    'projects.description': message('查找并检查有限的最近工作快照。此视图不能打开、创建或更改项目。'),
++    'projects.originSimulated': message('模拟项目数据 · 仅限 localhost 固定数据 · 未连接真实账户或权限'),
++    'projects.originReal': message('已连接只读来源 · 访问权限由宿主应用提供'),
++    'projects.originUnavailable': message('项目来源不可用 · 未发送请求'),
++    'projects.boundary': message('这是最近项目快照，并非完整项目清单。项目打开和创建功能仍不可用。'),
++    'projects.refresh': message('刷新最近项目'),
++    'projects.loadingTitle': message('正在加载最近项目'),
++    'projects.loadingLabel': message('正在加载最近项目'),
++    'projects.cancel': message('取消加载'),
++    'projects.cancelledTitle': message('最近项目加载已取消'),
++    'projects.cancelledBody': message('加载已取消。'),
++    'projects.retry': message('重试加载'),
++    'projects.failureUnavailableTitle': message('最近项目不可用'),
++    'projects.failureUnavailableBody': message('此视图尚未配置经过身份验证且绑定会话的最近项目来源。'),
++    'projects.failureDeniedTitle': message('最近项目访问被拒绝'),
++    'projects.failureDeniedBody': message('提供的有效访问权限投影拒绝了此只读请求。'),
++    'projects.failureUnknownTitle': message('最近项目访问权限未知'),
++    'projects.failureUnknownBody': message('无法确定访问权限，因此最近项目请求保持关闭。'),
++    'projects.failureUnsupportedTitle': message('不支持最近项目'),
++    'projects.failureUnsupportedBody': message('已连接来源不支持此有限的最近项目请求。'),
++    'projects.failureErrorTitle': message('最近项目错误'),
++    'projects.failureErrorBody': message('无法验证或加载最近项目快照。'),
++    'projects.search': message('搜索最近项目'),
++    'projects.searchPlaceholder': message('搜索名称或描述'),
++    'projects.statusLabel': message('投影状态'),
++    'projects.allStatuses': message('所有投影状态'),
++    'projects.sortLabel': message('最近项目排序'),
++    'projects.sortAscending': message('名称 A–Z'),
++    'projects.sortDescending': message('名称 Z–A'),
++    'projects.snapshotLimited': message('已加载 {count} 个最近项目 · 有限快照，可能还有更多项目。', ['count']),
++    'projects.snapshotRecent': message('已加载 {count} 个最近项目 · 有限的最近快照。', ['count']),
++    'projects.emptyTitle': message('此快照中没有最近项目'),
++    'projects.emptyBody': message('来源返回了空的最近工作快照。这不能证明工作区中没有项目。'),
++    'projects.noMatchesTitle': message('没有匹配的最近项目'),
++    'projects.noMatchesBody': message('已加载的最近快照中没有条目匹配当前本地筛选条件。'),
++    'projects.reset': message('重置筛选条件'),
++    'projects.list': message('最近项目快照'),
++    'projects.noDescription': message('未投影描述。'),
++    'projects.statusUnknown': message('未投影状态'),
++    'projects.inspect': message('检查'),
++    'projects.inspectNamed': message('检查 {name}', ['name']),
++    'projects.detailTitle': message('项目详情'),
++    'projects.detailClose': message('关闭项目详情'),
++    'projects.detailReadOnly': message('只读本地检查'),
++    'projects.detailId': message('项目 ID'),
++    'projects.detailStatus': message('投影状态'),
++    'projects.detailCreated': message('投影创建时间'),
++    'projects.notProjected': message('未投影'),
++    'projects.detailLimit': message('检查不会建立规范可用性，也不会授予打开此项目的权限。'),
+     brandHome: message('媒体平台首页'), brand: message('媒体平台'), creativeWorkspace: message('创作工作区'),
+     globalNavigation: message('全局导航'), projectNavigation: message('项目导航'), projectSurfaceSwitcher: message('项目界面切换'),
+     workspace: message('工作区'), operations: message('运营'), admin: message('管理'), developer: message('开发者'), overview: message('概览'), review: message('审阅'),
+diff --git a/frontend/src/localization/source-manifest.json b/frontend/src/localization/source-manifest.json
+index 68fb2989..48dd33fb 100644
+--- a/frontend/src/localization/source-manifest.json
++++ b/frontend/src/localization/source-manifest.json
+@@ -54,6 +54,58 @@
+     "shell.notifications.typeReview",
+     "shell.notifications.typeAnnouncement",
+     "shell.notifications.typeOther",
++    "shell.projects.region",
++    "shell.projects.eyebrow",
++    "shell.projects.title",
++    "shell.projects.description",
++    "shell.projects.originSimulated",
++    "shell.projects.originReal",
++    "shell.projects.originUnavailable",
++    "shell.projects.boundary",
++    "shell.projects.refresh",
++    "shell.projects.loadingTitle",
++    "shell.projects.loadingLabel",
++    "shell.projects.cancel",
++    "shell.projects.cancelledTitle",
++    "shell.projects.cancelledBody",
++    "shell.projects.retry",
++    "shell.projects.failureUnavailableTitle",
++    "shell.projects.failureUnavailableBody",
++    "shell.projects.failureDeniedTitle",
++    "shell.projects.failureDeniedBody",
++    "shell.projects.failureUnknownTitle",
++    "shell.projects.failureUnknownBody",
++    "shell.projects.failureUnsupportedTitle",
++    "shell.projects.failureUnsupportedBody",
++    "shell.projects.failureErrorTitle",
++    "shell.projects.failureErrorBody",
++    "shell.projects.search",
++    "shell.projects.searchPlaceholder",
++    "shell.projects.statusLabel",
++    "shell.projects.allStatuses",
++    "shell.projects.sortLabel",
++    "shell.projects.sortAscending",
++    "shell.projects.sortDescending",
++    "shell.projects.snapshotLimited",
++    "shell.projects.snapshotRecent",
++    "shell.projects.emptyTitle",
++    "shell.projects.emptyBody",
++    "shell.projects.noMatchesTitle",
++    "shell.projects.noMatchesBody",
++    "shell.projects.reset",
++    "shell.projects.list",
++    "shell.projects.noDescription",
++    "shell.projects.statusUnknown",
++    "shell.projects.inspect",
++    "shell.projects.inspectNamed",
++    "shell.projects.detailTitle",
++    "shell.projects.detailClose",
++    "shell.projects.detailReadOnly",
++    "shell.projects.detailId",
++    "shell.projects.detailStatus",
++    "shell.projects.detailCreated",
++    "shell.projects.notProjected",
++    "shell.projects.detailLimit",
+     "common.localeSelector",
+     "common.localeEnglish",
+     "common.localeChinese",
+diff --git a/frontend/src/product/projects/ProjectBrowser.test.tsx b/frontend/src/product/projects/ProjectBrowser.test.tsx
+new file mode 100644
+index 00000000..1e8d250e
+--- /dev/null
++++ b/frontend/src/product/projects/ProjectBrowser.test.tsx
+@@ -0,0 +1,294 @@
++import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
++import { describe, expect, it, vi } from 'vitest'
++import { LocalizationProvider } from '../../localization'
++import { ProjectBrowser } from './ProjectBrowser'
++import { createProjectsFixture } from './fixture'
++import type { ProjectListRequest, ProjectsSource, RecentProjectsSnapshot } from './source'
++
++function deferred<T = unknown>() {
++  let resolve!: (value: T) => void
++  let reject!: (reason?: unknown) => void
++  const promise = new Promise<T>((done, fail) => { resolve = done; reject = fail })
++  return { promise, resolve, reject }
++}
++function setup(source: ProjectsSource = createProjectsFixture({ workspaceId: 'workspace-1' }), locale: 'en' | 'zh-CN' = 'en') {
++  return render(<LocalizationProvider initialLocale={locale}><ProjectBrowser workspaceId="workspace-1" source={source} /></LocalizationProvider>)
++}
++function realSource(overrides: Partial<ProjectsSource['scope']> = {}): ProjectsSource {
++  const fixture = createProjectsFixture({
++    workspaceId: overrides.workspaceId ?? 'workspace-1',
++    principalId: overrides.principalId ?? 'principal-1',
++    tenantId: overrides.tenantId ?? 'tenant-1',
++    sessionId: overrides.sessionId ?? 'session-1',
++  })
++  return {
++    ...fixture,
++    scope: { ...fixture.scope, ...overrides },
++    access: { ...fixture.access, key: 'project.recent.query', source: 'SERVER', reasonCode: 'SERVER_PROJECT_RECENT_QUERY' },
++    adapter: { ...fixture.adapter, origin: 'real' },
++  }
++}
++function ownedSnapshot(request: ProjectListRequest, name = 'Late secret'): RecentProjectsSnapshot {
++  return {
++    status: 'ok', scope: request.scope, requestId: request.requestId,
++    projects: [{ id: 'late', tenantId: request.scope.tenantId, name }],
++    boundary: { kind: 'recent', limit: 1, limited: false },
++  }
++}
++
++describe('Workspace recent Project discovery and inspection', () => {
++  it('searches literal name and description content, filters opaque statuses, sorts deterministically, and resets no matches', async () => {
++    setup()
++    await screen.findAllByRole('button', { name: 'Inspect Alpha project' })
++    expect(screen.getAllByRole('button', { name: /^Inspect / }).map(button => button.getAttribute('aria-label'))).toEqual(['Inspect Alpha project', 'Inspect Alpha project', 'Inspect Zeta <project>'])
++    fireEvent.change(screen.getByRole('searchbox', { name: 'Search recent projects' }), { target: { value: 'description literal' } })
++    expect(screen.getByRole('button', { name: 'Inspect Zeta <project>' })).toBeTruthy()
++    expect(screen.queryByRole('button', { name: 'Inspect Alpha project' })).toBeNull()
++    fireEvent.change(screen.getByRole('searchbox', { name: 'Search recent projects' }), { target: { value: '' } })
++    fireEvent.change(screen.getByLabelText('Projected status'), { target: { value: 'future::READY<script>' } })
++    expect(screen.getByRole('button', { name: 'Inspect Zeta <project>' })).toBeTruthy()
++    expect(screen.queryByText('script', { selector: 'script' })).toBeNull()
++    fireEvent.change(screen.getByLabelText('Sort recent projects'), { target: { value: 'name-desc' } })
++    fireEvent.change(screen.getByRole('searchbox', { name: 'Search recent projects' }), { target: { value: 'no literal match' } })
++    expect(screen.getByRole('heading', { name: 'No matching recent projects' })).toBeTruthy()
++    fireEvent.click(screen.getByRole('button', { name: 'Reset filters' }))
++    expect((screen.getByRole('searchbox', { name: 'Search recent projects' }) as HTMLInputElement).value).toBe('')
++    expect((screen.getByLabelText('Projected status') as HTMLSelectElement).value).toBe('')
++    expect((screen.getByLabelText('Sort recent projects') as HTMLSelectElement).value).toBe('name-asc')
++  })
++
++  it('distinguishes an empty recent snapshot from local no matches', async () => {
++    setup(createProjectsFixture({ workspaceId: 'workspace-1', empty: true }))
++    expect(await screen.findByRole('heading', { name: 'No recent projects in this snapshot' })).toBeTruthy()
++    expect(screen.queryByRole('button', { name: 'Reset filters' })).toBeNull()
++  })
++
++  it('inspects the exact item in a read-only dialog, renders opaque text safely, and restores launcher focus after Escape', async () => {
++    setup()
++    const launchers = await screen.findAllByRole('button', { name: 'Inspect Alpha project' })
++    launchers[1].focus(); fireEvent.click(launchers[1])
++    const dialog = screen.getByRole('dialog', { name: 'Project details' })
++    expect(within(dialog).getByText('project-alpha-b')).toBeTruthy()
++    expect(within(dialog).getByText('<b>opaque description</b>')).toBeTruthy()
++    expect(dialog.querySelector('b')).toBeNull()
++    expect(within(dialog).getByText('Read-only local inspection')).toBeTruthy()
++    fireEvent.keyDown(dialog, { key: 'Escape' })
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(document.activeElement).toBe(launchers[1])
++  })
++
++  it('supports cancel, retry and refresh; each new request clears content and late cancelled replies stay hidden', async () => {
++    const source = createProjectsFixture({ workspaceId: 'workspace-1' })
++    const original = source.adapter.listRecent
++    const first = deferred(); let firstRequest!: ProjectListRequest
++    vi.spyOn(source.adapter, 'listRecent').mockImplementationOnce(request => { firstRequest = request; return first.promise })
++    setup(source)
++    expect(screen.getByRole('status', { name: 'Loading recent projects' })).toBeTruthy()
++    fireEvent.click(screen.getByRole('button', { name: 'Cancel loading' }))
++    expect(screen.getByText('Loading cancelled.')).toBeTruthy()
++    await act(async () => first.resolve(await original(firstRequest, new AbortController().signal)))
++    expect(screen.queryByRole('button', { name: /^Inspect / })).toBeNull()
++    fireEvent.click(screen.getByRole('button', { name: 'Retry loading' }))
++    await screen.findAllByRole('button', { name: 'Inspect Alpha project' })
++
++    const refresh = deferred(); let refreshRequest!: ProjectListRequest
++    vi.spyOn(source.adapter, 'listRecent').mockImplementationOnce(request => { refreshRequest = request; return refresh.promise })
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh recent projects' }))
++    expect(screen.queryByRole('button', { name: /^Inspect / })).toBeNull()
++    await act(async () => refresh.resolve(await original(refreshRequest, new AbortController().signal)))
++    expect((await screen.findAllByRole('button', { name: 'Inspect Alpha project' })).length).toBe(2)
++  })
++
++  it('keeps the focused workflow control through loading, cancel, retry, failure and success', async () => {
++    const source = realSource()
++    const initial = deferred(); let initialRequest!: ProjectListRequest
++    vi.spyOn(source.adapter, 'listRecent').mockImplementationOnce(request => { initialRequest = request; return initial.promise })
++    setup(source)
++
++    const cancel = screen.getByRole('button', { name: 'Cancel loading' })
++    cancel.focus()
++    fireEvent.click(cancel)
++    const cancelledRetry = screen.getByRole('button', { name: 'Retry loading' })
++    expect(document.activeElement).toBe(cancelledRetry)
++    await act(async () => initial.resolve(ownedSnapshot(initialRequest, 'Cancelled secret')))
++    expect(document.activeElement).toBe(cancelledRetry)
++
++    const retryPending = deferred(); let retryRequest!: ProjectListRequest
++    vi.spyOn(source.adapter, 'listRecent').mockImplementationOnce(request => { retryRequest = request; return retryPending.promise })
++    fireEvent.click(cancelledRetry)
++    expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Cancel loading' }))
++    await act(async () => retryPending.resolve({
++      status: 'error', scope: retryRequest.scope, requestId: retryRequest.requestId, explanation: 'Opaque server retry failure',
++    }))
++    const failedRetry = screen.getByRole('button', { name: 'Retry loading' })
++    expect(document.activeElement).toBe(failedRetry)
++
++    const successPending = deferred(); let successRequest!: ProjectListRequest
++    vi.spyOn(source.adapter, 'listRecent').mockImplementationOnce(request => { successRequest = request; return successPending.promise })
++    fireEvent.click(failedRetry)
++    expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Cancel loading' }))
++    await act(async () => successPending.resolve(ownedSnapshot(successRequest, 'Focused success')))
++    expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Refresh recent projects' }))
++  })
++
++  it('does not reclaim workflow focus when the user moves to another control before completion', async () => {
++    const source = realSource()
++    const view = render(<LocalizationProvider><button type="button">Stable focus</button><ProjectBrowser workspaceId="workspace-1" source={source} /></LocalizationProvider>)
++    await screen.findAllByRole('button', { name: 'Inspect Alpha project' })
++    const pending = deferred(); let request!: ProjectListRequest
++    vi.spyOn(source.adapter, 'listRecent').mockImplementationOnce(value => { request = value; return pending.promise })
++    const refresh = screen.getByRole('button', { name: 'Refresh recent projects' })
++    refresh.focus()
++    fireEvent.click(refresh)
++    const stable = screen.getByRole('button', { name: 'Stable focus' })
++    stable.focus()
++    await act(async () => pending.resolve(ownedSnapshot(request, 'Fresh result')))
++    expect(document.activeElement).toBe(stable)
++    view.unmount()
++  })
++
++  it.each(['unavailable', 'denied', 'unknown', 'unsupported', 'error'] as const)('clears content and presents the exact %s failure without simulation fallback', async failure => {
++    const source = realSource()
++    setup(source)
++    await screen.findAllByRole('button', { name: 'Inspect Alpha project' })
++    vi.spyOn(source.adapter, 'listRecent').mockImplementation(async request => ({ status: failure, scope: request.scope, requestId: request.requestId, explanation: '<opaque failure 原因>' }))
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh recent projects' }))
++    await waitFor(() => expect(screen.getByRole('heading', { name: new RegExp(failure, 'i') })).toBeTruthy())
++    expect(screen.queryByRole('button', { name: /^Inspect / })).toBeNull()
++    expect(screen.queryByText(/SIMULATED PROJECT DATA/)).toBeNull()
++    expect(screen.getByText('<opaque failure 原因>')).toBeTruthy()
++  })
++
++  it('treats malformed and mismatched success receipts as errors and exposes no returned content', async () => {
++    const source = createProjectsFixture({ workspaceId: 'workspace-1' })
++    vi.spyOn(source.adapter, 'listRecent').mockImplementation(async request => ({
++      status: 'ok', scope: { ...request.scope, sessionId: 'foreign' }, requestId: request.requestId,
++      projects: [{ id: 'leaked', name: 'Must stay hidden' }], boundary: { kind: 'recent', limit: 1, limited: false },
++    }))
++    setup(source)
++    expect(await screen.findByRole('heading', { name: 'Recent projects error' })).toBeTruthy()
++    expect(screen.queryByText('Must stay hidden')).toBeNull()
++  })
++
++  it.each(['principalId', 'tenantId', 'sessionId', 'workspaceId'] as const)('synchronously hides old content on %s change and ignores the old late reply', async field => {
++    const source = createProjectsFixture({ workspaceId: 'workspace-1' })
++    const view = setup(source)
++    await screen.findAllByRole('button', { name: 'Inspect Alpha project' })
++    const pending = deferred(); let oldRequest!: ProjectListRequest
++    vi.spyOn(source.adapter, 'listRecent').mockImplementationOnce(request => { oldRequest = request; return pending.promise })
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh recent projects' }))
++    const next = createProjectsFixture({
++      workspaceId: field === 'workspaceId' ? 'workspace-2' : 'workspace-1',
++      principalId: field === 'principalId' ? 'changed' : undefined,
++      tenantId: field === 'tenantId' ? 'changed' : undefined,
++      sessionId: field === 'sessionId' ? 'changed' : undefined,
++      empty: true,
++    })
++    view.rerender(<LocalizationProvider><ProjectBrowser workspaceId={next.scope.workspaceId} source={next} /></LocalizationProvider>)
++    expect(screen.queryByRole('button', { name: /^Inspect / })).toBeNull()
++    expect(await screen.findByRole('heading', { name: 'No recent projects in this snapshot' })).toBeTruthy()
++    await act(async () => pending.resolve({ status: 'ok', scope: oldRequest.scope, requestId: oldRequest.requestId, projects: [{ id: 'late', tenantId: oldRequest.scope.tenantId, name: 'Late secret' }], boundary: { kind: 'recent', limit: 1, limited: false } }))
++    expect(screen.queryByText('Late secret')).toBeNull()
++  })
++
++  it('drops late replies after adapter replacement and unmount', async () => {
++    const source = createProjectsFixture({ workspaceId: 'workspace-1' })
++    const pending = deferred(); let oldRequest!: ProjectListRequest
++    vi.spyOn(source.adapter, 'listRecent').mockImplementation(request => { oldRequest = request; return pending.promise })
++    const view = setup(source)
++    const replacement = createProjectsFixture({ workspaceId: 'workspace-1', empty: true })
++    view.rerender(<LocalizationProvider><ProjectBrowser workspaceId="workspace-1" source={replacement} /></LocalizationProvider>)
++    expect(await screen.findByRole('heading', { name: 'No recent projects in this snapshot' })).toBeTruthy()
++    await act(async () => pending.resolve(ownedSnapshot(oldRequest)))
++    expect(screen.queryByText('Late secret')).toBeNull()
++    view.unmount()
++  })
++
++  it('aborts and drops a source reply that arrives after unmount', async () => {
++    const source = createProjectsFixture({ workspaceId: 'workspace-1' })
++    const pending = deferred(); let request!: ProjectListRequest
++    vi.spyOn(source.adapter, 'listRecent').mockImplementation(value => { request = value; return pending.promise })
++    const view = setup(source)
++    view.unmount()
++    await act(async () => pending.resolve({ status: 'ok', scope: request.scope, requestId: request.requestId, projects: [{ id: 'late', tenantId: request.scope.tenantId, name: 'Unmounted secret' }], boundary: { kind: 'recent', limit: 1, limited: false } }))
++    expect(screen.queryByText('Unmounted secret')).toBeNull()
++  })
++
++  it('drops a valid pending reply across logout and does not query without a principal', async () => {
++    const source = realSource()
++    const pending = deferred(); let oldRequest!: ProjectListRequest
++    vi.spyOn(source.adapter, 'listRecent').mockImplementation(request => { oldRequest = request; return pending.promise })
++    const view = setup(source)
++    const loggedOut = realSource({ principalId: null })
++    const loggedOutList = vi.spyOn(loggedOut.adapter, 'listRecent')
++    view.rerender(<LocalizationProvider><ProjectBrowser workspaceId="workspace-1" source={loggedOut} /></LocalizationProvider>)
++    expect(await screen.findByRole('heading', { name: 'Recent projects access unknown' })).toBeTruthy()
++    expect(loggedOutList).not.toHaveBeenCalled()
++    await act(async () => pending.resolve(ownedSnapshot(oldRequest, 'Logged-out secret')))
++    expect(screen.queryByText('Logged-out secret')).toBeNull()
++  })
++
++  it('never reopens inspection or steals newly placed focus when a retired refresh replies late', async () => {
++    const source = createProjectsFixture({ workspaceId: 'workspace-1' })
++    const view = render(<LocalizationProvider><button type="button">Stable focus</button><ProjectBrowser workspaceId="workspace-1" source={source} /></LocalizationProvider>)
++    const launchers = await screen.findAllByRole('button', { name: 'Inspect Alpha project' })
++    fireEvent.click(launchers[1])
++    expect(screen.getByRole('dialog', { name: 'Project details' })).toBeTruthy()
++    const pending = deferred(); let request!: ProjectListRequest
++    vi.spyOn(source.adapter, 'listRecent').mockImplementationOnce(value => { request = value; return pending.promise })
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh recent projects', hidden: true }))
++    expect(screen.queryByRole('dialog')).toBeNull()
++    fireEvent.click(screen.getByRole('button', { name: 'Cancel loading' }))
++    const stable = screen.getByRole('button', { name: 'Stable focus' })
++    stable.focus()
++    await act(async () => pending.resolve({ status: 'ok', scope: request.scope, requestId: request.requestId, projects: [{ id: 'late', tenantId: request.scope.tenantId, name: 'Late secret' }], boundary: { kind: 'recent', limit: 1, limited: false } }))
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(screen.queryByText('Late secret')).toBeNull()
++    expect(document.activeElement).toBe(stable)
++    view.unmount()
++  })
++  it('does not query denied or unknown projections and presents no content', () => {
++    for (const accessStatus of ['POLICY_DENIED', 'UNKNOWN_FAIL_CLOSED'] as const) {
++      const source = createProjectsFixture({ workspaceId: 'workspace-1', accessStatus })
++      const list = vi.spyOn(source.adapter, 'listRecent')
++      const view = setup(source)
++      expect(screen.queryByRole('button', { name: /^Inspect / })).toBeNull()
++      expect(screen.getByText(source.access.explanation)).toBeTruthy()
++      expect(list).not.toHaveBeenCalled()
++      view.unmount()
++    }
++  })
++
++  it.each(['en', 'zh-CN'] as const)('shows an opaque server-owned denied explanation without translating it in %s', locale => {
++    const explanation = '<server-owned 原因 DENY_42>'
++    const source = realSource()
++    source.access = { ...source.access, status: 'POLICY_DENIED', reasonCode: 'DENY_42', explanation }
++    const list = vi.spyOn(source.adapter, 'listRecent')
++    setup(source, locale)
++    expect(screen.getByText(explanation)).toBeTruthy()
++    expect(list).not.toHaveBeenCalled()
++  })
++
++  it('is unavailable by default and persistently identifies the localhost fixture as simulated and read-only', async () => {
++    const unavailable = render(<LocalizationProvider><ProjectBrowser workspaceId="workspace-1" /></LocalizationProvider>)
++    expect(screen.getByRole('heading', { name: 'Recent projects unavailable' })).toBeTruthy()
++    unavailable.unmount()
++    setup()
++    await screen.findAllByRole('button', { name: 'Inspect Alpha project' })
++    expect(screen.getByText(/SIMULATED PROJECT DATA/)).toBeTruthy()
++    expect(screen.getByText(/recent snapshot.*not a full project inventory/i)).toBeTruthy()
++    expect(screen.queryByRole('link', { name: /Open/ })).toBeNull()
++    expect(screen.queryByRole('button', { name: /Create/ })).toBeNull()
++  })
++
++  it('localizes the full Projects UI in zh-CN while preserving projected names, descriptions and statuses', async () => {
++    setup(createProjectsFixture({ workspaceId: 'workspace-1' }), 'zh-CN')
++    expect(await screen.findByRole('heading', { name: '最近项目' })).toBeTruthy()
++    expect(screen.getByRole('searchbox', { name: '搜索最近项目' })).toBeTruthy()
++    expect(screen.getByText(/模拟项目数据/)).toBeTruthy()
++    expect(screen.getAllByText('future::READY<script>').length).toBeGreaterThan(0)
++    fireEvent.click(screen.getByRole('button', { name: '检查 Zeta <project>' }))
++    const dialog = screen.getByRole('dialog', { name: '项目详情' })
++    expect(within(dialog).getByText('description literal 原文')).toBeTruthy()
++  })
++})
+diff --git a/frontend/src/product/projects/ProjectBrowser.tsx b/frontend/src/product/projects/ProjectBrowser.tsx
+new file mode 100644
+index 00000000..8e95fdf3
+--- /dev/null
++++ b/frontend/src/product/projects/ProjectBrowser.tsx
+@@ -0,0 +1,184 @@
++import { createContext, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
++import { Badge, Button, EmptyState, Panel, PropertyRow, Search, Skeleton, Status } from '../../components/design-system'
++import { AsyncStatePanel } from '../../foundation/errors'
++import { InteractionDialog } from '../../interaction/InteractionDialog'
++import { useTranslation } from '../../localization'
++import { localhostProjectsFixture } from './fixture'
++import {
++  contextKey, parseRecentProjects, projectStatusValues, selectProjects, sourceAccessExplanation, sourceDisposition,
++  sourcePresentationOrigin,
++  unavailableProjectsSource, type ProjectFilters, type ProjectListFailureStatus, type ProjectsSource,
++  type RecentProjectsSnapshot,
++} from './source'
++
++const ProjectsSourceContext = createContext<ProjectsSource | undefined>(undefined)
++export function ProjectBrowserProvider({ source, children }: { source: ProjectsSource; children: ReactNode }) {
++  return <ProjectsSourceContext.Provider value={source}>{children}</ProjectsSourceContext.Provider>
++}
++
++const adapterIds = new WeakMap<ProjectsSource['adapter'], number>()
++let nextAdapterId = 0
++function adapterKey(adapter: ProjectsSource['adapter']) {
++  if (!adapterIds.has(adapter)) adapterIds.set(adapter, ++nextAdapterId)
++  return adapterIds.get(adapter)
++}
++
++export function ProjectBrowser({ workspaceId, source: supplied }: { workspaceId: string; source?: ProjectsSource }) {
++  const provided = useContext(ProjectsSourceContext)
++  const defaultSource = useMemo(() => typeof window === 'undefined'
++    ? unavailableProjectsSource(workspaceId)
++    : localhostProjectsFixture(window.location, workspaceId) ?? unavailableProjectsSource(workspaceId), [workspaceId])
++  const source = supplied ?? provided ?? defaultSource
++  const sourceKey = JSON.stringify([workspaceId, adapterKey(source.adapter), contextKey({ ...source.scope, access: source.access }), source.adapter.origin])
++  // The keyed subtree removes the prior identity's content in the same render.
++  // Its request cleanup independently rejects adapters that ignore AbortSignal.
++  return <ProjectBrowserSession key={sourceKey} workspaceId={workspaceId} source={source} />
++}
++
++type BrowserStatus = 'loading' | 'ready' | 'cancelled' | ProjectListFailureStatus
++type LocalProjectAction =
++  | { category: 'LOCAL_EPHEMERAL'; type: 'inspect-project'; projectId: string }
++  | { category: 'LOCAL_EPHEMERAL'; type: 'close-project-inspection' }
++
++function ProjectBrowserSession({ workspaceId, source }: { workspaceId: string; source: ProjectsSource }) {
++  const { t } = useTranslation()
++  const text = (key: string, parameters?: Record<string, string | number>) => t(`shell.projects.${key}`, parameters)
++  const disposition = sourceDisposition(source, workspaceId)
++  const [status, setStatus] = useState<BrowserStatus>(disposition === 'ready' ? 'loading' : disposition)
++  const [snapshot, setSnapshot] = useState<RecentProjectsSnapshot | null>(null)
++  const [filters, setFilters] = useState<ProjectFilters>({ query: '', status: '', order: 'name-asc' })
++  const [detailId, setDetailId] = useState<string | null>(null)
++  const [explanation, setExplanation] = useState<string | null>(null)
++  const live = useRef(false)
++  const generation = useRef(0)
++  const sequence = useRef(0)
++  const controller = useRef<AbortController | null>(null)
++
++  useLayoutEffect(() => {
++    live.current = true
++    return () => {
++      live.current = false
++      generation.current += 1
++      controller.current?.abort()
++    }
++  }, [])
++
++  async function load() {
++    const current = ++generation.current
++    controller.current?.abort()
++    setSnapshot(null)
++    setDetailId(null)
++    setExplanation(null)
++    if (disposition !== 'ready') {
++      setStatus(disposition)
++      return
++    }
++    const requestController = new AbortController()
++    controller.current = requestController
++    const request = { scope: source.scope, requestId: `recent-projects-${++sequence.current}` }
++    setStatus('loading')
++    try {
++      const result = parseRecentProjects(await source.adapter.listRecent(request, requestController.signal), request)
++      if (!live.current || requestController.signal.aborted || current !== generation.current) return
++      if (result.status === 'ok') {
++        setSnapshot(result)
++        setStatus('ready')
++      } else {
++        setStatus(result.status)
++        setExplanation(result.explanation ?? null)
++      }
++    } catch {
++      if (!live.current || requestController.signal.aborted || current !== generation.current) return
++      setSnapshot(null)
++      setDetailId(null)
++      setStatus('error')
++    }
++  }
++
++  useEffect(() => { void load() }, [])
++
++  function cancel() {
++    generation.current += 1
++    controller.current?.abort()
++    setSnapshot(null)
++    setDetailId(null)
++    setExplanation(null)
++    setStatus('cancelled')
++  }
++
++  // One page-local dispatcher owns all local inspection entry handlers. It is
++  // deliberately not registered as a command and never changes canonical state.
++  function dispatchLocal(action: LocalProjectAction) {
++    if (action.category !== 'LOCAL_EPHEMERAL') return
++    setDetailId(action.type === 'inspect-project' ? action.projectId : null)
++  }
++
++  const projects = snapshot?.projects ?? []
++  const statusValues = useMemo(() => projectStatusValues(projects), [projects])
++  const visible = useMemo(() => selectProjects(projects, filters), [filters, projects])
++  const detail = visible.find(project => project.id === detailId)
++  useEffect(() => {
++    if (detailId && !visible.some(project => project.id === detailId)) setDetailId(null)
++  }, [detailId, visible])
++
++  const failureCopy: Record<ProjectListFailureStatus, { title: string; body: string; state: 'UNAVAILABLE' | 'BLOCKED' | 'ERROR' }> = {
++    unavailable: { title: text('failureUnavailableTitle'), body: text('failureUnavailableBody'), state: 'UNAVAILABLE' },
++    denied: { title: text('failureDeniedTitle'), body: text('failureDeniedBody'), state: 'BLOCKED' },
++    unknown: { title: text('failureUnknownTitle'), body: text('failureUnknownBody'), state: 'BLOCKED' },
++    unsupported: { title: text('failureUnsupportedTitle'), body: text('failureUnsupportedBody'), state: 'UNAVAILABLE' },
++    error: { title: text('failureErrorTitle'), body: text('failureErrorBody'), state: 'ERROR' },
++  }
++  const failure = status !== 'loading' && status !== 'ready' && status !== 'cancelled' ? failureCopy[status] : null
++  const presentationOrigin = sourcePresentationOrigin(source)
++  const originKey = presentationOrigin === 'simulated' ? 'originSimulated' : presentationOrigin === 'real' ? 'originReal' : 'originUnavailable'
++  const visibleExplanation = explanation ?? (disposition === 'ready' ? null : sourceAccessExplanation(source))
++  const workflowLabel = status === 'loading' ? 'cancel' : status === 'ready' ? 'refresh' : 'retry'
++
++  return <section className="ff-project-browser" aria-label={text('region')}>
++    <header className="ff-project-browser-heading">
++      <div><span>{text('eyebrow')}</span><h1>{text('title')}</h1><p>{text('description')}</p></div>
++      {disposition === 'ready'
++        ? <Button onClick={status === 'loading' ? cancel : () => void load()}>{text(workflowLabel)}</Button>
++        : null}
++    </header>
++    <p className={`ff-project-origin ff-project-origin--${presentationOrigin}`}><Badge tone={presentationOrigin === 'simulated' ? 'warning' : 'neutral'}>{text(originKey)}</Badge></p>
++    <p className="ff-project-boundary">{text('boundary')}</p>
++
++    {status === 'loading' ? <AsyncStatePanel state="LOADING" title={text('loadingTitle')}><Skeleton label={text('loadingLabel')} /></AsyncStatePanel> : null}
++    {status === 'cancelled' ? <AsyncStatePanel state="UNAVAILABLE" title={text('cancelledTitle')}><p>{text('cancelledBody')}</p></AsyncStatePanel> : null}
++    {failure ? <AsyncStatePanel state={failure.state} title={failure.title}><p>{failure.body}</p>{visibleExplanation ? <p className="ff-project-opaque-explanation">{visibleExplanation}</p> : null}</AsyncStatePanel> : null}
++
++    {status === 'ready' && snapshot ? <>
++      <div className="ff-project-controls">
++        <Search label={text('search')} placeholder={text('searchPlaceholder')} value={filters.query} onChange={event => setFilters(current => ({ ...current, query: event.target.value }))} />
++        <label>{text('statusLabel')}<select value={filters.status} onChange={event => setFilters(current => ({ ...current, status: event.target.value }))}>
++          <option value="">{text('allStatuses')}</option>
++          {statusValues.map(value => <option key={value} value={value}>{value}</option>)}
++        </select></label>
++        <label>{text('sortLabel')}<select value={filters.order} onChange={event => setFilters(current => ({ ...current, order: event.target.value as ProjectFilters['order'] }))}>
++          <option value="name-asc">{text('sortAscending')}</option><option value="name-desc">{text('sortDescending')}</option>
++        </select></label>
++      </div>
++      <p role="status" aria-live="polite">{text(snapshot.boundary.limited ? 'snapshotLimited' : 'snapshotRecent', { count: projects.length })}</p>
++      {!projects.length ? <EmptyState title={text('emptyTitle')} description={text('emptyBody')} />
++        : !visible.length ? <EmptyState title={text('noMatchesTitle')} description={text('noMatchesBody')} action={<Button onClick={() => setFilters({ query: '', status: '', order: 'name-asc' })}>{text('reset')}</Button>} />
++          : <ul className="ff-project-browser-list" aria-label={text('list')}>
++            {visible.map(project => <li key={project.id}><Panel title={project.name}>
++              <p className="ff-project-description">{project.description || text('noDescription')}</p>
++              <Status label={project.status ?? text('statusUnknown')} />
++              <Button onClick={() => dispatchLocal({ category: 'LOCAL_EPHEMERAL', type: 'inspect-project', projectId: project.id })} aria-label={text('inspectNamed', { name: project.name })}>{text('inspect')}</Button>
++            </Panel></li>)}
++          </ul>}
++    </> : null}
++
++    {detail ? <InteractionDialog title={text('detailTitle')} closeLabel={text('detailClose')} onClose={() => dispatchLocal({ category: 'LOCAL_EPHEMERAL', type: 'close-project-inspection' })} className="ff-project-detail">
++      <Badge tone="info">{text('detailReadOnly')}</Badge>
++      <h3>{detail.name}</h3>
++      <p className="ff-project-detail-description">{detail.description || text('noDescription')}</p>
++      <PropertyRow label={text('detailId')}><code>{detail.id}</code></PropertyRow>
++      <PropertyRow label={text('detailStatus')}><span>{detail.status ?? text('statusUnknown')}</span></PropertyRow>
++      <PropertyRow label={text('detailCreated')}><span>{detail.createdAt ?? text('notProjected')}</span></PropertyRow>
++      <p>{text('detailLimit')}</p>
++    </InteractionDialog> : null}
++  </section>
++}
+diff --git a/frontend/src/product/projects/fixture.ts b/frontend/src/product/projects/fixture.ts
+new file mode 100644
+index 00000000..7495316c
+--- /dev/null
++++ b/frontend/src/product/projects/fixture.ts
+@@ -0,0 +1,75 @@
++import type { EffectiveAccessEntry, EffectiveAccessStatus } from '../../foundation/effectiveAccess'
++import type { ProjectSummary } from '../../foundation/platformClient'
++import { accessDisposition, scopeKey, type ProjectListFailureStatus, type ProjectsContext, type ProjectsSource } from './source'
++
++export interface ProjectsFixtureOptions {
++  workspaceId: string
++  principalId?: string
++  tenantId?: string
++  sessionId?: string
++  accessStatus?: EffectiveAccessStatus
++  empty?: boolean
++  limit?: number
++  failure?: ProjectListFailureStatus
++}
++
++function projectedAccess(status: EffectiveAccessStatus): EffectiveAccessEntry {
++  return {
++    key: 'fixture.project.recent.query', status,
++    reasonCode: `SIMULATED_${status}`, explanation: 'Simulated access projection; never valid for a real resource.',
++    factors: {
++      capability: status === 'AVAILABLE' ? 'SATISFIED' : 'UNKNOWN', runtime: status === 'AVAILABLE' ? 'SATISFIED' : 'UNKNOWN',
++      entitlement: status === 'AVAILABLE' ? 'SATISFIED' : 'UNKNOWN', policy: status === 'AVAILABLE' ? 'SATISFIED' : 'UNKNOWN',
++      quota: status === 'AVAILABLE' ? 'SATISFIED' : 'UNKNOWN',
++    },
++    source: 'DEVELOPMENT_FAIL_CLOSED',
++  }
++}
++
++export function createProjectsFixture(options: ProjectsFixtureOptions = { workspaceId: 'simulated-workspace' }): ProjectsSource {
++  const scope = {
++    principalId: options.principalId ?? 'simulated-project-reader', tenantId: options.tenantId ?? 'simulated-project-tenant',
++    sessionId: options.sessionId ?? 'simulated-project-session', workspaceId: options.workspaceId,
++  }
++  const access = projectedAccess(options.accessStatus ?? 'AVAILABLE')
++  const projects: ProjectSummary[] = options.empty ? [] : [
++    { id: 'project-zeta', tenantId: scope.tenantId, name: 'Zeta <project>', description: 'description literal 原文', status: 'future::READY<script>', createdAt: '2026-08-31T08:00:00Z' },
++    { id: 'project-alpha-b', tenantId: scope.tenantId, name: 'Alpha project', description: '<b>opaque description</b>', status: 'IN_REVIEW?', createdAt: 'not-a-protocol-time' },
++    { id: 'project-alpha-a', tenantId: scope.tenantId, name: 'Alpha project', description: null, status: 'IN_REVIEW?' },
++  ]
++  const limit = Math.max(1, options.limit ?? 20)
++  return {
++    scope, access,
++    adapter: {
++      origin: 'simulated',
++      async listRecent(request, signal) {
++        const envelope = { scope: request.scope, requestId: request.requestId }
++        if (signal.aborted) return { ...envelope, status: 'error' }
++        if (scopeKey(request.scope) !== scopeKey(scope)) return { ...envelope, status: 'denied' }
++        const disposition = accessDisposition({ ...scope, access } as ProjectsContext)
++        if (disposition !== 'ready') return { ...envelope, status: disposition }
++        if (options.failure) return { ...envelope, status: options.failure, explanation: 'Simulated opaque source failure.' }
++        return {
++          ...envelope, status: 'ok', projects: projects.slice(0, limit).map(project => ({ ...project })),
++          boundary: { kind: 'recent', limit, limited: projects.length > limit },
++        }
++      },
++    },
++  }
++}
++
++export function localhostProjectsFixture(location: Pick<Location, 'hostname' | 'search'>, workspaceId: string): ProjectsSource | null {
++  if (!['localhost', '127.0.0.1', '[::1]'].includes(location.hostname)) return null
++  const parameters = new URLSearchParams(location.search)
++  if (parameters.getAll('projectsFixture').length !== 1 || parameters.get('projectsFixture') !== '1') return null
++  const access = parameters.get('projectsFixtureAccess')
++  const failure = parameters.get('projectsFixtureFailure')
++  const supportedFailures = ['unavailable', 'denied', 'unknown', 'unsupported', 'error'] as const
++  return createProjectsFixture({
++    workspaceId,
++    accessStatus: access === 'denied' ? 'POLICY_DENIED' : access === 'unknown' ? 'UNKNOWN_FAIL_CLOSED' : 'AVAILABLE',
++    empty: parameters.get('projectsFixtureEmpty') === '1',
++    limit: parameters.get('projectsFixtureLimited') === '1' ? 1 : undefined,
++    failure: supportedFailures.find(value => value === failure),
++  })
++}
+diff --git a/frontend/src/product/projects/source.test.ts b/frontend/src/product/projects/source.test.ts
+new file mode 100644
+index 00000000..db0cd42c
+--- /dev/null
++++ b/frontend/src/product/projects/source.test.ts
+@@ -0,0 +1,154 @@
++import { describe, expect, it, vi } from 'vitest'
++import type { EffectiveAccessEntry, EffectiveAccessStatus } from '../../foundation/effectiveAccess'
++import type { ProjectSummary } from '../../foundation/platformClient'
++import {
++  accessDisposition,
++  contextKey,
++  parseRecentProjects,
++  projectStatusValues,
++  selectProjects,
++  sourceDisposition,
++  sourcePresentationOrigin,
++  unavailableProjectsSource,
++  type ProjectListRequest,
++  type ProjectsContext,
++  type ProjectsSource,
++} from './source'
++import { createProjectsFixture, localhostProjectsFixture } from './fixture'
++
++function access(status: EffectiveAccessStatus): EffectiveAccessEntry {
++  return {
++    key: 'project.recent.query', status, reasonCode: `TEST_${status}`, explanation: `Projected ${status}`,
++    factors: { capability: 'UNKNOWN', runtime: 'UNKNOWN', entitlement: 'UNKNOWN', policy: 'UNKNOWN', quota: 'UNKNOWN' },
++    source: 'SERVER',
++  }
++}
++const scope = { principalId: 'principal-1', tenantId: 'tenant-1', sessionId: 'session-1', workspaceId: 'workspace-1' }
++const context: ProjectsContext = { ...scope, access: access('AVAILABLE') }
++const request: ProjectListRequest = { scope, requestId: 'request-1' }
++const items: ProjectSummary[] = [
++  { id: 'id-z', tenantId: 'tenant-1', name: 'Zulu', description: 'contains Launch literal', status: 'future::READY' },
++  { id: 'id-b', tenantId: 'tenant-1', name: 'Alpha', description: '<b>opaque</b>', status: '未定义状态' },
++  { id: 'id-a', tenantId: 'tenant-1', name: 'Alpha', description: null, status: '未定义状态' },
++]
++const receipt = () => ({ status: 'ok', scope, requestId: 'request-1', projects: items, boundary: { kind: 'recent', limit: 3, limited: true } })
++
++describe('recent Project frontend consumption proposal', () => {
++  it('reuses ProjectSummary, searches name and description literally, and sorts by name with an ID tie-break', () => {
++    const existingViewType: ProjectSummary = items[0]
++    expect(selectProjects(items, { query: 'Launch literal', status: '', order: 'name-asc' })).toEqual([existingViewType])
++    expect(selectProjects(items, { query: '<b>opaque</b>', status: '', order: 'name-asc' }).map(item => item.id)).toEqual(['id-b'])
++    expect(selectProjects(items, { query: '', status: '', order: 'name-asc' }).map(item => item.id)).toEqual(['id-a', 'id-b', 'id-z'])
++    expect(selectProjects(items, { query: '', status: '', order: 'name-desc' }).map(item => item.id)).toEqual(['id-z', 'id-a', 'id-b'])
++  })
++
++  it('keeps projected statuses opaque and uses them only as literal local filter values', () => {
++    expect(projectStatusValues(items)).toEqual(['future::READY', '未定义状态'])
++    expect(selectProjects(items, { query: '', status: '未定义状态', order: 'name-asc' }).map(item => item.id)).toEqual(['id-a', 'id-b'])
++    expect(selectProjects(items, { query: '', status: 'READY', order: 'name-asc' })).toEqual([])
++  })
++
++  it('accepts only an owned, bounded, recent snapshot without claiming a full inventory', () => {
++    expect(parseRecentProjects(receipt(), request)).toEqual(receipt())
++  })
++
++  it.each([
++    undefined,
++    { error: 'NOT_FOUND' },
++    { ...receipt(), requestId: 'old-request' },
++    { ...receipt(), scope: { ...scope, principalId: 'other' } },
++    { ...receipt(), scope: { ...scope, tenantId: 'other' } },
++    { ...receipt(), scope: { ...scope, sessionId: 'other' } },
++    { ...receipt(), scope: { ...scope, workspaceId: 'other' } },
++    { ...receipt(), projects: [items[0], items[0]] },
++    { ...receipt(), projects: [{ ...items[0], tenantId: 'other' }] },
++    { ...receipt(), projects: [...items, { id: 'four', name: 'Fourth' }] },
++    { ...receipt(), boundary: { kind: 'inventory', limit: 3, limited: true } },
++    { ...receipt(), boundary: { kind: 'recent', limit: 0, limited: false } },
++  ])('rejects malformed, duplicate, foreign, mismatched or unbounded receipts %#', input => {
++    expect(() => parseRecentProjects(input, request)).toThrow()
++  })
++
++  it.each(['unavailable', 'denied', 'unknown', 'unsupported', 'error'] as const)('preserves exact %s failures with opaque explanations', status => {
++    const failure = { status, scope, requestId: 'request-1', explanation: '<opaque 原因>' }
++    expect(parseRecentProjects(failure, request)).toEqual(failure)
++  })
++
++  it('keys every principal, tenant, session, workspace and access projection change', () => {
++    const keys = [
++      context,
++      { ...context, principalId: 'other' },
++      { ...context, tenantId: 'other' },
++      { ...context, sessionId: 'other' },
++      { ...context, workspaceId: 'other' },
++      { ...context, access: access('POLICY_DENIED') },
++    ].map(contextKey)
++    expect(new Set(keys).size).toBe(keys.length)
++  })
++
++  it('consumes established EffectiveAccess statuses without manufacturing availability', () => {
++    expect(accessDisposition(context)).toBe('ready')
++    expect(accessDisposition({ ...context, access: access('POLICY_DENIED') })).toBe('denied')
++    expect(accessDisposition({ ...context, access: access('NOT_ENTITLED') })).toBe('denied')
++    expect(accessDisposition({ ...context, access: access('UNKNOWN_FAIL_CLOSED') })).toBe('unknown')
++    expect(accessDisposition({ ...context, access: access('RUNTIME_UNAVAILABLE') })).toBe('unavailable')
++    expect(accessDisposition({ ...context, principalId: null })).toBe('unknown')
++  })
++})
++
++describe('source boundaries', () => {
++  it('requires an exact server-owned proposal projection for a real source', () => {
++    const realSource = (entry: EffectiveAccessEntry): ProjectsSource => ({
++      scope,
++      access: entry,
++      adapter: { origin: 'real', async listRecent() { throw new Error('not called') } },
++    })
++    expect(sourceDisposition(realSource(access('AVAILABLE')))).toBe('ready')
++    expect(sourcePresentationOrigin(realSource(access('AVAILABLE')))).toBe('real')
++    expect(sourceDisposition(realSource({ ...access('AVAILABLE'), key: 'fixture.project.recent.query' }))).toBe('unknown')
++    expect(sourcePresentationOrigin(realSource({ ...access('AVAILABLE'), key: 'fixture.project.recent.query' }))).toBe('unavailable')
++    expect(sourceDisposition(realSource({ ...access('AVAILABLE'), key: 'project.query.recent' }))).toBe('unknown')
++    expect(sourceDisposition(realSource({ ...access('AVAILABLE'), source: 'DEVELOPMENT_FAIL_CLOSED' }))).toBe('unknown')
++    expect(sourceDisposition(realSource({ ...access('AVAILABLE'), source: 'MISSING_SERVER_PROJECTION' }))).toBe('unknown')
++  })
++
++  it('accepts only the explicitly labelled projection for a simulated fixture', () => {
++    const fixture = createProjectsFixture({ workspaceId: 'workspace-1' })
++    expect(sourceDisposition(fixture)).toBe('ready')
++    expect(sourcePresentationOrigin(fixture)).toBe('simulated')
++    expect(sourceDisposition({ ...fixture, adapter: { ...fixture.adapter, origin: 'real' } })).toBe('unknown')
++    expect(sourcePresentationOrigin({ ...fixture, adapter: { ...fixture.adapter, origin: 'real' } })).toBe('unavailable')
++    expect(sourceDisposition({ ...fixture, access: { ...fixture.access, key: 'project.recent.query' } })).toBe('unknown')
++    expect(sourceDisposition({ ...fixture, access: { ...fixture.access, source: 'SERVER' } })).toBe('unknown')
++  })
++
++  it('defaults unavailable without HTTP, storage-derived auth, or an adapter fallback', async () => {
++    const fetch = vi.spyOn(globalThis, 'fetch')
++    const source = unavailableProjectsSource('workspace-1')
++    const result = await source.adapter.listRecent({ scope: source.scope, requestId: 'q' }, new AbortController().signal)
++    expect(source.adapter.origin).toBe('unavailable')
++    expect(result).toMatchObject({ status: 'unavailable', scope: source.scope, requestId: 'q' })
++    expect(fetch).not.toHaveBeenCalled()
++    fetch.mockRestore()
++  })
++
++  it('requires the exact localhost projectsFixture=1 opt-in and never touches auth, storage or transport', async () => {
++    expect(localhostProjectsFixture({ hostname: 'example.com', search: '?projectsFixture=1' }, 'workspace-1')).toBeNull()
++    expect(localhostProjectsFixture({ hostname: 'localhost', search: '' }, 'workspace-1')).toBeNull()
++    expect(localhostProjectsFixture({ hostname: 'localhost', search: '?projectsFixture=1&projectsFixture=1' }, 'workspace-1')).toBeNull()
++    const source = localhostProjectsFixture({ hostname: '127.0.0.1', search: '?projectsFixture=1' }, 'workspace-1')!
++    const fetch = vi.spyOn(globalThis, 'fetch')
++    const setItem = vi.spyOn(Storage.prototype, 'setItem')
++    expect(source.adapter.origin).toBe('simulated')
++    expect(source.scope).toMatchObject({ principalId: 'simulated-project-reader', tenantId: 'simulated-project-tenant', workspaceId: 'workspace-1' })
++    await source.adapter.listRecent({ scope: source.scope, requestId: 'q' }, new AbortController().signal)
++    expect(fetch).not.toHaveBeenCalled()
++    expect(setItem).not.toHaveBeenCalled()
++    fetch.mockRestore(); setItem.mockRestore()
++  })
++
++  it.each(['POLICY_DENIED', 'UNKNOWN_FAIL_CLOSED'] as const)('fixture cannot relax %s access', async status => {
++    const source = createProjectsFixture({ workspaceId: 'workspace-1', accessStatus: status })
++    expect(await source.adapter.listRecent({ scope: source.scope, requestId: 'q' }, new AbortController().signal)).toMatchObject({ status: status === 'POLICY_DENIED' ? 'denied' : 'unknown' })
++  })
++})
+diff --git a/frontend/src/product/projects/source.ts b/frontend/src/product/projects/source.ts
+new file mode 100644
+index 00000000..1ae50ef3
+--- /dev/null
++++ b/frontend/src/product/projects/source.ts
+@@ -0,0 +1,135 @@
++import { z } from 'zod'
++import { isAvailable, unknownAccess, type EffectiveAccessEntry } from '../../foundation/effectiveAccess'
++import type { ProjectSummary } from '../../foundation/platformClient'
++
++export interface ProjectScope { principalId: string | null; tenantId: string | null; sessionId: string; workspaceId: string }
++export interface ProjectsContext extends ProjectScope { access: EffectiveAccessEntry }
++export interface ProjectListRequest { scope: ProjectScope; requestId: string }
++export interface ProjectsAdapter { origin: 'real' | 'simulated' | 'unavailable'; listRecent(request: ProjectListRequest, signal: AbortSignal): Promise<unknown> }
++export interface ProjectsSource { scope: ProjectScope; access: EffectiveAccessEntry; adapter: ProjectsAdapter }
++export type ProjectOrder = 'name-asc' | 'name-desc'
++export type ProjectFilters = { query: string; status: string; order: ProjectOrder }
++export type ProjectListFailureStatus = 'unavailable' | 'denied' | 'unknown' | 'unsupported' | 'error'
++
++const RECENT_PROJECTS_QUERY_KEY = 'project.recent.query'
++const SIMULATED_RECENT_PROJECTS_QUERY_KEY = 'fixture.project.recent.query'
++
++const identity = z.string().min(1)
++const scopeSchema = z.object({
++  principalId: identity.nullable(), tenantId: identity.nullable(), sessionId: identity, workspaceId: identity,
++}).strict()
++const projectSchema = z.object({
++  id: identity,
++  tenantId: identity.nullable().optional(),
++  name: identity,
++  description: z.string().nullish(),
++  status: z.string().optional(),
++  createdAt: z.string().optional(),
++}).strict()
++const envelope = { scope: scopeSchema, requestId: identity }
++const successSchema = z.object({
++  ...envelope,
++  status: z.literal('ok'),
++  projects: z.array(projectSchema),
++  // The only supported collection is a capped recent-work snapshot. This is
++  // intentionally not a cursor, total, or claim about complete inventory.
++  boundary: z.object({ kind: z.literal('recent'), limit: z.number().int().positive(), limited: z.boolean() }).strict(),
++}).strict()
++const failureSchema = z.object({
++  ...envelope,
++  status: z.enum(['unavailable', 'denied', 'unknown', 'unsupported', 'error']),
++  explanation: z.string().optional(),
++}).strict()
++export type RecentProjectsSnapshot = z.infer<typeof successSchema>
++export type ProjectListFailure = z.infer<typeof failureSchema>
++
++export function scopeKey(scope: ProjectScope): string {
++  return JSON.stringify([scope.principalId, scope.tenantId, scope.sessionId, scope.workspaceId])
++}
++
++export function contextKey(context: ProjectsContext): string {
++  return JSON.stringify([
++    scopeKey(context), context.access.key, context.access.status, context.access.reasonCode,
++    context.access.explanation, context.access.source, context.access.observedAt ?? null,
++    context.access.factors.capability, context.access.factors.runtime, context.access.factors.entitlement,
++    context.access.factors.policy, context.access.factors.quota,
++  ])
++}
++
++export function accessDisposition(context: ProjectsContext): 'ready' | 'unavailable' | 'denied' | 'unknown' {
++  if (!context.principalId || !context.tenantId) return 'unknown'
++  if (isAvailable(context.access)) return 'ready'
++  if (context.access.status === 'POLICY_DENIED' || context.access.status === 'NOT_ENTITLED') return 'denied'
++  if (context.access.status === 'UNKNOWN_FAIL_CLOSED') return 'unknown'
++  return 'unavailable'
++}
++
++function hasExpectedProjection(source: ProjectsSource): boolean {
++  if (source.adapter.origin === 'real') {
++    // This key remains a frontend consumption proposal. A real adapter may
++    // consume it only when the host supplies the matching server projection.
++    return source.access.key === RECENT_PROJECTS_QUERY_KEY && source.access.source === 'SERVER'
++  }
++  if (source.adapter.origin === 'simulated') {
++    return source.access.key === SIMULATED_RECENT_PROJECTS_QUERY_KEY
++      && source.access.source === 'DEVELOPMENT_FAIL_CLOSED'
++  }
++  return false
++}
++
++export function sourcePresentationOrigin(source: ProjectsSource): ProjectsAdapter['origin'] {
++  return source.adapter.origin !== 'unavailable' && hasExpectedProjection(source)
++    ? source.adapter.origin
++    : 'unavailable'
++}
++
++export function sourceDisposition(source: ProjectsSource, expectedWorkspaceId = source.scope.workspaceId): 'ready' | 'unavailable' | 'denied' | 'unknown' {
++  if (source.adapter.origin === 'unavailable') return 'unavailable'
++  if (source.scope.workspaceId !== expectedWorkspaceId) return 'unknown'
++  if (!hasExpectedProjection(source)) return 'unknown'
++  return accessDisposition({ ...source.scope, access: source.access })
++}
++
++export function sourceAccessExplanation(source: ProjectsSource): string | null {
++  return hasExpectedProjection(source) ? source.access.explanation : null
++}
++
++export function parseRecentProjects(input: unknown, request: ProjectListRequest): RecentProjectsSnapshot | ProjectListFailure {
++  const result = z.union([successSchema, failureSchema]).parse(input)
++  if (scopeKey(result.scope) !== scopeKey(request.scope) || result.requestId !== request.requestId) {
++    throw new Error('Invalid recent Projects receipt ownership')
++  }
++  if (result.status !== 'ok') return result
++  const ids = result.projects.map(project => project.id)
++  if (new Set(ids).size !== ids.length || result.projects.length > result.boundary.limit
++    || result.projects.some(project => project.tenantId !== undefined && project.tenantId !== request.scope.tenantId)) {
++    throw new Error('Invalid recent Projects snapshot')
++  }
++  return result
++}
++
++function compareText(left: string, right: string): number {
++  return left < right ? -1 : left > right ? 1 : 0
++}
++
++export function selectProjects(projects: readonly ProjectSummary[], filters: ProjectFilters): ProjectSummary[] {
++  const query = filters.query.toLocaleLowerCase()
++  const direction = filters.order === 'name-desc' ? -1 : 1
++  return projects
++    .filter(project => (!query || `${project.name}\n${project.description ?? ''}`.toLocaleLowerCase().includes(query))
++      && (!filters.status || project.status === filters.status))
++    .sort((left, right) => direction * compareText(left.name, right.name) || compareText(left.id, right.id))
++}
++
++export function projectStatusValues(projects: readonly ProjectSummary[]): string[] {
++  return [...new Set(projects.flatMap(project => project.status === undefined ? [] : [project.status]))].sort(compareText)
++}
++
++export function unavailableProjectsSource(workspaceId: string): ProjectsSource {
++  const scope = { principalId: null, tenantId: null, sessionId: 'unconfigured', workspaceId }
++  return {
++    scope,
++    access: unknownAccess(RECENT_PROJECTS_QUERY_KEY),
++    adapter: { origin: 'unavailable', async listRecent(request) { return { status: 'unavailable', scope: request.scope, requestId: request.requestId } } },
++  }
++}
+diff --git a/frontend/src/styles/foundation.css b/frontend/src/styles/foundation.css
+index 8d833365..e4afe48b 100644
+--- a/frontend/src/styles/foundation.css
++++ b/frontend/src/styles/foundation.css
+@@ -461,9 +461,29 @@ kbd { padding: 1px var(--space-1); border: 1px solid var(--border-default); bord
+ .ff-notification-title { flex: 1 1 220px; overflow-wrap: anywhere; white-space: pre-wrap; }
+ .ff-notification-detail { padding: 12px; background: var(--surface-1); border: 1px solid var(--border-strong); border-radius: 8px; }
+ .ff-notification-detail h3, .ff-notification-body { white-space: pre-wrap; overflow-wrap: anywhere; }
++.ff-project-browser { min-width: 0; }
++.ff-project-browser-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-4); }
++.ff-project-browser-heading > div > span { color: var(--accent-400); text-transform: uppercase; letter-spacing: .1em; font-size: var(--text-micro); font-weight: 700; }
++.ff-project-browser-heading h1 { margin: var(--space-1) 0; font-size: clamp(1.5rem, 3vw, var(--text-h1)); }
++.ff-project-browser-heading p, .ff-project-boundary { color: var(--text-secondary); }
++.ff-project-origin { width: fit-content; padding: var(--space-2); border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface-2); }
++.ff-project-origin--simulated { border-color: color-mix(in srgb, var(--warning) 55%, var(--border-strong)); background: var(--warning-muted); }
++.ff-project-controls { display: flex; flex-wrap: wrap; align-items: end; gap: var(--space-3); margin-block: var(--space-4); }
++.ff-project-controls label { display: flex; flex-direction: column; gap: var(--space-1); color: var(--text-secondary); font-size: var(--text-caption); }
++.ff-project-controls select { min-height: 36px; max-width: min(100%, 360px); padding: var(--space-2); border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--surface-2); color: var(--text-primary); }
++.ff-project-browser-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: var(--space-4); margin-block: var(--space-4); padding: 0; list-style: none; }
++.ff-project-browser-list .ff-panel { height: 100%; }
++.ff-project-browser-list .ff-panel__body { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); }
++.ff-project-browser-list .ff-panel__body > * { max-width: 100%; }
++.ff-project-description, .ff-project-detail-description, .ff-project-opaque-explanation { white-space: pre-wrap; overflow-wrap: anywhere; }
++.ff-project-detail { width: min(560px, calc(100vw - 32px)); max-height: 80dvh; overflow: auto; padding: var(--space-4); border: 1px solid var(--border-strong); border-radius: var(--radius-xl); background: var(--surface-2); box-shadow: var(--shadow-xl); }
++.ff-project-detail code { overflow-wrap: anywhere; }
+ @media (max-width: 640px) {
+   .ff-notification-inbox { width: calc(100vw - 16px); max-height: 90dvh; margin: 8px; border-radius: 12px; padding: 14px; }
+   .ff-notification-inbox button, .ff-notification-inbox a { min-height: 44px; }
++  .ff-project-browser-heading { flex-direction: column; }
++  .ff-project-controls, .ff-project-controls > *, .ff-project-controls .ff-input { width: 100%; max-width: none; }
++  .ff-project-detail { width: calc(100vw - 16px); max-height: 90dvh; margin: 8px; border-radius: 12px; }
+ }
+ 
+ @media (max-width: 640px) {
+diff --git a/frontend/src/surfaces/FoundationPages.tsx b/frontend/src/surfaces/FoundationPages.tsx
+index f7b790dd..762a2d5f 100644
+--- a/frontend/src/surfaces/FoundationPages.tsx
++++ b/frontend/src/surfaces/FoundationPages.tsx
+@@ -1,4 +1,4 @@
+-import { useMemo, useState, type ReactNode } from 'react'
++import { useState, type ReactNode } from 'react'
+ import { useLocation, useMatch, useParams } from '@tanstack/react-router'
+ import { ProductAppShell } from '../components/app-shell/AppShell'
+ import { Badge, Button, EmptyState, Input, Panel, PropertyRow, Search, Skeleton, Status } from '../components/design-system'
+@@ -7,6 +7,7 @@ import { AccessStatus, getEffectiveAccess } from '../foundation/effectiveAccess'
+ import { ProjectContextProvider, useProjectContext } from '../foundation/projectContext'
+ import { useEffectiveAccessCatalog, useWorkspaceHome } from '../foundation/platformClient'
+ import { getSurface, surfaceRegistry, type SurfaceId } from '../foundation/surfaceRegistry'
++import { ProjectBrowser } from '../product/projects/ProjectBrowser'
+ 
+ function routeParams(): { workspaceId?: string; projectId?: string } {
+   return useParams({ strict: false }) as { workspaceId?: string; projectId?: string }
+@@ -55,10 +56,7 @@ export function WorkspaceHomePage() {
+ 
+ export function ProjectListPage() {
+   const { workspaceId = '' } = routeParams()
+-  const [query, setQuery] = useState('')
+-  const home = useWorkspaceHome(workspaceId)
+-  const projects = useMemo(() => home.data?.recentProjects.filter(project => project.name.toLowerCase().includes(query.toLowerCase())) ?? [], [home.data, query])
+-  return <ProductAppShell surfaceId="workspace" workspaceId={workspaceId}><div className="ff-page"><PageHeading eyebrow="Workspace" title="Projects" description="Recent Project projections for this authenticated Workspace. Opening remains fail-closed until scoped resolution exists." /><Search value={query} onChange={event => setQuery(event.target.value)} label="Search projects" />{home.isLoading ? <Skeleton /> : home.error ? <AsyncStatePanel state="ERROR" title="Projects unavailable"><p>The authenticated Workspace projection could not be loaded.</p></AsyncStatePanel> : projects.length ? <div className="ff-card-grid">{projects.map(project => <Panel key={project.id} title={project.name}><p>{project.description || 'No description projected.'}</p><Status label={project.status ?? 'Status unknown'} /><Button disabled title="FB-GAP-001">Open project</Button></Panel>)}</div> : <EmptyState title="No projects found" description={query ? 'No projected Project matches this search.' : 'No recent Projects were returned.'} />}</div></ProductAppShell>
++  return <ProductAppShell surfaceId="workspace" workspaceId={workspaceId}><div className="ff-page"><ProjectBrowser workspaceId={workspaceId} /></div></ProductAppShell>
+ }
+ 
+ export function ProjectFrame({ surfaceId, children }: { surfaceId: SurfaceId; children: ReactNode }) {

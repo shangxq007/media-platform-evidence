@@ -1,0 +1,49 @@
+{
+  "targeted-final": [
+    "./node_modules/.bin/vitest",
+    "run",
+    "src/product/projects",
+    "src/app/routeTree.test.tsx",
+    "src/components/app-shell/AppShell.test.tsx",
+    "src/interaction/InteractionShell.test.tsx",
+    "src/localization/localization.test.tsx",
+    "src/product/notifications/NotificationInbox.test.tsx",
+    "--configLoader",
+    "runner",
+    "--no-cache",
+    "--reporter=json",
+    "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1/TARGETED_FINAL.json"
+  ],
+  "type-policy": [
+    "npm",
+    "run",
+    "typecheck"
+  ],
+  "lint": [
+    "./node_modules/.bin/eslint",
+    "src/**/*.{ts,tsx}"
+  ],
+  "architecture": [
+    "node",
+    "scripts/frontend-architecture-guard.mjs"
+  ],
+  "architecture-controls": [
+    "node",
+    "scripts/frontend-architecture-guard.test.mjs"
+  ],
+  "full-frontend-final": [
+    "./node_modules/.bin/vitest",
+    "run",
+    "--configLoader",
+    "runner",
+    "--no-cache",
+    "--reporter=json",
+    "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1/FULL_UNIT.json"
+  ],
+  "build-final": [
+    "node",
+    "--input-type=module",
+    "-e",
+    "import {build,resolveConfig} from 'vite';import path from 'node:path';import fs from 'node:fs';const output=\"/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1/build\";if(fs.existsSync(output))throw Error('External output must be new');const opts={configLoader:'bundle',build:{outDir:output,emptyOutDir:false}};const c=await resolveConfig(opts,'build');if(path.resolve(c.root,c.build.outDir)!==output)throw Error('Unexpected effective output');console.log('EFFECTIVE_EXTERNAL_OUTPUT='+output);await build(opts);"
+  ]
+}

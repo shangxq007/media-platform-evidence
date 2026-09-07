@@ -1,0 +1,20 @@
+I’ll first lock down the Hermes-selected scope and repository rules, then inspect the existing Workspace and access-projection code before touching any allowlisted file. I’ll preserve the required RED/GREEN artifacts and keep all edits in place without Git index or commit operations.
+The allowlist overlaps existing dirty Wave 2 work in four shared files, so I’m treating those edits as preserved inputs and will patch only the Projects-specific seams. The durable root rule requiring a frozen commit conflicts with the newer Owner instruction; I’m applying the explicit no-commit/no-index override and will record that conflict in the external report.
+I’m at the test-first boundary now. The RED suite will exercise contract validation and user behavior against compileable but deliberately incomplete seams, so the failures are behavioral (receipt acceptance/filtering/rendering), not missing-module or missing-import failures.
+The first focused run is preserved as 44 tests with 35 behavioral failures and 9 passes. I’m now replacing only the compile scaffolds with the bounded source contract, strict receipt ownership checks, fixture isolation, and the UI state machine those tests specify.
+The contract layer is now fully green, and the second UI attempt reached 43/44; the remaining failure was a test query that correctly found the same opaque description in both its card and dialog. I’ve scoped that assertion to the dialog and am running the clean focused gate next.
+The expanded focused gate now passes 53/53, including the runtime route check and late-reply identity transitions. I’m doing two bounded follow-ups only: the localization contract test for the newly registered keys, and a file-targeted TypeScript check over the Projects increment and its two integration seams—no build or full suite.
+The bounded TypeScript check and localization contract both pass. A focused lint check found one unused type-only import (no runtime issue); I removed it, and the Projects files are now lint-clean. I’m adding one final regression that makes the “late reply cannot reopen the inspector or reclaim focus” requirement explicit before the last focused test run.
+The final focused suite is clean at 54/54, and the post-test targeted typecheck and lint are both clean. I’m now doing the bounded handoff audit: allowlist/path verification, machine-readable count reconciliation, and the required writer report with the unconfigured-auth rationale and Hermes backend dependency fields.
+Implemented the bounded read-only Workspace Projects increment.
+
+- Added scoped source contract, strict receipt validation, localhost fixture, discovery/filter/sort UI, cancellation/retry/refresh, and read-only detail dialog.
+- Ordinary Projects loading remains unavailable because no authenticated principal/tenant/session-bound adapter exists; no HTTP or mock fallback occurs.
+- Fixture: `/w/<workspaceId>/projects?projectsFixture=1` on localhost only.
+- Preserved existing dirty work and made no commits, index writes, remote operations, builds, or browser/server runs.
+- Final focused tests: 54/54 passed.
+- Localization tests: 13/13 passed.
+- Targeted TypeScript and lint checks passed.
+- All failed attempts and machine-readable results were preserved.
+
+Full handoff: [REPORT.md](/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1/writer/REPORT.md)

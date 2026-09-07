@@ -1,0 +1,612 @@
+
+> media-platform-frontend@0.1.0 test
+> vitest run --configLoader=runner --no-cache src/product/projects/source.test.ts src/product/projects/ProjectBrowser.test.tsx --reporter=default --reporter=json --outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1/writer-review-correction/red-focus-trust-lifecycle-02-results.json
+
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ❯ src/product/projects/source.test.ts (28 tests | 2 failed) 34ms
+   ✓ recent Project frontend consumption proposal > reuses ProjectSummary, searches name and description literally, and sorts by name with an ID tie-break 3ms
+   ✓ recent Project frontend consumption proposal > keeps projected statuses opaque and uses them only as literal local filter values 1ms
+   ✓ recent Project frontend consumption proposal > accepts only an owned, bounded, recent snapshot without claiming a full inventory 4ms
+   ✓ recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 0 2ms
+   ✓ recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 1 1ms
+   ✓ recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 2 1ms
+   ✓ recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 3 1ms
+   ✓ recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 4 0ms
+   ✓ recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 5 1ms
+   ✓ recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 6 0ms
+   ✓ recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 7 0ms
+   ✓ recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 8 0ms
+   ✓ recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 9 0ms
+   ✓ recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 10 1ms
+   ✓ recent Project frontend consumption proposal > rejects malformed, duplicate, foreign, mismatched or unbounded receipts 11 1ms
+   ✓ recent Project frontend consumption proposal > preserves exact unavailable failures with opaque explanations 0ms
+   ✓ recent Project frontend consumption proposal > preserves exact denied failures with opaque explanations 0ms
+   ✓ recent Project frontend consumption proposal > preserves exact unknown failures with opaque explanations 0ms
+   ✓ recent Project frontend consumption proposal > preserves exact unsupported failures with opaque explanations 0ms
+   ✓ recent Project frontend consumption proposal > preserves exact error failures with opaque explanations 0ms
+   ✓ recent Project frontend consumption proposal > keys every principal, tenant, session, workspace and access projection change 0ms
+   ✓ recent Project frontend consumption proposal > consumes established EffectiveAccess statuses without manufacturing availability 0ms
+   × source boundaries > requires an exact server-owned proposal projection for a real source 9ms
+     → expected 'ready' to be 'unknown' // Object.is equality
+   × source boundaries > accepts only the explicitly labelled projection for a simulated fixture 1ms
+     → expected 'ready' to be 'unknown' // Object.is equality
+   ✓ source boundaries > defaults unavailable without HTTP, storage-derived auth, or an adapter fallback 2ms
+   ✓ source boundaries > requires the exact localhost projectsFixture=1 opt-in and never touches auth, storage or transport 1ms
+   ✓ source boundaries > fixture cannot relax POLICY_DENIED access 0ms
+   ✓ source boundaries > fixture cannot relax UNKNOWN_FAIL_CLOSED access 0ms
+ ❯ src/product/projects/ProjectBrowser.test.tsx (25 tests | 4 failed) 581ms
+   ✓ Workspace recent Project discovery and inspection > searches literal name and description content, filters opaque statuses, sorts deterministically, and resets no matches 105ms
+   ✓ Workspace recent Project discovery and inspection > distinguishes an empty recent snapshot from local no matches 13ms
+   ✓ Workspace recent Project discovery and inspection > inspects the exact item in a read-only dialog, renders opaque text safely, and restores launcher focus after Escape 43ms
+   ✓ Workspace recent Project discovery and inspection > supports cancel, retry and refresh; each new request clears content and late cancelled replies stay hidden 47ms
+   × Workspace recent Project discovery and inspection > keeps the focused workflow control through loading, cancel, retry, failure and success 22ms
+     → expected <body><div>…(1)</div></body> to be <button …(1)></button> // Object.is equality
+   ✓ Workspace recent Project discovery and inspection > does not reclaim workflow focus when the user moves to another control before completion 25ms
+   ✓ Workspace recent Project discovery and inspection > clears content and presents the exact unavailable failure without simulation fallback 25ms
+   ✓ Workspace recent Project discovery and inspection > clears content and presents the exact denied failure without simulation fallback 26ms
+   ✓ Workspace recent Project discovery and inspection > clears content and presents the exact unknown failure without simulation fallback 31ms
+   ✓ Workspace recent Project discovery and inspection > clears content and presents the exact unsupported failure without simulation fallback 23ms
+   ✓ Workspace recent Project discovery and inspection > clears content and presents the exact error failure without simulation fallback 20ms
+   ✓ Workspace recent Project discovery and inspection > treats malformed and mismatched success receipts as errors and exposes no returned content 11ms
+   ✓ Workspace recent Project discovery and inspection > synchronously hides old content on principalId change and ignores the old late reply 23ms
+   ✓ Workspace recent Project discovery and inspection > synchronously hides old content on tenantId change and ignores the old late reply 25ms
+   ✓ Workspace recent Project discovery and inspection > synchronously hides old content on sessionId change and ignores the old late reply 24ms
+   ✓ Workspace recent Project discovery and inspection > synchronously hides old content on workspaceId change and ignores the old late reply 23ms
+   ✓ Workspace recent Project discovery and inspection > drops late replies after adapter replacement and unmount 12ms
+   ✓ Workspace recent Project discovery and inspection > aborts and drops a source reply that arrives after unmount 3ms
+   ✓ Workspace recent Project discovery and inspection > drops a valid pending reply across logout and does not query without a principal 7ms
+   ✓ Workspace recent Project discovery and inspection > never reopens inspection or steals newly placed focus when a retired refresh replies late 27ms
+   × Workspace recent Project discovery and inspection > does not query denied or unknown projections and presents no content 3ms
+     → Unable to find an element with the text: Simulated access projection; never valid for a real resource.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"Workspace recent projects"[39m
+      [33mclass[39m=[32m"ff-project-browser"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-project-browser-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0mWorkspace · read-only[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0mRecent projects[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0mFind and inspect a bounded snapshot of recent work. This view cannot open, create, or change projects.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-origin ff-project-origin--simulated"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+        [36m>[39m
+          [0mSIMULATED PROJECT DATA · localhost fixture only · no real account or permission[0m
+        [36m</span>[39m
+      [36m</p>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-boundary"[39m
+      [36m>[39m
+        [0mThis is a recent snapshot, not a full project inventory. Project opening and creation remain unavailable.[0m
+      [36m</p>[39m
+      [36m<section[39m
+        [33maria-busy[39m=[32m"false"[39m
+        [33maria-labelledby[39m=[32m"_r_1i_"[39m
+        [33maria-live[39m=[32m"polite"[39m
+        [33mclass[39m=[32m"ff-state ff-state--blocked"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-state__code"[39m
+        [36m>[39m
+          [0mBLOCKED[0m
+        [36m</span>[39m
+        [36m<h2[39m
+          [33mid[39m=[32m"_r_1i_"[39m
+        [36m>[39m
+          [0mRecent projects denied[0m
+        [36m</h2>[39m
+        [36m<div>[39m
+          [36m<p>[39m
+            [0mThe supplied effective-access projection denied this read-only request.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</section>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > shows an opaque server-owned denied explanation without translating it in en 3ms
+     → Unable to find an element with the text: <server-owned 原因 DENY_42>. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"Workspace recent projects"[39m
+      [33mclass[39m=[32m"ff-project-browser"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-project-browser-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0mWorkspace · read-only[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0mRecent projects[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0mFind and inspect a bounded snapshot of recent work. This view cannot open, create, or change projects.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-origin ff-project-origin--real"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+        [36m>[39m
+          [0mCONNECTED READ-ONLY SOURCE · access is supplied by the host application[0m
+        [36m</span>[39m
+      [36m</p>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-boundary"[39m
+      [36m>[39m
+        [0mThis is a recent snapshot, not a full project inventory. Project opening and creation remain unavailable.[0m
+      [36m</p>[39m
+      [36m<section[39m
+        [33maria-busy[39m=[32m"false"[39m
+        [33maria-labelledby[39m=[32m"_r_1j_"[39m
+        [33maria-live[39m=[32m"polite"[39m
+        [33mclass[39m=[32m"ff-state ff-state--blocked"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-state__code"[39m
+        [36m>[39m
+          [0mBLOCKED[0m
+        [36m</span>[39m
+        [36m<h2[39m
+          [33mid[39m=[32m"_r_1j_"[39m
+        [36m>[39m
+          [0mRecent projects denied[0m
+        [36m</h2>[39m
+        [36m<div>[39m
+          [36m<p>[39m
+            [0mThe supplied effective-access projection denied this read-only request.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</section>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × Workspace recent Project discovery and inspection > shows an opaque server-owned denied explanation without translating it in zh-CN 3ms
+     → Unable to find an element with the text: <server-owned 原因 DENY_42>. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"工作区最近项目"[39m
+      [33mclass[39m=[32m"ff-project-browser"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-project-browser-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0m工作区 · 只读[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0m最近项目[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0m查找并检查有限的最近工作快照。此视图不能打开、创建或更改项目。[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-origin ff-project-origin--real"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+        [36m>[39m
+          [0m已连接只读来源 · 访问权限由宿主应用提供[0m
+        [36m</span>[39m
+      [36m</p>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-boundary"[39m
+      [36m>[39m
+        [0m这是最近项目快照，并非完整项目清单。项目打开和创建功能仍不可用。[0m
+      [36m</p>[39m
+      [36m<section[39m
+        [33maria-busy[39m=[32m"false"[39m
+        [33maria-labelledby[39m=[32m"_r_1k_"[39m
+        [33maria-live[39m=[32m"polite"[39m
+        [33mclass[39m=[32m"ff-state ff-state--blocked"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-state__code"[39m
+        [36m>[39m
+          [0mBLOCKED[0m
+        [36m</span>[39m
+        [36m<h2[39m
+          [33mid[39m=[32m"_r_1k_"[39m
+        [36m>[39m
+          [0m最近项目访问被拒绝[0m
+        [36m</h2>[39m
+        [36m<div>[39m
+          [36m<p>[39m
+            [0m提供的有效访问权限投影拒绝了此只读请求。[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</section>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   ✓ Workspace recent Project discovery and inspection > is unavailable by default and persistently identifies the localhost fixture as simulated and read-only 18ms
+   ✓ Workspace recent Project discovery and inspection > localizes the full Projects UI in zh-CN while preserving projected names, descriptions and statuses 17ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > keeps the focused workflow control through loading, cancel, retry, failure and success
+AssertionError: expected <body><div>…(1)</div></body> to be <button …(1)></button> // Object.is equality
+
+- Expected
++ Received
+
++ <body>
++   <div>
++     <section
++       aria-label="Workspace recent projects"
++       class="ff-project-browser"
++     >
++       <header
++         class="ff-project-browser-heading"
++       >
++         <div>
++           <span>
++             Workspace · read-only
++           </span>
++           <h1>
++             Recent projects
++           </h1>
++           <p>
++             Find and inspect a bounded snapshot of recent work. This view cannot open, create, or change projects.
++           </p>
++         </div>
++       </header>
++       <p
++         class="ff-project-origin ff-project-origin--real"
++       >
++         <span
++           class="ff-badge ff-badge--neutral"
++         >
++           CONNECTED READ-ONLY SOURCE · access is supplied by the host application
++         </span>
++       </p>
++       <p
++         class="ff-project-boundary"
++       >
++         This is a recent snapshot, not a full project inventory. Project opening and creation remain unavailable.
++       </p>
++       <section
++         aria-busy="false"
++         aria-labelledby="_r_9_"
++         aria-live="polite"
++         class="ff-state ff-state--unavailable"
++       >
++         <span
++           class="ff-state__code"
++         >
++           UNAVAILABLE
++         </span>
++         <h2
++           id="_r_9_"
++         >
++           Recent project loading cancelled
++         </h2>
++         <div>
++           <p>
++             Loading cancelled.
++           </p>
+            <button
+              class="ff-button ff-button--secondary "
+            >
+              Retry loading
+            </button>
++         </div>
++       </section>
++     </section>
++   </div>
++ </body>
+
+ ❯ src/product/projects/ProjectBrowser.test.tsx:112:36
+    110|     fireEvent.click(cancel)
+    111|     const cancelledRetry = screen.getByRole('button', { name: 'Retry l…
+    112|     expect(document.activeElement).toBe(cancelledRetry)
+       |                                    ^
+    113|     await act(async () => initial.resolve(ownedSnapshot(initialRequest…
+    114|     expect(document.activeElement).toBe(cancelledRetry)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > does not query denied or unknown projections and presents no content
+TestingLibraryElementError: Unable to find an element with the text: Simulated access projection; never valid for a real resource.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"Workspace recent projects"[39m
+      [33mclass[39m=[32m"ff-project-browser"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-project-browser-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0mWorkspace · read-only[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0mRecent projects[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0mFind and inspect a bounded snapshot of recent work. This view cannot open, create, or change projects.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-origin ff-project-origin--simulated"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+        [36m>[39m
+          [0mSIMULATED PROJECT DATA · localhost fixture only · no real account or permission[0m
+        [36m</span>[39m
+      [36m</p>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-boundary"[39m
+      [36m>[39m
+        [0mThis is a recent snapshot, not a full project inventory. Project opening and creation remain unavailable.[0m
+      [36m</p>[39m
+      [36m<section[39m
+        [33maria-busy[39m=[32m"false"[39m
+        [33maria-labelledby[39m=[32m"_r_1i_"[39m
+        [33maria-live[39m=[32m"polite"[39m
+        [33mclass[39m=[32m"ff-state ff-state--blocked"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-state__code"[39m
+        [36m>[39m
+          [0mBLOCKED[0m
+        [36m</span>[39m
+        [36m<h2[39m
+          [33mid[39m=[32m"_r_1i_"[39m
+        [36m>[39m
+          [0mRecent projects denied[0m
+        [36m</h2>[39m
+        [36m<div>[39m
+          [36m<p>[39m
+            [0mThe supplied effective-access projection denied this read-only request.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</section>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/product/projects/ProjectBrowser.test.tsx:256:21
+    254|       const view = setup(source)
+    255|       expect(screen.queryByRole('button', { name: /^Inspect / })).toBe…
+    256|       expect(screen.getByText(source.access.explanation)).toBeTruthy()
+       |                     ^
+    257|       expect(list).not.toHaveBeenCalled()
+    258|       view.unmount()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > shows an opaque server-owned denied explanation without translating it in en
+TestingLibraryElementError: Unable to find an element with the text: <server-owned 原因 DENY_42>. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"Workspace recent projects"[39m
+      [33mclass[39m=[32m"ff-project-browser"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-project-browser-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0mWorkspace · read-only[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0mRecent projects[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0mFind and inspect a bounded snapshot of recent work. This view cannot open, create, or change projects.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-origin ff-project-origin--real"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+        [36m>[39m
+          [0mCONNECTED READ-ONLY SOURCE · access is supplied by the host application[0m
+        [36m</span>[39m
+      [36m</p>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-boundary"[39m
+      [36m>[39m
+        [0mThis is a recent snapshot, not a full project inventory. Project opening and creation remain unavailable.[0m
+      [36m</p>[39m
+      [36m<section[39m
+        [33maria-busy[39m=[32m"false"[39m
+        [33maria-labelledby[39m=[32m"_r_1j_"[39m
+        [33maria-live[39m=[32m"polite"[39m
+        [33mclass[39m=[32m"ff-state ff-state--blocked"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-state__code"[39m
+        [36m>[39m
+          [0mBLOCKED[0m
+        [36m</span>[39m
+        [36m<h2[39m
+          [33mid[39m=[32m"_r_1j_"[39m
+        [36m>[39m
+          [0mRecent projects denied[0m
+        [36m</h2>[39m
+        [36m<div>[39m
+          [36m<p>[39m
+            [0mThe supplied effective-access projection denied this read-only request.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</section>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/product/projects/ProjectBrowser.test.tsx:268:19
+    266|     const list = vi.spyOn(source.adapter, 'listRecent')
+    267|     setup(source, locale)
+    268|     expect(screen.getByText(explanation)).toBeTruthy()
+       |                   ^
+    269|     expect(list).not.toHaveBeenCalled()
+    270|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > shows an opaque server-owned denied explanation without translating it in zh-CN
+TestingLibraryElementError: Unable to find an element with the text: <server-owned 原因 DENY_42>. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"工作区最近项目"[39m
+      [33mclass[39m=[32m"ff-project-browser"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-project-browser-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0m工作区 · 只读[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0m最近项目[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0m查找并检查有限的最近工作快照。此视图不能打开、创建或更改项目。[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-origin ff-project-origin--real"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+        [36m>[39m
+          [0m已连接只读来源 · 访问权限由宿主应用提供[0m
+        [36m</span>[39m
+      [36m</p>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-boundary"[39m
+      [36m>[39m
+        [0m这是最近项目快照，并非完整项目清单。项目打开和创建功能仍不可用。[0m
+      [36m</p>[39m
+      [36m<section[39m
+        [33maria-busy[39m=[32m"false"[39m
+        [33maria-labelledby[39m=[32m"_r_1k_"[39m
+        [33maria-live[39m=[32m"polite"[39m
+        [33mclass[39m=[32m"ff-state ff-state--blocked"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-state__code"[39m
+        [36m>[39m
+          [0mBLOCKED[0m
+        [36m</span>[39m
+        [36m<h2[39m
+          [33mid[39m=[32m"_r_1k_"[39m
+        [36m>[39m
+          [0m最近项目访问被拒绝[0m
+        [36m</h2>[39m
+        [36m<div>[39m
+          [36m<p>[39m
+            [0m提供的有效访问权限投影拒绝了此只读请求。[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</section>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/product/projects/ProjectBrowser.test.tsx:268:19
+    266|     const list = vi.spyOn(source.adapter, 'listRecent')
+    267|     setup(source, locale)
+    268|     expect(screen.getByText(explanation)).toBeTruthy()
+       |                   ^
+    269|     expect(list).not.toHaveBeenCalled()
+    270|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  src/product/projects/source.test.ts > source boundaries > requires an exact server-owned proposal projection for a real source
+AssertionError: expected 'ready' to be 'unknown' // Object.is equality
+
+Expected: "unknown"
+Received: "ready"
+
+ ❯ src/product/projects/source.test.ts:106:108
+    104|     })
+    105|     expect(sourceDisposition(realSource(access('AVAILABLE')))).toBe('r…
+    106|     expect(sourceDisposition(realSource({ ...access('AVAILABLE'), key:…
+       |                                                                                                            ^
+    107|     expect(sourceDisposition(realSource({ ...access('AVAILABLE'), key:…
+    108|     expect(sourceDisposition(realSource({ ...access('AVAILABLE'), sour…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  src/product/projects/source.test.ts > source boundaries > accepts only the explicitly labelled projection for a simulated fixture
+AssertionError: expected 'ready' to be 'unknown' // Object.is equality
+
+Expected: "unknown"
+Received: "ready"
+
+ ❯ src/product/projects/source.test.ts:115:96
+    113|     const fixture = createProjectsFixture({ workspaceId: 'workspace-1'…
+    114|     expect(sourceDisposition(fixture)).toBe('ready')
+    115|     expect(sourceDisposition({ ...fixture, adapter: { ...fixture.adapt…
+       |                                                                                                ^
+    116|     expect(sourceDisposition({ ...fixture, access: { ...fixture.access…
+    117|     expect(sourceDisposition({ ...fixture, access: { ...fixture.access…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  6 failed | 47 passed (53)
+   Start at  01:58:14
+   Duration  2.14s (transform 448ms, setup 0ms, collect 908ms, tests 616ms, environment 528ms, prepare 207ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1/writer-review-correction/red-focus-trust-lifecycle-02-results.json

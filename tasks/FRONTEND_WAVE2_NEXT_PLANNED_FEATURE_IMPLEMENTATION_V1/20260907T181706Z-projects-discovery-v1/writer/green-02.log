@@ -1,0 +1,669 @@
+
+> media-platform-frontend@0.1.0 test
+> vitest run --configLoader=runner --no-cache src/product/projects/source.test.ts src/product/projects/ProjectBrowser.test.tsx --reporter=default --reporter=json --outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1/writer/green-02-results.json
+
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ✓ src/product/projects/source.test.ts (26 tests) 27ms
+ ❯ src/product/projects/ProjectBrowser.test.tsx (18 tests | 1 failed) 543ms
+   ✓ Workspace recent Project discovery and inspection > searches literal name and description content, filters opaque statuses, sorts deterministically, and resets no matches 105ms
+   ✓ Workspace recent Project discovery and inspection > distinguishes an empty recent snapshot from local no matches 19ms
+   ✓ Workspace recent Project discovery and inspection > inspects the exact item in a read-only dialog, renders opaque text safely, and restores launcher focus after Escape 45ms
+   ✓ Workspace recent Project discovery and inspection > supports cancel, retry and refresh; each new request clears content and late cancelled replies stay hidden 45ms
+   ✓ Workspace recent Project discovery and inspection > clears content and presents the exact unavailable failure without simulation fallback 30ms
+   ✓ Workspace recent Project discovery and inspection > clears content and presents the exact denied failure without simulation fallback 31ms
+   ✓ Workspace recent Project discovery and inspection > clears content and presents the exact unknown failure without simulation fallback 37ms
+   ✓ Workspace recent Project discovery and inspection > clears content and presents the exact unsupported failure without simulation fallback 28ms
+   ✓ Workspace recent Project discovery and inspection > clears content and presents the exact error failure without simulation fallback 31ms
+   ✓ Workspace recent Project discovery and inspection > treats malformed and mismatched success receipts as errors and exposes no returned content 10ms
+   ✓ Workspace recent Project discovery and inspection > synchronously hides old content on principalId change and ignores the old late reply 25ms
+   ✓ Workspace recent Project discovery and inspection > synchronously hides old content on tenantId change and ignores the old late reply 17ms
+   ✓ Workspace recent Project discovery and inspection > synchronously hides old content on sessionId change and ignores the old late reply 16ms
+   ✓ Workspace recent Project discovery and inspection > synchronously hides old content on workspaceId change and ignores the old late reply 18ms
+   ✓ Workspace recent Project discovery and inspection > drops late replies after adapter replacement and unmount 18ms
+   ✓ Workspace recent Project discovery and inspection > does not query denied or unknown projections and presents no content 9ms
+   ✓ Workspace recent Project discovery and inspection > is unavailable by default and persistently identifies the localhost fixture as simulated and read-only 21ms
+   × Workspace recent Project discovery and inspection > localizes the full Projects UI in zh-CN while preserving projected names, descriptions and statuses 35ms
+     → Found multiple elements with the text: description literal 原文
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"ff-project-description"[39m
+[36m>[39m
+  [0mdescription literal 原文[0m
+[36m</p>[39m
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"ff-project-detail-description"[39m
+[36m>[39m
+  [0mdescription literal 原文[0m
+[36m</p>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"工作区最近项目"[39m
+      [33mclass[39m=[32m"ff-project-browser"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-project-browser-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0m工作区 · 只读[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0m最近项目[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0m查找并检查有限的最近工作快照。此视图不能打开、创建或更改项目。[0m
+          [36m</p>[39m
+        [36m</div>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0m刷新最近项目[0m
+        [36m</button>[39m
+      [36m</header>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-origin ff-project-origin--simulated"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+        [36m>[39m
+          [0m模拟项目数据 · 仅限 localhost 固定数据 · 未连接真实账户或权限[0m
+        [36m</span>[39m
+      [36m</p>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-boundary"[39m
+      [36m>[39m
+        [0m这是最近项目快照，并非完整项目清单。项目打开和创建功能仍不可用。[0m
+      [36m</p>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-project-controls"[39m
+      [36m>[39m
+        [36m<input[39m
+          [33maria-label[39m=[32m"搜索最近项目"[39m
+          [33mclass[39m=[32m"ff-input "[39m
+          [33mplaceholder[39m=[32m"搜索名称或描述"[39m
+          [33mtype[39m=[32m"search"[39m
+          [33mvalue[39m=[32m""[39m
+        [36m/>[39m
+        [36m<label>[39m
+          [0m投影状态[0m
+          [36m<select>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m""[39m
+            [36m>[39m
+              [0m所有投影状态[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"IN_REVIEW?"[39m
+            [36m>[39m
+              [0mIN_REVIEW?[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"future::READY<script>"[39m
+            [36m>[39m
+              [0mfuture::READY&lt;script&gt;[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+        [36m<label>[39m
+          [0m最近项目排序[0m
+          [36m<select>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"name-asc"[39m
+            [36m>[39m
+              [0m名称 A–Z[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"name-desc"[39m
+            [36m>[39m
+              [0m名称 Z–A[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+      [36m</div>[39m
+      [36m<p[39m
+        [33maria-live[39m=[32m"polite"[39m
+        [33mrole[39m=[32m"status"[39m
+      [36m>[39m
+        [0m已加载 3 个最近项目 · 有限的最近快照。[0m
+      [36m</p>[39m
+      [36m<ul[39m
+        [33maria-label[39m=[32m"最近项目快照"[39m
+        [33mclass[39m=[32m"ff-project-browser-list"[39m
+      [36m>[39m
+        [36m<li>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mAlpha project[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"ff-project-description"[39m
+              [36m>[39m
+                [0m未投影描述。[0m
+              [36m</p>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--neutral"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mIN_REVIEW?[0m
+              [36m</span>[39m
+              [36m<button[39m
+                [33maria-label[39m=[32m"检查 Alpha project"[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0m检查[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</li>[39m
+        [36m<li>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mAlpha project[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"ff-project-description"[39m
+              [36m>[39m
+                [0m&lt;b&gt;opaque description&lt;/b&gt;[0m
+              [36m</p>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--neutral"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mIN_REVIEW?[0m
+              [36m</span>[39m
+              [36m<button[39m
+                [33maria-label[39m=[32m"检查 Alpha project"[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0m检查[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</li>[39m
+        [36m<li>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mZeta &lt;project&gt;[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"ff-project-description"[39m
+              [36m>[39m
+                [0mdescription literal 原文[0m
+              [36m</p>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--neutral"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mfuture::READY&lt;script&gt;[0m
+              [36m</span>[39m
+              [36m<button[39m
+                [33maria-label[39m=[32m"检查 Zeta <project>"[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0m检查[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</li>[39m
+      [36m</ul>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-dialog-backdrop"[39m
+      [36m>[39m
+        [36m<section[39m
+          [33maria-labelledby[39m=[32m"_r_1c_"[39m
+          [33maria-modal[39m=[32m"true"[39m
+          [33mclass[39m=[32m"ff-interaction-dialog ff-project-detail"[39m
+          [33mrole[39m=[32m"dialog"[39m
+          [33mtabindex[39m=[32m"-1"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-dialog-heading"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mid[39m=[32m"_r_1c_"[39m
+            [36m>[39m
+              [0m项目详情[0m
+            [36m</h2>[39m
+            [36m<button[39m
+              [33maria-label[39m=[32m"关闭项目详情"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [0m×[0m
+            [36m</button>[39m
+          [36m</header>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"ff-badge ff-badge--info"[39m
+          [36m>[39m
+            [0m只读本地检查[0m
+          [36m</span>[39m
+          [36m<h3>[39m
+            [0mZeta &lt;project&gt;[0m
+          [36m</h3>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"ff-project-detail-description"[39m
+          [36m>[39m
+            [0mdescription literal 原文[0m
+          [36m</p>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-property-row"[39m
+          [36m>[39m
+            [36m<span>[39m
+              [0m项目 ID[0m
+            [36m</span>[39m
+            [36m<div>[39m
+              [36m<code>[39m
+                [0mproject-zeta[0m
+              [36m</code>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-property-row"[39m
+          [36m>[39m
+            [36m<span>[39m
+              [0m投影状态[0m
+            [36m</span>[39m
+            [36m<div>[39m
+              [36m<span>[39m
+                [0mfuture::READY&lt;script&gt;[0m
+              [36m</span>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-property-row"[39m
+          [36m>[39m
+            [36m<span>[39m
+              [0m投影创建时间[0m
+            [36m</span>[39m
+            [36m<div>[39m
+              [36m<span>[39m
+                [0m2026-08-31T08:00:00Z[0m
+              [36m</span>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<p>[39m
+            [0m检查不会建立规范可用性，也不会授予打开此项目的权限。[0m
+          [36m</p>[39m
+        [36m</section>[39m
+      [36m</div>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/product/projects/ProjectBrowser.test.tsx > Workspace recent Project discovery and inspection > localizes the full Projects UI in zh-CN while preserving projected names, descriptions and statuses
+TestingLibraryElementError: Found multiple elements with the text: description literal 原文
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"ff-project-description"[39m
+[36m>[39m
+  [0mdescription literal 原文[0m
+[36m</p>[39m
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"ff-project-detail-description"[39m
+[36m>[39m
+  [0mdescription literal 原文[0m
+[36m</p>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"工作区最近项目"[39m
+      [33mclass[39m=[32m"ff-project-browser"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-project-browser-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0m工作区 · 只读[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0m最近项目[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0m查找并检查有限的最近工作快照。此视图不能打开、创建或更改项目。[0m
+          [36m</p>[39m
+        [36m</div>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0m刷新最近项目[0m
+        [36m</button>[39m
+      [36m</header>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-origin ff-project-origin--simulated"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+        [36m>[39m
+          [0m模拟项目数据 · 仅限 localhost 固定数据 · 未连接真实账户或权限[0m
+        [36m</span>[39m
+      [36m</p>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-project-boundary"[39m
+      [36m>[39m
+        [0m这是最近项目快照，并非完整项目清单。项目打开和创建功能仍不可用。[0m
+      [36m</p>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-project-controls"[39m
+      [36m>[39m
+        [36m<input[39m
+          [33maria-label[39m=[32m"搜索最近项目"[39m
+          [33mclass[39m=[32m"ff-input "[39m
+          [33mplaceholder[39m=[32m"搜索名称或描述"[39m
+          [33mtype[39m=[32m"search"[39m
+          [33mvalue[39m=[32m""[39m
+        [36m/>[39m
+        [36m<label>[39m
+          [0m投影状态[0m
+          [36m<select>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m""[39m
+            [36m>[39m
+              [0m所有投影状态[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"IN_REVIEW?"[39m
+            [36m>[39m
+              [0mIN_REVIEW?[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"future::READY<script>"[39m
+            [36m>[39m
+              [0mfuture::READY&lt;script&gt;[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+        [36m<label>[39m
+          [0m最近项目排序[0m
+          [36m<select>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"name-asc"[39m
+            [36m>[39m
+              [0m名称 A–Z[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"name-desc"[39m
+            [36m>[39m
+              [0m名称 Z–A[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+      [36m</div>[39m
+      [36m<p[39m
+        [33maria-live[39m=[32m"polite"[39m
+        [33mrole[39m=[32m"status"[39m
+      [36m>[39m
+        [0m已加载 3 个最近项目 · 有限的最近快照。[0m
+      [36m</p>[39m
+      [36m<ul[39m
+        [33maria-label[39m=[32m"最近项目快照"[39m
+        [33mclass[39m=[32m"ff-project-browser-list"[39m
+      [36m>[39m
+        [36m<li>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mAlpha project[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"ff-project-description"[39m
+              [36m>[39m
+                [0m未投影描述。[0m
+              [36m</p>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--neutral"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mIN_REVIEW?[0m
+              [36m</span>[39m
+              [36m<button[39m
+                [33maria-label[39m=[32m"检查 Alpha project"[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0m检查[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</li>[39m
+        [36m<li>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mAlpha project[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"ff-project-description"[39m
+              [36m>[39m
+                [0m&lt;b&gt;opaque description&lt;/b&gt;[0m
+              [36m</p>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--neutral"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mIN_REVIEW?[0m
+              [36m</span>[39m
+              [36m<button[39m
+                [33maria-label[39m=[32m"检查 Alpha project"[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0m检查[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</li>[39m
+        [36m<li>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mZeta &lt;project&gt;[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"ff-project-description"[39m
+              [36m>[39m
+                [0mdescription literal 原文[0m
+              [36m</p>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--neutral"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mfuture::READY&lt;script&gt;[0m
+              [36m</span>[39m
+              [36m<button[39m
+                [33maria-label[39m=[32m"检查 Zeta <project>"[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0m检查[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</li>[39m
+      [36m</ul>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-dialog-backdrop"[39m
+      [36m>[39m
+        [36m<section[39m
+          [33maria-labelledby[39m=[32m"_r_1c_"[39m
+          [33maria-modal[39m=[32m"true"[39m
+          [33mclass[39m=[32m"ff-interaction-dialog ff-project-detail"[39m
+          [33mrole[39m=[32m"dialog"[39m
+          [33mtabindex[39m=[32m"-1"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-dialog-heading"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mid[39m=[32m"_r_1c_"[39m
+            [36m>[39m
+              [0m项目详情[0m
+            [36m</h2>[39m
+            [36m<button[39m
+              [33maria-label[39m=[32m"关闭项目详情"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [0m×[0m
+            [36m</button>[39m
+          [36m</header>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"ff-badge ff-badge--info"[39m
+          [36m>[39m
+            [0m只读本地检查[0m
+          [36m</span>[39m
+          [36m<h3>[39m
+            [0mZeta &lt;project&gt;[0m
+          [36m</h3>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"ff-project-detail-description"[39m
+          [36m>[39m
+            [0mdescription literal 原文[0m
+          [36m</p>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-property-row"[39m
+          [36m>[39m
+            [36m<span>[39m
+              [0m项目 ID[0m
+            [36m</span>[39m
+            [36m<div>[39m
+              [36m<code>[39m
+                [0mproject-zeta[0m
+              [36m</code>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-property-row"[39m
+          [36m>[39m
+            [36m<span>[39m
+              [0m投影状态[0m
+            [36m</span>[39m
+            [36m<div>[39m
+              [36m<span>[39m
+                [0mfuture::READY&lt;script&gt;[0m
+              [36m</span>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-property-row"[39m
+          [36m>[39m
+            [36m<span>[39m
+              [0m投影创建时间[0m
+            [36m</span>[39m
+            [36m<div>[39m
+              [36m<span>[39m
+                [0m2026-08-31T08:00:00Z[0m
+              [36m</span>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<p>[39m
+            [0m检查不会建立规范可用性，也不会授予打开此项目的权限。[0m
+          [36m</p>[39m
+        [36m</section>[39m
+      [36m</div>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ getElementError node_modules/@testing-library/dom/dist/query-helpers.js:20:35
+ ❯ getMultipleElementsFoundError node_modules/@testing-library/dom/dist/query-helpers.js:23:10
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/product/projects/ProjectBrowser.test.tsx:162:19
+    160|     fireEvent.click(screen.getByRole('button', { name: '检查 Zeta <proje…
+    161|     expect(screen.getByRole('dialog', { name: '项目详情' })).toBeTruthy()
+    162|     expect(screen.getByText('description literal 原文')).toBeTruthy()
+       |                   ^
+    163|   })
+    164| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 43 passed (44)
+   Start at  01:39:46
+   Duration  2.04s (transform 418ms, setup 0ms, collect 841ms, tests 570ms, environment 529ms, prepare 219ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1/writer/green-02-results.json

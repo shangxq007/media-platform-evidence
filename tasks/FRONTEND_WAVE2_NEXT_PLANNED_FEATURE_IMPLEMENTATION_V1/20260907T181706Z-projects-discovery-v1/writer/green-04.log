@@ -1,0 +1,21 @@
+
+> media-platform-frontend@0.1.0 test
+> vitest run --configLoader=runner --no-cache src/product/projects/source.test.ts src/product/projects/ProjectBrowser.test.tsx src/app/routeTree.test.tsx --reporter=default --reporter=json --outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1/writer/green-04-results.json
+
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ✓ src/product/projects/source.test.ts (26 tests) 26ms
+ ✓ src/product/projects/ProjectBrowser.test.tsx (19 tests) 577ms
+ ✓ src/app/routeTree.test.tsx (8 tests) 1942ms
+   ✓ runtime route registration and deep-link restoration > restores Workspace, Project, and surface identity from a creative deep link and fails unauthorized commands closed  649ms
+   ✓ runtime route registration and deep-link restoration > reaches the post-H7 edit route and loads explicit canonical HEAD authority  431ms
+   ✓ runtime route registration and deep-link restoration > renders the Workspace to Projects entry without synthesizing a Project selection  356ms
+   ✓ runtime route registration and deep-link restoration > routes the existing Projects destination to the fail-closed recent-project browser without using Workspace home as its source  323ms
+
+ Test Files  3 passed (3)
+      Tests  53 passed (53)
+   Start at  01:41:53
+   Duration  4.46s (transform 1.73s, setup 0ms, collect 2.49s, tests 2.55s, environment 824ms, prepare 352ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1/writer/green-04-results.json
