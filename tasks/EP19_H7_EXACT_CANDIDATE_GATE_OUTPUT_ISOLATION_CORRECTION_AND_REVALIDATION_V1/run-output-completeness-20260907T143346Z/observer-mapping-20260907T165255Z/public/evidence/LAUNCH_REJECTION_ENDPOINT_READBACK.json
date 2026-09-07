@@ -1,0 +1,87 @@
+{
+  "result": "DRIFT",
+  "baseline": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/outputs/continuation-runs/owner-observer-restored-689ab945-v1/baseline.json",
+  "baseline_sha256": "66c07faab6b23a7702fcfbbe560e373655f9b8a263aff06a42d656d7e717af68",
+  "captured_time": 1788802111.0448885,
+  "elapsed_seconds": 58.141815185546875,
+  "entry_count": 117888,
+  "drift_count": 2,
+  "deltas": [
+    {
+      "path": "/home/user/.hermes/skills/.usage.json",
+      "changed_fields": [
+        "sha256",
+        "git_blob",
+        "metadata"
+      ],
+      "before": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21750089,
+          "st_mode": 33152,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 96485,
+          "st_mtime_ns": 1788801060401439232,
+          "st_ctime_ns": 1788801060403439251,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "47312b50c4a456e994505a6666bdc7084c4b42f238f33a74ad3a4f8be4e4c27b",
+        "git_blob": "381c4aa85c562636bc51aee27f50654580491256"
+      },
+      "after": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 21751649,
+          "st_mode": 33152,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 96485,
+          "st_mtime_ns": 1788801836252084024,
+          "st_ctime_ns": 1788801836254084043,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "68ae3e062b7a3003bbf6a7fbfbf49e99a90fd7f734490b1b30d2e44396a2c1cb",
+        "git_blob": "64276a9844eebfbbd3b211eae41f782d2598abb5"
+      }
+    },
+    {
+      "path": "/home/user/.hermes/skills",
+      "changed_fields": [
+        "metadata"
+      ],
+      "before": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 449122,
+          "st_mode": 16832,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 1056,
+          "st_mtime_ns": 1788801060403439251,
+          "st_ctime_ns": 1788801060403439251,
+          "st_nlink": 1
+        },
+        "kind": "directory"
+      },
+      "after": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 449122,
+          "st_mode": 16832,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 1056,
+          "st_mtime_ns": 1788801836254084043,
+          "st_ctime_ns": 1788801836254084043,
+          "st_nlink": 1
+        },
+        "kind": "directory"
+      }
+    }
+  ],
+  "writer_attribution": "NOT_ESTABLISHED",
+  "limits": "Post-rejection readback cannot prove exact earlier event time/cause or exclude temporarily restored drift; no expectations refreshed."
+}

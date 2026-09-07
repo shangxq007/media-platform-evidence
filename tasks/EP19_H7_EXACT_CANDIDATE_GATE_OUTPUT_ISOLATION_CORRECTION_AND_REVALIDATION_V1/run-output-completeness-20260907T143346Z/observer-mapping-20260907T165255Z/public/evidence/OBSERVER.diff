@@ -1,0 +1,38 @@
+--- reviewed-current/observe.py
++++ approved-original/observe.py
+@@ -104,9 +104,33 @@
+      event.update(category='AUTHORIZED_EXACT_FRONTEND_REF_LOCK_COMPLETED',target=str(target),target_oid=oid,lock_final_absent=True,source='OWNER_FRONTEND_REF_CONFIRMATION.txt normal exact-ref development exception; transient lock paired with exact target update; no packed-refs exception')
+     except Exception as error:event.update(category='REJECT_UNRESOLVED_FRONTEND_REF_LOCK',reason=str(error))
+  def resolve_shared(self):
++  import zlib
+   pending=[e for e in self.events if e['category']=='PENDING_SHARED_OBJECT_SCOPE_PROOF']
+-  if pending:
+-   self.shared_proof={'disposition':'REJECT_UNRESOLVED_SHARED_METADATA_SCOPE','writer':'NOT_ESTABLISHED','independent_review':'REQUIRED/PENDING'}
++  if not pending:return
++  refs=[str(p.relative_to(self.shared_git)) for p in self.cross_lane if p.is_relative_to(self.shared_git/'refs/heads') and not str(p).endswith('.lock')]
++  checked={};tips={}
++  try:
++   if not refs:raise RuntimeError('NO_AUTHORIZED_FRONTEND_REF')
++   env={**os.environ,'GIT_OPTIONAL_LOCKS':'0','GIT_NO_REPLACE_OBJECTS':'1'};base=['git','--no-optional-locks','--git-dir='+str(self.shared_git)]
++   for ref in refs:tips[ref]=subprocess.check_output(base+['rev-parse','--verify',ref],env=env).decode().strip()
++   reachable={line.split(b' ',1)[0].decode() for line in subprocess.check_output(base+['rev-list','--objects',*tips.values()],env=env).splitlines()}
++   for path in {Path(e['path']) for e in pending}:
++    rel=path.relative_to(self.shared_git/'objects').as_posix()
++    if re.fullmatch(r'[0-9a-f]{2}/[0-9a-f]{38}',rel):
++     oid=rel.replace('/','')
++     if path.is_symlink() or oid not in reachable:raise RuntimeError('NEW_OBJECT_NOT_BOUND_TO_AUTHORIZED_REF')
++     raw=path.read_bytes();decoder=zlib.decompressobj();content=decoder.decompress(raw)+decoder.flush()
++     if not decoder.eof or decoder.unused_data or hashlib.sha1(content).hexdigest()!=oid:raise RuntimeError('NEW_OBJECT_DIGEST_MISMATCH')
++     checked[rel]=hashlib.sha256(raw).hexdigest()
++   for e in pending:
++    path=Path(e['path']);rel=path.relative_to(self.shared_git/'objects').as_posix();prefix=rel.split('/')[0]
++    if rel not in checked:
++     if not any(k.startswith(prefix+'/') for k in checked):raise RuntimeError('UNBOUND_NEW_OBJECT_DIRECTORY_OR_TEMP')
++     if '/tmp_obj_' in rel and path.exists():raise RuntimeError('SHARED_TEMP_STILL_PRESENT')
++   self.shared_proof={'authorized_ref_tips_observed':tips,'new_loose_objects_sha256':checked,'scope':'Authorized frontend-reachable new loose object append only after actual content/reachability checks. Existing metadata stays strict; writer NOT_ESTABLISHED; new-subtree observation gaps are not waived.'}
++   for e in pending:e['category']='AUTHORIZED_FRONTEND_REACHABLE_NEW_OBJECT_APPEND_WRITER_UNKNOWN'
++  except Exception as error:
++   self.shared_proof={'error_type':type(error).__name__,'reason':str(error),'disposition':'REJECT_UNRESOLVED_SHARED_METADATA_SCOPE'}
+    for e in pending:e['category']='REJECT_UNRESOLVED_SHARED_METADATA_SCOPE'
+  def rejected(self):return bool(self.errors or any(e['category'].startswith('REJECT') for e in self.events))
+  def close(self):os.close(self.fd)

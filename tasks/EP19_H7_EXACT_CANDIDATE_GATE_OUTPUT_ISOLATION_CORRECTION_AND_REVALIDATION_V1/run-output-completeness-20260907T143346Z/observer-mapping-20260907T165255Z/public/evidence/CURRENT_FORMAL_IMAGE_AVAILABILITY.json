@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "podman",
+    "--remote",
+    "--url",
+    "unix:///run/user/1000/podman/podman.sock",
+    "image",
+    "inspect",
+    "docker.io/coqorg/coq@sha256:e50d77c4c5a9aa0d76ae1b343d79c5f922da3a75054b79c5dc635895438e4674",
+    "--format",
+    "{{.Id}}"
+  ],
+  "native_exit": 0,
+  "stdout": "b80d66c91b4da3a1b3c5d3e6672cf8f4ab72ed2f7a6a1f0cf7d3aef747cf6a4b",
+  "stderr": "",
+  "expected": "b80d66c91b4da3a1b3c5d3e6672cf8f4ab72ed2f7a6a1f0cf7d3aef747cf6a4b",
+  "result": "PASS"
+}
