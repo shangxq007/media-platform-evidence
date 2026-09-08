@@ -1,0 +1,763 @@
+FRONTEND_ARCHITECTURE_POSITIVE_CONTROL=PASS files=195
+PRODUCT_CURRENT_REVISION_ID_FRONTEND_USAGE_COUNT_NEGATIVE_CONTROL=PASS residue=0
+CLIENT_LATEST_HEAD_INFERENCE_COUNT_NEGATIVE_CONTROL=PASS residue=0
+CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT_NEGATIVE_CONTROL=PASS residue=0
+CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT_NEGATIVE_CONTROL=PASS residue=0
+NEW_FRONTEND_GENERIC_PATCH_USAGE_COUNT_NEGATIVE_CONTROL=PASS residue=0
+PHYSICAL_STORAGE_URI_AS_ENTITY_ID_COUNT_NEGATIVE_CONTROL=PASS residue=0
+PROVIDER_KEY_AS_ARTIFACT_ID_COUNT_NEGATIVE_CONTROL=PASS residue=0
+CLIENT_CANONICAL_MERGE_AUTHORITY_COUNT_NEGATIVE_CONTROL=PASS residue=0
+H8_INTERNAL_IMPLEMENTATION_FRONTEND_DEPENDENCY_COUNT_NEGATIVE_CONTROL=PASS residue=0
+UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT_NEGATIVE_CONTROL=PASS residue=0
+POST_H7_AUTHENTICATED_TENANT_AND_READ_ONLY_COMPARE_CONTROL=PASS residue=0
+FRONTEND_CONCRETE_FFMPEG_AUTHORITY_COUNT_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_PLAN_NAME_FEATURE_AUTHORITY_COUNT_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_LOCAL_CAN_RUN_DECISION_COUNT_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_DUPLICATE_CANONICAL_TIMELINE_AUTHORITY_COUNT_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_CANONICAL_DOMAIN_SHADOW_COUNT_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_PROVIDER_SELECTION_AUTHORITY_COUNT_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_DIRECT_CANONICAL_MUTATION_BYPASS_COUNT_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_PROVIDER_INTERNAL_GRAPH_AUTHORITY_COUNT_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_SYNTHETIC_WORKSPACE_SCOPE_COUNT_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_SYNTHETIC_WORKSPACE_SCOPE_COUNT_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_ACTIVE_UNSCOPED_RENDER_API_COUNT_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_ACTIVE_UNSCOPED_RENDER_API_COUNT_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_STALE_RENDER_STATUS_SHADOW_COUNT_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT_sourceUrl_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT_storageUri_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT_storageKey_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT_objectKey_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT_bucket_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT_assetUri_NEGATIVE_CONTROL=PASS residue=0
+FRONTEND_EXPLICIT_NON_PRODUCT_SURFACE_EXCLUSION_CONTROL=PASS residue=0
+FRONTEND_ARCHITECTURE_EMPTY_UNIVERSE_NEGATIVE_CONTROL=PASS residue=0
+TAP version 13
+# Subtest: governed frontend passes with all authority counts at zero
+ok 1 - governed frontend passes with all authority counts at zero
+  ---
+  duration_ms: 887.098077
+  type: 'test'
+  ...
+# Subtest: localization guard rejects direct vendor imports and migrated hardcoded chrome
+ok 2 - localization guard rejects direct vendor imports and migrated hardcoded chrome
+  ---
+  duration_ms: 2.354087
+  type: 'test'
+  ...
+# Subtest: localization boundary rejects product integration imports, dynamic imports, public re-exports, and JSX copy
+ok 3 - localization boundary rejects product integration imports, dynamic imports, public re-exports, and JSX copy
+  ---
+  duration_ms: 2.825973
+  type: 'test'
+  ...
+# Subtest: localization boundary permits only main composition to config and bounded integration internals
+ok 4 - localization boundary permits only main composition to config and bounded integration internals
+  ---
+  duration_ms: 1.64681
+  type: 'test'
+  ...
+# Subtest: localization source manifest is strict and detects a missing required English key
+ok 5 - localization source manifest is strict and detects a missing required English key
+  ---
+  duration_ms: 1.927563
+  type: 'test'
+  ...
+# Subtest: localization source-key validation is namespace-aware, English-only, comment-safe, and fail-closed
+ok 6 - localization source-key validation is namespace-aware, English-only, comment-safe, and fail-closed
+  ---
+  duration_ms: 1.045957
+  type: 'test'
+  ...
+# Subtest: OLD_IMPORT_COUNT rejects reintroduced legacy usage
+ok 7 - OLD_IMPORT_COUNT rejects reintroduced legacy usage
+  ---
+  duration_ms: 0.877519
+  type: 'test'
+  ...
+# Subtest: OLD_COMPONENT_USAGE_COUNT rejects reintroduced legacy usage
+ok 8 - OLD_COMPONENT_USAGE_COUNT rejects reintroduced legacy usage
+  ---
+  duration_ms: 0.864186
+  type: 'test'
+  ...
+# Subtest: OLD_SCHEMA_USAGE_COUNT rejects reintroduced legacy usage
+ok 9 - OLD_SCHEMA_USAGE_COUNT rejects reintroduced legacy usage
+  ---
+  duration_ms: 1.142436
+  type: 'test'
+  ...
+# Subtest: OLD_ROUTE_COUNT rejects an increase above the preserved compatibility ceiling
+ok 10 - OLD_ROUTE_COUNT rejects an increase above the preserved compatibility ceiling
+  ---
+  duration_ms: 2.119067
+  type: 'test'
+  ...
+# Subtest: path ledger reconciliation detects unclassified, stale, and duplicate paths
+ok 11 - path ledger reconciliation detects unclassified, stale, and duplicate paths
+  ---
+  duration_ms: 9.701714
+  type: 'test'
+  ...
+# Subtest: ignored physical log is not ledger-required
+ok 12 - ignored physical log is not ledger-required
+  ---
+  duration_ms: 51.386791
+  type: 'test'
+  ...
+# Subtest: absent ignored log with a correct ledger does not create a stale row
+ok 13 - absent ignored log with a correct ledger does not create a stale row
+  ---
+  duration_ms: 50.690562
+  type: 'test'
+  ...
+# Subtest: nonignored unclassified path still fails reconciliation
+ok 14 - nonignored unclassified path still fails reconciliation
+  ---
+  duration_ms: 49.569688
+  type: 'test'
+  ...
+# Subtest: tracked path missing from the ledger still fails reconciliation
+ok 15 - tracked path missing from the ledger still fails reconciliation
+  ---
+  duration_ms: 61.140615
+  type: 'test'
+  ...
+# Subtest: ledger row for a tracked but physically missing path stays stale
+ok 16 - ledger row for a tracked but physically missing path stays stale
+  ---
+  duration_ms: 60.963374
+  type: 'test'
+  ...
+# Subtest: duplicate ledger path still fails reconciliation
+ok 17 - duplicate ledger path still fails reconciliation
+  ---
+  duration_ms: 53.339449
+  type: 'test'
+  ...
+# Subtest: explicitly tracked ignored-name file remains governed
+ok 18 - explicitly tracked ignored-name file remains governed
+  ---
+  duration_ms: 61.816598
+  type: 'test'
+  ...
+# Subtest: PRODUCT_CURRENT_REVISION_ID_FRONTEND_USAGE_COUNT rejects its post-H7 negative control and leaves zero residue
+ok 19 - PRODUCT_CURRENT_REVISION_ID_FRONTEND_USAGE_COUNT rejects its post-H7 negative control and leaves zero residue
+  ---
+  duration_ms: 4.264209
+  type: 'test'
+  ...
+# Subtest: CLIENT_LATEST_HEAD_INFERENCE_COUNT rejects its post-H7 negative control and leaves zero residue
+ok 20 - CLIENT_LATEST_HEAD_INFERENCE_COUNT rejects its post-H7 negative control and leaves zero residue
+  ---
+  duration_ms: 3.632598
+  type: 'test'
+  ...
+# Subtest: CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects its post-H7 negative control and leaves zero residue
+ok 21 - CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects its post-H7 negative control and leaves zero residue
+  ---
+  duration_ms: 3.624582
+  type: 'test'
+  ...
+# Subtest: CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects its post-H7 negative control and leaves zero residue
+ok 22 - CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects its post-H7 negative control and leaves zero residue
+  ---
+  duration_ms: 3.169078
+  type: 'test'
+  ...
+# Subtest: NEW_FRONTEND_GENERIC_PATCH_USAGE_COUNT rejects its post-H7 negative control and leaves zero residue
+ok 23 - NEW_FRONTEND_GENERIC_PATCH_USAGE_COUNT rejects its post-H7 negative control and leaves zero residue
+  ---
+  duration_ms: 2.400097
+  type: 'test'
+  ...
+# Subtest: PHYSICAL_STORAGE_URI_AS_ENTITY_ID_COUNT rejects its post-H7 negative control and leaves zero residue
+ok 24 - PHYSICAL_STORAGE_URI_AS_ENTITY_ID_COUNT rejects its post-H7 negative control and leaves zero residue
+  ---
+  duration_ms: 2.232009
+  type: 'test'
+  ...
+# Subtest: PROVIDER_KEY_AS_ARTIFACT_ID_COUNT rejects its post-H7 negative control and leaves zero residue
+ok 25 - PROVIDER_KEY_AS_ARTIFACT_ID_COUNT rejects its post-H7 negative control and leaves zero residue
+  ---
+  duration_ms: 1.568739
+  type: 'test'
+  ...
+# Subtest: CLIENT_CANONICAL_MERGE_AUTHORITY_COUNT rejects its post-H7 negative control and leaves zero residue
+ok 26 - CLIENT_CANONICAL_MERGE_AUTHORITY_COUNT rejects its post-H7 negative control and leaves zero residue
+  ---
+  duration_ms: 1.922121
+  type: 'test'
+  ...
+# Subtest: H8_INTERNAL_IMPLEMENTATION_FRONTEND_DEPENDENCY_COUNT rejects its post-H7 negative control and leaves zero residue
+ok 27 - H8_INTERNAL_IMPLEMENTATION_FRONTEND_DEPENDENCY_COUNT rejects its post-H7 negative control and leaves zero residue
+  ---
+  duration_ms: 1.589043
+  type: 'test'
+  ...
+# Subtest: UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects its post-H7 negative control and leaves zero residue
+ok 28 - UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects its post-H7 negative control and leaves zero residue
+  ---
+  duration_ms: 1.067779
+  type: 'test'
+  ...
+# Subtest: post-H7 rules allow authenticated tenant path scope and read-only server compare
+ok 29 - post-H7 rules allow authenticated tenant path scope and read-only server compare
+  ---
+  duration_ms: 1.378555
+  type: 'test'
+  ...
+# Subtest: CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects actor shorthand on a governed runtime bridge
+ok 30 - CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects actor shorthand on a governed runtime bridge
+  ---
+  duration_ms: 1.086908
+  type: 'test'
+  ...
+# Subtest: CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects quoted actor key on a governed runtime bridge
+ok 31 - CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects quoted actor key on a governed runtime bridge
+  ---
+  duration_ms: 0.884805
+  type: 'test'
+  ...
+# Subtest: CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects computed actor key on a governed runtime bridge
+ok 32 - CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects computed actor key on a governed runtime bridge
+  ---
+  duration_ms: 0.908518
+  type: 'test'
+  ...
+# Subtest: CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects actor alias on a governed runtime bridge
+ok 33 - CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects actor alias on a governed runtime bridge
+  ---
+  duration_ms: 0.988858
+  type: 'test'
+  ...
+# Subtest: CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects tenant shorthand request body on a governed runtime bridge
+ok 34 - CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects tenant shorthand request body on a governed runtime bridge
+  ---
+  duration_ms: 0.96848
+  type: 'test'
+  ...
+# Subtest: CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects computed tenant override on a governed runtime bridge
+ok 35 - CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects computed tenant override on a governed runtime bridge
+  ---
+  duration_ms: 0.979957
+  type: 'test'
+  ...
+# Subtest: CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects quoted tenant header on a governed runtime bridge
+ok 36 - CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects quoted tenant header on a governed runtime bridge
+  ---
+  duration_ms: 0.921887
+  type: 'test'
+  ...
+# Subtest: CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects tenant alias on a governed runtime bridge
+ok 37 - CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects tenant alias on a governed runtime bridge
+  ---
+  duration_ms: 0.978903
+  type: 'test'
+  ...
+# Subtest: CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects split tenant payload declaration on a governed runtime bridge
+ok 38 - CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects split tenant payload declaration on a governed runtime bridge
+  ---
+  duration_ms: 1.019173
+  type: 'test'
+  ...
+# Subtest: POST_H7_AXIOS_IMPORT_BYPASS_COUNT rejects aliased Axios import on a governed runtime bridge
+ok 39 - POST_H7_AXIOS_IMPORT_BYPASS_COUNT rejects aliased Axios import on a governed runtime bridge
+  ---
+  duration_ms: 1.022229
+  type: 'test'
+  ...
+# Subtest: POST_H7_VERSIONLESS_TRANSPORT_IMPORT_BYPASS_COUNT rejects aliased versionless transport import on a governed runtime bridge
+ok 40 - POST_H7_VERSIONLESS_TRANSPORT_IMPORT_BYPASS_COUNT rejects aliased versionless transport import on a governed runtime bridge
+  ---
+  duration_ms: 1.010275
+  type: 'test'
+  ...
+# Subtest: UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects raw unstable route on a governed runtime bridge
+ok 41 - UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects raw unstable route on a governed runtime bridge
+  ---
+  duration_ms: 0.933213
+  type: 'test'
+  ...
+# Subtest: UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects composed unstable route on a governed runtime bridge
+ok 42 - UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects composed unstable route on a governed runtime bridge
+  ---
+  duration_ms: 0.980571
+  type: 'test'
+  ...
+# Subtest: UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects alternate transport client call on a governed runtime bridge
+ok 43 - UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects alternate transport client call on a governed runtime bridge
+  ---
+  duration_ms: 1.086466
+  type: 'test'
+  ...
+# Subtest: UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects dynamic transport method on a governed runtime bridge
+ok 44 - UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects dynamic transport method on a governed runtime bridge
+  ---
+  duration_ms: 0.993116
+  type: 'test'
+  ...
+# Subtest: UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects transport method alias on a governed runtime bridge
+ok 45 - UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects transport method alias on a governed runtime bridge
+  ---
+  duration_ms: 0.833922
+  type: 'test'
+  ...
+# Subtest: UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects destructured transport alias on a governed runtime bridge
+ok 46 - UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects destructured transport alias on a governed runtime bridge
+  ---
+  duration_ms: 1.019231
+  type: 'test'
+  ...
+# Subtest: tenant authority guard allows authenticated ProjectContext projection and gateway path scope
+ok 47 - tenant authority guard allows authenticated ProjectContext projection and gateway path scope
+  ---
+  duration_ms: 1.444195
+  type: 'test'
+  ...
+# Subtest: api/app runtime allowlist rejects an unexpected non-test TypeScript module
+ok 48 - api/app runtime allowlist rejects an unexpected non-test TypeScript module
+  ---
+  duration_ms: 2.774721
+  type: 'test'
+  ...
+# Subtest: hostile A: an unallowlisted nested api/app .ts runtime fails closed
+ok 49 - hostile A: an unallowlisted nested api/app .ts runtime fails closed
+  ---
+  duration_ms: 2.77988
+  type: 'test'
+  ...
+# Subtest: hostile B: an unallowlisted nested api/app .tsx runtime fails closed
+ok 50 - hostile B: an unallowlisted nested api/app .tsx runtime fails closed
+  ---
+  duration_ms: 2.814302
+  type: 'test'
+  ...
+# Subtest: hostile C: post-H7 authority rules scan forbidden patterns in nested api/app runtime
+ok 51 - hostile C: post-H7 authority rules scan forbidden patterns in nested api/app runtime
+  ---
+  duration_ms: 1.101218
+  type: 'test'
+  ...
+# Subtest: hostile D: nested api/app test modules are excluded from runtime inventory
+ok 52 - hostile D: nested api/app test modules are excluded from runtime inventory
+  ---
+  duration_ms: 2.587057
+  type: 'test'
+  ...
+# Subtest: hostile E: nested api/app declaration modules are excluded from runtime inventory
+ok 53 - hostile E: nested api/app declaration modules are excluded from runtime inventory
+  ---
+  duration_ms: 2.621726
+  type: 'test'
+  ...
+# Subtest: hostile F: an unseen arbitrarily deep api/app directory cannot escape classification
+ok 54 - hostile F: an unseen arbitrarily deep api/app directory cannot escape classification
+  ---
+  duration_ms: 3.007491
+  type: 'test'
+  ...
+# Subtest: post-H7 governed path manifest fails closed when one expected runtime path is omitted
+ok 55 - post-H7 governed path manifest fails closed when one expected runtime path is omitted
+  ---
+  duration_ms: 7.664128
+  type: 'test'
+  ...
+# Subtest: FRONTEND_CONCRETE_FFMPEG_AUTHORITY_COUNT rejects FRONTEND_CONCRETE_FFMPEG_AUTHORITY_COUNT and leaves zero residue
+ok 56 - FRONTEND_CONCRETE_FFMPEG_AUTHORITY_COUNT rejects FRONTEND_CONCRETE_FFMPEG_AUTHORITY_COUNT and leaves zero residue
+  ---
+  duration_ms: 1.271675
+  type: 'test'
+  ...
+# Subtest: FRONTEND_PLAN_NAME_FEATURE_AUTHORITY_COUNT rejects FRONTEND_PLAN_NAME_FEATURE_AUTHORITY_COUNT and leaves zero residue
+ok 57 - FRONTEND_PLAN_NAME_FEATURE_AUTHORITY_COUNT rejects FRONTEND_PLAN_NAME_FEATURE_AUTHORITY_COUNT and leaves zero residue
+  ---
+  duration_ms: 1.112338
+  type: 'test'
+  ...
+# Subtest: FRONTEND_LOCAL_CAN_RUN_DECISION_COUNT rejects FRONTEND_LOCAL_CAN_RUN_DECISION_COUNT and leaves zero residue
+ok 58 - FRONTEND_LOCAL_CAN_RUN_DECISION_COUNT rejects FRONTEND_LOCAL_CAN_RUN_DECISION_COUNT and leaves zero residue
+  ---
+  duration_ms: 0.915302
+  type: 'test'
+  ...
+# Subtest: FRONTEND_DUPLICATE_CANONICAL_TIMELINE_AUTHORITY_COUNT rejects FRONTEND_DUPLICATE_CANONICAL_TIMELINE_AUTHORITY_COUNT and leaves zero residue
+ok 59 - FRONTEND_DUPLICATE_CANONICAL_TIMELINE_AUTHORITY_COUNT rejects FRONTEND_DUPLICATE_CANONICAL_TIMELINE_AUTHORITY_COUNT and leaves zero residue
+  ---
+  duration_ms: 0.796787
+  type: 'test'
+  ...
+# Subtest: FRONTEND_CANONICAL_DOMAIN_SHADOW_COUNT rejects FRONTEND_CANONICAL_DOMAIN_SHADOW_COUNT and leaves zero residue
+ok 60 - FRONTEND_CANONICAL_DOMAIN_SHADOW_COUNT rejects FRONTEND_CANONICAL_DOMAIN_SHADOW_COUNT and leaves zero residue
+  ---
+  duration_ms: 0.777585
+  type: 'test'
+  ...
+# Subtest: FRONTEND_PROVIDER_SELECTION_AUTHORITY_COUNT rejects FRONTEND_PROVIDER_SELECTION_AUTHORITY_COUNT and leaves zero residue
+ok 61 - FRONTEND_PROVIDER_SELECTION_AUTHORITY_COUNT rejects FRONTEND_PROVIDER_SELECTION_AUTHORITY_COUNT and leaves zero residue
+  ---
+  duration_ms: 0.819329
+  type: 'test'
+  ...
+# Subtest: FRONTEND_DIRECT_CANONICAL_MUTATION_BYPASS_COUNT rejects FRONTEND_DIRECT_CANONICAL_MUTATION_BYPASS_COUNT and leaves zero residue
+ok 62 - FRONTEND_DIRECT_CANONICAL_MUTATION_BYPASS_COUNT rejects FRONTEND_DIRECT_CANONICAL_MUTATION_BYPASS_COUNT and leaves zero residue
+  ---
+  duration_ms: 0.748524
+  type: 'test'
+  ...
+# Subtest: FRONTEND_PROVIDER_INTERNAL_GRAPH_AUTHORITY_COUNT rejects FRONTEND_PROVIDER_INTERNAL_GRAPH_AUTHORITY_COUNT and leaves zero residue
+ok 63 - FRONTEND_PROVIDER_INTERNAL_GRAPH_AUTHORITY_COUNT rejects FRONTEND_PROVIDER_INTERNAL_GRAPH_AUTHORITY_COUNT and leaves zero residue
+  ---
+  duration_ms: 0.747389
+  type: 'test'
+  ...
+# Subtest: FRONTEND_SYNTHETIC_WORKSPACE_SCOPE_COUNT rejects tenant synthetic default and leaves zero residue
+ok 64 - FRONTEND_SYNTHETIC_WORKSPACE_SCOPE_COUNT rejects tenant synthetic default and leaves zero residue
+  ---
+  duration_ms: 0.915489
+  type: 'test'
+  ...
+# Subtest: FRONTEND_SYNTHETIC_WORKSPACE_SCOPE_COUNT rejects project synthetic default and leaves zero residue
+ok 65 - FRONTEND_SYNTHETIC_WORKSPACE_SCOPE_COUNT rejects project synthetic default and leaves zero residue
+  ---
+  duration_ms: 0.922525
+  type: 'test'
+  ...
+# Subtest: FRONTEND_ACTIVE_UNSCOPED_RENDER_API_COUNT rejects nested unscoped artifact endpoint and leaves zero residue
+ok 66 - FRONTEND_ACTIVE_UNSCOPED_RENDER_API_COUNT rejects nested unscoped artifact endpoint and leaves zero residue
+  ---
+  duration_ms: 0.77894
+  type: 'test'
+  ...
+# Subtest: FRONTEND_ACTIVE_UNSCOPED_RENDER_API_COUNT rejects nested unscoped artifact mutation and leaves zero residue
+ok 67 - FRONTEND_ACTIVE_UNSCOPED_RENDER_API_COUNT rejects nested unscoped artifact mutation and leaves zero residue
+  ---
+  duration_ms: 0.774384
+  type: 'test'
+  ...
+# Subtest: FRONTEND_STALE_RENDER_STATUS_SHADOW_COUNT rejects stale render status shadow and leaves zero residue
+ok 68 - FRONTEND_STALE_RENDER_STATUS_SHADOW_COUNT rejects stale render status shadow and leaves zero residue
+  ---
+  duration_ms: 0.888328
+  type: 'test'
+  ...
+# Subtest: FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects sourceUrl and leaves zero residue
+ok 69 - FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects sourceUrl and leaves zero residue
+  ---
+  duration_ms: 0.907974
+  type: 'test'
+  ...
+# Subtest: FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects storageUri and leaves zero residue
+ok 70 - FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects storageUri and leaves zero residue
+  ---
+  duration_ms: 0.753875
+  type: 'test'
+  ...
+# Subtest: FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects storageKey and leaves zero residue
+ok 71 - FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects storageKey and leaves zero residue
+  ---
+  duration_ms: 0.767507
+  type: 'test'
+  ...
+# Subtest: FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects objectKey and leaves zero residue
+ok 72 - FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects objectKey and leaves zero residue
+  ---
+  duration_ms: 0.738849
+  type: 'test'
+  ...
+# Subtest: FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects bucket and leaves zero residue
+ok 73 - FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects bucket and leaves zero residue
+  ---
+  duration_ms: 0.738174
+  type: 'test'
+  ...
+# Subtest: FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects assetUri and leaves zero residue
+ok 74 - FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects assetUri and leaves zero residue
+  ---
+  duration_ms: 0.724598
+  type: 'test'
+  ...
+# Subtest: FRONTEND_DIRECT_STORAGE_URI_USE_COUNT rejects a baseline increase
+ok 75 - FRONTEND_DIRECT_STORAGE_URI_USE_COUNT rejects a baseline increase
+  ---
+  duration_ms: 0.856282
+  type: 'test'
+  ...
+# Subtest: FRONTEND_SCATTERED_NATIVE_FETCH_COUNT rejects a baseline increase
+ok 76 - FRONTEND_SCATTERED_NATIVE_FETCH_COUNT rejects a baseline increase
+  ---
+  duration_ms: 0.7568
+  type: 'test'
+  ...
+# Subtest: FRONTEND_DUPLICATE_CANONICAL_DTO_AUTHORITY_COUNT rejects a baseline increase
+ok 77 - FRONTEND_DUPLICATE_CANONICAL_DTO_AUTHORITY_COUNT rejects a baseline increase
+  ---
+  duration_ms: 0.702902
+  type: 'test'
+  ...
+# Subtest: FRONTEND_UNCLASSIFIED_DOMAIN_MODEL_COUNT rejects a baseline increase
+ok 78 - FRONTEND_UNCLASSIFIED_DOMAIN_MODEL_COUNT rejects a baseline increase
+  ---
+  duration_ms: 0.697398
+  type: 'test'
+  ...
+# Subtest: FRONTEND_COMMERCIAL_AUTHORITY_COUNT rejects a baseline increase
+ok 79 - FRONTEND_COMMERCIAL_AUTHORITY_COUNT rejects a baseline increase
+  ---
+  duration_ms: 0.757495
+  type: 'test'
+  ...
+# Subtest: FRONTEND_RUNTIME_ELIGIBILITY_AUTHORITY_COUNT rejects a baseline increase
+ok 80 - FRONTEND_RUNTIME_ELIGIBILITY_AUTHORITY_COUNT rejects a baseline increase
+  ---
+  duration_ms: 0.748632
+  type: 'test'
+  ...
+# Subtest: active product rules exclude explicit admin, developer, and operator surfaces
+ok 81 - active product rules exclude explicit admin, developer, and operator surfaces
+  ---
+  duration_ms: 1.2407
+  type: 'test'
+  ...
+# Subtest: guard fails closed on an empty scan universe
+ok 82 - guard fails closed on an empty scan universe
+  ---
+  duration_ms: 0.728416
+  type: 'test'
+  ...
+# Subtest: selection structural boundary rejects product/another/Untyped.tsx: import { useState as state } from 'react'; const [selectedIds, setSelectedIds] = state([])
+ok 83 - selection structural boundary rejects product/another/Untyped.tsx: import { useState as state } from 'react'; const [selectedIds, setSelectedIds] = state([])
+  ---
+  duration_ms: 1.383745
+  type: 'test'
+  ...
+# Subtest: selection structural boundary rejects product/canvas/Other.ts: function relabel(reference) { reference.label = 'Canonical' }
+ok 84 - selection structural boundary rejects product/canvas/Other.ts: function relabel(reference) { reference.label = 'Canonical' }
+  ---
+  duration_ms: 0.980247
+  type: 'test'
+  ...
+# Subtest: selection structural boundary rejects product/canvas/Other.ts: const edge = { meaning: 'DEPENDENCY' }
+ok 85 - selection structural boundary rejects product/canvas/Other.ts: const edge = { meaning: 'DEPENDENCY' }
+  ---
+  duration_ms: 0.920052
+  type: 'test'
+  ...
+# Subtest: selection structural boundary rejects product/another/Panel.tsx: import { createInteractionStore as make } from '../../interaction/model'; const privateStore = make({ surfaceId: 'canvas' })
+ok 86 - selection structural boundary rejects product/another/Panel.tsx: import { createInteractionStore as make } from '../../interaction/model'; const privateStore = make({ surfaceId: 'canvas' })
+  ---
+  duration_ms: 1.225697
+  type: 'test'
+  ...
+# Subtest: selection structural boundary rejects interaction/Other.tsx: import { createContext } from 'react'; import type { InteractionStore } from './model'; const another = createContext<InteractionStore | null>(null)
+ok 87 - selection structural boundary rejects interaction/Other.tsx: import { createContext } from 'react'; import type { InteractionStore } from './model'; const another = createContext<InteractionStore | null>(null)
+  ---
+  duration_ms: 1.208823
+  type: 'test'
+  ...
+# Subtest: selection structural boundary rejects product/another/Panel.tsx: import { useState } from 'react'; import type { SelectionState } from '../../interaction/model'; const [privateSelection] = useState<SelectionState>()
+ok 88 - selection structural boundary rejects product/another/Panel.tsx: import { useState } from 'react'; import type { SelectionState } from '../../interaction/model'; const [privateSelection] = useState<SelectionState>()
+  ---
+  duration_ms: 1.038534
+  type: 'test'
+  ...
+# Subtest: selection structural boundary rejects product/canvas/Model.ts: interface ExtraState { selectedPresentationId: string | null }
+ok 89 - selection structural boundary rejects product/canvas/Model.ts: interface ExtraState { selectedPresentationId: string | null }
+  ---
+  duration_ms: 0.923574
+  type: 'test'
+  ...
+# Subtest: selection structural boundary rejects product/canvas/Model.ts: function rename(state, title) { return { ...state, references: state.references.map(ref => ({ ...ref, label: title })) } }
+ok 90 - selection structural boundary rejects product/canvas/Model.ts: function rename(state, title) { return { ...state, references: state.references.map(ref => ({ ...ref, label: title })) } }
+  ---
+  duration_ms: 1.291325
+  type: 'test'
+  ...
+# Subtest: selection structural boundary rejects product/canvas/Other.ts: import { apply } from '../../api/app/operation.gateway'
+ok 91 - selection structural boundary rejects product/canvas/Other.ts: import { apply } from '../../api/app/operation.gateway'
+  ---
+  duration_ms: 0.918949
+  type: 'test'
+  ...
+# Subtest: selection structural boundary rejects interaction/Other.ts: export { ApplyContext } from '../../workflow-module/internal'
+ok 92 - selection structural boundary rejects interaction/Other.ts: export { ApplyContext } from '../../workflow-module/internal'
+  ---
+  duration_ms: 0.747065
+  type: 'test'
+  ...
+# Subtest: selection structural boundary rejects interaction/Other.ts: const result = { status: 'APPLIED', planDigest: 'fake' }
+ok 93 - selection structural boundary rejects interaction/Other.ts: const result = { status: 'APPLIED', planDigest: 'fake' }
+  ---
+  duration_ms: 0.781608
+  type: 'test'
+  ...
+# Subtest: selection structural boundary rejects interaction/Other.tsx: const control = <Button>{t('agent.apply')}</Button>
+ok 94 - selection structural boundary rejects interaction/Other.tsx: const control = <Button>{t('agent.apply')}</Button>
+  ---
+  duration_ms: 0.81813
+  type: 'test'
+  ...
+# Subtest: selection structural boundary rejects product/canvas/Other.ts: const entity = { kind: 'EDGE', id: 'visual' }
+ok 95 - selection structural boundary rejects product/canvas/Other.ts: const entity = { kind: 'EDGE', id: 'visual' }
+  ---
+  duration_ms: 0.841255
+  type: 'test'
+  ...
+# Subtest: Slice1B structural control rejects DOM collection authority
+ok 96 - Slice1B structural control rejects DOM collection authority
+  ---
+  duration_ms: 0.932745
+  type: 'test'
+  ...
+# Subtest: Slice1B structural control rejects DOM mount authority
+ok 97 - Slice1B structural control rejects DOM mount authority
+  ---
+  duration_ms: 0.843959
+  type: 'test'
+  ...
+# Subtest: Slice1B structural control rejects semantic ID sorting
+ok 98 - Slice1B structural control rejects semantic ID sorting
+  ---
+  duration_ms: 0.935251
+  type: 'test'
+  ...
+# Subtest: Slice1B structural control rejects route persistence
+ok 99 - Slice1B structural control rejects route persistence
+  ---
+  duration_ms: 0.816096
+  type: 'test'
+  ...
+# Subtest: Slice1B structural control rejects storage persistence
+ok 100 - Slice1B structural control rejects storage persistence
+  ---
+  duration_ms: 0.83852
+  type: 'test'
+  ...
+# Subtest: Slice1B structural control rejects route parsing
+ok 101 - Slice1B structural control rejects route parsing
+  ---
+  duration_ms: 0.863289
+  type: 'test'
+  ...
+# Subtest: Slice1B structural control rejects direct backend
+ok 102 - Slice1B structural control rejects direct backend
+  ---
+  duration_ms: 0.870424
+  type: 'test'
+  ...
+# Subtest: Slice1B structural control rejects second store
+ok 103 - Slice1B structural control rejects second store
+  ---
+  duration_ms: 0.973585
+  type: 'test'
+  ...
+# Subtest: Slice1B structural control permits model filtering, captured context and viewport/focus measurement
+ok 104 - Slice1B structural control permits model filtering, captured context and viewport/focus measurement
+  ---
+  duration_ms: 1.315158
+  type: 'test'
+  ...
+# Subtest: Slice1C G01 rejects app/routeTree.tsx: const routeState = { selectedRefs: [], primaryRef: null, lifetime: {} }
+ok 105 - Slice1C G01 rejects app/routeTree.tsx: const routeState = { selectedRefs: [], primaryRef: null, lifetime: {} }
+  ---
+  duration_ms: 0.947756
+  type: 'test'
+  ...
+# Subtest: Slice1C G01 rejects app/routes/Nested.tsx: import { useSelection as own } from '../../interaction/SelectionContext'; const state = own()
+ok 106 - Slice1C G01 rejects app/routes/Nested.tsx: import { useSelection as own } from '../../interaction/SelectionContext'; const state = own()
+  ---
+  duration_ms: 0.820014
+  type: 'test'
+  ...
+# Subtest: Slice1C G02 rejects app/routes/Nested.tsx: import { createInteractionStore as make } from '../../interaction/model'; const store = make(scope)
+ok 107 - Slice1C G02 rejects app/routes/Nested.tsx: import { createInteractionStore as make } from '../../interaction/model'; const store = make(scope)
+  ---
+  duration_ms: 0.81327
+  type: 'test'
+  ...
+# Subtest: Slice1C G03 rejects app/routeTree.tsx: const id = new URLSearchParams(location.search).get('selectedPresentationId')
+ok 108 - Slice1C G03 rejects app/routeTree.tsx: const id = new URLSearchParams(location.search).get('selectedPresentationId')
+  ---
+  duration_ms: 0.838383
+  type: 'test'
+  ...
+# Subtest: Slice1C G03 rejects app/routeTree.tsx: navigate({ search: { selectedIds: refs } })
+ok 109 - Slice1C G03 rejects app/routeTree.tsx: navigate({ search: { selectedIds: refs } })
+  ---
+  duration_ms: 0.930205
+  type: 'test'
+  ...
+# Subtest: Slice1C G04 rejects surfaces/Panel.tsx: localStorage.setItem('selection', JSON.stringify(store.getSnapshot()))
+ok 110 - Slice1C G04 rejects surfaces/Panel.tsx: localStorage.setItem('selection', JSON.stringify(store.getSnapshot()))
+  ---
+  duration_ms: 0.777432
+  type: 'test'
+  ...
+# Subtest: Slice1C G04 rejects surfaces/Panel.tsx: sessionStorage.setItem('selectedRefs', JSON.stringify(selectedRefs))
+ok 111 - Slice1C G04 rejects surfaces/Panel.tsx: sessionStorage.setItem('selectedRefs', JSON.stringify(selectedRefs))
+  ---
+  duration_ms: 0.673198
+  type: 'test'
+  ...
+# Subtest: Slice1C G04 rejects app/routeTree.tsx: new BroadcastChannel('selection')
+ok 112 - Slice1C G04 rejects app/routeTree.tsx: new BroadcastChannel('selection')
+  ---
+  duration_ms: 1.055304
+  type: 'test'
+  ...
+# Subtest: Slice1C G05 rejects app/routeTree.tsx: history.pushState({ selectionSnapshot: store.getSnapshot() }, '', target)
+ok 113 - Slice1C G05 rejects app/routeTree.tsx: history.pushState({ selectionSnapshot: store.getSnapshot() }, '', target)
+  ---
+  duration_ms: 1.164206
+  type: 'test'
+  ...
+# Subtest: Slice1C G05 rejects app/routeTree.tsx: const selectedRefs = history.state.selectedRefs
+ok 114 - Slice1C G05 rejects app/routeTree.tsx: const selectedRefs = history.state.selectedRefs
+  ---
+  duration_ms: 1.099382
+  type: 'test'
+  ...
+# Subtest: Slice1C G06 rejects surfaces/Panel.tsx: const next = { ...selectedRef, surfaceId: 'nle' }
+ok 115 - Slice1C G06 rejects surfaces/Panel.tsx: const next = { ...selectedRef, surfaceId: 'nle' }
+  ---
+  duration_ms: 1.056776
+  type: 'test'
+  ...
+# Subtest: Slice1C G07 rejects components/app-shell/DocumentLifecycleBridge.tsx: interface BridgeState { membership: string[]; revision: number; lifetime: object }
+ok 116 - Slice1C G07 rejects components/app-shell/DocumentLifecycleBridge.tsx: interface BridgeState { membership: string[]; revision: number; lifetime: object }
+  ---
+  duration_ms: 1.083061
+  type: 'test'
+  ...
+# Subtest: Slice1C G07 rejects components/app-shell/AppShell.tsx: function LifecycleBridge() { const state = { primaryRef: ref, revision: 4 } }
+ok 117 - Slice1C G07 rejects components/app-shell/AppShell.tsx: function LifecycleBridge() { const state = { primaryRef: ref, revision: 4 } }
+  ---
+  duration_ms: 1.147749
+  type: 'test'
+  ...
+# Subtest: Slice1C G08 rejects surfaces/Panel.tsx: useEffect(() => { store.select({ mode: 'clear', refs: [] }) }, [projectId])
+ok 118 - Slice1C G08 rejects surfaces/Panel.tsx: useEffect(() => { store.select({ mode: 'clear', refs: [] }) }, [projectId])
+  ---
+  duration_ms: 1.098177
+  type: 'test'
+  ...
+# Subtest: Slice1C G08 rejects components/app-shell/AppShell.tsx: <SelectionProvider key={location.pathname} scope={scope}>{children}</SelectionProvider>
+ok 119 - Slice1C G08 rejects components/app-shell/AppShell.tsx: <SelectionProvider key={location.pathname} scope={scope}>{children}</SelectionProvider>
+  ---
+  duration_ms: 1.163875
+  type: 'test'
+  ...
+# Subtest: Slice1C allows navigation identity, ordinary auth storage, comments and Selection-owned retirement
+ok 120 - Slice1C allows navigation identity, ordinary auth storage, comments and Selection-owned retirement
+  ---
+  duration_ms: 3.492946
+  type: 'test'
+  ...
+1..120
+# tests 120
+# suites 0
+# pass 120
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1485.067461

@@ -1,0 +1,11 @@
+183:     name: 'UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT',
+184:     governedPathPattern: POST_H7_COMPONENT_PATH_PATTERN,
+185:     patterns: [
+186:       /['"`]\/(?:timeline-git|render|tenants)(?:['"`]|\/)/,
+187:       /\b(?:api|axios|transport)\s*(?:\.\s*(?:get|post|put|patch|delete)|\[\s*['"](?:get|post|put|patch|delete)['"]\s*\])\s*\(/,
+188:       /\b(?:api|axios|transport)\s*\[[^\]\n]+\]\s*\(/,
+189:       /\b[A-Za-z_$][\w$]*\s*\.\s*(?:get|post|put|patch|delete)\s*\(/,
+190:       /\b(?:const|let|var)\s+[A-Za-z_$][\w$]*\s*=\s*(?:api|axios|transport)\s*(?:\.\s*(?:get|post|put|patch|delete)|\[\s*['"](?:get|post|put|patch|delete)['"]\s*\])/,
+191:       /\b(?:const|let|var)\s*\{[^}\n]*(?:get|post|put|patch|delete)[^}\n]*\}\s*=\s*(?:api|axios|transport)\b/,
+192:       /(?<![A-Za-z0-9_.])fetch\s*\(/,
+193:     ],

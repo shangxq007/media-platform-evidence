@@ -1,0 +1,40 @@
+{
+  "name": "build-final",
+  "implementation_tree": "f62687609a556dff204fc6939416c11abd45f945",
+  "command": [
+    "node",
+    "--input-type=module",
+    "-e",
+    "import {build,resolveConfig} from 'vite';import path from 'node:path';import fs from 'node:fs';const output=\"/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V5/final-validation-03/build\";if(fs.existsSync(output))throw Error('External output must be new');const opts={configLoader:'bundle',build:{outDir:output,emptyOutDir:false}};const c=await resolveConfig(opts,'build');if(path.resolve(c.root,c.build.outDir)!==output)throw Error('Unexpected effective output');console.log('EFFECTIVE_EXTERNAL_OUTPUT='+output);await build(opts);"
+  ],
+  "containment": [
+    "bwrap",
+    "--die-with-parent",
+    "--ro-bind",
+    "/",
+    "/",
+    "--bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V5/final-validation-03",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V5/final-validation-03",
+    "--ro-bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V5/final-validation-03/snapshot",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V5/final-validation-03/snapshot",
+    "--ro-bind",
+    "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules",
+    "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules",
+    "--proc",
+    "/proc",
+    "--dev",
+    "/dev",
+    "--tmpfs",
+    "/tmp",
+    "--chdir",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V5/final-validation-03/snapshot/frontend",
+    "--bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V5/final-validation-03/vite-temp",
+    "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/.vite-temp",
+    "--"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 6.134376049041748
+}

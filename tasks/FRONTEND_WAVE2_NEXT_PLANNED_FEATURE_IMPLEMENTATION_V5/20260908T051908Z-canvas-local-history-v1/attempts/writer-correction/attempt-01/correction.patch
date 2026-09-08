@@ -1,0 +1,32 @@
+--- before/frontend/src/interaction/InteractionShell.test.tsx
++++ after/frontend/src/interaction/InteractionShell.test.tsx
+@@ -845,7 +845,7 @@
+   const handle = vi.fn(() => true)
+   function Probe() {
+     store = useInteractionStore()
+-    useSurfaceAdapter({ objects: () => [], get supports() { return available ? ['undo-local'] : [] }, handle })
++    useSurfaceAdapter({ objects: () => [], get supports() { return available ? ['undo-local'] as const : [] }, handle })
+     commands = useSelectionCommands()
+     return null
+   }
+--- before/frontend/src/interaction/model.test.ts
++++ after/frontend/src/interaction/model.test.ts
+@@ -237,7 +237,7 @@
+   const store = createInteractionStore(scope)
+   let available = true
+   const handle = vi.fn(() => { available = false; return true })
+-  store.register({ objects: () => [], get supports() { return available ? ['undo-local'] : [] }, handle })
++  store.register({ objects: () => [], get supports() { return available ? ['undo-local'] as const : [] }, handle })
+   expect(store.getSnapshot().selectedRefs).toEqual([])
+   expect(store.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'undo-local' }, 'COMMAND').ok).toBe(true)
+   expect(store.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'undo-local' }, 'TOOLBAR').ok).toBe(false)
+--- before/frontend/src/product/workflow-sketch/WorkflowSketch.tsx
++++ after/frontend/src/product/workflow-sketch/WorkflowSketch.tsx
+@@ -54,6 +54,7 @@
+   }))
+   const handle = (action: PresentationAction | QueryAction) => {
+     if (action.category !== 'WORKSPACE_PRESENTATION') return false
++    if (action.type === 'undo-local' || action.type === 'redo-local') return false
+     const exists = sketch.nodes.some(node => node.id === action.targetId)
+     if (!exists) return false
+     if (action.type === 'rename') updateSketch(current => renameWorkflowSketchNode(current, action.targetId, action.title))

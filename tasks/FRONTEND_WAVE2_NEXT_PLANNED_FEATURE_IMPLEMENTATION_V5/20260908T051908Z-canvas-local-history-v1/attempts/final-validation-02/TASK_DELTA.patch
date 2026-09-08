@@ -1,0 +1,673 @@
+diff --git a/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md b/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+index 157669f6..66f6d4a5 100644
+--- a/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
++++ b/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+@@ -416,3 +416,9 @@ Existing UXW1-002 discusses optional Project-scoped layout/presentation persiste
+ 
+ If persistence is separately proposed later, ownership/scope, controlled principal, allowed preference fields, authorized reads/writes, non-disclosing denied/validation/conflict failures, stale-context retirement and readback acceptance would need an agreed contract first. This is not such a contract, and whole-platform readiness is not a prerequisite for the current local interaction.
+ 
++
++## V5 Canvas local-history disposition — no real integration
++
++FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V5 reuses UXW1-002 (optional scoped presentation layout persistence). Undo/redo of current Canvas titles/positions is local in-memory presentation recovery, bounded to 50 edits; no network, persistence, permission grant, new backend requirement ID or agreed endpoint/DTO. Camera, Selection and canonical revisions/Operations are not history targets. Local history clears with owner/context retirement or unmount.
++
++UXW1-002 still requires any eventual persisted layout to be owned by the authenticated workspace/project, versioned separately from canonical references and checked for access/concurrency. Denied/unknown/unavailable, malformed and stale-context/version outcomes must not restore another owner's data or imply save success. Future acceptance must pin frontend build/tree and backend version, use controlled authorized and denied identities, restore only approved local labels/positions, reject stale or cross-context layouts, and read back actual persisted state. This is a proposal, not a contract or V5 integration. No dependency on completion of EP19 or the entire backend program is imposed.
+diff --git a/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv b/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+index ae6b7dea..5fc1b530 100644
+--- a/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
++++ b/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+@@ -1,6 +1,6 @@
+ REQUEST_ID	USER_FLOW	CURRENT_GAP	DESIRED_CAPABILITY	DESIRED_APPLICATION_CONTRACT	BLOCKING_LEVEL	WAVE1_FRONTEND_FREEZE_BLOCKING	FUTURE_PRODUCT_CAPABILITY_BLOCKING	MOCK_BEHAVIOR	UX_REASON	ACCEPTANCE_CRITERIA	STATUS
+ UXW1-001	Open a project from a workspace; find and inspect a bounded recent-project snapshot	Workspace-to-project relationship cannot be verified by the current context projection (FB-GAP-001); Projects discovery requires an explicitly authenticated principal/tenant/session/Workspace-bound source; existing dashboard wrapper is not proof of that complete lifecycle boundary	Authenticated workspace project membership projection	Typed application projection of scoped project identity and display name with non-disclosing denied/not-found responses; no client tenant override; clarified UNAGREED recent-query consumption proposal and selective-integration criteria in FB-GAP-001 recent-project clarification, linked FB-GAP-009; echoed request/scope and complete/limited snapshot; no invented endpoint or DTO	BLOCKS_VERIFIED_PROJECT_CONTEXT	NO	YES	Existing workspace getHome fake is used only in tests; production retains blocked context notice; new Projects consumer uses a separate explicitly injected read-only application source and localhost-only simulated fixture; ordinary unconfigured Projects path unavailable, no HTTP or mock fallback. Existing WorkspaceHome query unchanged; no Project opening/creation/persistence	Users need trustworthy scope and understandable access boundaries	Server validates authenticated membership; invalid scope fails closed without resource disclosure; route metadata alone never grants command access; additionally reject stale/malformed/duplicate or mismatched recent snapshots, preserve unknown/denied/unsupported/unavailable/failure distinctions, cancel across source/principal/tenant/session/Workspace changes; local search/sort/detail is not server search, canonical detail or authorization	PROPOSED_CLARIFIED_FRONTEND_RECENT_PROJECT_DISCOVERY_REAL_INTEGRATION_NOT_ESTABLISHED
+-UXW1-002	Return to a canvas arrangement; optionally revisit a local Workflow planning sketch	Local titles, selection and placement are discarded on navigation, including intentionally local creator presentation preferences; V3 Workflow sketch is also intentionally disposable, not a canonical definition	Optional scoped presentation layout persistence	Versioned workspace/project presentation document containing local node placement, labels and approved non-semantic UI preferences separately from semantic references; authorization and concurrency checks; no canonical edges or identity writes; any future Workflow local layout persistence needs separately agreed reference/version binding and cannot write process definitions	BLOCKS_PRESENTATION_PERSISTENCE	NO	YES	No persistence fake or endpoint; local in-memory state is visibly marked not saved; V3 adds only local authored category cards with no fixtures, API, storage or save	Users may expect arrangements and local presentation preferences to survive navigation; V4 Commands shortcut remapping is session-local shell presentation only and does not consume this persistence proposal; account/global shortcut preference storage is out of scope, not an agreed extension of this project-layout contract	Reload restores only authorized project layout and approved presentation preferences; concurrent save conflicts are explicit; semantic identity and relationships remain unchanged; preserve nonexecuting local sketch distinction and clear stale layout on relevant owner/context retirement	PROPOSED
++UXW1-002	Return to a canvas arrangement; optionally revisit a local Workflow planning sketch	Local titles, selection and placement are discarded on navigation, including intentionally local creator presentation preferences; V3 Workflow sketch is also intentionally disposable, not a canonical definition	Optional scoped presentation layout persistence	Versioned workspace/project presentation document containing local node placement, labels and approved non-semantic UI preferences separately from semantic references; authorization and concurrency checks; no canonical edges or identity writes; any future Workflow local layout persistence needs separately agreed reference/version binding and cannot write process definitions	BLOCKS_PRESENTATION_PERSISTENCE	NO	YES	No persistence fake or endpoint; local in-memory state is visibly marked not saved; V3 adds only local authored category cards with no fixtures, API, storage or save	V5 Canvas undo/redo recovers only current-session titles and positions (bounded 50 edits); no persisted history, save or canonical revision undo. Users may expect arrangements and local presentation preferences to survive navigation; V4 Commands shortcut remapping is session-local shell presentation only and does not consume this persistence proposal; account/global shortcut preference storage is out of scope, not an agreed extension of this project-layout contract	Reload restores only authorized project layout and approved presentation preferences; concurrent save conflicts are explicit; semantic identity and relationships remain unchanged; preserve nonexecuting local sketch distinction and clear stale layout on relevant owner/context retirement	PROPOSED
+ UXW1-003	Browse media before previewing Add Media Clip	Existing asset gateway cannot project complete canonical logical source pins	Safe source-pin browser projection	Application projection of logical media asset, stream and artifact IDs, content digest and exact media bounds required by the existing command; no physical locations	BLOCKS_GUIDED_MEDIA_SELECTION	NO	YES	Existing unavailable asset gateway reused; scripted operation gateways stay in tests; advanced manual pin form retained	Manual opaque IDs are difficult to discover and validate	Selected media supplies a complete server-validated pin; stale or unauthorized pins fail closed; preview-before-apply remains required	PROPOSED
+ UXW1-004	Watch and scrub an actual timeline	No decoded media access or authoritative track/clip geometry projection	Authorized timeline playback and geometry read model	Revision-scoped track/clip projection with exact time basis plus safe short-lived media access abstraction; timing and ownership supplied by server	BLOCKS_REAL_PLAYBACK_AND_CLIP_EDITING	NO	YES	Production explicitly offers only a bounded 0–20 local-step simulation with placeholder V1/A1 lanes and two explicitly synthetic clips (opening and closing); no mock media or invented clip edits	Users must distinguish layout exploration from a playable edit	Playback matches the selected projected revision and exact time basis; denied access is explicit; UI never derives canonical geometry from local simulation	PROPOSED
+ UXW1-005	Use overview, visual changes, conversation, checks or merge in Review	Only history and server semantic comparison are integrated	Scoped review projections and separately authorized merge command	Typed revision-pair review projections and capability/access reasons; any future merge follows a canonical server-owned preview/confirm contract	BLOCKS_EXTENDED_REVIEW	NO	YES	Unavailable section states and disabled merge action in production; existing scripted history/compare gateways in tests only	Unavailable review tabs should not imply fabricated discussion, checks or merge authority	Empty/loading/error states are defined per projection; revision-pair scope is validated; no client merge or inferred HEAD; authorization is enforced by server	PROPOSED
+diff --git a/frontend/governance/UX_WAVE_1_REVIEW.md b/frontend/governance/UX_WAVE_1_REVIEW.md
+index debfd5ee..d3d6ab61 100644
+--- a/frontend/governance/UX_WAVE_1_REVIEW.md
++++ b/frontend/governance/UX_WAVE_1_REVIEW.md
+@@ -183,3 +183,22 @@ A compact shared-dialog editor changes or resets the active binding within the c
+ 
+ No backend capability is required for this local tool. Existing UXW1-002 and the API gap ledger explicitly distinguish optional Project-layout persistence from out-of-scope account/global shortcut storage; no new requirement ID or API contract. No new runtime paths planned; historical H4 and tracked-dist dispositions unchanged. Exact V4 source tree, fresh engineering/browser results, scoped preservation and evidence publication belong to the external V4 task directory, not inferred from this pre-validation progress appendix. Independent review remains required; product commit/freeze/merge/push/publication is not performed.
+ 
++
++## Owner adopted bounded technical review — V4 shortcut / V5 continuation
++
++INDEPENDENT_TECHNICAL_REVIEW=PASS_BOUNDED
++REVIEWED_IMPLEMENTATION_TREE=66b3b9abd9b79161c8f4c902acfd2acb336a387a
++ACCEPTED_SCOPE=SESSION_LOCAL_COMMAND_PALETTE_SHORTCUT_REMAPPING
++PRODUCT_CORRECTION_REQUIRED=NO_FOR_REVIEWED_SCOPE
++REAL_BACKEND_INTEGRATION=NOT_ESTABLISHED
++PRODUCT_PUBLICATION=NOT_AUTHORIZED_BY_THIS_REVIEW
++
++Owner adoption under FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V5. Evidence repository https://github.com/shangxq007/media-platform-evidence; commit 80bb16cfafcb709ca5499e86eaf487ccaa063d90; public manifest SHA-256 e0a2ab789361134a9cfb59be1ca600c1b3e334384f25779cbd9a7d1e7f5184b9; prefix tasks/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/20260908T035937Z-command-shortcut-v1/.
++
++Only the command-palette shortcut is remappable: Mod+K, Mod+Alt+K, Mod+Alt+P. Overrides belong to the current Shell/context, not account preferences, and clear on context/owner retirement and unmount. Registry collision checks do not guarantee universal OS/browser/accessibility compatibility. Browser validation used simulated project context. Canonical commands gained no authorization.
++
++Historical V4 results, NOT fresh V5 executions: full tests 704 unique passing identities; targeted 279; versus V3 9 added / 0 removed; seven engineering gates passed; 21 recorded browser passes; eight external build files. V4 sealed reports and delivery records remain unchanged. H4 history, tracked-dist disposition, formal Slice1C and release remain separate.
++
++### V5 selected planned feature — Canvas session-local layout undo/redo
++
++The existing IA plan Commands and keyboard architecture (lines 314–329) permits local undo only for unapplied presentation drafts. Canvas currently overwrites local title/positions without recovery. V5 adds bounded undo/redo for those existing local edits, including atomic completed group drag, via the existing dispatcher/contextual discovery and Canvas toolbar. Selection/camera and canonical history are not undo targets; no persistence/network. Full pre-edit selection and acceptance criteria are in the V5 external task directory SELECTION_AND_SCOPE.md. No new source paths planned; UXW1-002 remains a separate optional layout-persistence proposal. Fresh validation and delivery will be reported externally, not inferred from this selection record.
+diff --git a/frontend/src/interaction/InteractionShell.test.tsx b/frontend/src/interaction/InteractionShell.test.tsx
+index 138d2bc5..e9db2609 100644
+--- a/frontend/src/interaction/InteractionShell.test.tsx
++++ b/frontend/src/interaction/InteractionShell.test.tsx
+@@ -814,3 +814,48 @@ it('retained Selection commands reject changed revisions before dispatch, includ
+   fireEvent.click(screen.getByRole('button', { name: 'Reveal node: Two' }))
+   expect(dispatch).toHaveBeenCalledWith({ category: 'WORKSPACE_PRESENTATION', type: 'reveal', targetId: 'two' }, 'COMMAND')
+ })
++
++it('V5 discovers Canvas history in the shared palette, reconciles Inspector and keeps canonical actions disabled', async () => {
++  setup()
++  fireEvent.click(await screen.findByRole('button', { name: 'Local composition note' }))
++  fireEvent.change(screen.getByLabelText('Local title'), { target: { value: 'Palette draft' } })
++  fireEvent.keyDown(window, { key: 'k', ctrlKey: true })
++  const palette = screen.getByRole('dialog', { name: 'Command palette' })
++  fireEvent.click(within(palette).getByRole('button', { name: 'Undo local edit' }))
++  expect((screen.getByLabelText('Local title') as HTMLInputElement).value).toBe('Local composition note')
++  fireEvent.keyDown(window, { key: 'k', ctrlKey: true })
++  fireEvent.click(within(screen.getByRole('dialog', { name: 'Command palette' })).getByRole('button', { name: 'Redo local edit' }))
++  expect((screen.getByLabelText('Local title') as HTMLInputElement).value).toBe('Palette draft')
++  fireEvent.click(screen.getAllByRole('button', { name: 'Ask Agent' })[0])
++  fireEvent.change(screen.getByLabelText('User intent'), { target: { value: 'rename to Agent draft' } })
++  fireEvent.click(screen.getByRole('button', { name: 'Preview' }))
++  fireEvent.click(screen.getByRole('button', { name: 'Apply local presentation' }))
++  fireEvent.click(screen.getByRole('button', { name: 'Close Agent conversation' }))
++  fireEvent.click(screen.getByRole('button', { name: 'Undo local edit' }))
++  expect((screen.getByLabelText('Local title') as HTMLInputElement).value).toBe('Palette draft')
++  fireEvent.keyDown(window, { key: 'k', ctrlKey: true })
++  const canonical = within(screen.getByRole('dialog', { name: 'Command palette' })).getAllByRole('button').filter(button => /canonical/i.test(button.textContent ?? ''))
++  expect(canonical.length).toBeGreaterThan(0)
++  canonical.forEach(button => expect((button as HTMLButtonElement).disabled).toBe(true))
++})
++
++it('V5 retained contextual history checks live adapter availability even before a new render', () => {
++  let store!: InteractionStore, commands!: PaletteAction[]
++  let available = true
++  const handle = vi.fn(() => true)
++  function Probe() {
++    store = useInteractionStore()
++    useSurfaceAdapter({ objects: () => [], get supports() { return available ? ['undo-local'] as const : [] }, handle })
++    commands = useSelectionCommands()
++    return null
++  }
++  render(<SelectionProvider scope={{ surfaceId: 'canvas' }}><Probe /></SelectionProvider>)
++  const retained = commands.find(command => command.id === 'canvas.undo-local')!
++  expect(retained).toBeTruthy()
++  const before = store.getSnapshot()
++  available = false // No reconciliation or render has happened yet.
++  expect(store.getSnapshot()).toBe(before)
++  act(() => retained.onSelect())
++  expect(handle).not.toHaveBeenCalled()
++  expect(commands.some(command => command.id === 'canvas.undo-local')).toBe(false)
++})
+diff --git a/frontend/src/interaction/InteractionShell.tsx b/frontend/src/interaction/InteractionShell.tsx
+index 88ffee15..d16106e6 100644
+--- a/frontend/src/interaction/InteractionShell.tsx
++++ b/frontend/src/interaction/InteractionShell.tsx
+@@ -117,6 +117,10 @@ export function useSelectionCommands(): PaletteAction[] {
+   const labelTarget = selection.selectedObjects.length > 1 ? t(pluralTarget, { count: selection.selectedObjects.length }) : `${selected ? t(`agent.kindLower${selected.kind}`) : ''}: ${selected?.title}`
+   const actions: PaletteAction[] = selected ? [command('selection.inspect', t('agent.commandInspect', { target: labelTarget }), { category: 'LOCAL_EPHEMERAL', type: 'inspect', open: true }), ...(selection.supported.includes('reveal') ? [command('selection.reveal', t('agent.commandReveal', { target: `${t(`agent.kindLower${selected.kind}`)}: ${selected.title}` }), { category: 'WORKSPACE_PRESENTATION', type: 'reveal', targetId: selected.id })] : []), command('selection.clear', t('agent.clearSelection'), { category: 'LOCAL_EPHEMERAL', type: 'select', ids: [] })] : []
+   if (selection.selectedObjects.length > 1 && selection.selectedObjects.every(object => object.kind === 'CLIP' && object.synthetic)) actions.push(...[{ id: 'selection.adjust-audio', key: 'agent.adjustAudio' }, { id: 'selection.duplicate', key: 'agent.duplicate' }].map(({ id, key }) => ({ id, label: t(key), disabledReason: t('agent.fixtureUnavailable'), onSelect: () => {} })))
++  if (selection.surfaceId === 'canvas') {
++    if (selection.supported.includes('undo-local')) actions.push(command('canvas.undo-local', t('canvas.undoLocal'), { category: 'WORKSPACE_PRESENTATION', type: 'undo-local' }))
++    if (selection.supported.includes('redo-local')) actions.push(command('canvas.redo-local', t('canvas.redoLocal'), { category: 'WORKSPACE_PRESENTATION', type: 'redo-local' }))
++  }
+   if (selection.revisionPair) actions.unshift(command('review.compare', t('agent.commandCompare'), { category: 'READ_ONLY_QUERY', type: 'compare-revisions', pair: selection.revisionPair }))
+   actions.push(command('agent.open', t('agent.commandAsk', { target: selection.selectedObjects.length > 1 ? t(pluralTarget, { count: selection.selectedObjects.length }) : selected ? selected.title : `${selection.projectId ?? t('shell.workspace')} · ${selection.surfaceId}` }), { category: 'LOCAL_EPHEMERAL', type: 'agent', open: true }))
+   return actions
+diff --git a/frontend/src/interaction/model.test.ts b/frontend/src/interaction/model.test.ts
+index 88a3e596..d51ee51c 100644
+--- a/frontend/src/interaction/model.test.ts
++++ b/frontend/src/interaction/model.test.ts
+@@ -232,3 +232,26 @@ it('Slice1C retirement invalidates ownership synchronously and rejects retained
+   expect(store.getSnapshot()).toBe(retired)
+   expect(handle).not.toHaveBeenCalled()
+ })
++
++it('V5 dispatch enforces live history availability without selection and rejects canonical and other surfaces', () => {
++  const store = createInteractionStore(scope)
++  let available = true
++  const handle = vi.fn(() => { available = false; return true })
++  store.register({ objects: () => [], get supports() { return available ? ['undo-local'] as const : [] }, handle })
++  expect(store.getSnapshot().selectedRefs).toEqual([])
++  expect(store.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'undo-local' }, 'COMMAND').ok).toBe(true)
++  expect(store.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'undo-local' }, 'TOOLBAR').ok).toBe(false)
++  expect(handle).toHaveBeenCalledTimes(1)
++  available = true
++  const revision = store.getSnapshot().revision
++  expect(store.dispatch({ category: 'CANONICAL_SEMANTIC', type: 'semantic', commandId: 'undo-local' }).ok).toBe(false)
++  expect(store.getSnapshot().revision).toBe(revision)
++  expect(handle).toHaveBeenCalledTimes(1)
++  for (const surfaceId of ['nle', 'review'] as const) {
++    const other = createInteractionStore({ surfaceId })
++    other.register({ objects: () => [], supports: ['undo-local', 'redo-local'], handle })
++    expect(other.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'undo-local' }).ok).toBe(false)
++    expect(other.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'redo-local' }).ok).toBe(false)
++  }
++  expect(handle).toHaveBeenCalledTimes(1)
++})
+diff --git a/frontend/src/interaction/model.ts b/frontend/src/interaction/model.ts
+index c1f1337e..9814c1ee 100644
+--- a/frontend/src/interaction/model.ts
++++ b/frontend/src/interaction/model.ts
+@@ -10,6 +10,8 @@ export interface SimulationTime { unit: 'SIMULATED_STEP_0_20'; playhead: number;
+ export interface RevisionPair { from: string; to: string }
+ export type InvocationSource = 'DIRECT' | 'TOOLBAR' | 'INSPECTOR' | 'COMMAND' | 'AGENT'
+ export type PresentationAction =
++  | { category: 'WORKSPACE_PRESENTATION'; type: 'undo-local' }
++  | { category: 'WORKSPACE_PRESENTATION'; type: 'redo-local' }
+   | { category: 'WORKSPACE_PRESENTATION'; type: 'rename'; targetId: string; title: string }
+   | { category: 'WORKSPACE_PRESENTATION'; type: 'move'; targetId: string; x: number; y: number }
+   | { category: 'WORKSPACE_PRESENTATION'; type: 'reveal'; targetId: string }
+@@ -160,7 +162,9 @@ export function createInteractionStore(scope: SelectionScope, initialRevision: n
+       if (action.category === 'READ_ONLY_QUERY') {
+         if (action.type !== 'compare-revisions' || !state.revisionPair || !same(action.pair, state.revisionPair) || action.pair.from === action.pair.to) return reject('Choose a current pair of distinct revisions first.')
+       } else if (action.category === 'WORKSPACE_PRESENTATION') {
+-        if (!['rename', 'move', 'reveal'].includes(action.type) || inventory().filter(object => object.id === action.targetId).length !== 1 || !state.selectedObjects.some(object => object.id === action.targetId)) return reject('Select this object again before changing its local presentation.')
++        if (action.type === 'undo-local' || action.type === 'redo-local') {
++          if (state.surfaceId !== 'canvas') return reject('Local history is only available on Canvas.')
++        } else if (!['rename', 'move', 'reveal'].includes(action.type) || inventory().filter(object => object.id === action.targetId).length !== 1 || !state.selectedObjects.some(object => object.id === action.targetId)) return reject('Select this object again before changing its local presentation.')
+       } else return reject('Unsupported intent category.')
+       if (!adapter?.supports.includes(action.type) || !adapter.handle(action)) return reject('This action is not integrated on the current surface.')
+       reconcile()
+diff --git a/frontend/src/localization/catalogs.ts b/frontend/src/localization/catalogs.ts
+index 989fc72f..352b5c87 100644
+--- a/frontend/src/localization/catalogs.ts
++++ b/frontend/src/localization/catalogs.ts
+@@ -250,6 +250,9 @@ const englishNamespaces: CatalogNamespaces = {
+     commandInspect: message('Inspect {target}', ['target']), commandReveal: message('Reveal {target}', ['target']), commandAsk: message('Ask Agent about {target}', ['target']), commandCompare: message('What changed between these revisions?'),
+   },
+   canvas: {
++    historyControls: message("Local edit history"), undoLocal: message("Undo local edit"), redoLocal: message("Redo local edit"),
++    historyStatus: message("Local edits to undo: {undo}. To redo: {redo}.", ["undo", "redo"]),
++    historyHelp: message("Only node titles and positions, up to 50 edits in this Canvas session. Nothing is saved. Each title input change is one edit; a group drag is one edit."),
+     selectMode: message("Select"), panMode: message("Pan"),
+     pointerHelp: message("Select: drag empty space to select nodes. Drag at least 4 screen pixels with width and height; Ctrl or Meta adds to selection. Pan: drag empty space to move the view. Drag a selected node to move its group locally; release to finish. Escape cancels a gesture. Keyboard and Multi-select controls remain available."),
+     dragPreview: message("Local move preview; release to place."), marqueePreview: message("Selection preview; release to select."), panPreview: message("View preview; release to pan."),
+@@ -640,6 +643,9 @@ const chineseNamespaces: CatalogNamespaces = {
+     commandInspect: message('检查{target}', ['target']), commandReveal: message('显示{target}', ['target']), commandAsk: message('就{target}询问 Agent', ['target']), commandCompare: message('这些修订之间有什么变化？'),
+   },
+   canvas: {
++    historyControls: message("本地编辑历史"), undoLocal: message("撤销本地编辑"), redoLocal: message("重做本地编辑"),
++    historyStatus: message("可撤销的本地编辑：{undo}。可重做：{redo}。", ["undo", "redo"]),
++    historyHelp: message("仅记录当前画布会话中的节点标题和位置，最多 50 次编辑，不会保存。标题每次输入变化记为一次编辑；整组拖动记为一次编辑。"),
+     selectMode: message("选择"), panMode: message("平移"),
+     pointerHelp: message("选择：在空白处拖动以选择节点。拖动至少 4 个屏幕像素并形成宽和高；Ctrl 或 Meta 添加选择。平移：在空白处拖动以移动视图。拖动已选节点可在本地移动整组；松开完成。Escape 取消手势。仍可使用键盘和多选控件。"),
+     dragPreview: message("本地移动预览；松开以放置。"), marqueePreview: message("选择预览；松开以选择。"), panPreview: message("视图预览；松开以平移。"),
+diff --git a/frontend/src/localization/source-manifest.json b/frontend/src/localization/source-manifest.json
+index 7e4eda98..8fdab4f8 100644
+--- a/frontend/src/localization/source-manifest.json
++++ b/frontend/src/localization/source-manifest.json
+@@ -5,6 +5,11 @@
+   "fallbackLocale": "en",
+   "namespaces": ["common", "shell", "agent", "canvas", "timeline", "review", "workflow", "render", "settings", "errors"],
+   "requiredSourceKeys": [
++    "canvas.historyControls",
++    "canvas.undoLocal",
++    "canvas.redoLocal",
++    "canvas.historyStatus",
++    "canvas.historyHelp",
+     "shell.shortcut.title",
+     "shell.shortcut.close",
+     "shell.shortcut.session",
+diff --git a/frontend/src/product/canvas/WorkspaceCanvas.test.tsx b/frontend/src/product/canvas/WorkspaceCanvas.test.tsx
+index 685f6c0a..9427293d 100644
+--- a/frontend/src/product/canvas/WorkspaceCanvas.test.tsx
++++ b/frontend/src/product/canvas/WorkspaceCanvas.test.tsx
+@@ -873,3 +873,266 @@ it.each(['drag', 'marquee', 'pan'] as const)('Slice1C pagehide cancels %s synchr
+   expect(activeStore.getSnapshot().lifetime).not.toBe(before.lifetime)
+   expect(activeStore.getSnapshot().selectedRefs).toEqual([])
+ })
++
++it('V5 restores local title and position through the dispatcher without changing selection or camera', async () => {
++  setup()
++  await screen.findByText('First project')
++  const note = screen.getByRole('button', { name: 'Local composition note' })
++  fireEvent.click(note)
++  fireEvent.change(screen.getByLabelText('Local title'), { target: { value: 'Draft title' } })
++  fireEvent.change(screen.getByLabelText('Local X'), { target: { value: '500' } })
++  const before = activeStore.getSnapshot()
++  const stage = screen.getByRole('region', { name: 'Infinite canvas workspace' })
++  fireEvent.keyDown(stage, { key: 'ArrowRight' })
++  const camera = stage.querySelector('.ff-canvas-viewport')!.getAttribute('style')
++  const undo = screen.getByRole('button', { name: 'Undo local edit' })
++  act(() => undo.focus())
++  fireEvent.click(undo)
++  expect((screen.getByLabelText('Local X') as HTMLInputElement).value).toBe('430')
++  expect((screen.getByLabelText('Local title') as HTMLInputElement).value).toBe('Draft title')
++  fireEvent.click(undo)
++  expect((screen.getByLabelText('Local title') as HTMLInputElement).value).toBe('Local composition note')
++  expect(undo.getAttribute('aria-disabled')).toBe('true')
++  expect((undo as HTMLButtonElement).disabled).toBe(false)
++  expect(document.activeElement).toBe(undo)
++  fireEvent.click(undo)
++  const redo = screen.getByRole('button', { name: 'Redo local edit' })
++  act(() => redo.focus())
++  fireEvent.click(redo); fireEvent.click(redo)
++  expect((screen.getByLabelText('Local title') as HTMLInputElement).value).toBe('Draft title')
++  expect((screen.getByLabelText('Local X') as HTMLInputElement).value).toBe('500')
++  expect(redo.getAttribute('aria-disabled')).toBe('true')
++  expect(document.activeElement).toBe(redo)
++  expect(activeStore.getSnapshot().selectedRefs).toEqual(before.selectedRefs)
++  expect(activeStore.getSnapshot().primaryRef).toEqual(before.primaryRef)
++  expect(stage.querySelector('.ff-canvas-viewport')!.getAttribute('style')).toBe(camera)
++})
++
++it.each(['owner', 'document', 'adapter'] as const)('V5 clears history synchronously on %s retirement and rejects retained adapter work', async reason => {
++  observeAdapter = true
++  setup()
++  await screen.findByText('First project')
++  fireEvent.click(screen.getByRole('button', { name: 'Local composition note' }))
++  fireEvent.change(screen.getByLabelText('Local title'), { target: { value: 'Retiring draft' } })
++  const oldStore = activeStore
++  act(() => reason === 'adapter' ? unregisterAdapter() : oldStore.retireSelectionOwner(reason))
++  expect(screen.getByText('Local edits to undo: 0. To redo: 0.')).toBeTruthy()
++  expect(screen.getByRole('button', { name: 'Undo local edit' }).getAttribute('aria-disabled')).toBe('true')
++  expect(oldStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'undo-local' }).ok).toBe(false)
++  act(() => expect(registeredAdapter.handle({ category: 'WORKSPACE_PRESENTATION', type: 'rename', targetId: 'note-node', title: 'Stale' })).toBe(false))
++  expect(screen.queryByRole('button', { name: 'Stale' })).toBeNull()
++  expect(screen.getByText('Local edits to undo: 0. To redo: 0.')).toBeTruthy()
++})
++
++it('V5 bounds the session to 50 edits, preserves redo across no-ops and branches on a new edit', async () => {
++  setup()
++  await screen.findByText('First project')
++  fireEvent.click(screen.getByRole('button', { name: 'Local composition note' }))
++  const dispatchTitle = (title: string) => activeStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'rename', targetId: 'note-node', title }, 'INSPECTOR')
++  act(() => { for (let i = 1; i <= 51; i++) expect(dispatchTitle(`Edit ${i}`).ok).toBe(true) })
++  expect(screen.getByText('Local edits to undo: 50. To redo: 0.')).toBeTruthy()
++  act(() => { for (let i = 0; i < 50; i++) expect(activeStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'undo-local' }).ok).toBe(true) })
++  expect((screen.getByLabelText('Local title') as HTMLInputElement).value).toBe('Edit 1')
++  expect(activeStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'undo-local' }).ok).toBe(false)
++  expect(screen.getByText('Local edits to undo: 0. To redo: 50.')).toBeTruthy()
++  act(() => {
++    dispatchTitle('Edit 1')
++    activeStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'move', targetId: 'note-node', x: 430, y: 230 })
++    activeStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'move', targetId: 'note-node', x: NaN, y: 230 })
++  })
++  expect(screen.getByText('Local edits to undo: 0. To redo: 50.')).toBeTruthy()
++  act(() => { for (let i = 0; i < 50; i++) expect(activeStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'redo-local' }).ok).toBe(true) })
++  expect((screen.getByLabelText('Local title') as HTMLInputElement).value).toBe('Edit 51')
++  act(() => activeStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'undo-local' }))
++  act(() => dispatchTitle('New branch'))
++  expect(screen.getByText('Local edits to undo: 50. To redo: 0.')).toBeTruthy()
++  expect(activeStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'redo-local' }).ok).toBe(false)
++})
++
++it('V5 commits a whole selected drag as one edit and undo cancels a later live preview', async () => {
++  setup()
++  await screen.findByText('First project')
++  const { stage, project, note, pointer, captured } = pointerFixture()
++  act(() => activeStore.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: ['project-node', 'note-node'], primaryId: 'note-node' }))
++  const selection = activeStore.getSnapshot()
++  pointer('pointerDown', project, 100, 100); pointer('pointerMove', stage, 140, 130)
++  expect(screen.getByText('Local edits to undo: 0. To redo: 0.')).toBeTruthy()
++  pointer('pointerUp', stage, 140, 130)
++  expect([project.style.left, note.style.left]).toEqual(['160px', '470px'])
++  expect(screen.getByText('Local edits to undo: 1. To redo: 0.')).toBeTruthy()
++  pointer('pointerDown', project, 100, 100); pointer('pointerMove', stage, 180, 180)
++  expect(captured.size).toBe(1)
++  fireEvent.click(screen.getByRole('button', { name: 'Undo local edit' }))
++  expect(captured.size).toBe(0)
++  expect([project.style.left, project.style.top, note.style.left, note.style.top]).toEqual(['120px', '90px', '430px', '230px'])
++  pointer('pointerUp', stage, 200, 200)
++  expect([project.style.left, note.style.left]).toEqual(['120px', '430px'])
++  expect(screen.getByText('Local edits to undo: 0. To redo: 1.')).toBeTruthy()
++  expect(activeStore.getSnapshot().selectedRefs).toEqual(selection.selectedRefs)
++  expect(activeStore.getSnapshot().primaryRef).toEqual(selection.primaryRef)
++  expect((screen.getByLabelText('Local X') as HTMLInputElement).value).toBe('430')
++  fireEvent.click(screen.getByRole('button', { name: 'Redo local edit' }))
++  expect([project.style.left, note.style.left]).toEqual(['160px', '470px'])
++})
++
++it('V5 excludes canceled/no-op gestures, selection and camera and leaves native text undo untouched', async () => {
++  setup()
++  await screen.findByText('First project')
++  const { stage, project, pointer } = pointerFixture()
++  for (const reason of ['pointerCancel', 'lostPointerCapture', 'Escape'] as const) {
++    pointer('pointerDown', project, 100, 100); pointer('pointerMove', stage, 160, 160)
++    if (reason === 'Escape') fireEvent.keyDown(stage, { key: reason }); else pointer(reason, stage)
++    pointer('pointerUp', stage, 160, 160)
++  }
++  pointer('pointerDown', project, 100, 100); pointer('pointerUp', stage, 102, 102)
++  pointer('pointerDown', project, 100, 100); pointer('pointerMove', stage, 150, 150); pointer('pointerUp', stage, 100, 100)
++  pointer('pointerDown', stage, 0, 0); pointer('pointerMove', stage, 700, 500); pointer('pointerUp', stage, 700, 500)
++  fireEvent.click(screen.getByRole('button', { name: 'Pan' }))
++  pointer('pointerDown', stage, 0, 0); pointer('pointerMove', stage, 30, 30); pointer('pointerUp', stage, 30, 30)
++  fireEvent.keyDown(stage, { key: '+' })
++  fireEvent.click(screen.getByRole('button', { name: 'Fit canvas' }))
++  fireEvent.click(project)
++  const title = screen.getByLabelText('Local title')
++  for (const key of ['z', 'y']) for (const modifier of ['ctrlKey', 'metaKey']) expect(fireEvent.keyDown(title, { key, [modifier]: true })).toBe(true)
++  expect(screen.getByText('Local edits to undo: 0. To redo: 0.')).toBeTruthy()
++  expect(project.style.left).toBe('120px')
++})
++
++it('V5 rejects an edit if releasing its live preview retires ownership synchronously', async () => {
++  setup()
++  await screen.findByText('First project')
++  const { stage, note, pointer, release } = pointerFixture()
++  fireEvent.click(note)
++  fireEvent.change(screen.getByLabelText('Local title'), { target: { value: 'Owned title' } })
++  pointer('pointerDown', note, 100, 100); pointer('pointerMove', stage, 150, 150)
++  release.mockImplementationOnce(() => activeStore.retireSelectionOwner('owner'))
++  act(() => expect(activeStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'rename', targetId: 'note-node', title: 'Stale replacement' }).ok).toBe(false))
++  expect(screen.getByRole('button', { name: 'Owned title' })).toBe(note)
++  expect(screen.getByText('Local edits to undo: 0. To redo: 0.')).toBeTruthy()
++  pointer('pointerUp', stage, 200, 200)
++  expect(note.style.left).toBe('430px')
++})
++
++it.each(['project', 'workspace', 'unmount', 'pagehide'] as const)('V5 starts with empty history after %s and cannot revive old completions', async reason => {
++  observeAdapter = true
++  const view = setup()
++  await screen.findByText('First project')
++  const { stage, note, pointer } = pointerFixture()
++  fireEvent.click(note)
++  fireEvent.change(screen.getByLabelText('Local title'), { target: { value: 'Old session' } })
++  pointer('pointerDown', note, 100, 100); pointer('pointerMove', stage, 150, 150)
++  const oldStore = activeStore
++  const oldAdapter = registeredAdapter
++  if (reason === 'project') view.rerender(view.content('w1', 'p2'))
++  else if (reason === 'workspace') view.rerender(view.content('w2', 'p1'))
++  else if (reason === 'unmount') view.unmount()
++  else act(() => window.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: true })))
++  expect(oldStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'undo-local' }).ok).toBe(false)
++  act(() => expect(oldAdapter.handle({ category: 'WORKSPACE_PRESENTATION', type: 'undo-local' })).toBe(false))
++  pointer('pointerUp', stage, 200, 200)
++  if (reason === 'pagehide') act(() => window.dispatchEvent(new PageTransitionEvent('pageshow', { persisted: true })))
++  if (reason === 'unmount') return
++  expect(screen.getByText('Local edits to undo: 0. To redo: 0.')).toBeTruthy()
++  expect(activeStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'redo-local' }).ok).toBe(false)
++  const current = screen.getByRole('button', { name: reason === 'pagehide' ? 'Old session' : 'Local composition note' })
++  expect(current.style.left).toBe('430px')
++  fireEvent.click(current)
++  fireEvent.keyDown(current, { key: 'ArrowRight' })
++  expect(current.style.left).toBe('454px')
++  fireEvent.click(screen.getByRole('button', { name: 'Undo local edit' }))
++  expect(current.style.left).toBe('430px')
++  expect(screen.getByText('Local edits to undo: 0. To redo: 1.')).toBeTruthy()
++})
++
++it('V5 rejects undo if releasing capture retires its owner and retains the committed title', async () => {
++  setup()
++  await screen.findByText('First project')
++  const { stage, note, pointer, release } = pointerFixture()
++  fireEvent.click(note)
++  fireEvent.change(screen.getByLabelText('Local title'), { target: { value: 'Committed title' } })
++  pointer('pointerDown', note, 100, 100); pointer('pointerMove', stage, 150, 150)
++  release.mockImplementationOnce(() => activeStore.retireSelectionOwner('owner'))
++  act(() => expect(activeStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'undo-local' }).ok).toBe(false))
++  expect(screen.getByRole('button', { name: 'Committed title' })).toBe(note)
++  expect(screen.getByText('Local edits to undo: 0. To redo: 0.')).toBeTruthy()
++  pointer('pointerUp', stage, 200, 200)
++  expect(note.style.left).toBe('430px')
++})
++
++it('V5 restores a safe bilingual title and exposes native focusable history controls with local empty copy', async () => {
++  setup('zh-CN')
++  await screen.findByText('First project')
++  const undo = screen.getByRole('button', { name: '撤销本地编辑' }) as HTMLButtonElement
++  const redo = screen.getByRole('button', { name: '重做本地编辑' }) as HTMLButtonElement
++  expect(undo.disabled).toBe(false); expect(undo.tabIndex).toBe(0)
++  expect(redo.disabled).toBe(false); expect(redo.tabIndex).toBe(0)
++  expect(screen.getByText('可撤销的本地编辑：0。可重做：0。')).toBeTruthy()
++  const note = screen.getByRole('button', { name: 'Local composition note' })
++  fireEvent.click(note)
++  act(() => activeStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'rename', targetId: 'note-node', title: '<img src=x onerror=alert(1)> 中文标题' }))
++  act(() => undo.focus())
++  expect(fireEvent.keyDown(undo, { key: 'Enter' })).toBe(true)
++  // Native key activation is a browser gate; happy-dom only simulates its resulting click.
++  fireEvent.click(undo, { detail: 0 })
++  expect(document.activeElement).toBe(undo)
++  expect(undo.getAttribute('aria-disabled')).toBe('true')
++  act(() => redo.focus())
++  expect(fireEvent.keyDown(redo, { key: ' ' })).toBe(true)
++  fireEvent.click(redo, { detail: 0 })
++  expect(screen.getByRole('button', { name: '<img src=x onerror=alert(1)> 中文标题' })).toBe(note)
++  expect(note.querySelector('img')).toBeNull()
++  expect(document.activeElement).toBe(redo)
++  expect(redo.getAttribute('aria-disabled')).toBe('true')
++})
++
++import { applyProposal, createProposal } from '../../interaction/model'
++
++it('V5 undo and redo immediately reconcile shared projections and invalidate pre-restoration proposals', async () => {
++  setup()
++  await screen.findByText('First project')
++  const note = screen.getByRole('button', { name: 'Local composition note' })
++  fireEvent.click(note)
++  fireEvent.keyDown(note, { key: 'ArrowRight' })
++  const beforeUndo = activeStore.getSnapshot()
++  const proposal = createProposal(beforeUndo, 'rename to Stale after undo')
++  act(() => {
++    expect(activeStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'undo-local' }, 'COMMAND').ok).toBe(true)
++    expect(activeStore.getSnapshot().primarySelectedObject?.x).toBe(430)
++    expect(applyProposal(activeStore, proposal).ok).toBe(false)
++  })
++  expect(activeStore.getSnapshot().revision).toBeGreaterThan(beforeUndo.revision)
++  expect(activeStore.getSnapshot().selectedRefs).toEqual(beforeUndo.selectedRefs)
++  const beforeRedo = activeStore.getSnapshot()
++  const nextProposal = createProposal(beforeRedo, 'rename to Stale after redo')
++  act(() => {
++    expect(activeStore.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'redo-local' }, 'COMMAND').ok).toBe(true)
++    expect(activeStore.getSnapshot().primarySelectedObject?.x).toBe(454)
++    expect(applyProposal(activeStore, nextProposal).ok).toBe(false)
++  })
++  expect(activeStore.getSnapshot().revision).toBeGreaterThan(beforeRedo.revision)
++  expect((screen.getByLabelText('Local X') as HTMLInputElement).value).toBe('454')
++  expect(note.getAttribute('aria-label')).toBe('Local composition note')
++})
++
++it('V5 can restore an unselected edit while retaining the current primary and camera without consuming redo on view changes', async () => {
++  setup()
++  await screen.findByText('First project')
++  const note = screen.getByRole('button', { name: 'Local composition note' })
++  const project = screen.getByRole('button', { name: 'Project reference' })
++  fireEvent.click(note)
++  fireEvent.change(screen.getByLabelText('Local title'), { target: { value: 'Different target' } })
++  fireEvent.click(project)
++  const selected = activeStore.getSnapshot()
++  fireEvent.click(screen.getByRole('button', { name: 'Undo local edit' }))
++  expect(note.getAttribute('aria-label')).toBe('Local composition note')
++  expect(activeStore.getSnapshot().primaryRef).toEqual(selected.primaryRef)
++  const stage = screen.getByRole('region', { name: 'Infinite canvas workspace' })
++  fireEvent.keyDown(stage, { key: 'ArrowLeft' }); fireEvent.keyDown(stage, { key: '+' })
++  act(() => activeStore.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: [] }))
++  const camera = stage.querySelector('.ff-canvas-viewport')!.getAttribute('style')
++  expect(screen.getByText('Local edits to undo: 0. To redo: 1.')).toBeTruthy()
++  fireEvent.click(screen.getByRole('button', { name: 'Redo local edit' }))
++  expect(note.getAttribute('aria-label')).toBe('Different target')
++  expect(activeStore.getSnapshot().selectedRefs).toEqual([])
++  expect(stage.querySelector('.ff-canvas-viewport')!.getAttribute('style')).toBe(camera)
++})
+diff --git a/frontend/src/product/canvas/WorkspaceCanvas.tsx b/frontend/src/product/canvas/WorkspaceCanvas.tsx
+index 608efcf5..0bf2be52 100644
+--- a/frontend/src/product/canvas/WorkspaceCanvas.tsx
++++ b/frontend/src/product/canvas/WorkspaceCanvas.tsx
+@@ -6,7 +6,7 @@ import { PageHeading, ProjectFrame } from '../../surfaces/FoundationPages'
+ import { useInteractionStore, useSelection, useSurfaceAdapter } from '../../interaction/SelectionContext'
+ import type { InteractionStore, SelectionState, PresentationSelectionRef } from '../../interaction/model'
+ import { SelectionActionBar } from '../../interaction/InteractionShell'
+-import { canvasMarqueeRefs, isMarqueeArea, CANVAS_NODE_SIZE, CANVAS_GESTURE_THRESHOLD, screenToCanvas, moveCanvasGroup, type CanvasPoint, type CanvasNode, type WorkspaceCanvasState, changeZoom, fitCanvasViewport, createCanvasState, moveViewport, placeCanvasNode, renameCanvasNode, resetViewport } from './model'
++import { emptyCanvasHistory, recordCanvasEdit, restoreCanvasEdit, canvasMarqueeRefs, isMarqueeArea, CANVAS_NODE_SIZE, CANVAS_GESTURE_THRESHOLD, screenToCanvas, moveCanvasGroup, type CanvasPoint, type CanvasNode, type WorkspaceCanvasState, changeZoom, fitCanvasViewport, createCanvasState, moveViewport, placeCanvasNode, renameCanvasNode, resetViewport } from './model'
+ import { useTranslation } from '../../localization'
+ 
+ interface CanvasGesture {
+@@ -50,6 +50,9 @@ function CanvasSession() {
+   const { t } = useTranslation()
+   const [canvas, updateCanvas] = useState(() => createCanvasState(project.projectId))
+   const canvasRef = useRef(canvas)
++  const history = useRef(emptyCanvasHistory())
++  const historyOwner = useRef<object | null>(null)
++  const [, refreshHistory] = useState(0)
+   const gesture = useRef<CanvasGesture | null>(null)
+   const [previewNodes, setPreviewNodes] = useState<readonly CanvasNode[] | null>(null)
+   const [previewPoint, setPreviewPoint] = useState<CanvasPoint | null>(null)
+@@ -67,8 +70,19 @@ function CanvasSession() {
+     // Release can race native cancellation or element removal. Preview is already discarded.
+     try { active.capture.releasePointerCapture(active.pointerId) } catch { /* capture already lost */ }
+   }, [])
+-  const setCanvas = (update: (current: typeof canvas) => typeof canvas) => { const next = update(canvasRef.current); if (next !== canvasRef.current) cancelGesture(); canvasRef.current = next; updateCanvas(next) }
+   const store = useInteractionStore(), selection = useSelection()
++  const setCanvas = (update: (current: WorkspaceCanvasState) => WorkspaceCanvasState): boolean => {
++    const owner = store.getSnapshot(), current = canvasRef.current
++    if (historyOwner.current !== owner.lifetime) return false
++    const next = update(current)
++    if (next !== current) cancelGesture()
++    // Capture release may synchronously replace either ownership or the local projection.
++    if (historyOwner.current !== owner.lifetime || store.getSnapshot().revision !== owner.revision || canvasRef.current !== current) return false
++    history.current = recordCanvasEdit(history.current, current, next)
++    canvasRef.current = next
++    updateCanvas(next)
++    return true
++  }
+   const [multiSelect, setMultiSelect] = useState(false)
+   const selectNode = (localId: string, toggle: boolean) => {
+     const current = store.getSnapshot()
+@@ -77,11 +91,20 @@ function CanvasSession() {
+   const stage = useRef<HTMLDivElement>(null)
+   const viewport = useRef<HTMLDivElement>(null)
+   useLayoutEffect(() => {
++    history.current = emptyCanvasHistory()
++    historyOwner.current = store.getSnapshot().lifetime
++    refreshHistory(value => value + 1)
+     const unsubscribe = store.subscribe(() => {
+       const active = gesture.current, current = store.getSnapshot()
++      if (historyOwner.current && historyOwner.current !== current.lifetime) {
++        historyOwner.current = null
++        history.current = emptyCanvasHistory()
++        cancelGesture()
++        refreshHistory(value => value + 1)
++      }
+       if (active && (current.revision !== active.context.revision || current.lifetime !== active.context.lifetime)) cancelGesture()
+     })
+-    return () => { unsubscribe(); cancelGesture() }
++    return () => { historyOwner.current = null; history.current = emptyCanvasHistory(); unsubscribe(); cancelGesture() }
+   }, [store, cancelGesture])
+ 
+   const gestureContextCurrent = (active: CanvasGesture) => {
+@@ -222,10 +245,25 @@ function CanvasSession() {
+       const reference = canvasRef.current.references.find(ref => ref.referenceId === node.semanticReferenceId)
+       return { id: node.presentationId, kind: 'NODE', title: node.title, x: node.x, y: node.y, reference: reference?.entityId, logicalRef: reference ? { kind: reference.kind, referenceId: reference.referenceId, entityId: reference.entityId } : undefined }
+     }),
+-    supports: ['rename', 'move', 'reveal'],
++    get supports() { return ['rename', 'move', 'reveal', ...(history.current.undo.length ? ['undo-local' as const] : []), ...(history.current.redo.length ? ['redo-local' as const] : [])] as const },
+     handle: action => {
+-      if (action.type === 'rename') setCanvas(current => renameCanvasNode(current, action.targetId, action.title))
+-      else if (action.type === 'move') setCanvas(current => placeCanvasNode(current, action.targetId, action.x, action.y))
++      if (historyOwner.current !== store.getSnapshot().lifetime) return false
++      if (action.type === 'undo-local' || action.type === 'redo-local') {
++        const direction = action.type === 'undo-local' ? 'undo' : 'redo'
++        const entry = history.current[direction].slice(-1)[0]
++        if (!entry) return false
++        const owner = store.getSnapshot()
++        cancelGesture()
++        // Releasing native capture can synchronously retire ownership or change the projection.
++        if (historyOwner.current !== owner.lifetime || store.getSnapshot().lifetime !== owner.lifetime || store.getSnapshot().revision !== owner.revision || history.current[direction].slice(-1)[0] !== entry) return false
++        history.current = direction === 'undo'
++          ? { undo: history.current.undo.slice(0, -1), redo: [...history.current.redo, entry] }
++          : { undo: [...history.current.undo, entry], redo: history.current.redo.slice(0, -1) }
++        const next = restoreCanvasEdit(canvasRef.current, direction === 'undo' ? entry.before : entry.after)
++        canvasRef.current = next
++        updateCanvas(next)
++      } else if (action.type === 'rename') return setCanvas(current => renameCanvasNode(current, action.targetId, action.title))
++      else if (action.type === 'move') return setCanvas(current => placeCanvasNode(current, action.targetId, action.x, action.y))
+       else if (action.type === 'reveal') reveal()
+       else return false
+       return true
+@@ -286,6 +324,12 @@ function CanvasSession() {
+     <PageHeading eyebrow={t('canvas.eyebrow')} title={t('canvas.title')} description={t('canvas.description')} />
+     <SelectionActionBar />
+     <Button aria-pressed={multiSelect} onClick={() => { cancelGesture(); setMultiSelect(value => !value) }}>{multiSelect ? t('canvas.done') : t('canvas.multiSelect')}</Button>
++    <div className="ff-canvas-toolbar" role="group" aria-label={t('canvas.historyControls')}>
++      <Button data-canvas-history="undo" aria-disabled={!selection.supported.includes('undo-local')} aria-describedby="canvas-history-status" onClick={() => store.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'undo-local' }, 'TOOLBAR')}>{t('canvas.undoLocal')}</Button>
++      <Button data-canvas-history="redo" aria-disabled={!selection.supported.includes('redo-local')} aria-describedby="canvas-history-status" onClick={() => store.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'redo-local' }, 'TOOLBAR')}>{t('canvas.redoLocal')}</Button>
++      <span id="canvas-history-status" role="status">{t('canvas.historyStatus', { undo: history.current.undo.length, redo: history.current.redo.length })}</span>
++    </div>
++    <p className="ff-canvas-guidance">{t('canvas.historyHelp')}</p>
+     <div className="ff-canvas-toolbar" aria-label={t('canvas.viewportControls')}>
+       <Button aria-pressed={mode === 'select'} onClick={() => { cancelGesture(); setMode('select') }}>{t('canvas.selectMode')}</Button>
+       <Button aria-pressed={mode === 'pan'} onClick={() => { cancelGesture(); setMode('pan') }}>{t('canvas.panMode')}</Button>
+diff --git a/frontend/src/product/canvas/model.test.ts b/frontend/src/product/canvas/model.test.ts
+index 25b01281..dca0e66f 100644
+--- a/frontend/src/product/canvas/model.test.ts
++++ b/frontend/src/product/canvas/model.test.ts
+@@ -141,3 +141,23 @@ describe('Slice1B marquee model geometry and order', () => {
+     expect(canvasMarqueeRefs(nodes, start, end, scope, [ref('m'), ref('missing'), { ...ref('a'), projectId: 'wrong' }, { ...ref('z'), kind: 'CLIP' }, ref('m')]).map(r => r.localId)).toEqual(['m', 'z', 'a'])
+   })
+ })
++
++import { emptyCanvasHistory, recordCanvasEdit, restoreCanvasEdit } from './model'
++
++it('V5 history stores only local titles/positions and restores onto current identity and camera', () => {
++  const initial = createCanvasState('p')
++  const changed = renameCanvasNode(moveCanvasGroup(initial, initial.nodes, { x: 12, y: -8 }), 'note-node', 'Draft')
++  const history = recordCanvasEdit(emptyCanvasHistory(), initial, changed)
++  expect(history.undo).toHaveLength(1)
++  for (const values of [history.undo[0].before, history.undo[0].after]) {
++    values.forEach(value => expect(Object.keys(value).sort()).toEqual(['presentationId', 'title', 'x', 'y']))
++  }
++  const current = { ...changeZoom(moveViewport(changed, 71, -31), 0.5), references: [{ ...initial.references[0], entityId: 'current-identity' }], edges: [] }
++  const restored = restoreCanvasEdit(current, history.undo[0].before)
++  expect(restored.nodes.map(({ title, x, y }) => ({ title, x, y }))).toEqual(initial.nodes.map(({ title, x, y }) => ({ title, x, y })))
++  expect(restored.references).toBe(current.references)
++  expect(restored.edges).toBe(current.edges)
++  expect(restored.nodes.map(node => [node.presentationId, node.semanticReferenceId])).toEqual(current.nodes.map(node => [node.presentationId, node.semanticReferenceId]))
++  expect([restored.zoom, restored.viewportX, restored.viewportY]).toEqual([1.5, 71, -31])
++  expect(recordCanvasEdit(history, changed, current)).toBe(history)
++})
+diff --git a/frontend/src/product/canvas/model.ts b/frontend/src/product/canvas/model.ts
+index a6798739..98642070 100644
+--- a/frontend/src/product/canvas/model.ts
++++ b/frontend/src/product/canvas/model.ts
+@@ -133,3 +133,22 @@ export function canvasMarqueeRefs(nodes: readonly CanvasNode[], start: CanvasPoi
+   // Map preserves insertion order: survivors first, then fresh hits in Canvas MODEL array order.
+   return [...new Map([...survivors, ...hits].map(ref => [ref.localId, ref])).values()]
+ }
++
++// History contains only local presentation keys and editable values, never a Canvas/Selection snapshot.
++export type CanvasLocalValues = Pick<CanvasNode, 'presentationId' | 'title' | 'x' | 'y'>
++export interface CanvasEditEntry { readonly before: readonly CanvasLocalValues[]; readonly after: readonly CanvasLocalValues[] }
++export interface CanvasHistory { readonly undo: readonly CanvasEditEntry[]; readonly redo: readonly CanvasEditEntry[] }
++export const emptyCanvasHistory = (): CanvasHistory => ({ undo: [], redo: [] })
++export function recordCanvasEdit(history: CanvasHistory, before: WorkspaceCanvasState, after: WorkspaceCanvasState): CanvasHistory {
++  const values = (state: WorkspaceCanvasState) => state.nodes.map(({ presentationId, title, x, y }) => ({ presentationId, title, x, y }))
++  const previous = values(before), next = values(after)
++  if (JSON.stringify(previous) === JSON.stringify(next)) return history
++  return { undo: [...history.undo, { before: previous, after: next }].slice(-50), redo: [] }
++}
++export function restoreCanvasEdit(state: WorkspaceCanvasState, values: readonly CanvasLocalValues[]): WorkspaceCanvasState {
++  const byId = new Map(values.map(value => [value.presentationId, value]))
++  return { ...state, nodes: state.nodes.map(node => {
++    const value = byId.get(node.presentationId)
++    return value ? { ...node, title: value.title, x: value.x, y: value.y } : node
++  }) }
++}
+diff --git a/frontend/src/product/workflow-sketch/WorkflowSketch.tsx b/frontend/src/product/workflow-sketch/WorkflowSketch.tsx
+index 1ee7b3c3..de0ae337 100644
+--- a/frontend/src/product/workflow-sketch/WorkflowSketch.tsx
++++ b/frontend/src/product/workflow-sketch/WorkflowSketch.tsx
+@@ -54,6 +54,7 @@ export function WorkflowSketch() {
+   }))
+   const handle = (action: PresentationAction | QueryAction) => {
+     if (action.category !== 'WORKSPACE_PRESENTATION') return false
++    if (action.type === 'undo-local' || action.type === 'redo-local') return false
+     const exists = sketch.nodes.some(node => node.id === action.targetId)
+     if (!exists) return false
+     if (action.type === 'rename') updateSketch(current => renameWorkflowSketchNode(current, action.targetId, action.title))
+diff --git a/frontend/src/styles/foundation.css b/frontend/src/styles/foundation.css
+index 5fc25c62..9142ee28 100644
+--- a/frontend/src/styles/foundation.css
++++ b/frontend/src/styles/foundation.css
+@@ -532,3 +532,6 @@ kbd { padding: 1px var(--space-1); border: 1px solid var(--border-default); bord
+ .ff-shortcut-editor select { width: 100%; min-width: 0; padding: 10px; background: var(--surface-1); color: inherit; border: 1px solid var(--border-strong); border-radius: 6px; }
+ .ff-shortcut-editor p { font-size: 13px; }
+ .ff-shortcut-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
++
++/* Keep exhausted local history controls in the native tab order and visibly unavailable. */
++.ff-canvas-toolbar .ff-button[aria-disabled="true"] { color: var(--text-tertiary); background: var(--surface-2); border-color: var(--border-subtle); cursor: not-allowed; opacity: .72; }

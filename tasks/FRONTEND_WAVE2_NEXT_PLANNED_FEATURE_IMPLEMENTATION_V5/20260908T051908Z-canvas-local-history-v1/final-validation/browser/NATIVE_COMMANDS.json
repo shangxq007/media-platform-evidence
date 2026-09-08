@@ -1,0 +1,3476 @@
+[
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:10.613492+00:00",
+    "method": "Network.enable",
+    "params": {},
+    "result": {
+      "id": 1,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:10.615003+00:00",
+    "method": "Page.enable",
+    "params": {},
+    "result": {
+      "id": 2,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:10.616555+00:00",
+    "method": "Runtime.enable",
+    "params": {},
+    "result": {
+      "id": 3,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:10.617779+00:00",
+    "method": "Log.enable",
+    "params": {},
+    "result": {
+      "id": 4,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:10.619050+00:00",
+    "method": "Emulation.setFocusEmulationEnabled",
+    "params": {
+      "enabled": true
+    },
+    "result": {
+      "id": 5,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:10.620586+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 6,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:10.636737+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/"
+    },
+    "result": {
+      "id": 7,
+      "result": {
+        "frameId": "926CF7B6F5A6A8A11F1CBE5A67660DB0",
+        "loaderId": "E31D40696637CC1B7D7619B6C3D9DAF1",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:10.956617+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "localStorage.setItem(\"dev_access_token\",\"SIMULATED_LOCAL_ONLY_NOT_A_CREDENTIAL\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 8,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:10.976257+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/w/workspace-1/projects/simulated-project/canvas"
+    },
+    "result": {
+      "id": 9,
+      "result": {
+        "frameId": "926CF7B6F5A6A8A11F1CBE5A67660DB0",
+        "loaderId": "D04B0B2E6A3562BED7CFBD8C0A525FB4",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:11.284054+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 10,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:11.453093+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 11,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:11.618900+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 12,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:11.631117+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 13,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:11.633369+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 14,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:11.635169+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 15,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:11.637845+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 16,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "[{\"id\":\"project-node\",\"title\":\"Project reference\",\"x\":\"120px\",\"y\":\"90px\"},{\"id\":\"note-node\",\"title\":\"Local composition note\",\"x\":\"430px\",\"y\":\"230px\"}]"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:11.646084+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\").getAttribute(\"aria-disabled\")===\"true\"&&document.querySelector(\"[data-canvas-history=\\\"redo\\\"]\").getAttribute(\"aria-disabled\")===\"true\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 17,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:11.792304+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:11.797102+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 19,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":77.0078125,\"y\":337.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:11.801681+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 77,
+      "y": 338,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 20,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:11.804890+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 77,
+      "y": 338,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 21,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:11.808898+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 77,
+      "y": 338,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 22,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:11.963091+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 23,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:11.965437+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 24,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.119160+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"120px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 25,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.121870+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement.matches(\"[data-canvas-history=\\\"undo\\\"]\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 26,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.124871+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 27,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":558.5,\"y\":673.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.129481+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 558,
+      "y": 674,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 28,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.173422+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 558,
+      "y": 674,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 29,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.180347+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 558,
+      "y": 674,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 30,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.362249+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "ArrowRight",
+      "code": "ArrowRight",
+      "windowsVirtualKeyCode": 39,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 31,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.364548+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "ArrowRight",
+      "code": "ArrowRight",
+      "windowsVirtualKeyCode": 39,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 32,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.518424+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 33,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "[{\"id\":\"project-node\",\"title\":\"Project reference\",\"x\":\"144px\",\"y\":\"90px\"},{\"id\":\"note-node\",\"title\":\"Local composition note\",\"x\":\"430px\",\"y\":\"230px\"}]"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.521150+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))!==\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"120px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 34,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.524325+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-canvas-viewport\").style.transform",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 35,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "translate(298.5px, 20px) scale(1)"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.526566+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 36,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":77.0078125,\"y\":379.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.530927+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 77,
+      "y": 380,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 37,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.534792+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 77,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 38,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.570686+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 77,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 39,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.724866+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"120px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 40,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.728916+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\").getAttribute(\"aria-pressed\")===\"true\" && document.querySelector(\".ff-canvas-viewport\").style.transform===\"translate(298.5px, 20px) scale(1)\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 41,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.731776+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement.matches(\"[data-canvas-history=\\\"undo\\\"]\") && document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\").getAttribute(\"aria-disabled\")===\"true\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 42,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.735526+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 43,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.737876+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 44,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.890979+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement.matches(\"[data-canvas-history=\\\"redo\\\"]\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 45,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.924707+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 46,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:12.927184+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 47,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.080703+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 48,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.084398+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": " ",
+      "code": "Space",
+      "windowsVirtualKeyCode": 32,
+      "modifiers": 0,
+      "text": " ",
+      "unmodifiedText": " "
+    },
+    "result": {
+      "id": 49,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.087178+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": " ",
+      "code": "Space",
+      "windowsVirtualKeyCode": 32,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 50,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.240360+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 51,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.243875+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"#selection-inspector input:not([type=\\\"number\\\"])\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 52,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":1285.5,\"y\":345}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.248006+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 1286,
+      "y": 345,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 53,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.252523+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 1286,
+      "y": 345,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 54,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.258046+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 1286,
+      "y": 345,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 55,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.412070+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 56,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.415017+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 57,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.599297+00:00",
+    "method": "Input.insertText",
+    "params": {
+      "text": "<b>Creator draft</b>"
+    },
+    "result": {
+      "id": 58,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.752928+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 59,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "[{\"id\":\"project-node\",\"title\":\"<b>Creator draft</b>\",\"x\":\"144px\",\"y\":\"90px\"},{\"id\":\"note-node\",\"title\":\"Local composition note\",\"x\":\"430px\",\"y\":\"230px\"}]"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.756037+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\").getAttribute(\"aria-label\")===\"<b>Creator draft</b>\" && !document.querySelector(\"[data-canvas-node] b\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 60,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.759361+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 61,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":77.0078125,\"y\":379.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.764216+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 77,
+      "y": 380,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 62,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.768082+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 77,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 63,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.802184+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 77,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 64,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.955823+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 65,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.959533+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"#selection-inspector input:not([type=number])\").value===\"Project reference\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 66,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.963104+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-history=\\\"redo\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 67,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":190.6953125,\"y\":379.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.967832+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 191,
+      "y": 380,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 68,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:13.971474+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 191,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 69,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.002788+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 191,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 70,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.156374+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"<b>Creator draft</b>\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 71,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.304923+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.312596+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-shell-toolbar button:has(kbd)\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 73,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":383.2734375,\"y\":75}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.317800+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 383,
+      "y": 75,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 74,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.321595+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 383,
+      "y": 75,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 75,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.359832+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 383,
+      "y": 75,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 76,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.513544+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\"[role=dialog]\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 77,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.517636+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const es=[...document.querySelectorAll(\"[role=dialog] button\")].filter(e=>e.textContent.trim()===\"Undo local edit\"&&e.getClientRects().length);if(es.length!==1)throw Error(\"button count \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 78,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.521797+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-native-target=\\\"yes\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 79,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":705,\"y\":519}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.526724+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 705,
+      "y": 519,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 80,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.531584+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 705,
+      "y": 519,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 81,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.563622+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 705,
+      "y": 519,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 82,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.717439+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 83,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.721520+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-shell-toolbar button:has(kbd)\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 84,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":383.2734375,\"y\":75}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.726571+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 383,
+      "y": 75,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 85,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.731223+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 383,
+      "y": 75,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 86,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.764424+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 383,
+      "y": 75,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 87,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.919044+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const es=[...document.querySelectorAll(\"[role=dialog] button\")].filter(e=>e.textContent.trim()===\"Redo local edit\"&&e.getClientRects().length);if(es.length!==1)throw Error(\"button count \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 88,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.922373+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-native-target=\\\"yes\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 89,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":705,\"y\":567}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.927253+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 705,
+      "y": 567,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 90,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.931790+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 705,
+      "y": 567,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 91,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:14.967177+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 705,
+      "y": 567,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 92,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.121698+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"<b>Creator draft</b>\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 93,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.126537+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 94,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":77.0078125,\"y\":379.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.132212+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 77,
+      "y": 380,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 95,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.136499+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 77,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 96,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.167650+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 77,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 97,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.321618+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"#selection-inspector input:not([type=\\\"number\\\"])\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 98,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":1285.5,\"y\":345}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.326822+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 1286,
+      "y": 345,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 99,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.331973+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 1286,
+      "y": 345,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 100,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.337015+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 1286,
+      "y": 345,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 101,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.491398+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 102,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.495035+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 103,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.679966+00:00",
+    "method": "Input.insertText",
+    "params": {
+      "text": "New branch"
+    },
+    "result": {
+      "id": 104,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.834369+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 105,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "[{\"id\":\"project-node\",\"title\":\"New branch\",\"x\":\"144px\",\"y\":\"90px\"},{\"id\":\"note-node\",\"title\":\"Local composition note\",\"x\":\"430px\",\"y\":\"230px\"}]"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.838243+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[data-canvas-history=\\\"redo\\\"]\").getAttribute(\"aria-disabled\")===\"true\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 106,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.842560+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-history=\\\"redo\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 107,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":190.6953125,\"y\":379.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.847836+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 191,
+      "y": 380,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 108,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.852508+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 191,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 109,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:15.857260+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 191,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 110,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.011610+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"New branch\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 111,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.016040+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-shell-toolbar button:has(kbd)\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 112,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":383.2734375,\"y\":75}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.021664+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 383,
+      "y": 75,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 113,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.026180+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 383,
+      "y": 75,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 114,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.059514+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 383,
+      "y": 75,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 115,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.213827+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "[...document.querySelectorAll(\"[role=dialog] button\")].filter(e=>e.disabled).length>=3",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 116,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.237955+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Escape",
+      "code": "Escape",
+      "windowsVirtualKeyCode": 27,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 117,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.243447+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Escape",
+      "code": "Escape",
+      "windowsVirtualKeyCode": 27,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 118,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.411267+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/w/workspace-1/projects/simulated-project/canvas"
+    },
+    "result": {
+      "id": 119,
+      "result": {
+        "frameId": "926CF7B6F5A6A8A11F1CBE5A67660DB0",
+        "loaderId": "B9E11609729D5CE16A94F7646E02A6B5",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.719488+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 120,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.883248+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 121,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.894398+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 122,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.898152+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 123,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.901839+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 124,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":558.5,\"y\":673.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.906818+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 558,
+      "y": 674,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 125,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.949955+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 558,
+      "y": 674,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 126,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:16.959365+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 558,
+      "y": 674,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 127,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.114254+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Control",
+      "code": "ControlLeft",
+      "windowsVirtualKeyCode": 17,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 128,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.119170+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-node=\\\"note-node\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 129,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":868.5,\"y\":855.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.124636+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 868,
+      "y": 856,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 130,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.130162+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 868,
+      "y": 856,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 131,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.163746+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 868,
+      "y": 856,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 132,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.318340+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Control",
+      "code": "ControlLeft",
+      "windowsVirtualKeyCode": 17,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 133,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.322714+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"[data-canvas-node][aria-pressed=true]\").length===2",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 134,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.327003+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 135,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "[{\"id\":\"project-node\",\"title\":\"Project reference\",\"x\":\"120px\",\"y\":\"90px\"},{\"id\":\"note-node\",\"title\":\"Local composition note\",\"x\":\"430px\",\"y\":\"230px\"}]"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.331055+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\"),r=e.getBoundingClientRect();return {x:r.left+35,y:r.top+35}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 136,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 183.5,
+            "y": 600.59375
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.336745+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 183.5,
+      "y": 600.59375,
+      "button": "left",
+      "buttons": 1,
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 137,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.442727+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 223.5,
+      "y": 624.59375,
+      "button": "left",
+      "buttons": 1,
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 138,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.547396+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))!==\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"120px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 139,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.580033+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 223.5,
+      "y": 624.59375,
+      "button": "left",
+      "buttons": 0,
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 140,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.784810+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 141,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "[{\"id\":\"project-node\",\"title\":\"Project reference\",\"x\":\"160px\",\"y\":\"114px\"},{\"id\":\"note-node\",\"title\":\"Local composition note\",\"x\":\"470px\",\"y\":\"254px\"}]"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.789377+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const a=[{\"id\":\"project-node\",\"title\":\"Project reference\",\"x\":\"120px\",\"y\":\"90px\"},{\"id\":\"note-node\",\"title\":\"Local composition note\",\"x\":\"430px\",\"y\":\"230px\"}],z=[{\"id\":\"project-node\",\"title\":\"Project reference\",\"x\":\"160px\",\"y\":\"114px\"},{\"id\":\"note-node\",\"title\":\"Local composition note\",\"x\":\"470px\",\"y\":\"254px\"}];return a.every((e,i)=>e.x!==z[i].x&&e.y!==z[i].y)})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 142,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.794305+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 143,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":77.0078125,\"y\":379.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.800461+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 77,
+      "y": 380,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 144,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.805746+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 77,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 145,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.839337+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 77,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 146,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.994264+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"120px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 147,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:17.999472+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\").getAttribute(\"aria-disabled\")===\"true\"&&document.querySelectorAll(\"[data-canvas-node][aria-pressed=true]\").length===2",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 148,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.004542+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-history=\\\"redo\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 149,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":190.6953125,\"y\":379.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.010359+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 191,
+      "y": 380,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 150,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.014970+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 191,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 151,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.046703+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 191,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 152,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.201789+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"160px\\\",\\\"y\\\":\\\"114px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"470px\\\",\\\"y\\\":\\\"254px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 153,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.207099+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\"),r=e.getBoundingClientRect();return {x:r.left+35,y:r.top+35}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 154,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 223.5,
+            "y": 624.59375
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.213731+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 223.5,
+      "y": 624.59375,
+      "button": "left",
+      "buttons": 1,
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 155,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.320266+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 263.5,
+      "y": 648.59375,
+      "button": "left",
+      "buttons": 1,
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 156,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.425602+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))!==\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"160px\\\",\\\"y\\\":\\\"114px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"470px\\\",\\\"y\\\":\\\"254px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 157,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.445416+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Escape",
+      "code": "Escape",
+      "windowsVirtualKeyCode": 27,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 158,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.449708+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Escape",
+      "code": "Escape",
+      "windowsVirtualKeyCode": 27,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 159,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.605414+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 263.5,
+      "y": 648.59375,
+      "button": "left",
+      "buttons": 0,
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 160,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.760638+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"160px\\\",\\\"y\\\":\\\"114px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"470px\\\",\\\"y\\\":\\\"254px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 161,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.766086+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 162,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":77.0078125,\"y\":379.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.772635+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 77,
+      "y": 380,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 163,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.778130+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 77,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 164,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.809941+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 77,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 165,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.965144+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"120px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 166,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:18.970611+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\").getAttribute(\"aria-disabled\")===\"true\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 167,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.126202+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.145857+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/w/workspace-1/projects/simulated-project/canvas"
+    },
+    "result": {
+      "id": 169,
+      "result": {
+        "frameId": "926CF7B6F5A6A8A11F1CBE5A67660DB0",
+        "loaderId": "5D6A2ECF3D82EA8B13510FED9569D4D1",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.467711+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 170,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.626744+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 171,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.631351+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\").getAttribute(\"aria-disabled\")===\"true\"&&document.querySelector(\"[data-canvas-history=\\\"redo\\\"]\").getAttribute(\"aria-disabled\")===\"true\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 172,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.636846+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"120px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 173,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.664113+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 174,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.696854+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"zh-CN\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 175,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.766361+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"zh-CN\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 176,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.771404+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[data-canvas-history]\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 177,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.776565+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.scrollWidth<=innerWidth && [...document.querySelectorAll(\"[data-canvas-history]\")].every(e=>{const r=e.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth}) && document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\").textContent===\"撤销本地编辑\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 178,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.882769+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.891064+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 180,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":99.23148727416992,\"y\":704.9820556640625}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.898975+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 99,
+      "y": 705,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 181,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.949481+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 99,
+      "y": 705,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 182,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:19.960296+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 99,
+      "y": 705,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 183,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.142481+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "ArrowRight",
+      "code": "ArrowRight",
+      "windowsVirtualKeyCode": 39,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 184,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.148300+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "ArrowRight",
+      "code": "ArrowRight",
+      "windowsVirtualKeyCode": 39,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 185,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.304708+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 186,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "[{\"id\":\"project-node\",\"title\":\"Project reference\",\"x\":\"144px\",\"y\":\"90px\"},{\"id\":\"note-node\",\"title\":\"Local composition note\",\"x\":\"430px\",\"y\":\"230px\"}]"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.311686+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[data-canvas-history]\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 187,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.317147+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 188,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":56,\"y\":408.296875}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.324050+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 56,
+      "y": 408,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 189,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.330169+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 56,
+      "y": 408,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 190,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.361994+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 56,
+      "y": 408,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 191,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.520133+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 192,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.525960+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 193,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.708860+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 194,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.714514+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 195,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.870813+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 196,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.948169+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.986610+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 198,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.992319+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 199,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:20.997671+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[data-canvas-history]\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 200,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:21.108746+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:21.116679+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.title",
+      "returnByValue": true
+    },
+    "result": {
+      "id": 202,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "Media Platform — Video Editor"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:01:21.122852+00:00",
+    "method": "Browser.close",
+    "params": {},
+    "result": {
+      "id": 203,
+      "result": {}
+    }
+  }
+]

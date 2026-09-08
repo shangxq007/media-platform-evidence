@@ -1,0 +1,118 @@
+{
+  "feature": "Canvas session-local title/position undo-redo",
+  "executed_added_test_identities": [
+    [
+      "frontend/src/interaction/InteractionShell.test.tsx",
+      [],
+      "V5 discovers Canvas history in the shared palette, reconciles Inspector and keeps canonical actions disabled"
+    ],
+    [
+      "frontend/src/interaction/InteractionShell.test.tsx",
+      [],
+      "V5 retained contextual history checks live adapter availability even before a new render"
+    ],
+    [
+      "frontend/src/interaction/model.test.ts",
+      [],
+      "V5 dispatch enforces live history availability without selection and rejects canonical and other surfaces"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 restores local title and position through the dispatcher without changing selection or camera"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 clears history synchronously on owner retirement and rejects retained adapter work"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 clears history synchronously on document retirement and rejects retained adapter work"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 clears history synchronously on adapter retirement and rejects retained adapter work"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 bounds the session to 50 edits, preserves redo across no-ops and branches on a new edit"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 commits a whole selected drag as one edit and undo cancels a later live preview"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 excludes canceled/no-op gestures, selection and camera and leaves native text undo untouched"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 rejects an edit if releasing its live preview retires ownership synchronously"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 starts with empty history after project and cannot revive old completions"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 starts with empty history after workspace and cannot revive old completions"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 starts with empty history after unmount and cannot revive old completions"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 starts with empty history after pagehide and cannot revive old completions"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 rejects undo if releasing capture retires its owner and retains the committed title"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 restores a safe bilingual title and exposes native focusable history controls with local empty copy"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 undo and redo immediately reconcile shared projections and invalidate pre-restoration proposals"
+    ],
+    [
+      "frontend/src/product/canvas/WorkspaceCanvas.test.tsx",
+      [],
+      "V5 can restore an unselected edit while retaining the current primary and camera without consuming redo on view changes"
+    ],
+    [
+      "frontend/src/product/canvas/model.test.ts",
+      [],
+      "V5 history stores only local titles/positions and restores onto current identity and camera"
+    ]
+  ],
+  "source_endpoints": "SOURCE_INDEX.md",
+  "native_checks": "final-validation/browser/NATIVE_CHECKS.json",
+  "guard_mechanisms": [
+    "unchanged architecture guard and negative controls",
+    "type-policy and lint",
+    "full existing behavioral suite"
+  ],
+  "blind_spots": [
+    "no real backend",
+    "no physical device/OS IME/screen reader",
+    "no canonical or persisted history"
+  ],
+  "old_test_identity_removals": []
+}

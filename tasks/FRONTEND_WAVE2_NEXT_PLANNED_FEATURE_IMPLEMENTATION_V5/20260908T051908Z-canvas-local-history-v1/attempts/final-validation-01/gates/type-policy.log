@@ -1,0 +1,15 @@
+
+> media-platform-frontend@0.1.0 typecheck
+> tsc --noEmit
+
+src/interaction/InteractionShell.test.tsx(848,48): error TS2322: Type 'string[]' is not assignable to type 'readonly ("undo-local" | "redo-local" | "rename" | "move" | "reveal" | "compare-revisions")[]'.
+  Type 'string' is not assignable to type '"undo-local" | "redo-local" | "rename" | "move" | "reveal" | "compare-revisions"'.
+src/interaction/model.test.ts(240,43): error TS2322: Type 'string[]' is not assignable to type 'readonly ("undo-local" | "redo-local" | "rename" | "move" | "reveal" | "compare-revisions")[]'.
+  Type 'string' is not assignable to type '"undo-local" | "redo-local" | "rename" | "move" | "reveal" | "compare-revisions"'.
+src/product/workflow-sketch/WorkflowSketch.tsx(57,65): error TS2339: Property 'targetId' does not exist on type 'PresentationAction'.
+  Property 'targetId' does not exist on type '{ category: "WORKSPACE_PRESENTATION"; type: "undo-local"; }'.
+npm notice
+npm notice New major version of npm available! 10.9.8 -> 12.0.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.0.2
+npm notice To update run: npm install -g npm@12.0.2
+npm notice

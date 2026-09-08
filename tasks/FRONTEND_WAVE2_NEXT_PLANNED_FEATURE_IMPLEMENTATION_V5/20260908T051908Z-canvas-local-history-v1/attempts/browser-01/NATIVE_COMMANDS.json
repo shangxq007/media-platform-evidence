@@ -1,0 +1,1357 @@
+[
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:31.989414+00:00",
+    "method": "Network.enable",
+    "params": {},
+    "result": {
+      "id": 1,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:31.990890+00:00",
+    "method": "Page.enable",
+    "params": {},
+    "result": {
+      "id": 2,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:31.992583+00:00",
+    "method": "Runtime.enable",
+    "params": {},
+    "result": {
+      "id": 3,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:31.993963+00:00",
+    "method": "Log.enable",
+    "params": {},
+    "result": {
+      "id": 4,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:31.995334+00:00",
+    "method": "Emulation.setFocusEmulationEnabled",
+    "params": {
+      "enabled": true
+    },
+    "result": {
+      "id": 5,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:31.997048+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 6,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:32.012178+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/"
+    },
+    "result": {
+      "id": 7,
+      "result": {
+        "frameId": "B11409C327B7B2BFB0B488F8992E4BC6",
+        "loaderId": "D6CD4240592A9E9D1CA1B27ACFDBD0FE",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:32.338298+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "localStorage.setItem(\"dev_access_token\",\"SIMULATED_LOCAL_ONLY_NOT_A_CREDENTIAL\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 8,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:32.349536+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/w/workspace-1/projects/simulated-project/canvas"
+    },
+    "result": {
+      "id": 9,
+      "result": {
+        "frameId": "B11409C327B7B2BFB0B488F8992E4BC6",
+        "loaderId": "23277AA97B891DD7FAD3BC8834204603",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:32.656133+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 10,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:32.969903+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 11,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:32.988336+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 12,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:32.990378+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 13,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:32.992107+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 14,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:32.994082+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 15,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "[{\"id\":\"project-node\",\"title\":\"Project reference\",\"x\":\"120px\",\"y\":\"90px\"},{\"id\":\"note-node\",\"title\":\"Local composition note\",\"x\":\"430px\",\"y\":\"230px\"}]"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:32.995949+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\").getAttribute(\"aria-disabled\")===\"true\"&&document.querySelector(\"[data-canvas-history=\\\"redo\\\"]\").getAttribute(\"aria-disabled\")===\"true\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 16,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.143215+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.148016+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 18,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":77.0078125,\"y\":337.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.152799+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 77,
+      "y": 338,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 19,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.156122+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 77,
+      "y": 338,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 20,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.160232+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 77,
+      "y": 338,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 21,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.314686+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 22,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.317219+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 23,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.470997+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"120px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 24,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.473664+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement.matches(\"[data-canvas-history=\\\"undo\\\"]\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 25,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.476690+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 26,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":558.5,\"y\":673.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.481118+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 558,
+      "y": 674,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 27,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.524882+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 558,
+      "y": 674,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 28,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.532056+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 558,
+      "y": 674,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 29,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.713624+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "ArrowRight",
+      "code": "ArrowRight",
+      "windowsVirtualKeyCode": 39,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 30,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.716795+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "ArrowRight",
+      "code": "ArrowRight",
+      "windowsVirtualKeyCode": 39,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 31,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.870518+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 32,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "[{\"id\":\"project-node\",\"title\":\"Project reference\",\"x\":\"144px\",\"y\":\"90px\"},{\"id\":\"note-node\",\"title\":\"Local composition note\",\"x\":\"430px\",\"y\":\"230px\"}]"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.873259+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))!==\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"120px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 33,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.876494+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-canvas-viewport\").style.transform",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 34,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "translate(298.5px, 20px) scale(1)"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.878881+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 35,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":77.0078125,\"y\":379.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.882970+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 77,
+      "y": 380,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 36,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.886538+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 77,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 37,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:33.923253+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 77,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 38,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.077047+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"120px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 39,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.080293+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\").getAttribute(\"aria-pressed\")===\"true\" && document.querySelector(\".ff-canvas-viewport\").style.transform===\"translate(298.5px, 20px) scale(1)\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 40,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.083131+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement.matches(\"[data-canvas-history=\\\"undo\\\"]\") && document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\").getAttribute(\"aria-disabled\")===\"true\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 41,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.088199+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 42,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.090777+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 43,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.243908+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement.matches(\"[data-canvas-history=\\\"redo\\\"]\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 44,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.276667+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 45,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.279574+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 46,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.432916+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 47,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.436541+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": " ",
+      "code": "Space",
+      "windowsVirtualKeyCode": 32,
+      "modifiers": 0,
+      "text": " ",
+      "unmodifiedText": " "
+    },
+    "result": {
+      "id": 48,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.439230+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": " ",
+      "code": "Space",
+      "windowsVirtualKeyCode": 32,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 49,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.592344+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 50,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.595930+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"#selection-inspector input:not([type=\\\"number\\\"])\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 51,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":1285.5,\"y\":345}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.600213+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 1286,
+      "y": 345,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 52,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.604681+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 1286,
+      "y": 345,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 53,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.610764+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 1286,
+      "y": 345,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 54,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.765679+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 55,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.768857+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 56,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:34.954676+00:00",
+    "method": "Input.insertText",
+    "params": {
+      "text": "<b>Creator draft</b>"
+    },
+    "result": {
+      "id": 57,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.108559+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 58,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "[{\"id\":\"project-node\",\"title\":\"<b>Creator draft</b>\",\"x\":\"144px\",\"y\":\"90px\"},{\"id\":\"note-node\",\"title\":\"Local composition note\",\"x\":\"430px\",\"y\":\"230px\"}]"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.111626+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\").getAttribute(\"aria-label\")===\"<b>Creator draft</b>\" && !document.querySelector(\"[data-canvas-node] b\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 59,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.115019+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 60,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":77.0078125,\"y\":379.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.119767+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 77,
+      "y": 380,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 61,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.123784+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 77,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 62,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.153988+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 77,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 63,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.308632+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 64,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.312401+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"#selection-inspector input:not([type=number])\").value===\"Project reference\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 65,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.316016+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\"[data-canvas-history=\\\"redo\\\"]\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 66,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":190.6953125,\"y\":379.59375}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.320569+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 191,
+      "y": 380,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 67,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.324454+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 191,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 68,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.354344+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 191,
+      "y": 380,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 69,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.508820+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"<b>Creator draft</b>\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 70,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.653645+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.660456+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "JSON.stringify((()=>{const e=document.querySelector(\".ff-shell-toolbar button:has(kbd)\");if(!e)throw Error(\"missing element\");const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})())",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 72,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "{\"x\":383.2734375,\"y\":75}"
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.665470+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 383,
+      "y": 75,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 73,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.669536+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 383,
+      "y": 75,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 74,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.707229+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 383,
+      "y": 75,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 75,
+      "result": {}
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.861236+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\"[role=dialog]\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 76,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:35.865763+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"Undo local edit\"&&e.getClientRects().length);if(es.length!==1)throw Error(\"button count \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 77,
+      "result": {
+        "result": {
+          "type": "object",
+          "subtype": "error",
+          "className": "Error",
+          "description": "Error: button count 2\n    at <anonymous>:1:159\n    at <anonymous>:1:369",
+          "objectId": "-5021180134734590689.3.1"
+        },
+        "exceptionDetails": {
+          "exceptionId": 1,
+          "text": "Uncaught",
+          "lineNumber": 0,
+          "columnNumber": 152,
+          "scriptId": "37",
+          "stackTrace": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "37",
+                "url": "",
+                "lineNumber": 0,
+                "columnNumber": 158
+              },
+              {
+                "functionName": "",
+                "scriptId": "37",
+                "url": "",
+                "lineNumber": 0,
+                "columnNumber": 368
+              }
+            ]
+          },
+          "exception": {
+            "type": "object",
+            "subtype": "error",
+            "className": "Error",
+            "description": "Error: button count 2\n    at <anonymous>:1:159\n    at <anonymous>:1:369",
+            "objectId": "-5021180134734590689.3.2"
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:36.039747+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "f62687609a556dff204fc6939416c11abd45f945",
+    "timestamp": "2026-09-08T05:00:36.045886+00:00",
+    "method": "Browser.close",
+    "params": {},
+    "result": {
+      "id": 79,
+      "result": {}
+    }
+  }
+]

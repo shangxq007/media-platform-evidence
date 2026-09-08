@@ -1,0 +1,114 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "f62687609a556dff204fc6939416c11abd45f945",
+    "VALIDATION_TIMESTAMP": "2026-09-08T05:00:32.996566+00:00",
+    "name": "Empty local history has unavailable Undo and Redo",
+    "expression": "document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\").getAttribute(\"aria-disabled\")===\"true\"&&document.querySelector(\"[data-canvas-history=\\\"redo\\\"]\").getAttribute(\"aria-disabled\")===\"true\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "f62687609a556dff204fc6939416c11abd45f945",
+    "VALIDATION_TIMESTAMP": "2026-09-08T05:00:33.472014+00:00",
+    "name": "Unavailable Undo is a no-op under pointer and Enter",
+    "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"120px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "f62687609a556dff204fc6939416c11abd45f945",
+    "VALIDATION_TIMESTAMP": "2026-09-08T05:00:33.474926+00:00",
+    "name": "Unavailable control retains native focus",
+    "expression": "document.activeElement.matches(\"[data-canvas-history=\\\"undo\\\"]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "f62687609a556dff204fc6939416c11abd45f945",
+    "VALIDATION_TIMESTAMP": "2026-09-08T05:00:33.874574+00:00",
+    "name": "Native arrow changes local placement",
+    "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))!==\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"120px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "f62687609a556dff204fc6939416c11abd45f945",
+    "VALIDATION_TIMESTAMP": "2026-09-08T05:00:34.078317+00:00",
+    "name": "Pointer Undo restores keyboard movement",
+    "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"120px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "f62687609a556dff204fc6939416c11abd45f945",
+    "VALIDATION_TIMESTAMP": "2026-09-08T05:00:34.081363+00:00",
+    "name": "Undo preserves current selection and camera",
+    "expression": "document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\").getAttribute(\"aria-pressed\")===\"true\" && document.querySelector(\".ff-canvas-viewport\").style.transform===\"translate(298.5px, 20px) scale(1)\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "f62687609a556dff204fc6939416c11abd45f945",
+    "VALIDATION_TIMESTAMP": "2026-09-08T05:00:34.085161+00:00",
+    "name": "Last Undo remains focused and communicates unavailability",
+    "expression": "document.activeElement.matches(\"[data-canvas-history=\\\"undo\\\"]\") && document.querySelector(\"[data-canvas-history=\\\"undo\\\"]\").getAttribute(\"aria-disabled\")===\"true\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "f62687609a556dff204fc6939416c11abd45f945",
+    "VALIDATION_TIMESTAMP": "2026-09-08T05:00:34.245250+00:00",
+    "name": "Native Tab reaches Redo",
+    "expression": "document.activeElement.matches(\"[data-canvas-history=\\\"redo\\\"]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "f62687609a556dff204fc6939416c11abd45f945",
+    "VALIDATION_TIMESTAMP": "2026-09-08T05:00:34.434328+00:00",
+    "name": "Native Enter redoes the exact local placement",
+    "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "f62687609a556dff204fc6939416c11abd45f945",
+    "VALIDATION_TIMESTAMP": "2026-09-08T05:00:34.593796+00:00",
+    "name": "Unavailable Redo Space does not replay twice",
+    "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "f62687609a556dff204fc6939416c11abd45f945",
+    "VALIDATION_TIMESTAMP": "2026-09-08T05:00:35.113166+00:00",
+    "name": "Native text input safely renders title, not HTML",
+    "expression": "document.querySelector(\"[data-canvas-node=\\\"project-node\\\"]\").getAttribute(\"aria-label\")===\"<b>Creator draft</b>\" && !document.querySelector(\"[data-canvas-node] b\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "f62687609a556dff204fc6939416c11abd45f945",
+    "VALIDATION_TIMESTAMP": "2026-09-08T05:00:35.310357+00:00",
+    "name": "Undo title leaves preceding position edit intact",
+    "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"Project reference\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "f62687609a556dff204fc6939416c11abd45f945",
+    "VALIDATION_TIMESTAMP": "2026-09-08T05:00:35.313912+00:00",
+    "name": "Shared Inspector refreshes after Undo",
+    "expression": "document.querySelector(\"#selection-inspector input:not([type=number])\").value===\"Project reference\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "f62687609a556dff204fc6939416c11abd45f945",
+    "VALIDATION_TIMESTAMP": "2026-09-08T05:00:35.510743+00:00",
+    "name": "Redo restores exact safe title",
+    "expression": "JSON.stringify([...document.querySelectorAll(\"[data-canvas-node]\")].map(e=>({id:e.dataset.canvasNode,title:e.querySelector(\"strong\").textContent,x:e.style.left,y:e.style.top})))===\"[{\\\"id\\\":\\\"project-node\\\",\\\"title\\\":\\\"<b>Creator draft</b>\\\",\\\"x\\\":\\\"144px\\\",\\\"y\\\":\\\"90px\\\"},{\\\"id\\\":\\\"note-node\\\",\\\"title\\\":\\\"Local composition note\\\",\\\"x\\\":\\\"430px\\\",\\\"y\\\":\\\"230px\\\"}]\"",
+    "passed": true,
+    "value": true
+  }
+]
