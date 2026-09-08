@@ -1,0 +1,13 @@
+I’ll read the handoff and current diff, add the stale-guidance regression, and capture RED before changing the two localization values. Then I’ll capture focused GREEN and append the review and handoff corrections.
+The restricted-item branch is intact. The existing EN and zh stale labels lack refresh guidance, and the tests already cover all five states. I’ll preserve that coverage and add a locale-specific regression that checks the guidance, protected-field exclusion, and absence of item actions.
+RED captured the expected failure in both locales: 95 passed and 2 failed solely on the missing guidance. I’ve extended the two existing localization values and updated the earlier correction test’s exact stale-label expectation. Focused GREEN is running; the component branch and five states are unchanged.
+Focused GREEN passed all 97 tests, retaining all 95 prior identities and adding the two locale cases. I’ve appended the review and handoff corrections. I’m now verifying that only the three authorized worktree files changed and that HEAD, index, and historical evidence are preserved.
+Completed the bounded correction.
+
+- Added EN/zh regression; real RED: 95 passed, 2 failed.
+- Extended only existing stale localization values; focused GREEN: 97/97 passed.
+- Preserved the real branch fix, all five states, and original tests.
+- Appended review and [handoff](/tmp/FRONTEND_WAVE2_RENDER_ARTIFACT_METADATA_ACCESS_CORRECTION_V1/WRITER_HANDOFF.md); historical evidence preserved.
+- Verified only the three authorized worktree files changed; HEAD/index and other inventoried paths unchanged.
+
+Final gates and browser verification remain Hermes’s responsibility.

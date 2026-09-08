@@ -1,0 +1,143 @@
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ✓ src/product/render-browser/source.test.ts (16 tests) 36ms
+ ❯ src/product/render-browser/RenderBrowser.test.tsx (26 tests | 1 failed) 1184ms
+   × RenderBrowser observability workflow > does not serialize denied Artifact metadata in an available collection 169ms
+     → protected Artifact id: expected '<section class="ff-render-detail-sect…' not to contain 'artifact-restricted-ordinary'
+     → protected Artifact name: expected '<section class="ff-render-detail-sect…' not to contain 'Restricted courtyard preview'
+     → protected Artifact type: expected '<section class="ff-render-detail-sect…' not to contain 'restricted-media-type'
+     → protected Artifact availability: expected '<section class="ff-render-detail-sect…' not to contain 'RESTRICTED_PROCESSING'
+     → protected Artifact version: expected '<section class="ff-render-detail-sect…' not to contain 'restricted-artifact-v9'
+     → protected Artifact taskId: expected '<section class="ff-render-detail-sect…' not to contain 'task-connected'
+   ✓ RenderBrowser observability workflow > uses explicit provider injection and remains usable through StrictMode adapter registration replay 63ms
+   ✓ RenderBrowser observability workflow > shows supplied summary data, opaque unknown status, valid progress and current-snapshot disclosure without actions 21ms
+   ✓ RenderBrowser observability workflow > searches ID/name, filters only source-supported literal statuses, sorts stably and keeps Reset focusable 45ms
+   ✓ RenderBrowser observability workflow > opens read-only task/attempt/failure/Artifact metadata and restores launcher focus without exposing URLs 54ms
+   ✓ RenderBrowser observability workflow > distinguishes missing attempts/Artifacts from empty and bounded inspectable metadata 53ms
+   ✓ RenderBrowser observability workflow > retains mismatched progress units and missing totals literally without deriving a percentage 119ms
+   ✓ RenderBrowser observability workflow > uses one stable Refresh/Cancel/Retry control, preserves filters, drops cancelled replies and never steals moved focus 37ms
+   ✓ RenderBrowser observability workflow > clears old content for a safe unavailable receipt and keeps retry available 22ms
+   ✓ RenderBrowser observability workflow > clears old content for a safe denied receipt and keeps retry available 28ms
+   ✓ RenderBrowser observability workflow > clears old content for a safe unknown receipt and keeps retry available 28ms
+   ✓ RenderBrowser observability workflow > clears old content for a safe unsupported receipt and keeps retry available 21ms
+   ✓ RenderBrowser observability workflow > clears old content for a safe error receipt and keeps retry available 19ms
+   ✓ RenderBrowser observability workflow > clears old content for a safe stale receipt and keeps retry available 18ms
+   ✓ RenderBrowser observability workflow > distinguishes invalid relationships from invalid returned content and never retains stale detail 24ms
+   ✓ RenderBrowser observability workflow > shows detail-not-found after a successful refresh removes the inspected Render 37ms
+   ✓ RenderBrowser observability workflow > retires a pending valid reply on principalId change 13ms
+   ✓ RenderBrowser observability workflow > retires a pending valid reply on tenantId change 17ms
+   ✓ RenderBrowser observability workflow > retires a pending valid reply on sessionId change 12ms
+   ✓ RenderBrowser observability workflow > retires a pending valid reply on projectId change 13ms
+   ✓ RenderBrowser observability workflow > retires a pending read under StrictMode Selection ownership and rejects its late success 21ms
+   ✓ RenderBrowser observability workflow > retires pending reads on access/source replacement and unmount 118ms
+   ✓ RenderBrowser observability workflow > clears ready data and detail on access, agreed binding and adapter replacement under StrictMode 142ms
+   ✓ RenderBrowser observability workflow > never queries initially denied or unknown access, including a host-relabelled test key 23ms
+   ✓ RenderBrowser observability workflow > rebinds only to a fresh pageshow Selection owner after clearing ready data 27ms
+   ✓ RenderBrowser observability workflow > is unavailable with no injected source and localizes the complete workflow in Chinese 34ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/product/render-browser/RenderBrowser.test.tsx > RenderBrowser observability workflow > does not serialize denied Artifact metadata in an available collection
+AssertionError: protected Artifact id: expected '<section class="ff-render-detail-sect…' not to contain 'artifact-restricted-ordinary'
+
+Expected: "artifact-restricted-ordinary"
+Received: "<section class="ff-render-detail-section"><h3>Artifacts</h3><p>Showing bounded Artifact metadata; more may exist.</p><ul class="ff-render-artifacts"><li><div><strong>Restricted courtyard preview</strong><code>artifact-restricted-ordinary</code></div><span class="ff-badge ff-badge--warning">Metadata denied</span><div class="ff-property-row"><span>Type</span><div><span>restricted-media-type</span></div></div><div class="ff-property-row"><span>Source availability</span><div><span>RESTRICTED_PROCESSING</span></div></div><div class="ff-property-row"><span>Artifact version</span><div><span>restricted-artifact-v9</span></div></div><div class="ff-property-row"><span>Explicit task link</span><div><code>task-connected</code></div></div><p>Metadata inspection does not grant Artifact read access. No independently verified typed Artifact destination is available.</p></li></ul></section>"
+
+ ❯ src/product/render-browser/RenderBrowser.test.tsx:74:107
+     72|     expect(within(dialog).getByText('Related task').parentElement?.tex…
+     73|     for (const [field, value] of Object.entries(protectedArtifact)) {
+     74|       if (field !== 'metadataAccess') expect.soft(artifacts.outerHTML,…
+       |                                                                                                           ^
+     75|     }
+     76|     expect(artifacts.querySelector('a, button, input, [title], [aria-l…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  src/product/render-browser/RenderBrowser.test.tsx > RenderBrowser observability workflow > does not serialize denied Artifact metadata in an available collection
+AssertionError: protected Artifact name: expected '<section class="ff-render-detail-sect…' not to contain 'Restricted courtyard preview'
+
+Expected: "Restricted courtyard preview"
+Received: "<section class="ff-render-detail-section"><h3>Artifacts</h3><p>Showing bounded Artifact metadata; more may exist.</p><ul class="ff-render-artifacts"><li><div><strong>Restricted courtyard preview</strong><code>artifact-restricted-ordinary</code></div><span class="ff-badge ff-badge--warning">Metadata denied</span><div class="ff-property-row"><span>Type</span><div><span>restricted-media-type</span></div></div><div class="ff-property-row"><span>Source availability</span><div><span>RESTRICTED_PROCESSING</span></div></div><div class="ff-property-row"><span>Artifact version</span><div><span>restricted-artifact-v9</span></div></div><div class="ff-property-row"><span>Explicit task link</span><div><code>task-connected</code></div></div><p>Metadata inspection does not grant Artifact read access. No independently verified typed Artifact destination is available.</p></li></ul></section>"
+
+ ❯ src/product/render-browser/RenderBrowser.test.tsx:74:107
+     72|     expect(within(dialog).getByText('Related task').parentElement?.tex…
+     73|     for (const [field, value] of Object.entries(protectedArtifact)) {
+     74|       if (field !== 'metadataAccess') expect.soft(artifacts.outerHTML,…
+       |                                                                                                           ^
+     75|     }
+     76|     expect(artifacts.querySelector('a, button, input, [title], [aria-l…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  src/product/render-browser/RenderBrowser.test.tsx > RenderBrowser observability workflow > does not serialize denied Artifact metadata in an available collection
+AssertionError: protected Artifact type: expected '<section class="ff-render-detail-sect…' not to contain 'restricted-media-type'
+
+Expected: "restricted-media-type"
+Received: "<section class="ff-render-detail-section"><h3>Artifacts</h3><p>Showing bounded Artifact metadata; more may exist.</p><ul class="ff-render-artifacts"><li><div><strong>Restricted courtyard preview</strong><code>artifact-restricted-ordinary</code></div><span class="ff-badge ff-badge--warning">Metadata denied</span><div class="ff-property-row"><span>Type</span><div><span>restricted-media-type</span></div></div><div class="ff-property-row"><span>Source availability</span><div><span>RESTRICTED_PROCESSING</span></div></div><div class="ff-property-row"><span>Artifact version</span><div><span>restricted-artifact-v9</span></div></div><div class="ff-property-row"><span>Explicit task link</span><div><code>task-connected</code></div></div><p>Metadata inspection does not grant Artifact read access. No independently verified typed Artifact destination is available.</p></li></ul></section>"
+
+ ❯ src/product/render-browser/RenderBrowser.test.tsx:74:107
+     72|     expect(within(dialog).getByText('Related task').parentElement?.tex…
+     73|     for (const [field, value] of Object.entries(protectedArtifact)) {
+     74|       if (field !== 'metadataAccess') expect.soft(artifacts.outerHTML,…
+       |                                                                                                           ^
+     75|     }
+     76|     expect(artifacts.querySelector('a, button, input, [title], [aria-l…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  src/product/render-browser/RenderBrowser.test.tsx > RenderBrowser observability workflow > does not serialize denied Artifact metadata in an available collection
+AssertionError: protected Artifact availability: expected '<section class="ff-render-detail-sect…' not to contain 'RESTRICTED_PROCESSING'
+
+Expected: "RESTRICTED_PROCESSING"
+Received: "<section class="ff-render-detail-section"><h3>Artifacts</h3><p>Showing bounded Artifact metadata; more may exist.</p><ul class="ff-render-artifacts"><li><div><strong>Restricted courtyard preview</strong><code>artifact-restricted-ordinary</code></div><span class="ff-badge ff-badge--warning">Metadata denied</span><div class="ff-property-row"><span>Type</span><div><span>restricted-media-type</span></div></div><div class="ff-property-row"><span>Source availability</span><div><span>RESTRICTED_PROCESSING</span></div></div><div class="ff-property-row"><span>Artifact version</span><div><span>restricted-artifact-v9</span></div></div><div class="ff-property-row"><span>Explicit task link</span><div><code>task-connected</code></div></div><p>Metadata inspection does not grant Artifact read access. No independently verified typed Artifact destination is available.</p></li></ul></section>"
+
+ ❯ src/product/render-browser/RenderBrowser.test.tsx:74:107
+     72|     expect(within(dialog).getByText('Related task').parentElement?.tex…
+     73|     for (const [field, value] of Object.entries(protectedArtifact)) {
+     74|       if (field !== 'metadataAccess') expect.soft(artifacts.outerHTML,…
+       |                                                                                                           ^
+     75|     }
+     76|     expect(artifacts.querySelector('a, button, input, [title], [aria-l…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  src/product/render-browser/RenderBrowser.test.tsx > RenderBrowser observability workflow > does not serialize denied Artifact metadata in an available collection
+AssertionError: protected Artifact version: expected '<section class="ff-render-detail-sect…' not to contain 'restricted-artifact-v9'
+
+Expected: "restricted-artifact-v9"
+Received: "<section class="ff-render-detail-section"><h3>Artifacts</h3><p>Showing bounded Artifact metadata; more may exist.</p><ul class="ff-render-artifacts"><li><div><strong>Restricted courtyard preview</strong><code>artifact-restricted-ordinary</code></div><span class="ff-badge ff-badge--warning">Metadata denied</span><div class="ff-property-row"><span>Type</span><div><span>restricted-media-type</span></div></div><div class="ff-property-row"><span>Source availability</span><div><span>RESTRICTED_PROCESSING</span></div></div><div class="ff-property-row"><span>Artifact version</span><div><span>restricted-artifact-v9</span></div></div><div class="ff-property-row"><span>Explicit task link</span><div><code>task-connected</code></div></div><p>Metadata inspection does not grant Artifact read access. No independently verified typed Artifact destination is available.</p></li></ul></section>"
+
+ ❯ src/product/render-browser/RenderBrowser.test.tsx:74:107
+     72|     expect(within(dialog).getByText('Related task').parentElement?.tex…
+     73|     for (const [field, value] of Object.entries(protectedArtifact)) {
+     74|       if (field !== 'metadataAccess') expect.soft(artifacts.outerHTML,…
+       |                                                                                                           ^
+     75|     }
+     76|     expect(artifacts.querySelector('a, button, input, [title], [aria-l…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  src/product/render-browser/RenderBrowser.test.tsx > RenderBrowser observability workflow > does not serialize denied Artifact metadata in an available collection
+AssertionError: protected Artifact taskId: expected '<section class="ff-render-detail-sect…' not to contain 'task-connected'
+
+Expected: "task-connected"
+Received: "<section class="ff-render-detail-section"><h3>Artifacts</h3><p>Showing bounded Artifact metadata; more may exist.</p><ul class="ff-render-artifacts"><li><div><strong>Restricted courtyard preview</strong><code>artifact-restricted-ordinary</code></div><span class="ff-badge ff-badge--warning">Metadata denied</span><div class="ff-property-row"><span>Type</span><div><span>restricted-media-type</span></div></div><div class="ff-property-row"><span>Source availability</span><div><span>RESTRICTED_PROCESSING</span></div></div><div class="ff-property-row"><span>Artifact version</span><div><span>restricted-artifact-v9</span></div></div><div class="ff-property-row"><span>Explicit task link</span><div><code>task-connected</code></div></div><p>Metadata inspection does not grant Artifact read access. No independently verified typed Artifact destination is available.</p></li></ul></section>"
+
+ ❯ src/product/render-browser/RenderBrowser.test.tsx:74:107
+     72|     expect(within(dialog).getByText('Related task').parentElement?.tex…
+     73|     for (const [field, value] of Object.entries(protectedArtifact)) {
+     74|       if (field !== 'metadataAccess') expect.soft(artifacts.outerHTML,…
+       |                                                                                                           ^
+     75|     }
+     76|     expect(artifacts.querySelector('a, button, input, [title], [aria-l…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 41 passed (42)
+   Start at  03:47:44
+   Duration  3.07s (transform 807ms, setup 0ms, collect 1.31s, tests 1.22s, environment 525ms, prepare 228ms)
+
+JSON report written to /tmp/FRONTEND_WAVE2_RENDER_ARTIFACT_METADATA_ACCESS_CORRECTION_V1/red-01/tests.json

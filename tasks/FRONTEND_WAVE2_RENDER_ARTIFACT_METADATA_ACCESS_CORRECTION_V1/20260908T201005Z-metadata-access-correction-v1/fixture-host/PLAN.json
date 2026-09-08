@@ -1,0 +1,45 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "root": "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_RENDER_ARTIFACT_METADATA_ACCESS_CORRECTION_V1/browser-prep",
+  "snapshot": "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_RENDER_ARTIFACT_METADATA_ACCESS_CORRECTION_V1/final-validation-01/snapshot",
+  "tree_file": "../final-validation-01/FINAL_TREE.txt",
+  "tree_binding_key": "FINAL_EXACT_IMPLEMENTATION_TREE",
+  "preparation": "prepare_fixture_host.py",
+  "host_template": "entry.template.tsx",
+  "build_binding": "bind_build.py",
+  "runner": "run_browser.py",
+  "smoke": "browser/render_smoke.py",
+  "fixture_server": "browser/fixture-server.py",
+  "fixture_opt_in": "/operations/renders?metadataFixture=1",
+  "ordinary_route": "/operations/renders",
+  "ports": {"fixture_loopback": 4198, "chromium_cdp_loopback": 9269},
+  "matrix": [
+    {"locale": "en", "viewport": [1440,1000]},
+    {"locale": "en", "viewport": [390,844]},
+    {"locale": "zh-CN", "viewport": [390,844]}
+  ],
+  "cases": [
+    "Plain final application unconfigured and unavailable",
+    "Mixed inspectable, denied, unknown, stale, unavailable items with identifiable ordinary non-secret values",
+    "Same IDs visible then denied, unknown, stale, unavailable through native Refresh renders reads (never execution retry)",
+    "Full raw item DOM attributes/title/aria/data/hidden/link plus textContent absence of id/name/type/availability/version/taskId",
+    "Allowed metadata visible; restricted identities absent across artifact section; all-restricted section excludes taskId",
+    "Native close pointer and Escape return launcher focus",
+    "Native cancel followed by intentionally late successful response",
+    "Pending response followed by source access denied, unknown, and session replacement; old response cannot restore content",
+    "No artifact URL, download event, mutation controls or HTTP mutation; dashboard GET is only simulated application HTTP API read"
+  ],
+  "outputs_per_unique_attempt": ["TREE_BINDING.json", "BUILD_BINDING.json", "FIXTURE_HOST_INPUTS.json", "PLAN.json", "HEALTH.json", "SERVED_ARTIFACTS.json", "HTTP_REQUESTS.jsonl", "NATIVE_COMMANDS.json", "NATIVE_CHECKS.json", "BROWSER_HTTP_REQUESTS.json", "BROWSER_DIAGNOSTICS.json", "APPLICATION_TRAFFIC.json", "ASSISTANCE.json", "*-DOM.json", "*-FIXTURE_READ_CALLS.json", "*.png", "fixture.log", "chrome.log", "smoke.log", "TEARDOWN.json", "RESULT.json on success", "FAILURE.txt on smoke failure"],
+  "disclosures": [
+    "External fixture provider wraps exact final registered route tree, not a substitute demo route",
+    "DOM locators and scroll/target annotations; locale change uses DOM event helper; source/context/delay controls are explicit fixture assistance",
+    "Focus emulation enabled; real headless Chromium desktop viewport sizes, not physical mobile/touch/screenreader acceptance",
+    "Shared task-courtyard independently authorized at task/attempt level and on inspectable item; per-restricted-item subtree must omit it, and all-restricted artifact section must omit it",
+    "Snapshot source and external host/build hashes bound; served census compares each build file byte hash",
+    "No backend, EP19, production auth/access integration, credentials, remote, source/dependency/dist/static edits",
+    "Source-owner/session replacement covered; interaction owner retirement beyond this remains parent component gate responsibility"
+  ],
+  "execution_owner": "parent",
+  "independent_review": "REQUIRED",
+  "preparation_verification": "File writes verified and automatic Python syntax lint only; no host preparation, build, browser, server or gate executed"
+}

@@ -1,0 +1,11 @@
+{
+  "implementation_tree": "c72044119a32be6417ed8d43282f1f37c7f51e00",
+  "inspection_method": "Hermes directly viewed actual Chromium PNG outputs",
+  "screenshots": [
+    {"path":"en-1440-mixed.png","observed":"Inspectable item shows name, ID, type, availability, version and task link. Four subsequent items display only denied/unknown/stale-read-refresh/unavailable badges. No artifact action shown."},
+    {"path":"zh-CN-390-all-stale.png","observed":"Five generic Chinese stale badges include refresh-Render-data guidance. Protected artifact fields are absent from visible artifact section; independent task ID remains in attempts above."},
+    {"path":"en-390-all-unavailable.png","observed":"Five generic Metadata unavailable badges. No artifact fields/actions visible. Independent task metadata above remains visible."}
+  ],
+  "limitations": ["Screenshots are scrolled to artifact section: dialog title/close control is above visible scroll position. Native close/Escape/focus tests are separate evidence, not a claim of persistent header.","Narrow task status wraps mid-word and detail labels are small; no broad mobile redesign or device certification performed.","Visible pixels do not prove hidden DOM non-disclosure; serialized DOM assertions provide that separate evidence."],
+  "independent_review": "REQUIRED"
+}

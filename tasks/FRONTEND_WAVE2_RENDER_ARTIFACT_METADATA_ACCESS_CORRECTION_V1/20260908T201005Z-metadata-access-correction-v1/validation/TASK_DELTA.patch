@@ -1,0 +1,415 @@
+diff --git a/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md b/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+index 24f8d1190e69d9ff2daae2ea1a93eef6f4c8270e..1b2bbfc1299c111407d397307ff6e83242ec8dfe 100644
+--- a/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
++++ b/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+@@ -156,7 +156,7 @@ list/access methods, `frontend/src/pages/RenderJobDashboard.tsx`, and
+ | Required canonical authority | Render owns job lifecycle; Execution owns attempts/runtime; policy/access owners authorize actions |
+ | Existing backend owner | Scoped render create/get/list/execution endpoints exist. `RenderJobResponse` is exactly `id`, `projectId`, `timelineSnapshotId`, `profile`, and string `status`; other status-history/metrics endpoints are separate. |
+ | Missing projection/command | A separately agreed Project-scoped query for coherent Render/source/task/attempt/progress/failure/version/time/completeness relationships, plus independent Artifact-target access. Action commands, provider/runtime detail, and canonical writes remain separate and unavailable. |
+-| Temporary frontend behavior | A strict FRONTEND UNAGREED read projection shows only supplied safe fields and explicit links. Unknown literal status remains visible but never implies success/failure/action. Invalid progress is not clamped; no progress/ETA/order/history is synthesized. |
++| Temporary frontend behavior | A strict FRONTEND UNAGREED read projection shows only supplied safe fields and explicit links. Artifact collection availability does not authorize item metadata: only explicit inspectable metadataAccess emits name/id/type/availability/version/taskId; denied/unknown/unavailable/stale items emit a generic state-only placeholder. Restricted backend responses MUST trim protected fields; DOM omission is not a confidentiality boundary. Unknown literal status remains visible but never implies success/failure/action. Invalid progress is not clamped; no progress/ETA/order/history is synthesized. |
+ | Blocking/nonblocking | **Nonblocking** for basic list/detail status; blocks richer action controls and Operations tabs. |
+ | Recommended owner lane | Render / Execution application query |
+ 
+@@ -409,7 +409,13 @@ Receipts reject mismatched ownership, foreign Project items, duplicate Render/at
+ 
+ Only local ID/name search, source-supported literal status filter, stable name/ID sort, focusable reset, read-only detail and current-snapshot inspection are implemented. Filters and reasonable list position survive refresh/retry; shared dialog close returns focus. Missing, partial, empty, bounded, denied, unavailable, unknown, stale, inspectable-metadata, detail-not-found, no-match, and empty-snapshot states remain distinct. Frontend fetch time is separately labelled and never substitutes for source time. No polling, timer, animation, fake total/pagination, generated attempt history, arbitrary URL/storage/signed URL, Artifact download/open, render submit/cancel/retry/rerender, delete/publish, Workflow/Timeline write, notification, billing, quota, or canonical mutation exists.
+ 
+-Artifact metadata inspection never grants Artifact read. A future open action requires both an existing typed application route/type and an independently verified current target-access receipt; neither is established here. One future bounded integration may pin one frontend tree/build and one separately agreed backend Project-read adapter, use controlled authorized and denied identities plus current/bounded/stale/error projections, validate zero writes and independently test any Artifact destination. This is not a full-platform readiness prerequisite and does not authorize backend work.
++Artifact collection `artifacts.state=available` only permits collection presentation; every item still requires explicit `metadataAccess=inspectable` after outer EffectiveAccess, host binding, scope/request identity, schema and relationship checks. Only then may its supplied name, id, type, availability, version and taskId appear. Item denied/unknown/unavailable/stale states produce generic localized state-only placeholders, with no protected values in visible text, title, aria-label, data attributes, links or hidden DOM. Internal React keys may retain item identity. Missing or invalid metadataAccess and invalid task relationships remain invalid responses; no default-to-inspectable conversion exists. A task ID may independently appear in an authorized task/attempt section; that does not authorize its disclosure in a restricted Artifact subtree.
++
++Refresh clears the prior snapshot before reading. Same-ID inspectable-to-denied/unknown/unavailable/stale transitions remove old metadata, including after reopening detail; unavailable/stale/error/cancelled reads cannot fill from cache. Late aborted or superseded success cannot restore it; only a new explicit valid inspectable receipt can. Principal/account identity (principalId), tenant, session, Project, access, binding, adapter and Selection-owner changes clear details and abort/retire old reads. The proposed scope has no separate accountId field.
++
++Restricted backends **MUST trim protected metadata from responses** according to authenticated item access. Frontend DOM omission is **not a confidentiality boundary**: this unagreed defensive consumer schema can still accept protected fields on restricted items, so those bytes would remain observable in transport/runtime. A real backend contract must agree a trimmed response and its frontend adapter representation before integration. This correction establishes neither that contract nor real authorization enforcement.
++
++Artifact metadata inspection never grants Artifact content read. A future open action requires both an existing typed application route/type and an independently verified current target-access receipt; neither is established here. One future bounded integration may pin one frontend tree/build and one separately agreed backend Project-read adapter, use controlled authorized and denied identities plus current/bounded/stale/error projections, and validate zero writes. Include mixed inspectable/restricted items in an available collection, all four restricted states, same-ID allow-to-restricted transitions, late old allow after denial, valid new allow, refresh failure/cancel, scope/owner/access retirement, backend response trimming, invalid item access/relationships and independent task metadata. Independently test any subsequently authorized Artifact destination. This is not a full-platform readiness prerequisite and does not authorize backend work.
+ 
+ 
+ ### V3 Workflow local-sketch consumption note — existing UXW1-002 / FB-GAP-002
+diff --git a/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv b/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+index 75e0fb5f5c8e3dad3c4a4bb6232ea53eff3559ed..f730c8b879901a6d6690a3a108a6164611297189 100644
+--- a/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
++++ b/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+@@ -10,5 +10,5 @@ UXW2-NTF-001	Read a durable user inbox, unread count, and mark one/all notificat
+ UXW2-NTF-002	Configure notification subscriptions, preferences, and channel bindings	FB-GAP-011; reference 86d6aef94fd5e58da552e97c11473cff6eca734e; Binding create returns three fields not full binding; subscription update returns three fields and defaults can contain null; batch returns List not results/errors; preference GET/PUT omit declared identities/full fields and Partial updates can default flags to true	Align existing preference/subscription/binding DTOs and update/partial-failure semantics before any UI integration	Principal-scoped current-user settings; backend controls critical-event rules and channel validation; defined non-disclosing denied/validation/missing outcomes; public DTO must not leak destination secrets	BLOCKS_NOTIFICATION_SETTINGS	NO	YES	No settings UI or transport calls; design/contract candidate remains candidate	Settings must not silently reset flags or report nonexistent verification	Future contract tests verify every request/response/nullability/update-preservation rule, batch failure semantics, critical restrictions, destination redaction and ownership; no live delivery in frontend mocks	PROPOSED_SOURCE_CONFIRMED_NONBLOCKING_FOR_REVIEW
+ UXW2-NTF-003	Inspect/configure notification event definitions and delivery records; prepare explicit administrative notification input	FB-GAP-012; reference 86d6aef94fd5e58da552e97c11473cff6eca734e; Frontend event-definitions/delivery-logs/providers differ from backend events/deliveries/provider-status; list/object/metrics envelopes differ; detail ignores notificationId; publishEvent sends type/tenantId but backend requires eventType/subjectId	Accepted admin event/delivery queries and exact target/publish input contract; no speculative announcement workflow	Server-enforced administrator and tenant/resource scope; explicit filtered IDs and pagination capabilities; preserve typed forbidden/not-found/unsupported failures; existing FB-GAP-002 applies	BLOCKS_NOTIFICATION_ADMIN_INTEGRATION	NO	YES	No admin notification UI or calls added; absent UI alone is not an endpoint gap	Admin labels and guessed target IDs cannot confer authority or prove a notification was sent	Future contract and authorization tests resolve route/payload/envelope differences, exact-ID detail filtering, non-disclosing cross-tenant denial and explicit target validation; separate authorization for announcements/targeting	PROPOSED_SOURCE_CONFIRMED_NONBLOCKING_FOR_REVIEW
+ UXW2-NTF-004	Receive a real email/SMS/webhook notification or verify/test/retry a bound channel	FB-GAP-013; reference 86d6aef94fd5e58da552e97c11473cff6eca734e; Email/SMS/Webhook providers return SENT without external transport; binding verify writes VERIFIED without challenge; test only checks/audits and Controller says TEST_SENT; retry only returns RETRY_QUEUED; Novu transport code exists but live integration unestablished	Truthful simulated/accepted/sent/delivered/failed boundaries and separately authorized real delivery/verification/retry integration	Authenticated scoped verified destination and explicit delivery/test authority; no browser/Agent escalation; real failures cannot become empty or success; no secret exposure	BLOCKS_REAL_NOTIFICATION_DELIVERY	NO	YES	Local provider SENT and persisted MOCK are simulation, not external delivery; this task sends nothing	Users must not mistake source stubs or admin receipts for delivery	Future backend-owned controlled integration validates actual transport/challenge/attempt and readback, authorization, failure/retry semantics, destination safety and simulated labeling; actual external tests require separate consent	PROPOSED_SOURCE_CONFIRMED_NONBLOCKING_FOR_REVIEW
+-FB-GAP-005	Discover/filter/sort/inspect Project-scoped Render observability, including explicit task/attempt/progress/failure/version/time/completeness relationships and separately governed Artifact metadata access	Existing RenderJobSummary/API supplies only a five-field summary; no accepted coherent frontend adapter/lifecycle envelope or task-attempt-artifact observability contract exists; Artifact visibility is not Artifact read permission; reuse FB-GAP-002/004/005/006	One separately agreed controlled Project read projection plus independent typed Artifact target access when an existing application route/type is actually supported; zero Render, task, Artifact, Timeline or canonical writes	FRONTEND UNAGREED only: echoed principal/tenant/session/Project/request; host binds its separately agreed read key to matching SERVER EffectiveAccess; bounded/complete projection version/freshness/status-filter support; stable Render/source/task/attempt/Artifact IDs, literal statuses, optional supplied times/progress/failures/versions, explicit parent/retry/task links and safe Artifact metadata states; no fixed endpoint, permission key, server DTO, URL or storage location invented	BLOCKS_REAL_OPERATIONS_RENDER_ADAPTER	NO	YES	Ordinary route is unavailable and sends no request. Tests/external fixture host explicitly inject a complete identity-scoped simulated read source; no URL switch, HTTP, polling, persistence, action, fallback or canonical write. Unknown source status remains literal; invalid progress is not clamped	Complete the current Operations read workflow without global joins, fake totals/history/progress/ETA or task visibility being mistaken for Artifact access	Pin one frontend tree/build and one separately agreed backend Project-read adapter; controlled authorized/denied identities and current/bounded/stale/error data; validate exact access binding, receipt ownership, duplicate IDs, numeric/time/bounds, task-attempt-artifact relations, cancellation/Selection-owner retirement, unknown statuses and nondisclosure. Independently authorize any existing typed Artifact destination; read back zero writes. This bounded integration is not a full-platform prerequisite	FRONTEND_CONSUMER_IMPLEMENTED_REAL_INTEGRATION_NOT_ESTABLISHED
++FB-GAP-005	Discover/filter/sort/inspect Project-scoped Render observability, including explicit task/attempt/progress/failure/version/time/completeness relationships and separately governed Artifact metadata access	Existing RenderJobSummary/API supplies only a five-field summary; no accepted coherent frontend adapter/lifecycle envelope or task-attempt-artifact observability contract exists; Artifact visibility is not Artifact read permission; reuse FB-GAP-002/004/005/006	One separately agreed controlled Project read projection plus independent typed Artifact target access when an existing application route/type is actually supported; zero Render, task, Artifact, Timeline or canonical writes	FRONTEND UNAGREED only: echoed principal/tenant/session/Project/request; host binds its separately agreed read key to matching SERVER EffectiveAccess; bounded/complete projection version/freshness/status-filter support; stable Render/source/task/attempt/Artifact IDs, literal statuses, optional supplied times/progress/failures/versions, explicit parent/retry/task links and safe Artifact metadata states; no fixed endpoint, permission key, server DTO, URL or storage location invented; collection artifacts.state=available does not grant item metadata access: only explicit metadataAccess=inspectable allows supplied name/id/type/availability/version/taskId after outer access/identity/relationship checks; denied/unknown/unavailable/stale items are state-only; missing/invalid item access is rejected; restricted backends MUST trim protected response fields, DOM omission is NOT a confidentiality boundary; trimmed server response and adapter representation remain to be agreed	BLOCKS_REAL_OPERATIONS_RENDER_ADAPTER	NO	YES	Ordinary route is unavailable and sends no request. Tests/external fixture host explicitly inject a complete identity-scoped simulated read source; no URL switch, HTTP, polling, persistence, action, fallback or canonical write. Unknown source status remains literal; invalid progress is not clamped. Item permission transitions clear old metadata; refresh clears the old snapshot; unavailable/stale/error/cancelled or late old reads cannot restore it; only a new valid inspectable response restores metadata. Principal/account (principalId), tenant/session/Project, access/binding/adapter and Selection-owner changes clear details and abort reads; no separate accountId exists in this proposed scope	Complete the current Operations read workflow without global joins, fake totals/history/progress/ETA or task visibility being mistaken for Artifact access	Pin one frontend tree/build and one separately agreed backend Project-read adapter; controlled authorized/denied identities and current/bounded/stale/error data; validate exact access binding, receipt ownership, duplicate IDs, numeric/time/bounds, task-attempt-artifact relations, cancellation/Selection-owner retirement, unknown statuses and nondisclosure. Independently authorize any existing typed Artifact destination; read back zero writes. This bounded integration is not a full-platform prerequisite Include pinned mixed available collections with all five item access states, same-ID inspectable-to-restricted transitions, denied then late old success then new valid allow, refresh error/cancel/stale, scope/owner replacement, missing/invalid metadataAccess, invalid relationships, backend response trimming and full Artifact subtree nondisclosure while independently authorized task metadata remains visible.	FRONTEND_CONSUMER_IMPLEMENTED_REAL_INTEGRATION_NOT_ESTABLISHED
+ FB-GAP-007	Discover and inspect Project Scenes and explicitly related Shots	No accepted Production aggregate/query exists; reuse FB-GAP-001/002/004/008 for Project relationship, effective access, resource projections and safe references	One separately agreed controlled Project read projection; no Production writes	FRONTEND UNAGREED only: echoed principal/tenant/session/Workspace/Project/request; host explicitly binds its agreed read-projection key to the matching SERVER EffectiveAccess entry; stable Scene/Shot IDs, optional supplied name/description/status/version, explicit relations, scoped safe shared references, complete/bounded metadata and projection version; no fixed endpoint, permission key or server DTO invented	BLOCKS_REAL_PRODUCTION_SCENE_SHOT_INTEGRATION	NO	YES	Ordinary registered route is unavailable and sends no request. Tests/external host may explicitly inject an identity-supplied read-only fixture with a clearly test-only unagreed binding; no URL opt-in, HTTP, storage, persistence, fallback or canonical change	Creators can discover supplied production structure without client joins or fabricated production truth	Pin one frontend tree/build and separately agreed backend version/adapter; controlled authorized and denied identities; validate the exact host binding, all required identity fields before request, ownership/relations/bounds/version, nondisclosing denied/error/stale outcomes, InteractionStore/source cancellation/retirement and safe destination access; zero writes and read back no mutation	FRONTEND_CONSUMER_IMPLEMENTED_REAL_INTEGRATION_NOT_ESTABLISHED
+diff --git a/frontend/governance/UX_WAVE_1_REVIEW.md b/frontend/governance/UX_WAVE_1_REVIEW.md
+index cb90701dc508ae0b67d46c4b4df0105598995412..d64f39c56065114615cfc0c1030fa27298b2813a 100644
+--- a/frontend/governance/UX_WAVE_1_REVIEW.md
++++ b/frontend/governance/UX_WAVE_1_REVIEW.md
+@@ -230,3 +230,26 @@ Owner adopts the V6 static review for its recorded bounded frontend-only scope.
+ The V6 review does not certify physical-device behavior, narrow-screen behavior beyond the recorded internal-scroll checks, IME behavior beyond the recorded cases, or a complete screen-reader assessment. It preserves the reported current-snapshot and reference-access limits and does not rewrite sealed V6 evidence. Historical H4 governance, tracked-dist disposition, formal Slice1C, release, deployment, and publication remain separate.
+ 
+ Current V7 work selects only the next adopted priority, Render observability. It extends the existing Operations Render browser and may reuse V6 lifecycle/safety patterns, but it does not reopen V6, authorize Workflow UX, create a backend lane, or imply acceptance. Exact V7 changes and writer checks remain external evidence pending independent review.
++
++## Bounded Artifact metadata access correction — writer RED/GREEN handoff
++
++Task: `FRONTEND_WAVE2_RENDER_ARTIFACT_METADATA_ACCESS_CORRECTION_V1`. V7 overall acceptance remains **PENDING**; this appendix records only interim writer validation. All prior report content is preserved. The historical 789-test baseline and V6-to-V7 retained 748 / removed 49 / added 41 accounting remain history, not fresh execution or current acceptance.
++
++The real denied-item regression demonstrated that an available Artifact collection rendered a denied item's name, ID, type, availability, version and task link alongside a denial badge. The minimal correction now branches before those fields render: only an explicit inspectable item emits metadata after existing outer access/binding, ownership and relationship checks; denied/unknown/unavailable/stale items emit only the existing localized state badge. No protected item values enter text, attributes, links or hidden DOM. Authorized task metadata remains independently visible in its task section. Collection-level outcomes and the existing read-only Render workflow are retained.
++
++Focused Vitest runs used the installed binary from `frontend/`, `--configLoader runner --no-cache`, and default plus JSON reporters. RED attempt `red-01`: exit 1, 42 tests = 41 passed + 1 failed, 0 skipped; the one new regression failed on six metadata-disclosure assertions before production changed. GREEN attempt `green-01`: exit 0, 91 passed, 0 failed/skipped, with an act warning in the new adapter replacement test. After an explicit response wait and added collection-level coverage, `green-02`: exit 0, 95 passed, 0 failed/skipped, no stderr warning. Counts are verified against the machine-readable reports. All 41 pre-correction focused identities remain, with 54 additions and no removals; the original RED test and its assertions remain intact.
++
++Coverage includes all five item states, mixed allowed/restricted items, same-ID permission transitions, old DOM removal at refresh, no cached fill after unavailable/stale/error/cancel, denial followed by late old success and a new valid allow, ready and pending scope/access/binding/adapter/owner replacement, abort signals, missing/invalid metadataAccess and invalid ownership/task relationships. The schema, lifecycle, fixtures, CSS and localization files required no changes. Existing FB-GAP-005 records now explicitly require backend response trimming: DOM omission is not a confidentiality boundary, and neither a real contract nor real backend integration is established.
++
++Writer evidence is prepared at `/tmp/FRONTEND_WAVE2_RENDER_ARTIFACT_METADATA_ACCESS_CORRECTION_V1/`, including raw logs, JSON reports, before/after evidence and `WRITER_HANDOFF.md`. The session filesystem permits writes only to the task worktree and `/tmp`; Hermes must copy these artifacts into the requested evidence root `/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_RENDER_ARTIFACT_METADATA_ACCESS_CORRECTION_V1`. Final engineering and browser evidence will be supplied by Hermes there after this handoff; no full-gate or browser PASS is claimed. No commit, freeze, stage, Git history/ref operation, remote operation, build, backend/EP19 test, guard change, dependency change or publication was performed. The Owner brief explicitly overrides candidate freezing for this unfrozen implementation; durable instruction alignment remains separate.
++
++
++### Stale Artifact read-refresh guidance correction — writer continuation (2026-09-09)
++
++Hermes identified a literal acceptance gap: the stale item badge named staleness but did not explain that read data must be fetched again. This continuation extends only the existing `renders.artifactStale` values in `frontend/src/localization/catalogs.ts`: EN “Metadata stale; refresh Render data to check again.” and zh “元数据已过期；请刷新渲染数据后再次检查。” The guidance refers to refreshing Render read data. It introduces no item action, render retry, key, path or framework. The real restricted-item branch is unchanged, as are all five metadataAccess states: inspectable, denied, unknown, unavailable and stale.
++
++This corrects the earlier appendix's statement that localization required no changes; that statement records the earlier implementation. The stale item now includes generic read-refresh guidance alongside its state. The earlier appendix and all historical runs remain intact.
++
++Before the catalog edit, a new behavioral regression exercised both EN and zh stale items, checking exact generic guidance, exclusion of every protected Artifact field from the serialized section, absence of item controls and render-retry guidance, and a single read without an automatic retry. Real `stale-guidance-red`: exit 1, 97 total = 95 passed + 2 failed solely on the missing guidance. After the two catalog values and the earlier correction's exact stale-label expectation changed, `stale-guidance-green`: exit 0, 97 passed, 0 failed/skipped/todo/runtime error suites across two focused files; no stderr warning. All 95 preceding focused identities remain, with 2 added and 0 removed. Original V7 test bodies/identities and assertions remain preserved; no assertion was weakened.
++
++Raw logs, JSON reports and exact commands are in the new `stale-guidance-red/` and `stale-guidance-green/` directories under `/tmp/FRONTEND_WAVE2_RENDER_ARTIFACT_METADATA_ACCESS_CORRECTION_V1/`. Additional before/after hashes, patches and preservation checks are in `stale-guidance-preservation/`; the existing writer handoff receives a separate append. Only catalogs, RenderBrowser tests and this review change in the worktree during this continuation. HEAD/index and other inventoried paths remain unchanged. No build, backend, dependency, dist/static, guard, Skill/Memory, credential or Git mutation was performed; external browser preparation and the Hermes evidence root were not touched. Final gates, browser evidence and overall acceptance remain Hermes's responsibility and pending.
+diff --git a/frontend/src/localization/catalogs.ts b/frontend/src/localization/catalogs.ts
+index 701a9e940319d6edc14218c3fcecc99a2d4562b9..e60a242c2b74d929a028d2d14ab5dd1fd179ef17 100644
+--- a/frontend/src/localization/catalogs.ts
++++ b/frontend/src/localization/catalogs.ts
+@@ -255,7 +255,7 @@ const englishNamespaces: CatalogNamespaces = {
+     'renders.artifactDenied': message('Metadata denied'),
+     'renders.artifactUnavailable': message('Metadata unavailable'),
+     'renders.artifactUnknown': message('Metadata access unknown'),
+-    'renders.artifactStale': message('Metadata stale'),
++    'renders.artifactStale': message('Metadata stale; refresh Render data to check again.'),
+     'renders.artifactType': message('Type'),
+     'renders.artifactAvailability': message('Source availability'),
+     'renders.artifactVersion': message('Artifact version'),
+@@ -816,7 +816,7 @@ const chineseNamespaces: CatalogNamespaces = {
+     'renders.artifactDenied': message('元数据访问被拒绝'),
+     'renders.artifactUnavailable': message('元数据不可用'),
+     'renders.artifactUnknown': message('元数据访问权限未知'),
+-    'renders.artifactStale': message('元数据已过期'),
++    'renders.artifactStale': message('元数据已过期；请刷新渲染数据后再次检查。'),
+     'renders.artifactType': message('类型'),
+     'renders.artifactAvailability': message('来源可用性'),
+     'renders.artifactVersion': message('制品版本'),
+diff --git a/frontend/src/product/render-browser/RenderBrowser.test.tsx b/frontend/src/product/render-browser/RenderBrowser.test.tsx
+index a32cda1e33d23b4977fa358bb85c7e3e4cdf7ad2..21772d4949e18e2a3ccae05b98d9f8401ecaf9af 100644
+--- a/frontend/src/product/render-browser/RenderBrowser.test.tsx
++++ b/frontend/src/product/render-browser/RenderBrowser.test.tsx
+@@ -7,7 +7,7 @@ import type { InteractionStore } from '../../interaction/model'
+ import { LocalizationProvider } from '../../localization'
+ import { createRendersFixture } from './fixture'
+ import { RenderBrowser, RenderBrowserProvider } from './RenderBrowser'
+-import { TEST_ONLY_RENDER_ACCESS_KEY, type RenderProgress, type RenderReadRequest, type RenderSource } from './source'
++import { TEST_ONLY_RENDER_ACCESS_KEY, type RenderArtifact, type RenderProgress, type RenderReadRequest, type RenderSource } from './source'
+ 
+ const scope = { principalId: 'principal-1', tenantId: 'tenant-1', sessionId: 'session-1', projectId: 'project-1' }
+ const HOST_ACCESS_KEY = 'host-agreed.render-observability.read'
+@@ -53,6 +53,29 @@ function Capture({ capture }: { capture: (store: InteractionStore) => void }) {
+ function setup(source: RenderSource = createRendersFixture({ scope, limit: 3 }), locale: 'en' | 'zh-CN' = 'en') { return render(<Host source={source} locale={locale} />) }
+ 
+ describe('RenderBrowser observability workflow', () => {
++  it('does not serialize denied Artifact metadata in an available collection', async () => {
++    const source = realSource()
++    const protectedArtifact = {
++      id: 'artifact-restricted-ordinary', name: 'Restricted courtyard preview', type: 'restricted-media-type',
++      availability: 'RESTRICTED_PROCESSING', version: 'restricted-artifact-v9', taskId: 'task-connected', metadataAccess: 'denied',
++    }
++    vi.spyOn(source.adapter, 'readProject').mockImplementation(async request => {
++      const result = ownedResult(request)
++      return { ...result, jobs: result.jobs.map(job => ({ ...job, artifacts: { ...job.artifacts, items: [protectedArtifact] } })) }
++    })
++    setup(source)
++    fireEvent.click(await screen.findByRole('button', { name: 'Inspect render Connected render' }))
++    const dialog = screen.getByRole('dialog', { name: 'Render details' })
++    const artifacts = within(dialog).getByRole('heading', { name: 'Artifacts', level: 3 }).parentElement!
++    expect(within(artifacts).getByText('Metadata denied')).toBeTruthy()
++    // The task remains independently authorized in its own section, never in the restricted Artifact subtree.
++    expect(within(dialog).getByText('Related task').parentElement?.textContent).toContain(protectedArtifact.taskId)
++    for (const [field, value] of Object.entries(protectedArtifact)) {
++      if (field !== 'metadataAccess') expect.soft(artifacts.outerHTML, `protected Artifact ${field}`).not.toContain(value)
++    }
++    expect(artifacts.querySelector('a, button, input, [title], [aria-label], [hidden]')).toBeNull()
++  })
++
+   it('uses explicit provider injection and remains usable through StrictMode adapter registration replay', async () => {
+     const source = realSource(); const read = vi.spyOn(source.adapter, 'readProject'); let store!: InteractionStore
+     const replay = deferred<unknown>()
+@@ -366,3 +389,235 @@ describe('RenderBrowser observability workflow', () => {
+     }
+   })
+ })
++
++const restrictedStates = ['denied', 'unknown', 'unavailable', 'stale'] as const
++const metadataLabels = {
++  inspectable: 'Inspectable metadata', denied: 'Metadata denied', unknown: 'Metadata access unknown',
++  unavailable: 'Metadata unavailable', stale: 'Metadata stale; refresh Render data to check again.',
++}
++function artifactReceipt(request: RenderReadRequest, metadataAccess: RenderArtifact['metadataAccess']) {
++  const result = ownedResult(request)
++  const artifact: RenderArtifact = {
++    id: 'artifact-permission-sample', name: 'Permission sample preview', type: 'permission-sample-media',
++    availability: 'PERMISSION_SAMPLE_READY', version: 'permission-sample-v8', taskId: 'task-connected', metadataAccess,
++  }
++  return { ...result, jobs: result.jobs.map(job => ({ ...job, artifacts: { ...job.artifacts, items: [artifact] } })) }
++}
++function artifactSection() {
++  return within(screen.getByRole('dialog', { name: 'Render details' })).getByRole('heading', { name: 'Artifacts', level: 3 }).parentElement!
++}
++function expectArtifactAbsent(root: Element) {
++  const artifact = artifactReceipt({ scope, requestId: 'assertion-only' }, 'inspectable').jobs[0].artifacts.items[0]
++  for (const [field, value] of Object.entries(artifact)) {
++    // taskId may appear independently in the authorized task/attempt sections.
++    if (field !== 'metadataAccess' && field !== 'taskId') expect(root.outerHTML, `protected Artifact ${field}`).not.toContain(value)
++  }
++}
++function expectRestrictedArtifact(state: typeof restrictedStates[number]) {
++  const section = artifactSection()
++  expectArtifactAbsent(section)
++  expect(section.outerHTML).not.toContain('task-connected')
++  expect(section.outerHTML).not.toContain('revision-connected')
++  const item = within(section).getByRole('listitem')
++  expect(item.textContent).toBe(metadataLabels[state])
++  expect(within(item).getByText(metadataLabels[state])).toBeTruthy()
++  expect(item.querySelector('a, button, input, [title], [aria-label], [hidden]')).toBeNull()
++}
++
++describe('Artifact item metadata permission boundaries', () => {
++  it.each([
++    { locale: 'en' as const, inspect: 'Inspect render Connected render', heading: 'Artifacts', guidance: 'Metadata stale; refresh Render data to check again.' },
++    { locale: 'zh-CN' as const, inspect: '检查渲染 Connected render', heading: '制品', guidance: '元数据已过期；请刷新渲染数据后再次检查。' },
++  ])('gives stale items generic read-refresh guidance in $locale without metadata or render actions', async ({ locale, inspect, heading, guidance }) => {
++    const source = realSource()
++    const read = vi.spyOn(source.adapter, 'readProject').mockImplementation(async request => artifactReceipt(request, 'stale'))
++    setup(source, locale)
++    fireEvent.click(await screen.findByRole('button', { name: inspect }))
++    const section = within(screen.getByRole('dialog')).getByRole('heading', { name: heading, level: 3 }).parentElement!
++    const item = within(section).getByRole('listitem')
++    expect.soft(item.textContent).toBe(guidance)
++    const artifact = artifactReceipt({ scope, requestId: 'assertion-only' }, 'stale').jobs[0].artifacts.items[0]
++    for (const [field, value] of Object.entries(artifact)) {
++      if (field !== 'metadataAccess') expect(section.outerHTML, `protected Artifact ${field}`).not.toContain(value)
++    }
++    expect(item.querySelector('a, button, input, [role="button"], [tabindex], [title], [aria-label], [hidden]')).toBeNull()
++    expect(item.textContent).not.toMatch(/retry|rerender|re-render|重试|重新渲染/i)
++    expect(read).toHaveBeenCalledTimes(1)
++  })
++
++  it.each(restrictedStates)('preserves the separate collection-level %s outcome', async state => {
++    const source = realSource()
++    vi.spyOn(source.adapter, 'readProject').mockImplementation(async request => {
++      const result = artifactReceipt(request, 'inspectable')
++      return { ...result, jobs: result.jobs.map(job => ({ ...job, artifacts: { state, explanation: 'Collection metadata cannot be inspected.' } })) }
++    })
++    setup(source)
++    fireEvent.click(await screen.findByRole('button', { name: 'Inspect render Connected render' }))
++    const section = artifactSection()
++    expect(within(section).getByText('Collection metadata cannot be inspected.')).toBeTruthy()
++    expect(section.querySelector('.ff-badge')?.textContent).toBe({
++      denied: 'Artifact metadata denied', unknown: 'Artifact metadata access unknown',
++      unavailable: 'Artifact metadata unavailable', stale: 'Artifact metadata stale',
++    }[state])
++    expectArtifactAbsent(section)
++    expect(within(section).queryByRole('list')).toBeNull()
++    expect(section.outerHTML).not.toContain('task-connected')
++  })
++
++  it.each(['inspectable', ...restrictedStates] as const)('renders only the permitted item content for %s', async state => {
++    const source = realSource()
++    vi.spyOn(source.adapter, 'readProject').mockImplementation(async request => artifactReceipt(request, state))
++    setup(source)
++    fireEvent.click(await screen.findByRole('button', { name: 'Inspect render Connected render' }))
++    if (state === 'inspectable') {
++      const section = artifactSection()
++      const artifact = artifactReceipt({ scope, requestId: 'assertion-only' }, state).jobs[0].artifacts.items[0]
++      for (const [field, value] of Object.entries(artifact)) {
++        if (field !== 'metadataAccess') expect(section.outerHTML).toContain(value)
++      }
++      expect(within(section).getByText(metadataLabels.inspectable)).toBeTruthy()
++      expect(section.querySelector('a, button')).toBeNull()
++    } else expectRestrictedArtifact(state)
++  })
++
++  it('keeps allowed metadata beside all four state-only restricted items in one available collection', async () => {
++    const source = realSource()
++    vi.spyOn(source.adapter, 'readProject').mockImplementation(async request => {
++      const result = ownedResult(request)
++      const restricted = restrictedStates.map(state => ({
++        ...artifactReceipt(request, state).jobs[0].artifacts.items[0], id: `artifact-permission-sample-${state}`,
++      }))
++      return { ...result, jobs: result.jobs.map(job => ({ ...job, artifacts: { ...job.artifacts, limit: 5, items: [...job.artifacts.items, ...restricted] } })) }
++    })
++    setup(source)
++    fireEvent.click(await screen.findByRole('button', { name: 'Inspect render Connected render' }))
++    const section = artifactSection()
++    const items = within(section).getAllByRole('listitem')
++    expect(items).toHaveLength(5)
++    expect(within(items[0]).getByText('Preview 原文')).toBeTruthy()
++    expect(items[0].outerHTML).toContain('task-connected')
++    expectArtifactAbsent(section)
++    restrictedStates.forEach((state, index) => {
++      expect(items[index + 1].textContent).toBe(metadataLabels[state])
++      expect(items[index + 1].outerHTML).not.toContain('task-connected')
++    })
++    expect(section.querySelector('a, button, [title], [aria-label], [hidden]')).toBeNull()
++  })
++
++  it.each(restrictedStates)('clears same-ID inspectable metadata during refresh and after %s until a new valid allow', async state => {
++    const source = realSource(); const { calls } = pendingReads(source)
++    setup(source)
++    await act(async () => calls[0].result.resolve(artifactReceipt(calls[0].request, 'inspectable')))
++    fireEvent.click(screen.getByRole('button', { name: 'Inspect render Connected render' }))
++    const oldSection = artifactSection()
++    expect(oldSection.outerHTML).toContain('Permission sample preview')
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh renders' }))
++    expect(oldSection.isConnected).toBe(false)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expectArtifactAbsent(document.body)
++    await act(async () => calls[1].result.resolve(artifactReceipt(calls[1].request, state)))
++    expectRestrictedArtifact(state)
++    expectArtifactAbsent(document.body)
++    fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' })
++    fireEvent.click(screen.getByRole('button', { name: 'Inspect render Connected render' }))
++    expectRestrictedArtifact(state)
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh renders' }))
++    expectArtifactAbsent(document.body)
++    await act(async () => calls[2].result.resolve(artifactReceipt(calls[2].request, 'inspectable')))
++    expect(artifactSection().outerHTML).toContain('Permission sample preview')
++    expect(artifactSection().outerHTML).toContain('permission-sample-v8')
++  })
++
++  it('keeps item denial after an aborted old allow arrives and restores only a new valid allow', async () => {
++    const source = realSource(); const { calls } = pendingReads(source)
++    setup(source)
++    await act(async () => calls[0].result.resolve(artifactReceipt(calls[0].request, 'inspectable')))
++    fireEvent.click(screen.getByRole('button', { name: 'Inspect render Connected render' }))
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh renders' }))
++    fireEvent.click(screen.getByRole('button', { name: 'Cancel loading' }))
++    expect(calls[1].signal.aborted).toBe(true)
++    fireEvent.click(screen.getByRole('button', { name: 'Retry loading' }))
++    await act(async () => calls[2].result.resolve(artifactReceipt(calls[2].request, 'denied')))
++    fireEvent.click(screen.getByRole('button', { name: 'Inspect render Connected render' }))
++    expectRestrictedArtifact('denied')
++    await act(async () => calls[1].result.resolve(artifactReceipt(calls[1].request, 'inspectable')))
++    expectRestrictedArtifact('denied')
++    expectArtifactAbsent(document.body)
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh renders' }))
++    await act(async () => calls[3].result.resolve(artifactReceipt(calls[3].request, 'inspectable')))
++    expect(artifactSection().outerHTML).toContain('Permission sample preview')
++  })
++
++  it.each(['error', 'cancel', 'stale', 'rejection'] as const)('never fills cached Artifact metadata after refresh %s', async outcome => {
++    const source = realSource(); const { calls } = pendingReads(source)
++    setup(source)
++    await act(async () => calls[0].result.resolve(artifactReceipt(calls[0].request, 'inspectable')))
++    fireEvent.click(screen.getByRole('button', { name: 'Inspect render Connected render' }))
++    expect(artifactSection().outerHTML).toContain('Permission sample preview')
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh renders' }))
++    expectArtifactAbsent(document.body)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    if (outcome === 'cancel') {
++      fireEvent.click(screen.getByRole('button', { name: 'Cancel loading' }))
++      expect(calls[1].signal.aborted).toBe(true)
++      await act(async () => calls[1].result.resolve(artifactReceipt(calls[1].request, 'inspectable')))
++    } else if (outcome === 'rejection') {
++      await act(async () => calls[1].result.reject(new Error('Read failed')))
++    } else {
++      await act(async () => calls[1].result.resolve({ ...calls[1].request, status: outcome }))
++    }
++    expect(screen.getByRole('button', { name: 'Retry loading' })).toBeTruthy()
++    expectArtifactAbsent(document.body)
++    expect(screen.queryByRole('dialog')).toBeNull()
++  })
++
++  it.each((['principalId', 'tenantId', 'sessionId', 'projectId', 'access', 'binding', 'adapter', 'owner', 'retire'] as const).flatMap(replacement =>
++    (['ready', 'refresh'] as const).map(stage => [replacement, stage] as const),
++  ))('removes Artifact DOM and aborts old reads on %s replacement while %s', async (replacement, stage) => {
++    const source = realSource(); const { calls } = pendingReads(source); let store!: InteractionStore
++    const view = render(<Host source={source} capture={value => { store = value }} />)
++    await act(async () => calls[0].result.resolve(artifactReceipt(calls[0].request, 'inspectable')))
++    fireEvent.click(screen.getByRole('button', { name: 'Inspect render Connected render' }))
++    const oldSection = artifactSection()
++    expect(oldSection.outerHTML).toContain('Permission sample preview')
++    // Exercise both mounted ready details and a pending refresh across the change.
++    if (stage === 'refresh') fireEvent.click(screen.getByRole('button', { name: 'Refresh renders' }))
++    const next: RenderSource = replacement === 'access' ? { ...source, access: { ...source.access, status: 'POLICY_DENIED' } }
++      : replacement === 'binding' ? { ...source, readAccessBinding: { kind: 'HOST_AGREED', accessKey: 'changed.host.read' } }
++        : replacement === 'adapter' ? { ...source, adapter: realSource().adapter }
++          : ['owner', 'retire'].includes(replacement) ? source
++            : { ...source, scope: { ...source.scope, [replacement]: 'changed-scope' } }
++    if (replacement === 'retire') act(() => store.retireSelectionOwner('owner'))
++    else view.rerender(<Host key={replacement === 'owner' ? 'new-owner' : undefined} source={next} />)
++    expect(oldSection.isConnected).toBe(false)
++    expect(calls[0].signal.aborted).toBe(true)
++    if (replacement === 'adapter') expect(await screen.findByText('Connected render')).toBeTruthy()
++    expectArtifactAbsent(document.body)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    if (stage === 'refresh') {
++      expect(calls[1].signal.aborted).toBe(true)
++      await act(async () => calls[1].result.resolve(artifactReceipt(calls[1].request, 'inspectable')))
++      expectArtifactAbsent(document.body)
++      expect(screen.queryByRole('dialog')).toBeNull()
++    }
++  })
++
++  it.each(['missing', 'invalid', 'relationship', 'request', 'scope'] as const)('rejects %s receipts before any Artifact metadata renders', async invalid => {
++    const source = realSource()
++    vi.spyOn(source.adapter, 'readProject').mockImplementation(async request => {
++      const result = artifactReceipt(request, 'inspectable')
++      const artifact = result.jobs[0].artifacts.items[0]
++      if (invalid === 'missing') Reflect.deleteProperty(artifact, 'metadataAccess')
++      if (invalid === 'invalid') Reflect.set(artifact, 'metadataAccess', 'allow')
++      if (invalid === 'relationship') artifact.taskId = 'unrelated-task'
++      if (invalid === 'request') result.requestId = 'old-request'
++      if (invalid === 'scope') result.scope = { ...request.scope, principalId: 'different-account' }
++      return result
++    })
++    setup(source)
++    expect(await screen.findByRole('heading', { name: invalid === 'relationship' ? 'Invalid Render relationships' : 'Invalid Render snapshot' })).toBeTruthy()
++    expectArtifactAbsent(document.body)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(screen.queryByRole('button', { name: 'Inspect render Connected render' })).toBeNull()
++  })
++})
+diff --git a/frontend/src/product/render-browser/RenderBrowser.tsx b/frontend/src/product/render-browser/RenderBrowser.tsx
+index a0c9e4e3ef8abdde79dbbaac2a45b8acfceb57af..9d49734396ae3dd258d1b6a33790d15307a6a3d9 100644
+--- a/frontend/src/product/render-browser/RenderBrowser.tsx
++++ b/frontend/src/product/render-browser/RenderBrowser.tsx
+@@ -282,8 +282,10 @@ function ArtifactDetail({ render, text }: { render: RenderProjection; text: Text
+       : artifacts.state === 'empty' ? <p>{text('artifactsEmpty')}</p>
+         : artifacts.state !== 'available' ? <><Badge tone="warning">{text(`artifactsState_${artifacts.state}`)}</Badge>{artifacts.explanation ? <p>{artifacts.explanation}</p> : null}</>
+           : <>{artifacts.completeness === 'bounded' ? <p>{text('artifactsBounded')}</p> : <p>{text('artifactsComplete')}</p>}
+-            {!artifacts.items.length ? <p>{text('artifactsEmpty')}</p> : <ul className="ff-render-artifacts">{artifacts.items.map(artifact => <li key={artifact.id}>
+-              <div><strong>{artifact.name || artifact.id}</strong><code>{artifact.id}</code></div><Badge tone={artifact.metadataAccess === 'inspectable' ? 'info' : 'warning'}>{metadataLabel(artifact.metadataAccess, text)}</Badge>
++            {!artifacts.items.length ? <p>{text('artifactsEmpty')}</p> : <ul className="ff-render-artifacts">{artifacts.items.map(artifact => artifact.metadataAccess !== 'inspectable'
++              ? <li key={artifact.id}><Badge tone="warning">{metadataLabel(artifact.metadataAccess, text)}</Badge></li>
++              : <li key={artifact.id}>
++              <div><strong>{artifact.name || artifact.id}</strong><code>{artifact.id}</code></div><Badge tone="info">{metadataLabel(artifact.metadataAccess, text)}</Badge>
+               <PropertyRow label={text('artifactType')}><span>{artifact.type}</span></PropertyRow><PropertyRow label={text('artifactAvailability')}><span>{artifact.availability}</span></PropertyRow><PropertyRow label={text('artifactVersion')}><span>{supplied(artifact.version, text)}</span></PropertyRow><PropertyRow label={text('artifactTaskId')}><code>{artifact.taskId}</code></PropertyRow>
+               <p>{text('artifactNoOpen')}</p>
+             </li>)}</ul>}
+diff --git a/frontend/src/product/render-browser/source.test.ts b/frontend/src/product/render-browser/source.test.ts
+index 01171fde678ec92180a2e93082dd02f60fed8eba..ee8060c2dd742bb7e7b39c28de1fcfb972148646 100644
+--- a/frontend/src/product/render-browser/source.test.ts
++++ b/frontend/src/product/render-browser/source.test.ts
+@@ -85,6 +85,22 @@ describe('bounded Render observability projection', () => {
+     expect(parseRenderSnapshot(receipt(), request)).toEqual(receipt())
+   })
+ 
++  it.each(['inspectable', 'denied', 'unknown', 'unavailable', 'stale'] as const)('preserves item metadataAccess %s in an available collection and still validates its relationship', metadataAccess => {
++    const artifact = { id: 'artifact-permission', name: 'Ordinary preview', type: 'video/mp4', availability: 'AVAILABLE', taskId: 'task-z', metadataAccess }
++    const input = { ...receipt(), jobs: [{ ...jobs[0], artifacts: { state: 'available', completeness: 'complete', limit: 1, items: [artifact] } }] }
++    expect(parseRenderSnapshot(input, request)).toEqual(input)
++    artifact.taskId = 'unrelated-task'
++    expect(() => parseRenderSnapshot(input, request)).toThrow('Artifact task link is invalid')
++    expect(artifact.metadataAccess).toBe(metadataAccess)
++  })
++
++  it.each([undefined, null, '', 'allow', 'INSPECTABLE', true])('rejects missing or invalid item metadataAccess %s without defaulting to inspectable', metadataAccess => {
++    const artifact = { id: 'artifact-permission', name: 'Ordinary preview', type: 'video/mp4', availability: 'AVAILABLE', taskId: 'task-z', ...(metadataAccess === undefined ? {} : { metadataAccess }) }
++    const input = { ...receipt(), jobs: [{ ...jobs[0], artifacts: { state: 'available', completeness: 'complete', limit: 1, items: [artifact] } }] }
++    expect(() => parseRenderSnapshot(input, request)).toThrow('Invalid Render observability receipt')
++    expect('metadataAccess' in artifact ? artifact.metadataAccess : undefined).toBe(metadataAccess)
++  })
++
+   it('preserves missing, empty, bounded, denied, unavailable, unknown and stale Artifact states without inventing history', () => {
+     for (const artifacts of [undefined, { state: 'empty' }, { state: 'denied' }, { state: 'unavailable' }, { state: 'unknown' }, { state: 'stale' }] as const) {
+       const input: ReturnType<typeof receipt> = receipt()

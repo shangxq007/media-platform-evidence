@@ -1,0 +1,26 @@
+I’ll read the writer brief and applicable repository instructions, then carry out the bounded RED/GREEN task without committing.
+The brief authorizes the existing dirty work and explicitly overrides candidate freezing for this task. I’ll preserve that work and capture a real failing regression before changing production code.
+
+The session’s filesystem permissions allow writes only in this worktree and `/tmp`; the requested evidence directory is outside them. I’ll prepare the evidence in `/tmp` for Hermes to copy into the requested directory.
+The defect is in `ArtifactDetail`: every item renders its metadata regardless of `metadataAccess`. The schema already requires an explicit valid state and checks task relationships.
+
+The new denied-item regression checks the entire serialized Artifact section, including attributes, using ordinary metadata strings. It also verifies that independently authorized task metadata remains visible in the task section.
+RED is captured: 41 tests passed and the new regression failed on all six protected fields—ID, name, type, availability, version, and task link. The raw log and JSON retain the exposed DOM.
+
+I’ve added the small rendering branch: restricted items emit only their localized state badge. Next I’ll test mixed permissions, transitions, and late responses against the existing request lifecycle.
+The added coverage exercises all five item states, mixed collections, same-ID permission changes, refresh failures and cancellation, late old success after denial, and scope/access/binding/adapter/owner changes. It also checks that invalid access values and broken relationships fail before rendering.
+
+The fix reuses existing labels and lifecycle checks; no schema, CSS, localization, or fixture changes are needed. I’m updating FB-GAP-005 to distinguish collection availability from item access and to require backend response trimming.
+The first GREEN run passed all 91 tests. It reported an `act` warning in the new adapter-replacement test; I’ve added an explicit wait for the replacement response and separate checks for collection-level restricted states. The final focused run is underway.
+
+The production change remains limited to the item rendering branch. Full engineering gates and browser acceptance remain pending with Hermes.
+The final focused run passed 95/95 tests with no warnings. The evidence checks confirm that all 41 original focused test identities remain and only six authorized paths changed. Git state, index, stash, and the original review-report prefix are unchanged.
+
+I’m finishing the handoff with the preserved RED output, both GREEN attempts, the behavior matrix, and the remaining Hermes validation steps.
+Implemented the bounded correction without committing. Restricted Artifact items now render only their state.
+
+RED captured the real metadata leak; final focused GREEN passed **95/95 tests**. Six authorized paths changed; existing work and Git state were preserved.
+
+[Writer handoff](/tmp/FRONTEND_WAVE2_RENDER_ARTIFACT_METADATA_ACCESS_CORRECTION_V1/WRITER_HANDOFF.md)
+
+Filesystem restrictions required evidence in `/tmp`. Hermes must copy it to E and perform final engineering/browser gates; V7 acceptance remains pending.

@@ -1,0 +1,119 @@
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ✓ src/product/render-browser/source.test.ts (27 tests) 47ms
+ ❯ src/product/render-browser/RenderBrowser.test.tsx (70 tests | 2 failed) 2493ms
+   ✓ RenderBrowser observability workflow > does not serialize denied Artifact metadata in an available collection 140ms
+   ✓ RenderBrowser observability workflow > uses explicit provider injection and remains usable through StrictMode adapter registration replay 74ms
+   ✓ RenderBrowser observability workflow > shows supplied summary data, opaque unknown status, valid progress and current-snapshot disclosure without actions 23ms
+   ✓ RenderBrowser observability workflow > searches ID/name, filters only source-supported literal statuses, sorts stably and keeps Reset focusable 40ms
+   ✓ RenderBrowser observability workflow > opens read-only task/attempt/failure/Artifact metadata and restores launcher focus without exposing URLs 64ms
+   ✓ RenderBrowser observability workflow > distinguishes missing attempts/Artifacts from empty and bounded inspectable metadata 54ms
+   ✓ RenderBrowser observability workflow > retains mismatched progress units and missing totals literally without deriving a percentage 71ms
+   ✓ RenderBrowser observability workflow > uses one stable Refresh/Cancel/Retry control, preserves filters, drops cancelled replies and never steals moved focus 40ms
+   ✓ RenderBrowser observability workflow > clears old content for a safe unavailable receipt and keeps retry available 21ms
+   ✓ RenderBrowser observability workflow > clears old content for a safe denied receipt and keeps retry available 30ms
+   ✓ RenderBrowser observability workflow > clears old content for a safe unknown receipt and keeps retry available 19ms
+   ✓ RenderBrowser observability workflow > clears old content for a safe unsupported receipt and keeps retry available 26ms
+   ✓ RenderBrowser observability workflow > clears old content for a safe error receipt and keeps retry available 20ms
+   ✓ RenderBrowser observability workflow > clears old content for a safe stale receipt and keeps retry available 19ms
+   ✓ RenderBrowser observability workflow > distinguishes invalid relationships from invalid returned content and never retains stale detail 20ms
+   ✓ RenderBrowser observability workflow > shows detail-not-found after a successful refresh removes the inspected Render 37ms
+   ✓ RenderBrowser observability workflow > retires a pending valid reply on principalId change 13ms
+   ✓ RenderBrowser observability workflow > retires a pending valid reply on tenantId change 17ms
+   ✓ RenderBrowser observability workflow > retires a pending valid reply on sessionId change 11ms
+   ✓ RenderBrowser observability workflow > retires a pending valid reply on projectId change 12ms
+   ✓ RenderBrowser observability workflow > retires a pending read under StrictMode Selection ownership and rejects its late success 21ms
+   ✓ RenderBrowser observability workflow > retires pending reads on access/source replacement and unmount 112ms
+   ✓ RenderBrowser observability workflow > clears ready data and detail on access, agreed binding and adapter replacement under StrictMode 123ms
+   ✓ RenderBrowser observability workflow > never queries initially denied or unknown access, including a host-relabelled test key 21ms
+   ✓ RenderBrowser observability workflow > rebinds only to a fresh pageshow Selection owner after clearing ready data 23ms
+   ✓ RenderBrowser observability workflow > is unavailable with no injected source and localizes the complete workflow in Chinese 31ms
+   × Artifact item metadata permission boundaries > gives stale items generic read-refresh guidance in 'en' without metadata or render actions 42ms
+     → expected 'Metadata stale' to be 'Metadata stale; refresh Render data t…' // Object.is equality
+   × Artifact item metadata permission boundaries > gives stale items generic read-refresh guidance in 'zh-CN' without metadata or render actions 26ms
+     → expected '元数据已过期' to be '元数据已过期；请刷新渲染数据后再次检查。' // Object.is equality
+   ✓ Artifact item metadata permission boundaries > preserves the separate collection-level denied outcome 31ms
+   ✓ Artifact item metadata permission boundaries > preserves the separate collection-level unknown outcome 25ms
+   ✓ Artifact item metadata permission boundaries > preserves the separate collection-level unavailable outcome 30ms
+   ✓ Artifact item metadata permission boundaries > preserves the separate collection-level stale outcome 25ms
+   ✓ Artifact item metadata permission boundaries > renders only the permitted item content for inspectable 33ms
+   ✓ Artifact item metadata permission boundaries > renders only the permitted item content for denied 24ms
+   ✓ Artifact item metadata permission boundaries > renders only the permitted item content for unknown 28ms
+   ✓ Artifact item metadata permission boundaries > renders only the permitted item content for unavailable 25ms
+   ✓ Artifact item metadata permission boundaries > renders only the permitted item content for stale 29ms
+   ✓ Artifact item metadata permission boundaries > keeps allowed metadata beside all four state-only restricted items in one available collection 28ms
+   ✓ Artifact item metadata permission boundaries > clears same-ID inspectable metadata during refresh and after denied until a new valid allow 88ms
+   ✓ Artifact item metadata permission boundaries > clears same-ID inspectable metadata during refresh and after unknown until a new valid allow 86ms
+   ✓ Artifact item metadata permission boundaries > clears same-ID inspectable metadata during refresh and after unavailable until a new valid allow 86ms
+   ✓ Artifact item metadata permission boundaries > clears same-ID inspectable metadata during refresh and after stale until a new valid allow 84ms
+   ✓ Artifact item metadata permission boundaries > keeps item denial after an aborted old allow arrives and restores only a new valid allow 60ms
+   ✓ Artifact item metadata permission boundaries > never fills cached Artifact metadata after refresh error 23ms
+   ✓ Artifact item metadata permission boundaries > never fills cached Artifact metadata after refresh cancel 19ms
+   ✓ Artifact item metadata permission boundaries > never fills cached Artifact metadata after refresh stale 24ms
+   ✓ Artifact item metadata permission boundaries > never fills cached Artifact metadata after refresh rejection 19ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on principalId replacement while ready 21ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on principalId replacement while refresh 19ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on tenantId replacement while ready 21ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on tenantId replacement while refresh 23ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on sessionId replacement while ready 21ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on sessionId replacement while refresh 31ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on projectId replacement while ready 24ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on projectId replacement while refresh 31ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on access replacement while ready 23ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on access replacement while refresh 39ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on binding replacement while ready 31ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on binding replacement while refresh 53ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on adapter replacement while ready 36ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on adapter replacement while refresh 42ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on owner replacement while ready 27ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on owner replacement while refresh 26ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on retire replacement while ready 25ms
+   ✓ Artifact item metadata permission boundaries > removes Artifact DOM and aborts old reads on retire replacement while refresh 28ms
+   ✓ Artifact item metadata permission boundaries > rejects missing receipts before any Artifact metadata renders 9ms
+   ✓ Artifact item metadata permission boundaries > rejects invalid receipts before any Artifact metadata renders 8ms
+   ✓ Artifact item metadata permission boundaries > rejects relationship receipts before any Artifact metadata renders 10ms
+   ✓ Artifact item metadata permission boundaries > rejects request receipts before any Artifact metadata renders 9ms
+   ✓ Artifact item metadata permission boundaries > rejects scope receipts before any Artifact metadata renders 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/product/render-browser/RenderBrowser.test.tsx > Artifact item metadata permission boundaries > gives stale items generic read-refresh guidance in 'en' without metadata or render actions
+AssertionError: expected 'Metadata stale' to be 'Metadata stale; refresh Render data t…' // Object.is equality
+
+Expected: "Metadata stale; refresh Render data to check again."
+Received: "Metadata stale"
+
+ ❯ src/product/render-browser/RenderBrowser.test.tsx:438:35
+    436|     const section = within(screen.getByRole('dialog')).getByRole('head…
+    437|     const item = within(section).getByRole('listitem')
+    438|     expect.soft(item.textContent).toBe(guidance)
+       |                                   ^
+    439|     const artifact = artifactReceipt({ scope, requestId: 'assertion-on…
+    440|     for (const [field, value] of Object.entries(artifact)) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/product/render-browser/RenderBrowser.test.tsx > Artifact item metadata permission boundaries > gives stale items generic read-refresh guidance in 'zh-CN' without metadata or render actions
+AssertionError: expected '元数据已过期' to be '元数据已过期；请刷新渲染数据后再次检查。' // Object.is equality
+
+Expected: "元数据已过期；请刷新渲染数据后再次检查。"
+Received: "元数据已过期"
+
+ ❯ src/product/render-browser/RenderBrowser.test.tsx:438:35
+    436|     const section = within(screen.getByRole('dialog')).getByRole('head…
+    437|     const item = within(section).getByRole('listitem')
+    438|     expect.soft(item.textContent).toBe(guidance)
+       |                                   ^
+    439|     const artifact = artifactReceipt({ scope, requestId: 'assertion-on…
+    440|     for (const [field, value] of Object.entries(artifact)) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  2 failed | 95 passed (97)
+   Start at  03:58:38
+   Duration  4.47s (transform 846ms, setup 0ms, collect 1.35s, tests 2.54s, environment 530ms, prepare 205ms)
+
+JSON report written to /tmp/FRONTEND_WAVE2_RENDER_ARTIFACT_METADATA_ACCESS_CORRECTION_V1/stale-guidance-red/tests.json
