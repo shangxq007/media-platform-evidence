@@ -1,0 +1,13 @@
+# Controller final bounded review
+Status: VALID for bounded implementation/engineering evidence; independent acceptance NOT_CLAIMED.
+Exact tree: 31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee; validation-final-02 (directory final-validation-02) only.
+
+1. Recovered stopped source before correction; HEAD/index and scoped bytes/modes matched. New approval authorized the actual current classification file. Exactly eight additive REUSE rows, old prefix unchanged; no historical H4 rewrite/guard weakening.
+2. Latest ProductionBrowser/model/types inspected, including context validation before adapter invocation, host-provided SERVER binding, owner retirement and StrictMode lifetime reconciliation, guarded transport-vs-invalid parsing and stable controls. Writer initial fixed-key prose is superseded by its correction appendix, not current contract authority.
+3. All seven final exact-tree gates executed exit 0. 797 full identities versus accepted 724: +73/-0, no duplicate/failure/skip. 204 targeted; 120 architecture controls. 46 unchanged lint warnings; build chunk warning retained.
+4. Final native browser 36 checks/19 screenshots; exact 14 served-file hashes; ordinary unavailable and explicit fixture separate. Native commands and per-check expression/actual/windows retained. Headless focus emulation, DOM helper/locale/scroll/fixture timing and auth marker assistance disclosed. Chromium/wrapper exit0, fixture deliberate SIGTERM -15, no leaked listeners.
+5. Pixel review: desktop two columns, readonly/simulation label clear; narrow page and detail vertically scroll; detail lower explanation below viewport. No physical mobile, touch, IME, screenreader, backend or true bfcache claim. Historical optional icon404 and bundle size warning remain.
+6. Accepted V5 source outside increment preserved, adoption text and priority additions verified. Existing backend TSV/gap records reuse FB-GAP-007 and keep future controlled read-only integration proposed only.
+7. Complete patch replay and final source preservation passed. Package scope contains source context, all endpoints, raw gates/tests, explicit fixture host and original build plus chunks, native receipts/images and previous failed attempt. Source commit, freeze, merge and remote publication forbidden/not performed. No backend lane stationarity gate, Skill/Memory body edits or unbounded optional audit.
+
+Remaining: parent independent readback and separately authorized evidence-only publication; real interface agreement/integration and human device/accessibility acceptance are not done. No additional feature authority follows from green gates.

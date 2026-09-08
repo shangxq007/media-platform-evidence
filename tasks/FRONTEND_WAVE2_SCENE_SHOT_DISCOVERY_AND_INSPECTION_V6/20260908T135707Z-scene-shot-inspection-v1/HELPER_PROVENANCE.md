@@ -1,0 +1,2 @@
+# Qualified reuse
+Materialization/gate/patch replay/build helpers copied from V5, not executed over V5. V6 baseline path and executable-mode key sets qualified against accepted tree; 724 test reference replaces historical 704 and baseline lint uses V5 final-validation-03. External objects/index/snapshot/build only; no product Git mutation. No historical build or evidence overwrite. Browser helper adaptation will be source-verified after writer finishes.

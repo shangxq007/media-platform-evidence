@@ -1,0 +1,40 @@
+{
+  "name": "build-final",
+  "implementation_tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+  "command": [
+    "node",
+    "--input-type=module",
+    "-e",
+    "import {build,resolveConfig} from 'vite';import path from 'node:path';import fs from 'node:fs';const output=\"/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_SCENE_SHOT_DISCOVERY_AND_INSPECTION_V6/final-validation-02/build\";if(fs.existsSync(output))throw Error('External output must be new');const opts={configLoader:'bundle',build:{outDir:output,emptyOutDir:false,manifest:true,rollupOptions:{input:{application:\"/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_SCENE_SHOT_DISCOVERY_AND_INSPECTION_V6/final-validation-02/snapshot/frontend/index.html\",fixture:\"/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_SCENE_SHOT_DISCOVERY_AND_INSPECTION_V6/final-validation-02/fixture-host/entry.tsx\"}}}};const c=await resolveConfig(opts,'build');if(path.resolve(c.root,c.build.outDir)!==output)throw Error('Unexpected effective output');console.log('EFFECTIVE_EXTERNAL_OUTPUT='+output);await build(opts);const manifest=JSON.parse(fs.readFileSync(path.join(output,'.vite/manifest.json'),'utf8'));const fixture=Object.values(manifest).find(x=>x.isEntry&&x.name==='fixture');if(!fixture)throw Error('Missing explicit fixture entry');const html=fs.readFileSync(path.join(output,'index.html'),'utf8');const fixtureHtml=html.replace(/(<script[^>]+src=\")([^\"]+)(\")/,(_,a,b,c)=>a+'/'+fixture.file+c);if(fixtureHtml===html)throw Error('Missing standard module entry');fs.writeFileSync(path.join(output,'fixture.html'),fixtureHtml);console.log('EXPLICIT_FIXTURE_ENTRY='+fixture.file);"
+  ],
+  "containment": [
+    "bwrap",
+    "--die-with-parent",
+    "--ro-bind",
+    "/",
+    "/",
+    "--bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_SCENE_SHOT_DISCOVERY_AND_INSPECTION_V6/final-validation-02",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_SCENE_SHOT_DISCOVERY_AND_INSPECTION_V6/final-validation-02",
+    "--ro-bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_SCENE_SHOT_DISCOVERY_AND_INSPECTION_V6/final-validation-02/snapshot",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_SCENE_SHOT_DISCOVERY_AND_INSPECTION_V6/final-validation-02/snapshot",
+    "--ro-bind",
+    "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules",
+    "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules",
+    "--proc",
+    "/proc",
+    "--dev",
+    "/dev",
+    "--tmpfs",
+    "/tmp",
+    "--chdir",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_SCENE_SHOT_DISCOVERY_AND_INSPECTION_V6/final-validation-02/snapshot/frontend",
+    "--bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_SCENE_SHOT_DISCOVERY_AND_INSPECTION_V6/final-validation-02/vite-temp",
+    "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/.vite-temp",
+    "--"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 5.983789920806885
+}

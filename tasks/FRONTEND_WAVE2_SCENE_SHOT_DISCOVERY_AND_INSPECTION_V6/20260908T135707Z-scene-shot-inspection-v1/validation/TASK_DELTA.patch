@@ -1,0 +1,1505 @@
+diff --git a/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md b/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+index 66f6d4a597545525e080b8748cf6377171036d11..fde09f385eaaf049e93a4609e173119fc47b0f29 100644
+--- a/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
++++ b/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+@@ -191,7 +191,7 @@ Evidence: `observability-module/.../api/ObservabilityController.java`,
+ | Required canonical authority | A future explicitly authorized production application owner; Project, Timeline, Workflow, Asset/Artifact, Identity, and Review retain their own truth |
+ | Existing backend owner | Project dashboard, asset/product, review, workflow, and identity APIs expose separate canonical data. No inspected accepted application controller exposes the required production-management aggregate/projection routes. |
+ | Missing projection/command | Typed production query/command contracts with stable production identities, explicit canonical references, lifecycle, authorization, pagination, dependencies, and workload rules. |
+-| Temporary frontend behavior | Reserve the semantic routes and keep the surface `PREVIEW`/`HIDDEN` with a precise unavailable state. Do not build local task/shot truth or imply Timeline/Workflow mutation. |
++| Temporary frontend behavior | Keep the surface `PREVIEW`. The V6 frontend consumer defaults unavailable and accepts only an explicitly injected principal/tenant/session/Workspace/Project-bound source; its isolated fixture is opt-in and read-only. It displays only strict supplied Scene/Shot fields and explicit relationships, never local task/shot truth or Timeline/Workflow mutation. |
+ | Blocking/nonblocking | **Blocking** for Production Management functionality; **nonblocking** for route/shell foundation. |
+ | Recommended owner lane | Future authorized Production application lane; not this F0/F1 task |
+ 
+@@ -422,3 +422,16 @@ If persistence is separately proposed later, ownership/scope, controlled princip
+ FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V5 reuses UXW1-002 (optional scoped presentation layout persistence). Undo/redo of current Canvas titles/positions is local in-memory presentation recovery, bounded to 50 edits; no network, persistence, permission grant, new backend requirement ID or agreed endpoint/DTO. Camera, Selection and canonical revisions/Operations are not history targets. Local history clears with owner/context retirement or unmount.
+ 
+ UXW1-002 still requires any eventual persisted layout to be owned by the authenticated workspace/project, versioned separately from canonical references and checked for access/concurrency. Denied/unknown/unavailable, malformed and stale-context/version outcomes must not restore another owner's data or imply save success. Future acceptance must pin frontend build/tree and backend version, use controlled authorized and denied identities, restore only approved local labels/positions, reject stale or cross-context layouts, and read back actual persisted state. This is a proposal, not a contract or V5 integration. No dependency on completion of EP19 or the entire backend program is imposed.
++
++
++## V6 Project Scene/Shot read-only consumer — FB-GAP-007 remains open
++
++The V6 consumer uses the existing FB-GAP-007 Production Management gap and existing FB-GAP-001/002/004/008 boundaries for Project relationship, effective access, resource projection, and safe referenced-resource inspection. It creates no new backend gap ID, endpoint, permission key, DTO, canonical Scene/Shot authority, or write operation.
++
++The smallest **FRONTEND UNAGREED** interface contains an echoed `principalId`, `tenantId`, `sessionId`, `workspaceId`, `projectId`, request identity, supplied Scene and Shot stable IDs plus optional name/description/status/version, explicit Scene-ID/Shot-ID relationships, Project-scoped safe shared references, and `complete` or `bounded` snapshot metadata with a required projection version. Unknown, denied, unavailable, unsupported, invalid, error, and version-stale results disclose no data. Duplicate/ambiguous IDs, duplicate or orphaned relationships, Shots without exactly one supplied Scene relationship, foreign Project data, unsafe reference kinds, mismatched receipts, and excess bounds fail closed.
++
++V6 correction: no fixed real-server permission/query literal is imposed. A real host must explicitly bind its separately agreed read-projection key to the matching `SERVER` EffectiveAccess entry; a mismatched binding, development provenance, or generic `surface.production.view` visibility remains unknown/fail-closed. Fixture access uses a separately labelled test-only unagreed key. All five required identity/scope fields reject empty values and whitespace/control characters without trimming or reinterpretation before the adapter can be called.
++
++The current implementation performs only local search/status filter/stable sort/reset and read-only detail/reference inspection. Reset remains a stable focus target whenever populated or empty filter results are shown. Missing, supplied-empty, empty snapshot, no-match, no-related-Shot, and bounded snapshot states remain distinct. It infers no duration, progress, ownership, order, assignment, count beyond the loaded snapshot, external URL, storage path, or permission. Source, identity, access, InteractionStore owner lifetime, context, generation, cancellation, unmount, and projection-version changes retire old content; only a fresh owner after `pageshow` rebinds. No request result can create a canonical or persistent write, and this is not physical bfcache qualification.
++
++One proposed future integration only: pin one frontend tree/build and one separately agreed frontend/backend controlled Project-read adapter; use controlled authenticated authorized and denied identities, exact Project relationships, error and version-stale responses, and zero writes. Validate strict envelopes, access nondisclosure, cancellation/context retirement, and safe referenced-resource checks. This is not actual integration and does not authorize a backend lane or depend on whole-platform completion.
+diff --git a/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv b/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv
+index faf50b31141bf0eab4dd272077552acc8906bece..64ac0cefec53dbb54f9e6672d51e5a585c452e57 100644
+--- a/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv
++++ b/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv
+@@ -203,3 +203,11 @@ frontend/src/product/workflow-sketch/model.ts	ACTIVE	POST_H4_ADDITION	LOCAL_WORK
+ frontend/src/product/workflow-sketch/model.test.ts	ACTIVE	POST_H4_ADDITION	LOCAL_WORKFLOW_SKETCH_PRESENTATION_ONLY
+ frontend/src/product/workflow-sketch/WorkflowSketch.tsx	ACTIVE	POST_H4_ADDITION	LOCAL_WORKFLOW_SKETCH_PRESENTATION_ONLY
+ frontend/src/product/workflow-sketch/WorkflowSketch.test.tsx	ACTIVE	POST_H4_ADDITION	LOCAL_WORKFLOW_SKETCH_PRESENTATION_ONLY
++frontend/src/product/production/ProductionBrowser.tsx	ACTIVE	POST_H4_ADDITION	PROJECT_SCOPED_SCENE_SHOT_READ_ONLY_FRONTEND_CONSUMER
++frontend/src/product/production/ProductionBrowser.test.tsx	ACTIVE	POST_H4_ADDITION	PROJECT_SCOPED_SCENE_SHOT_READ_ONLY_FRONTEND_CONSUMER_TEST
++frontend/src/product/production/types.ts	ACTIVE	POST_H4_ADDITION	UNAGREED_FRONTEND_SCENE_SHOT_CONSUMPTION_INTERFACE
++frontend/src/product/production/model.ts	ACTIVE	POST_H4_ADDITION	STRICT_PROJECT_SCOPED_SCENE_SHOT_VALIDATION_AND_LOCAL_PROJECTION
++frontend/src/product/production/model.test.ts	ACTIVE	POST_H4_ADDITION	STRICT_PROJECT_SCOPED_SCENE_SHOT_VALIDATION_TEST
++frontend/src/product/production/source.tsx	ACTIVE	POST_H4_ADDITION	EXPLICIT_INJECTED_SCENE_SHOT_SOURCE_BOUNDARY
++frontend/src/product/production/simulatedSource.ts	ACTIVE	POST_H4_ADDITION	EXPLICIT_IDENTITY_SUPPLIED_SIMULATED_SCENE_SHOT_SOURCE
++frontend/src/product/production/production.css	ACTIVE	POST_H4_ADDITION	RESPONSIVE_SCENE_SHOT_PRESENTATION
+diff --git a/docs/architecture/governance/frontend-product-information-architecture-v1.md b/docs/architecture/governance/frontend-product-information-architecture-v1.md
+index 700cba80552114a9e2393dcb751b60d655fd4804..3ac2326e89a3192f1543d5876e5d3f186d4b5729 100644
+--- a/docs/architecture/governance/frontend-product-information-architecture-v1.md
++++ b/docs/architecture/governance/frontend-product-information-architecture-v1.md
+@@ -475,6 +475,10 @@ documents are complete.
+ 
+ ## Known limits
+ 
++### Owner-adopted Product/UX priority order
++
++The adopted priority is: **Scene/Shot discovery and inspection > Render observability > Workflow UX > bounded NLE editing > Agent-assisted creative**. Only the first item is authorized for the current bounded V6 implementation. This ordering neither creates a second roadmap nor authorizes backend work, later priorities, integration, or publication.
++
+ - The accepted Project response is tenant-scoped and does not expose an
+   explicit Workspace relationship; the target nested route therefore requires
+   a server-authorized relationship projection before Project surfaces load.
+@@ -482,8 +486,10 @@ documents are complete.
+   effective-access intersection as separate typed outcomes.
+ - Canonical Timeline authoring/application commands and a scoped redacted
+   artifact list are missing for key creative/render flows.
+-- Production Management is an IA reservation, not a claim that its API or UI
+-  exists.
++- Production Management now has a bounded read-only frontend Scene/Shot
++  consumer with an explicit injected simulation boundary. No accepted API,
++  real adapter, authentication, authorization, or backend integration is
++  established by that consumer.
+ - Runtime adoption was not tested or inferred from source presence in this
+   documentation-only run.
+ 
+diff --git a/docs/architecture/governance/frontend-product-path-classification-v1.tsv b/docs/architecture/governance/frontend-product-path-classification-v1.tsv
+index d62bf96eea75e167116b3e6e4568d3f3c6b76db3..7be51c2ec948a1ee156f02731da0efe3cff297da 100644
+--- a/docs/architecture/governance/frontend-product-path-classification-v1.tsv
++++ b/docs/architecture/governance/frontend-product-path-classification-v1.tsv
+@@ -535,3 +535,11 @@ frontend/src/product/workflow-sketch/model.ts	REUSE	LOCAL_WORKFLOW_SKETCH_PRESEN
+ frontend/src/product/workflow-sketch/model.test.ts	REUSE	LOCAL_WORKFLOW_SKETCH_PRESENTATION_ONLY
+ frontend/src/product/workflow-sketch/WorkflowSketch.tsx	REUSE	LOCAL_WORKFLOW_SKETCH_PRESENTATION_ONLY
+ frontend/src/product/workflow-sketch/WorkflowSketch.test.tsx	REUSE	LOCAL_WORKFLOW_SKETCH_PRESENTATION_ONLY
++frontend/src/product/production/ProductionBrowser.tsx	REUSE	PROJECT_SCOPED_SCENE_SHOT_READ_ONLY_FRONTEND_CONSUMER
++frontend/src/product/production/ProductionBrowser.test.tsx	REUSE	PROJECT_SCOPED_SCENE_SHOT_READ_ONLY_FRONTEND_CONSUMER_TEST
++frontend/src/product/production/types.ts	REUSE	UNAGREED_FRONTEND_SCENE_SHOT_CONSUMPTION_INTERFACE
++frontend/src/product/production/model.ts	REUSE	STRICT_PROJECT_SCOPED_SCENE_SHOT_VALIDATION_AND_LOCAL_PROJECTION
++frontend/src/product/production/model.test.ts	REUSE	STRICT_PROJECT_SCOPED_SCENE_SHOT_VALIDATION_TEST
++frontend/src/product/production/source.tsx	REUSE	EXPLICIT_INJECTED_SCENE_SHOT_SOURCE_BOUNDARY
++frontend/src/product/production/simulatedSource.ts	REUSE	EXPLICIT_IDENTITY_SUPPLIED_SIMULATED_SCENE_SHOT_SOURCE
++frontend/src/product/production/production.css	REUSE	RESPONSIVE_SCENE_SHOT_PRESENTATION
+diff --git a/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv b/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+index 5fc1b5300e5299ee7ea7f99665f9011aac2683b2..8e5bf6de90bcefd2c5e8b2b12a2ff053e58cd01e 100644
+--- a/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
++++ b/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+@@ -11,3 +11,4 @@ UXW2-NTF-002	Configure notification subscriptions, preferences, and channel bind
+ UXW2-NTF-003	Inspect/configure notification event definitions and delivery records; prepare explicit administrative notification input	FB-GAP-012; reference 86d6aef94fd5e58da552e97c11473cff6eca734e; Frontend event-definitions/delivery-logs/providers differ from backend events/deliveries/provider-status; list/object/metrics envelopes differ; detail ignores notificationId; publishEvent sends type/tenantId but backend requires eventType/subjectId	Accepted admin event/delivery queries and exact target/publish input contract; no speculative announcement workflow	Server-enforced administrator and tenant/resource scope; explicit filtered IDs and pagination capabilities; preserve typed forbidden/not-found/unsupported failures; existing FB-GAP-002 applies	BLOCKS_NOTIFICATION_ADMIN_INTEGRATION	NO	YES	No admin notification UI or calls added; absent UI alone is not an endpoint gap	Admin labels and guessed target IDs cannot confer authority or prove a notification was sent	Future contract and authorization tests resolve route/payload/envelope differences, exact-ID detail filtering, non-disclosing cross-tenant denial and explicit target validation; separate authorization for announcements/targeting	PROPOSED_SOURCE_CONFIRMED_NONBLOCKING_FOR_REVIEW
+ UXW2-NTF-004	Receive a real email/SMS/webhook notification or verify/test/retry a bound channel	FB-GAP-013; reference 86d6aef94fd5e58da552e97c11473cff6eca734e; Email/SMS/Webhook providers return SENT without external transport; binding verify writes VERIFIED without challenge; test only checks/audits and Controller says TEST_SENT; retry only returns RETRY_QUEUED; Novu transport code exists but live integration unestablished	Truthful simulated/accepted/sent/delivered/failed boundaries and separately authorized real delivery/verification/retry integration	Authenticated scoped verified destination and explicit delivery/test authority; no browser/Agent escalation; real failures cannot become empty or success; no secret exposure	BLOCKS_REAL_NOTIFICATION_DELIVERY	NO	YES	Local provider SENT and persisted MOCK are simulation, not external delivery; this task sends nothing	Users must not mistake source stubs or admin receipts for delivery	Future backend-owned controlled integration validates actual transport/challenge/attempt and readback, authorization, failure/retry semantics, destination safety and simulated labeling; actual external tests require separate consent	PROPOSED_SOURCE_CONFIRMED_NONBLOCKING_FOR_REVIEW
+ FB-GAP-005	Find/filter/sort/inspect explicitly Project-scoped Render summaries in Operations	Existing APIs exist; explicit authorized frontend adapter and lifecycle envelope unintegrated; FB-GAP-002/005/006	Align existing scoped read-only summary consumer, no new backend capability	UNAGREED scope/request/bounded snapshot proposal; existing RenderJobSummary five fields; no endpoint/Operation invented	BLOCKS_REAL_OPERATIONS_RENDER_ADAPTER	NO	YES	localhost opt-in simulated source only; ordinary unavailable; no HTTP, persistence or job actions	Complete existing partial Operations read workflow without global joins	Pin one backend adapter and frontend tree/build; authenticated principal tenant session project, explicit limited data; denied/error/stale results clear content; no canonical writes	PROPOSED_CLARIFICATION_REAL_INTEGRATION_NOT_ESTABLISHED
++FB-GAP-007	Discover and inspect Project Scenes and explicitly related Shots	No accepted Production aggregate/query exists; reuse FB-GAP-001/002/004/008 for Project relationship, effective access, resource projections and safe references	One separately agreed controlled Project read projection; no Production writes	FRONTEND UNAGREED only: echoed principal/tenant/session/Workspace/Project/request; host explicitly binds its agreed read-projection key to the matching SERVER EffectiveAccess entry; stable Scene/Shot IDs, optional supplied name/description/status/version, explicit relations, scoped safe shared references, complete/bounded metadata and projection version; no fixed endpoint, permission key or server DTO invented	BLOCKS_REAL_PRODUCTION_SCENE_SHOT_INTEGRATION	NO	YES	Ordinary registered route is unavailable and sends no request. Tests/external host may explicitly inject an identity-supplied read-only fixture with a clearly test-only unagreed binding; no URL opt-in, HTTP, storage, persistence, fallback or canonical change	Creators can discover supplied production structure without client joins or fabricated production truth	Pin one frontend tree/build and separately agreed backend version/adapter; controlled authorized and denied identities; validate the exact host binding, all required identity fields before request, ownership/relations/bounds/version, nondisclosing denied/error/stale outcomes, InteractionStore/source cancellation/retirement and safe destination access; zero writes and read back no mutation	FRONTEND_CONSUMER_IMPLEMENTED_REAL_INTEGRATION_NOT_ESTABLISHED
+diff --git a/frontend/governance/UX_WAVE_1_REVIEW.md b/frontend/governance/UX_WAVE_1_REVIEW.md
+index d3d6ab61db2edbd80a14d6d4bbc4505b97bee9a0..0882d1d1ca6e8f0208cb6376e21d8143cac66006 100644
+--- a/frontend/governance/UX_WAVE_1_REVIEW.md
++++ b/frontend/governance/UX_WAVE_1_REVIEW.md
+@@ -202,3 +202,16 @@ Historical V4 results, NOT fresh V5 executions: full tests 704 unique passing id
+ ### V5 selected planned feature — Canvas session-local layout undo/redo
+ 
+ The existing IA plan Commands and keyboard architecture (lines 314–329) permits local undo only for unapplied presentation drafts. Canvas currently overwrites local title/positions without recovery. V5 adds bounded undo/redo for those existing local edits, including atomic completed group drag, via the existing dispatcher/contextual discovery and Canvas toolbar. Selection/camera and canonical history are not undo targets; no persistence/network. Full pre-edit selection and acceptance criteria are in the V5 external task directory SELECTION_AND_SCOPE.md. No new source paths planned; UXW1-002 remains a separate optional layout-persistence proposal. Fresh validation and delivery will be reported externally, not inferred from this selection record.
++
++## Owner adopted bounded technical review — V5 Canvas local history / V6 continuation
++
++INDEPENDENT_TECHNICAL_REVIEW=PASS_BOUNDED
++REVIEWED_IMPLEMENTATION_TREE=f62687609a556dff204fc6939416c11abd45f945
++ACCEPTED_SCOPE=CANVAS_SESSION_LOCAL_LAYOUT_UNDO_REDO
++PRODUCT_CORRECTION_REQUIRED=NO_FOR_REVIEWED_SCOPE
++REAL_BACKEND_INTEGRATION=NOT_ESTABLISHED
++PRODUCT_PUBLICATION=NOT_AUTHORIZED_BY_THIS_REVIEW
++
++Accepted limits are exact: Canvas history covers titles and positions only, retains at most 50 edits, treats one completed group drag as one edit, does not restore Selection or camera, has no persistence or canonical Revision undo, and records each title-input change as one edit. Browser evidence used simulation; physical-device, IME, screen-reader, and backend acceptance were not established.
++
++Historical V5 results, NOT fresh V6 executions: full tests 724 unique passing identities; targeted 299; 20 added / 0 removed versus V4; seven engineering gates passed; 32 recorded browser passes. V5 evidence remains separate and unchanged. H4 history, formal Slice1C, real integration, and release/publication remain separate.
+diff --git a/frontend/src/app/routeTree.test.tsx b/frontend/src/app/routeTree.test.tsx
+index 7c5e166350b6b5c3653272a9ddc40cb94de47da7..1b62d822dc5b6bedd78c3ae3dcc78a824225afe6 100644
+--- a/frontend/src/app/routeTree.test.tsx
++++ b/frontend/src/app/routeTree.test.tsx
+@@ -149,6 +149,24 @@ describe('runtime route registration and deep-link restoration', () => {
+     expect(screen.getByText(/existing storage health diagnostic/i)).toBeTruthy()
+   })
+ 
++  it('registers the Project Production consumer with exact route scope and no implicit fixture or request', async () => {
++    vi.spyOn(platformClient.workspace, 'getHome').mockResolvedValue({
++      workspace: { id: 'workspace-1', name: 'Editorial' }, tenantId: 'tenant-1',
++      recentProjects: [{ id: 'project-1', name: 'Launch film' }],
++    })
++    const fetch = vi.spyOn(globalThis, 'fetch')
++    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } })
++    const history = createMemoryHistory({ initialEntries: ['/w/workspace-1/projects/project-1/production'] })
++    const router = createRouter({ routeTree, history, context: { queryClient } })
++    render(<QueryClientProvider client={queryClient}><RouterProvider router={router} /></QueryClientProvider>)
++    expect(await screen.findByRole('heading', { name: 'Production snapshot unavailable' })).toBeTruthy()
++    expect(screen.getAllByText('workspace-1').length).toBeGreaterThan(0)
++    expect(screen.getAllByText('project-1').length).toBeGreaterThan(0)
++    expect(screen.getByText(/no authenticated, session-bound, single-Project Scene and Shot source/i)).toBeTruthy()
++    expect(screen.queryByText(/SIMULATED PRODUCTION DATA/)).toBeNull()
++    expect(fetch).not.toHaveBeenCalled()
++  })
++
+   it('handles Workspace API errors without inventing an empty state', async () => {
+     vi.spyOn(platformClient.workspace, 'getHome').mockRejectedValue(new Error('offline'))
+     const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } })
+diff --git a/frontend/src/localization/catalogs.ts b/frontend/src/localization/catalogs.ts
+index 352b5c874d2a4794b297855999333deb28a85547..cc1814365cebaaa8b793195953d042de7de66b65 100644
+--- a/frontend/src/localization/catalogs.ts
++++ b/frontend/src/localization/catalogs.ts
+@@ -180,6 +180,85 @@ const englishNamespaces: CatalogNamespaces = {
+     'renders.detailProfile': message('Profile'),
+     'renders.detailStatus': message('Status'),
+     'renders.detailLimit': message('This safe summary does not expose job controls, execution authority, providers, workers, runtime details, artifacts, or downloads.'),
++    'productionBrowser.region': message('Project Scene and Shot discovery'),
++    'productionBrowser.eyebrow': message('Production management · read-only'),
++    'productionBrowser.title': message('Scenes and shots'),
++    'productionBrowser.description': message('Browse supplied Scenes and their explicit Shot relationships for one Project. This view cannot change production state.'),
++    'productionBrowser.originSimulated': message('SIMULATED PRODUCTION DATA · explicitly injected fixture · no real account or permission'),
++    'productionBrowser.originReal': message('CONNECTED READ-ONLY SOURCE · identity, access and Project scope are supplied by the host'),
++    'productionBrowser.originUnavailable': message('PRODUCTION SOURCE UNAVAILABLE · no request was sent'),
++    'productionBrowser.scope': message('Supplied scope'),
++    'productionBrowser.workspaceId': message('Workspace ID'),
++    'productionBrowser.projectId': message('Project ID'),
++    'productionBrowser.boundary': message('Only source-supplied fields and explicit Scene-to-Shot relationships are shown. Visibility never grants resource permission.'),
++    'productionBrowser.refresh': message('Refresh production snapshot'),
++    'productionBrowser.cancel': message('Cancel loading'),
++    'productionBrowser.retry': message('Retry loading'),
++    'productionBrowser.loadingTitle': message('Loading production snapshot'),
++    'productionBrowser.loadingLabel': message('Loading Scenes and Shots'),
++    'productionBrowser.cancelledTitle': message('Production snapshot loading cancelled'),
++    'productionBrowser.cancelledBody': message('Loading cancelled. No prior snapshot is retained.'),
++    'productionBrowser.ownerRetiredTitle': message('Production context retired'),
++    'productionBrowser.ownerRetiredBody': message('This interaction owner has retired. Production data was cleared; return through a fresh application context.'),
++    'productionBrowser.failureUnavailableTitle': message('Production snapshot unavailable'),
++    'productionBrowser.failureUnavailableBody': message('No authenticated, session-bound, single-Project Scene and Shot source is configured.'),
++    'productionBrowser.failureDeniedTitle': message('Production snapshot denied'),
++    'productionBrowser.failureDeniedBody': message('The supplied effective-access projection denied this read-only request without disclosing resource existence.'),
++    'productionBrowser.failureUnknownTitle': message('Production snapshot access unknown'),
++    'productionBrowser.failureUnknownBody': message('Identity, access, or Project scope could not be established, so the request remained fail-closed.'),
++    'productionBrowser.failureUnsupportedTitle': message('Production snapshot unsupported'),
++    'productionBrowser.failureUnsupportedBody': message('The connected source does not support this bounded Scene and Shot projection.'),
++    'productionBrowser.failureErrorTitle': message('Production snapshot error'),
++    'productionBrowser.failureErrorBody': message('The source request failed. Retry to request a fresh production snapshot.'),
++    'productionBrowser.failureInvalidTitle': message('Invalid production snapshot'),
++    'productionBrowser.failureInvalidBody': message('The returned snapshot did not match the strict frontend contract. No returned production data is shown; retry requests a fresh snapshot.'),
++    'productionBrowser.failureStaleTitle': message('Production snapshot is stale'),
++    'productionBrowser.failureStaleBody': message('The source reported a stale projection version. Refresh before inspecting production data.'),
++    'productionBrowser.search': message('Search scenes'),
++    'productionBrowser.searchPlaceholder': message('Search supplied Scene ID, name, or description'),
++    'productionBrowser.statusLabel': message('Scene status'),
++    'productionBrowser.allStatuses': message('All supplied statuses'),
++    'productionBrowser.sortLabel': message('Sort scenes'),
++    'productionBrowser.sortAscending': message('Name A–Z'),
++    'productionBrowser.sortDescending': message('Name Z–A'),
++    'productionBrowser.snapshotBounded': message('{sceneCount} Scenes and {shotCount} Shots loaded · bounded snapshot; more may exist · version {version}.', ['sceneCount', 'shotCount', 'version']),
++    'productionBrowser.snapshotComplete': message('{sceneCount} Scenes and {shotCount} Shots loaded · source reports this snapshot complete · version {version}.', ['sceneCount', 'shotCount', 'version']),
++    'productionBrowser.emptyTitle': message('No scenes in this snapshot'),
++    'productionBrowser.emptyBody': message('The source returned an empty Project snapshot. This does not establish that Scenes do not exist elsewhere.'),
++    'productionBrowser.noMatchesTitle': message('No matching scenes'),
++    'productionBrowser.noMatchesBody': message('No Scene in the loaded snapshot matches the current local filters.'),
++    'productionBrowser.reset': message('Reset filters'),
++    'productionBrowser.sceneList': message('Scene snapshot'),
++    'productionBrowser.notSupplied': message('Not supplied'),
++    'productionBrowser.emptySupplied': message('Empty supplied value'),
++    'productionBrowser.browseScene': message('Browse shots'),
++    'productionBrowser.browseSceneNamed': message('Browse scene {name}', ['name']),
++    'productionBrowser.inspect': message('Inspect'),
++    'productionBrowser.inspectSceneNamed': message('Inspect scene {name}', ['name']),
++    'productionBrowser.relatedShotsTitle': message('Shots in {name}', ['name']),
++    'productionBrowser.selectSceneTitle': message('Related shots'),
++    'productionBrowser.selectSceneBody': message('Choose a Scene to show only Shots connected by explicit supplied relationships.'),
++    'productionBrowser.noShotsTitle': message('No related shots in this snapshot'),
++    'productionBrowser.noShotsBody': message('No Shot relationship for this Scene was supplied in the loaded snapshot.'),
++    'productionBrowser.shotListNamed': message('Shots explicitly related to {name}', ['name']),
++    'productionBrowser.inspectShotNamed': message('Inspect shot {name}', ['name']),
++    'productionBrowser.sceneDetailTitle': message('Scene details'),
++    'productionBrowser.shotDetailTitle': message('Shot details'),
++    'productionBrowser.detailClose': message('Close production details'),
++    'productionBrowser.detailReadOnly': message('Read-only supplied detail'),
++    'productionBrowser.detailKind': message('Kind'),
++    'productionBrowser.detailId': message('Stable ID'),
++    'productionBrowser.detailProjectId': message('Project ID'),
++    'productionBrowser.detailName': message('Name'),
++    'productionBrowser.detailDescription': message('Description'),
++    'productionBrowser.detailStatus': message('Status'),
++    'productionBrowser.detailVersion': message('Version'),
++    'productionBrowser.references': message('Safe supplied references'),
++    'productionBrowser.noReferences': message('No references supplied.'),
++    'productionBrowser.referenceSupported': message('Local inspection supported'),
++    'productionBrowser.referenceUnsupported': message('Inspection unsupported'),
++    'productionBrowser.referenceAuthority': message('A visible reference does not grant permission. Destination access and Project scope must be checked independently; no external, storage, or download URL is used.'),
++    'productionBrowser.detailLimit': message('Inspection shows supplied fields only. It does not infer duration, progress, ownership, order, assignment, or canonical availability.'),
+     brandHome: message('Media Platform home'), brand: message('Media Platform'), creativeWorkspace: message('Creative workspace'),
+     globalNavigation: message('Global navigation'), projectNavigation: message('Project navigation'), projectSurfaceSwitcher: message('Project surface switcher'),
+     workspace: message('Workspace'), operations: message('Operations'), admin: message('Admin'), developer: message('Developer'),
+@@ -577,6 +656,85 @@ const chineseNamespaces: CatalogNamespaces = {
+     'renders.detailProfile': message('配置'),
+     'renders.detailStatus': message('状态'),
+     'renders.detailLimit': message('此安全摘要不提供任务控制、执行权限、提供方、工作器、运行时详情、制品或下载。'),
++    'productionBrowser.region': message('项目场景与镜头发现'),
++    'productionBrowser.eyebrow': message('制作管理 · 只读'),
++    'productionBrowser.title': message('场景与镜头'),
++    'productionBrowser.description': message('浏览一个项目中由来源提供的场景及其明确镜头关系。此视图不能更改制作状态。'),
++    'productionBrowser.originSimulated': message('模拟制作数据 · 显式注入固定数据 · 未连接真实账户或权限'),
++    'productionBrowser.originReal': message('已连接只读来源 · 身份、访问权限和项目范围由宿主提供'),
++    'productionBrowser.originUnavailable': message('制作来源不可用 · 未发送请求'),
++    'productionBrowser.scope': message('提供的范围'),
++    'productionBrowser.workspaceId': message('工作区 ID'),
++    'productionBrowser.projectId': message('项目 ID'),
++    'productionBrowser.boundary': message('仅显示来源提供的字段和明确场景到镜头关系。可见性永不授予资源权限。'),
++    'productionBrowser.refresh': message('刷新制作快照'),
++    'productionBrowser.cancel': message('取消加载'),
++    'productionBrowser.retry': message('重试加载'),
++    'productionBrowser.loadingTitle': message('正在加载制作快照'),
++    'productionBrowser.loadingLabel': message('正在加载场景与镜头'),
++    'productionBrowser.cancelledTitle': message('制作快照加载已取消'),
++    'productionBrowser.cancelledBody': message('加载已取消，不保留先前快照。'),
++    'productionBrowser.ownerRetiredTitle': message('制作上下文已停用'),
++    'productionBrowser.ownerRetiredBody': message('此交互所有者已停用。制作数据已清除；请通过新的应用上下文返回。'),
++    'productionBrowser.failureUnavailableTitle': message('制作快照不可用'),
++    'productionBrowser.failureUnavailableBody': message('尚未配置经过身份验证、绑定会话且限定单一项目的场景与镜头来源。'),
++    'productionBrowser.failureDeniedTitle': message('制作快照访问被拒绝'),
++    'productionBrowser.failureDeniedBody': message('提供的有效访问投影拒绝了此只读请求，且不披露资源是否存在。'),
++    'productionBrowser.failureUnknownTitle': message('制作快照访问权限未知'),
++    'productionBrowser.failureUnknownBody': message('无法确定身份、访问权限或项目范围，因此请求保持关闭。'),
++    'productionBrowser.failureUnsupportedTitle': message('不支持制作快照'),
++    'productionBrowser.failureUnsupportedBody': message('已连接来源不支持此有限的场景与镜头投影。'),
++    'productionBrowser.failureErrorTitle': message('制作快照错误'),
++    'productionBrowser.failureErrorBody': message('来源请求失败。请重试以请求新的制作快照。'),
++    'productionBrowser.failureInvalidTitle': message('制作快照无效'),
++    'productionBrowser.failureInvalidBody': message('返回的快照不符合严格的前端契约。不显示任何返回的制作数据；重试将请求新快照。'),
++    'productionBrowser.failureStaleTitle': message('制作快照已过期'),
++    'productionBrowser.failureStaleBody': message('来源报告投影版本已过期。请刷新后再检查制作数据。'),
++    'productionBrowser.search': message('搜索场景'),
++    'productionBrowser.searchPlaceholder': message('搜索来源提供的场景 ID、名称或描述'),
++    'productionBrowser.statusLabel': message('场景状态'),
++    'productionBrowser.allStatuses': message('所有提供的状态'),
++    'productionBrowser.sortLabel': message('场景排序'),
++    'productionBrowser.sortAscending': message('名称 A–Z'),
++    'productionBrowser.sortDescending': message('名称 Z–A'),
++    'productionBrowser.snapshotBounded': message('已加载 {sceneCount} 个场景和 {shotCount} 个镜头 · 有限快照，可能还有更多内容 · 版本 {version}。', ['sceneCount', 'shotCount', 'version']),
++    'productionBrowser.snapshotComplete': message('已加载 {sceneCount} 个场景和 {shotCount} 个镜头 · 来源报告此快照完整 · 版本 {version}。', ['sceneCount', 'shotCount', 'version']),
++    'productionBrowser.emptyTitle': message('此快照中没有场景'),
++    'productionBrowser.emptyBody': message('来源返回了空的项目快照。这不能证明其他位置不存在场景。'),
++    'productionBrowser.noMatchesTitle': message('没有匹配的场景'),
++    'productionBrowser.noMatchesBody': message('已加载快照中没有场景匹配当前本地筛选条件。'),
++    'productionBrowser.reset': message('重置筛选条件'),
++    'productionBrowser.sceneList': message('场景快照'),
++    'productionBrowser.notSupplied': message('未提供'),
++    'productionBrowser.emptySupplied': message('提供了空值'),
++    'productionBrowser.browseScene': message('浏览镜头'),
++    'productionBrowser.browseSceneNamed': message('浏览场景 {name}', ['name']),
++    'productionBrowser.inspect': message('检查'),
++    'productionBrowser.inspectSceneNamed': message('检查场景 {name}', ['name']),
++    'productionBrowser.relatedShotsTitle': message('{name}中的镜头', ['name']),
++    'productionBrowser.selectSceneTitle': message('相关镜头'),
++    'productionBrowser.selectSceneBody': message('选择一个场景，仅显示由来源明确关系连接的镜头。'),
++    'productionBrowser.noShotsTitle': message('此快照中没有相关镜头'),
++    'productionBrowser.noShotsBody': message('已加载快照未提供此场景的镜头关系。'),
++    'productionBrowser.shotListNamed': message('与{name}明确相关的镜头', ['name']),
++    'productionBrowser.inspectShotNamed': message('检查镜头 {name}', ['name']),
++    'productionBrowser.sceneDetailTitle': message('场景详情'),
++    'productionBrowser.shotDetailTitle': message('镜头详情'),
++    'productionBrowser.detailClose': message('关闭制作详情'),
++    'productionBrowser.detailReadOnly': message('只读来源详情'),
++    'productionBrowser.detailKind': message('类型'),
++    'productionBrowser.detailId': message('稳定 ID'),
++    'productionBrowser.detailProjectId': message('项目 ID'),
++    'productionBrowser.detailName': message('名称'),
++    'productionBrowser.detailDescription': message('描述'),
++    'productionBrowser.detailStatus': message('状态'),
++    'productionBrowser.detailVersion': message('版本'),
++    'productionBrowser.references': message('安全的来源引用'),
++    'productionBrowser.noReferences': message('未提供引用。'),
++    'productionBrowser.referenceSupported': message('支持本地检查'),
++    'productionBrowser.referenceUnsupported': message('不支持检查'),
++    'productionBrowser.referenceAuthority': message('引用可见并不授予权限。目标访问权限与项目范围必须独立检查；不使用外部、存储或下载 URL。'),
++    'productionBrowser.detailLimit': message('检查仅显示来源提供的字段，不推断时长、进度、所有者、顺序、分配或规范可用性。'),
+     brandHome: message('媒体平台首页'), brand: message('媒体平台'), creativeWorkspace: message('创作工作区'),
+     globalNavigation: message('全局导航'), projectNavigation: message('项目导航'), projectSurfaceSwitcher: message('项目界面切换'),
+     workspace: message('工作区'), operations: message('运营'), admin: message('管理'), developer: message('开发者'), overview: message('概览'), review: message('审阅'),
+diff --git a/frontend/src/product/production/ProductionBrowser.test.tsx b/frontend/src/product/production/ProductionBrowser.test.tsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..a97bf77b690c2362b32e9b03aee4f0b707d2f50a
+--- /dev/null
++++ b/frontend/src/product/production/ProductionBrowser.test.tsx
+@@ -0,0 +1,293 @@
++import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
++import { StrictMode } from 'react'
++import { describe, expect, it, vi } from 'vitest'
++import type { EffectiveAccessEntry } from '../../foundation/effectiveAccess'
++import { SelectionProvider } from '../../interaction/SelectionContext'
++import { useInteractionStore } from '../../interaction/SelectionContext'
++import type { InteractionStore } from '../../interaction/model'
++import { LocalizationProvider } from '../../localization'
++import { ProductionBrowser } from './ProductionBrowser'
++import { createSimulatedProductionSource } from './simulatedSource'
++import { ProductionSourceProvider } from './source'
++import { type ProductionReadRequest, type ProductionSource } from './types'
++
++const scope = { principalId: 'principal-1', tenantId: 'tenant-1', sessionId: 'session-1', workspaceId: 'workspace-1', projectId: 'project-1' }
++
++function deferred<T>() {
++  let resolve!: (value: T) => void
++  const promise = new Promise<T>(value => { resolve = value })
++  return { promise, resolve }
++}
++
++const TEST_HOST_ACCESS_KEY = 'test-host-agreed.production.read'
++function availableAccess(): EffectiveAccessEntry {
++  return {
++    key: TEST_HOST_ACCESS_KEY, status: 'AVAILABLE', reasonCode: 'TEST_AVAILABLE', explanation: '<server access explanation 原文>',
++    factors: { capability: 'SATISFIED', runtime: 'SATISFIED', entitlement: 'SATISFIED', policy: 'SATISFIED', quota: 'SATISFIED' }, source: 'SERVER',
++  }
++}
++
++function ownedResult(request: ProductionReadRequest, sceneName = 'Connected Scene') {
++  return {
++    status: 'ok', scope: request.scope, requestId: request.requestId,
++    scenes: [{ kind: 'SCENE', id: 'scene-connected', projectId: request.scope.projectId, name: sceneName, status: 'APPROVED', version: 'scene-v1' }],
++    shots: [{ kind: 'SHOT', id: 'shot-connected', projectId: request.scope.projectId, name: 'Connected Shot', description: 'Supplied detail', status: 'READY', version: 'shot-v3', references: [{ kind: 'RENDER', id: 'render-connected', projectId: request.scope.projectId, availability: 'SUPPORTED' }] }],
++    relations: [{ sceneId: 'scene-connected', shotId: 'shot-connected' }],
++    boundary: { kind: 'project-production-snapshot', completeness: 'complete', limit: 2, version: 'projection-connected' },
++  }
++}
++
++function realSource(overrides: Partial<typeof scope> = {}): ProductionSource {
++  const sourceScope = { ...scope, ...overrides }
++  return { scope: sourceScope, access: availableAccess(), readAccessBinding: { kind: 'HOST_AGREED', accessKey: TEST_HOST_ACCESS_KEY }, adapter: { origin: 'real', async readProject(request) { return ownedResult(request) } } }
++}
++
++function setup(source: ProductionSource = createSimulatedProductionSource({ scope }), locale: 'en' | 'zh-CN' = 'en') {
++  return render(<LocalizationProvider initialLocale={locale}><SelectionProvider scope={{ workspaceId: scope.workspaceId, projectId: scope.projectId, surfaceId: 'production' }}><ProductionBrowser expectedScope={scope} source={source} /></SelectionProvider></LocalizationProvider>)
++}
++
++function CaptureInteractionStore({ capture }: { capture: (store: InteractionStore) => void }) {
++  capture(useInteractionStore())
++  return null
++}
++
++describe('ProductionBrowser Scene and Shot discovery', () => {
++  it('remains initially usable under the actual StrictMode-style host lifecycle', async () => {
++    const source = realSource()
++    const query = vi.spyOn(source.adapter, 'readProject')
++    render(<StrictMode><LocalizationProvider><SelectionProvider scope={{ workspaceId: scope.workspaceId, projectId: scope.projectId, surfaceId: 'production' }}><ProductionBrowser expectedScope={scope} source={source} /></SelectionProvider></LocalizationProvider></StrictMode>)
++    expect(await screen.findByText('Connected Scene')).toBeTruthy()
++    expect(screen.queryByRole('heading', { name: 'Production context retired' })).toBeNull()
++    expect(query.mock.calls.length).toBeGreaterThan(0)
++  })
++
++  it('accepts the isolated fixture only through an explicit source prop or provider injection', async () => {
++    const source = createSimulatedProductionSource({ scope })
++    render(<LocalizationProvider><SelectionProvider scope={{ workspaceId: scope.workspaceId, projectId: scope.projectId, surfaceId: 'production' }}><ProductionSourceProvider source={source}><ProductionBrowser expectedScope={scope} /></ProductionSourceProvider></SelectionProvider></LocalizationProvider>)
++    expect(await screen.findByRole('button', { name: 'Browse scene Courtyard <scene>' })).toBeTruthy()
++    expect(screen.getByText(/explicitly injected fixture/i)).toBeTruthy()
++  })
++
++  it('browses only explicitly related Shots, preserves missing fields, and exposes no mutation or arbitrary URL', async () => {
++    setup()
++    expect(await screen.findByRole('heading', { name: 'Scenes and shots' })).toBeTruthy()
++    expect(screen.getByText(/SIMULATED PRODUCTION DATA/)).toBeTruthy()
++    expect(screen.getByText('workspace-1')).toBeTruthy()
++    expect(screen.getByText('project-1')).toBeTruthy()
++    fireEvent.click(screen.getByRole('button', { name: 'Browse scene Courtyard <scene>' }))
++    const shots = screen.getByRole('list', { name: 'Shots explicitly related to Courtyard <scene>' })
++    expect(within(shots).getByText('Arrival shot')).toBeTruthy()
++    expect(within(shots).queryByText('Studio insert')).toBeNull()
++    fireEvent.click(within(shots).getByRole('button', { name: 'Inspect shot shot-courtyard-detail' }))
++    const unsupported = screen.getByRole('dialog', { name: 'Shot details' })
++    expect(within(unsupported).getByText('workflow-courtyard')).toBeTruthy()
++    expect(within(unsupported).getByText('No safe Workflow inspection route is supplied by this fixture.')).toBeTruthy()
++    expect(within(unsupported).getByText('Empty supplied value')).toBeTruthy()
++    expect(screen.queryByRole('button', { name: /create|delete|rename|assign|change status/i })).toBeNull()
++    expect(screen.queryByRole('link')).toBeNull()
++  })
++
++  it('searches, filters, sorts and resets Scenes locally while retaining controls after detail close', async () => {
++    setup()
++    await screen.findByRole('button', { name: 'Browse scene Courtyard <scene>' })
++    fireEvent.change(screen.getByRole('searchbox', { name: 'Search scenes' }), { target: { value: 'interior 原文' } })
++    expect(screen.getByRole('button', { name: 'Browse scene Studio' })).toBeTruthy()
++    expect(screen.queryByRole('button', { name: 'Browse scene Courtyard <scene>' })).toBeNull()
++    fireEvent.change(screen.getByRole('searchbox', { name: 'Search scenes' }), { target: { value: '' } })
++    fireEvent.change(screen.getByLabelText('Scene status'), { target: { value: 'DRAFT?' } })
++    fireEvent.change(screen.getByLabelText('Sort scenes'), { target: { value: 'name-desc' } })
++    fireEvent.change(screen.getByRole('searchbox', { name: 'Search scenes' }), { target: { value: 'no match' } })
++    expect(screen.getByRole('heading', { name: 'No matching scenes' })).toBeTruthy()
++    fireEvent.click(screen.getByRole('button', { name: 'Reset filters' }))
++    const launcher = screen.getByRole('button', { name: 'Browse scene Courtyard <scene>' })
++    fireEvent.click(launcher)
++    const shotLauncher = screen.getByRole('button', { name: 'Inspect shot Arrival shot' })
++    shotLauncher.focus(); fireEvent.click(shotLauncher)
++    const dialog = screen.getByRole('dialog', { name: 'Shot details' })
++    expect(within(dialog).getByText('arrival-v2')).toBeTruthy()
++    expect(within(dialog).getByText('render-arrival')).toBeTruthy()
++    expect(within(dialog).getByText(/does not grant permission/i)).toBeTruthy()
++    fireEvent.keyDown(dialog, { key: 'Escape' })
++    expect(document.activeElement).toBe(shotLauncher)
++    expect((screen.getByRole('searchbox', { name: 'Search scenes' }) as HTMLInputElement).value).toBe('')
++    expect((screen.getByLabelText('Scene status') as HTMLSelectElement).value).toBe('')
++    expect((screen.getByLabelText('Sort scenes') as HTMLSelectElement).value).toBe('name-asc')
++  })
++
++  it('keeps Reset reachable for populated filters and preserves Reset focus after restoring defaults', async () => {
++    setup()
++    await screen.findByRole('button', { name: 'Browse scene Courtyard <scene>' })
++    fireEvent.change(screen.getByLabelText('Scene status'), { target: { value: 'DRAFT?' } })
++    expect(screen.getByRole('button', { name: 'Browse scene Studio' })).toBeTruthy()
++    const reset = screen.getByRole('button', { name: 'Reset filters' })
++    reset.focus(); fireEvent.click(reset)
++    expect((screen.getByLabelText('Scene status') as HTMLSelectElement).value).toBe('')
++    expect(screen.getByRole('button', { name: 'Browse scene Courtyard <scene>' })).toBeTruthy()
++    expect(document.activeElement).toBe(reset)
++  })
++
++  it('distinguishes empty snapshots, no related Shots, bounded snapshots and missing supplied values', async () => {
++    const empty = setup(createSimulatedProductionSource({ scope, empty: true }))
++    expect(await screen.findByRole('heading', { name: 'No scenes in this snapshot' })).toBeTruthy()
++    empty.unmount()
++    setup(createSimulatedProductionSource({ scope, limit: 3 }))
++    expect(await screen.findByText(/bounded snapshot; more may exist/i)).toBeTruthy()
++    fireEvent.click(screen.getByRole('button', { name: 'Browse scene Silent scene' }))
++    expect(screen.getByRole('heading', { name: 'No related shots in this snapshot' })).toBeTruthy()
++    fireEvent.click(screen.getByRole('button', { name: 'Inspect scene Silent scene' }))
++    expect(within(screen.getByRole('dialog', { name: 'Scene details' })).getAllByText('Not supplied').length).toBeGreaterThan(0)
++  })
++
++  it('uses one stable Refresh/Cancel/Retry control, drops cancelled replies, and never steals moved focus', async () => {
++    const source = realSource()
++    render(<LocalizationProvider><SelectionProvider scope={{ workspaceId: scope.workspaceId, projectId: scope.projectId, surfaceId: 'production' }}><button type="button">Stable focus</button><ProductionBrowser expectedScope={scope} source={source} /></SelectionProvider></LocalizationProvider>)
++    await screen.findByText('Connected Scene')
++    const pending = deferred<unknown>(); let request!: ProductionReadRequest
++    vi.spyOn(source.adapter, 'readProject').mockImplementationOnce(value => { request = value; return pending.promise })
++    const workflow = screen.getByRole('button', { name: 'Refresh production snapshot' })
++    workflow.focus(); fireEvent.click(workflow)
++    expect(screen.getByRole('button', { name: 'Cancel loading' })).toBe(workflow)
++    const stable = screen.getByRole('button', { name: 'Stable focus' }); stable.focus()
++    await act(async () => pending.resolve({ status: 'error', scope: request.scope, requestId: request.requestId, explanation: '<opaque error>' }))
++    expect(screen.getByRole('button', { name: 'Retry loading' })).toBe(workflow)
++    expect(document.activeElement).toBe(stable)
++
++    const cancelled = deferred<unknown>(); let cancelledRequest!: ProductionReadRequest
++    vi.spyOn(source.adapter, 'readProject').mockImplementationOnce(value => { cancelledRequest = value; return cancelled.promise })
++    fireEvent.click(workflow); fireEvent.click(workflow)
++    await act(async () => cancelled.resolve(ownedResult(cancelledRequest, 'Cancelled secret')))
++    expect(screen.queryByText('Cancelled secret')).toBeNull()
++  })
++
++  it.each(['unavailable', 'denied', 'unknown', 'unsupported', 'error', 'stale'] as const)('clears content and renders nondisclosing %s state with opaque supplied explanation', async failure => {
++    const source = realSource()
++    setup(source)
++    await screen.findByText('Connected Scene')
++    vi.spyOn(source.adapter, 'readProject').mockImplementation(async request => ({ status: failure, scope: request.scope, requestId: request.requestId, explanation: `<opaque ${failure} 原因>` }))
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh production snapshot' }))
++    await waitFor(() => expect(screen.getByText(`<opaque ${failure} 原因>`)).toBeTruthy())
++    expect(screen.queryByText('Connected Scene')).toBeNull()
++  })
++
++  it('fails closed on invalid relations and never retains old content', async () => {
++    const source = realSource()
++    setup(source)
++    await screen.findByText('Connected Scene')
++    vi.spyOn(source.adapter, 'readProject').mockImplementation(async request => ({ ...ownedResult(request, 'Must stay hidden'), relations: [] }))
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh production snapshot' }))
++    expect(await screen.findByRole('heading', { name: 'Invalid production snapshot' })).toBeTruthy()
++    expect(screen.getByRole('button', { name: 'Retry loading' })).toBeTruthy()
++    expect(screen.queryByText('Must stay hidden')).toBeNull()
++  })
++
++  it('keeps a rejected source request retryable and distinct from invalid snapshot validation', async () => {
++    const source = realSource()
++    setup(source)
++    await screen.findByText('Connected Scene')
++    vi.spyOn(source.adapter, 'readProject').mockRejectedValueOnce(new Error('transport detail must remain hidden'))
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh production snapshot' }))
++    expect(await screen.findByRole('heading', { name: 'Production snapshot error' })).toBeTruthy()
++    expect(screen.getByRole('button', { name: 'Retry loading' })).toBeTruthy()
++    expect(screen.queryByText('transport detail must remain hidden')).toBeNull()
++    expect(screen.queryByRole('heading', { name: 'Invalid production snapshot' })).toBeNull()
++  })
++
++  it.each(['principalId', 'tenantId', 'sessionId', 'workspaceId', 'projectId'] as const)('retires a valid pending reply on %s change', async field => {
++    const source = realSource()
++    const pending = deferred<unknown>(); let oldRequest!: ProductionReadRequest
++    vi.spyOn(source.adapter, 'readProject').mockImplementation(request => { oldRequest = request; return pending.promise })
++    const view = setup(source)
++    const nextScope = { ...scope, [field]: field === 'workspaceId' ? 'workspace-2' : field === 'projectId' ? 'project-2' : 'changed' }
++    const next = realSource({ [field]: nextScope[field] })
++    view.rerender(<LocalizationProvider><SelectionProvider scope={{ workspaceId: nextScope.workspaceId, projectId: nextScope.projectId, surfaceId: 'production' }}><ProductionBrowser expectedScope={nextScope} source={next} /></SelectionProvider></LocalizationProvider>)
++    expect(await screen.findByText('Connected Scene')).toBeTruthy()
++    await act(async () => pending.resolve(ownedResult(oldRequest, 'Retired secret')))
++    expect(screen.queryByText('Retired secret')).toBeNull()
++  })
++
++  it('retires pending replies on adapter/access replacement and unmount', async () => {
++    const source = realSource()
++    const pending = deferred<unknown>(); let oldRequest!: ProductionReadRequest
++    vi.spyOn(source.adapter, 'readProject').mockImplementation(request => { oldRequest = request; return pending.promise })
++    const view = setup(source)
++    const deniedBase = realSource()
++    const denied = { ...deniedBase, access: { ...deniedBase.access, status: 'POLICY_DENIED' as const, explanation: '<replacement denied>' } }
++    const deniedQuery = vi.spyOn(denied.adapter, 'readProject')
++    view.rerender(<LocalizationProvider><SelectionProvider scope={{ workspaceId: scope.workspaceId, projectId: scope.projectId, surfaceId: 'production' }}><ProductionBrowser expectedScope={scope} source={denied} /></SelectionProvider></LocalizationProvider>)
++    expect(screen.getByText('<replacement denied>')).toBeTruthy()
++    expect(deniedQuery).not.toHaveBeenCalled()
++    await act(async () => pending.resolve(ownedResult(oldRequest, 'Replaced adapter secret')))
++    expect(screen.queryByText('Replaced adapter secret')).toBeNull()
++    view.unmount()
++
++    const unmountedSource = realSource()
++    const unmounted = deferred<unknown>(); let unmountedRequest!: ProductionReadRequest
++    vi.spyOn(unmountedSource.adapter, 'readProject').mockImplementation(request => { unmountedRequest = request; return unmounted.promise })
++    const second = setup(unmountedSource)
++    second.unmount()
++    await act(async () => unmounted.resolve(ownedResult(unmountedRequest, 'Unmounted secret')))
++    expect(screen.queryByText('Unmounted secret')).toBeNull()
++  })
++
++  it('clears a ready snapshot on InteractionStore owner retirement and rebinds only to a fresh pageshow store', async () => {
++    const source = realSource()
++    const query = vi.spyOn(source.adapter, 'readProject')
++    render(<LocalizationProvider><SelectionProvider scope={{ workspaceId: scope.workspaceId, projectId: scope.projectId, surfaceId: 'production' }}><ProductionBrowser expectedScope={scope} source={source} /></SelectionProvider></LocalizationProvider>)
++    expect(await screen.findByText('Connected Scene')).toBeTruthy()
++    act(() => window.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: true })))
++    expect(screen.queryByText('Connected Scene')).toBeNull()
++    expect(screen.getByRole('heading', { name: 'Production context retired' })).toBeTruthy()
++    expect(query).toHaveBeenCalledTimes(1)
++    act(() => window.dispatchEvent(new PageTransitionEvent('pageshow', { persisted: true })))
++    expect(await screen.findByText('Connected Scene')).toBeTruthy()
++    expect(query).toHaveBeenCalledTimes(2)
++  })
++
++  it('rejects a pending reply after InteractionStore owner retirement', async () => {
++    const source = realSource()
++    const pending = deferred<unknown>(); let request!: ProductionReadRequest; let store!: InteractionStore
++    vi.spyOn(source.adapter, 'readProject').mockImplementation(value => { request = value; return pending.promise })
++    render(<LocalizationProvider><SelectionProvider scope={{ workspaceId: scope.workspaceId, projectId: scope.projectId, surfaceId: 'production' }}><CaptureInteractionStore capture={value => { store = value }} /><ProductionBrowser expectedScope={scope} source={source} /></SelectionProvider></LocalizationProvider>)
++    expect(screen.getByRole('heading', { name: 'Loading production snapshot' })).toBeTruthy()
++    act(() => store.retireSelectionOwner('owner'))
++    expect(screen.getByRole('heading', { name: 'Production context retired' })).toBeTruthy()
++    await act(async () => pending.resolve(ownedResult(request, 'Retired owner secret')))
++    expect(screen.queryByText('Retired owner secret')).toBeNull()
++  })
++
++  it.each([
++    ['principalId', ''], ['tenantId', ' '], ['sessionId', '\t'], ['workspaceId', '\u0000'], ['projectId', '\n'],
++  ] as const)('does not query a malformed required %s context', (field, value) => {
++    const invalid = realSource({ [field]: value })
++    const query = vi.spyOn(invalid.adapter, 'readProject')
++    const expected = { workspaceId: invalid.scope.workspaceId, projectId: invalid.scope.projectId }
++    render(<LocalizationProvider><SelectionProvider scope={{ workspaceId: expected.workspaceId, projectId: expected.projectId, surfaceId: 'production' }}><ProductionBrowser expectedScope={expected} source={invalid} /></SelectionProvider></LocalizationProvider>)
++    expect(screen.getByRole('heading', { name: 'Production snapshot access unknown' })).toBeTruthy()
++    expect(query).not.toHaveBeenCalled()
++  })
++
++  it('does not query denied/unknown sources and is unavailable with no injected source', () => {
++    for (const status of ['POLICY_DENIED', 'UNKNOWN_FAIL_CLOSED'] as const) {
++      const base = realSource()
++      const source = { ...base, access: { ...base.access, status, explanation: `<initial ${status} 原因>` } }
++      const query = vi.spyOn(source.adapter, 'readProject')
++      const view = setup(source)
++      expect(screen.getByText(`<initial ${status} 原因>`)).toBeTruthy()
++      expect(query).not.toHaveBeenCalled()
++      view.unmount()
++    }
++    render(<LocalizationProvider><SelectionProvider scope={{ workspaceId: scope.workspaceId, projectId: scope.projectId, surfaceId: 'production' }}><ProductionBrowser expectedScope={scope} /></SelectionProvider></LocalizationProvider>)
++    expect(screen.getByRole('heading', { name: 'Production snapshot unavailable' })).toBeTruthy()
++  })
++
++  it('localizes the complete bounded workflow in Chinese while preserving supplied values literally', async () => {
++    setup(createSimulatedProductionSource({ scope }), 'zh-CN')
++    expect(await screen.findByRole('heading', { name: '场景与镜头' })).toBeTruthy()
++    expect(await screen.findByRole('searchbox', { name: '搜索场景' })).toBeTruthy()
++    fireEvent.click(screen.getByRole('button', { name: '浏览场景 Courtyard <scene>' }))
++    fireEvent.click(screen.getByRole('button', { name: '检查镜头 Arrival shot' }))
++    const dialog = screen.getByRole('dialog', { name: '镜头详情' })
++    expect(within(dialog).getByText('arrival-v2')).toBeTruthy()
++    expect(within(dialog).getByText('render-arrival')).toBeTruthy()
++  })
++})
+diff --git a/frontend/src/product/production/ProductionBrowser.tsx b/frontend/src/product/production/ProductionBrowser.tsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..703899aa2d2563f7ae6f2f06e72e4fd4361b22b1
+--- /dev/null
++++ b/frontend/src/product/production/ProductionBrowser.tsx
+@@ -0,0 +1,247 @@
++import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
++import { Badge, Button, EmptyState, Panel, PropertyRow, Search, Skeleton, Status } from '../../components/design-system'
++import { AsyncStatePanel } from '../../foundation/errors'
++import { InteractionDialog } from '../../interaction/InteractionDialog'
++import { useInteractionStore, useSelection, useSurfaceAdapter } from '../../interaction/SelectionContext'
++import type { InteractionStore } from '../../interaction/model'
++import { useTranslation } from '../../localization'
++import {
++  parseProductionSnapshot,
++  productionAccessExplanation,
++  productionContextKey,
++  productionPresentationOrigin,
++  productionSourceDisposition,
++  sceneStatusValues,
++  selectScenes,
++  type ProductionSnapshot,
++} from './model'
++import { productionAdapterKey, useProvidedProductionSource } from './source'
++import { unavailableProductionSource } from './simulatedSource'
++import type {
++  ProductionFailureStatus,
++  ProductionReference,
++  ProductionSource,
++  SceneFilters,
++  SceneProjection,
++  ShotProjection,
++} from './types'
++import './production.css'
++
++type ExpectedScope = { readonly workspaceId: string; readonly projectId: string }
++type BrowserStatus = 'loading' | 'ready' | 'cancelled' | 'invalid' | ProductionFailureStatus
++type Detail = { readonly kind: 'SCENE'; readonly value: SceneProjection } | { readonly kind: 'SHOT'; readonly value: ShotProjection }
++
++const interactionStoreIds = new WeakMap<InteractionStore, number>()
++let nextInteractionStoreId = 0
++function interactionStoreKey(store: InteractionStore): number {
++  if (!interactionStoreIds.has(store)) interactionStoreIds.set(store, ++nextInteractionStoreId)
++  return interactionStoreIds.get(store)!
++}
++
++export function ProductionBrowser({ expectedScope, source: supplied }: { expectedScope: ExpectedScope; source?: ProductionSource }) {
++  const store = useInteractionStore()
++  const selection = useSelection()
++  useSurfaceAdapter({ objects: () => [], supports: [], handle: () => false })
++  const owner = useRef({ store, lifetime: selection.lifetime })
++  if (owner.current.store !== store) owner.current = { store, lifetime: selection.lifetime }
++  useLayoutEffect(() => {
++    // StrictMode replays layout-effect cleanup/setup against the same mounted
++    // store. Accept the current lifetime only when the adapter setup itself is
++    // replayed. Explicit owner/document retirement does not rerun this effect.
++    owner.current = { store, lifetime: store.getSnapshot().lifetime }
++  }, [store])
++  const ownerRetired = owner.current.lifetime !== selection.lifetime
++  const provided = useProvidedProductionSource()
++  const fallback = useMemo(() => unavailableProductionSource(expectedScope), [expectedScope.workspaceId, expectedScope.projectId])
++  const source = supplied ?? provided ?? fallback
++  const sourceKey = JSON.stringify([
++    productionAdapterKey(source.adapter), source.adapter.origin,
++    source.readAccessBinding, productionContextKey({ ...source.scope, access: source.access }),
++    expectedScope.workspaceId, expectedScope.projectId, interactionStoreKey(store),
++  ])
++  if (ownerRetired) return <RetiredProductionBrowser />
++  return <ProductionBrowserSession key={sourceKey} expectedScope={expectedScope} source={source} />
++}
++
++function RetiredProductionBrowser() {
++  const { t } = useTranslation()
++  return <section className="ff-production-browser" aria-label={t('shell.productionBrowser.region')}>
++    <AsyncStatePanel state="UNAVAILABLE" title={t('shell.productionBrowser.ownerRetiredTitle')}><p>{t('shell.productionBrowser.ownerRetiredBody')}</p></AsyncStatePanel>
++  </section>
++}
++
++function displayName(entity: SceneProjection | ShotProjection): string {
++  return entity.name ?? entity.id
++}
++
++function ProductionBrowserSession({ expectedScope, source }: { expectedScope: ExpectedScope; source: ProductionSource }) {
++  const { t } = useTranslation()
++  const text = (key: string, parameters?: Record<string, string | number>) => t(`shell.productionBrowser.${key}`, parameters)
++  const disposition = productionSourceDisposition(source, expectedScope)
++  const [status, setStatus] = useState<BrowserStatus>(disposition === 'ready' ? 'loading' : disposition)
++  const [snapshot, setSnapshot] = useState<ProductionSnapshot | null>(null)
++  const [filters, setFilters] = useState<SceneFilters>({ query: '', status: '', order: 'name-asc' })
++  const [sceneId, setSceneId] = useState<string | null>(null)
++  const [detail, setDetail] = useState<Detail | null>(null)
++  const [explanation, setExplanation] = useState<string | null>(null)
++  const live = useRef(false)
++  const generation = useRef(0)
++  const sequence = useRef(0)
++  const controller = useRef<AbortController | null>(null)
++
++  useLayoutEffect(() => {
++    live.current = true
++    return () => {
++      live.current = false
++      generation.current += 1
++      controller.current?.abort()
++    }
++  }, [])
++
++  async function load() {
++    const current = ++generation.current
++    controller.current?.abort()
++    setSnapshot(null)
++    setSceneId(null)
++    setDetail(null)
++    setExplanation(null)
++    if (disposition !== 'ready') { setStatus(disposition); return }
++    const requestController = new AbortController()
++    controller.current = requestController
++    const request = { scope: source.scope, requestId: `production-snapshot-${++sequence.current}` }
++    setStatus('loading')
++    let input: unknown
++    try {
++      input = await source.adapter.readProject(request, requestController.signal)
++    } catch {
++      if (!live.current || requestController.signal.aborted || current !== generation.current) return
++      setStatus('error')
++      return
++    }
++    if (!live.current || requestController.signal.aborted || current !== generation.current) return
++    try {
++      const result = parseProductionSnapshot(input, request)
++      if (result.status === 'ok') { setSnapshot(result); setStatus('ready') }
++      else { setStatus(result.status); setExplanation(result.explanation ?? null) }
++    } catch {
++      if (!live.current || requestController.signal.aborted || current !== generation.current) return
++      setStatus('invalid')
++    }
++  }
++
++  useEffect(() => { void load() }, [])
++
++  function cancel() {
++    generation.current += 1
++    controller.current?.abort()
++    setSnapshot(null); setSceneId(null); setDetail(null); setExplanation(null); setStatus('cancelled')
++  }
++
++  const scenes = snapshot?.scenes ?? []
++  const visibleScenes = useMemo(() => selectScenes(scenes, filters), [filters, scenes])
++  const selectedScene = visibleScenes.find(scene => scene.id === sceneId) ?? null
++  const relatedShotIds = new Set(snapshot?.relations.filter(relation => relation.sceneId === selectedScene?.id).map(relation => relation.shotId) ?? [])
++  const relatedShots = snapshot?.shots.filter(shot => relatedShotIds.has(shot.id)) ?? []
++  const filtersChanged = filters.query !== '' || filters.status !== '' || filters.order !== 'name-asc'
++  const resetFilters = () => {
++    if (filtersChanged) setFilters({ query: '', status: '', order: 'name-asc' })
++  }
++  useEffect(() => {
++    if (sceneId && !visibleScenes.some(scene => scene.id === sceneId)) { setSceneId(null); setDetail(null) }
++  }, [sceneId, visibleScenes])
++
++  const failures: Record<ProductionFailureStatus | 'invalid', { title: string; body: string; state: 'UNAVAILABLE' | 'BLOCKED' | 'ERROR' }> = {
++    unavailable: { title: text('failureUnavailableTitle'), body: text('failureUnavailableBody'), state: 'UNAVAILABLE' },
++    denied: { title: text('failureDeniedTitle'), body: text('failureDeniedBody'), state: 'BLOCKED' },
++    unknown: { title: text('failureUnknownTitle'), body: text('failureUnknownBody'), state: 'BLOCKED' },
++    unsupported: { title: text('failureUnsupportedTitle'), body: text('failureUnsupportedBody'), state: 'UNAVAILABLE' },
++    error: { title: text('failureErrorTitle'), body: text('failureErrorBody'), state: 'ERROR' },
++    invalid: { title: text('failureInvalidTitle'), body: text('failureInvalidBody'), state: 'ERROR' },
++    stale: { title: text('failureStaleTitle'), body: text('failureStaleBody'), state: 'BLOCKED' },
++  }
++  const failure = status !== 'loading' && status !== 'ready' && status !== 'cancelled' ? failures[status] : null
++  const origin = productionPresentationOrigin(source)
++  const originKey = origin === 'simulated' ? 'originSimulated' : origin === 'real' ? 'originReal' : 'originUnavailable'
++  const visibleExplanation = explanation ?? (disposition === 'ready' ? null : productionAccessExplanation(source))
++  const workflowKey = status === 'loading' ? 'cancel' : status === 'ready' ? 'refresh' : 'retry'
++
++  return <section className="ff-production-browser" aria-label={text('region')}>
++    <header className="ff-production-heading">
++      <div><span>{text('eyebrow')}</span><h1>{text('title')}</h1><p>{text('description')}</p></div>
++      {disposition === 'ready' ? <Button onClick={status === 'loading' ? cancel : () => void load()}>{text(workflowKey)}</Button> : null}
++    </header>
++    <p className={`ff-production-origin ff-production-origin--${origin}`}><Badge tone={origin === 'simulated' ? 'warning' : 'neutral'}>{text(originKey)}</Badge></p>
++    <details className="ff-production-scope"><summary>{text('scope')}</summary><dl>
++      <dt>{text('workspaceId')}</dt><dd><code>{source.scope.workspaceId}</code></dd>
++      <dt>{text('projectId')}</dt><dd><code>{source.scope.projectId}</code></dd>
++    </dl></details>
++    <p className="ff-production-boundary">{text('boundary')}</p>
++
++    {status === 'loading' ? <AsyncStatePanel state="LOADING" title={text('loadingTitle')}><Skeleton label={text('loadingLabel')} /></AsyncStatePanel> : null}
++    {status === 'cancelled' ? <AsyncStatePanel state="UNAVAILABLE" title={text('cancelledTitle')}><p>{text('cancelledBody')}</p></AsyncStatePanel> : null}
++    {failure ? <AsyncStatePanel state={failure.state} title={failure.title}><p>{failure.body}</p>{visibleExplanation ? <p className="ff-production-opaque">{visibleExplanation}</p> : null}</AsyncStatePanel> : null}
++
++    {status === 'ready' && snapshot ? <>
++      <div className="ff-production-controls">
++        <Search label={text('search')} placeholder={text('searchPlaceholder')} value={filters.query} onChange={event => setFilters(current => ({ ...current, query: event.target.value }))} />
++        <label>{text('statusLabel')}<select value={filters.status} onChange={event => setFilters(current => ({ ...current, status: event.target.value }))}>
++          <option value="">{text('allStatuses')}</option>{sceneStatusValues(scenes).map(value => <option key={value} value={value}>{value}</option>)}
++        </select></label>
++        <label>{text('sortLabel')}<select value={filters.order} onChange={event => setFilters(current => ({ ...current, order: event.target.value as SceneFilters['order'] }))}>
++          <option value="name-asc">{text('sortAscending')}</option><option value="name-desc">{text('sortDescending')}</option>
++        </select></label>
++        <Button aria-disabled={!filtersChanged} onClick={resetFilters}>{text('reset')}</Button>
++      </div>
++      <p role="status" aria-live="polite">{text(snapshot.boundary.completeness === 'bounded' ? 'snapshotBounded' : 'snapshotComplete', { sceneCount: scenes.length, shotCount: snapshot.shots.length, version: snapshot.boundary.version })}</p>
++      {!scenes.length ? <EmptyState title={text('emptyTitle')} description={text('emptyBody')} />
++        : !visibleScenes.length ? <EmptyState title={text('noMatchesTitle')} description={text('noMatchesBody')} />
++          : <div className="ff-production-layout">
++            <ul className="ff-production-scene-list" aria-label={text('sceneList')}>{visibleScenes.map(scene => <li key={scene.id}>
++              <Panel title={displayName(scene)} className={scene.id === sceneId ? 'ff-production-selected' : ''}>
++                <p>{scene.description === undefined || scene.description === null ? text('notSupplied') : scene.description || text('emptySupplied')}</p>
++                <Status label={scene.status ?? text('notSupplied')} />
++                <div className="ff-production-actions"><Button onClick={() => { setSceneId(scene.id); setDetail(null) }} aria-pressed={scene.id === sceneId} aria-label={text('browseSceneNamed', { name: displayName(scene) })}>{text('browseScene')}</Button><Button onClick={() => setDetail({ kind: 'SCENE', value: scene })} aria-label={text('inspectSceneNamed', { name: displayName(scene) })}>{text('inspect')}</Button></div>
++              </Panel>
++            </li>)}</ul>
++            <Panel title={selectedScene ? text('relatedShotsTitle', { name: displayName(selectedScene) }) : text('selectSceneTitle')} className="ff-production-shots">
++              {!selectedScene ? <p>{text('selectSceneBody')}</p>
++                : !relatedShots.length ? <EmptyState title={text('noShotsTitle')} description={text('noShotsBody')} />
++                  : <ul aria-label={text('shotListNamed', { name: displayName(selectedScene) })}>{relatedShots.map(shot => <li key={shot.id}>
++                    <div><strong>{displayName(shot)}</strong><span>{shot.status ?? text('notSupplied')}</span></div>
++                    <Button onClick={() => setDetail({ kind: 'SHOT', value: shot })} aria-label={text('inspectShotNamed', { name: displayName(shot) })}>{text('inspect')}</Button>
++                  </li>)}</ul>}
++            </Panel>
++          </div>}
++    </> : null}
++
++    {detail ? <ProductionDetail detail={detail} text={text} onClose={() => setDetail(null)} /> : null}
++  </section>
++}
++
++function ProductionDetail({ detail, text, onClose }: { detail: Detail; text: (key: string, parameters?: Record<string, string | number>) => string; onClose: () => void }) {
++  const value = detail.value
++  const field = (content: string | null | undefined) => content === undefined || content === null ? text('notSupplied') : content || text('emptySupplied')
++  return <InteractionDialog title={text(detail.kind === 'SCENE' ? 'sceneDetailTitle' : 'shotDetailTitle')} closeLabel={text('detailClose')} onClose={onClose} className="ff-production-detail">
++    <Badge tone="info">{text('detailReadOnly')}</Badge>
++    <PropertyRow label={text('detailKind')}><span>{detail.kind}</span></PropertyRow>
++    <PropertyRow label={text('detailId')}><code>{value.id}</code></PropertyRow>
++    <PropertyRow label={text('detailProjectId')}><code>{value.projectId}</code></PropertyRow>
++    <PropertyRow label={text('detailName')}><span>{field(value.name)}</span></PropertyRow>
++    <PropertyRow label={text('detailDescription')}><span>{field(value.description)}</span></PropertyRow>
++    <PropertyRow label={text('detailStatus')}><span>{field(value.status)}</span></PropertyRow>
++    <PropertyRow label={text('detailVersion')}><span>{field(value.version)}</span></PropertyRow>
++    {detail.kind === 'SHOT' ? <ReferenceList references={detail.value.references ?? []} text={text} /> : null}
++    <p>{text('detailLimit')}</p>
++  </InteractionDialog>
++}
++
++function ReferenceList({ references, text }: { references: readonly ProductionReference[]; text: (key: string, parameters?: Record<string, string | number>) => string }) {
++  return <section className="ff-production-references"><h3>{text('references')}</h3>
++    {!references.length ? <p>{text('noReferences')}</p> : <ul>{references.map(reference => <li key={`${reference.kind}:${reference.id}`}>
++      <div><strong>{reference.label ?? reference.kind}</strong><code>{reference.id}</code></div>
++      <Badge tone={reference.availability === 'SUPPORTED' ? 'info' : 'warning'}>{text(reference.availability === 'SUPPORTED' ? 'referenceSupported' : 'referenceUnsupported')}</Badge>
++      {reference.availability === 'UNSUPPORTED' ? <p>{reference.explanation}</p> : null}
++    </li>)}</ul>}
++    <p>{text('referenceAuthority')}</p>
++  </section>
++}
+diff --git a/frontend/src/product/production/model.test.ts b/frontend/src/product/production/model.test.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..606c5168530457b0280d86c3ddf6f8ddee1257df
+--- /dev/null
++++ b/frontend/src/product/production/model.test.ts
+@@ -0,0 +1,167 @@
++import { describe, expect, it, vi } from 'vitest'
++import type { EffectiveAccessEntry, EffectiveAccessStatus } from '../../foundation/effectiveAccess'
++import {
++  parseProductionSnapshot,
++  productionAccessDisposition,
++  productionContextKey,
++  productionPresentationOrigin,
++  productionSourceDisposition,
++  sceneStatusValues,
++  selectScenes,
++} from './model'
++import { createSimulatedProductionSource, unavailableProductionSource } from './simulatedSource'
++import {
++  type ProductionReadRequest,
++  type ProductionSource,
++  type SceneProjection,
++} from './types'
++
++const TEST_HOST_ACCESS_KEY = 'test-host-agreed.production.read'
++function access(status: EffectiveAccessStatus, key = TEST_HOST_ACCESS_KEY): EffectiveAccessEntry {
++  return {
++    key,
++    status,
++    reasonCode: `TEST_${status}`,
++    explanation: '<server-owned opaque explanation 原文>',
++    factors: { capability: 'UNKNOWN', runtime: 'UNKNOWN', entitlement: 'UNKNOWN', policy: 'UNKNOWN', quota: 'UNKNOWN' },
++    source: 'SERVER',
++  }
++}
++
++const scope = { principalId: 'principal-1', tenantId: 'tenant-1', sessionId: 'session-1', workspaceId: 'workspace-1', projectId: 'project-1' }
++const request: ProductionReadRequest = { scope, requestId: 'request-1' }
++const scenes: SceneProjection[] = [
++  { kind: 'SCENE', id: 'scene-z', projectId: scope.projectId, name: 'Zulu <scene>', description: 'Exterior 原文', status: 'READY?' },
++  { kind: 'SCENE', id: 'scene-b', projectId: scope.projectId, name: 'Alpha', description: null, status: 'DRAFT' },
++  { kind: 'SCENE', id: 'scene-a', projectId: scope.projectId, name: 'Alpha', version: 'scene-v1' },
++]
++const validReceipt = () => ({
++  status: 'ok', scope, requestId: request.requestId,
++  scenes,
++  shots: [
++    { kind: 'SHOT', id: 'shot-1', projectId: scope.projectId, name: 'Opening shot', status: 'READY?', version: 'shot-v2', references: [{ kind: 'RENDER', id: 'render-1', projectId: scope.projectId, availability: 'SUPPORTED' }] },
++    { kind: 'SHOT', id: 'shot-2', projectId: scope.projectId, description: '<b>literal description</b>', references: [{ kind: 'WORKFLOW', id: 'workflow-1', projectId: scope.projectId, availability: 'UNSUPPORTED', explanation: 'No safe inspection route is supplied.' }] },
++  ],
++  relations: [{ sceneId: 'scene-z', shotId: 'shot-1' }, { sceneId: 'scene-z', shotId: 'shot-2' }],
++  boundary: { kind: 'project-production-snapshot', completeness: 'bounded', limit: 5, version: 'projection-v7' },
++})
++
++describe('bounded Scene and Shot production projection', () => {
++  it('filters only supplied Scene display fields and status, then sorts stably by name and ID', () => {
++    expect(selectScenes(scenes, { query: 'Exterior 原文', status: '', order: 'name-asc' }).map(scene => scene.id)).toEqual(['scene-z'])
++    expect(selectScenes(scenes, { query: '', status: 'DRAFT', order: 'name-asc' }).map(scene => scene.id)).toEqual(['scene-b'])
++    expect(selectScenes(scenes, { query: '', status: '', order: 'name-asc' }).map(scene => scene.id)).toEqual(['scene-a', 'scene-b', 'scene-z'])
++    expect(selectScenes(scenes, { query: '', status: '', order: 'name-desc' }).map(scene => scene.id)).toEqual(['scene-z', 'scene-a', 'scene-b'])
++    expect(sceneStatusValues(scenes)).toEqual(['DRAFT', 'READY?'])
++  })
++
++  it('accepts an owned bounded snapshot with explicit stable Scene-to-Shot relations and safe references', () => {
++    expect(parseProductionSnapshot(validReceipt(), request)).toEqual(validReceipt())
++  })
++
++  it.each([
++    undefined,
++    { error: 'NOT_FOUND' },
++    { ...validReceipt(), requestId: 'old-request' },
++    { ...validReceipt(), scope: { ...scope, principalId: 'other' } },
++    { ...validReceipt(), scope: { ...scope, tenantId: 'other' } },
++    { ...validReceipt(), scope: { ...scope, sessionId: 'other' } },
++    { ...validReceipt(), scope: { ...scope, workspaceId: 'other' } },
++    { ...validReceipt(), scope: { ...scope, projectId: 'other' } },
++    { ...validReceipt(), scenes: [scenes[0], scenes[0]] },
++    { ...validReceipt(), shots: [validReceipt().shots[0], validReceipt().shots[0]] },
++    { ...validReceipt(), shots: [{ ...validReceipt().shots[0], id: scenes[0].id }] },
++    { ...validReceipt(), scenes: [{ ...scenes[0], projectId: 'foreign-project' }] },
++    { ...validReceipt(), shots: [{ ...validReceipt().shots[0], projectId: 'foreign-project' }] },
++    { ...validReceipt(), relations: [{ sceneId: 'missing', shotId: 'shot-1' }] },
++    { ...validReceipt(), relations: [{ sceneId: 'scene-z', shotId: 'missing' }] },
++    { ...validReceipt(), relations: [{ sceneId: 'scene-z', shotId: 'shot-1' }, { sceneId: 'scene-b', shotId: 'shot-1' }] },
++    { ...validReceipt(), relations: [{ sceneId: 'scene-z', shotId: 'shot-1' }, { sceneId: 'scene-z', shotId: 'shot-1' }] },
++    { ...validReceipt(), relations: [{ sceneId: 'scene-z', shotId: 'shot-1' }] },
++    { ...validReceipt(), shots: [{ ...validReceipt().shots[0], references: [{ kind: 'RENDER', id: 'render-1', projectId: 'foreign-project', availability: 'SUPPORTED' }] }] },
++    { ...validReceipt(), shots: [{ ...validReceipt().shots[0], references: [{ kind: 'SCENE', id: 'scene-z', projectId: scope.projectId, availability: 'SUPPORTED' }] }] },
++    { ...validReceipt(), shots: [{ ...validReceipt().shots[0], references: [{ kind: 'WORKFLOW', id: 'workflow-1', projectId: scope.projectId, availability: 'UNSUPPORTED' }] }] },
++    { ...validReceipt(), boundary: { ...validReceipt().boundary, version: '' } },
++    { ...validReceipt(), boundary: { ...validReceipt().boundary, limit: 1 } },
++    { ...validReceipt(), unexpected: 'field' },
++  ])('rejects malformed, ambiguous, foreign, orphaned, unsafe, unbounded, or mismatched results %#', input => {
++    expect(() => parseProductionSnapshot(input, request)).toThrow()
++  })
++
++  it.each(['unavailable', 'denied', 'unknown', 'unsupported', 'error', 'stale'] as const)('preserves nondisclosing %s failure receipts', status => {
++    const failure = { status, scope, requestId: request.requestId, explanation: '<opaque source result 原文>' }
++    expect(parseProductionSnapshot(failure, request)).toEqual(failure)
++  })
++
++  it('keys all identity, scope, access, and source ownership inputs', () => {
++    const base = { ...scope, access: access('AVAILABLE') }
++    const keys = [
++      base,
++      { ...base, principalId: 'other' }, { ...base, tenantId: 'other' }, { ...base, sessionId: 'other' },
++      { ...base, workspaceId: 'other' }, { ...base, projectId: 'other' }, { ...base, access: access('POLICY_DENIED') },
++    ].map(productionContextKey)
++    expect(new Set(keys).size).toBe(keys.length)
++  })
++
++  it('requires exact real and simulated access projections and never treats viewability as permission', () => {
++    const source = (entry: EffectiveAccessEntry, bindingKey = entry.key): ProductionSource => ({ scope, access: entry, readAccessBinding: { kind: 'HOST_AGREED', accessKey: bindingKey }, adapter: { origin: 'real', async readProject() { throw new Error('not called') } } })
++    expect(productionAccessDisposition({ ...scope, access: access('AVAILABLE') })).toBe('ready')
++    expect(productionAccessDisposition({ ...scope, access: access('POLICY_DENIED') })).toBe('denied')
++    expect(productionAccessDisposition({ ...scope, access: access('UNKNOWN_FAIL_CLOSED') })).toBe('unknown')
++    expect(productionAccessDisposition({ ...scope, principalId: null, access: access('AVAILABLE') })).toBe('unknown')
++    expect(productionSourceDisposition(source(access('AVAILABLE')), scope)).toBe('ready')
++    expect(productionPresentationOrigin(source(access('AVAILABLE')))).toBe('real')
++    expect(productionSourceDisposition(source(access('AVAILABLE'), 'different.host.binding'), scope)).toBe('unknown')
++    expect(productionSourceDisposition(source(access('AVAILABLE', 'surface.production.view')), scope)).toBe('unknown')
++    expect(productionSourceDisposition(source({ ...access('AVAILABLE'), source: 'DEVELOPMENT_FAIL_CLOSED' }), scope)).toBe('unknown')
++    expect(productionSourceDisposition(source(access('AVAILABLE')), { workspaceId: 'workspace-2', projectId: scope.projectId })).toBe('unknown')
++  })
++})
++
++describe('explicit Production source boundaries', () => {
++  it('accepts an arbitrary explicitly host-agreed SERVER access binding and rejects a mismatched binding', () => {
++    const accessEntry = access('AVAILABLE', 'actual.host.production.read.v7')
++    const matching = {
++      scope, access: accessEntry,
++      readAccessBinding: { kind: 'HOST_AGREED', accessKey: accessEntry.key },
++      adapter: { origin: 'real', async readProject() { throw new Error('not called') } },
++    } as ProductionSource & { readAccessBinding: { kind: 'HOST_AGREED'; accessKey: string } }
++    expect(productionSourceDisposition(matching, scope)).toBe('ready')
++    expect(productionPresentationOrigin(matching)).toBe('real')
++    expect(productionSourceDisposition({ ...matching, readAccessBinding: { ...matching.readAccessBinding, accessKey: 'different.host.binding' } }, scope)).toBe('unknown')
++  })
++
++  it.each([
++    ['principalId', ''], ['tenantId', ' '], ['sessionId', '\t'], ['workspaceId', '\u0000'], ['projectId', '\n'],
++  ] as const)('rejects malformed required %s before a source can be ready', (field, value) => {
++    const malformedScope = { ...scope, [field]: value }
++    const source = {
++      scope: malformedScope, access: access('AVAILABLE'),
++      readAccessBinding: { kind: 'HOST_AGREED', accessKey: TEST_HOST_ACCESS_KEY },
++      adapter: { origin: 'real', async readProject() { throw new Error('must not be called') } },
++    } as ProductionSource
++    expect(productionAccessDisposition({ ...malformedScope, access: source.access })).toBe('unknown')
++    expect(productionSourceDisposition(source, { workspaceId: malformedScope.workspaceId, projectId: malformedScope.projectId })).toBe('unknown')
++  })
++
++  it('defaults unavailable without transport and retains the supplied route scope without inventing identity', async () => {
++    const fetch = vi.spyOn(globalThis, 'fetch')
++    const source = unavailableProductionSource({ workspaceId: 'workspace-1', projectId: 'project-1' })
++    expect(source.scope).toEqual({ principalId: null, tenantId: null, sessionId: 'unconfigured', workspaceId: 'workspace-1', projectId: 'project-1' })
++    expect(await source.adapter.readProject({ scope: source.scope, requestId: 'q' }, new AbortController().signal)).toMatchObject({ status: 'unavailable', scope: source.scope, requestId: 'q' })
++    expect(fetch).not.toHaveBeenCalled()
++    fetch.mockRestore()
++  })
++
++  it('creates simulated data only from an explicit supplied identity and never reads URL, storage, or transport', async () => {
++    const source = createSimulatedProductionSource({ scope })
++    const fetch = vi.spyOn(globalThis, 'fetch')
++    const getItem = vi.spyOn(Storage.prototype, 'getItem')
++    expect(source.scope).toEqual(scope)
++    expect(source.adapter.origin).toBe('simulated')
++    await source.adapter.readProject({ scope, requestId: 'q' }, new AbortController().signal)
++    expect(fetch).not.toHaveBeenCalled()
++    expect(getItem).not.toHaveBeenCalled()
++    fetch.mockRestore(); getItem.mockRestore()
++  })
++})
+diff --git a/frontend/src/product/production/model.ts b/frontend/src/product/production/model.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..12b4d28cf216278b873b808bb85f3e83c62e21e7
+--- /dev/null
++++ b/frontend/src/product/production/model.ts
+@@ -0,0 +1,165 @@
++import { z } from 'zod'
++import { isAvailable } from '../../foundation/effectiveAccess'
++import {
++  MAX_PRODUCTION_ITEMS,
++  TEST_ONLY_PRODUCTION_ACCESS_KEY,
++  type ProductionContext,
++  type ProductionFailureStatus,
++  type ProductionReadRequest,
++  type ProductionSource,
++  type SceneFilters,
++  type SceneProjection,
++} from './types'
++
++export function isProductionIdentity(value: unknown): value is string {
++  return typeof value === 'string' && value.length > 0 && !Array.from(value).some(character => {
++    const code = character.charCodeAt(0)
++    return /\s/u.test(character) || code <= 0x1f || code === 0x7f
++  })
++}
++
++const identity = z.string().refine(isProductionIdentity)
++const nonEmptyText = z.string().min(1)
++const scopeSchema = z.object({
++  principalId: identity.nullable(), tenantId: identity.nullable(), sessionId: identity,
++  workspaceId: identity, projectId: identity,
++}).strict()
++const projectedFields = {
++  id: identity, projectId: identity, name: z.string().min(1).nullable().optional(),
++  description: z.string().nullable().optional(), status: nonEmptyText.optional(), version: identity.optional(),
++}
++const sceneSchema = z.object({ kind: z.literal('SCENE'), ...projectedFields }).strict()
++const referenceBase = {
++  kind: z.enum(['PROJECT', 'MEDIA_ASSET', 'ARTIFACT', 'TIMELINE', 'REVISION', 'RENDER', 'WORKFLOW']),
++  id: identity, label: z.string().min(1).optional(), projectId: identity,
++}
++const referenceSchema = z.discriminatedUnion('availability', [
++  z.object({ ...referenceBase, availability: z.literal('SUPPORTED') }).strict(),
++  z.object({ ...referenceBase, availability: z.literal('UNSUPPORTED'), explanation: nonEmptyText }).strict(),
++])
++const shotSchema = z.object({ kind: z.literal('SHOT'), ...projectedFields, references: z.array(referenceSchema).max(MAX_PRODUCTION_ITEMS).optional() }).strict()
++const relationSchema = z.object({ sceneId: identity, shotId: identity }).strict()
++const envelope = { scope: scopeSchema, requestId: identity }
++const successSchema = z.object({
++  ...envelope, status: z.literal('ok'),
++  scenes: z.array(sceneSchema).max(MAX_PRODUCTION_ITEMS),
++  shots: z.array(shotSchema).max(MAX_PRODUCTION_ITEMS),
++  relations: z.array(relationSchema).max(MAX_PRODUCTION_ITEMS),
++  boundary: z.object({
++    kind: z.literal('project-production-snapshot'), completeness: z.enum(['complete', 'bounded']),
++    limit: z.number().int().positive().max(MAX_PRODUCTION_ITEMS), version: identity,
++  }).strict(),
++}).strict()
++const failureSchema = z.object({
++  ...envelope, status: z.enum(['unavailable', 'denied', 'unknown', 'unsupported', 'error', 'stale']),
++  explanation: z.string().optional(),
++}).strict()
++
++export type ProductionSnapshot = z.infer<typeof successSchema>
++export type ProductionFailure = z.infer<typeof failureSchema>
++
++export function productionScopeKey(scope: ProductionContext | ProductionSource['scope']): string {
++  return JSON.stringify([scope.principalId, scope.tenantId, scope.sessionId, scope.workspaceId, scope.projectId])
++}
++
++export function productionContextKey(context: ProductionContext): string {
++  return JSON.stringify([
++    productionScopeKey(context), context.access.key, context.access.status, context.access.reasonCode,
++    context.access.explanation, context.access.source, context.access.observedAt ?? null,
++    context.access.factors.capability, context.access.factors.runtime, context.access.factors.entitlement,
++    context.access.factors.policy, context.access.factors.quota,
++  ])
++}
++
++export function productionAccessDisposition(context: ProductionContext): 'ready' | 'unavailable' | 'denied' | 'unknown' {
++  if (!productionScopeIsValid(context)) return 'unknown'
++  if (isAvailable(context.access)) return 'ready'
++  if (context.access.status === 'POLICY_DENIED' || context.access.status === 'NOT_ENTITLED') return 'denied'
++  if (context.access.status === 'UNKNOWN_FAIL_CLOSED') return 'unknown'
++  return 'unavailable'
++}
++
++export function productionScopeIsValid(scope: ProductionSource['scope']): boolean {
++  return isProductionIdentity(scope.principalId) && isProductionIdentity(scope.tenantId)
++    && isProductionIdentity(scope.sessionId) && isProductionIdentity(scope.workspaceId)
++    && isProductionIdentity(scope.projectId)
++}
++
++function hasExpectedProjection(source: ProductionSource): boolean {
++  if (source.adapter.origin === 'real') {
++    return source.readAccessBinding.kind === 'HOST_AGREED'
++      && isProductionIdentity(source.readAccessBinding.accessKey)
++      && source.readAccessBinding.accessKey !== 'surface.production.view'
++      && source.access.key === source.readAccessBinding.accessKey
++      && source.access.source === 'SERVER'
++  }
++  if (source.adapter.origin === 'simulated') {
++    return source.readAccessBinding.kind === 'TEST_ONLY_UNAGREED'
++      && source.readAccessBinding.accessKey === TEST_ONLY_PRODUCTION_ACCESS_KEY
++      && source.access.key === TEST_ONLY_PRODUCTION_ACCESS_KEY
++      && source.access.source === 'DEVELOPMENT_FAIL_CLOSED'
++  }
++  return false
++}
++
++export function productionSourceDisposition(source: ProductionSource, expected: Pick<ProductionSource['scope'], 'workspaceId' | 'projectId'>): 'ready' | 'unavailable' | 'denied' | 'unknown' {
++  if (source.adapter.origin === 'unavailable') return 'unavailable'
++  if (!productionScopeIsValid(source.scope) || !isProductionIdentity(expected.workspaceId) || !isProductionIdentity(expected.projectId)) return 'unknown'
++  if (source.scope.workspaceId !== expected.workspaceId || source.scope.projectId !== expected.projectId) return 'unknown'
++  if (!hasExpectedProjection(source)) return 'unknown'
++  return productionAccessDisposition({ ...source.scope, access: source.access })
++}
++
++export function productionPresentationOrigin(source: ProductionSource): ProductionSource['adapter']['origin'] {
++  return source.adapter.origin !== 'unavailable' && hasExpectedProjection(source) ? source.adapter.origin : 'unavailable'
++}
++
++export function productionAccessExplanation(source: ProductionSource): string | null {
++  return hasExpectedProjection(source) && productionScopeIsValid(source.scope) ? source.access.explanation : null
++}
++
++export function parseProductionSnapshot(input: unknown, request: ProductionReadRequest): ProductionSnapshot | ProductionFailure {
++  const result = z.union([successSchema, failureSchema]).parse(input)
++  if (productionScopeKey(result.scope) !== productionScopeKey(request.scope) || result.requestId !== request.requestId) throw new Error('Invalid Production snapshot receipt ownership')
++  if (result.status !== 'ok') return result
++  const sceneIds = result.scenes.map(scene => scene.id)
++  const shotIds = result.shots.map(shot => shot.id)
++  const allIds = [...sceneIds, ...shotIds]
++  const relationKeys = result.relations.map(relation => JSON.stringify([relation.sceneId, relation.shotId]))
++  const relationCountByShot = new Map<string, number>()
++  for (const relation of result.relations) relationCountByShot.set(relation.shotId, (relationCountByShot.get(relation.shotId) ?? 0) + 1)
++  const invalidReferences = result.shots.some(shot => {
++    const references = shot.references ?? []
++    const keys = references.map(reference => JSON.stringify([reference.kind, reference.id]))
++    return new Set(keys).size !== keys.length || references.some(reference => reference.projectId !== request.scope.projectId)
++  })
++  if (new Set(allIds).size !== allIds.length
++    || new Set(relationKeys).size !== relationKeys.length
++    || result.scenes.length > result.boundary.limit || result.shots.length > result.boundary.limit
++    || result.scenes.some(scene => scene.projectId !== request.scope.projectId)
++    || result.shots.some(shot => shot.projectId !== request.scope.projectId)
++    || result.relations.some(relation => !sceneIds.includes(relation.sceneId) || !shotIds.includes(relation.shotId))
++    || shotIds.some(shotId => relationCountByShot.get(shotId) !== 1) || invalidReferences) {
++    throw new Error('Invalid single-Project Scene and Shot snapshot')
++  }
++  return result
++}
++
++function compareText(left: string, right: string): number { return left < right ? -1 : left > right ? 1 : 0 }
++function sceneSortName(scene: SceneProjection): string { return scene.name ?? scene.id }
++
++export function selectScenes(scenes: readonly SceneProjection[], filters: SceneFilters): SceneProjection[] {
++  const query = filters.query.toLocaleLowerCase()
++  const direction = filters.order === 'name-desc' ? -1 : 1
++  return scenes
++    .filter(scene => (!query || `${scene.id}\n${scene.name ?? ''}\n${scene.description ?? ''}`.toLocaleLowerCase().includes(query)) && (!filters.status || scene.status === filters.status))
++    .sort((left, right) => direction * compareText(sceneSortName(left), sceneSortName(right)) || compareText(left.id, right.id))
++}
++
++export function sceneStatusValues(scenes: readonly SceneProjection[]): string[] {
++  return [...new Set(scenes.flatMap(scene => scene.status === undefined ? [] : [scene.status]))].sort(compareText)
++}
++
++export function productionFailureStatuses(): readonly ProductionFailureStatus[] {
++  return ['unavailable', 'denied', 'unknown', 'unsupported', 'error', 'stale']
++}
+diff --git a/frontend/src/product/production/production.css b/frontend/src/product/production/production.css
+new file mode 100644
+index 0000000000000000000000000000000000000000..6e4e297d769080098ab69fb2519b5fcef7099679
+--- /dev/null
++++ b/frontend/src/product/production/production.css
+@@ -0,0 +1,26 @@
++.ff-production-browser { display: grid; gap: var(--space-4); min-width: 0; }
++.ff-production-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); }
++.ff-production-heading h1 { margin: var(--space-1) 0; }
++.ff-production-heading p { margin: 0; color: var(--text-secondary); }
++.ff-production-heading > div > span { color: var(--accent-400); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
++.ff-production-origin, .ff-production-boundary { margin: 0; }
++.ff-production-origin--simulated { border-left: 3px solid var(--warning); padding-left: var(--space-3); }
++.ff-production-scope dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: var(--space-2) var(--space-3); }
++.ff-production-scope dd { margin: 0; overflow-wrap: anywhere; }
++.ff-production-controls { display: grid; grid-template-columns: minmax(14rem, 1fr) minmax(10rem, auto) minmax(10rem, auto) auto; gap: var(--space-3); align-items: end; }
++.ff-production-controls label { display: grid; gap: var(--space-1); }
++.ff-production-controls select { min-height: 2.5rem; border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--surface-2); color: inherit; padding: 0 var(--space-2); }
++.ff-production-layout { display: grid; grid-template-columns: minmax(16rem, .9fr) minmax(18rem, 1.1fr); gap: var(--space-4); align-items: start; min-width: 0; }
++.ff-production-scene-list, .ff-production-shots ul, .ff-production-references ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
++.ff-production-selected { outline: 2px solid var(--accent-500); outline-offset: 2px; }
++.ff-production-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
++.ff-production-shots li, .ff-production-references li { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); border-bottom: 1px solid var(--border-subtle); padding-bottom: var(--space-3); }
++.ff-production-shots li > div, .ff-production-references li > div { display: grid; gap: var(--space-1); min-width: 0; }
++.ff-production-references { margin-top: var(--space-4); }
++.ff-production-references code { overflow-wrap: anywhere; }
++.ff-production-opaque { overflow-wrap: anywhere; }
++@media (max-width: 760px) {
++  .ff-production-heading, .ff-production-shots li, .ff-production-references li { align-items: stretch; flex-direction: column; }
++  .ff-production-controls, .ff-production-layout { grid-template-columns: minmax(0, 1fr); }
++  .ff-production-heading .ff-button, .ff-production-shots .ff-button { width: 100%; }
++}
+diff --git a/frontend/src/product/production/simulatedSource.ts b/frontend/src/product/production/simulatedSource.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..431c4bb6b1e9888ddb03cf29199339f402bdcf5c
+--- /dev/null
++++ b/frontend/src/product/production/simulatedSource.ts
+@@ -0,0 +1,93 @@
++import type { EffectiveAccessEntry, EffectiveAccessStatus } from '../../foundation/effectiveAccess'
++import { productionAccessDisposition, productionScopeIsValid, productionScopeKey } from './model'
++import {
++  MAX_PRODUCTION_ITEMS, TEST_ONLY_PRODUCTION_ACCESS_KEY, UNAGREED_PRODUCTION_QUERY_LABEL,
++  type ProductionContext, type ProductionFailureStatus, type ProductionScope, type ProductionSource,
++  type SceneProjection, type SceneShotRelation, type ShotProjection,
++} from './types'
++
++export interface SimulatedProductionOptions {
++  readonly scope: ProductionScope
++  readonly accessStatus?: EffectiveAccessStatus
++  readonly empty?: boolean
++  readonly limit?: number
++  readonly failure?: ProductionFailureStatus
++}
++
++function assertExplicitScope(scope: ProductionScope): void {
++  if (!productionScopeIsValid(scope)) throw new Error('The simulated Production source requires an explicitly supplied complete, well-formed identity and scope')
++}
++
++function simulatedAccess(status: EffectiveAccessStatus): EffectiveAccessEntry {
++  return {
++    key: TEST_ONLY_PRODUCTION_ACCESS_KEY, status, reasonCode: `SIMULATED_${status}`,
++    explanation: 'Simulated Production access projection; never valid for a real resource.',
++    factors: {
++      capability: status === 'AVAILABLE' ? 'SATISFIED' : 'UNKNOWN', runtime: status === 'AVAILABLE' ? 'SATISFIED' : 'UNKNOWN',
++      entitlement: status === 'AVAILABLE' ? 'SATISFIED' : 'UNKNOWN', policy: status === 'AVAILABLE' ? 'SATISFIED' : 'UNKNOWN',
++      quota: status === 'AVAILABLE' ? 'SATISFIED' : 'UNKNOWN',
++    }, source: 'DEVELOPMENT_FAIL_CLOSED',
++  }
++}
++
++export function createSimulatedProductionSource(options: SimulatedProductionOptions): ProductionSource {
++  assertExplicitScope(options.scope)
++  const scope = { ...options.scope }
++  const access = simulatedAccess(options.accessStatus ?? 'AVAILABLE')
++  const scenes: SceneProjection[] = options.empty ? [] : [
++    { kind: 'SCENE', id: 'scene-courtyard', projectId: scope.projectId, name: 'Courtyard <scene>', description: 'Exterior gathering', status: 'APPROVED', version: 'courtyard-v4' },
++    { kind: 'SCENE', id: 'scene-studio', projectId: scope.projectId, name: 'Studio', description: 'Interior 原文', status: 'DRAFT?', version: 'studio-v1' },
++    { kind: 'SCENE', id: 'scene-silent', projectId: scope.projectId, name: 'Silent scene' },
++  ]
++  const shots: ShotProjection[] = options.empty ? [] : [
++    { kind: 'SHOT', id: 'shot-arrival', projectId: scope.projectId, name: 'Arrival shot', description: 'Wide arrival', status: 'READY?', version: 'arrival-v2', references: [{ kind: 'RENDER', id: 'render-arrival', label: 'Arrival render', projectId: scope.projectId, availability: 'SUPPORTED' }] },
++    { kind: 'SHOT', id: 'shot-courtyard-detail', projectId: scope.projectId, description: '', status: 'DRAFT?', references: [{ kind: 'WORKFLOW', id: 'workflow-courtyard', projectId: scope.projectId, availability: 'UNSUPPORTED', explanation: 'No safe Workflow inspection route is supplied by this fixture.' }] },
++    { kind: 'SHOT', id: 'shot-studio-insert', projectId: scope.projectId, name: 'Studio insert', description: '<b>literal supplied detail</b>' },
++  ]
++  const relations: SceneShotRelation[] = options.empty ? [] : [
++    { sceneId: 'scene-courtyard', shotId: 'shot-arrival' },
++    { sceneId: 'scene-courtyard', shotId: 'shot-courtyard-detail' },
++    { sceneId: 'scene-studio', shotId: 'shot-studio-insert' },
++  ]
++  const limit = Math.min(MAX_PRODUCTION_ITEMS, Math.max(1, options.limit ?? MAX_PRODUCTION_ITEMS))
++  const visibleScenes = scenes.slice(0, limit)
++  const visibleSceneIds = new Set(visibleScenes.map(scene => scene.id))
++  const visibleShots = shots.filter(shot => relations.some(relation => relation.shotId === shot.id && visibleSceneIds.has(relation.sceneId))).slice(0, limit)
++  const visibleShotIds = new Set(visibleShots.map(shot => shot.id))
++  const visibleRelations = relations.filter(relation => visibleSceneIds.has(relation.sceneId) && visibleShotIds.has(relation.shotId))
++  return {
++    scope, access, readAccessBinding: { kind: 'TEST_ONLY_UNAGREED', accessKey: TEST_ONLY_PRODUCTION_ACCESS_KEY },
++    adapter: {
++      origin: 'simulated',
++      async readProject(request, signal) {
++        const envelope = { scope: request.scope, requestId: request.requestId }
++        if (signal.aborted) return { ...envelope, status: 'error' }
++        if (productionScopeKey(request.scope) !== productionScopeKey(scope)) return { ...envelope, status: 'denied' }
++        const disposition = productionAccessDisposition({ ...scope, access } as ProductionContext)
++        if (disposition !== 'ready') return { ...envelope, status: disposition }
++        if (options.failure) return { ...envelope, status: options.failure, explanation: 'Simulated opaque Production source result.' }
++        return {
++          ...envelope, status: 'ok', scenes: visibleScenes.map(scene => ({ ...scene })),
++          shots: visibleShots.map(shot => ({ ...shot, references: shot.references?.map(reference => ({ ...reference })) })),
++          relations: visibleRelations.map(relation => ({ ...relation })),
++          boundary: { kind: 'project-production-snapshot', completeness: options.limit === undefined ? 'complete' : 'bounded', limit, version: 'simulated-production-projection-v1' },
++        }
++      },
++    },
++  }
++}
++
++export function unavailableProductionSource(expected: { workspaceId: string; projectId: string }): ProductionSource {
++  const scope: ProductionScope = { principalId: null, tenantId: null, sessionId: 'unconfigured', workspaceId: expected.workspaceId, projectId: expected.projectId }
++  return {
++    scope,
++    access: {
++      key: UNAGREED_PRODUCTION_QUERY_LABEL, status: 'UNKNOWN_FAIL_CLOSED', reasonCode: 'EFFECTIVE_ACCESS_PROJECTION_MISSING',
++      explanation: 'Effective access is not available from a connected Production source.',
++      factors: { capability: 'UNKNOWN', runtime: 'UNKNOWN', entitlement: 'UNKNOWN', policy: 'UNKNOWN', quota: 'UNKNOWN' },
++      source: 'MISSING_SERVER_PROJECTION',
++    },
++    readAccessBinding: { kind: 'UNAVAILABLE', label: UNAGREED_PRODUCTION_QUERY_LABEL },
++    adapter: { origin: 'unavailable', async readProject(request) { return { status: 'unavailable', scope: request.scope, requestId: request.requestId } } },
++  }
++}
+diff --git a/frontend/src/product/production/source.tsx b/frontend/src/product/production/source.tsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..b91393e918c3f4016eac8e97bc15fdefa3aa063a
+--- /dev/null
++++ b/frontend/src/product/production/source.tsx
+@@ -0,0 +1,20 @@
++import { createContext, useContext, type ReactNode } from 'react'
++import type { ProductionSource } from './types'
++
++const ProductionSourceContext = createContext<ProductionSource | undefined>(undefined)
++
++export function ProductionSourceProvider({ source, children }: { source: ProductionSource; children: ReactNode }) {
++  return <ProductionSourceContext.Provider value={source}>{children}</ProductionSourceContext.Provider>
++}
++
++export function useProvidedProductionSource(): ProductionSource | undefined {
++  return useContext(ProductionSourceContext)
++}
++
++const adapterIds = new WeakMap<ProductionSource['adapter'], number>()
++let nextAdapterId = 0
++export function productionAdapterKey(adapter: ProductionSource['adapter']): number {
++  if (!adapterIds.has(adapter)) adapterIds.set(adapter, ++nextAdapterId)
++  return adapterIds.get(adapter)!
++}
++
+diff --git a/frontend/src/product/production/types.ts b/frontend/src/product/production/types.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..ccc1ad02bb878b6260421e7de71e1f5ba379a8e4
+--- /dev/null
++++ b/frontend/src/product/production/types.ts
+@@ -0,0 +1,85 @@
++import type { EffectiveAccessEntry } from '../../foundation/effectiveAccess'
++import type { CrossSurfaceReference } from '../../foundation/references'
++
++export const UNAGREED_PRODUCTION_QUERY_LABEL = 'frontend.unagreed.production.scene-shot.read' as const
++export const TEST_ONLY_PRODUCTION_ACCESS_KEY = 'test-only.frontend-unagreed.production.scene-shot.read' as const
++export const MAX_PRODUCTION_ITEMS = 200 as const
++
++export interface ProductionScope {
++  readonly principalId: string | null
++  readonly tenantId: string | null
++  readonly sessionId: string
++  readonly workspaceId: string
++  readonly projectId: string
++}
++
++export interface ProductionContext extends ProductionScope {
++  readonly access: EffectiveAccessEntry
++}
++
++export interface ProductionEntityProjection {
++  readonly id: string
++  readonly projectId: string
++  readonly name?: string | null
++  readonly description?: string | null
++  readonly status?: string
++  readonly version?: string
++}
++
++export interface SceneProjection extends ProductionEntityProjection {
++  readonly kind: 'SCENE'
++}
++
++export type ProductionReference = CrossSurfaceReference & {
++  readonly projectId: string
++  readonly availability: 'SUPPORTED' | 'UNSUPPORTED'
++  readonly explanation?: string
++}
++
++export interface ShotProjection extends ProductionEntityProjection {
++  readonly kind: 'SHOT'
++  readonly references?: readonly ProductionReference[]
++}
++
++export interface SceneShotRelation {
++  readonly sceneId: string
++  readonly shotId: string
++}
++
++export interface ProductionBoundary {
++  readonly kind: 'project-production-snapshot'
++  readonly completeness: 'complete' | 'bounded'
++  readonly limit: number
++  readonly version: string
++}
++
++export interface ProductionReadRequest {
++  readonly scope: ProductionScope
++  readonly requestId: string
++}
++
++export type ProductionFailureStatus = 'unavailable' | 'denied' | 'unknown' | 'unsupported' | 'error' | 'stale'
++
++export interface ProductionAdapter {
++  readonly origin: 'real' | 'simulated' | 'unavailable'
++  readProject(request: ProductionReadRequest, signal: AbortSignal): Promise<unknown>
++}
++
++export type ProductionReadAccessBinding =
++  | { readonly kind: 'HOST_AGREED'; readonly accessKey: string }
++  | { readonly kind: 'TEST_ONLY_UNAGREED'; readonly accessKey: typeof TEST_ONLY_PRODUCTION_ACCESS_KEY }
++  | { readonly kind: 'UNAVAILABLE'; readonly label: typeof UNAGREED_PRODUCTION_QUERY_LABEL }
++
++export interface ProductionSource {
++  readonly scope: ProductionScope
++  readonly access: EffectiveAccessEntry
++  readonly readAccessBinding: ProductionReadAccessBinding
++  readonly adapter: ProductionAdapter
++}
++
++export type SceneOrder = 'name-asc' | 'name-desc'
++export interface SceneFilters {
++  readonly query: string
++  readonly status: string
++  readonly order: SceneOrder
++}
+diff --git a/frontend/src/surfaces/FoundationPages.tsx b/frontend/src/surfaces/FoundationPages.tsx
+index 65b6af580a7909d79fa447ec0ff1d645b9b8c84e..98af9f16039b0e67756175c79711e6c449a7533e 100644
+--- a/frontend/src/surfaces/FoundationPages.tsx
++++ b/frontend/src/surfaces/FoundationPages.tsx
+@@ -1,7 +1,7 @@
+ import { useState, type ReactNode } from 'react'
+ import { useLocation, useMatch, useParams } from '@tanstack/react-router'
+ import { ProductAppShell } from '../components/app-shell/AppShell'
+-import { Badge, Button, EmptyState, Input, Panel, PropertyRow, Search, Skeleton, Status } from '../components/design-system'
++import { Badge, Button, EmptyState, Panel, PropertyRow, Search, Skeleton, Status } from '../components/design-system'
+ import { AsyncStatePanel, classifyPlatformError } from '../foundation/errors'
+ import { AccessStatus, getEffectiveAccess } from '../foundation/effectiveAccess'
+ import { ProjectContextProvider, useProjectContext } from '../foundation/projectContext'
+@@ -9,6 +9,7 @@ import { useEffectiveAccessCatalog, useWorkspaceHome } from '../foundation/platf
+ import { getSurface, surfaceRegistry, type SurfaceId } from '../foundation/surfaceRegistry'
+ import { ProjectBrowser } from '../product/projects/ProjectBrowser'
+ import { RenderBrowser } from '../product/render-browser/RenderBrowser'
++import { ProductionBrowser } from '../product/production/ProductionBrowser'
+ import { WorkflowSketch } from '../product/workflow-sketch/WorkflowSketch'
+ export { WORKFLOW_NODE_CATEGORIES as workflowNodeCategories } from '../product/workflow-sketch/model'
+ 
+@@ -111,8 +112,12 @@ export function AgentPage() {
+ }
+ 
+ export function ProductionPage() {
+-  const [filter, setFilter] = useState('')
+-  return <ProjectFrame surfaceId="production"><PageHeading eyebrow="Production management" title="Production overview" description="A projection/control surface that owns neither Timeline nor Workflow." /><div className="ff-table-toolbar"><Search value={filter} onChange={event => setFilter(event.target.value)} label="Search production items" /><Input aria-label="Filter status" value="NOT_INTEGRATED" readOnly /><Button disabled>Sort</Button></div><Panel title="Shots, assets, and tasks"><EmptyState title="NOT_INTEGRATED" description="Canonical Shot, Scene, Task, assignment, milestone, and workload projections do not exist in the accepted application API (FB-GAP-007)." /></Panel><Panel title="Review and render status"><EmptyState title="Projection unavailable" description="No client-side joins are used to reconstruct production truth." /></Panel></ProjectFrame>
++  return <ProjectFrame surfaceId="production"><ProductionPageContent /></ProjectFrame>
++}
++
++function ProductionPageContent() {
++  const project = useProjectContext()
++  return <ProductionBrowser expectedScope={{ workspaceId: project.workspaceId, projectId: project.projectId }} />
+ }
+ 
+ const operationsCards = [

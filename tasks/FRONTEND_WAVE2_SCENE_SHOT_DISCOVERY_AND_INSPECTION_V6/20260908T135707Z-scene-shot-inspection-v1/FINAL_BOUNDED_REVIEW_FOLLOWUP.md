@@ -1,0 +1,8 @@
+# Final bounded review follow-up
+Same V6 scope/allowlist; no new feature or authority. Preserve earlier correction evidence.
+
+A. Verify the new owner-retirement mechanism under the actual main.tsx StrictMode host. Current ProductionBrowser captures selection.lifetime in a ref, while useSurfaceAdapter's StrictMode cleanup retires and re-registers the same store with a changed lifetime. In a StrictMode component test this may permanently render RetiredProductionBrowser on initial mount even though the fresh adapter is valid. Add a real non-vacuous StrictMode regression and run RED before fixing if reproduced. Reuse existing store lifecycle, do not change shared Selection files or weaken explicit owner/document retirement tests. No test-only fake mount bypass.
+
+B. The requested async-state contract includes invalid/stale separately from retryable source error. Current schema parse exceptions and transport rejections are both rendered as generic 'Production snapshot error'. Add a distinct localized malformed/invalid snapshot state with a safe retry affordance and no invalid content; keep valid `error` receipt/transport rejection as the existing retryable error, and keep explicit stale state. No new agreed backend status/endpoint is needed: invalid is frontend validation disposition. Add direct component tests for invalid receipt versus source rejection and update newly introduced invalid-result assertion (not old baseline test titles) without weakening nondisclosure. Preserve raw original failures and current requirements.
+
+Finish corrected affected tests/typecheck/lint and append report. Controller handles final exact-tree gates and native browser, not independent acceptance.

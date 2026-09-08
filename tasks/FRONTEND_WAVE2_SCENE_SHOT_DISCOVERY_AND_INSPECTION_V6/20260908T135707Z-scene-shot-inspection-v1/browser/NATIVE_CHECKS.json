@@ -1,0 +1,290 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:00.782586+00:00",
+    "name": "Ordinary final application is unavailable without any fixture source",
+    "expression": "document.body.innerText.includes(\"Production snapshot unavailable\") && !window.__V6Fixture && !document.querySelector(\"[data-v6-host]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:01.420793+00:00",
+    "name": "Explicit fixture host and simulated disclosure are visible",
+    "expression": "document.body.innerText.includes(\"SIMULATED PRODUCTION DATA\") && !!document.querySelector(\"[data-v6-host]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:01.423022+00:00",
+    "name": "Approved literal Scene labels render safely, not as HTML",
+    "expression": "document.querySelectorAll(\".ff-production-scene-list > li\").length===3 && !document.querySelector(\".ff-production-scene-list scene\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:01.984108+00:00",
+    "name": "Native search filters only the supplied Scene snapshot",
+    "expression": "document.querySelectorAll(\".ff-production-scene-list > li\").length===1 && document.body.innerText.includes(\"Courtyard <scene>\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:02.501269+00:00",
+    "name": "Native status selection uses supplied status",
+    "expression": "document.querySelector(\".ff-production-controls label:first-of-type select\").value===\"APPROVED\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:03.018799+00:00",
+    "name": "Native sort selection remains local",
+    "expression": "document.querySelector(\".ff-production-controls label:last-of-type select\").value===\"name-desc\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:03.210765+00:00",
+    "name": "Native Scene selection exposes only explicitly related Shots",
+    "expression": "document.body.innerText.includes(\"Arrival shot\") && !document.body.innerText.includes(\"Studio insert\") && document.querySelector(\"button[aria-pressed=true]\").getAttribute(\"aria-label\")===\"Browse scene Courtyard <scene>\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:03.423087+00:00",
+    "name": "Shot dialog shows supplied identity version and safe reference, no arbitrary URL",
+    "expression": "document.body.innerText.includes(\"arrival-v2\") && document.body.innerText.includes(\"render-arrival\") && !document.querySelector(\"[role=dialog] a[href]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:03.763792+00:00",
+    "name": "Native Escape closes dialog and restores Shot launcher focus",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.getAttribute(\"aria-label\")===\"Inspect shot Arrival shot\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:03.767633+00:00",
+    "name": "Return retains query status sort and Scene selection",
+    "expression": "document.querySelector(\".ff-production-browser input[type=search]\").value===\"Courtyard\" && document.querySelector(\".ff-production-controls label:first-of-type select\").value===\"APPROVED\" && document.querySelector(\".ff-production-controls label:last-of-type select\").value===\"name-desc\" && !!document.querySelector(\"button[aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:04.305496+00:00",
+    "name": "Native Tab distinguishes focus from Scene selection",
+    "expression": "document.activeElement.getAttribute(\"aria-label\")===\"Inspect shot Arrival shot\" && !!document.querySelector(\"button[aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:04.490847+00:00",
+    "name": "Native Enter activates focused Shot inspection",
+    "expression": "!!document.querySelector(\"[role=dialog]\") && document.body.innerText.includes(\"arrival-v2\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:05.084244+00:00",
+    "name": "No matches is distinct from an empty inventory",
+    "expression": "document.body.innerText.includes(\"No matching scenes\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:05.430439+00:00",
+    "name": "Native reset restores populated Scene browse defaults",
+    "expression": "document.querySelectorAll(\".ff-production-scene-list > li\").length===3 && document.querySelector(\".ff-production-browser input[type=search]\").value===\"\" && document.querySelector(\".ff-production-controls label:first-of-type select\").value===\"\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:05.631640+00:00",
+    "name": "Scene without explicit related Shots is an honest empty relation state",
+    "expression": "document.body.innerText.includes(\"No related shots in this snapshot\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:05.833854+00:00",
+    "name": "Missing projected metadata remains not supplied",
+    "expression": "document.body.innerText.includes(\"Not supplied\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:06.222960+00:00",
+    "name": "Source empty result differs from no search matches",
+    "expression": "document.body.innerText.includes(\"No scenes in this snapshot\") && !document.body.innerText.includes(\"No matching scenes\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:06.803533+00:00",
+    "name": "Source error removes old Scene content and keeps retry focus",
+    "expression": "document.body.innerText.includes(\"Production snapshot error\") && !document.querySelector(\".ff-production-scene-list\") && document.activeElement.textContent.trim()===\"Retry loading\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:07.171920+00:00",
+    "name": "Native retry recovers with stable workflow control focus",
+    "expression": "document.activeElement.textContent.trim()===\"Refresh production snapshot\" && document.querySelectorAll(\".ff-production-scene-list > li\").length===3",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:07.367519+00:00",
+    "name": "Loading hides old data and offers native cancellation",
+    "expression": "!document.querySelector(\".ff-production-scene-list\") && document.activeElement.textContent.trim()===\"Cancel loading\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:08.006831+00:00",
+    "name": "Native cancellation fences a deliberately late successful adapter reply",
+    "expression": "!document.querySelector(\".ff-production-scene-list\") && document.activeElement.textContent.trim()===\"Retry loading\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:08.583169+00:00",
+    "name": "Bounded inventory never claims global completeness",
+    "expression": "document.body.innerText.includes(\"bounded snapshot; more may exist\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:08.964725+00:00",
+    "name": "Denied source result is non-disclosing",
+    "expression": "!document.querySelector(\".ff-production-scene-list\") && !document.body.innerText.includes(\"Arrival shot\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:09.378565+00:00",
+    "name": "Invalid receipt is distinct from a retryable source error",
+    "expression": "document.body.innerText.includes(\"Invalid production snapshot\") && !document.body.innerText.includes(\"Production snapshot error\") && !document.querySelector(\".ff-production-scene-list\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:09.940242+00:00",
+    "name": "Explicit stale snapshot clears previous content",
+    "expression": "document.body.innerText.includes(\"Production snapshot is stale\") && !document.querySelector(\".ff-production-scene-list\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:10.341625+00:00",
+    "name": "Tablet viewport has no document horizontal overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:10.627651+00:00",
+    "name": "Narrow Chinese Scene discovery fits document width",
+    "expression": "document.body.innerText.includes(\"场景与镜头\") && document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:11.196086+00:00",
+    "name": "Narrow Chinese Shot dialog shows supplied values without horizontal overflow",
+    "expression": "document.body.innerText.includes(\"镜头详情\") && document.body.innerText.includes(\"arrival-v2\") && document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:11.450681+00:00",
+    "name": "Narrow native close returns to the Shot launcher",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.getAttribute(\"aria-label\")===\"检查镜头 Arrival shot\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:13.125429+00:00",
+    "name": "Narrow native populated search status sort retains a matching Scene",
+    "expression": "document.querySelectorAll(\".ff-production-scene-list > li\").length===1 && document.querySelector(\".ff-production-controls label:first-of-type select\").value===\"APPROVED\" && document.querySelector(\".ff-production-controls label:last-of-type select\").value===\"name-desc\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:13.723095+00:00",
+    "name": "Narrow return retains filtered browsing and native launcher focus",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.getAttribute(\"aria-label\")===\"Inspect shot Arrival shot\" && document.querySelector(\".ff-production-browser input[type=search]\").value===\"Courtyard\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:13.941602+00:00",
+    "name": "Narrow populated Reset restores defaults and keeps actual Reset focus",
+    "expression": "document.querySelectorAll(\".ff-production-scene-list > li\").length===3 && document.activeElement.textContent.trim()===\"Reset filters\" && document.querySelector(\".ff-production-controls label:last-of-type select\").value===\"name-asc\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:14.368434+00:00",
+    "name": "Narrow no-match state remains recoverable",
+    "expression": "document.body.innerText.includes(\"No matching scenes\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:14.897654+00:00",
+    "name": "Narrow source empty remains distinct from no matches",
+    "expression": "document.body.innerText.includes(\"No scenes in this snapshot\") && !document.body.innerText.includes(\"No matching scenes\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:15.433500+00:00",
+    "name": "Narrow source error removes old data and keeps native Retry focus",
+    "expression": "!document.querySelector(\".ff-production-scene-list\") && document.activeElement.textContent.trim()===\"Retry loading\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "VALIDATION_TIMESTAMP": "2026-09-08T13:45:15.768381+00:00",
+    "name": "Narrow native Retry restores Scene browse without horizontal document overflow",
+    "expression": "document.querySelectorAll(\".ff-production-scene-list > li\").length===3 && document.activeElement.textContent.trim()===\"Refresh production snapshot\" && document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  }
+]

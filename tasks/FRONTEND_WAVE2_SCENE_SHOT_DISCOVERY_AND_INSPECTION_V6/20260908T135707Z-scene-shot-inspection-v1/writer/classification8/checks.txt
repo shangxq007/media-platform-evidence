@@ -1,0 +1,26 @@
+CHECK 1: exact task-specific unified diff
+COMMAND: target=docs/architecture/governance/frontend-product-path-classification-v1.tsv; diff -u --label a/$target --label b/$target <(head -n 537 "$target") "$target"
+NATIVE_EXIT: 1 (expected: the approved eight-row addition is present)
+OUTPUT: EXACT_DIFF.patch
+
+CHECK 2: bounded classification integrity
+COMMAND: target=docs/architecture/governance/frontend-product-path-classification-v1.tsv; baseline_sha=eb08cd3fa44718d3661e1a0fd448033ee7a8bfed1696458acbddf1eb2cfa7edd; prefix_sha=$(head -n 537 "$target" | sha256sum | awk '{print $1}'); total_lines=$(wc -l < "$target"); production_count=$(find frontend/src/product/production -maxdepth 1 -type f | wc -l); suffix_count=$(tail -n 8 "$target" | wc -l); duplicate_count=$(cut -f1 "$target" | sort | uniq -d | wc -l); malformed_suffix=$(tail -n 8 "$target" | awk -F '\t' 'NF != 3 || $2 != "REUSE" || $3 == "" { count++ } END { print count + 0 }'); missing_suffix=$(comm -23 <(find frontend/src/product/production -maxdepth 1 -type f -printf '%p\n' | sort) <(tail -n 8 "$target" | cut -f1 | sort) | wc -l); extra_suffix=$(comm -13 <(find frontend/src/product/production -maxdepth 1 -type f -printf '%p\n' | sort) <(tail -n 8 "$target" | cut -f1 | sort) | wc -l); [[ "$prefix_sha" == "$baseline_sha" && "$total_lines" -eq 545 && "$production_count" -eq 8 && "$suffix_count" -eq 8 && "$duplicate_count" -eq 0 && "$malformed_suffix" -eq 0 && "$missing_suffix" -eq 0 && "$extra_suffix" -eq 0 ]]
+OUTPUT:
+BASELINE_PREFIX_SHA256=eb08cd3fa44718d3661e1a0fd448033ee7a8bfed1696458acbddf1eb2cfa7edd
+EXPECTED_BASELINE_PREFIX_SHA256=eb08cd3fa44718d3661e1a0fd448033ee7a8bfed1696458acbddf1eb2cfa7edd
+TOTAL_LINES=545
+EXPECTED_TOTAL_LINES=545
+PRODUCTION_FILE_COUNT=8
+SUFFIX_ROW_COUNT=8
+DUPLICATE_PATH_COUNT=0
+MALFORMED_SUFFIX_ROW_COUNT=0
+MISSING_PRODUCTION_PATH_COUNT=0
+EXTRA_SUFFIX_PATH_COUNT=0
+NATIVE_EXIT: 0
+
+CHECK 3: target whitespace/diff validity
+COMMAND: git diff --check -- docs/architecture/governance/frontend-product-path-classification-v1.tsv
+OUTPUT: empty
+NATIVE_EXIT: 0
+
+FINAL_TARGET_SHA256=f5e6e42bfaf7d1a0dd87afb4581d393fcdd0ec7bd937a9669b43fdb595b6b005

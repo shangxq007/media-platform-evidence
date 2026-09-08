@@ -1,0 +1,506 @@
+[
+  {
+    "check": "Ordinary final application is unavailable without any fixture source",
+    "expression": "document.body.innerText.includes(\"Production snapshot unavailable\") && !window.__V6Fixture && !document.querySelector(\"[data-v6-host]\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 0,
+    "command_end_index_zero_based": 15,
+    "input_methods": {
+      "Network.enable": 1,
+      "Page.enable": 1,
+      "Runtime.enable": 1,
+      "Log.enable": 1,
+      "Emulation.setFocusEmulationEnabled": 1,
+      "Emulation.setDeviceMetricsOverride": 1,
+      "Page.navigate": 2,
+      "Runtime.evaluate": 8
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Explicit fixture host and simulated disclosure are visible",
+    "expression": "document.body.innerText.includes(\"SIMULATED PRODUCTION DATA\") && !!document.querySelector(\"[data-v6-host]\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 16,
+    "command_end_index_zero_based": 24,
+    "input_methods": {
+      "Runtime.evaluate": 7,
+      "Page.captureScreenshot": 1,
+      "Page.navigate": 1
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Approved literal Scene labels render safely, not as HTML",
+    "expression": "document.querySelectorAll(\".ff-production-scene-list > li\").length===3 && !document.querySelector(\".ff-production-scene-list scene\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 25,
+    "command_end_index_zero_based": 25,
+    "input_methods": {
+      "Runtime.evaluate": 1
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Native search filters only the supplied Scene snapshot",
+    "expression": "document.querySelectorAll(\".ff-production-scene-list > li\").length===1 && document.body.innerText.includes(\"Courtyard <scene>\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 26,
+    "command_end_index_zero_based": 36,
+    "input_methods": {
+      "Runtime.evaluate": 4,
+      "Page.captureScreenshot": 1,
+      "Input.dispatchMouseEvent": 3,
+      "Input.dispatchKeyEvent": 2,
+      "Input.insertText": 1
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Native status selection uses supplied status",
+    "expression": "document.querySelector(\".ff-production-controls label:first-of-type select\").value===\"APPROVED\"",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 37,
+    "command_end_index_zero_based": 46,
+    "input_methods": {
+      "Runtime.evaluate": 3,
+      "Input.dispatchMouseEvent": 3,
+      "Input.dispatchKeyEvent": 4
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Native sort selection remains local",
+    "expression": "document.querySelector(\".ff-production-controls label:last-of-type select\").value===\"name-desc\"",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 47,
+    "command_end_index_zero_based": 56,
+    "input_methods": {
+      "Runtime.evaluate": 3,
+      "Input.dispatchMouseEvent": 3,
+      "Input.dispatchKeyEvent": 4
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Native Scene selection exposes only explicitly related Shots",
+    "expression": "document.body.innerText.includes(\"Arrival shot\") && !document.body.innerText.includes(\"Studio insert\") && document.querySelector(\"button[aria-pressed=true]\").getAttribute(\"aria-label\")===\"Browse scene Courtyard <scene>\"",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 57,
+    "command_end_index_zero_based": 62,
+    "input_methods": {
+      "Runtime.evaluate": 3,
+      "Input.dispatchMouseEvent": 3
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Shot dialog shows supplied identity version and safe reference, no arbitrary URL",
+    "expression": "document.body.innerText.includes(\"arrival-v2\") && document.body.innerText.includes(\"render-arrival\") && !document.querySelector(\"[role=dialog] a[href]\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 63,
+    "command_end_index_zero_based": 69,
+    "input_methods": {
+      "Runtime.evaluate": 4,
+      "Input.dispatchMouseEvent": 3
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Native Escape closes dialog and restores Shot launcher focus",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.getAttribute(\"aria-label\")===\"Inspect shot Arrival shot\"",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 70,
+    "command_end_index_zero_based": 73,
+    "input_methods": {
+      "Page.captureScreenshot": 1,
+      "Input.dispatchKeyEvent": 2,
+      "Runtime.evaluate": 1
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Return retains query status sort and Scene selection",
+    "expression": "document.querySelector(\".ff-production-browser input[type=search]\").value===\"Courtyard\" && document.querySelector(\".ff-production-controls label:first-of-type select\").value===\"APPROVED\" && document.querySelector(\".ff-production-controls label:last-of-type select\").value===\"name-desc\" && !!document.querySelector(\"button[aria-pressed=true]\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 74,
+    "command_end_index_zero_based": 74,
+    "input_methods": {
+      "Runtime.evaluate": 1
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Native Tab distinguishes focus from Scene selection",
+    "expression": "document.activeElement.getAttribute(\"aria-label\")===\"Inspect shot Arrival shot\" && !!document.querySelector(\"button[aria-pressed=true]\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 75,
+    "command_end_index_zero_based": 84,
+    "input_methods": {
+      "Runtime.evaluate": 3,
+      "Input.dispatchMouseEvent": 3,
+      "Input.dispatchKeyEvent": 4
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Native Enter activates focused Shot inspection",
+    "expression": "!!document.querySelector(\"[role=dialog]\") && document.body.innerText.includes(\"arrival-v2\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 85,
+    "command_end_index_zero_based": 87,
+    "input_methods": {
+      "Input.dispatchKeyEvent": 2,
+      "Runtime.evaluate": 1
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "No matches is distinct from an empty inventory",
+    "expression": "document.body.innerText.includes(\"No matching scenes\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 88,
+    "command_end_index_zero_based": 98,
+    "input_methods": {
+      "Input.dispatchKeyEvent": 4,
+      "Runtime.evaluate": 3,
+      "Input.dispatchMouseEvent": 3,
+      "Input.insertText": 1
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Native reset restores populated Scene browse defaults",
+    "expression": "document.querySelectorAll(\".ff-production-scene-list > li\").length===3 && document.querySelector(\".ff-production-browser input[type=search]\").value===\"\" && document.querySelector(\".ff-production-controls label:first-of-type select\").value===\"\"",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 99,
+    "command_end_index_zero_based": 106,
+    "input_methods": {
+      "Runtime.evaluate": 4,
+      "Page.captureScreenshot": 1,
+      "Input.dispatchMouseEvent": 3
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Scene without explicit related Shots is an honest empty relation state",
+    "expression": "document.body.innerText.includes(\"No related shots in this snapshot\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 107,
+    "command_end_index_zero_based": 112,
+    "input_methods": {
+      "Runtime.evaluate": 3,
+      "Input.dispatchMouseEvent": 3
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Missing projected metadata remains not supplied",
+    "expression": "document.body.innerText.includes(\"Not supplied\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 113,
+    "command_end_index_zero_based": 118,
+    "input_methods": {
+      "Runtime.evaluate": 3,
+      "Input.dispatchMouseEvent": 3
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Source empty result differs from no search matches",
+    "expression": "document.body.innerText.includes(\"No scenes in this snapshot\") && !document.body.innerText.includes(\"No matching scenes\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 119,
+    "command_end_index_zero_based": 128,
+    "input_methods": {
+      "Input.dispatchKeyEvent": 2,
+      "Runtime.evaluate": 5,
+      "Input.dispatchMouseEvent": 3
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Source error removes old Scene content and keeps retry focus",
+    "expression": "document.body.innerText.includes(\"Production snapshot error\") && !document.querySelector(\".ff-production-scene-list\") && document.activeElement.textContent.trim()===\"Retry loading\"",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 129,
+    "command_end_index_zero_based": 145,
+    "input_methods": {
+      "Runtime.evaluate": 10,
+      "Page.captureScreenshot": 1,
+      "Input.dispatchMouseEvent": 6
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Native retry recovers with stable workflow control focus",
+    "expression": "document.activeElement.textContent.trim()===\"Refresh production snapshot\" && document.querySelectorAll(\".ff-production-scene-list > li\").length===3",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 146,
+    "command_end_index_zero_based": 155,
+    "input_methods": {
+      "Runtime.evaluate": 6,
+      "Page.captureScreenshot": 1,
+      "Input.dispatchMouseEvent": 3
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Loading hides old data and offers native cancellation",
+    "expression": "!document.querySelector(\".ff-production-scene-list\") && document.activeElement.textContent.trim()===\"Cancel loading\"",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 156,
+    "command_end_index_zero_based": 163,
+    "input_methods": {
+      "Runtime.evaluate": 5,
+      "Input.dispatchMouseEvent": 3
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Native cancellation fences a deliberately late successful adapter reply",
+    "expression": "!document.querySelector(\".ff-production-scene-list\") && document.activeElement.textContent.trim()===\"Retry loading\"",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 164,
+    "command_end_index_zero_based": 172,
+    "input_methods": {
+      "Runtime.evaluate": 5,
+      "Page.captureScreenshot": 1,
+      "Input.dispatchMouseEvent": 3
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Bounded inventory never claims global completeness",
+    "expression": "document.body.innerText.includes(\"bounded snapshot; more may exist\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 173,
+    "command_end_index_zero_based": 188,
+    "input_methods": {
+      "Runtime.evaluate": 9,
+      "Page.captureScreenshot": 1,
+      "Input.dispatchMouseEvent": 6
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Denied source result is non-disclosing",
+    "expression": "!document.querySelector(\".ff-production-scene-list\") && !document.body.innerText.includes(\"Arrival shot\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 189,
+    "command_end_index_zero_based": 199,
+    "input_methods": {
+      "Runtime.evaluate": 7,
+      "Page.captureScreenshot": 1,
+      "Input.dispatchMouseEvent": 3
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Invalid receipt is distinct from a retryable source error",
+    "expression": "document.body.innerText.includes(\"Invalid production snapshot\") && !document.body.innerText.includes(\"Production snapshot error\") && !document.querySelector(\".ff-production-scene-list\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 200,
+    "command_end_index_zero_based": 214,
+    "input_methods": {
+      "Runtime.evaluate": 9,
+      "Input.dispatchMouseEvent": 6
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Explicit stale snapshot clears previous content",
+    "expression": "document.body.innerText.includes(\"Production snapshot is stale\") && !document.querySelector(\".ff-production-scene-list\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 215,
+    "command_end_index_zero_based": 231,
+    "input_methods": {
+      "Runtime.evaluate": 10,
+      "Page.captureScreenshot": 1,
+      "Input.dispatchMouseEvent": 6
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Tablet viewport has no document horizontal overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 232,
+    "command_end_index_zero_based": 243,
+    "input_methods": {
+      "Runtime.evaluate": 7,
+      "Page.captureScreenshot": 1,
+      "Input.dispatchMouseEvent": 3,
+      "Emulation.setDeviceMetricsOverride": 1
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Narrow Chinese Scene discovery fits document width",
+    "expression": "document.body.innerText.includes(\"场景与镜头\") && document.documentElement.scrollWidth<=innerWidth",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 244,
+    "command_end_index_zero_based": 249,
+    "input_methods": {
+      "Page.captureScreenshot": 1,
+      "Emulation.setDeviceMetricsOverride": 1,
+      "Runtime.evaluate": 4
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Narrow Chinese Shot dialog shows supplied values without horizontal overflow",
+    "expression": "document.body.innerText.includes(\"镜头详情\") && document.body.innerText.includes(\"arrival-v2\") && document.documentElement.scrollWidth<=innerWidth",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 250,
+    "command_end_index_zero_based": 262,
+    "input_methods": {
+      "Page.captureScreenshot": 1,
+      "Runtime.evaluate": 6,
+      "Input.dispatchMouseEvent": 6
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Narrow native close returns to the Shot launcher",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.getAttribute(\"aria-label\")===\"检查镜头 Arrival shot\"",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 263,
+    "command_end_index_zero_based": 266,
+    "input_methods": {
+      "Page.captureScreenshot": 1,
+      "Input.dispatchKeyEvent": 2,
+      "Runtime.evaluate": 1
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Narrow native populated search status sort retains a matching Scene",
+    "expression": "document.querySelectorAll(\".ff-production-scene-list > li\").length===1 && document.querySelector(\".ff-production-controls label:first-of-type select\").value===\"APPROVED\" && document.querySelector(\".ff-production-controls label:last-of-type select\").value===\"name-desc\"",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 267,
+    "command_end_index_zero_based": 297,
+    "input_methods": {
+      "Runtime.evaluate": 10,
+      "Page.captureScreenshot": 1,
+      "Input.dispatchMouseEvent": 9,
+      "Input.dispatchKeyEvent": 10,
+      "Input.insertText": 1
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Narrow return retains filtered browsing and native launcher focus",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.getAttribute(\"aria-label\")===\"Inspect shot Arrival shot\" && document.querySelector(\".ff-production-browser input[type=search]\").value===\"Courtyard\"",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 298,
+    "command_end_index_zero_based": 310,
+    "input_methods": {
+      "Runtime.evaluate": 5,
+      "Input.dispatchMouseEvent": 6,
+      "Input.dispatchKeyEvent": 2
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Narrow populated Reset restores defaults and keeps actual Reset focus",
+    "expression": "document.querySelectorAll(\".ff-production-scene-list > li\").length===3 && document.activeElement.textContent.trim()===\"Reset filters\" && document.querySelector(\".ff-production-controls label:last-of-type select\").value===\"name-asc\"",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 311,
+    "command_end_index_zero_based": 316,
+    "input_methods": {
+      "Runtime.evaluate": 3,
+      "Input.dispatchMouseEvent": 3
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Narrow no-match state remains recoverable",
+    "expression": "document.body.innerText.includes(\"No matching scenes\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 317,
+    "command_end_index_zero_based": 325,
+    "input_methods": {
+      "Runtime.evaluate": 3,
+      "Input.dispatchMouseEvent": 3,
+      "Input.dispatchKeyEvent": 2,
+      "Input.insertText": 1
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Narrow source empty remains distinct from no matches",
+    "expression": "document.body.innerText.includes(\"No scenes in this snapshot\") && !document.body.innerText.includes(\"No matching scenes\")",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 326,
+    "command_end_index_zero_based": 340,
+    "input_methods": {
+      "Runtime.evaluate": 8,
+      "Page.captureScreenshot": 1,
+      "Input.dispatchMouseEvent": 6
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Narrow source error removes old data and keeps native Retry focus",
+    "expression": "!document.querySelector(\".ff-production-scene-list\") && document.activeElement.textContent.trim()===\"Retry loading\"",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 341,
+    "command_end_index_zero_based": 357,
+    "input_methods": {
+      "Runtime.evaluate": 10,
+      "Page.captureScreenshot": 1,
+      "Input.dispatchMouseEvent": 6
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  },
+  {
+    "check": "Narrow native Retry restores Scene browse without horizontal document overflow",
+    "expression": "document.querySelectorAll(\".ff-production-scene-list > li\").length===3 && document.activeElement.textContent.trim()===\"Refresh production snapshot\" && document.documentElement.scrollWidth<=innerWidth",
+    "actual": true,
+    "tree": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+    "command_start_index_zero_based": 358,
+    "command_end_index_zero_based": 367,
+    "input_methods": {
+      "Runtime.evaluate": 6,
+      "Page.captureScreenshot": 1,
+      "Input.dispatchMouseEvent": 3
+    },
+    "provenance": "Contiguous prior-check-to-current-check window; earlier setup remains in full native command log. DOM queries/scroll/locale and explicit fixture controls are assistance, not native inputs."
+  }
+]
