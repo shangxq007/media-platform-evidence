@@ -1,0 +1,520 @@
+{
+  "captured_at": "2026-09-08T03:52:12.967919+00:00",
+  "files": [
+    {
+      "path": "frontend/src/foundation/commandRegistry.ts",
+      "classification": "product",
+      "before_sha256": "f3a13cf698d201ce6aa0e19070611edfbc5daa2b48c5329763fa4a82adf99ef6",
+      "after_sha256": "beb583c522afa9dc2053e0b1f729a5a7b3b8e190cb09d89d1020a5ba99051784",
+      "changed": true
+    },
+    {
+      "path": "frontend/src/foundation/commandRegistry.test.ts",
+      "classification": "test",
+      "before_sha256": "0ff1cc9657562431be27bce46c730626f87a5dfeeb4f30526aae4a93b4bbbd01",
+      "after_sha256": "e32862355cd1dcb048d5b1feaf131fe09cf684335312f46cdf6d78274e9d0238",
+      "changed": true
+    },
+    {
+      "path": "frontend/src/components/app-shell/AppShell.tsx",
+      "classification": "product",
+      "before_sha256": "fcbe9d34195c0f38dddb19f688cf89c0697f99b0f77b8c9a5c03e552ed6cacd3",
+      "after_sha256": "0bec7e7c08bf4f6902224c710ca585b7ac414c57907f93cb6c4a07aeec6d1ae5",
+      "changed": true
+    },
+    {
+      "path": "frontend/src/components/app-shell/AppShell.test.tsx",
+      "classification": "test",
+      "before_sha256": "6eb7623b00913e1104f3401912b1f825cccf98360bb9a5dfcdf1044fa619c600",
+      "after_sha256": "cefc17b57c6f114b53632705790394aa005503c3c931c330445f1d8fe745e93f",
+      "changed": true
+    },
+    {
+      "path": "frontend/src/localization/catalogs.ts",
+      "classification": "product",
+      "before_sha256": "383702e0a76903833898eb8ccc80225a46c47345cd64956bd9c61397a66dc54e",
+      "after_sha256": "37c8ef9b1178557a509131b54a49ec9293654b448856e3db5079425bd8bcf76a",
+      "changed": true
+    },
+    {
+      "path": "frontend/src/localization/source-manifest.json",
+      "classification": "localization-source-manifest",
+      "before_sha256": "8033248930f81ea3897cf26c46abb75bd4dc50f647781dc6d671dec9c50af280",
+      "after_sha256": "00208c3b5551fb6ea1776aefeaab5f77fab705bd7b35fd068ee0666973f67dc8",
+      "changed": true
+    },
+    {
+      "path": "frontend/src/styles/foundation.css",
+      "classification": "product",
+      "before_sha256": "c49610cc6d4adc6e7d22b80bf2e64d2e0ce1e1368cbd1245a823263dcfa641cf",
+      "after_sha256": "a8ed80deaba97370e1531dffaee095136fe3bc327e3b16a1d757be6bcea12357",
+      "changed": true
+    }
+  ],
+  "source_manifest_added_keys": [
+    "shell.shortcut.title",
+    "shell.shortcut.close",
+    "shell.shortcut.session",
+    "shell.shortcut.mod",
+    "shell.shortcut.current",
+    "shell.shortcut.choice",
+    "shell.shortcut.choose",
+    "shell.shortcut.unavailable",
+    "shell.shortcut.unsupported",
+    "shell.shortcut.conflict",
+    "shell.shortcut.defaultConflict",
+    "shell.shortcut.apply",
+    "shell.shortcut.reset",
+    "shell.shortcut.cancel"
+  ],
+  "test_title_preservation": {
+    "frontend/src/foundation/commandRegistry.test.ts": {
+      "existing_title_literals": [
+        "'command availability registry'",
+        "'blocks project commands without resolved Project context'",
+        "'does not let surface maturity or navigation bypass access'",
+        "'detects default and user-override shortcut conflicts'"
+      ],
+      "missing_title_literals": []
+    },
+    "frontend/src/components/app-shell/AppShell.test.tsx": {
+      "existing_title_literals": [
+        "'shared application shell'",
+        "'switches Product UI locale from the shell selector'",
+        "'allows remote copy replacement without changing protected command availability'",
+        "'exposes keyboard-reachable navigation and named panel controls'",
+        "'opens a palette whose protected commands remain disabled'",
+        "'uses only horizontal Studio and leaves text-entry shortcuts alone'",
+        "'real AppShell unavailable descriptions in $locale'",
+        "'localizes real missing access before and after the fail-closed adapter resolves'",
+        "'localizes the unresolved project explanation'",
+        "'localizes the hidden surface explanation ahead of unresolved project and access reasons'",
+        "'preserves opaque server explanation verbatim: %s'",
+        "'keeps canonical actions disabled with localized copy even for available access'",
+        "'shared notification entry'",
+        "'has exactly one fail-closed entry on %s'",
+        "'keeps inbox identity independent of project and preserves Selection on opening, detail and read'"
+      ],
+      "missing_title_literals": []
+    }
+  },
+  "focused_runs": [
+    {
+      "report": "01-binding-red-20260908T033823459392Z.json",
+      "command": [
+        "./node_modules/.bin/vitest",
+        "run",
+        "--configLoader",
+        "runner",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/writer/01-binding-red-20260908T033823459392Z.json",
+        "src/components/app-shell/AppShell.test.tsx",
+        "-t",
+        "uses the supported caller binding"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "native_exit": 1,
+      "total": 37,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 36,
+      "pending": 0,
+      "todo": 0,
+      "runtime_errors": 0
+    },
+    {
+      "report": "02-binding-green-20260908T033909996212Z.json",
+      "command": [
+        "./node_modules/.bin/vitest",
+        "run",
+        "--configLoader",
+        "runner",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/writer/02-binding-green-20260908T033909996212Z.json",
+        "src/components/app-shell/AppShell.test.tsx",
+        "src/foundation/commandRegistry.test.ts"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "native_exit": 0,
+      "total": 40,
+      "passed": 40,
+      "failed": 0,
+      "skipped": 0,
+      "pending": 0,
+      "todo": 0,
+      "runtime_errors": 0
+    },
+    {
+      "report": "03-editor-red-20260908T034013179901Z.json",
+      "command": [
+        "./node_modules/.bin/vitest",
+        "run",
+        "--configLoader",
+        "runner",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/writer/03-editor-red-20260908T034013179901Z.json",
+        "src/components/app-shell/AppShell.test.tsx",
+        "-t",
+        "applies, cancels and resets"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "native_exit": 1,
+      "total": 38,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 37,
+      "pending": 0,
+      "todo": 0,
+      "runtime_errors": 0
+    },
+    {
+      "report": "04-editor-green-20260908T034150919933Z.json",
+      "command": [
+        "./node_modules/.bin/vitest",
+        "run",
+        "--configLoader",
+        "runner",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/writer/04-editor-green-20260908T034150919933Z.json",
+        "src/components/app-shell/AppShell.test.tsx",
+        "src/foundation/commandRegistry.test.ts"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "native_exit": 0,
+      "total": 41,
+      "passed": 41,
+      "failed": 0,
+      "skipped": 0,
+      "pending": 0,
+      "todo": 0,
+      "runtime_errors": 0
+    },
+    {
+      "report": "05-composition-red-20260908T034243178977Z.json",
+      "command": [
+        "./node_modules/.bin/vitest",
+        "run",
+        "--configLoader",
+        "runner",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/writer/05-composition-red-20260908T034243178977Z.json",
+        "src/components/app-shell/AppShell.test.tsx",
+        "-t",
+        "leaves native editing and handled gestures"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "native_exit": 1,
+      "total": 39,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 38,
+      "pending": 0,
+      "todo": 0,
+      "runtime_errors": 0
+    },
+    {
+      "report": "06-composition-green-20260908T034312465311Z.json",
+      "command": [
+        "./node_modules/.bin/vitest",
+        "run",
+        "--configLoader",
+        "runner",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/writer/06-composition-green-20260908T034312465311Z.json",
+        "src/components/app-shell/AppShell.test.tsx",
+        "src/foundation/commandRegistry.test.ts"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "native_exit": 0,
+      "total": 42,
+      "passed": 42,
+      "failed": 0,
+      "skipped": 0,
+      "pending": 0,
+      "todo": 0,
+      "runtime_errors": 0
+    },
+    {
+      "report": "07-modal-red-20260908T034359098339Z.json",
+      "command": [
+        "./node_modules/.bin/vitest",
+        "run",
+        "--configLoader",
+        "runner",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/writer/07-modal-red-20260908T034359098339Z.json",
+        "src/components/app-shell/AppShell.test.tsx",
+        "-t",
+        "keeps modal ownership"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "native_exit": 1,
+      "total": 40,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 39,
+      "pending": 0,
+      "todo": 0,
+      "runtime_errors": 0
+    },
+    {
+      "report": "08-modal-green-20260908T034418073799Z.json",
+      "command": [
+        "./node_modules/.bin/vitest",
+        "run",
+        "--configLoader",
+        "runner",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/writer/08-modal-green-20260908T034418073799Z.json",
+        "src/components/app-shell/AppShell.test.tsx",
+        "src/foundation/commandRegistry.test.ts"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "native_exit": 1,
+      "total": 43,
+      "passed": 42,
+      "failed": 1,
+      "skipped": 0,
+      "pending": 0,
+      "todo": 0,
+      "runtime_errors": 0
+    },
+    {
+      "report": "09-modal-green-20260908T034452607733Z.json",
+      "command": [
+        "./node_modules/.bin/vitest",
+        "run",
+        "--configLoader",
+        "runner",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/writer/09-modal-green-20260908T034452607733Z.json",
+        "src/components/app-shell/AppShell.test.tsx",
+        "src/foundation/commandRegistry.test.ts"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "native_exit": 0,
+      "total": 43,
+      "passed": 43,
+      "failed": 0,
+      "skipped": 0,
+      "pending": 0,
+      "todo": 0,
+      "runtime_errors": 0
+    },
+    {
+      "report": "10-invalid-red-20260908T034611519073Z.json",
+      "command": [
+        "./node_modules/.bin/vitest",
+        "run",
+        "--configLoader",
+        "runner",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/writer/10-invalid-red-20260908T034611519073Z.json",
+        "src/components/app-shell/AppShell.test.tsx",
+        "src/foundation/commandRegistry.test.ts",
+        "-t",
+        "unsupported|collisions"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "native_exit": 1,
+      "total": 47,
+      "passed": 3,
+      "failed": 1,
+      "skipped": 43,
+      "pending": 0,
+      "todo": 0,
+      "runtime_errors": 0
+    },
+    {
+      "report": "11-invalid-green-20260908T034639057300Z.json",
+      "command": [
+        "./node_modules/.bin/vitest",
+        "run",
+        "--configLoader",
+        "runner",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/writer/11-invalid-green-20260908T034639057300Z.json",
+        "src/components/app-shell/AppShell.test.tsx",
+        "src/foundation/commandRegistry.test.ts"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "native_exit": 0,
+      "total": 47,
+      "passed": 47,
+      "failed": 0,
+      "skipped": 0,
+      "pending": 0,
+      "todo": 0,
+      "runtime_errors": 0
+    },
+    {
+      "report": "12-retirement-focused-20260908T034748914493Z.json",
+      "command": [
+        "./node_modules/.bin/vitest",
+        "run",
+        "--configLoader",
+        "runner",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/writer/12-retirement-focused-20260908T034748914493Z.json",
+        "src/components/app-shell/AppShell.test.tsx",
+        "src/foundation/commandRegistry.test.ts"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "native_exit": 0,
+      "total": 48,
+      "passed": 48,
+      "failed": 0,
+      "skipped": 0,
+      "pending": 0,
+      "todo": 0,
+      "runtime_errors": 0
+    },
+    {
+      "report": "13-altgraph-red-20260908T034911688522Z.json",
+      "command": [
+        "./node_modules/.bin/vitest",
+        "run",
+        "--configLoader",
+        "runner",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/writer/13-altgraph-red-20260908T034911688522Z.json",
+        "src/components/app-shell/AppShell.test.tsx",
+        "-t",
+        "leaves native editing and handled gestures"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "native_exit": 1,
+      "total": 44,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 43,
+      "pending": 0,
+      "todo": 0,
+      "runtime_errors": 0
+    },
+    {
+      "report": "14-final-focused-20260908T034936042659Z.json",
+      "command": [
+        "./node_modules/.bin/vitest",
+        "run",
+        "--configLoader",
+        "runner",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/writer/14-final-focused-20260908T034936042659Z.json",
+        "src/components/app-shell/AppShell.test.tsx",
+        "src/foundation/commandRegistry.test.ts",
+        "src/localization/localization.test.tsx"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "native_exit": 1,
+      "total": 61,
+      "passed": 56,
+      "failed": 5,
+      "skipped": 0,
+      "pending": 0,
+      "todo": 0,
+      "runtime_errors": 0
+    },
+    {
+      "report": "15-final-focused-20260908T035025208234Z.json",
+      "command": [
+        "./node_modules/.bin/vitest",
+        "run",
+        "--configLoader",
+        "runner",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4/writer/15-final-focused-20260908T035025208234Z.json",
+        "src/components/app-shell/AppShell.test.tsx",
+        "src/foundation/commandRegistry.test.ts",
+        "src/localization/localization.test.tsx"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "native_exit": 0,
+      "total": 61,
+      "passed": 61,
+      "failed": 0,
+      "skipped": 0,
+      "pending": 0,
+      "todo": 0,
+      "runtime_errors": 0
+    }
+  ],
+  "final_per_file": [
+    {
+      "path": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/src/foundation/commandRegistry.test.ts",
+      "assertions": 4,
+      "passed": 4
+    },
+    {
+      "path": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/src/localization/localization.test.tsx",
+      "assertions": 13,
+      "passed": 13
+    },
+    {
+      "path": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/src/components/app-shell/AppShell.test.tsx",
+      "assertions": 44,
+      "passed": 44
+    }
+  ],
+  "candidate": "No candidate frozen or committed; mutable working tree handed to Hermes per Owner V4.",
+  "branch": {
+    "command": [
+      "git",
+      "symbolic-ref",
+      "HEAD"
+    ],
+    "native_exit": 0,
+    "stdout": "refs/heads/agent/frontend-wave2-product-ux-v1\n",
+    "stderr": ""
+  },
+  "head_parent": {
+    "command": [
+      "git",
+      "rev-list",
+      "--parents",
+      "-n",
+      "1",
+      "HEAD"
+    ],
+    "native_exit": 0,
+    "stdout": "f5e19cf53fd010eea2935dd29557e82a879e042c 01cf2a509d687b8bf8b39eff69688b2a3f5f2f4a\n",
+    "stderr": ""
+  },
+  "status": {
+    "command": [
+      "git",
+      "--no-optional-locks",
+      "status",
+      "--short"
+    ],
+    "native_exit": 0,
+    "stdout": " M docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md\n M docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv\n M docs/architecture/governance/frontend-product-path-classification-v1.tsv\n M frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv\n M frontend/governance/UX_WAVE_1_REVIEW.md\n M frontend/scripts/frontend-architecture-guard.mjs\n M frontend/scripts/frontend-architecture-guard.test.mjs\n M frontend/src/app/routeTree.test.tsx\n M frontend/src/app/routeTree.tsx\n M frontend/src/components/app-shell/AppShell.test.tsx\n M frontend/src/components/app-shell/AppShell.tsx\n M frontend/src/components/design-system/index.tsx\n M frontend/src/foundation/commandRegistry.test.ts\n M frontend/src/foundation/commandRegistry.ts\n M frontend/src/interaction/InteractionShell.test.tsx\n M frontend/src/interaction/InteractionShell.tsx\n M frontend/src/interaction/SelectionContext.tsx\n M frontend/src/interaction/model.test.ts\n M frontend/src/interaction/model.ts\n M frontend/src/localization/catalogs.ts\n M frontend/src/localization/source-manifest.json\n M frontend/src/product/canvas/WorkspaceCanvas.test.tsx\n M frontend/src/product/canvas/WorkspaceCanvas.tsx\n M frontend/src/product/canvas/model.test.ts\n M frontend/src/product/canvas/model.ts\n M frontend/src/product/review/ReviewWorkspace.test.tsx\n M frontend/src/product/review/ReviewWorkspace.tsx\n M frontend/src/product/timeline/SemanticDiff.test.tsx\n M frontend/src/product/timeline/SemanticDiff.tsx\n M frontend/src/styles/foundation.css\n M frontend/src/surfaces/FoundationPages.tsx\n?? frontend/src/product/notifications/\n?? frontend/src/product/projects/\n?? frontend/src/product/render-browser/\n?? frontend/src/product/workflow-sketch/\n",
+    "stderr": ""
+  },
+  "stash": {
+    "command": [
+      "git",
+      "stash",
+      "list"
+    ],
+    "native_exit": 0,
+    "stdout": "stash@{0}: On agent/roadmap22-executable-task-graph-worker-fabric-decision-recovery: phase15-pre-cip2-drift-gate-repair-safety\n",
+    "stderr": ""
+  },
+  "index_sha256": "675115408e86deb10531d0a973cd0372d48458cf17ddb0bb9e6c52858c2fa18e"
+}

@@ -1,0 +1,81 @@
+{
+  "feature": "session-local palette shortcut",
+  "executed_added_test_identities": [
+    [
+      "frontend/src/foundation/commandRegistry.test.ts",
+      [
+        "bounded command palette shortcut resolution"
+      ],
+      "fails closed for unsupported external values and registry collisions while retaining other overrides"
+    ],
+    [
+      "frontend/src/components/app-shell/AppShell.test.tsx",
+      [
+        "session-local command palette shortcut"
+      ],
+      "applies, cancels and resets the shortcut while preserving focus, drafts and shared selection actions"
+    ],
+    [
+      "frontend/src/components/app-shell/AppShell.test.tsx",
+      [
+        "session-local command palette shortcut"
+      ],
+      "leaves native editing and handled gestures alone, including an active composition without a key flag"
+    ],
+    [
+      "frontend/src/components/app-shell/AppShell.test.tsx",
+      [
+        "session-local command palette shortcut"
+      ],
+      "keeps modal ownership for shortcuts and behind-modal activation and hands focus to a shared Agent action"
+    ],
+    [
+      "frontend/src/components/app-shell/AppShell.test.tsx",
+      [
+        "session-local command palette shortcut"
+      ],
+      "repairs an unsupported initial shortcut and retains native dialog focus in 'en'"
+    ],
+    [
+      "frontend/src/components/app-shell/AppShell.test.tsx",
+      [
+        "session-local command palette shortcut"
+      ],
+      "repairs an unsupported initial shortcut and retains native dialog focus in 'zh-CN'"
+    ],
+    [
+      "frontend/src/components/app-shell/AppShell.test.tsx",
+      [
+        "session-local command palette shortcut"
+      ],
+      "rejects initial and edited collisions without replacing other commands or silently resetting"
+    ],
+    [
+      "frontend/src/components/app-shell/AppShell.test.tsx",
+      [
+        "session-local command palette shortcut"
+      ],
+      "retires only local remapping and editor state across scope, owner and mount lifetimes"
+    ],
+    [
+      "frontend/src/components/app-shell/AppShell.test.tsx",
+      [
+        "session-local command palette shortcut"
+      ],
+      "uses the supported caller binding for both discovery and exact keyboard activation"
+    ]
+  ],
+  "source_endpoints": "SOURCE_INDEX.md",
+  "native_checks": "final-validation/browser/NATIVE_CHECKS.json",
+  "guard_mechanisms": [
+    "existing architecture guard plus negative-control suite",
+    "type-policy",
+    "full existing behavioral suite"
+  ],
+  "blind_spots": [
+    "no physical OS/browser shortcut guarantee",
+    "no real backend",
+    "no screen reader/OS IME/physical device validation"
+  ],
+  "old_test_identity_removals": []
+}

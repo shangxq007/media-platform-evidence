@@ -1,0 +1,1838 @@
+{
+  "tree": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+  "mapping": [
+    {
+      "path": "frontend/src/foundation/commandRegistry.ts",
+      "symbols": [
+        "resolvePaletteShortcut",
+        "getShortcut",
+        "detectShortcutConflicts",
+        "paletteShortcutChoices"
+      ],
+      "tests": [
+        [
+          "frontend/src/foundation/commandRegistry.test.ts",
+          [
+            "bounded command palette shortcut resolution"
+          ],
+          "fails closed for unsupported external values and registry collisions while retaining other overrides"
+        ]
+      ]
+    },
+    {
+      "path": "frontend/src/components/app-shell/AppShell.tsx",
+      "symbols": [
+        "ShellContent session lifetime state",
+        "effectiveOverrides/paletteBinding",
+        "composition and keydown effect",
+        "openPalette/closeEditor/applyShortcut",
+        "shared InteractionDialog editor",
+        "existing useSelectionCommands projection"
+      ],
+      "tests": [
+        [
+          "frontend/src/components/app-shell/AppShell.test.tsx",
+          [
+            "session-local command palette shortcut"
+          ],
+          "applies, cancels and resets the shortcut while preserving focus, drafts and shared selection actions"
+        ],
+        [
+          "frontend/src/components/app-shell/AppShell.test.tsx",
+          [
+            "session-local command palette shortcut"
+          ],
+          "leaves native editing and handled gestures alone, including an active composition without a key flag"
+        ],
+        [
+          "frontend/src/components/app-shell/AppShell.test.tsx",
+          [
+            "session-local command palette shortcut"
+          ],
+          "keeps modal ownership for shortcuts and behind-modal activation and hands focus to a shared Agent action"
+        ],
+        [
+          "frontend/src/components/app-shell/AppShell.test.tsx",
+          [
+            "session-local command palette shortcut"
+          ],
+          "repairs an unsupported initial shortcut and retains native dialog focus in 'en'"
+        ],
+        [
+          "frontend/src/components/app-shell/AppShell.test.tsx",
+          [
+            "session-local command palette shortcut"
+          ],
+          "repairs an unsupported initial shortcut and retains native dialog focus in 'zh-CN'"
+        ],
+        [
+          "frontend/src/components/app-shell/AppShell.test.tsx",
+          [
+            "session-local command palette shortcut"
+          ],
+          "rejects initial and edited collisions without replacing other commands or silently resetting"
+        ],
+        [
+          "frontend/src/components/app-shell/AppShell.test.tsx",
+          [
+            "session-local command palette shortcut"
+          ],
+          "retires only local remapping and editor state across scope, owner and mount lifetimes"
+        ],
+        [
+          "frontend/src/components/app-shell/AppShell.test.tsx",
+          [
+            "session-local command palette shortcut"
+          ],
+          "uses the supported caller binding for both discovery and exact keyboard activation"
+        ]
+      ]
+    },
+    {
+      "path": "frontend/src/localization/catalogs.ts",
+      "symbols": [
+        "shell.shortcut.* EN/ZH entries and source manifest"
+      ],
+      "tests": [
+        [
+          "frontend/src/components/app-shell/AppShell.test.tsx",
+          [
+            "session-local command palette shortcut"
+          ],
+          "repairs an unsupported initial shortcut and retains native dialog focus in 'en'"
+        ],
+        [
+          "frontend/src/components/app-shell/AppShell.test.tsx",
+          [
+            "session-local command palette shortcut"
+          ],
+          "repairs an unsupported initial shortcut and retains native dialog focus in 'zh-CN'"
+        ]
+      ]
+    },
+    {
+      "path": "frontend/src/styles/foundation.css",
+      "symbols": [
+        ".ff-shortcut-editor",
+        ".ff-shortcut-actions"
+      ],
+      "tests": [],
+      "native_layout_checks": [
+        "Narrow Chinese editor and controls fit viewport",
+        "Narrow Chinese remap opens existing palette with native chord",
+        "Narrow English editor and controls fit viewport"
+      ]
+    }
+  ],
+  "native_checks_with_preceding_inputs": [
+    {
+      "check": "Default binding is discoverable with accessible direct Commands fallback",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:27.038178+00:00",
+      "native_inputs": [],
+      "dom_assistance_expressions": [
+        "localStorage.setItem(\"dev_access_token\",\"SIMULATED_LOCAL_ONLY_NOT_A_CREDENTIAL\")",
+        "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()"
+      ]
+    },
+    {
+      "check": "Shared editor owns initial focus and discloses unsaved session",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:27.461689+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 566,
+            "y": 626,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 566,
+            "y": 626,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 566,
+            "y": 626,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 530,
+            "y": 75,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 530,
+            "y": 75,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 530,
+            "y": 75,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": [
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"Keyboard shortcut\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count Keyboard shortcut \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()"
+      ]
+    },
+    {
+      "check": "Native select chooses alternate draft without applying",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:28.145459+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 712,
+            "y": 316,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 712,
+            "y": 316,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 712,
+            "y": 316,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Home",
+            "code": "Home",
+            "windowsVirtualKeyCode": 36
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Home",
+            "code": "Home",
+            "windowsVirtualKeyCode": 36
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "ArrowDown",
+            "code": "ArrowDown",
+            "windowsVirtualKeyCode": 40,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "ArrowDown",
+            "code": "ArrowDown",
+            "windowsVirtualKeyCode": 40,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Enter",
+            "code": "Enter",
+            "windowsVirtualKeyCode": 13,
+            "modifiers": 0,
+            "text": "\r",
+            "unmodifiedText": "\r"
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Enter",
+            "code": "Enter",
+            "windowsVirtualKeyCode": 13,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": []
+    },
+    {
+      "check": "Cancel preserves default and restores launcher focus",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:28.339279+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 736,
+            "y": 366,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 736,
+            "y": 366,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 736,
+            "y": 366,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": [
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"Cancel\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count Cancel \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()"
+      ]
+    },
+    {
+      "check": "Apply changes binding/help without clearing shared selection",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:29.246433+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 530,
+            "y": 75,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 530,
+            "y": 75,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 530,
+            "y": 75,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 712,
+            "y": 316,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 712,
+            "y": 316,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 712,
+            "y": 316,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Home",
+            "code": "Home",
+            "windowsVirtualKeyCode": 36
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Home",
+            "code": "Home",
+            "windowsVirtualKeyCode": 36
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "ArrowDown",
+            "code": "ArrowDown",
+            "windowsVirtualKeyCode": 40,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "ArrowDown",
+            "code": "ArrowDown",
+            "windowsVirtualKeyCode": 40,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Enter",
+            "code": "Enter",
+            "windowsVirtualKeyCode": 13,
+            "modifiers": 0,
+            "text": "\r",
+            "unmodifiedText": "\r"
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Enter",
+            "code": "Enter",
+            "windowsVirtualKeyCode": 13,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 519,
+            "y": 366,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 519,
+            "y": 366,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 519,
+            "y": 366,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": [
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"Keyboard shortcut\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count Keyboard shortcut \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()",
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"Apply shortcut\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count Apply shortcut \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()"
+      ]
+    },
+    {
+      "check": "Old default chord no longer opens palette",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:29.413398+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Control",
+            "code": "ControlLeft",
+            "windowsVirtualKeyCode": 17,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "k",
+            "code": "KeyK",
+            "windowsVirtualKeyCode": 75,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "k",
+            "code": "KeyK",
+            "windowsVirtualKeyCode": 75,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Control",
+            "code": "ControlLeft",
+            "windowsVirtualKeyCode": 17,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": []
+    },
+    {
+      "check": "New native chord opens existing palette",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:29.620071+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Control",
+            "code": "ControlLeft",
+            "windowsVirtualKeyCode": 17,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Alt",
+            "code": "AltLeft",
+            "windowsVirtualKeyCode": 18,
+            "modifiers": 3
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "k",
+            "code": "KeyK",
+            "windowsVirtualKeyCode": 75,
+            "modifiers": 3
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "k",
+            "code": "KeyK",
+            "windowsVirtualKeyCode": 75,
+            "modifiers": 3
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Alt",
+            "code": "AltLeft",
+            "windowsVirtualKeyCode": 18,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Control",
+            "code": "ControlLeft",
+            "windowsVirtualKeyCode": 17,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": []
+    },
+    {
+      "check": "Remapped palette dispatches existing Inspect and preserves selected node",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:29.990332+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 705,
+            "y": 375,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 705,
+            "y": 375,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 705,
+            "y": 375,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": [
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"Inspect node: Project reference\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count Inspect node: Project reference \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()"
+      ]
+    },
+    {
+      "check": "Editor select and modal retain precedence over active global chord",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:30.358453+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 559,
+            "y": 75,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 559,
+            "y": 75,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 559,
+            "y": 75,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Control",
+            "code": "ControlLeft",
+            "windowsVirtualKeyCode": 17,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Alt",
+            "code": "AltLeft",
+            "windowsVirtualKeyCode": 18,
+            "modifiers": 3
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "k",
+            "code": "KeyK",
+            "windowsVirtualKeyCode": 75,
+            "modifiers": 3
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "k",
+            "code": "KeyK",
+            "windowsVirtualKeyCode": 75,
+            "modifiers": 3
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Alt",
+            "code": "AltLeft",
+            "windowsVirtualKeyCode": 18,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Control",
+            "code": "ControlLeft",
+            "windowsVirtualKeyCode": 17,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": [
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"Keyboard shortcut\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count Keyboard shortcut \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()"
+      ]
+    },
+    {
+      "check": "Escape closes editor and restores initiating control",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:30.539845+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Escape",
+            "code": "Escape",
+            "windowsVirtualKeyCode": 27,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Escape",
+            "code": "Escape",
+            "windowsVirtualKeyCode": 27,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": []
+    },
+    {
+      "check": "Backdrop cancels without losing launcher focus",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:30.927018+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 559,
+            "y": 75,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 559,
+            "y": 75,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 559,
+            "y": 75,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 4,
+            "y": 4,
+            "button": "left",
+            "clickCount": 1
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 4,
+            "y": 4,
+            "button": "left",
+            "clickCount": 1
+          }
+        }
+      ],
+      "dom_assistance_expressions": [
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"Keyboard shortcut\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count Keyboard shortcut \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()"
+      ]
+    },
+    {
+      "check": "Extra Shift modifier is not intercepted",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:31.109911+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Control",
+            "code": "ControlLeft",
+            "windowsVirtualKeyCode": 17,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Alt",
+            "code": "AltLeft",
+            "windowsVirtualKeyCode": 18,
+            "modifiers": 3
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "windowsVirtualKeyCode": 16,
+            "modifiers": 11
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "k",
+            "code": "KeyK",
+            "windowsVirtualKeyCode": 75,
+            "modifiers": 11
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "k",
+            "code": "KeyK",
+            "windowsVirtualKeyCode": 75,
+            "modifiers": 11
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "windowsVirtualKeyCode": 16,
+            "modifiers": 3
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Alt",
+            "code": "AltLeft",
+            "windowsVirtualKeyCode": 18,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Control",
+            "code": "ControlLeft",
+            "windowsVirtualKeyCode": 17,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": []
+    },
+    {
+      "check": "Canonical commands remain truthfully unavailable",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:31.318300+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 398,
+            "y": 75,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 398,
+            "y": 75,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 398,
+            "y": 75,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": []
+    },
+    {
+      "check": "Reset retires alternate binding",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:32.072377+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Escape",
+            "code": "Escape",
+            "windowsVirtualKeyCode": 27,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Escape",
+            "code": "Escape",
+            "windowsVirtualKeyCode": 27,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 559,
+            "y": 75,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 559,
+            "y": 75,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 559,
+            "y": 75,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 639,
+            "y": 366,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 639,
+            "y": 366,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 639,
+            "y": 366,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Control",
+            "code": "ControlLeft",
+            "windowsVirtualKeyCode": 17,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Alt",
+            "code": "AltLeft",
+            "windowsVirtualKeyCode": 18,
+            "modifiers": 3
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "k",
+            "code": "KeyK",
+            "windowsVirtualKeyCode": 75,
+            "modifiers": 3
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "k",
+            "code": "KeyK",
+            "windowsVirtualKeyCode": 75,
+            "modifiers": 3
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Alt",
+            "code": "AltLeft",
+            "windowsVirtualKeyCode": 18,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Control",
+            "code": "ControlLeft",
+            "windowsVirtualKeyCode": 17,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": [
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"Keyboard shortcut\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count Keyboard shortcut \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()",
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"Restore default\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count Restore default \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()"
+      ]
+    },
+    {
+      "check": "Reset default is genuinely active",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:32.270516+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Control",
+            "code": "ControlLeft",
+            "windowsVirtualKeyCode": 17,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "k",
+            "code": "KeyK",
+            "windowsVirtualKeyCode": 75,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "k",
+            "code": "KeyK",
+            "windowsVirtualKeyCode": 75,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Control",
+            "code": "ControlLeft",
+            "windowsVirtualKeyCode": 17,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": []
+    },
+    {
+      "check": "Reload/remount discards unsaved shortcut override",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:34.053388+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Escape",
+            "code": "Escape",
+            "windowsVirtualKeyCode": 27,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Escape",
+            "code": "Escape",
+            "windowsVirtualKeyCode": 27,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 530,
+            "y": 75,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 530,
+            "y": 75,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 530,
+            "y": 75,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 712,
+            "y": 316,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 712,
+            "y": 316,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 712,
+            "y": 316,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Home",
+            "code": "Home",
+            "windowsVirtualKeyCode": 36
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Home",
+            "code": "Home",
+            "windowsVirtualKeyCode": 36
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "ArrowDown",
+            "code": "ArrowDown",
+            "windowsVirtualKeyCode": 40,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "ArrowDown",
+            "code": "ArrowDown",
+            "windowsVirtualKeyCode": 40,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "ArrowDown",
+            "code": "ArrowDown",
+            "windowsVirtualKeyCode": 40,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "ArrowDown",
+            "code": "ArrowDown",
+            "windowsVirtualKeyCode": 40,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Enter",
+            "code": "Enter",
+            "windowsVirtualKeyCode": 13,
+            "modifiers": 0,
+            "text": "\r",
+            "unmodifiedText": "\r"
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Enter",
+            "code": "Enter",
+            "windowsVirtualKeyCode": 13,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 519,
+            "y": 366,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 519,
+            "y": 366,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 519,
+            "y": 366,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": [
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"Keyboard shortcut\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count Keyboard shortcut \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()",
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"Apply shortcut\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count Apply shortcut \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()"
+      ]
+    },
+    {
+      "check": "Narrow Chinese editor and controls fit viewport",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:34.397455+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 227,
+            "y": 94,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 227,
+            "y": 94,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 227,
+            "y": 94,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": [
+        "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"zh-CN\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"\\u952e\\u76d8\\u5feb\\u6377\\u952e\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count 键盘快捷键 \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()"
+      ]
+    },
+    {
+      "check": "Native keyboard focus stays in shared modal",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:34.485264+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Tab",
+            "code": "Tab",
+            "windowsVirtualKeyCode": 9,
+            "modifiers": 8
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Tab",
+            "code": "Tab",
+            "windowsVirtualKeyCode": 9,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": []
+    },
+    {
+      "check": "Narrow Chinese remap opens existing palette with native chord",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:35.778094+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Tab",
+            "code": "Tab",
+            "windowsVirtualKeyCode": 9,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Tab",
+            "code": "Tab",
+            "windowsVirtualKeyCode": 9,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 195,
+            "y": 758,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 195,
+            "y": 758,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 195,
+            "y": 758,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Home",
+            "code": "Home",
+            "windowsVirtualKeyCode": 36
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Home",
+            "code": "Home",
+            "windowsVirtualKeyCode": 36
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "ArrowDown",
+            "code": "ArrowDown",
+            "windowsVirtualKeyCode": 40,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "ArrowDown",
+            "code": "ArrowDown",
+            "windowsVirtualKeyCode": 40,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "ArrowDown",
+            "code": "ArrowDown",
+            "windowsVirtualKeyCode": 40,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "ArrowDown",
+            "code": "ArrowDown",
+            "windowsVirtualKeyCode": 40,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Enter",
+            "code": "Enter",
+            "windowsVirtualKeyCode": 13,
+            "modifiers": 0,
+            "text": "\r",
+            "unmodifiedText": "\r"
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Enter",
+            "code": "Enter",
+            "windowsVirtualKeyCode": 13,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 60,
+            "y": 809,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 60,
+            "y": 809,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 60,
+            "y": 809,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Control",
+            "code": "ControlLeft",
+            "windowsVirtualKeyCode": 17,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Alt",
+            "code": "AltLeft",
+            "windowsVirtualKeyCode": 18,
+            "modifiers": 3
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "p",
+            "code": "KeyP",
+            "windowsVirtualKeyCode": 80,
+            "modifiers": 3
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "p",
+            "code": "KeyP",
+            "windowsVirtualKeyCode": 80,
+            "modifiers": 3
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Alt",
+            "code": "AltLeft",
+            "windowsVirtualKeyCode": 18,
+            "modifiers": 2
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Control",
+            "code": "ControlLeft",
+            "windowsVirtualKeyCode": 17,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": [
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"\\u5e94\\u7528\\u5feb\\u6377\\u952e\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count 应用快捷键 \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()"
+      ]
+    },
+    {
+      "check": "Chinese reset restores default without persistence",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:36.432246+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyDown",
+            "key": "Escape",
+            "code": "Escape",
+            "windowsVirtualKeyCode": 27,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchKeyEvent",
+          "params": {
+            "type": "keyUp",
+            "key": "Escape",
+            "code": "Escape",
+            "windowsVirtualKeyCode": 27,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 227,
+            "y": 94,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 227,
+            "y": 94,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 227,
+            "y": 94,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 148,
+            "y": 809,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 148,
+            "y": 809,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 148,
+            "y": 809,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": [
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"\\u952e\\u76d8\\u5feb\\u6377\\u952e\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count 键盘快捷键 \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()",
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"\\u6062\\u590d\\u9ed8\\u8ba4\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count 恢复默认 \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()"
+      ]
+    },
+    {
+      "check": "Narrow English editor and controls fit viewport",
+      "passed": true,
+      "timestamp": "2026-09-08T03:56:36.769781+00:00",
+      "native_inputs": [
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseMoved",
+            "x": 63,
+            "y": 137,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mousePressed",
+            "x": 63,
+            "y": 137,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        },
+        {
+          "method": "Input.dispatchMouseEvent",
+          "params": {
+            "type": "mouseReleased",
+            "x": 63,
+            "y": 137,
+            "button": "left",
+            "clickCount": 1,
+            "modifiers": 0
+          }
+        }
+      ],
+      "dom_assistance_expressions": [
+        "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+        "(()=>{const es=[...document.querySelectorAll(\"button\")].filter(e=>e.textContent.trim()===\"Keyboard shortcut\" && e.getClientRects().length);if(es.length!==1)throw Error(\"button count Keyboard shortcut \"+es.length);document.querySelectorAll(\"[data-native-target]\").forEach(e=>e.removeAttribute(\"data-native-target\"));es[0].dataset.nativeTarget=\"yes\";es[0].scrollIntoView({block:\"nearest\"});})()"
+      ]
+    }
+  ],
+  "guard_mechanisms": "Existing frontend architecture guard and its negative controls executed unmodified; path/permission/localization boundaries remain inherited. Full raw native exits and logs in final-validation/gates. Type-policy is the existing package typecheck policy, not an invented whole-repository compiler claim.",
+  "blind_spots": [
+    "context and owner transitions covered with real in-memory Selection store in component tests; browser used real document reload for remap retirement",
+    "unsupported/colliding external bindings are component tests, no browser prop injection",
+    "no OS/device IME/screen reader or true backend"
+  ],
+  "native_input_stream": "final-validation/browser/NATIVE_COMMANDS.json"
+}

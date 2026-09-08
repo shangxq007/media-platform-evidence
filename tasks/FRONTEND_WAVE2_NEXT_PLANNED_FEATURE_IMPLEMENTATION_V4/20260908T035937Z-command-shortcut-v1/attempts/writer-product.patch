@@ -1,0 +1,568 @@
+--- a/frontend/src/foundation/commandRegistry.ts
++++ b/frontend/src/foundation/commandRegistry.ts
+@@ -73,3 +73,20 @@
+ export function useShortcutOverrides(overrides: ShortcutOverrides = {}): ShortcutOverrides {
+   return overrides
+ }
++
++
++export const paletteShortcutChoices = ['Mod+K', 'Mod+Alt+K', 'Mod+Alt+P'] as const
++export type PaletteShortcut = typeof paletteShortcutChoices[number]
++export type PaletteShortcutBinding =
++  | { readonly error: null; readonly shortcut: PaletteShortcut; readonly key: string; readonly altKey: boolean }
++  | { readonly error: 'unsupported' | 'conflict'; readonly shortcut?: undefined }
++
++export function resolvePaletteShortcut(overrides: ShortcutOverrides = {}): PaletteShortcutBinding {
++  const command = commandRegistry.find(command => command.id === 'navigation.command-palette.open')!
++  const requested = overrides[command.id]
++  if (requested !== undefined && typeof requested !== 'string') return { error: 'unsupported' }
++  const shortcut = paletteShortcutChoices.find(choice => choice === getShortcut(command, overrides))
++  if (!shortcut) return { error: 'unsupported' }
++  if (detectShortcutConflicts(commandRegistry, overrides)[shortcut.toLowerCase()]) return { error: 'conflict' }
++  return { error: null, shortcut, key: shortcut.slice(-1).toLowerCase(), altKey: shortcut.includes('+Alt+') }
++}
+--- a/frontend/src/foundation/commandRegistry.test.ts
++++ b/frontend/src/foundation/commandRegistry.test.ts
+@@ -1,5 +1,5 @@
+ import { describe, expect, it } from 'vitest'
+-import { commandRegistry, detectShortcutConflicts, getCommandAvailability } from './commandRegistry'
++import { commandRegistry, detectShortcutConflicts, getCommandAvailability, resolvePaletteShortcut } from './commandRegistry'
+ 
+ describe('command availability registry', () => {
+   it('blocks project commands without resolved Project context', () => {
+@@ -21,3 +21,19 @@
+     })
+   })
+ })
++
++
++describe('bounded command palette shortcut resolution', () => {
++  it('fails closed for unsupported external values and registry collisions while retaining other overrides', () => {
++    for (const value of ['', 'Ctrl+K', 'mod+k', 'Mod+Shift+K', 'Mod+Alt+Delete', '<img src=x onerror=alert(1)>', null, 42]) {
++      expect(resolvePaletteShortcut({ 'navigation.command-palette.open': value as string })).toEqual({ error: 'unsupported' })
++    }
++    const overrides = { 'navigation.command-palette.open': 'Mod+Alt+P', 'project.create': 'mod+alt+p' } as const
++    expect(resolvePaletteShortcut(overrides)).toEqual({ error: 'conflict' })
++    expect(overrides['project.create']).toBe('mod+alt+p')
++    expect(resolvePaletteShortcut({ 'project.create': 'Mod+K' })).toEqual({ error: 'conflict' })
++    for (const [shortcut, key, altKey] of [['Mod+K', 'k', false], ['Mod+Alt+K', 'k', true], ['Mod+Alt+P', 'p', true]] as const) {
++      expect(resolvePaletteShortcut({ 'navigation.command-palette.open': shortcut, 'project.create': 'Mod+Alt+N' })).toEqual({ error: null, shortcut, key, altKey })
++    }
++  })
++})
+--- a/frontend/src/components/app-shell/AppShell.tsx
++++ b/frontend/src/components/app-shell/AppShell.tsx
+@@ -1,12 +1,13 @@
+-import { useEffect, useMemo, useState, type ReactNode } from 'react'
++import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+ import { Badge, Breadcrumb, Button, CommandPalette, ResizablePanel } from '../design-system'
+-import { commandRegistry, getCommandAvailability, getShortcut, type ShortcutOverrides } from '../../foundation/commandRegistry'
++import { commandRegistry, getCommandAvailability, getShortcut, resolvePaletteShortcut, paletteShortcutChoices, type PaletteShortcut, type ShortcutOverrides } from '../../foundation/commandRegistry'
+ import { useEffectiveAccessCatalog } from '../../foundation/platformClient'
+ import { surfaceRegistry, getSurface, type SurfaceId } from '../../foundation/surfaceRegistry'
+-import { SelectionProvider, useInteractionStore } from '../../interaction/SelectionContext'
++import { SelectionProvider, useInteractionStore, useSelection } from '../../interaction/SelectionContext'
+ import { AgentLauncher, AgentShell, SelectionInspector, useSelectionCommands } from '../../interaction/InteractionShell'
+ import type { ProjectContextValue } from '../../foundation/projectContext'
+ import { useTranslation, type SupportedLocale } from '../../localization'
++import { InteractionDialog } from '../../interaction/InteractionDialog'
+ import { NotificationInbox } from '../../product/notifications/NotificationInbox'
+ 
+ const localAvailabilityMessageKeys: Readonly<Record<string, string>> = {
+@@ -64,20 +65,49 @@
+   const surface = getSurface(surfaceId)
+   const accessKeys = useMemo(() => commandRegistry.flatMap(command => command.requiredAccessKey ? [command.requiredAccessKey] : []), [])
+   const access = useEffectiveAccessCatalog(accessKeys)
+-  const [paletteOpen, setPaletteOpen] = useState(false)
++  const store = useInteractionStore()
++  const selection = useSelection()
++  const newSession = () => ({ store, lifetime: selection.lifetime, shortcut: undefined as PaletteShortcut | undefined, panel: null as 'palette' | 'editor' | null, draft: '' })
++  const [session, setSession] = useState(newSession)
++  // Retire only command UI state; preserve the mounted shell and its other consumers.
++  if (session.store !== store || session.lifetime !== selection.lifetime) setSession(newSession())
++  if (session.panel && selection.agentOpen) setSession(current => ({ ...current, panel: null }))
++  const setPaletteOpen = (open: boolean) => setSession(current => ({ ...current, panel: open ? 'palette' : null }))
+   const [leftVisible, setLeftVisible] = useState(false)
+   const { t } = useTranslation()
+ 
++  const effectiveOverrides = session.shortcut === undefined ? shortcutOverrides : { ...shortcutOverrides, 'navigation.command-palette.open': session.shortcut }
++  const paletteBinding = resolvePaletteShortcut(effectiveOverrides)
++  const draftBinding = resolvePaletteShortcut({ ...effectiveOverrides, 'navigation.command-palette.open': session.draft })
++  const defaultShortcut = resolvePaletteShortcut().shortcut!
++  const defaultBinding = resolvePaletteShortcut({ ...effectiveOverrides, 'navigation.command-palette.open': defaultShortcut })
++  const modalPresent = () => Boolean(document.querySelector('[role="dialog"][aria-modal="true"]'))
++  const openPalette = () => { if (!modalPresent()) setPaletteOpen(true) }
++  const closeEditor = () => setSession(current => ({ ...current, panel: null }))
++  const applyShortcut = (shortcut: PaletteShortcut) => setSession(current => ({ ...current, shortcut, panel: null }))
++
++  const composing = useRef(false)
+   useEffect(() => {
++    const startComposition = () => { composing.current = true }
++    const endComposition = () => { composing.current = false }
+     const listener = (event: KeyboardEvent) => {
+       if ((event.target as HTMLElement)?.closest?.('input, textarea, select, [contenteditable]:not([contenteditable="false"])')) return
+-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); setPaletteOpen(true) }
++      if (paletteBinding.error || event.defaultPrevented || event.repeat || composing.current || event.isComposing || event.keyCode === 229 || event.getModifierState('AltGraph')) return
++      if (modalPresent()) return
++      if (event.metaKey !== event.ctrlKey && !event.shiftKey && event.altKey === paletteBinding.altKey && event.key.toLowerCase() === paletteBinding.key) { event.preventDefault(); setPaletteOpen(true) }
+     }
++    window.addEventListener('compositionstart', startComposition, true)
++    window.addEventListener('compositionend', endComposition, true)
++    window.addEventListener('blur', endComposition)
+     window.addEventListener('keydown', listener)
+-    return () => window.removeEventListener('keydown', listener)
+-  }, [])
++    return () => {
++      window.removeEventListener('compositionstart', startComposition, true)
++      window.removeEventListener('compositionend', endComposition, true)
++      window.removeEventListener('blur', endComposition)
++      window.removeEventListener('keydown', listener)
++    }
++  }, [paletteBinding.error, paletteBinding.shortcut])
+ 
+-  const store = useInteractionStore()
+   const selectionCommands = useSelectionCommands()
+   const paletteActions = [...selectionCommands.map(action => ({ ...action, onSelect: () => { setPaletteOpen(false); action.onSelect() } })), ...commandRegistry.filter(command => command.id !== 'navigation.command-palette.open').map(command => {
+     const availability = getCommandAvailability(command, { surfaceId, hasResolvedProject: project?.status === 'RESOLVED', accessCatalog: access.data })
+@@ -92,7 +122,12 @@
+   })]
+ 
+   return (
+-    <div className="ff-app-shell" data-surface={surfaceId} data-studio="horizontal">
++    <div className="ff-app-shell" data-surface={surfaceId} data-studio="horizontal" onClickCapture={event => {
++      if (session.panel && modalPresent() && !(event.target as HTMLElement).closest('[role="dialog"][aria-modal="true"]')) {
++        event.preventDefault()
++        event.stopPropagation()
++      }
++    }}>
+       <a className="skip-link" href="#main-content">{t('shell.skipToMain')}</a>
+       <WorkspaceHeader workspaceId={workspaceId} project={project} />
+       <div className="ff-shell-toolbar" aria-label={t('shell.panelControls')}>
+@@ -103,7 +138,10 @@
+         </div></details>
+         <span className="ff-surface-label">{surface.displayName}</span>
+         {surface.shellRegions['asset-browser'] !== 'HIDDEN' ? <Button variant="ghost" aria-pressed={leftVisible} onClick={() => setLeftVisible(value => !value)}>{t('shell.toggleAssetBrowser')}</Button> : null}
+-        <Button variant="ghost" onClick={() => setPaletteOpen(true)}>{t('shell.commands')} <kbd>⌘K</kbd></Button>
++        <Button variant="ghost" onClick={openPalette}>{t('shell.commands')} <kbd>{paletteBinding.shortcut ?? t('shell.shortcut.unavailable')}</kbd></Button>
++        <Button variant="ghost" onClick={() => {
++          if (!modalPresent()) setSession(current => ({ ...current, panel: 'editor', draft: paletteBinding.shortcut ?? '' }))
++        }}>{t('shell.shortcut.title')}</Button>
+         <AgentLauncher />
+         <NotificationInbox />
+       </div>
+@@ -114,7 +152,24 @@
+         <SelectionInspector />
+       </div>
+       <AgentShell />
+-      <CommandPalette open={paletteOpen} actions={paletteActions} onClose={() => setPaletteOpen(false)} />
++      {session.panel === 'editor' ? <InteractionDialog title={t('shell.shortcut.title')} closeLabel={t('shell.shortcut.close')} onClose={closeEditor} className="ff-shortcut-editor">
++        <p>{t('shell.shortcut.session')}</p>
++        <p>{t('shell.shortcut.mod')}</p>
++        <p>{t('shell.shortcut.current', { shortcut: paletteBinding.shortcut ?? t('shell.shortcut.unavailable') })}</p>
++        {paletteBinding.error ? <p role="alert">{t(paletteBinding.error === 'unsupported' ? 'shell.shortcut.unsupported' : 'shell.shortcut.conflict')}</p> : null}
++        <label>{t('shell.shortcut.choice')}<select data-dialog-entry value={session.draft} onChange={event => setSession(current => ({ ...current, draft: event.target.value }))}>
++          {!session.draft ? <option value="" disabled>{t('shell.shortcut.choose')}</option> : null}
++          {paletteShortcutChoices.map(shortcut => <option key={shortcut} value={shortcut}>{shortcut}</option>)}
++        </select></label>
++        {session.draft && draftBinding.error ? <p role="alert">{t(draftBinding.error === 'unsupported' ? 'shell.shortcut.unsupported' : 'shell.shortcut.conflict')}</p> : null}
++        {defaultBinding.error ? <p>{t('shell.shortcut.defaultConflict')}</p> : null}
++        <div className="ff-shortcut-actions">
++          <Button disabled={Boolean(draftBinding.error)} onClick={() => { if (!draftBinding.error) applyShortcut(draftBinding.shortcut) }}>{t('shell.shortcut.apply')}</Button>
++          <Button variant="ghost" disabled={Boolean(defaultBinding.error)} onClick={() => { if (!defaultBinding.error) applyShortcut(defaultBinding.shortcut) }}>{t('shell.shortcut.reset')}</Button>
++          <Button variant="ghost" onClick={closeEditor}>{t('shell.shortcut.cancel')}</Button>
++        </div>
++      </InteractionDialog> : null}
++      <CommandPalette open={session.panel === 'palette'} actions={paletteActions} onClose={() => setPaletteOpen(false)} />
+     </div>
+   )
+ }
+--- a/frontend/src/components/app-shell/AppShell.test.tsx
++++ b/frontend/src/components/app-shell/AppShell.test.tsx
+@@ -7,7 +7,7 @@
+ import { surfaceRegistry } from '../../foundation/surfaceRegistry'
+ import type { ProjectContextValue } from '../../foundation/projectContext'
+ import { LocalizationProvider, createCatalog } from '../../localization'
+-import { commandRegistry } from '../../foundation/commandRegistry'
++import { commandRegistry, type ShortcutOverrides } from '../../foundation/commandRegistry'
+ import { platformQueryKeys } from '../../foundation/platformClient'
+ import { unknownAccess, type EffectiveAccessEntry } from '../../foundation/effectiveAccess'
+ import { useInteractionStore, useSurfaceAdapter } from '../../interaction/SelectionContext'
+@@ -191,3 +191,300 @@
+     }
+   })
+ })
++
++
++describe('session-local command palette shortcut', () => {
++  function keyDown(target: Window | HTMLElement, init: KeyboardEventInit) {
++    const event = new KeyboardEvent('keydown', { bubbles: true, cancelable: true, ...init })
++    // Happy DOM aliases AltGraph to any Alt key. Model the independent, unpressed
++    // AltGraph state for ordinary chords; the AltGraph rejection case sets it true.
++    const nativeModifierState = event.getModifierState.bind(event)
++    Object.defineProperty(event, 'getModifierState', { value: (key: string) => key === 'AltGraph' ? false : nativeModifierState(key) })
++    return fireEvent(target, event)
++  }
++
++  function setup(shortcutOverrides: ShortcutOverrides = {}) {
++    const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
++    return render(<QueryClientProvider client={client}><ProductAppShell surfaceId="canvas" workspaceId="workspace-1" project={project} shortcutOverrides={shortcutOverrides}><input aria-label="Local draft" defaultValue="Keep this draft" /></ProductAppShell></QueryClientProvider>)
++  }
++
++  it('applies, cancels and resets the shortcut while preserving focus, drafts and shared selection actions', () => {
++    const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
++    let store!: ReturnType<typeof useInteractionStore>
++    function Probe() {
++      store = useInteractionStore()
++      useSurfaceAdapter({ objects: () => [{ id: 'a', title: 'Selected A', kind: 'NODE' }, { id: 'b', title: 'Selected B', kind: 'NODE' }], supports: ['reveal'], handle: () => true })
++      return <input aria-label="Local draft" defaultValue="Keep this draft" />
++    }
++    render(<QueryClientProvider client={client}><ProductAppShell surfaceId="canvas" shortcutOverrides={{ 'project.create': 'Mod+Alt+N' }}><Probe /></ProductAppShell></QueryClientProvider>)
++    act(() => { store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: ['a', 'b'], primaryId: 'b' }) })
++    const before = store.getSnapshot()
++    const dispatch = vi.spyOn(store, 'dispatch')
++    const launcher = screen.getByRole('button', { name: 'Keyboard shortcut' })
++    const commands = screen.getByRole('button', { name: /Commands/ })
++    launcher.focus()
++    fireEvent.click(launcher)
++    const dialog = screen.getByRole('dialog', { name: 'Keyboard shortcut' })
++    const choice = within(dialog).getByRole('combobox', { name: 'Command palette shortcut' })
++    expect(document.activeElement).toBe(choice)
++    expect((choice as HTMLSelectElement).value).toBe('Mod+K')
++    fireEvent.change(choice, { target: { value: 'Mod+Alt+K' } })
++    fireEvent.click(within(dialog).getByRole('button', { name: 'Cancel' }))
++    expect(document.activeElement).toBe(launcher)
++    expect(commands.textContent).toContain('Mod+K')
++    fireEvent.click(launcher)
++    fireEvent.change(screen.getByRole('combobox', { name: 'Command palette shortcut' }), { target: { value: 'Mod+Alt+P' } })
++    fireEvent.click(screen.getByRole('button', { name: 'Apply shortcut' }))
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(document.activeElement).toBe(launcher)
++    expect(commands.textContent).toContain('Mod+Alt+P')
++    expect(keyDown(window, { key: 'k', ctrlKey: true })).toBe(true)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(keyDown(window, { key: 'p', ctrlKey: true, altKey: true })).toBe(false)
++    expect(screen.getByRole('dialog', { name: 'Command palette' })).toBeTruthy()
++    expect(screen.getByRole('button', { name: 'Create project Mod+Alt+N' })).toBeTruthy()
++    fireEvent.click(screen.getByRole('button', { name: 'Inspect 2 selected objects' }))
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(document.activeElement).toBe(launcher)
++    expect(dispatch).toHaveBeenCalledWith({ category: 'LOCAL_EPHEMERAL', type: 'inspect', open: true }, 'COMMAND')
++    expect(store.getSnapshot().selectedRefs).toEqual(before.selectedRefs)
++    expect(store.getSnapshot().primaryRef).toEqual(before.primaryRef)
++    dispatch.mockClear()
++    fireEvent.click(launcher)
++    fireEvent.click(screen.getByRole('button', { name: 'Restore default' }))
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(document.activeElement).toBe(launcher)
++    expect(commands.textContent).toContain('Mod+K')
++    expect(keyDown(window, { key: 'p', ctrlKey: true, altKey: true })).toBe(true)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(dispatch).not.toHaveBeenCalled()
++    expect((screen.getByLabelText('Local draft') as HTMLInputElement).value).toBe('Keep this draft')
++    expect(store.getSnapshot().selectedRefs).toEqual(before.selectedRefs)
++    keyDown(window, { key: 'k', ctrlKey: true })
++    expect(screen.getByRole('dialog', { name: 'Command palette' })).toBeTruthy()
++  })
++
++  it('leaves native editing and handled gestures alone, including an active composition without a key flag', () => {
++    setup({ 'navigation.command-palette.open': 'Mod+Alt+K' })
++    const launcher = screen.getByRole('button', { name: 'Keyboard shortcut' })
++    for (const extra of [{ repeat: true }, { shiftKey: true }, { metaKey: true }, { isComposing: true }, { keyCode: 229 }, { ctrlKey: false }]) {
++      expect(keyDown(launcher, { key: 'k', ctrlKey: true, altKey: true, ...extra })).toBe(true)
++      expect(screen.queryByRole('dialog')).toBeNull()
++    }
++    const altGraph = new KeyboardEvent('keydown', { key: 'k', ctrlKey: true, altKey: true, bubbles: true, cancelable: true })
++    Object.defineProperty(altGraph, 'getModifierState', { value: (key: string) => key === 'AltGraph' })
++    expect(fireEvent(launcher, altGraph)).toBe(true)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    const handled = new KeyboardEvent('keydown', { key: 'k', ctrlKey: true, altKey: true, bubbles: true, cancelable: true })
++    handled.preventDefault()
++    fireEvent(launcher, handled)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    for (const tag of ['input', 'textarea', 'select', 'div']) {
++      const field = document.createElement(tag)
++      if (tag === 'div') field.setAttribute('contenteditable', 'true')
++      const target = tag === 'div' ? field.appendChild(document.createElement('span')) : field
++      document.body.appendChild(field)
++      expect(keyDown(target, { key: 'k', ctrlKey: true, altKey: true })).toBe(true)
++      expect(screen.queryByRole('dialog')).toBeNull()
++      field.remove()
++    }
++    launcher.focus()
++    fireEvent.compositionStart(launcher)
++    expect(keyDown(launcher, { key: 'k', ctrlKey: true, altKey: true })).toBe(true)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    fireEvent.compositionEnd(launcher)
++    expect(keyDown(launcher, { key: 'K', ctrlKey: true, altKey: true })).toBe(false)
++    expect(screen.getByRole('dialog', { name: 'Command palette' })).toBeTruthy()
++  })
++
++  it('keeps modal ownership for shortcuts and behind-modal activation and hands focus to a shared Agent action', () => {
++    const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
++    let store!: ReturnType<typeof useInteractionStore>
++    function Probe() { store = useInteractionStore(); return null }
++    render(<QueryClientProvider client={client}><ProductAppShell surfaceId="canvas"><Probe /></ProductAppShell></QueryClientProvider>)
++    const launcher = screen.getByRole('button', { name: 'Keyboard shortcut' })
++    const commands = screen.getByRole('button', { name: /Commands/ })
++    const notifications = screen.getByRole('button', { name: /Notifications/ })
++    launcher.focus()
++    fireEvent.click(launcher)
++    const editor = screen.getByRole('dialog', { name: 'Keyboard shortcut' })
++    const entry = document.activeElement
++    expect(keyDown(window, { key: 'k', ctrlKey: true })).toBe(true)
++    fireEvent.click(commands)
++    fireEvent.click(notifications)
++    expect(screen.getAllByRole('dialog')).toEqual([editor])
++    expect(document.activeElement).toBe(entry)
++    // A shared store action can open the existing Agent without a DOM click.
++    act(() => { store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'agent', open: true }) })
++    expect(screen.queryByRole('dialog', { name: 'Keyboard shortcut' })).toBeNull()
++    const agent = screen.getByRole('dialog', { name: 'Agent conversation' })
++    expect(agent.contains(document.activeElement)).toBe(true)
++    fireEvent.click(commands)
++    fireEvent.click(launcher)
++    expect(screen.getAllByRole('dialog')).toEqual([agent])
++    keyDown(agent, { key: 'Escape' })
++    commands.focus()
++    fireEvent.click(commands)
++    fireEvent.click(launcher)
++    expect(screen.getAllByRole('dialog')).toHaveLength(1)
++    fireEvent.click(screen.getByRole('button', { name: /Ask Agent about/ }))
++    const sharedAgent = screen.getByRole('dialog', { name: 'Agent conversation' })
++    expect(screen.getAllByRole('dialog')).toEqual([sharedAgent])
++    expect(sharedAgent.contains(document.activeElement)).toBe(true)
++    keyDown(sharedAgent, { key: 'Escape' })
++    expect(document.activeElement).toBe(commands)
++    notifications.focus()
++    fireEvent.click(notifications)
++    const inbox = screen.getByRole('dialog', { name: 'Notifications' })
++    const inboxEntry = document.activeElement
++    fireEvent.click(commands)
++    fireEvent.click(launcher)
++    expect(keyDown(window, { key: 'k', ctrlKey: true })).toBe(true)
++    expect(screen.getAllByRole('dialog')).toEqual([inbox])
++    expect(document.activeElement).toBe(inboxEntry)
++  })
++
++  it.each([
++    { locale: 'en' as const, launcher: 'Keyboard shortcut', commands: /Commands/, choice: 'Command palette shortcut', unavailable: 'Shortcut unavailable', unsupported: 'This shortcut is not supported. Choose a listed shortcut or restore the default.', reset: 'Restore default', apply: 'Apply shortcut', cancel: 'Cancel' },
++    { locale: 'zh-CN' as const, launcher: '键盘快捷键', commands: /命令/, choice: '命令面板快捷键', unavailable: '快捷键不可用', unsupported: '不支持此快捷键。请选择列表中的快捷键或恢复默认设置。', reset: '恢复默认', apply: '应用快捷键', cancel: '取消' },
++  ])('repairs an unsupported initial shortcut and retains native dialog focus in $locale', copy => {
++    const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
++    render(<LocalizationProvider initialLocale={copy.locale}><QueryClientProvider client={client}><ProductAppShell surfaceId="canvas" shortcutOverrides={{ 'navigation.command-palette.open': '<img src=x onerror=alert(1)>' }}>Draft</ProductAppShell></QueryClientProvider></LocalizationProvider>)
++    const commands = screen.getByRole('button', { name: copy.commands })
++    const launcher = screen.getByRole('button', { name: copy.launcher })
++    expect(commands.textContent).toContain(copy.unavailable)
++    expect(keyDown(window, { key: 'k', ctrlKey: true })).toBe(true)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    commands.focus()
++    fireEvent.click(commands)
++    keyDown(screen.getByRole('dialog'), { key: 'Escape' })
++    expect(document.activeElement).toBe(commands)
++    launcher.focus()
++    fireEvent.click(launcher)
++    const dialog = screen.getByRole('dialog', { name: copy.launcher })
++    expect(within(dialog).getByRole('alert').textContent).toBe(copy.unsupported)
++    expect(dialog.querySelector('img')).toBeNull()
++    expect((screen.getByRole('button', { name: copy.apply }) as HTMLButtonElement).disabled).toBe(true)
++    const choice = screen.getByRole('combobox', { name: copy.choice })
++    expect(document.activeElement).toBe(choice)
++    const cancel = screen.getByRole('button', { name: copy.cancel })
++    cancel.focus()
++    keyDown(cancel, { key: 'Tab' })
++    const close = within(dialog).getAllByRole('button')[0]
++    expect(document.activeElement).toBe(close)
++    keyDown(close, { key: 'Tab', shiftKey: true })
++    expect(document.activeElement).toBe(cancel)
++    fireEvent.mouseDown(dialog.parentElement!)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(document.activeElement).toBe(launcher)
++    expect(commands.textContent).toContain(copy.unavailable)
++    fireEvent.click(launcher)
++    fireEvent.click(screen.getByRole('button', { name: copy.reset }))
++    expect(document.activeElement).toBe(launcher)
++    expect(commands.textContent).toContain('Mod+K')
++    keyDown(window, { key: 'k', metaKey: true })
++    expect(screen.getByRole('dialog')).toBeTruthy()
++  })
++
++  it('rejects initial and edited collisions without replacing other commands or silently resetting', () => {
++    setup({ 'navigation.command-palette.open': 'Mod+Alt+P', 'project.create': 'mod+alt+p', 'render.open': 'Mod+K' })
++    const commands = screen.getByRole('button', { name: /Commands/ })
++    const launcher = screen.getByRole('button', { name: 'Keyboard shortcut' })
++    expect(commands.textContent).toContain('Shortcut unavailable')
++    for (const event of [{ key: 'p', altKey: true }, { key: 'k' }]) {
++      expect(keyDown(window, { ctrlKey: true, ...event })).toBe(true)
++      expect(screen.queryByRole('dialog')).toBeNull()
++    }
++    fireEvent.click(launcher)
++    expect(screen.getByText('This shortcut is assigned to another command. Choose a different shortcut.')).toBeTruthy()
++    const apply = screen.getByRole('button', { name: 'Apply shortcut' }) as HTMLButtonElement
++    const reset = screen.getByRole('button', { name: 'Restore default' }) as HTMLButtonElement
++    expect(apply.disabled).toBe(true)
++    expect(reset.disabled).toBe(true)
++    expect(screen.getByText('The default shortcut is assigned to another command and cannot be restored.')).toBeTruthy()
++    fireEvent.click(reset)
++    expect(commands.textContent).toContain('Shortcut unavailable')
++    fireEvent.change(screen.getByRole('combobox', { name: 'Command palette shortcut' }), { target: { value: 'Mod+Alt+K' } })
++    expect(apply.disabled).toBe(false)
++    fireEvent.click(apply)
++    fireEvent.click(launcher)
++    fireEvent.change(screen.getByRole('combobox', { name: 'Command palette shortcut' }), { target: { value: 'Mod+Alt+P' } })
++    expect((screen.getByRole('button', { name: 'Apply shortcut' }) as HTMLButtonElement).disabled).toBe(true)
++    fireEvent.click(screen.getByRole('button', { name: 'Cancel' }))
++    expect(commands.textContent).toContain('Mod+Alt+K')
++    keyDown(window, { key: 'k', ctrlKey: true, altKey: true })
++    expect(screen.getByRole('dialog', { name: 'Command palette' })).toBeTruthy()
++    expect(screen.getByRole('button', { name: 'Create project mod+alt+p' })).toBeTruthy()
++    expect(screen.getByRole('button', { name: 'Open render entry Mod+K' })).toBeTruthy()
++  })
++
++  it('retires only local remapping and editor state across scope, owner and mount lifetimes', () => {
++    const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
++    let store!: ReturnType<typeof useInteractionStore>
++    function Probe() {
++      store = useInteractionStore()
++      useSurfaceAdapter({ objects: () => [], supports: [], handle: () => false })
++      return <input aria-label="Surviving shell consumer" defaultValue="Keep local work" />
++    }
++    const content = (workspaceId: string, projectId: string, surfaceId: 'canvas' | 'nle') => <QueryClientProvider client={client}><ProductAppShell surfaceId={surfaceId} workspaceId={workspaceId} project={{ ...project, workspaceId, projectId }} shortcutOverrides={{ 'navigation.command-palette.open': 'Mod+Alt+K', 'project.create': 'Mod+Alt+N' }}><Probe /></ProductAppShell></QueryClientProvider>
++    const view = render(content('workspace-1', 'project-1', 'canvas'))
++    const consumer = screen.getByLabelText('Surviving shell consumer')
++    fireEvent.change(consumer, { target: { value: 'Edited local work' } })
++    fireEvent.click(screen.getByRole('button', { name: 'Toggle asset browser' }))
++    const remapAndOpenEditor = () => {
++      const launcher = screen.getByRole('button', { name: 'Keyboard shortcut' })
++      launcher.focus()
++      fireEvent.click(launcher)
++      fireEvent.change(screen.getByRole('combobox', { name: 'Command palette shortcut' }), { target: { value: 'Mod+Alt+P' } })
++      fireEvent.click(screen.getByRole('button', { name: 'Apply shortcut' }))
++      fireEvent.click(launcher)
++      return launcher
++    }
++    for (const scope of [['workspace-2', 'project-1', 'canvas'], ['workspace-2', 'project-2', 'canvas'], ['workspace-2', 'project-2', 'nle'], ['workspace-1', 'project-1', 'canvas']] as const) {
++      const launcher = remapAndOpenEditor()
++      view.rerender(content(scope[0], scope[1], scope[2]))
++      expect(screen.queryByRole('dialog')).toBeNull()
++      expect(document.activeElement).toBe(launcher)
++      expect(screen.getByRole('button', { name: /Commands/ }).textContent).toContain('Mod+Alt+K')
++      expect(keyDown(window, { key: 'p', ctrlKey: true, altKey: true })).toBe(true)
++      expect(screen.queryByRole('dialog')).toBeNull()
++      expect(screen.getByLabelText('Surviving shell consumer')).toBe(consumer)
++      expect((consumer as HTMLInputElement).value).toBe('Edited local work')
++      expect(screen.getByRole('button', { name: 'Toggle asset browser' }).getAttribute('aria-pressed')).toBe('true')
++    }
++    const launcher = remapAndOpenEditor()
++    const owner = store
++    const lifetime = store.getSnapshot().lifetime
++    act(() => { store.retireSelectionOwner('adapter') })
++    expect(store).toBe(owner)
++    expect(store.getSnapshot().lifetime).not.toBe(lifetime)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(document.activeElement).toBe(launcher)
++    expect(screen.getByRole('button', { name: /Commands/ }).textContent).toContain('Mod+Alt+K')
++    remapAndOpenEditor()
++    keyDown(screen.getByRole('dialog'), { key: 'Escape' })
++    keyDown(window, { key: 'p', ctrlKey: true, altKey: true })
++    expect(screen.getByRole('dialog', { name: 'Command palette' })).toBeTruthy()
++    view.rerender(content('workspace-3', 'project-3', 'nle'))
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(screen.getByRole('button', { name: /Commands/ }).textContent).toContain('Mod+Alt+K')
++    view.unmount()
++    setup()
++    expect(screen.getByRole('button', { name: /Commands/ }).textContent).toContain('Mod+K')
++    expect(keyDown(window, { key: 'p', ctrlKey: true, altKey: true })).toBe(true)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    keyDown(window, { key: 'k', ctrlKey: true })
++    expect(screen.getByRole('dialog', { name: 'Command palette' })).toBeTruthy()
++  })
++
++  it('uses the supported caller binding for both discovery and exact keyboard activation', () => {
++    setup({ 'navigation.command-palette.open': 'Mod+Alt+P' })
++    expect(screen.getByRole('button', { name: /Commands/ }).textContent).toContain('Mod+Alt+P')
++    expect(keyDown(window, { key: 'k', ctrlKey: true })).toBe(true)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(keyDown(window, { key: 'p', ctrlKey: true, metaKey: true, altKey: true })).toBe(true)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(keyDown(window, { key: 'p', metaKey: true, altKey: true })).toBe(false)
++    expect(screen.getByRole('dialog', { name: 'Command palette' })).toBeTruthy()
++  })
++})
+--- a/frontend/src/localization/catalogs.ts
++++ b/frontend/src/localization/catalogs.ts
+@@ -13,6 +13,20 @@
+     localeChinese: message('简体中文'),
+   },
+   shell: {
++    'shortcut.title': message("Keyboard shortcut"),
++    'shortcut.close': message("Close keyboard shortcut"),
++    'shortcut.session': message("Changes apply only in this open workspace context and are not saved."),
++    'shortcut.mod': message("Mod means Ctrl on Windows/Linux or Command on Mac. Use only one."),
++    'shortcut.current': message("Current shortcut: {shortcut}", ['shortcut']),
++    'shortcut.choice': message("Command palette shortcut"),
++    'shortcut.choose': message("Choose a shortcut"),
++    'shortcut.unavailable': message("Shortcut unavailable"),
++    'shortcut.unsupported': message("This shortcut is not supported. Choose a listed shortcut or restore the default."),
++    'shortcut.conflict': message("This shortcut is assigned to another command. Choose a different shortcut."),
++    'shortcut.defaultConflict': message("The default shortcut is assigned to another command and cannot be restored."),
++    'shortcut.apply': message("Apply shortcut"),
++    'shortcut.reset': message("Restore default"),
++    'shortcut.cancel': message("Cancel"),
+     'notifications.title': message("Notifications"),
+     'notifications.close': message("Close notifications"),
+     'notifications.entryUnknown': message("Notifications · unread count unknown"),
+@@ -393,6 +407,20 @@
+     localeSelector: message('产品界面语言'), localeEnglish: message('English'), localeChinese: message('简体中文'),
+   },
+   shell: {
++    'shortcut.title': message("键盘快捷键"),
++    'shortcut.close': message("关闭键盘快捷键"),
++    'shortcut.session': message("更改仅在当前打开的工作区上下文中生效，不会保存。"),
++    'shortcut.mod': message("Mod 表示 Windows/Linux 的 Ctrl 或 Mac 的 Command。仅按其中一个。"),
++    'shortcut.current': message("当前快捷键：{shortcut}", ['shortcut']),
++    'shortcut.choice': message("命令面板快捷键"),
++    'shortcut.choose': message("选择快捷键"),
++    'shortcut.unavailable': message("快捷键不可用"),
++    'shortcut.unsupported': message("不支持此快捷键。请选择列表中的快捷键或恢复默认设置。"),
++    'shortcut.conflict': message("此快捷键已分配给其他命令。请选择其他快捷键。"),
++    'shortcut.defaultConflict': message("默认快捷键已分配给其他命令，无法恢复。"),
++    'shortcut.apply': message("应用快捷键"),
++    'shortcut.reset': message("恢复默认"),
++    'shortcut.cancel': message("取消"),
+     'notifications.title': message("通知"),
+     'notifications.close': message("关闭通知"),
+     'notifications.entryUnknown': message("通知 · 未读数量未知"),
+--- a/frontend/src/localization/source-manifest.json
++++ b/frontend/src/localization/source-manifest.json
+@@ -5,6 +5,20 @@
+   "fallbackLocale": "en",
+   "namespaces": ["common", "shell", "agent", "canvas", "timeline", "review", "workflow", "render", "settings", "errors"],
+   "requiredSourceKeys": [
++    "shell.shortcut.title",
++    "shell.shortcut.close",
++    "shell.shortcut.session",
++    "shell.shortcut.mod",
++    "shell.shortcut.current",
++    "shell.shortcut.choice",
++    "shell.shortcut.choose",
++    "shell.shortcut.unavailable",
++    "shell.shortcut.unsupported",
++    "shell.shortcut.conflict",
++    "shell.shortcut.defaultConflict",
++    "shell.shortcut.apply",
++    "shell.shortcut.reset",
++    "shell.shortcut.cancel",
+     "shell.notifications.title",
+     "shell.notifications.close",
+     "shell.notifications.entryUnknown",
+--- a/frontend/src/styles/foundation.css
++++ b/frontend/src/styles/foundation.css
+@@ -527,3 +527,8 @@
+   .ff-app-shell[data-studio] .ff-shell-toolbar:has(.ff-notification-entry) { flex-wrap: wrap; }
+   .ff-notification-entry { min-height: 44px; }
+ }
++
++/* Session-local command shortcut editor. */
++.ff-shortcut-editor select { width: 100%; min-width: 0; padding: 10px; background: var(--surface-1); color: inherit; border: 1px solid var(--border-strong); border-radius: 6px; }
++.ff-shortcut-editor p { font-size: 13px; }
++.ff-shortcut-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }

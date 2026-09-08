@@ -1,0 +1,170 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:27.038178+00:00",
+    "name": "Default binding is discoverable with accessible direct Commands fallback",
+    "expression": "document.querySelector(\".ff-shell-toolbar button:has(kbd)\").textContent.includes(\"Mod+K\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:27.461689+00:00",
+    "name": "Shared editor owns initial focus and discloses unsaved session",
+    "expression": "document.activeElement.matches(\".ff-shortcut-editor select\") && document.querySelector(\".ff-shortcut-editor\").textContent.includes(\"not saved\") && document.querySelectorAll(\"[role=dialog]\").length===1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:28.145459+00:00",
+    "name": "Native select chooses alternate draft without applying",
+    "expression": "document.querySelector(\".ff-shortcut-editor select\").value===\"Mod+Alt+K\" && document.querySelector(\".ff-shell-toolbar kbd\").textContent===\"Mod+K\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:28.339279+00:00",
+    "name": "Cancel preserves default and restores launcher focus",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.textContent===\"Keyboard shortcut\" && document.querySelector(\".ff-shell-toolbar kbd\").textContent===\"Mod+K\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:29.246433+00:00",
+    "name": "Apply changes binding/help without clearing shared selection",
+    "expression": "document.querySelector(\".ff-shell-toolbar kbd\").textContent===\"Mod+Alt+K\" && !!document.querySelector(\"[data-canvas-node][aria-pressed=true]\") && document.activeElement.textContent===\"Keyboard shortcut\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:29.413398+00:00",
+    "name": "Old default chord no longer opens palette",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:29.620071+00:00",
+    "name": "New native chord opens existing palette",
+    "expression": "!!document.querySelector(\"[role=dialog]\") && !document.querySelector(\".ff-shortcut-editor\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:29.990332+00:00",
+    "name": "Remapped palette dispatches existing Inspect and preserves selected node",
+    "expression": "!!document.querySelector(\"#selection-inspector\") && document.querySelector(\"[data-canvas-node][aria-pressed=true]\").dataset.canvasNode===\"project-node\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:30.358453+00:00",
+    "name": "Editor select and modal retain precedence over active global chord",
+    "expression": "document.querySelectorAll(\"[role=dialog]\").length===1 && !!document.querySelector(\".ff-shortcut-editor\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:30.539845+00:00",
+    "name": "Escape closes editor and restores initiating control",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.textContent===\"Keyboard shortcut\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:30.927018+00:00",
+    "name": "Backdrop cancels without losing launcher focus",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.textContent===\"Keyboard shortcut\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:31.109911+00:00",
+    "name": "Extra Shift modifier is not intercepted",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:31.318300+00:00",
+    "name": "Canonical commands remain truthfully unavailable",
+    "expression": "[...document.querySelectorAll(\"[role=dialog] button\")].filter(e=>e.disabled).length>=3 && document.querySelector(\"[role=dialog]\").textContent.includes(\"cannot be applied here yet\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:32.072377+00:00",
+    "name": "Reset retires alternate binding",
+    "expression": "document.querySelector(\".ff-shell-toolbar kbd\").textContent===\"Mod+K\" && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:32.270516+00:00",
+    "name": "Reset default is genuinely active",
+    "expression": "!!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:34.053388+00:00",
+    "name": "Reload/remount discards unsaved shortcut override",
+    "expression": "document.querySelector(\".ff-shell-toolbar kbd\").textContent===\"Mod+K\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:34.397455+00:00",
+    "name": "Narrow Chinese editor and controls fit viewport",
+    "expression": "document.documentElement.scrollWidth <= innerWidth && [...document.querySelectorAll(\".ff-shortcut-editor button,.ff-shortcut-editor select\")].every(e=>{const r=e.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth&&r.top>=0&&r.bottom<=innerHeight})",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:34.485264+00:00",
+    "name": "Native keyboard focus stays in shared modal",
+    "expression": "!!document.activeElement.closest(\".ff-shortcut-editor\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:35.778094+00:00",
+    "name": "Narrow Chinese remap opens existing palette with native chord",
+    "expression": "!!document.querySelector(\"[role=dialog]\") && document.querySelector(\".ff-shell-toolbar kbd\").textContent===\"Mod+Alt+P\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:36.432246+00:00",
+    "name": "Chinese reset restores default without persistence",
+    "expression": "document.querySelector(\".ff-shell-toolbar kbd\").textContent===\"Mod+K\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+    "VALIDATION_TIMESTAMP": "2026-09-08T03:56:36.769781+00:00",
+    "name": "Narrow English editor and controls fit viewport",
+    "expression": "document.documentElement.scrollWidth <= innerWidth && [...document.querySelectorAll(\".ff-shortcut-editor button,.ff-shortcut-editor select\")].every(e=>{const r=e.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth&&r.top>=0&&r.bottom<=innerHeight})",
+    "passed": true,
+    "value": true
+  }
+]

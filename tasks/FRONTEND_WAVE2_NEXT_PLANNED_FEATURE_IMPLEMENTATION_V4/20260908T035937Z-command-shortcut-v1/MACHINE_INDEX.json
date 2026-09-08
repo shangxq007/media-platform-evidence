@@ -1,0 +1,147 @@
+{
+  "TASK": "FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V4",
+  "LANE": "FRONTEND",
+  "FRONTEND_BRANCH": "refs/heads/agent/frontend-wave2-product-ux-v1",
+  "PRIOR_V3_REVIEW_ADOPTION_RECORDED": "YES",
+  "SELECTED_FEATURE": "Session-local command-palette shortcut remapping",
+  "PLAN_SOURCE_AND_ITEM": "frontend-product-information-architecture-v1.md:314-325 / Commands and keyboard architecture / remappable shortcuts",
+  "USER_VISIBLE_OUTCOME": "Change Commands shortcut for current shell/context; try actual palette, cancel and restore default; no saving",
+  "BASELINE_IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+  "FINAL_IMPLEMENTATION_TREE": "66b3b9abd9b79161c8f4c902acfd2acb336a387a",
+  "PRODUCT_CHANGED_PATHS": [
+    "frontend/src/components/app-shell/AppShell.test.tsx",
+    "frontend/src/components/app-shell/AppShell.tsx",
+    "frontend/src/foundation/commandRegistry.test.ts",
+    "frontend/src/foundation/commandRegistry.ts",
+    "frontend/src/localization/catalogs.ts",
+    "frontend/src/localization/source-manifest.json",
+    "frontend/src/styles/foundation.css"
+  ],
+  "DOCUMENTATION_CHANGED_PATHS": [
+    "docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md",
+    "frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv",
+    "frontend/governance/UX_WAVE_1_REVIEW.md"
+  ],
+  "PERMISSION_AND_ACTION_BOUNDARIES": "LOCAL_EPHEMERAL shell binding only; existing contextual Selection dispatch unchanged; WORKSPACE_PRESENTATION actions retain existing owner; canonical palette commands remain disabled",
+  "MOCK_AND_REAL_DATA_BOUNDARIES": "No shortcut fixture or backend; browser shell uses explicitly simulated dashboard and inert local auth marker; native selection user flow uses accepted local surface",
+  "TARGETED_TEST_RESULTS": {
+    "tests": 279,
+    "passed": 279,
+    "failures": 0,
+    "skips": 0,
+    "todo": 0
+  },
+  "FULL_TEST_IDENTITY_ACCOUNTING": {
+    "baseline": 695,
+    "final": 704,
+    "files": 36,
+    "passed": 704,
+    "failures": 0,
+    "skips": 0,
+    "added": 9,
+    "removed": 0,
+    "duplicates": 0
+  },
+  "REQUIRED_FRONTEND_GATE_RESULTS": [
+    {
+      "name": "architecture-controls",
+      "exit_code": 0,
+      "elapsed_seconds": 2.071791172027588
+    },
+    {
+      "name": "architecture",
+      "exit_code": 0,
+      "elapsed_seconds": 1.519960880279541
+    },
+    {
+      "name": "build-final",
+      "exit_code": 0,
+      "elapsed_seconds": 5.983268737792969
+    },
+    {
+      "name": "full-frontend-final",
+      "exit_code": 0,
+      "elapsed_seconds": 8.34548544883728
+    },
+    {
+      "name": "lint",
+      "exit_code": 0,
+      "elapsed_seconds": 4.881651163101196
+    },
+    {
+      "name": "targeted-final",
+      "exit_code": 0,
+      "elapsed_seconds": 7.6398537158966064
+    },
+    {
+      "name": "type-policy",
+      "exit_code": 0,
+      "elapsed_seconds": 10.699812173843384
+    }
+  ],
+  "FOCUSED_BROWSER_RESULTS": {
+    "checks": 21,
+    "passed": 21,
+    "failed": 0,
+    "teardown": {
+      "processes": [
+        {
+          "name": "smoke",
+          "pid": 389059,
+          "exit": 0,
+          "terminated_by_task": false
+        },
+        {
+          "name": "chrome",
+          "pid": 388904,
+          "exit": 0,
+          "terminated_by_task": false
+        },
+        {
+          "name": "fixture",
+          "pid": 388893,
+          "exit": -15,
+          "terminated_by_task": true
+        }
+      ],
+      "remaining_ports": []
+    },
+    "assistance": "final-validation/browser/ASSISTANCE.json"
+  },
+  "BUILD_MANIFEST_SHA256": "ce8a88f2b7d0f54bed00f002f84a486b28ffd1e9ba111c6a4bb419939ae79e3b",
+  "BACKEND_REQUIREMENTS_UPDATED": [
+    "UXW1-002 clarification only: local shortcut remapping does not consume Project-layout persistence",
+    "Existing API gap ledger appended local-only V4 disposition; no accepted API contract"
+  ],
+  "NEW_BACKEND_REQUIREMENTS": 0,
+  "BACKEND_CHANGES": 0,
+  "TRACKED_DIST_CHANGES": 0,
+  "BACKEND_STATIC_CHANGES": 0,
+  "REAL_INTEGRATION_PERFORMED": "NO",
+  "BOUNDED_PRESERVATION_RESULT": {
+    "head": "f5e19cf53fd010eea2935dd29557e82a879e042c",
+    "branch": "refs/heads/agent/frontend-wave2-product-ux-v1",
+    "real_index_unchanged": true,
+    "unchanged_baseline_paths_outside_allowlist": 986,
+    "unexpected_baseline_changes": [],
+    "bounded_historical_and_dist_files": 218,
+    "bounded_preservation_differences": [],
+    "final_changed_paths_match": true,
+    "product_git_mutations": 0,
+    "backend_task_checks": 0,
+    "scope": "Named frontend worktree and task-recorded predecessor public/build/receipt plus tracked frontend dist. No claim of parallel backend or whole-system stationarity."
+  },
+  "H4_RECONCILIATION_STATUS": "HISTORICAL_RECORDS_PRESERVED_NO_GLOBAL_DEBT_CLOSURE",
+  "FORMAL_SLICE1C_LEDGER_STATUS": "UNCHANGED_SEPARATE_GOVERNANCE",
+  "PRIOR_DETACHED_RECEIPT_RETRIED": "NO",
+  "PRODUCT_COMMIT_FREEZE_MERGE_PUSH": "NOT_PERFORMED",
+  "PRODUCT_PUBLICATION": "NOT_PERFORMED",
+  "EVIDENCE_DELIVERY_STATUS": "LOCAL_SEALED_PENDING_EXTERNAL_DELIVERY_RECEIPT",
+  "EVIDENCE_COMMIT_SHA": "NOT_ESTABLISHED_AT_SEAL",
+  "REVIEW_INDEX_URL": "NOT_ESTABLISHED_AT_SEAL",
+  "MACHINE_INDEX_URL": "NOT_ESTABLISHED_AT_SEAL",
+  "PUBLIC_MANIFEST_SHA256": "DETACHED_MANIFEST_IDENTITY_IN_DELIVERY_RECEIPT",
+  "REMOTE_VERIFICATION": "NOT_PERFORMED_AT_SEAL",
+  "INDEPENDENT_REVIEW": "REQUIRED",
+  "STOP": "YES"
+}
