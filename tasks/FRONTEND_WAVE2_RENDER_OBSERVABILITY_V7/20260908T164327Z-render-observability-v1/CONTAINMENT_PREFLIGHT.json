@@ -1,0 +1,25 @@
+{
+  "command": [
+    "bwrap",
+    "--die-with-parent",
+    "--ro-bind",
+    "/",
+    "/",
+    "--bind",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_RENDER_OBSERVABILITY_V7",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_RENDER_OBSERVABILITY_V7",
+    "--proc",
+    "/proc",
+    "--dev",
+    "/dev",
+    "--tmpfs",
+    "/tmp",
+    "--",
+    "python3",
+    "-c",
+    "import os,json; print(json.dumps({p:bool(os.statvfs(p).f_flag & os.ST_RDONLY) for p in ['/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1', '/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_RENDER_OBSERVABILITY_V7']}))"
+  ],
+  "exit": 0,
+  "stdout": "{\"/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1\": true, \"/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_RENDER_OBSERVABILITY_V7\": false}\n",
+  "stderr": ""
+}

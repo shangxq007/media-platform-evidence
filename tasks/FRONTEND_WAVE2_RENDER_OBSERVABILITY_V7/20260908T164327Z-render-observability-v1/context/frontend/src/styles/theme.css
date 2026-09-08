@@ -1,0 +1,251 @@
+/* ========================================================================
+   Theme — Reusable component styles
+   All colors reference tokens.css variables for automatic dark/light switching
+   ======================================================================== */
+
+/* ── Surface helpers ── */
+.theme-surface {
+  background-color: var(--surface-2);
+  color: var(--text-primary);
+}
+.theme-surface-elevated {
+  background-color: var(--surface-3);
+  color: var(--text-primary);
+}
+.theme-base {
+  background-color: var(--surface-0);
+  color: var(--text-primary);
+}
+.theme-border {
+  border-color: var(--border-subtle);
+}
+.theme-border-strong {
+  border-color: var(--border-strong);
+}
+
+/* ── Text helpers ── */
+.theme-text-primary { color: var(--text-primary); }
+.theme-text-secondary { color: var(--text-secondary); }
+.theme-text-muted { color: var(--text-tertiary); }
+.theme-text-link {
+  color: var(--accent-400);
+  text-decoration: none;
+}
+.theme-text-link:hover {
+  color: var(--accent-300);
+  text-decoration: underline;
+}
+
+/* ── Card ── */
+.theme-card {
+  background-color: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--duration-normal) var(--ease-default),
+              box-shadow var(--duration-normal) var(--ease-default),
+              transform var(--duration-normal) var(--ease-default);
+}
+.theme-card:hover {
+  border-color: var(--border-default);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+/* ── Input ── */
+.theme-input {
+  background-color: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: var(--text-body);
+  padding: var(--space-2) var(--space-3);
+  height: 36px;
+  transition: border-color var(--duration-fast) var(--ease-default),
+              box-shadow var(--duration-fast) var(--ease-default);
+}
+.theme-input:focus {
+  outline: none;
+  border-color: var(--accent-500);
+  box-shadow: 0 0 0 3px var(--accent-500), 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+.theme-input::placeholder {
+  color: var(--text-tertiary);
+}
+.theme-input:disabled {
+  background-color: var(--surface-1);
+  color: var(--text-tertiary);
+  cursor: not-allowed;
+}
+
+/* ── Buttons ── */
+.theme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-body);
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  height: 36px;
+  transition: background-color var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default),
+              box-shadow var(--duration-fast) var(--ease-default);
+}
+.theme-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--surface-0), 0 0 0 4px var(--accent-500);
+}
+.theme-btn:disabled {
+  background-color: var(--surface-4);
+  color: var(--text-tertiary);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.theme-btn-primary {
+  background-color: var(--accent-500);
+  color: var(--text-inverse);
+}
+.theme-btn-primary:hover {
+  background-color: var(--accent-600);
+}
+.theme-btn-primary:active {
+  background-color: var(--accent-700);
+}
+
+.theme-btn-secondary {
+  background-color: var(--surface-2);
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+.theme-btn-secondary:hover {
+  background-color: var(--surface-3);
+  border-color: var(--border-default);
+}
+
+.theme-btn-danger {
+  background-color: var(--danger);
+  color: var(--text-inverse);
+}
+.theme-btn-danger:hover {
+  filter: brightness(1.1);
+}
+
+.theme-btn-ghost {
+  background-color: transparent;
+  color: var(--text-secondary);
+}
+.theme-btn-ghost:hover {
+  background-color: var(--surface-4);
+  color: var(--text-primary);
+}
+
+.theme-btn-sm {
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--text-caption);
+  height: 28px;
+}
+.theme-btn-lg {
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-body);
+  height: 44px;
+}
+
+/* ── Badge ── */
+.theme-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px var(--space-2);
+  border-radius: 9999px;
+  font-size: var(--text-caption);
+  font-weight: 500;
+  line-height: 1.25rem;
+}
+
+/* ── Overlay ── */
+.theme-overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+}
+
+[data-theme="dark"] .theme-overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* ── Scrollbar ── */
+.theme-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.theme-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.theme-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 3px;
+}
+
+/* ── Skeleton loading ── */
+.theme-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-3) 25%,
+    var(--surface-4) 50%,
+    var(--surface-3) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Accessibility ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+[aria-busy="true"] { cursor: wait; }
+[aria-disabled="true"] { cursor: not-allowed; opacity: 0.5; }
+
+*:focus-visible {
+  outline: 2px solid var(--accent-500);
+  outline-offset: 2px;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--surface-0), 0 0 0 4px var(--accent-500);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-card,
+  .theme-btn,
+  .theme-input,
+  .theme-skeleton {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

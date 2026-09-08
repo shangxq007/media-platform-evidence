@@ -1,0 +1,214 @@
+/* ========================================================================
+   Design Tokens — Media Platform
+   Inspired by: Linear, Vercel, Stripe, Runway, Raycast
+   Dark-first, surface-based color hierarchy
+   ======================================================================== */
+
+:root {
+  /* ── Surface hierarchy (5 levels) ── */
+  --surface-0: #FFFFFF;
+  --surface-1: #FAFBFC;
+  --surface-2: #F3F4F6;
+  --surface-3: #FFFFFF;
+  --surface-4: #E5E7EB;
+
+  /* ── Text hierarchy ── */
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-tertiary: #9CA3AF;
+  --text-inverse: #FFFFFF;
+
+  /* ── Border ── */
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-default: rgba(0, 0, 0, 0.10);
+  --border-strong: rgba(0, 0, 0, 0.16);
+
+  /* ── Accent — Electric Indigo ── */
+  --accent-50: #EEF2FF;
+  --accent-100: #E0E7FF;
+  --accent-200: #C7D2FE;
+  --accent-300: #A5B4FC;
+  --accent-400: #818CF8;
+  --accent-500: #6366F1;
+  --accent-600: #4F46E5;
+  --accent-700: #4338CA;
+
+  /* ── Semantic ── */
+  --success: #34D399;
+  --success-muted: rgba(52, 211, 153, 0.12);
+  --warning: #FBBF24;
+  --warning-muted: rgba(251, 191, 36, 0.12);
+  --danger: #F87171;
+  --danger-muted: rgba(248, 113, 113, 0.12);
+  --info: #60A5FA;
+  --info-muted: rgba(96, 165, 250, 0.12);
+
+  /* ── Risk levels ── */
+  --risk-low: #34D399;
+  --risk-medium: #FBBF24;
+  --risk-high: #FB923C;
+  --risk-critical: #F87171;
+
+  /* ── Timeline clip colors ── */
+  --clip-video: #6366F1;
+  --clip-audio: #2DD4BF;
+  --clip-subtitle: #F472B6;
+  --clip-sticker: #FBBF24;
+  --clip-effect: #A78BFA;
+  --clip-ai: #22D3EE;
+
+  /* ── Tier colors ── */
+  --tier-free: #9AA0AB;
+  --tier-pro: #818CF8;
+  --tier-team: #34D399;
+
+  /* ── Spacing ── */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ── Border radius ── */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* ── Shadows (light mode) ── */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+
+  /* ── Typography ── */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+
+  --text-display: 2.5rem;
+  --text-h1: 1.875rem;
+  --text-h2: 1.5rem;
+  --text-h3: 1.125rem;
+  --text-body: 0.875rem;
+  --text-caption: 0.75rem;
+  --text-micro: 0.6875rem;
+
+  /* ── Transitions ── */
+  --duration-fast: 100ms;
+  --duration-normal: 150ms;
+  --duration-slow: 250ms;
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Z-index ── */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-tooltip: 500;
+}
+
+/* ── Dark Mode (primary) ── */
+[data-theme="dark"] {
+  --surface-0: #0B0D10;
+  --surface-1: #111318;
+  --surface-2: #181B20;
+  --surface-3: #1E2128;
+  --surface-4: #252830;
+
+  --text-primary: #E8EAED;
+  --text-secondary: #9AA0AB;
+  --text-tertiary: #5C6370;
+  --text-inverse: #0B0D10;
+
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+
+  --risk-low: #4ADE80;
+  --risk-medium: #FBBF24;
+  --risk-high: #FB923C;
+  --risk-critical: #F87171;
+
+  --accent-50: #1E1B4B;
+  --accent-100: #2E2970;
+  --accent-200: #4338CA;
+
+  --success-muted: rgba(52, 211, 153, 0.15);
+  --warning-muted: rgba(251, 191, 36, 0.15);
+  --danger-muted: rgba(248, 113, 113, 0.15);
+  --info-muted: rgba(96, 165, 250, 0.15);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface-0: #0B0D10;
+    --surface-1: #111318;
+    --surface-2: #181B20;
+    --surface-3: #1E2128;
+    --surface-4: #252830;
+
+    --text-primary: #E8EAED;
+    --text-secondary: #9AA0AB;
+    --text-tertiary: #5C6370;
+    --text-inverse: #0B0D10;
+
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-default: rgba(255, 255, 255, 0.10);
+    --border-strong: rgba(255, 255, 255, 0.16);
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+
+    --risk-low: #4ADE80;
+    --risk-medium: #FBBF24;
+    --risk-high: #FB923C;
+    --risk-critical: #F87171;
+
+    --accent-50: #1E1B4B;
+    --accent-100: #2E2970;
+    --accent-200: #4338CA;
+
+    --success-muted: rgba(52, 211, 153, 0.15);
+    --warning-muted: rgba(251, 191, 36, 0.15);
+    --danger-muted: rgba(248, 113, 113, 0.15);
+    --info-muted: rgba(96, 165, 250, 0.15);
+  }
+}
+
+/* ── High contrast mode ── */
+@media (prefers-contrast: high) {
+  :root {
+    --border-subtle: rgba(0, 0, 0, 0.20);
+    --border-default: rgba(0, 0, 0, 0.30);
+    --border-strong: rgba(0, 0, 0, 0.50);
+    --text-tertiary: #6B7280;
+  }
+  [data-theme="dark"] {
+    --border-subtle: rgba(255, 255, 255, 0.20);
+    --border-default: rgba(255, 255, 255, 0.30);
+    --border-strong: rgba(255, 255, 255, 0.50);
+    --text-tertiary: #9CA3AF;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

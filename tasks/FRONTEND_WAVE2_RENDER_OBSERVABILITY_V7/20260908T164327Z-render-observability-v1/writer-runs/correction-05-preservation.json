@@ -1,0 +1,74 @@
+{
+  "state": {
+    "head": "f5e19cf53fd010eea2935dd29557e82a879e042c\n",
+    "parent": "01cf2a509d687b8bf8b39eff69688b2a3f5f2f4a\n",
+    "branch": "refs/heads/agent/frontend-wave2-product-ux-v1\n",
+    "stash": "OMITTED_UNRELATED_STASH_DESCRIPTIONS_SEE_SANITIZATION_RECEIPT"
+  },
+  "changed_since_continuation_start": [
+    "frontend/src/localization/catalogs.ts",
+    "frontend/src/localization/source-manifest.json",
+    "frontend/src/product/render-browser/RenderBrowser.test.tsx",
+    "frontend/src/product/render-browser/RenderBrowser.tsx",
+    "frontend/src/product/render-browser/source.test.ts",
+    "frontend/src/product/render-browser/source.ts"
+  ],
+  "external_files_observed": [
+    "recover.py",
+    "prepare_validation_helpers.py",
+    "materialize.py",
+    "gate.py",
+    "replay_patch.py",
+    "test_accounting.py",
+    "run_browser.py",
+    "ALLOWLIST.json",
+    "verify_build.py",
+    "prepare_fixture_host.py",
+    "scope_check.py",
+    "writer_validate.py",
+    "WRITER_HANDOFF.md",
+    "preservation.py",
+    "run-final-gates.py",
+    "package_local.py",
+    "browser/control.py",
+    "browser/browser_helpers.py",
+    "browser/chromium_helpers.py",
+    "browser/fixture-server.py",
+    "browser/render_smoke.py",
+    "fixture-host/entry.tsx"
+  ],
+  "external_changes_not_written_by_this_continuation": {
+    "package_local.py": {
+      "before": "f7899641c3540dde863a4f88735838e4aeeca41e309bc163d547b25ba6f3aa0c",
+      "observed_now": "da384784b1abe7976841cadb723adc1fbe96781d037d698b1eab0ccb884c60e1"
+    }
+  },
+  "external_observation_note": "Initial preservation assertion detected package_local.py changed concurrently. This writer did not write any controller helper; no restoration or overwrite was attempted. Scope check passed separately.",
+  "final_changed_file_hashes": {
+    "frontend/src/localization/catalogs.ts": {
+      "sha256": "2ce9f53eb2908bbd4c491808a40f167777be97a56a080db6950205b75b7248da",
+      "mode": 420
+    },
+    "frontend/src/localization/source-manifest.json": {
+      "sha256": "aa23c2e1d85bcf2cc33a9c35e8be30ad20aad38db9326eb3daff87250f22a174",
+      "mode": 420
+    },
+    "frontend/src/product/render-browser/RenderBrowser.test.tsx": {
+      "sha256": "2eba31b978c22501ac09111bc73c8439fcf9f18e3c6aab407e91b6e23617be5a",
+      "mode": 420
+    },
+    "frontend/src/product/render-browser/RenderBrowser.tsx": {
+      "sha256": "68dc8548f7c0d4342965dbfb3f2f226145856ff07937d9e200963063efe46aaa",
+      "mode": 420
+    },
+    "frontend/src/product/render-browser/source.test.ts": {
+      "sha256": "8ca19c2d154060545b16dddfc0fc261fe3f4c77dd544c1ea388cd68206501b5f",
+      "mode": 420
+    },
+    "frontend/src/product/render-browser/source.ts": {
+      "sha256": "840f2adeb84dd1c393a1f33a722d1eb588ee38ad92f58572f2e3d576e58827cd",
+      "mode": 420
+    }
+  },
+  "scope_check_log": "correction-05-scope.log"
+}

@@ -1,0 +1,370 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:23.182741+00:00",
+    "name": "Ordinary final application is unavailable without a Render source",
+    "expression": "document.body.innerText.includes(\"Render observability unavailable\") && !window.__V7Fixture && !document.querySelector(\"[data-v7-host]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:23.783675+00:00",
+    "name": "Explicit host discloses simulated Render identity and data",
+    "expression": "document.body.innerText.includes(\"SIMULATED RENDER DATA\") && !!document.querySelector(\"[data-v7-host]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:23.786827+00:00",
+    "name": "Supplied literal unknown status and valid progress are visible",
+    "expression": "document.body.innerText.includes(\"VENDOR_WARMING\") && document.body.innerText.includes(\"3 of 8 shots · 37.5%\") && !document.querySelector(\".ff-render-browser final\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:23.789876+00:00",
+    "name": "Fetch time is distinct from source update time",
+    "expression": "document.body.innerText.includes(\"Last successful frontend fetch:\") && document.body.innerText.includes(\"Source update time: 2026-09-08T02:02:00Z\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:24.366866+00:00",
+    "name": "Native name search filters the supplied snapshot",
+    "expression": "document.querySelectorAll(\".ff-render-browser-list > li\").length===1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:25.398160+00:00",
+    "name": "Native source status filter and stable local sort are selected",
+    "expression": "document.querySelectorAll(\".ff-render-controls select\")[0].value===\"VENDOR_WARMING\" && document.querySelectorAll(\".ff-render-controls select\")[1].value===\"name-desc\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:25.635198+00:00",
+    "name": "Detail includes explicit task version attempt and bounded Artifact metadata",
+    "expression": "document.querySelector(\"[role=dialog]\").innerText.includes(\"task-courtyard\") && document.querySelector(\"[role=dialog]\").innerText.includes(\"task-v3\") && document.querySelector(\"[role=dialog]\").innerText.includes(\"attempt-courtyard-1\") && document.querySelector(\"[role=dialog]\").innerText.includes(\"artifact-courtyard-preview\") && document.querySelector(\"[role=dialog]\").innerText.includes(\"more may exist\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:25.639113+00:00",
+    "name": "Unknown artifact availability is literal and no Artifact open or download is enabled",
+    "expression": "document.querySelector(\"[role=dialog]\").innerText.includes(\"PROCESSING?\") && !document.querySelector(\"[role=dialog] a[href],[role=dialog] [download]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:25.966681+00:00",
+    "name": "Supplied Artifact metadata is visually reachable inside detail",
+    "expression": "(()=>{const r=document.querySelector(\".ff-render-artifacts\").getBoundingClientRect();return r.top>=0 && r.top<innerHeight && r.bottom<=innerHeight})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:26.302284+00:00",
+    "name": "Native Escape closes detail and returns to the initiating task launcher",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.getAttribute(\"aria-label\")===\"Inspect render Courtyard <final>\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:26.306122+00:00",
+    "name": "Return preserves populated query filter and sort",
+    "expression": "document.querySelector(\".ff-render-browser input[type=search]\").value===\"Courtyard\" && document.querySelectorAll(\".ff-render-controls select\")[0].value===\"VENDOR_WARMING\" && document.querySelectorAll(\".ff-render-controls select\")[1].value===\"name-desc\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:26.503154+00:00",
+    "name": "Native Enter reopens the focused task",
+    "expression": "!!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:26.881906+00:00",
+    "name": "Native populated reset restores defaults and stable focus",
+    "expression": "document.querySelectorAll(\".ff-render-browser-list > li\").length===3 && document.activeElement.textContent.trim()===\"Reset filters\" && document.querySelectorAll(\".ff-render-controls select\")[1].value===\"name-asc\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:27.283194+00:00",
+    "name": "Native ID search works without supplied task name",
+    "expression": "document.querySelectorAll(\".ff-render-browser-list > li\").length===1 && document.body.innerText.includes(\"render-queued\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:27.703957+00:00",
+    "name": "Failed task and attempt status remain separate with safe supplied failure",
+    "expression": "document.querySelector(\"[role=dialog]\").innerText.includes(\"TASK_FAILED\") && document.querySelector(\"[role=dialog]\").innerText.includes(\"ATTEMPT_FAILED\") && document.querySelector(\"[role=dialog]\").innerText.includes(\"Encoder rejected supplied media\") && document.querySelector(\"[role=dialog]\").innerText.includes(\"MEDIA_REJECTED\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:27.709316+00:00",
+    "name": "Invalid progress never clamps or invents percentage",
+    "expression": "document.querySelector(\"[role=dialog]\").innerText.includes(\"Invalid supplied progress\") && !document.querySelector(\"[role=dialog]\").innerText.includes(\"140%\") && !document.querySelector(\"[role=dialog]\").innerText.includes(\"100%\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:27.714264+00:00",
+    "name": "Explicit empty Artifact collection is not missing metadata",
+    "expression": "document.querySelector(\"[role=dialog]\").innerText.includes(\"Source supplied an empty Artifact collection.\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:28.037548+00:00",
+    "name": "Safe attempt failure is visually reachable",
+    "expression": "(()=>{const r=document.querySelector(\".ff-render-attempts\").getBoundingClientRect();return r.top>=0 && r.bottom<=innerHeight})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:28.572938+00:00",
+    "name": "Missing progress attempts and Artifacts remain unprovided",
+    "expression": "document.querySelector(\"[role=dialog]\").innerText.includes(\"Progress was not supplied.\") && document.querySelector(\"[role=dialog]\").innerText.includes(\"Attempt history was not supplied.\") && document.querySelector(\"[role=dialog]\").innerText.includes(\"Artifact information was not supplied.\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:29.371522+00:00",
+    "name": "Partial progress displays supplied value and unit without a percent",
+    "expression": "document.querySelector(\"[role=dialog]\").innerText.includes(\"3 shots · total not supplied\") && !document.querySelector(\"[role=dialog]\").innerText.includes(\"37.5%\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:30.347271+00:00",
+    "name": "No matches remains distinct from empty source",
+    "expression": "document.body.innerText.includes(\"No matching renders\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:30.905935+00:00",
+    "name": "Source empty is explicitly scoped",
+    "expression": "document.body.innerText.includes(\"No Renders in this snapshot\") && !document.body.innerText.includes(\"No matching renders\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:31.495319+00:00",
+    "name": "Error clears old data while preserving native query Retry focus",
+    "expression": "!document.querySelector(\".ff-render-browser-list\") && document.activeElement.textContent.trim()===\"Retry loading\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:31.859643+00:00",
+    "name": "Native query retry restores data without an execution action",
+    "expression": "document.querySelectorAll(\".ff-render-browser-list > li\").length===3 && document.activeElement.textContent.trim()===\"Refresh renders\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:32.058868+00:00",
+    "name": "Pending read hides old data and offers native loading cancellation",
+    "expression": "!document.querySelector(\".ff-render-browser-list\") && document.activeElement.textContent.trim()===\"Cancel loading\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:32.712525+00:00",
+    "name": "Native cancellation fences a deliberately late successful adapter reply",
+    "expression": "document.body.innerText.includes(\"Render loading cancelled\") && !document.querySelector(\".ff-render-browser-list\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:33.280879+00:00",
+    "name": "Explicit denied read outcome is non-disclosing and distinct",
+    "expression": "document.body.innerText.includes(\"Render observability denied\") && !document.querySelector(\".ff-render-browser-list\") && !document.body.innerText.includes(\"artifact-courtyard-preview\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:33.886814+00:00",
+    "name": "Explicit unknown read outcome is non-disclosing and distinct",
+    "expression": "document.body.innerText.includes(\"Render observability access unknown\") && !document.querySelector(\".ff-render-browser-list\") && !document.body.innerText.includes(\"artifact-courtyard-preview\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:34.473473+00:00",
+    "name": "Explicit unsupported read outcome is non-disclosing and distinct",
+    "expression": "document.body.innerText.includes(\"Render observability unsupported\") && !document.querySelector(\".ff-render-browser-list\") && !document.body.innerText.includes(\"artifact-courtyard-preview\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:35.082666+00:00",
+    "name": "Explicit unavailable read outcome is non-disclosing and distinct",
+    "expression": "document.body.innerText.includes(\"Render observability unavailable\") && !document.querySelector(\".ff-render-browser-list\") && !document.body.innerText.includes(\"artifact-courtyard-preview\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:35.683403+00:00",
+    "name": "Explicit stale read outcome is non-disclosing and distinct",
+    "expression": "document.body.innerText.includes(\"Render snapshot is stale\") && !document.querySelector(\".ff-render-browser-list\") && !document.body.innerText.includes(\"artifact-courtyard-preview\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:36.286420+00:00",
+    "name": "Explicit invalid read outcome is non-disclosing and distinct",
+    "expression": "document.body.innerText.includes(\"Invalid Render snapshot\") && !document.querySelector(\".ff-render-browser-list\") && !document.body.innerText.includes(\"artifact-courtyard-preview\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:36.885974+00:00",
+    "name": "Explicit invalid-relationship read outcome is non-disclosing and distinct",
+    "expression": "document.body.innerText.includes(\"Invalid Render relationships\") && !document.querySelector(\".ff-render-browser-list\") && !document.body.innerText.includes(\"artifact-courtyard-preview\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:37.502895+00:00",
+    "name": "Bounded result does not claim a global total or invent pagination",
+    "expression": "document.body.innerText.includes(\"bounded snapshot; more may exist\") && document.querySelectorAll(\".ff-render-browser-list > li\").length===2",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:38.151454+00:00",
+    "name": "Artifact denied is distinct from empty or inspectable metadata",
+    "expression": "document.querySelector(\"[role=dialog]\").innerText.includes(\"Artifact metadata denied\") && !document.querySelector(\"[role=dialog]\").innerText.includes(\"artifact-courtyard-preview\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:38.984679+00:00",
+    "name": "Artifact stale remains explicitly unavailable for inspection actions",
+    "expression": "document.querySelector(\"[role=dialog]\").innerText.includes(\"Artifact metadata stale\") && !document.querySelector(\"[role=dialog] a[href]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:39.552084+00:00",
+    "name": "Narrow Chinese Render entry fits document width",
+    "expression": "document.body.innerText.includes(\"渲染可观测性\") && document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:39.932915+00:00",
+    "name": "Narrow Chinese task dialog preserves source values",
+    "expression": "document.body.innerText.includes(\"渲染详情\") && document.querySelector(\"[role=dialog]\").innerText.includes(\"task-courtyard\") && document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:40.171432+00:00",
+    "name": "Narrow Chinese Artifact section is reachable without horizontal overflow",
+    "expression": "(()=>{const r=document.querySelector(\".ff-render-artifacts\").getBoundingClientRect();return r.top>=0 && r.top<innerHeight && document.documentElement.scrollWidth<=innerWidth})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:40.454407+00:00",
+    "name": "Narrow native close restores the localized launcher",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.getAttribute(\"aria-label\")===\"检查渲染 Courtyard <final>\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:42.585548+00:00",
+    "name": "Narrow filtered detail return retains native focus and browsing criteria",
+    "expression": "document.activeElement.getAttribute(\"aria-label\")===\"Inspect render Courtyard <final>\" && document.querySelector(\".ff-render-browser input[type=search]\").value===\"Courtyard\" && document.querySelectorAll(\".ff-render-controls select\")[0].value===\"VENDOR_WARMING\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:42.814779+00:00",
+    "name": "Narrow reset restores a populated snapshot",
+    "expression": "document.querySelectorAll(\".ff-render-browser-list > li\").length===3 && document.activeElement.textContent.trim()===\"Reset filters\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:43.262962+00:00",
+    "name": "Narrow no-match remains recoverable",
+    "expression": "document.body.innerText.includes(\"No matching renders\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:43.790583+00:00",
+    "name": "Narrow source empty remains distinct",
+    "expression": "document.body.innerText.includes(\"No Renders in this snapshot\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:44.365171+00:00",
+    "name": "Narrow error clears content and retains native Retry focus",
+    "expression": "!document.querySelector(\".ff-render-browser-list\") && document.activeElement.textContent.trim()===\"Retry loading\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+    "VALIDATION_TIMESTAMP": "2026-09-08T16:24:44.704005+00:00",
+    "name": "Narrow native retry recovers without document horizontal overflow",
+    "expression": "document.querySelectorAll(\".ff-render-browser-list > li\").length===3 && document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  }
+]

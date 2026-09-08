@@ -1,0 +1,131 @@
+{
+  "TASK": "FRONTEND_WAVE2_RENDER_OBSERVABILITY_V7",
+  "LANE": "FRONTEND",
+  "FRONTEND_BRANCH": "refs/heads/agent/frontend-wave2-product-ux-v1",
+  "PRIOR_V6_REVIEW_ADOPTION_RECORDED": "YES — existing frontend/governance/UX_WAVE_1_REVIEW.md append; Owner adoption of fixed-evidence static read-only frontend review; prior evidence commit 7362b5e9e2e6df680b03a9666d5b8db264d9e413, manifest 08ff3f82a0b607e28e98b24acf1db0eb1d868bd304fef784a63a9b34157e0e33; not real contract/permission/integration acceptance",
+  "SELECTED_FEATURE": "Render observability only; STOP before Workflow UX",
+  "PLAN_SOURCE_AND_ITEM": "docs/architecture/governance/frontend-product-information-architecture-v1.md — adopted priority Scene/Shot > Render observability > Workflow UX > bounded NLE editing > Agent-assisted creative; existing /operations/renders increment",
+  "BASELINE_IMPLEMENTATION_TREE": "31f1b0b668e5538ca2960afe3c4b6ec5b74d74ee",
+  "FINAL_IMPLEMENTATION_TREE": "414d6ed80f6d4c01699d56403a043b84b390d1e7",
+  "PRODUCT_CHANGED_PATHS": [
+    "frontend/src/app/routeTree.test.tsx",
+    "frontend/src/localization/catalogs.ts",
+    "frontend/src/localization/source-manifest.json",
+    "frontend/src/product/render-browser/RenderBrowser.test.tsx",
+    "frontend/src/product/render-browser/RenderBrowser.tsx",
+    "frontend/src/product/render-browser/fixture.ts",
+    "frontend/src/product/render-browser/render-browser.css",
+    "frontend/src/product/render-browser/source.test.ts",
+    "frontend/src/product/render-browser/source.ts"
+  ],
+  "DOCUMENTATION_CHANGED_PATHS": [
+    "docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md",
+    "docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv",
+    "docs/architecture/governance/frontend-product-information-architecture-v1.md",
+    "docs/architecture/governance/frontend-product-path-classification-v1.tsv",
+    "frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv",
+    "frontend/governance/UX_WAVE_1_REVIEW.md"
+  ],
+  "REUSED_RENDER_SURFACES_AND_CONTRACTS": "Existing /operations/renders -> RenderBrowser; existing provider, EffectiveAccess, shared Selection owner, InteractionDialog, horizontal shell/design/localization. Inspected RenderJobSummary, render-jobs API, legacy result list/detail; richer observability does not exist in the five-field agreed type. No parallel center/registry/permission or legacy transport invocation.",
+  "RENDER_CONSUMPTION_CONTRACT_STATUS": "FRONTEND UNAGREED consumer proposal; no agreed HTTP endpoint, server permission key or canonical DTO claimed. Real read requires host-supplied matching HOST_AGREED binding and SERVER EffectiveAccess; generic visibility, proposal and test-only keys rejected.",
+  "USER_VISIBLE_OUTCOME": "Bounded supplied Render ID/name discovery, source-supported status filter, stable name/ID sort, reachable reset, manual refresh/query retry/loading cancel, readonly task detail, return preserving filters and launcher focus. EN/zh-CN; unconfigured ordinary route unavailable.",
+  "PROGRESS_AND_STATUS_SEMANTICS": "Unknown source statuses literal/neutral. Source value/unit/total/totalUnit/stage retained, including invalid finite values. Percent only finite consistent units, positive total, 0<=value<=total; never clamp or synthesize ETA/status/time. Source times literal; frontend successful-fetch time separately labelled.",
+  "FAILURE_AND_ATTEMPT_BOUNDARIES": "Validated supplied user-safe summary/code/time only; React text, strict shape and bounded disclosure checks. Explicit attempt identities/ordinals/task/parent/retry links only; no generated history. Task status and attempt status separate; missing/empty/bounded/complete distinct.",
+  "ARTIFACT_ACCESS_BOUNDARIES": "Supplied readonly safe ID/name/type/literal availability/version/explicit task link. Missing/empty/bounded/denied/unavailable/unknown/stale/inspectable metadata distinct. Metadata/task visibility grants no Artifact read. No verified typed destination/independent access receipt, therefore no open/download/URL action.",
+  "PERMISSION_AND_ACTION_BOUNDARIES": "EffectiveAccess authoritative projection; no visibility/role/testkey/client-flag authorization. Query retry is not render retry. No submit, execution cancel, rerender, task retry, artifact delete/publish, workflow/timeline/canonical mutation, provider/worker/billing/quota calls.",
+  "CONTEXT_AND_STALE_RESULT_HANDLING": "principal/tenant/session/Project, complete access projection, binding, adapter and Selection owner lifetime key the session; replacement/unmount/retirement aborts reads and clears data/dialog. Generation fences late success/rejection. StrictMode registration and ready/pending retirement tested. Explicit stale failure clears data; stale successful source snapshot is labelled stale, not called fresh.",
+  "MOCK_AND_REAL_DATA_BOUNDARIES": "Ordinary application has no implicit fixture URL switch, default account or real query. Separate loopback opt-in host wraps exact registered route tree with simulated identity/access and controlled adapter. Dashboard fixture reads and inert disposable auth marker are harness-only. No real integration.",
+  "TARGETED_TEST_RESULTS": {
+    "passed": 173,
+    "total": 173,
+    "failed": 0,
+    "pending": 0,
+    "report": "validation/TARGETED_FINAL.json"
+  },
+  "FULL_TEST_IDENTITY_ACCOUNTING": {
+    "baseline": 797,
+    "final": 789,
+    "files": 38,
+    "passed": 789,
+    "failures": 0,
+    "skips": 0,
+    "added": 41,
+    "removed": 49,
+    "duplicates": 0,
+    "retained_baseline_identities": 748,
+    "report": "validation/TEST_IDENTITY_ACCOUNTING.json",
+    "interpretation": "49 replaced identities are confined to the two rewritten Render suites; unknown-status rejection, hardcoded proposal binding and product URL fixture expectations intentionally superseded. Consolidated schema cases reduce expanded identity count. Not a claim that all 797 old identities remain. All unrelated identities retained."
+  },
+  "REQUIRED_FRONTEND_GATE_RESULTS": {
+    "required": 7,
+    "passed": 7,
+    "architecture_controls": {
+      "tests": 120,
+      "pass": 120,
+      "fail": 0,
+      "skipped": 0
+    },
+    "lint": {
+      "problems": 46,
+      "errors": 0,
+      "warnings": 46
+    },
+    "commands": "validation/FINAL_VALIDATION_PLAN.json",
+    "raw": "validation/gates/"
+  },
+  "FOCUSED_BROWSER_RESULTS": {
+    "checks": 46,
+    "passed": 46,
+    "failed": 0,
+    "screenshots": 30,
+    "served_files": 15,
+    "served_hash_differences": 0,
+    "browser": "Chromium CDP headless; focus emulation; desktop 1440x1000 and narrow 390x844 EN/zh-CN",
+    "assistance": "DOM locale/locator/scrollIntoView and explicit source-mode/delay controls disclosed",
+    "native_exits": {
+      "processes": [
+        {
+          "name": "smoke",
+          "pid": 538942,
+          "exit": 0,
+          "terminated_by_task": false
+        },
+        {
+          "name": "chrome",
+          "pid": 538791,
+          "exit": 0,
+          "terminated_by_task": false
+        },
+        {
+          "name": "fixture",
+          "pid": 538772,
+          "exit": -15,
+          "terminated_by_task": true
+        }
+      ],
+      "remaining_ports": []
+    },
+    "not_certified": "physical device/touch/virtual keyboard/OS IME/screenreader; width pass not mobile certification"
+  },
+  "BUILD_MANIFEST_SHA256": "2dcf0c845b06036ada04b083ad279de202d5a550f8793490cda5ef7e9d3b4d7e",
+  "BACKEND_REQUIREMENTS_UPDATED": "YES — existing FB-GAP-005 in both requested records; future bounded pinned frontend/backend controlled-Project readonly authorized/denied/error/stale and zero-write acceptance described, not performed",
+  "NEW_BACKEND_REQUIREMENTS": "No new requirement IDs; richer UNAGREED FB-GAP-005 consumption details only. No full-platform prerequisite.",
+  "BACKEND_CHANGES": "0 task-authorized backend source changes; no backend lane audit or stationarity requirement",
+  "TRACKED_DIST_CHANGES": "0; named frontend/dist 8 files byte/mode/membership preserved, fresh runtime built externally",
+  "BACKEND_STATIC_CHANGES": "0 generating-command changes; configured backend static destination 3 files byte/mode/membership verified before/after final gates/browser; product mounts read-only",
+  "REAL_INTEGRATION_PERFORMED": "NO",
+  "BOUNDED_PRESERVATION_RESULT": "PASS — final 1005 scoped paths match exact tree bytes/modes/membership; 990 baseline paths outside allowlist unchanged; real index/HEAD/branch preserved. Previous V6 public package/receipt/archive hashes preserved. No whole-repo/parallel-backend/whole-host stationarity claim.",
+  "H4_RECONCILIATION_STATUS": "UNCHANGED / unresolved historical dispositions retained; guards not changed, no debt-closure claim",
+  "FORMAL_SLICE1C_LEDGER_STATUS": "UNCHANGED / separate authority and review; no closure or release claim",
+  "PRODUCT_COMMIT_FREEZE_MERGE_PUSH": "NOT_PERFORMED; original HEAD f5e19cf53fd010eea2935dd29557e82a879e042c retained; no real-index staging",
+  "PRODUCT_PUBLICATION": "NOT_PERFORMED",
+  "EVIDENCE_DELIVERY_STATUS": "LOCAL_SANITIZED_REVIEW_PACKAGE; local manifest/archive verification recorded in detached LOCAL_PACKAGE_VERIFICATION.json; parent independently verifies and separately publishes",
+  "EVIDENCE_COMMIT_SHA": "NOT_ESTABLISHED — child did not publish",
+  "REVIEW_INDEX_URL": "NOT_ESTABLISHED — LOCAL_REVIEW_PACKAGE/REVIEW_INDEX.md only",
+  "RAW_REVIEW_INDEX_URL": "NOT_ESTABLISHED — no remote publication",
+  "MACHINE_INDEX_URL": "NOT_ESTABLISHED — LOCAL_REVIEW_PACKAGE/REVIEW_INDEX.json only",
+  "PUBLIC_MANIFEST_SHA256": "NOT_ESTABLISHED — public publication not performed; local manifest hash belongs in detached receipt, not a self-referential report",
+  "REMOTE_VERIFICATION": "NOT_PERFORMED by child",
+  "INDEPENDENT_REVIEW": "REQUIRED — no implementation acceptance claimed",
+  "STOP": "BEFORE_WORKFLOW_UX; parent independent review and separately authorized evidence-only publication only"
+}

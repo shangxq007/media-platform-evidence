@@ -1,0 +1,250 @@
+/* ========================================================================
+   Editor — Video editor chrome
+   All colors reference tokens.css variables
+   Dark-first design inspired by CapCut, DaVinci Resolve, Figma
+   ======================================================================== */
+
+.editor-shell {
+  --editor-toolbar-h: 48px;
+  --editor-panel-header-h: 36px;
+  background: var(--surface-0);
+}
+
+/* ── Toolbar ── */
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--editor-toolbar-h);
+  padding: 0 var(--space-4);
+  background: var(--surface-0);
+  border-bottom: 1px solid var(--border-subtle);
+  gap: var(--space-4);
+}
+.editor-toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.editor-toolbar-divider {
+  width: 1px;
+  height: 1.25rem;
+  background: var(--border-subtle);
+  margin: 0 var(--space-1);
+}
+
+/* ── Panels ── */
+.editor-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-1);
+  border-color: var(--border-subtle);
+}
+.editor-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--editor-panel-header-h);
+  padding: 0 var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: var(--text-micro);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* ── Preview stage ── */
+.editor-preview-stage {
+  background: #000000;
+}
+.editor-preview-frame {
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 24px 48px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+/* ── Tab strip ── */
+.editor-tab-strip {
+  display: flex;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-0);
+}
+.editor-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-2) var(--space-1);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  transition: color var(--duration-fast), background var(--duration-fast);
+  border-bottom: 2px solid transparent;
+  position: relative;
+  cursor: pointer;
+}
+.editor-tab:hover {
+  color: var(--text-secondary);
+  background: var(--surface-4);
+}
+.editor-tab.is-active {
+  color: var(--accent-400);
+  background: var(--accent-500); opacity: 0.08;
+  border-bottom-color: var(--accent-400);
+}
+
+/* ── Transport controls ── */
+.editor-transport {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-4);
+  height: 40px;
+  background: var(--surface-1);
+  border-top: 1px solid var(--border-subtle);
+}
+.editor-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  transition: background var(--duration-fast), color var(--duration-fast);
+  cursor: pointer;
+}
+.editor-icon-btn:hover {
+  background: var(--surface-4);
+  color: var(--text-primary);
+}
+.editor-icon-btn.is-primary {
+  width: 36px;
+  height: 36px;
+  background: var(--accent-500);
+  color: white;
+}
+.editor-icon-btn.is-primary:hover {
+  background: var(--accent-600);
+}
+
+/* ── Effects panel ── */
+.effects-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface-1);
+}
+.effects-category-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-0);
+}
+.effects-category-tab {
+  flex: 1;
+  padding: var(--space-2);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: capitalize;
+  color: var(--text-tertiary);
+  border-bottom: 2px solid transparent;
+  transition: color var(--duration-fast), border-color var(--duration-fast);
+  cursor: pointer;
+}
+.effects-category-tab.is-active {
+  color: var(--accent-400);
+  border-bottom-color: var(--accent-400);
+}
+
+.effect-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: border-color var(--duration-fast), background var(--duration-fast);
+}
+.effect-card:hover {
+  border-color: var(--accent-500);
+  background: var(--accent-500); opacity: 0.06;
+}
+.effect-card.is-selected {
+  border-color: var(--accent-400);
+  background: var(--accent-500); opacity: 0.12;
+}
+.effect-card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-500); opacity: 0.15;
+  color: var(--accent-400);
+}
+
+/* ── Dashboard action cards ── */
+.dashboard-action-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-2);
+  transition: border-color var(--duration-normal), box-shadow var(--duration-normal);
+  text-align: left;
+  cursor: pointer;
+}
+.dashboard-action-card:hover:not(:disabled) {
+  border-color: var(--border-default);
+  box-shadow: var(--shadow-md);
+}
+.dashboard-action-card:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.dashboard-action-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-500); opacity: 0.10;
+  color: var(--accent-400);
+}
+
+/* ── Studio page ── */
+.studio-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-6);
+}
+.studio-pack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+.studio-pack-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-2);
+  overflow: hidden;
+  transition: border-color var(--duration-normal), box-shadow var(--duration-normal);
+}
+.studio-pack-card:hover {
+  border-color: var(--border-default);
+  box-shadow: var(--shadow-md);
+}
+.studio-pack-card-header {
+  padding: var(--space-5);
+  border-bottom: 1px solid var(--border-subtle);
+  background: linear-gradient(135deg, var(--accent-500) 0%, transparent 60%);
+}

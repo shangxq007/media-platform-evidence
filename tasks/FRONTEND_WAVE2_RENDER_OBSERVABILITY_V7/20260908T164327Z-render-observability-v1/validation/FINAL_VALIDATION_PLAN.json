@@ -1,0 +1,48 @@
+{
+  "targeted-final": [
+    "./node_modules/.bin/vitest",
+    "run",
+    "src/product/render-browser",
+    "src/components/app-shell/AppShell.test.tsx",
+    "src/interaction",
+    "src/localization/localization.test.tsx",
+    "src/app/routeTree.test.tsx",
+    "--configLoader",
+    "runner",
+    "--no-cache",
+    "--reporter=json",
+    "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_RENDER_OBSERVABILITY_V7/final-validation-01/TARGETED_FINAL.json"
+  ],
+  "type-policy": [
+    "npm",
+    "run",
+    "typecheck"
+  ],
+  "lint": [
+    "./node_modules/.bin/eslint",
+    "src/**/*.{ts,tsx}"
+  ],
+  "architecture": [
+    "node",
+    "scripts/frontend-architecture-guard.mjs"
+  ],
+  "architecture-controls": [
+    "node",
+    "scripts/frontend-architecture-guard.test.mjs"
+  ],
+  "full-frontend-final": [
+    "./node_modules/.bin/vitest",
+    "run",
+    "--configLoader",
+    "runner",
+    "--no-cache",
+    "--reporter=json",
+    "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_RENDER_OBSERVABILITY_V7/final-validation-01/FULL_UNIT.json"
+  ],
+  "build-final": [
+    "node",
+    "--input-type=module",
+    "-e",
+    "import {build,resolveConfig} from 'vite';import path from 'node:path';import fs from 'node:fs';const output=\"/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_RENDER_OBSERVABILITY_V7/final-validation-01/build\";if(fs.existsSync(output))throw Error('External output must be new');const opts={configLoader:'bundle',build:{outDir:output,emptyOutDir:false,manifest:true,rollupOptions:{input:{application:\"/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_RENDER_OBSERVABILITY_V7/final-validation-01/snapshot/frontend/index.html\",fixture:\"/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_RENDER_OBSERVABILITY_V7/final-validation-01/fixture-host/entry.tsx\"}}}};const c=await resolveConfig(opts,'build');if(path.resolve(c.root,c.build.outDir)!==output)throw Error('Unexpected effective output');console.log('EFFECTIVE_EXTERNAL_OUTPUT='+output);await build(opts);const manifest=JSON.parse(fs.readFileSync(path.join(output,'.vite/manifest.json'),'utf8'));const fixture=Object.values(manifest).find(x=>x.isEntry&&x.name==='fixture');if(!fixture)throw Error('Missing explicit fixture entry');const html=fs.readFileSync(path.join(output,'index.html'),'utf8');const fixtureHtml=html.replace(/(<script[^>]+src=\")([^\"]+)(\")/,(_,a,b,c)=>a+'/'+fixture.file+c);if(fixtureHtml===html)throw Error('Missing standard module entry');fs.writeFileSync(path.join(output,'fixture.html'),fixtureHtml);console.log('EXPLICIT_FIXTURE_ENTRY='+fixture.file);"
+  ]
+}
