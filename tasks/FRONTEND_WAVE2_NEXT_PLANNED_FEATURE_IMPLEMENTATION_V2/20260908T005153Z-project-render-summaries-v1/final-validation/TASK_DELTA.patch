@@ -1,0 +1,1184 @@
+diff --git a/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md b/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+index 828b5624..a421a2aa 100644
+--- a/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
++++ b/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+@@ -383,3 +383,16 @@ UXW2-NTF-002..004 / FB-GAP-011..013 remain future settings/admin/delivery work,
+ | Mock boundary | Local provider SENT and persisted MOCK are simulation, not external delivery; this task sends nothing |
+ | Integration acceptance | Future backend-owned controlled integration validates actual transport/challenge/attempt and readback, authorization, failure/retry semantics, destination safety and simulated labeling; actual external tests require separate consent |
+ | Blocking disposition | BLOCKS_REAL_NOTIFICATION_DELIVERY; nonblocking for focused Review; no backend lane assignment or implementation authorization |
++
++
++## V2 bounded Operations Render consumer — FB-GAP-005 / FB-GAP-006 clarification
++
++This task implements only explicitly Project-scoped read-only summary discovery under the existing Operations route. Existing scoped render list/detail APIs are not claimed missing. Consumer: product/render-browser/RenderBrowser.tsx; existing RenderJobSummary five-field schema remains the projected model. No render lifecycle or execution model is created.
++
++- Proposed adapter input: principal/tenant/session/project scope and request identity; output: matching scope/request plus bounded summaries (id, projectId, timelineSnapshotId, profile, status) and explicit complete/limited metadata. This is UNAGREED frontend consumption vocabulary, not an accepted backend DTO, endpoint or Operation.
++- Existing EffectiveAccess governs availability/reasons. Real-origin must consume SERVER projection; unknown/denied/unsupported/unavailable/error remain distinct and no content or fixture fallback follows real failure. Every item must belong to the requested project; no guessed/default Project, global client join, timestamps-as-identity or inferred actions.
++- Cancel, unmount, principal/tenant/session/project/source/access change retire old pending responses, even valid successful old replies. Search/filter/sort/inspect apply only to the returned bounded snapshot; no invented pagination/total, polling, persistence or canonical command.
++- Ordinary unconfigured route is unavailable. Explicit localhost simulation exercises frontend behavior only. Storage and legacy render consumers unchanged. Artifacts, retry/cancel-job, output access, provider/runtime details and global Operations remain excluded under existing FB-GAP-004/006/008.
++- Future one-path integration: pin frontend final tree/build and separately agreed backend version/adapter; controlled principal and explicit tenant/project, valid summaries plus denied/error/late old-response cases. Permit only the agreed read query and local inspection; zero writes/artifact access. No other frontend/backend program readiness prerequisite.
++
++No new backend capability requirement ID is created. The existing FB-GAP-005 is linked in BACKEND_ENABLEMENT_REQUESTS.tsv for this consumer; full real adapter alignment remains unestablished.
+diff --git a/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv b/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv
+index e66f51e4..5be657a8 100644
+--- a/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv
++++ b/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv
+@@ -196,3 +196,6 @@ frontend/src/product/notifications/NotificationInbox.tsx	ACTIVE	POST_H4_ADDITION
+ frontend/src/product/projects/ProjectBrowser.tsx	ACTIVE	POST_H4_ADDITION	SCOPED_READ_ONLY_RECENT_PROJECT_DISCOVERY_AND_LOCAL_INSPECTION
+ frontend/src/product/projects/source.ts	ACTIVE	POST_H4_ADDITION	FRONTEND_RECENT_PROJECT_CONSUMPTION_PROPOSAL_NOT_SERVER_AUTHORITY
+ frontend/src/product/projects/fixture.ts	ACTIVE	POST_H4_ADDITION	EXPLICIT_LOCALHOST_SIMULATED_READ_ONLY_RECENT_PROJECT_FIXTURE
++frontend/src/product/render-browser/RenderBrowser.tsx	ACTIVE	POST_H4_ADDITION	EXPLICIT_SCOPED_RENDER_READ_ONLY_FRONTEND_CONSUMER
++frontend/src/product/render-browser/source.ts	ACTIVE	POST_H4_ADDITION	EXPLICIT_SCOPED_RENDER_READ_ONLY_FRONTEND_CONSUMER
++frontend/src/product/render-browser/fixture.ts	ACTIVE	POST_H4_ADDITION	EXPLICIT_SCOPED_RENDER_READ_ONLY_FRONTEND_CONSUMER
+diff --git a/docs/architecture/governance/frontend-product-path-classification-v1.tsv b/docs/architecture/governance/frontend-product-path-classification-v1.tsv
+index 19acfc53..cf70449d 100644
+--- a/docs/architecture/governance/frontend-product-path-classification-v1.tsv
++++ b/docs/architecture/governance/frontend-product-path-classification-v1.tsv
+@@ -526,3 +526,8 @@ frontend/src/product/projects/source.ts	REUSE	FRONTEND_RECENT_PROJECT_CONSUMPTIO
+ frontend/src/product/projects/fixture.ts	REUSE	EXPLICIT_LOCALHOST_SIMULATED_READ_ONLY_RECENT_PROJECT_FIXTURE
+ frontend/src/product/projects/ProjectBrowser.test.tsx	REUSE	RECENT_PROJECT_INTERACTION_LIFECYCLE_LOCALIZATION_REGRESSION
+ frontend/src/product/projects/source.test.ts	REUSE	RECENT_PROJECT_RECEIPT_SCOPE_AND_PRESENTATION_FILTER_TESTS
++frontend/src/product/render-browser/RenderBrowser.tsx	REUSE	EXPLICIT_SCOPED_RENDER_READ_ONLY_FRONTEND_CONSUMER
++frontend/src/product/render-browser/RenderBrowser.test.tsx	REUSE	SCOPED_RENDER_BOUNDARY_AND_INTERACTION_TESTS
++frontend/src/product/render-browser/source.ts	REUSE	EXPLICIT_SCOPED_RENDER_READ_ONLY_FRONTEND_CONSUMER
++frontend/src/product/render-browser/source.test.ts	REUSE	SCOPED_RENDER_BOUNDARY_AND_INTERACTION_TESTS
++frontend/src/product/render-browser/fixture.ts	REUSE	EXPLICIT_SCOPED_RENDER_READ_ONLY_FRONTEND_CONSUMER
+diff --git a/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv b/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+index 152702c2..73693005 100644
+--- a/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
++++ b/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+@@ -10,3 +10,4 @@ UXW2-NTF-001	Read a durable user inbox, unread count, and mark one/all notificat
+ UXW2-NTF-002	Configure notification subscriptions, preferences, and channel bindings	FB-GAP-011; reference 86d6aef94fd5e58da552e97c11473cff6eca734e; Binding create returns three fields not full binding; subscription update returns three fields and defaults can contain null; batch returns List not results/errors; preference GET/PUT omit declared identities/full fields and Partial updates can default flags to true	Align existing preference/subscription/binding DTOs and update/partial-failure semantics before any UI integration	Principal-scoped current-user settings; backend controls critical-event rules and channel validation; defined non-disclosing denied/validation/missing outcomes; public DTO must not leak destination secrets	BLOCKS_NOTIFICATION_SETTINGS	NO	YES	No settings UI or transport calls; design/contract candidate remains candidate	Settings must not silently reset flags or report nonexistent verification	Future contract tests verify every request/response/nullability/update-preservation rule, batch failure semantics, critical restrictions, destination redaction and ownership; no live delivery in frontend mocks	PROPOSED_SOURCE_CONFIRMED_NONBLOCKING_FOR_REVIEW
+ UXW2-NTF-003	Inspect/configure notification event definitions and delivery records; prepare explicit administrative notification input	FB-GAP-012; reference 86d6aef94fd5e58da552e97c11473cff6eca734e; Frontend event-definitions/delivery-logs/providers differ from backend events/deliveries/provider-status; list/object/metrics envelopes differ; detail ignores notificationId; publishEvent sends type/tenantId but backend requires eventType/subjectId	Accepted admin event/delivery queries and exact target/publish input contract; no speculative announcement workflow	Server-enforced administrator and tenant/resource scope; explicit filtered IDs and pagination capabilities; preserve typed forbidden/not-found/unsupported failures; existing FB-GAP-002 applies	BLOCKS_NOTIFICATION_ADMIN_INTEGRATION	NO	YES	No admin notification UI or calls added; absent UI alone is not an endpoint gap	Admin labels and guessed target IDs cannot confer authority or prove a notification was sent	Future contract and authorization tests resolve route/payload/envelope differences, exact-ID detail filtering, non-disclosing cross-tenant denial and explicit target validation; separate authorization for announcements/targeting	PROPOSED_SOURCE_CONFIRMED_NONBLOCKING_FOR_REVIEW
+ UXW2-NTF-004	Receive a real email/SMS/webhook notification or verify/test/retry a bound channel	FB-GAP-013; reference 86d6aef94fd5e58da552e97c11473cff6eca734e; Email/SMS/Webhook providers return SENT without external transport; binding verify writes VERIFIED without challenge; test only checks/audits and Controller says TEST_SENT; retry only returns RETRY_QUEUED; Novu transport code exists but live integration unestablished	Truthful simulated/accepted/sent/delivered/failed boundaries and separately authorized real delivery/verification/retry integration	Authenticated scoped verified destination and explicit delivery/test authority; no browser/Agent escalation; real failures cannot become empty or success; no secret exposure	BLOCKS_REAL_NOTIFICATION_DELIVERY	NO	YES	Local provider SENT and persisted MOCK are simulation, not external delivery; this task sends nothing	Users must not mistake source stubs or admin receipts for delivery	Future backend-owned controlled integration validates actual transport/challenge/attempt and readback, authorization, failure/retry semantics, destination safety and simulated labeling; actual external tests require separate consent	PROPOSED_SOURCE_CONFIRMED_NONBLOCKING_FOR_REVIEW
++FB-GAP-005	Find/filter/sort/inspect explicitly Project-scoped Render summaries in Operations	Existing APIs exist; explicit authorized frontend adapter and lifecycle envelope unintegrated; FB-GAP-002/005/006	Align existing scoped read-only summary consumer, no new backend capability	UNAGREED scope/request/bounded snapshot proposal; existing RenderJobSummary five fields; no endpoint/Operation invented	BLOCKS_REAL_OPERATIONS_RENDER_ADAPTER	NO	YES	localhost opt-in simulated source only; ordinary unavailable; no HTTP, persistence or job actions	Complete existing partial Operations read workflow without global joins	Pin one backend adapter and frontend tree/build; authenticated principal tenant session project, explicit limited data; denied/error/stale results clear content; no canonical writes	PROPOSED_CLARIFICATION_REAL_INTEGRATION_NOT_ESTABLISHED
+diff --git a/frontend/governance/UX_WAVE_1_REVIEW.md b/frontend/governance/UX_WAVE_1_REVIEW.md
+index 9fd00fa1..0f4e0691 100644
+--- a/frontend/governance/UX_WAVE_1_REVIEW.md
++++ b/frontend/governance/UX_WAVE_1_REVIEW.md
+@@ -125,3 +125,21 @@ This appendix preserves all historical review conclusions above. It records the
+ - Dependency disposition: clarify existing `UXW1-001` / `FB-GAP-001` (related `FB-GAP-009`), add no requirement ID, endpoint or Operation contract. Future integration is a separately authorized single read-only recent-snapshot path.
+ - Status: unfrozen local feature increment; independent review required. Exact final identities, executed gates and additive delivery receipt belong to the external task report at `/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V1/FINAL_REPORT.md`.
+ - Boundaries: no product freeze/commit/index change/merge/push/deployment, no real integration, no backend EP19 work; historical H4 and formal Slice1C status/publication gates unchanged.
++
++
++## Owner adopted bounded technical review — recent Projects / V2 continuation
++
++INDEPENDENT_TECHNICAL_REVIEW=PASS_BOUNDED
++REVIEWED_IMPLEMENTATION_TREE=0b76ac9352ad40fc155c7203ed69f6362b0db89f
++PROJECTS_UNCONFIGURED_BEHAVIOR=ACCEPTABLE_WITHIN_FRONTEND_ONLY_SCOPE
++ADDITIONAL_PRODUCT_CORRECTION_REQUIRED=NO
++REAL_BACKEND_INTEGRATION=NOT_ESTABLISHED
++DETACHED_RECEIPT_PUBLICATION=BLOCKED_AS_REPORTED
++PRODUCT_PUBLICATION=NOT_AUTHORIZED_BY_THIS_REVIEW
++
++Owner adoption under FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V2. ChatGPT's review checked 141 public text payloads against the manifest, patch replay against 15 supplied final endpoints, 630 unique passing full-suite identities (54 additions/no removals versus 576), 232 unique passing targeted identities, 36 recorded Chromium checks bound to the final tree, 17 chunks reconstructing six JS artifacts, all eight build artifacts, and desktop-list/narrow-Chinese-detail screenshots. These are independently reviewed recorded results, not newly executed tests, full public-package verification by ChatGPT, or real-backend acceptance. Broader H4/Slice1C/release statuses are unchanged; this is an append to the existing status record, not another acceptance ledger.
++
++
++### Current V2 increment status
++
++`FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V2` selects the foundation plan's Compact surface design records → Operations → search/filter/sort and open backed projections, limited to existing `/operations/renders` and explicit single-Project safe RenderJobSummary inspection. Scope/acceptance and exact final verification live in the task-owned external `IMPLEMENTATION_REPORT_ZH.md`; independent review is required. No new Slice or release acceptance. Storage, accepted recent Projects and other accepted creator features remain unchanged. The original V1 detached receipt remains BLOCKED_AS_REPORTED, separate from this implementation.
+diff --git a/frontend/src/app/routeTree.test.tsx b/frontend/src/app/routeTree.test.tsx
+index b49b1bdb..a08385b8 100644
+--- a/frontend/src/app/routeTree.test.tsx
++++ b/frontend/src/app/routeTree.test.tsx
+@@ -113,6 +113,25 @@ describe('runtime route registration and deep-link restoration', () => {
+     expect(home).not.toHaveBeenCalled()
+   })
+ 
++  it('routes Operations renders to the fail-closed source browser and leaves Storage behavior unchanged', async () => {
++    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } })
++    const history = createMemoryHistory({ initialEntries: ['/operations/renders'] })
++    const router = createRouter({ routeTree, history, context: { queryClient } })
++    const view = render(<QueryClientProvider client={queryClient}><RouterProvider router={router} /></QueryClientProvider>)
++    expect(await screen.findByRole('heading', { name: 'Render summaries unavailable' })).toBeTruthy()
++    expect(screen.getByText(/no authenticated, session-bound, single-Project render source/i)).toBeTruthy()
++    expect(screen.getByText('unconfigured')).toBeTruthy()
++
++    view.unmount()
++    const storageHistory = createMemoryHistory({ initialEntries: ['/operations/storage'] })
++    const storageRouter = createRouter({ routeTree, history: storageHistory, context: { queryClient } })
++    render(<QueryClientProvider client={queryClient}><RouterProvider router={storageRouter} /></QueryClientProvider>)
++    expect(await screen.findByRole('heading', { name: 'Storage' })).toBeTruthy()
++    expect(screen.getByRole('searchbox', { name: 'Search Storage' })).toBeTruthy()
++    expect((screen.getByRole('button', { name: 'Filter' }) as HTMLButtonElement).disabled).toBe(true)
++    expect(screen.getByText(/existing storage health diagnostic/i)).toBeTruthy()
++  })
++
+   it('handles Workspace API errors without inventing an empty state', async () => {
+     vi.spyOn(platformClient.workspace, 'getHome').mockRejectedValue(new Error('offline'))
+     const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } })
+diff --git a/frontend/src/localization/catalogs.ts b/frontend/src/localization/catalogs.ts
+index 36a7b8ab..43a5d9ad 100644
+--- a/frontend/src/localization/catalogs.ts
++++ b/frontend/src/localization/catalogs.ts
+@@ -114,6 +114,58 @@ const englishNamespaces: CatalogNamespaces = {
+     'projects.detailCreated': message('Projected creation time'),
+     'projects.notProjected': message('Not projected'),
+     'projects.detailLimit': message('Inspection does not establish canonical availability or permission to open this project.'),
++    'renders.region': message('Single-Project render summaries'),
++    'renders.eyebrow': message('Operations · read-only'),
++    'renders.title': message('Project renders'),
++    'renders.description': message('Find and inspect safe render job summaries supplied for one explicit Project. This view cannot control jobs.'),
++    'renders.originSimulated': message('SIMULATED RENDER DATA · localhost fixture only · no real account or permission'),
++    'renders.originReal': message('CONNECTED READ-ONLY SOURCE · access and Project scope are supplied by the host application'),
++    'renders.originUnavailable': message('RENDER SOURCE UNAVAILABLE · no request was sent'),
++    'renders.projectId': message('Source Project ID'),
++    'renders.boundary': message('Scope comes only from the source Project shown above. Results are bounded and are not a global render inventory.'),
++    'renders.refresh': message('Refresh render summaries'),
++    'renders.loadingTitle': message('Loading render summaries'),
++    'renders.loadingLabel': message('Loading render summaries'),
++    'renders.cancel': message('Cancel loading'),
++    'renders.cancelledTitle': message('Render summary loading cancelled'),
++    'renders.cancelledBody': message('Loading cancelled.'),
++    'renders.retry': message('Retry loading'),
++    'renders.failureUnavailableTitle': message('Render summaries unavailable'),
++    'renders.failureUnavailableBody': message('No authenticated, session-bound, single-Project render source is configured for this view.'),
++    'renders.failureDeniedTitle': message('Render summaries denied'),
++    'renders.failureDeniedBody': message('The supplied effective-access projection denied this read-only request.'),
++    'renders.failureUnknownTitle': message('Render summary access unknown'),
++    'renders.failureUnknownBody': message('Access or Project scope could not be established, so the request remained fail-closed.'),
++    'renders.failureUnsupportedTitle': message('Render summaries unsupported'),
++    'renders.failureUnsupportedBody': message('The connected source does not support this bounded single-Project request.'),
++    'renders.failureErrorTitle': message('Render summaries error'),
++    'renders.failureErrorBody': message('The render summary result could not be validated or loaded.'),
++    'renders.search': message('Search render summaries'),
++    'renders.searchPlaceholder': message('Search render ID or profile'),
++    'renders.statusLabel': message('Render status'),
++    'renders.allStatuses': message('All established statuses'),
++    'renders.sortLabel': message('Sort render summaries'),
++    'renders.sortAscending': message('Render ID A–Z'),
++    'renders.sortDescending': message('Render ID Z–A'),
++    'renders.snapshotLimited': message('{count} render summaries loaded · limited Project snapshot; more may exist.', ['count']),
++    'renders.snapshotBounded': message('{count} render summaries loaded · bounded Project snapshot.', ['count']),
++    'renders.emptyTitle': message('No render summaries in this snapshot'),
++    'renders.emptyBody': message('The source returned an empty bounded snapshot. This does not establish a global absence of render jobs.'),
++    'renders.noMatchesTitle': message('No matching render summaries'),
++    'renders.noMatchesBody': message('No item in the loaded Project snapshot matches the current local filters.'),
++    'renders.reset': message('Reset filters'),
++    'renders.list': message('Render summary snapshot'),
++    'renders.inspect': message('Inspect'),
++    'renders.inspectNamed': message('Inspect render {id}', ['id']),
++    'renders.detailTitle': message('Render summary details'),
++    'renders.detailClose': message('Close render summary details'),
++    'renders.detailReadOnly': message('Read-only local inspection'),
++    'renders.detailId': message('Render job ID'),
++    'renders.detailProjectId': message('Project ID'),
++    'renders.detailTimelineSnapshotId': message('Timeline snapshot ID'),
++    'renders.detailProfile': message('Profile'),
++    'renders.detailStatus': message('Status'),
++    'renders.detailLimit': message('This safe summary does not expose job controls, execution authority, providers, workers, runtime details, artifacts, or downloads.'),
+     brandHome: message('Media Platform home'), brand: message('Media Platform'), creativeWorkspace: message('Creative workspace'),
+     globalNavigation: message('Global navigation'), projectNavigation: message('Project navigation'), projectSurfaceSwitcher: message('Project surface switcher'),
+     workspace: message('Workspace'), operations: message('Operations'), admin: message('Admin'), developer: message('Developer'),
+@@ -422,6 +474,58 @@ const chineseNamespaces: CatalogNamespaces = {
+     'projects.detailCreated': message('投影创建时间'),
+     'projects.notProjected': message('未投影'),
+     'projects.detailLimit': message('检查不会建立规范可用性，也不会授予打开此项目的权限。'),
++    'renders.region': message('单项目渲染摘要'),
++    'renders.eyebrow': message('运营 · 只读'),
++    'renders.title': message('项目渲染'),
++    'renders.description': message('查找并检查来源为一个明确项目提供的安全渲染任务摘要。此视图不能控制任务。'),
++    'renders.originSimulated': message('模拟渲染数据 · 仅限 localhost 固定数据 · 未连接真实账户或权限'),
++    'renders.originReal': message('已连接只读来源 · 访问权限和项目范围由宿主应用提供'),
++    'renders.originUnavailable': message('渲染来源不可用 · 未发送请求'),
++    'renders.projectId': message('来源项目 ID'),
++    'renders.boundary': message('范围仅来自上方显示的来源项目。结果数量有限，并非全局渲染清单。'),
++    'renders.refresh': message('刷新渲染摘要'),
++    'renders.loadingTitle': message('正在加载渲染摘要'),
++    'renders.loadingLabel': message('正在加载渲染摘要'),
++    'renders.cancel': message('取消加载'),
++    'renders.cancelledTitle': message('渲染摘要加载已取消'),
++    'renders.cancelledBody': message('加载已取消。'),
++    'renders.retry': message('重试加载'),
++    'renders.failureUnavailableTitle': message('渲染摘要不可用'),
++    'renders.failureUnavailableBody': message('此视图尚未配置经过身份验证、绑定会话且限定单一项目的渲染来源。'),
++    'renders.failureDeniedTitle': message('渲染摘要访问被拒绝'),
++    'renders.failureDeniedBody': message('提供的有效访问权限投影拒绝了此只读请求。'),
++    'renders.failureUnknownTitle': message('渲染摘要访问权限未知'),
++    'renders.failureUnknownBody': message('无法确定访问权限或项目范围，因此请求保持关闭。'),
++    'renders.failureUnsupportedTitle': message('不支持渲染摘要'),
++    'renders.failureUnsupportedBody': message('已连接来源不支持此有限的单项目请求。'),
++    'renders.failureErrorTitle': message('渲染摘要错误'),
++    'renders.failureErrorBody': message('无法验证或加载渲染摘要结果。'),
++    'renders.search': message('搜索渲染摘要'),
++    'renders.searchPlaceholder': message('搜索渲染 ID 或配置'),
++    'renders.statusLabel': message('渲染状态'),
++    'renders.allStatuses': message('所有已建立状态'),
++    'renders.sortLabel': message('渲染摘要排序'),
++    'renders.sortAscending': message('渲染 ID A–Z'),
++    'renders.sortDescending': message('渲染 ID Z–A'),
++    'renders.snapshotLimited': message('已加载 {count} 个渲染摘要 · 有限项目快照，可能还有更多结果。', ['count']),
++    'renders.snapshotBounded': message('已加载 {count} 个渲染摘要 · 有限项目快照。', ['count']),
++    'renders.emptyTitle': message('此快照中没有渲染摘要'),
++    'renders.emptyBody': message('来源返回了空的有限快照。这不能证明全局不存在渲染任务。'),
++    'renders.noMatchesTitle': message('没有匹配的渲染摘要'),
++    'renders.noMatchesBody': message('已加载的项目快照中没有条目匹配当前本地筛选条件。'),
++    'renders.reset': message('重置筛选条件'),
++    'renders.list': message('渲染摘要快照'),
++    'renders.inspect': message('检查'),
++    'renders.inspectNamed': message('检查渲染 {id}', ['id']),
++    'renders.detailTitle': message('渲染摘要详情'),
++    'renders.detailClose': message('关闭渲染摘要详情'),
++    'renders.detailReadOnly': message('只读本地检查'),
++    'renders.detailId': message('渲染任务 ID'),
++    'renders.detailProjectId': message('项目 ID'),
++    'renders.detailTimelineSnapshotId': message('时间线快照 ID'),
++    'renders.detailProfile': message('配置'),
++    'renders.detailStatus': message('状态'),
++    'renders.detailLimit': message('此安全摘要不提供任务控制、执行权限、提供方、工作器、运行时详情、制品或下载。'),
+     brandHome: message('媒体平台首页'), brand: message('媒体平台'), creativeWorkspace: message('创作工作区'),
+     globalNavigation: message('全局导航'), projectNavigation: message('项目导航'), projectSurfaceSwitcher: message('项目界面切换'),
+     workspace: message('工作区'), operations: message('运营'), admin: message('管理'), developer: message('开发者'), overview: message('概览'), review: message('审阅'),
+diff --git a/frontend/src/localization/source-manifest.json b/frontend/src/localization/source-manifest.json
+index 48dd33fb..952413f3 100644
+--- a/frontend/src/localization/source-manifest.json
++++ b/frontend/src/localization/source-manifest.json
+@@ -106,6 +106,58 @@
+     "shell.projects.detailCreated",
+     "shell.projects.notProjected",
+     "shell.projects.detailLimit",
++    "shell.renders.region",
++    "shell.renders.eyebrow",
++    "shell.renders.title",
++    "shell.renders.description",
++    "shell.renders.originSimulated",
++    "shell.renders.originReal",
++    "shell.renders.originUnavailable",
++    "shell.renders.projectId",
++    "shell.renders.boundary",
++    "shell.renders.refresh",
++    "shell.renders.loadingTitle",
++    "shell.renders.loadingLabel",
++    "shell.renders.cancel",
++    "shell.renders.cancelledTitle",
++    "shell.renders.cancelledBody",
++    "shell.renders.retry",
++    "shell.renders.failureUnavailableTitle",
++    "shell.renders.failureUnavailableBody",
++    "shell.renders.failureDeniedTitle",
++    "shell.renders.failureDeniedBody",
++    "shell.renders.failureUnknownTitle",
++    "shell.renders.failureUnknownBody",
++    "shell.renders.failureUnsupportedTitle",
++    "shell.renders.failureUnsupportedBody",
++    "shell.renders.failureErrorTitle",
++    "shell.renders.failureErrorBody",
++    "shell.renders.search",
++    "shell.renders.searchPlaceholder",
++    "shell.renders.statusLabel",
++    "shell.renders.allStatuses",
++    "shell.renders.sortLabel",
++    "shell.renders.sortAscending",
++    "shell.renders.sortDescending",
++    "shell.renders.snapshotLimited",
++    "shell.renders.snapshotBounded",
++    "shell.renders.emptyTitle",
++    "shell.renders.emptyBody",
++    "shell.renders.noMatchesTitle",
++    "shell.renders.noMatchesBody",
++    "shell.renders.reset",
++    "shell.renders.list",
++    "shell.renders.inspect",
++    "shell.renders.inspectNamed",
++    "shell.renders.detailTitle",
++    "shell.renders.detailClose",
++    "shell.renders.detailReadOnly",
++    "shell.renders.detailId",
++    "shell.renders.detailProjectId",
++    "shell.renders.detailTimelineSnapshotId",
++    "shell.renders.detailProfile",
++    "shell.renders.detailStatus",
++    "shell.renders.detailLimit",
+     "common.localeSelector",
+     "common.localeEnglish",
+     "common.localeChinese",
+diff --git a/frontend/src/product/render-browser/RenderBrowser.test.tsx b/frontend/src/product/render-browser/RenderBrowser.test.tsx
+new file mode 100644
+index 00000000..5059a35e
+--- /dev/null
++++ b/frontend/src/product/render-browser/RenderBrowser.test.tsx
+@@ -0,0 +1,223 @@
++import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
++import { describe, expect, it, vi } from 'vitest'
++import type { EffectiveAccessEntry } from '../../foundation/effectiveAccess'
++import { LocalizationProvider } from '../../localization'
++import { createRendersFixture } from './fixture'
++import { RenderBrowser } from './RenderBrowser'
++import { REAL_RENDER_SUMMARIES_QUERY_KEY, type RenderListRequest, type RendersSource } from './source'
++
++function deferred<T>() {
++  let resolve!: (value: T) => void
++  const promise = new Promise<T>(value => { resolve = value })
++  return { promise, resolve }
++}
++
++function availableAccess(): EffectiveAccessEntry {
++  return {
++    key: REAL_RENDER_SUMMARIES_QUERY_KEY, status: 'AVAILABLE', reasonCode: 'TEST_AVAILABLE', explanation: '<server source explanation 原文>',
++    factors: { capability: 'SATISFIED', runtime: 'SATISFIED', entitlement: 'SATISFIED', policy: 'SATISFIED', quota: 'SATISFIED' },
++    source: 'SERVER',
++  }
++}
++
++const scope = { principalId: 'principal-1', tenantId: 'tenant-1', sessionId: 'session-1', projectId: 'project-1' }
++function ownedResult(request: RenderListRequest, profile = 'Connected profile') {
++  return {
++    status: 'ok', scope: request.scope, requestId: request.requestId,
++    jobs: [{ id: 'render-connected', projectId: request.scope.projectId, timelineSnapshotId: 'snapshot-connected', profile, status: 'EXECUTING' }],
++    boundary: { kind: 'project-snapshot', limit: 20, limited: false },
++  }
++}
++function realSource(overrides: Partial<typeof scope> = {}): RendersSource {
++  const sourceScope = { ...scope, ...overrides }
++  return {
++    scope: sourceScope, access: availableAccess(),
++    adapter: { origin: 'real', async listProject(request) { return ownedResult(request) } },
++  }
++}
++function setup(source: RendersSource = createRendersFixture(), locale: 'en' | 'zh-CN' = 'en') {
++  return render(<LocalizationProvider initialLocale={locale}><RenderBrowser source={source} /></LocalizationProvider>)
++}
++
++describe('RenderBrowser', () => {
++  it('shows the exact source-owned Project and only bounded safe summaries', async () => {
++    setup()
++    expect(await screen.findByRole('heading', { name: 'Project renders' })).toBeTruthy()
++    expect(screen.getByText('simulated-render-project')).toBeTruthy()
++    expect(screen.getByText(/not a global render inventory/i)).toBeTruthy()
++    const list = screen.getByRole('list', { name: 'Render summary snapshot' })
++    expect(within(list).queryByText(/Provider ID|Worker ID|Runtime ID/i)).toBeNull()
++    expect(screen.queryByRole('button', { name: /cancel job|retry job|download/i })).toBeNull()
++  })
++
++  it('searches ID/profile, filters established statuses, sorts IDs, and resets locally', async () => {
++    setup()
++    await screen.findByRole('button', { name: 'Inspect render render-alpha' })
++    fireEvent.change(screen.getByRole('searchbox', { name: 'Search render summaries' }), { target: { value: 'Cinema <literal>' } })
++    expect(screen.getByRole('button', { name: 'Inspect render render-zeta' })).toBeTruthy()
++    expect(screen.queryByRole('button', { name: 'Inspect render render-alpha' })).toBeNull()
++    expect(screen.queryByText('script', { selector: 'script' })).toBeNull()
++    fireEvent.change(screen.getByRole('searchbox', { name: 'Search render summaries' }), { target: { value: '' } })
++    fireEvent.change(screen.getByLabelText('Render status'), { target: { value: 'FAILED' } })
++    expect(screen.getByRole('button', { name: 'Inspect render render-beta' })).toBeTruthy()
++    fireEvent.change(screen.getByLabelText('Sort render summaries'), { target: { value: 'id-desc' } })
++    fireEvent.change(screen.getByRole('searchbox', { name: 'Search render summaries' }), { target: { value: 'no match' } })
++    expect(screen.getByRole('heading', { name: 'No matching render summaries' })).toBeTruthy()
++    fireEvent.click(screen.getByRole('button', { name: 'Reset filters' }))
++    expect((screen.getByRole('searchbox', { name: 'Search render summaries' }) as HTMLInputElement).value).toBe('')
++    expect((screen.getByLabelText('Render status') as HTMLSelectElement).value).toBe('')
++    expect((screen.getByLabelText('Sort render summaries') as HTMLSelectElement).value).toBe('id-asc')
++  })
++
++  it('distinguishes an empty Project snapshot from local no matches', async () => {
++    setup(createRendersFixture({ empty: true }))
++    expect(await screen.findByRole('heading', { name: 'No render summaries in this snapshot' })).toBeTruthy()
++    expect(screen.queryByRole('button', { name: 'Reset filters' })).toBeNull()
++  })
++
++  it('opens five exact fields in the shared read-only dialog and Escape restores launcher focus', async () => {
++    setup()
++    const launcher = await screen.findByRole('button', { name: 'Inspect render render-zeta' })
++    launcher.focus(); fireEvent.click(launcher)
++    const dialog = screen.getByRole('dialog', { name: 'Render summary details' })
++    expect(within(dialog).getByText('Read-only local inspection')).toBeTruthy()
++    expect(within(dialog).getByText('render-zeta')).toBeTruthy()
++    expect(within(dialog).getByText('simulated-render-project')).toBeTruthy()
++    expect(within(dialog).getByText('timeline-snapshot-zeta')).toBeTruthy()
++    expect(within(dialog).getByText('Cinema <literal>')).toBeTruthy()
++    expect(within(dialog).getByText('COMPLETED')).toBeTruthy()
++    expect(dialog.querySelector('script')).toBeNull()
++    expect(dialog.querySelectorAll('.ff-property-row')).toHaveLength(5)
++    fireEvent.keyDown(dialog, { key: 'Escape' })
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(document.activeElement).toBe(launcher)
++  })
++
++  it('uses one stable workflow button for Refresh, Cancel and Retry and never steals moved focus asynchronously', async () => {
++    const source = realSource()
++    render(<LocalizationProvider><button type="button">Stable focus</button><RenderBrowser source={source} /></LocalizationProvider>)
++    await screen.findByRole('button', { name: 'Inspect render render-connected' })
++    const pending = deferred<unknown>(); let request!: RenderListRequest
++    vi.spyOn(source.adapter, 'listProject').mockImplementationOnce(value => { request = value; return pending.promise })
++    const workflow = screen.getByRole('button', { name: 'Refresh render summaries' })
++    workflow.focus(); fireEvent.click(workflow)
++    expect(screen.getByRole('button', { name: 'Cancel loading' })).toBe(workflow)
++    const stable = screen.getByRole('button', { name: 'Stable focus' })
++    stable.focus()
++    await act(async () => pending.resolve({ status: 'error', scope: request.scope, requestId: request.requestId, explanation: '<opaque failure>' }))
++    expect(screen.getByRole('button', { name: 'Retry loading' })).toBe(workflow)
++    expect(document.activeElement).toBe(stable)
++
++    const success = deferred<unknown>(); let successRequest!: RenderListRequest
++    vi.spyOn(source.adapter, 'listProject').mockImplementationOnce(value => { successRequest = value; return success.promise })
++    workflow.focus(); fireEvent.click(workflow)
++    expect(screen.getByRole('button', { name: 'Cancel loading' })).toBe(workflow)
++    fireEvent.click(workflow)
++    expect(screen.getByRole('button', { name: 'Retry loading' })).toBe(workflow)
++    await act(async () => success.resolve(ownedResult(successRequest, 'Cancelled secret')))
++    expect(screen.queryByText('Cancelled secret')).toBeNull()
++    expect(document.activeElement).toBe(workflow)
++
++    const final = deferred<unknown>(); let finalRequest!: RenderListRequest
++    vi.spyOn(source.adapter, 'listProject').mockImplementationOnce(value => { finalRequest = value; return final.promise })
++    fireEvent.click(workflow)
++    expect(screen.getByRole('button', { name: 'Cancel loading' })).toBe(workflow)
++    await act(async () => final.resolve(ownedResult(finalRequest, 'Focused success')))
++    expect(screen.getByRole('button', { name: 'Refresh render summaries' })).toBe(workflow)
++    expect(document.activeElement).toBe(workflow)
++  })
++
++  it.each(['unavailable', 'denied', 'unknown', 'unsupported', 'error'] as const)('clears old content and renders exact %s receipt explanations as text', async failure => {
++    const source = realSource()
++    setup(source)
++    await screen.findByRole('button', { name: 'Inspect render render-connected' })
++    vi.spyOn(source.adapter, 'listProject').mockImplementation(async request => ({
++      status: failure, scope: request.scope, requestId: request.requestId, explanation: `<opaque ${failure} 原因>`,
++    }))
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh render summaries' }))
++    await waitFor(() => expect(screen.getByRole('heading', { name: new RegExp(failure, 'i') })).toBeTruthy())
++    expect(screen.queryByText('Connected profile')).toBeNull()
++    expect(screen.getByText(`<opaque ${failure} 原因>`)).toBeTruthy()
++    expect(screen.queryByText('opaque', { selector: 'opaque' })).toBeNull()
++  })
++
++  it('fails closed on invalid returned content and never retains the old summary', async () => {
++    const source = realSource()
++    setup(source)
++    await screen.findByText('Connected profile')
++    vi.spyOn(source.adapter, 'listProject').mockImplementation(async request => ({
++      ...ownedResult(request, 'Must stay hidden'),
++      jobs: [{ ...ownedResult(request).jobs[0], projectId: 'foreign-project' }],
++    }))
++    fireEvent.click(screen.getByRole('button', { name: 'Refresh render summaries' }))
++    expect(await screen.findByRole('heading', { name: 'Render summaries error' })).toBeTruthy()
++    expect(screen.queryByText('Connected profile')).toBeNull()
++    expect(screen.queryByText('Must stay hidden')).toBeNull()
++  })
++
++  it.each(['principalId', 'tenantId', 'sessionId', 'projectId'] as const)('retires a real valid pending response on %s change', async field => {
++    const source = realSource()
++    const pending = deferred<unknown>(); let oldRequest!: RenderListRequest
++    vi.spyOn(source.adapter, 'listProject').mockImplementation(request => { oldRequest = request; return pending.promise })
++    const view = setup(source)
++    const next = realSource({ [field]: field === 'projectId' ? 'project-2' : 'changed' })
++    view.rerender(<LocalizationProvider><RenderBrowser source={next} /></LocalizationProvider>)
++    expect(await screen.findByText('Connected profile')).toBeTruthy()
++    expect(screen.getByText(next.scope.projectId)).toBeTruthy()
++    await act(async () => pending.resolve(ownedResult(oldRequest, 'Retired identity secret')))
++    expect(screen.queryByText('Retired identity secret')).toBeNull()
++  })
++
++  it('retires real valid pending responses on adapter replacement and unmount', async () => {
++    const source = realSource()
++    const pending = deferred<unknown>(); let oldRequest!: RenderListRequest
++    vi.spyOn(source.adapter, 'listProject').mockImplementation(request => { oldRequest = request; return pending.promise })
++    const view = setup(source)
++    const replacement = createRendersFixture({ empty: true })
++    view.rerender(<LocalizationProvider><RenderBrowser source={replacement} /></LocalizationProvider>)
++    expect(await screen.findByRole('heading', { name: 'No render summaries in this snapshot' })).toBeTruthy()
++    await act(async () => pending.resolve(ownedResult(oldRequest, 'Retired adapter secret')))
++    expect(screen.queryByText('Retired adapter secret')).toBeNull()
++    view.unmount()
++
++    const unmountedSource = realSource()
++    const unmounted = deferred<unknown>(); let unmountedRequest!: RenderListRequest
++    vi.spyOn(unmountedSource.adapter, 'listProject').mockImplementation(request => { unmountedRequest = request; return unmounted.promise })
++    const second = setup(unmountedSource)
++    second.unmount()
++    await act(async () => unmounted.resolve(ownedResult(unmountedRequest, 'Unmounted secret')))
++    expect(screen.queryByText('Unmounted secret')).toBeNull()
++  })
++
++  it('does not query initial denied/unknown sources and displays their opaque explanations', () => {
++    for (const status of ['POLICY_DENIED', 'UNKNOWN_FAIL_CLOSED'] as const) {
++      const source = realSource()
++      source.access = { ...source.access, status, explanation: `<initial ${status} 原因>` }
++      const list = vi.spyOn(source.adapter, 'listProject')
++      const view = setup(source)
++      expect(screen.getByText(`<initial ${status} 原因>`)).toBeTruthy()
++      expect(list).not.toHaveBeenCalled()
++      view.unmount()
++    }
++  })
++
++  it('is unavailable by default and identifies the fixture as simulated read-only data', async () => {
++    const unavailable = render(<LocalizationProvider><RenderBrowser /></LocalizationProvider>)
++    expect(screen.getByRole('heading', { name: 'Render summaries unavailable' })).toBeTruthy()
++    unavailable.unmount()
++    setup()
++    await screen.findByRole('button', { name: 'Inspect render render-alpha' })
++    expect(screen.getByText(/SIMULATED RENDER DATA/)).toBeTruthy()
++    expect(screen.queryByRole('link')).toBeNull()
++  })
++
++  it('localizes controls and states in Chinese while leaving summary fields opaque', async () => {
++    setup(createRendersFixture(), 'zh-CN')
++    expect(await screen.findByRole('heading', { name: '项目渲染' })).toBeTruthy()
++    expect(screen.getByRole('searchbox', { name: '搜索渲染摘要' })).toBeTruthy()
++    expect(screen.getByText(/模拟渲染数据/)).toBeTruthy()
++    expect(screen.getAllByText('Cinema <literal>').length).toBeGreaterThan(0)
++    fireEvent.click(screen.getByRole('button', { name: '检查渲染 render-zeta' }))
++    expect(within(screen.getByRole('dialog', { name: '渲染摘要详情' })).getByText('timeline-snapshot-zeta')).toBeTruthy()
++  })
++})
+diff --git a/frontend/src/product/render-browser/RenderBrowser.tsx b/frontend/src/product/render-browser/RenderBrowser.tsx
+new file mode 100644
+index 00000000..f1e2c253
+--- /dev/null
++++ b/frontend/src/product/render-browser/RenderBrowser.tsx
+@@ -0,0 +1,184 @@
++import { createContext, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
++import { RENDER_JOB_STATUSES } from '../../contracts/app/render-job'
++import { Badge, Button, EmptyState, Panel, PropertyRow, Search, Skeleton, Status } from '../../components/design-system'
++import { AsyncStatePanel } from '../../foundation/errors'
++import { InteractionDialog } from '../../interaction/InteractionDialog'
++import { useTranslation } from '../../localization'
++import { localhostRendersFixture } from './fixture'
++import {
++  contextKey,
++  parseRenderSummaries,
++  selectRenderJobs,
++  sourceAccessExplanation,
++  sourceDisposition,
++  sourcePresentationOrigin,
++  unavailableRendersSource,
++  type RenderFilters,
++  type RenderListFailureStatus,
++  type RenderSummariesSnapshot,
++  type RendersSource,
++} from './source'
++
++const RendersSourceContext = createContext<RendersSource | undefined>(undefined)
++export function RenderBrowserProvider({ source, children }: { source: RendersSource; children: ReactNode }) {
++  return <RendersSourceContext.Provider value={source}>{children}</RendersSourceContext.Provider>
++}
++
++const adapterIds = new WeakMap<RendersSource['adapter'], number>()
++let nextAdapterId = 0
++function adapterKey(adapter: RendersSource['adapter']): number {
++  if (!adapterIds.has(adapter)) adapterIds.set(adapter, ++nextAdapterId)
++  return adapterIds.get(adapter)!
++}
++
++export function RenderBrowser({ source: supplied }: { source?: RendersSource }) {
++  const provided = useContext(RendersSourceContext)
++  const defaultSource = useMemo(() => typeof window === 'undefined'
++    ? unavailableRendersSource()
++    : localhostRendersFixture(window.location) ?? unavailableRendersSource(), [])
++  const source = supplied ?? provided ?? defaultSource
++  const sourceKey = JSON.stringify([
++    adapterKey(source.adapter), source.adapter.origin, contextKey({ ...source.scope, access: source.access }),
++  ])
++  // A source/identity change synchronously replaces the prior subtree. Cleanup
++  // below also rejects adapters that resolve successfully after cancellation.
++  return <RenderBrowserSession key={sourceKey} source={source} />
++}
++
++type BrowserStatus = 'loading' | 'ready' | 'cancelled' | RenderListFailureStatus
++
++function RenderBrowserSession({ source }: { source: RendersSource }) {
++  const { t } = useTranslation()
++  const text = (key: string, parameters?: Record<string, string | number>) => t(`shell.renders.${key}`, parameters)
++  const disposition = sourceDisposition(source)
++  const [status, setStatus] = useState<BrowserStatus>(disposition === 'ready' ? 'loading' : disposition)
++  const [snapshot, setSnapshot] = useState<RenderSummariesSnapshot | null>(null)
++  const [filters, setFilters] = useState<RenderFilters>({ query: '', status: '', order: 'id-asc' })
++  const [detailId, setDetailId] = useState<string | null>(null)
++  const [explanation, setExplanation] = useState<string | null>(null)
++  const live = useRef(false)
++  const generation = useRef(0)
++  const sequence = useRef(0)
++  const controller = useRef<AbortController | null>(null)
++
++  useLayoutEffect(() => {
++    live.current = true
++    return () => {
++      live.current = false
++      generation.current += 1
++      controller.current?.abort()
++    }
++  }, [])
++
++  async function load() {
++    const current = ++generation.current
++    controller.current?.abort()
++    setSnapshot(null)
++    setDetailId(null)
++    setExplanation(null)
++    if (disposition !== 'ready') {
++      setStatus(disposition)
++      return
++    }
++    const requestController = new AbortController()
++    controller.current = requestController
++    const request = { scope: source.scope, requestId: `render-summaries-${++sequence.current}` }
++    setStatus('loading')
++    try {
++      const result = parseRenderSummaries(await source.adapter.listProject(request, requestController.signal), request)
++      if (!live.current || requestController.signal.aborted || current !== generation.current) return
++      if (result.status === 'ok') {
++        setSnapshot(result)
++        setStatus('ready')
++      } else {
++        setStatus(result.status)
++        setExplanation(result.explanation ?? null)
++      }
++    } catch {
++      if (!live.current || requestController.signal.aborted || current !== generation.current) return
++      setSnapshot(null)
++      setDetailId(null)
++      setStatus('error')
++    }
++  }
++
++  useEffect(() => { void load() }, [])
++
++  function cancel() {
++    generation.current += 1
++    controller.current?.abort()
++    setSnapshot(null)
++    setDetailId(null)
++    setExplanation(null)
++    setStatus('cancelled')
++  }
++
++  const jobs = snapshot?.jobs ?? []
++  const visible = useMemo(() => selectRenderJobs(jobs, filters), [filters, jobs])
++  const detail = visible.find(job => job.id === detailId)
++  useEffect(() => {
++    if (detailId && !visible.some(job => job.id === detailId)) setDetailId(null)
++  }, [detailId, visible])
++
++  const failureCopy: Record<RenderListFailureStatus, { title: string; body: string; state: 'UNAVAILABLE' | 'BLOCKED' | 'ERROR' }> = {
++    unavailable: { title: text('failureUnavailableTitle'), body: text('failureUnavailableBody'), state: 'UNAVAILABLE' },
++    denied: { title: text('failureDeniedTitle'), body: text('failureDeniedBody'), state: 'BLOCKED' },
++    unknown: { title: text('failureUnknownTitle'), body: text('failureUnknownBody'), state: 'BLOCKED' },
++    unsupported: { title: text('failureUnsupportedTitle'), body: text('failureUnsupportedBody'), state: 'UNAVAILABLE' },
++    error: { title: text('failureErrorTitle'), body: text('failureErrorBody'), state: 'ERROR' },
++  }
++  const failure = status !== 'loading' && status !== 'ready' && status !== 'cancelled' ? failureCopy[status] : null
++  const presentationOrigin = sourcePresentationOrigin(source)
++  const originKey = presentationOrigin === 'simulated' ? 'originSimulated' : presentationOrigin === 'real' ? 'originReal' : 'originUnavailable'
++  const visibleExplanation = explanation ?? (disposition === 'ready' ? null : sourceAccessExplanation(source))
++  const workflowLabel = status === 'loading' ? 'cancel' : status === 'ready' ? 'refresh' : 'retry'
++
++  return <section className="ff-render-browser" aria-label={text('region')}>
++    <header className="ff-render-browser-heading">
++      <div><span>{text('eyebrow')}</span><h1>{text('title')}</h1><p>{text('description')}</p></div>
++      {disposition === 'ready'
++        ? <Button onClick={status === 'loading' ? cancel : () => void load()}>{text(workflowLabel)}</Button>
++        : null}
++    </header>
++    <p className={`ff-render-origin ff-render-origin--${presentationOrigin}`}><Badge tone={presentationOrigin === 'simulated' ? 'warning' : 'neutral'}>{text(originKey)}</Badge></p>
++    <PropertyRow label={text('projectId')}><code>{source.scope.projectId}</code></PropertyRow>
++    <p className="ff-render-boundary">{text('boundary')}</p>
++
++    {status === 'loading' ? <AsyncStatePanel state="LOADING" title={text('loadingTitle')}><Skeleton label={text('loadingLabel')} /></AsyncStatePanel> : null}
++    {status === 'cancelled' ? <AsyncStatePanel state="UNAVAILABLE" title={text('cancelledTitle')}><p>{text('cancelledBody')}</p></AsyncStatePanel> : null}
++    {failure ? <AsyncStatePanel state={failure.state} title={failure.title}><p>{failure.body}</p>{visibleExplanation ? <p className="ff-render-opaque-explanation">{visibleExplanation}</p> : null}</AsyncStatePanel> : null}
++
++    {status === 'ready' && snapshot ? <>
++      <div className="ff-render-controls">
++        <Search label={text('search')} placeholder={text('searchPlaceholder')} value={filters.query} onChange={event => setFilters(current => ({ ...current, query: event.target.value }))} />
++        <label>{text('statusLabel')}<select value={filters.status} onChange={event => setFilters(current => ({ ...current, status: event.target.value }))}>
++          <option value="">{text('allStatuses')}</option>
++          {RENDER_JOB_STATUSES.map(value => <option key={value} value={value}>{value}</option>)}
++        </select></label>
++        <label>{text('sortLabel')}<select value={filters.order} onChange={event => setFilters(current => ({ ...current, order: event.target.value as RenderFilters['order'] }))}>
++          <option value="id-asc">{text('sortAscending')}</option><option value="id-desc">{text('sortDescending')}</option>
++        </select></label>
++      </div>
++      <p role="status" aria-live="polite">{text(snapshot.boundary.limited ? 'snapshotLimited' : 'snapshotBounded', { count: jobs.length })}</p>
++      {!jobs.length ? <EmptyState title={text('emptyTitle')} description={text('emptyBody')} />
++        : !visible.length ? <EmptyState title={text('noMatchesTitle')} description={text('noMatchesBody')} action={<Button onClick={() => setFilters({ query: '', status: '', order: 'id-asc' })}>{text('reset')}</Button>} />
++          : <ul className="ff-render-browser-list" aria-label={text('list')}>
++            {visible.map(job => <li key={job.id}><Panel title={job.id}>
++              <p className="ff-render-profile">{job.profile}</p>
++              <Status label={job.status} />
++              <Button onClick={() => setDetailId(job.id)} aria-label={text('inspectNamed', { id: job.id })}>{text('inspect')}</Button>
++            </Panel></li>)}
++          </ul>}
++    </> : null}
++
++    {detail ? <InteractionDialog title={text('detailTitle')} closeLabel={text('detailClose')} onClose={() => setDetailId(null)} className="ff-render-detail">
++      <Badge tone="info">{text('detailReadOnly')}</Badge>
++      <PropertyRow label={text('detailId')}><code>{detail.id}</code></PropertyRow>
++      <PropertyRow label={text('detailProjectId')}><code>{detail.projectId}</code></PropertyRow>
++      <PropertyRow label={text('detailTimelineSnapshotId')}><code>{detail.timelineSnapshotId}</code></PropertyRow>
++      <PropertyRow label={text('detailProfile')}><span>{detail.profile}</span></PropertyRow>
++      <PropertyRow label={text('detailStatus')}><span>{detail.status}</span></PropertyRow>
++      <p>{text('detailLimit')}</p>
++    </InteractionDialog> : null}
++  </section>
++}
+diff --git a/frontend/src/product/render-browser/fixture.ts b/frontend/src/product/render-browser/fixture.ts
+new file mode 100644
+index 00000000..3f265a33
+--- /dev/null
++++ b/frontend/src/product/render-browser/fixture.ts
+@@ -0,0 +1,90 @@
++import type { RenderJobSummary } from '../../contracts/app/render-job'
++import type { EffectiveAccessEntry, EffectiveAccessStatus } from '../../foundation/effectiveAccess'
++import {
++  SIMULATED_RENDER_SUMMARIES_QUERY_KEY,
++  accessDisposition,
++  scopeKey,
++  type RenderListFailureStatus,
++  type RendersContext,
++  type RendersSource,
++} from './source'
++
++export interface RendersFixtureOptions {
++  principalId?: string
++  tenantId?: string
++  sessionId?: string
++  projectId?: string
++  accessStatus?: EffectiveAccessStatus
++  empty?: boolean
++  limit?: number
++  failure?: RenderListFailureStatus
++}
++
++function projectedAccess(status: EffectiveAccessStatus): EffectiveAccessEntry {
++  return {
++    key: SIMULATED_RENDER_SUMMARIES_QUERY_KEY,
++    status,
++    reasonCode: `SIMULATED_${status}`,
++    explanation: 'Simulated Render access projection; never valid for a real resource.',
++    factors: {
++      capability: status === 'AVAILABLE' ? 'SATISFIED' : 'UNKNOWN',
++      runtime: status === 'AVAILABLE' ? 'SATISFIED' : 'UNKNOWN',
++      entitlement: status === 'AVAILABLE' ? 'SATISFIED' : 'UNKNOWN',
++      policy: status === 'AVAILABLE' ? 'SATISFIED' : 'UNKNOWN',
++      quota: status === 'AVAILABLE' ? 'SATISFIED' : 'UNKNOWN',
++    },
++    source: 'DEVELOPMENT_FAIL_CLOSED',
++  }
++}
++
++export function createRendersFixture(options: RendersFixtureOptions = {}): RendersSource {
++  const scope = {
++    principalId: options.principalId ?? 'simulated-render-reader',
++    tenantId: options.tenantId ?? 'simulated-render-tenant',
++    sessionId: options.sessionId ?? 'simulated-render-session',
++    projectId: options.projectId ?? 'simulated-render-project',
++  }
++  const access = projectedAccess(options.accessStatus ?? 'AVAILABLE')
++  const jobs: RenderJobSummary[] = options.empty ? [] : [
++    { id: 'render-zeta', projectId: scope.projectId, timelineSnapshotId: 'timeline-snapshot-zeta', profile: 'Cinema <literal>', status: 'COMPLETED' },
++    { id: 'render-beta', projectId: scope.projectId, timelineSnapshotId: 'timeline-snapshot-beta', profile: '<b>opaque profile</b>', status: 'FAILED' },
++    { id: 'render-alpha', projectId: scope.projectId, timelineSnapshotId: 'timeline-snapshot-alpha', profile: 'Social 原文', status: 'QUEUED' },
++  ]
++  const limit = Math.min(500, Math.max(1, options.limit ?? 20))
++  return {
++    scope,
++    access,
++    adapter: {
++      origin: 'simulated',
++      async listProject(request, signal) {
++        const envelope = { scope: request.scope, requestId: request.requestId }
++        if (signal.aborted) return { ...envelope, status: 'error' }
++        if (scopeKey(request.scope) !== scopeKey(scope)) return { ...envelope, status: 'denied' }
++        const disposition = accessDisposition({ ...scope, access } as RendersContext)
++        if (disposition !== 'ready') return { ...envelope, status: disposition }
++        if (options.failure) return { ...envelope, status: options.failure, explanation: 'Simulated opaque Render source failure.' }
++        return {
++          ...envelope,
++          status: 'ok',
++          jobs: jobs.slice(0, limit).map(job => ({ ...job })),
++          boundary: { kind: 'project-snapshot', limit, limited: jobs.length > limit },
++        }
++      },
++    },
++  }
++}
++
++export function localhostRendersFixture(location: Pick<Location, 'hostname' | 'search'>): RendersSource | null {
++  if (!['localhost', '127.0.0.1', '[::1]'].includes(location.hostname)) return null
++  const parameters = new URLSearchParams(location.search)
++  if (parameters.getAll('rendersFixture').length !== 1 || parameters.get('rendersFixture') !== '1') return null
++  const fixtureAccess = parameters.get('rendersFixtureAccess')
++  const fixtureFailure = parameters.get('rendersFixtureFailure')
++  const supportedFailures = ['unavailable', 'denied', 'unknown', 'unsupported', 'error'] as const
++  return createRendersFixture({
++    accessStatus: fixtureAccess === 'denied' ? 'POLICY_DENIED' : fixtureAccess === 'unknown' ? 'UNKNOWN_FAIL_CLOSED' : 'AVAILABLE',
++    empty: parameters.get('rendersFixtureEmpty') === '1',
++    limit: parameters.get('rendersFixtureLimited') === '1' ? 1 : undefined,
++    failure: supportedFailures.find(value => value === fixtureFailure),
++  })
++}
+diff --git a/frontend/src/product/render-browser/source.test.ts b/frontend/src/product/render-browser/source.test.ts
+new file mode 100644
+index 00000000..0eced4de
+--- /dev/null
++++ b/frontend/src/product/render-browser/source.test.ts
+@@ -0,0 +1,157 @@
++import { describe, expect, it, vi } from 'vitest'
++import type { RenderJobSummary } from '../../contracts/app/render-job'
++import type { EffectiveAccessEntry, EffectiveAccessStatus } from '../../foundation/effectiveAccess'
++import { createRendersFixture, localhostRendersFixture } from './fixture'
++import {
++  REAL_RENDER_SUMMARIES_QUERY_KEY,
++  accessDisposition,
++  contextKey,
++  parseRenderSummaries,
++  selectRenderJobs,
++  sourceDisposition,
++  sourcePresentationOrigin,
++  unavailableRendersSource,
++  type RenderListRequest,
++  type RendersContext,
++  type RendersSource,
++} from './source'
++
++function access(status: EffectiveAccessStatus): EffectiveAccessEntry {
++  return {
++    key: REAL_RENDER_SUMMARIES_QUERY_KEY,
++    status,
++    reasonCode: `TEST_${status}`,
++    explanation: `<server-owned ${status} 原因>`,
++    factors: { capability: 'UNKNOWN', runtime: 'UNKNOWN', entitlement: 'UNKNOWN', policy: 'UNKNOWN', quota: 'UNKNOWN' },
++    source: 'SERVER',
++  }
++}
++
++const scope = { principalId: 'principal-1', tenantId: 'tenant-1', sessionId: 'session-1', projectId: 'project-1' }
++const context: RendersContext = { ...scope, access: access('AVAILABLE') }
++const request: RenderListRequest = { scope, requestId: 'request-1' }
++const jobs: RenderJobSummary[] = [
++  { id: 'render-z', projectId: 'project-1', timelineSnapshotId: 'snapshot-z', profile: 'Cinema <literal>', status: 'COMPLETED' },
++  { id: 'render-b', projectId: 'project-1', timelineSnapshotId: 'snapshot-b', profile: 'Social 原文', status: 'FAILED' },
++  { id: 'render-a', projectId: 'project-1', timelineSnapshotId: 'snapshot-a', profile: 'Social 原文', status: 'QUEUED' },
++]
++const receipt = () => ({
++  status: 'ok', scope, requestId: 'request-1', jobs,
++  boundary: { kind: 'project-snapshot', limit: 3, limited: true },
++})
++
++describe('single-Project render summary consumption', () => {
++  it('reuses RenderJobSummary and filters only ID/profile/status with deterministic ID sorting', () => {
++    const existingContract: RenderJobSummary = jobs[0]
++    expect(selectRenderJobs(jobs, { query: 'Cinema <literal>', status: '', order: 'id-asc' })).toEqual([existingContract])
++    expect(selectRenderJobs(jobs, { query: 'snapshot', status: '', order: 'id-asc' })).toEqual([])
++    expect(selectRenderJobs(jobs, { query: '', status: 'FAILED', order: 'id-asc' }).map(job => job.id)).toEqual(['render-b'])
++    expect(selectRenderJobs(jobs, { query: '', status: '', order: 'id-asc' }).map(job => job.id)).toEqual(['render-a', 'render-b', 'render-z'])
++    expect(selectRenderJobs(jobs, { query: '', status: '', order: 'id-desc' }).map(job => job.id)).toEqual(['render-z', 'render-b', 'render-a'])
++  })
++
++  it('accepts an owned, strict, bounded single-Project result without a global inventory claim', () => {
++    expect(parseRenderSummaries(receipt(), request)).toEqual(receipt())
++  })
++
++  it.each([
++    undefined,
++    { error: 'NOT_FOUND' },
++    { ...receipt(), requestId: 'old-request' },
++    { ...receipt(), scope: { ...scope, principalId: 'other' } },
++    { ...receipt(), scope: { ...scope, tenantId: 'other' } },
++    { ...receipt(), scope: { ...scope, sessionId: 'other' } },
++    { ...receipt(), scope: { ...scope, projectId: 'other' } },
++    { ...receipt(), jobs: [jobs[0], jobs[0]] },
++    { ...receipt(), jobs: [{ ...jobs[0], projectId: 'foreign-project' }] },
++    { ...receipt(), jobs: [{ ...jobs[0], status: 'FUTURE_STATUS' }] },
++    { ...receipt(), jobs: [{ ...jobs[0], providerId: 'must-not-enter-safe-summary' }] },
++    { ...receipt(), jobs: [...jobs, { ...jobs[0], id: 'render-four' }] },
++    { ...receipt(), boundary: { kind: 'global-inventory', limit: 3, limited: true } },
++    { ...receipt(), boundary: { kind: 'project-snapshot', limit: 0, limited: false } },
++    { ...receipt(), boundary: { kind: 'project-snapshot', limit: 501, limited: false } },
++  ])('rejects malformed, duplicate, foreign, unknown-status, extra-field, mismatched, or unbounded results %#', input => {
++    expect(() => parseRenderSummaries(input, request)).toThrow()
++  })
++
++  it.each(['unavailable', 'denied', 'unknown', 'unsupported', 'error'] as const)('preserves exact %s failures and opaque explanations', status => {
++    const failure = { status, scope, requestId: 'request-1', explanation: '<opaque 原因>' }
++    expect(parseRenderSummaries(failure, request)).toEqual(failure)
++  })
++
++  it('keys adapter-relevant principal, tenant, session, Project and access projection changes', () => {
++    const keys = [
++      context,
++      { ...context, principalId: 'other' },
++      { ...context, tenantId: 'other' },
++      { ...context, sessionId: 'other' },
++      { ...context, projectId: 'other' },
++      { ...context, access: access('POLICY_DENIED') },
++    ].map(contextKey)
++    expect(new Set(keys).size).toBe(keys.length)
++  })
++
++  it('consumes established EffectiveAccess states without creating permission', () => {
++    expect(accessDisposition(context)).toBe('ready')
++    expect(accessDisposition({ ...context, access: access('POLICY_DENIED') })).toBe('denied')
++    expect(accessDisposition({ ...context, access: access('NOT_ENTITLED') })).toBe('denied')
++    expect(accessDisposition({ ...context, access: access('UNKNOWN_FAIL_CLOSED') })).toBe('unknown')
++    expect(accessDisposition({ ...context, access: access('RUNTIME_UNAVAILABLE') })).toBe('unavailable')
++    expect(accessDisposition({ ...context, principalId: null })).toBe('unknown')
++  })
++})
++
++describe('Render source and fixture boundaries', () => {
++  const realSource = (entry: EffectiveAccessEntry): RendersSource => ({
++    scope, access: entry,
++    adapter: { origin: 'real', async listProject() { throw new Error('not called') } },
++  })
++
++  it('requires the exact SERVER projection proposal for a real source', () => {
++    expect(sourceDisposition(realSource(access('AVAILABLE')))).toBe('ready')
++    expect(sourcePresentationOrigin(realSource(access('AVAILABLE')))).toBe('real')
++    expect(sourceDisposition(realSource({ ...access('AVAILABLE'), key: 'fixture.render.job.summary.query' }))).toBe('unknown')
++    expect(sourceDisposition(realSource({ ...access('AVAILABLE'), source: 'DEVELOPMENT_FAIL_CLOSED' }))).toBe('unknown')
++    expect(sourcePresentationOrigin(realSource({ ...access('AVAILABLE'), source: 'DEVELOPMENT_FAIL_CLOSED' }))).toBe('unavailable')
++  })
++
++  it('accepts only the fixture-labelled fail-closed simulated projection', () => {
++    const fixture = createRendersFixture()
++    expect(sourceDisposition(fixture)).toBe('ready')
++    expect(sourcePresentationOrigin(fixture)).toBe('simulated')
++    expect(sourceDisposition({ ...fixture, adapter: { ...fixture.adapter, origin: 'real' } })).toBe('unknown')
++    expect(sourceDisposition({ ...fixture, access: { ...fixture.access, key: REAL_RENDER_SUMMARIES_QUERY_KEY } })).toBe('unknown')
++    expect(sourceDisposition({ ...fixture, access: { ...fixture.access, source: 'SERVER' } })).toBe('unknown')
++  })
++
++  it('defaults unavailable and performs no HTTP request', async () => {
++    const fetch = vi.spyOn(globalThis, 'fetch')
++    const source = unavailableRendersSource()
++    const result = await source.adapter.listProject({ scope: source.scope, requestId: 'q' }, new AbortController().signal)
++    expect(source.adapter.origin).toBe('unavailable')
++    expect(result).toMatchObject({ status: 'unavailable', scope: source.scope, requestId: 'q' })
++    expect(fetch).not.toHaveBeenCalled()
++    fetch.mockRestore()
++  })
++
++  it('requires one exact localhost rendersFixture=1 opt-in and ignores URL Project claims', async () => {
++    expect(localhostRendersFixture({ hostname: 'example.com', search: '?rendersFixture=1' })).toBeNull()
++    expect(localhostRendersFixture({ hostname: 'localhost', search: '?projectId=project-1' })).toBeNull()
++    expect(localhostRendersFixture({ hostname: 'localhost', search: '?rendersFixture=1&rendersFixture=1' })).toBeNull()
++    const source = localhostRendersFixture({ hostname: '127.0.0.1', search: '?rendersFixture=1&projectId=attacker-choice' })!
++    const fetch = vi.spyOn(globalThis, 'fetch')
++    const setItem = vi.spyOn(Storage.prototype, 'setItem')
++    expect(source.scope.projectId).toBe('simulated-render-project')
++    expect(source.scope.projectId).not.toBe('attacker-choice')
++    await source.adapter.listProject({ scope: source.scope, requestId: 'q' }, new AbortController().signal)
++    expect(fetch).not.toHaveBeenCalled()
++    expect(setItem).not.toHaveBeenCalled()
++    fetch.mockRestore(); setItem.mockRestore()
++  })
++
++  it.each(['POLICY_DENIED', 'UNKNOWN_FAIL_CLOSED'] as const)('fixture cannot relax %s access', async status => {
++    const source = createRendersFixture({ accessStatus: status })
++    const result = await source.adapter.listProject({ scope: source.scope, requestId: 'q' }, new AbortController().signal)
++    expect(result).toMatchObject({ status: status === 'POLICY_DENIED' ? 'denied' : 'unknown' })
++  })
++})
+diff --git a/frontend/src/product/render-browser/source.ts b/frontend/src/product/render-browser/source.ts
+new file mode 100644
+index 00000000..1ac67501
+--- /dev/null
++++ b/frontend/src/product/render-browser/source.ts
+@@ -0,0 +1,143 @@
++import { z } from 'zod'
++import { RenderJobSummary } from '../../contracts/app/render-job'
++import { isAvailable, unknownAccess, type EffectiveAccessEntry } from '../../foundation/effectiveAccess'
++
++export const REAL_RENDER_SUMMARIES_QUERY_KEY = 'render.job.summary.query'
++export const SIMULATED_RENDER_SUMMARIES_QUERY_KEY = 'fixture.render.job.summary.query'
++const MAX_RENDER_SUMMARIES = 500
++
++export interface RenderScope {
++  principalId: string | null
++  tenantId: string | null
++  sessionId: string
++  projectId: string
++}
++export interface RendersContext extends RenderScope { access: EffectiveAccessEntry }
++export interface RenderListRequest { scope: RenderScope; requestId: string }
++export interface RendersAdapter {
++  origin: 'real' | 'simulated' | 'unavailable'
++  listProject(request: RenderListRequest, signal: AbortSignal): Promise<unknown>
++}
++export interface RendersSource { scope: RenderScope; access: EffectiveAccessEntry; adapter: RendersAdapter }
++export type RenderOrder = 'id-asc' | 'id-desc'
++export type RenderFilters = { query: string; status: string; order: RenderOrder }
++export type RenderListFailureStatus = 'unavailable' | 'denied' | 'unknown' | 'unsupported' | 'error'
++
++const identity = z.string().min(1)
++const scopeSchema = z.object({
++  principalId: identity.nullable(), tenantId: identity.nullable(), sessionId: identity, projectId: identity,
++}).strict()
++const envelope = { scope: scopeSchema, requestId: identity }
++const successSchema = z.object({
++  ...envelope,
++  status: z.literal('ok'),
++  // Reuse the established application contract and reject any fields outside
++  // its five-field safe summary instead of silently widening this surface.
++  jobs: z.array(RenderJobSummary.strict()).max(MAX_RENDER_SUMMARIES),
++  boundary: z.object({
++    kind: z.literal('project-snapshot'),
++    limit: z.number().int().positive().max(MAX_RENDER_SUMMARIES),
++    limited: z.boolean(),
++  }).strict(),
++}).strict()
++const failureSchema = z.object({
++  ...envelope,
++  status: z.enum(['unavailable', 'denied', 'unknown', 'unsupported', 'error']),
++  explanation: z.string().optional(),
++}).strict()
++export type RenderSummariesSnapshot = z.infer<typeof successSchema>
++export type RenderListFailure = z.infer<typeof failureSchema>
++
++export function scopeKey(scope: RenderScope): string {
++  return JSON.stringify([scope.principalId, scope.tenantId, scope.sessionId, scope.projectId])
++}
++
++export function contextKey(context: RendersContext): string {
++  return JSON.stringify([
++    scopeKey(context), context.access.key, context.access.status, context.access.reasonCode,
++    context.access.explanation, context.access.source, context.access.observedAt ?? null,
++    context.access.factors.capability, context.access.factors.runtime, context.access.factors.entitlement,
++    context.access.factors.policy, context.access.factors.quota,
++  ])
++}
++
++export function accessDisposition(context: RendersContext): 'ready' | 'unavailable' | 'denied' | 'unknown' {
++  if (!context.principalId || !context.tenantId) return 'unknown'
++  if (isAvailable(context.access)) return 'ready'
++  if (context.access.status === 'POLICY_DENIED' || context.access.status === 'NOT_ENTITLED') return 'denied'
++  if (context.access.status === 'UNKNOWN_FAIL_CLOSED') return 'unknown'
++  return 'unavailable'
++}
++
++function hasExpectedProjection(source: RendersSource): boolean {
++  if (source.adapter.origin === 'real') {
++    // This key is a frontend consumption proposal only. A host may inject a
++    // real adapter only with the exact server-owned projection.
++    return source.access.key === REAL_RENDER_SUMMARIES_QUERY_KEY && source.access.source === 'SERVER'
++  }
++  if (source.adapter.origin === 'simulated') {
++    return source.access.key === SIMULATED_RENDER_SUMMARIES_QUERY_KEY
++      && source.access.source === 'DEVELOPMENT_FAIL_CLOSED'
++  }
++  return false
++}
++
++export function sourcePresentationOrigin(source: RendersSource): RendersAdapter['origin'] {
++  return source.adapter.origin !== 'unavailable' && hasExpectedProjection(source)
++    ? source.adapter.origin
++    : 'unavailable'
++}
++
++export function sourceDisposition(source: RendersSource): 'ready' | 'unavailable' | 'denied' | 'unknown' {
++  if (source.adapter.origin === 'unavailable') return 'unavailable'
++  if (!hasExpectedProjection(source)) return 'unknown'
++  return accessDisposition({ ...source.scope, access: source.access })
++}
++
++export function sourceAccessExplanation(source: RendersSource): string | null {
++  return hasExpectedProjection(source) ? source.access.explanation : null
++}
++
++export function parseRenderSummaries(input: unknown, request: RenderListRequest): RenderSummariesSnapshot | RenderListFailure {
++  const result = z.union([successSchema, failureSchema]).parse(input)
++  if (scopeKey(result.scope) !== scopeKey(request.scope) || result.requestId !== request.requestId) {
++    throw new Error('Invalid Render summary receipt ownership')
++  }
++  if (result.status !== 'ok') return result
++  const ids = result.jobs.map(job => job.id)
++  if (new Set(ids).size !== ids.length
++    || result.jobs.length > result.boundary.limit
++    || result.jobs.some(job => job.projectId !== request.scope.projectId)) {
++    throw new Error('Invalid single-Project Render snapshot')
++  }
++  return result
++}
++
++function compareText(left: string, right: string): number {
++  return left < right ? -1 : left > right ? 1 : 0
++}
++
++export function selectRenderJobs(jobs: readonly RenderJobSummary[], filters: RenderFilters): RenderJobSummary[] {
++  const query = filters.query.toLocaleLowerCase()
++  const direction = filters.order === 'id-desc' ? -1 : 1
++  return jobs
++    .filter(job => (!query || `${job.id}\n${job.profile}`.toLocaleLowerCase().includes(query))
++      && (!filters.status || job.status === filters.status))
++    .sort((left, right) => direction * compareText(left.id, right.id))
++}
++
++export function unavailableRendersSource(): RendersSource {
++  const scope: RenderScope = {
++    principalId: null, tenantId: null, sessionId: 'unconfigured', projectId: 'unconfigured',
++  }
++  return {
++    scope,
++    access: unknownAccess(REAL_RENDER_SUMMARIES_QUERY_KEY),
++    adapter: {
++      origin: 'unavailable',
++      async listProject(request) {
++        return { status: 'unavailable', scope: request.scope, requestId: request.requestId }
++      },
++    },
++  }
++}
+diff --git a/frontend/src/styles/foundation.css b/frontend/src/styles/foundation.css
+index e4afe48b..e86169e2 100644
+--- a/frontend/src/styles/foundation.css
++++ b/frontend/src/styles/foundation.css
+@@ -478,12 +478,32 @@ kbd { padding: 1px var(--space-1); border: 1px solid var(--border-default); bord
+ .ff-project-description, .ff-project-detail-description, .ff-project-opaque-explanation { white-space: pre-wrap; overflow-wrap: anywhere; }
+ .ff-project-detail { width: min(560px, calc(100vw - 32px)); max-height: 80dvh; overflow: auto; padding: var(--space-4); border: 1px solid var(--border-strong); border-radius: var(--radius-xl); background: var(--surface-2); box-shadow: var(--shadow-xl); }
+ .ff-project-detail code { overflow-wrap: anywhere; }
++.ff-render-browser { min-width: 0; }
++.ff-render-browser-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-4); }
++.ff-render-browser-heading > div > span { color: var(--accent-400); text-transform: uppercase; letter-spacing: .1em; font-size: var(--text-micro); font-weight: 700; }
++.ff-render-browser-heading h1 { margin: var(--space-1) 0; font-size: clamp(1.5rem, 3vw, var(--text-h1)); }
++.ff-render-browser-heading p, .ff-render-boundary { color: var(--text-secondary); }
++.ff-render-origin { width: fit-content; max-width: 100%; padding: var(--space-2); border: 1px solid var(--border-strong); border-radius: var(--radius-md); background: var(--surface-2); }
++.ff-render-origin--simulated { border-color: color-mix(in srgb, var(--warning) 55%, var(--border-strong)); background: var(--warning-muted); }
++.ff-render-controls { display: flex; flex-wrap: wrap; align-items: end; gap: var(--space-3); margin-block: var(--space-4); }
++.ff-render-controls label { display: flex; flex-direction: column; gap: var(--space-1); color: var(--text-secondary); font-size: var(--text-caption); }
++.ff-render-controls select { min-height: 36px; max-width: min(100%, 360px); padding: var(--space-2); border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--surface-2); color: var(--text-primary); }
++.ff-render-browser-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: var(--space-4); margin-block: var(--space-4); padding: 0; list-style: none; }
++.ff-render-browser-list .ff-panel { height: 100%; min-width: 0; }
++.ff-render-browser-list .ff-panel__body { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); }
++.ff-render-browser-list .ff-panel__body > * { max-width: 100%; }
++.ff-render-profile, .ff-render-opaque-explanation { white-space: pre-wrap; overflow-wrap: anywhere; }
++.ff-render-detail { width: min(560px, calc(100vw - 32px)); max-height: 80dvh; overflow: auto; padding: var(--space-4); border: 1px solid var(--border-strong); border-radius: var(--radius-xl); background: var(--surface-2); box-shadow: var(--shadow-xl); }
++.ff-render-detail code, .ff-render-detail span { overflow-wrap: anywhere; }
+ @media (max-width: 640px) {
+   .ff-notification-inbox { width: calc(100vw - 16px); max-height: 90dvh; margin: 8px; border-radius: 12px; padding: 14px; }
+   .ff-notification-inbox button, .ff-notification-inbox a { min-height: 44px; }
+   .ff-project-browser-heading { flex-direction: column; }
+   .ff-project-controls, .ff-project-controls > *, .ff-project-controls .ff-input { width: 100%; max-width: none; }
+   .ff-project-detail { width: calc(100vw - 16px); max-height: 90dvh; margin: 8px; border-radius: 12px; }
++  .ff-render-browser-heading { flex-direction: column; }
++  .ff-render-controls, .ff-render-controls > *, .ff-render-controls .ff-input { width: 100%; max-width: none; }
++  .ff-render-detail { width: calc(100vw - 16px); max-height: 90dvh; margin: 8px; border-radius: 12px; }
+ }
+ 
+ @media (max-width: 640px) {
+diff --git a/frontend/src/surfaces/FoundationPages.tsx b/frontend/src/surfaces/FoundationPages.tsx
+index 762a2d5f..93944e2a 100644
+--- a/frontend/src/surfaces/FoundationPages.tsx
++++ b/frontend/src/surfaces/FoundationPages.tsx
+@@ -8,6 +8,7 @@ import { ProjectContextProvider, useProjectContext } from '../foundation/project
+ import { useEffectiveAccessCatalog, useWorkspaceHome } from '../foundation/platformClient'
+ import { getSurface, surfaceRegistry, type SurfaceId } from '../foundation/surfaceRegistry'
+ import { ProjectBrowser } from '../product/projects/ProjectBrowser'
++import { RenderBrowser } from '../product/render-browser/RenderBrowser'
+ 
+ function routeParams(): { workspaceId?: string; projectId?: string } {
+   return useParams({ strict: false }) as { workspaceId?: string; projectId?: string }
+@@ -132,8 +133,10 @@ export function OperationsOverviewPage() {
+ 
+ export function OperationsProjectionPage() {
+   const location = useLocation()
+-  const area = location.pathname.endsWith('/storage') ? 'Storage' : 'Renders'
+-  return <ProductAppShell surfaceId="operations"><div className="ff-page"><PageHeading eyebrow="Platform operations" title={area} description="Only a narrow, honest foundation route is exposed; unsupported detail tabs remain absent." /><div className="ff-table-toolbar"><Search label={`Search ${area}`} /><Button disabled>Filter</Button><Button disabled>Sort</Button></div><AsyncStatePanel state="UNAVAILABLE" title={`${area} projection requires explicit scope`}><p>{area === 'Renders' ? 'The accepted Render API is Project-scoped. Operations does not guess a Project or reconstruct a global list.' : 'The existing storage health diagnostic has not yet been migrated to a typed authorized operations projection.'}</p></AsyncStatePanel></div></ProductAppShell>
++  if (!location.pathname.endsWith('/storage')) {
++    return <ProductAppShell surfaceId="operations"><div className="ff-page"><RenderBrowser /></div></ProductAppShell>
++  }
++  return <ProductAppShell surfaceId="operations"><div className="ff-page"><PageHeading eyebrow="Platform operations" title="Storage" description="Only a narrow, honest foundation route is exposed; unsupported detail tabs remain absent." /><div className="ff-table-toolbar"><Search label="Search Storage" /><Button disabled>Filter</Button><Button disabled>Sort</Button></div><AsyncStatePanel state="UNAVAILABLE" title="Storage projection requires explicit scope"><p>The existing storage health diagnostic has not yet been migrated to a typed authorized operations projection.</p></AsyncStatePanel></div></ProductAppShell>
+ }
+ 
+ const adminAreas = ['organization', 'members', 'workspaces', 'roles', 'security', 'billing', 'entitlements', 'usage', 'quota', 'policies', 'audit'] as const

@@ -1,0 +1,4994 @@
+[
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:23.393823+00:00",
+    "method": "Network.enable",
+    "params": {},
+    "result": {
+      "id": 1,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:23.395323+00:00",
+    "method": "Page.enable",
+    "params": {},
+    "result": {
+      "id": 2,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:23.396940+00:00",
+    "method": "Emulation.setFocusEmulationEnabled",
+    "params": {
+      "enabled": true
+    },
+    "result": {
+      "id": 3,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:23.398459+00:00",
+    "method": "Page.addScriptToEvaluateOnNewDocument",
+    "params": {
+      "source": "window.__nativeInputs=[];for(const type of ['keydown','pointerdown'])addEventListener(type,e=>window.__nativeInputs.push({type:e.type,trusted:e.isTrusted,key:e.key||null}),true)"
+    },
+    "result": {
+      "id": 4,
+      "result": {
+        "identifier": "1"
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:23.400160+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 5,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:23.401818+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__nativeInputs||[]",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 6,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": []
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:23.417072+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/operations/renders"
+    },
+    "result": {
+      "id": 7,
+      "result": {
+        "frameId": "F4A636436025F8288DC2E695D70AB15D",
+        "loaderId": "94E67AB7697BED1B8BF04A7E42527818",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:23.722137+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 8,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:23.887814+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 9,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.082466+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 10,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.087436+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 11,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.089221+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 12,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.090791+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.includes(\"Render\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 13,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.092315+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.toLowerCase().includes(\"unavailable\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 14,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.094060+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 15,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 0,
+          "description": "0"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.217249+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.221067+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__nativeInputs||[]",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 17,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": []
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.234883+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/operations/renders?rendersFixture=1"
+    },
+    "result": {
+      "id": 18,
+      "result": {
+        "frameId": "F4A636436025F8288DC2E695D70AB15D",
+        "loaderId": "B0FA90102BB9F0E7542F2B8AE539C018",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.549618+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 19,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.702187+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 20,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.704772+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 21,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.707225+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 22,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.709068+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.includes(\"Render\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 23,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.711601+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length===3",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 24,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.714135+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.innerText",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 25,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "Skip to main content\nMP\nMedia Platform\nCreative workspace\nProduct UI language\nEnglish\n简体中文\nNavigation\nOperations\nCommands\n⌘K\nAsk Agent\nNotifications\nOPERATIONS · READ-ONLY\nProject renders\n\nFind and inspect safe render job summaries supplied for one explicit Project. This view cannot control jobs.\n\nRefresh render summaries\n\nSIMULATED RENDER DATA · localhost fixture only · no real account or permission\n\nSource Project ID\nsimulated-render-project\n\nScope comes only from the source Project shown above. Results are bounded and are not a global render inventory.\n\nRender status\nAll established statuses\nQUEUED\nSELECTING_PROVIDER\nPROVIDER_SELECTED\nEXECUTING\nCOMPLETING\nCOMPLETED\nFAILED\nCANCELLED\nREJECTED\nSort render summaries\nRender ID A–Z\nRender ID Z–A\n\n3 render summaries loaded · bounded Project snapshot.\n\nrender-alpha\n\nSocial 原文\n\nQUEUED\nInspect\nrender-beta\n\n<b>opaque profile</b>\n\nFAILED\nInspect\nrender-zeta\n\nCinema <literal>\n\nCOMPLETED\nInspect"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.716418+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.innerText",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 26,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "Skip to main content\nMP\nMedia Platform\nCreative workspace\nProduct UI language\nEnglish\n简体中文\nNavigation\nOperations\nCommands\n⌘K\nAsk Agent\nNotifications\nOPERATIONS · READ-ONLY\nProject renders\n\nFind and inspect safe render job summaries supplied for one explicit Project. This view cannot control jobs.\n\nRefresh render summaries\n\nSIMULATED RENDER DATA · localhost fixture only · no real account or permission\n\nSource Project ID\nsimulated-render-project\n\nScope comes only from the source Project shown above. Results are bounded and are not a global render inventory.\n\nRender status\nAll established statuses\nQUEUED\nSELECTING_PROVIDER\nPROVIDER_SELECTED\nEXECUTING\nCOMPLETING\nCOMPLETED\nFAILED\nCANCELLED\nREJECTED\nSort render summaries\nRender ID A–Z\nRender ID Z–A\n\n3 render summaries loaded · bounded Project snapshot.\n\nrender-alpha\n\nSocial 原文\n\nQUEUED\nInspect\nrender-beta\n\n<b>opaque profile</b>\n\nFAILED\nInspect\nrender-zeta\n\nCinema <literal>\n\nCOMPLETED\nInspect"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.718775+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.innerText",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 27,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "Skip to main content\nMP\nMedia Platform\nCreative workspace\nProduct UI language\nEnglish\n简体中文\nNavigation\nOperations\nCommands\n⌘K\nAsk Agent\nNotifications\nOPERATIONS · READ-ONLY\nProject renders\n\nFind and inspect safe render job summaries supplied for one explicit Project. This view cannot control jobs.\n\nRefresh render summaries\n\nSIMULATED RENDER DATA · localhost fixture only · no real account or permission\n\nSource Project ID\nsimulated-render-project\n\nScope comes only from the source Project shown above. Results are bounded and are not a global render inventory.\n\nRender status\nAll established statuses\nQUEUED\nSELECTING_PROVIDER\nPROVIDER_SELECTED\nEXECUTING\nCOMPLETING\nCOMPLETED\nFAILED\nCANCELLED\nREJECTED\nSort render summaries\nRender ID A–Z\nRender ID Z–A\n\n3 render summaries loaded · bounded Project snapshot.\n\nrender-alpha\n\nSocial 原文\n\nQUEUED\nInspect\nrender-beta\n\n<b>opaque profile</b>\n\nFAILED\nInspect\nrender-zeta\n\nCinema <literal>\n\nCOMPLETED\nInspect"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.863235+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.867727+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"input[type=search][aria-label=\\\"Search render summaries\\\"]\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 29,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.870113+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=document.querySelector(\"input[type=search][aria-label=\\\"Search render summaries\\\"]\").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 30,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 234,
+            "y": 376
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.874911+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 234,
+      "y": 376,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 31,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.879894+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 234,
+      "y": 376,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 32,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.883349+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 234,
+      "y": 376,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 33,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.886878+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Control",
+      "code": "ControlLeft",
+      "windowsVirtualKeyCode": 17,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 34,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.890192+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 35,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.892458+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 36,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.895688+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Control",
+      "code": "ControlLeft",
+      "windowsVirtualKeyCode": 17,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 37,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.899214+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Backspace",
+      "code": "Backspace",
+      "windowsVirtualKeyCode": 8
+    },
+    "result": {
+      "id": 38,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.902306+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Backspace",
+      "code": "Backspace",
+      "windowsVirtualKeyCode": 8
+    },
+    "result": {
+      "id": 39,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.915541+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "C",
+      "code": "KeyC",
+      "windowsVirtualKeyCode": 67,
+      "modifiers": 0,
+      "text": "C",
+      "unmodifiedText": "C"
+    },
+    "result": {
+      "id": 40,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:24.920401+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "C",
+      "code": "KeyC",
+      "windowsVirtualKeyCode": 67,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 41,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:25.081876+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "i",
+      "code": "KeyI",
+      "windowsVirtualKeyCode": 73,
+      "modifiers": 0,
+      "text": "i",
+      "unmodifiedText": "i"
+    },
+    "result": {
+      "id": 42,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:25.084821+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "i",
+      "code": "KeyI",
+      "windowsVirtualKeyCode": 73,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 43,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:25.246953+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "n",
+      "code": "KeyN",
+      "windowsVirtualKeyCode": 78,
+      "modifiers": 0,
+      "text": "n",
+      "unmodifiedText": "n"
+    },
+    "result": {
+      "id": 44,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:25.251036+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "n",
+      "code": "KeyN",
+      "windowsVirtualKeyCode": 78,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 45,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:25.410948+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "e",
+      "code": "KeyE",
+      "windowsVirtualKeyCode": 69,
+      "modifiers": 0,
+      "text": "e",
+      "unmodifiedText": "e"
+    },
+    "result": {
+      "id": 46,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:25.414003+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "e",
+      "code": "KeyE",
+      "windowsVirtualKeyCode": 69,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 47,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:25.573959+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "m",
+      "code": "KeyM",
+      "windowsVirtualKeyCode": 77,
+      "modifiers": 0,
+      "text": "m",
+      "unmodifiedText": "m"
+    },
+    "result": {
+      "id": 48,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:25.576906+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "m",
+      "code": "KeyM",
+      "windowsVirtualKeyCode": 77,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 49,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:25.736624+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 0,
+      "text": "a",
+      "unmodifiedText": "a"
+    },
+    "result": {
+      "id": 50,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:25.739529+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 51,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:25.893293+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 52,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 1,
+          "description": "1"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:25.898638+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 53,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:25.901864+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 54,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.057104+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 55,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.060288+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 56,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.215472+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 57,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.219005+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 58,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.372841+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement.getAttribute(\"aria-label\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 59,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "Inspect render render-zeta"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.393045+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 60,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.396146+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 61,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.549950+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 62,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.553517+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\").textContent",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 63,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "Render summary details×Read-only local inspectionRender job IDrender-zetaProject IDsimulated-render-projectTimeline snapshot IDtimeline-snapshot-zetaProfileCinema <literal>StatusCOMPLETEDThis safe summary does not expose job controls, execution authority, providers, workers, runtime details, artifacts, or downloads."
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.556887+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"[role=dialog] .ff-property-row\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 64,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 5,
+          "description": "5"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.560154+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog] script\")===null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 65,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.684917+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.691279+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 67,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.694513+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 68,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.848393+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.activeElement.closest(\"[role=dialog]\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 69,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.858437+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Escape",
+      "code": "Escape",
+      "windowsVirtualKeyCode": 27,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 70,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:26.861748+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Escape",
+      "code": "Escape",
+      "windowsVirtualKeyCode": 27,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 71,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.015626+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement.getAttribute(\"aria-label\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 72,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "Inspect render render-zeta"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.019182+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"input[type=search][aria-label=\\\"Search render summaries\\\"]\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 73,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.022732+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=document.querySelector(\"input[type=search][aria-label=\\\"Search render summaries\\\"]\").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 74,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 234,
+            "y": 376
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.026913+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 234,
+      "y": 376,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 75,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.032096+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 234,
+      "y": 376,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 76,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.036039+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 234,
+      "y": 376,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 77,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.039503+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Control",
+      "code": "ControlLeft",
+      "windowsVirtualKeyCode": 17,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 78,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.043420+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 79,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.046860+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 80,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.050239+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Control",
+      "code": "ControlLeft",
+      "windowsVirtualKeyCode": 17,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 81,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.064157+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Backspace",
+      "code": "Backspace",
+      "windowsVirtualKeyCode": 8
+    },
+    "result": {
+      "id": 82,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.071571+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Backspace",
+      "code": "Backspace",
+      "windowsVirtualKeyCode": 8
+    },
+    "result": {
+      "id": 83,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.079309+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "n",
+      "code": "KeyN",
+      "windowsVirtualKeyCode": 78,
+      "modifiers": 0,
+      "text": "n",
+      "unmodifiedText": "n"
+    },
+    "result": {
+      "id": 84,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.082841+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "n",
+      "code": "KeyN",
+      "windowsVirtualKeyCode": 78,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 85,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.252986+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "o",
+      "code": "KeyO",
+      "windowsVirtualKeyCode": 79,
+      "modifiers": 0,
+      "text": "o",
+      "unmodifiedText": "o"
+    },
+    "result": {
+      "id": 86,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.256621+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "o",
+      "code": "KeyO",
+      "windowsVirtualKeyCode": 79,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 87,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.416495+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "-",
+      "code": "Key-",
+      "windowsVirtualKeyCode": 45,
+      "modifiers": 0,
+      "text": "-",
+      "unmodifiedText": "-"
+    },
+    "result": {
+      "id": 88,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.420104+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "-",
+      "code": "Key-",
+      "windowsVirtualKeyCode": 45,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 89,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.579686+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "m",
+      "code": "KeyM",
+      "windowsVirtualKeyCode": 77,
+      "modifiers": 0,
+      "text": "m",
+      "unmodifiedText": "m"
+    },
+    "result": {
+      "id": 90,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.583280+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "m",
+      "code": "KeyM",
+      "windowsVirtualKeyCode": 77,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 91,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.742846+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 0,
+      "text": "a",
+      "unmodifiedText": "a"
+    },
+    "result": {
+      "id": 92,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.746543+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 93,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.906085+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "t",
+      "code": "KeyT",
+      "windowsVirtualKeyCode": 84,
+      "modifiers": 0,
+      "text": "t",
+      "unmodifiedText": "t"
+    },
+    "result": {
+      "id": 94,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:27.909305+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "t",
+      "code": "KeyT",
+      "windowsVirtualKeyCode": 84,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 95,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.069033+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "c",
+      "code": "KeyC",
+      "windowsVirtualKeyCode": 67,
+      "modifiers": 0,
+      "text": "c",
+      "unmodifiedText": "c"
+    },
+    "result": {
+      "id": 96,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.072908+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "c",
+      "code": "KeyC",
+      "windowsVirtualKeyCode": 67,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 97,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.232747+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "h",
+      "code": "KeyH",
+      "windowsVirtualKeyCode": 72,
+      "modifiers": 0,
+      "text": "h",
+      "unmodifiedText": "h"
+    },
+    "result": {
+      "id": 98,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.236682+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "h",
+      "code": "KeyH",
+      "windowsVirtualKeyCode": 72,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 99,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.391724+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.innerText",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 100,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "Skip to main content\nMP\nMedia Platform\nCreative workspace\nProduct UI language\nEnglish\n简体中文\nNavigation\nOperations\nCommands\n⌘K\nAsk Agent\nNotifications\nOPERATIONS · READ-ONLY\nProject renders\n\nFind and inspect safe render job summaries supplied for one explicit Project. This view cannot control jobs.\n\nRefresh render summaries\n\nSIMULATED RENDER DATA · localhost fixture only · no real account or permission\n\nSource Project ID\nsimulated-render-project\n\nScope comes only from the source Project shown above. Results are bounded and are not a global render inventory.\n\nRender status\nAll established statuses\nQUEUED\nSELECTING_PROVIDER\nPROVIDER_SELECTED\nEXECUTING\nCOMPLETING\nCOMPLETED\nFAILED\nCANCELLED\nREJECTED\nSort render summaries\nRender ID A–Z\nRender ID Z–A\n\n3 render summaries loaded · bounded Project snapshot.\n\n◇\nNo matching render summaries\n\nNo item in the loaded Project snapshot matches the current local filters.\n\nReset filters"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.396061+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "Boolean(Array.from(document.querySelectorAll(\"button\")).find(x=>(x.getAttribute(\"aria-label\")||x.textContent).trim()===\"Reset filters\"))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 101,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.400213+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "Array.from(document.querySelectorAll(\"button\")).find(x=>(x.getAttribute(\"aria-label\")||x.textContent).trim()===\"Reset filters\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 102,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.404378+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=Array.from(document.querySelectorAll(\"button\")).find(x=>(x.getAttribute(\"aria-label\")||x.textContent).trim()===\"Reset filters\").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 103,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 92.3515625,
+            "y": 575
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.410832+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 92.3515625,
+      "y": 575,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 104,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.416790+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 92.3515625,
+      "y": 575,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 105,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.429552+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 92.3515625,
+      "y": 575,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 106,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.433424+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 107,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 3,
+          "description": "3"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.437777+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-render-controls label select\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 108,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.441681+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=document.querySelector(\".ff-render-controls label select\").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 109,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 544,
+            "y": 379
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.452194+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 544,
+      "y": 379,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 110,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.474289+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 544,
+      "y": 379,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 111,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.478717+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 544,
+      "y": 379,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 112,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.483070+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "ArrowDown",
+      "code": "ArrowDown",
+      "windowsVirtualKeyCode": 40,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 113,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.487106+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "ArrowDown",
+      "code": "ArrowDown",
+      "windowsVirtualKeyCode": 40,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 114,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.649214+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 115,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.653875+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 116,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.808529+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 117,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 1,
+          "description": "1"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.812871+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"input[type=search][aria-label=\\\"Search render summaries\\\"]\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 118,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.817067+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=document.querySelector(\"input[type=search][aria-label=\\\"Search render summaries\\\"]\").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 119,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 234,
+            "y": 376
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.823091+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 234,
+      "y": 376,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 120,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.828837+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 234,
+      "y": 376,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 121,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.833221+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 234,
+      "y": 376,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 122,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.837594+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Control",
+      "code": "ControlLeft",
+      "windowsVirtualKeyCode": 17,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 123,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.841909+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 124,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.845854+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 125,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.849778+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Control",
+      "code": "ControlLeft",
+      "windowsVirtualKeyCode": 17,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 126,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.854229+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Backspace",
+      "code": "Backspace",
+      "windowsVirtualKeyCode": 8
+    },
+    "result": {
+      "id": 127,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.858214+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Backspace",
+      "code": "Backspace",
+      "windowsVirtualKeyCode": 8
+    },
+    "result": {
+      "id": 128,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.868098+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "n",
+      "code": "KeyN",
+      "windowsVirtualKeyCode": 78,
+      "modifiers": 0,
+      "text": "n",
+      "unmodifiedText": "n"
+    },
+    "result": {
+      "id": 129,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:28.871946+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "n",
+      "code": "KeyN",
+      "windowsVirtualKeyCode": 78,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 130,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:29.033184+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "o",
+      "code": "KeyO",
+      "windowsVirtualKeyCode": 79,
+      "modifiers": 0,
+      "text": "o",
+      "unmodifiedText": "o"
+    },
+    "result": {
+      "id": 131,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:29.037627+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "o",
+      "code": "KeyO",
+      "windowsVirtualKeyCode": 79,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 132,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:29.198502+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "-",
+      "code": "Key-",
+      "windowsVirtualKeyCode": 45,
+      "modifiers": 0,
+      "text": "-",
+      "unmodifiedText": "-"
+    },
+    "result": {
+      "id": 133,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:29.202866+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "-",
+      "code": "Key-",
+      "windowsVirtualKeyCode": 45,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 134,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:29.363340+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "m",
+      "code": "KeyM",
+      "windowsVirtualKeyCode": 77,
+      "modifiers": 0,
+      "text": "m",
+      "unmodifiedText": "m"
+    },
+    "result": {
+      "id": 135,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:29.367992+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "m",
+      "code": "KeyM",
+      "windowsVirtualKeyCode": 77,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 136,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:29.528386+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 0,
+      "text": "a",
+      "unmodifiedText": "a"
+    },
+    "result": {
+      "id": 137,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:29.532906+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 138,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:29.693186+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "t",
+      "code": "KeyT",
+      "windowsVirtualKeyCode": 84,
+      "modifiers": 0,
+      "text": "t",
+      "unmodifiedText": "t"
+    },
+    "result": {
+      "id": 139,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:29.697624+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "t",
+      "code": "KeyT",
+      "windowsVirtualKeyCode": 84,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 140,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:29.858112+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "c",
+      "code": "KeyC",
+      "windowsVirtualKeyCode": 67,
+      "modifiers": 0,
+      "text": "c",
+      "unmodifiedText": "c"
+    },
+    "result": {
+      "id": 141,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:29.862796+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "c",
+      "code": "KeyC",
+      "windowsVirtualKeyCode": 67,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 142,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.023170+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "h",
+      "code": "KeyH",
+      "windowsVirtualKeyCode": 72,
+      "modifiers": 0,
+      "text": "h",
+      "unmodifiedText": "h"
+    },
+    "result": {
+      "id": 143,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.027886+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "h",
+      "code": "KeyH",
+      "windowsVirtualKeyCode": 72,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 144,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.182938+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "Boolean(Array.from(document.querySelectorAll(\"button\")).find(x=>(x.getAttribute(\"aria-label\")||x.textContent).trim()===\"Reset filters\"))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 145,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.187684+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "Array.from(document.querySelectorAll(\"button\")).find(x=>(x.getAttribute(\"aria-label\")||x.textContent).trim()===\"Reset filters\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 146,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.192503+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=Array.from(document.querySelectorAll(\"button\")).find(x=>(x.getAttribute(\"aria-label\")||x.textContent).trim()===\"Reset filters\").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 147,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 92.3515625,
+            "y": 575
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.199143+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 92.3515625,
+      "y": 575,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 148,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.205342+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 92.3515625,
+      "y": 575,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 149,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.218954+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 92.3515625,
+      "y": 575,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 150,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.223664+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\".ff-render-controls label:last-child select\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 151,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.228364+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=document.querySelector(\".ff-render-controls label:last-child select\").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 152,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 705.0234375,
+            "y": 379
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.235285+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 705.0234375,
+      "y": 379,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 153,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.258933+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 705.0234375,
+      "y": 379,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 154,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.263964+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 705.0234375,
+      "y": 379,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 155,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.270101+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "ArrowDown",
+      "code": "ArrowDown",
+      "windowsVirtualKeyCode": 40,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 156,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.275298+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "ArrowDown",
+      "code": "ArrowDown",
+      "windowsVirtualKeyCode": 40,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 157,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.439616+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 158,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.444313+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 159,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.599511+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"button[aria-label^=\\\"Inspect render \\\"]\").getAttribute(\"aria-label\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 160,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "Inspect render render-zeta"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.604967+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const el=document.querySelector('button[aria-label^=\"Inspect render \"]');let f=el[Object.keys(el).find(x=>x.startsWith('__reactFiber$'))];while(f){const s=f.memoizedProps?.source;if(s?.adapter?.listProject){const h={source:s,original:s.adapter.listProject,held:true,pending:[]};s.adapter.listProject=(req,signal)=>h.held?new Promise(resolve=>h.pending.push({req,resolve})):h.original(req,signal);h.finish=()=>h.original(h.pending[0].req,new AbortController().signal).then(h.pending[0].resolve);window.__rendersHarness=h;return true}f=f.return}return false})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 161,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.610032+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "Boolean(Array.from(document.querySelectorAll(\"button\")).find(x=>(x.getAttribute(\"aria-label\")||x.textContent).trim()===\"Refresh render summaries\"))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 162,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.615001+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "Array.from(document.querySelectorAll(\"button\")).find(x=>(x.getAttribute(\"aria-label\")||x.textContent).trim()===\"Refresh render summaries\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 163,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.619932+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=Array.from(document.querySelectorAll(\"button\")).find(x=>(x.getAttribute(\"aria-label\")||x.textContent).trim()===\"Refresh render summaries\").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 164,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 1326.9609375,
+            "y": 132
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.626097+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 1326.9609375,
+      "y": 132,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 165,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.631724+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 1326.9609375,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 166,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.642281+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 1326.9609375,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 167,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.647190+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__rendersHarness.pending.length===1",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 168,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.652424+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 169,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 0,
+          "description": "0"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.657026+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement.textContent.includes(\"Cancel loading\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 170,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.661884+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "Boolean(Array.from(document.querySelectorAll(\"button\")).find(x=>(x.getAttribute(\"aria-label\")||x.textContent).trim()===\"Cancel loading\"))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 171,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.666807+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "Array.from(document.querySelectorAll(\"button\")).find(x=>(x.getAttribute(\"aria-label\")||x.textContent).trim()===\"Cancel loading\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 172,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.671727+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=Array.from(document.querySelectorAll(\"button\")).find(x=>(x.getAttribute(\"aria-label\")||x.textContent).trim()===\"Cancel loading\").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 173,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 1360.3203125,
+            "y": 132
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.684922+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 1360.3203125,
+      "y": 132,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 174,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.690498+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 1360.3203125,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 175,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.700319+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 1360.3203125,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 176,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.705519+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement.textContent.includes(\"Retry loading\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 177,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.711380+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__rendersHarness.finish()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 178,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.716259+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 179,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 0,
+          "description": "0"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.721081+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__rendersHarness.held=false",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 180,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.725780+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "Boolean(Array.from(document.querySelectorAll(\"button\")).find(x=>(x.getAttribute(\"aria-label\")||x.textContent).trim()===\"Retry loading\"))",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 181,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.730472+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "Array.from(document.querySelectorAll(\"button\")).find(x=>(x.getAttribute(\"aria-label\")||x.textContent).trim()===\"Retry loading\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 182,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.735089+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=Array.from(document.querySelectorAll(\"button\")).find(x=>(x.getAttribute(\"aria-label\")||x.textContent).trim()===\"Retry loading\").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 183,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 1364.65625,
+            "y": 132
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.751207+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 1364.65625,
+      "y": 132,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 184,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.756908+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 1364.65625,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 185,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.776404+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 1364.65625,
+      "y": 132,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 186,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.781518+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length===3",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 187,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.786689+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 188,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 3,
+          "description": "3"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.792794+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__nativeInputs||[]",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 189,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": [
+            {
+              "type": "pointerdown",
+              "trusted": true,
+              "key": null
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Control"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "a"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Backspace"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "C"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "i"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "n"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "e"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "m"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "a"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Tab"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Tab"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Tab"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Enter"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Tab"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Escape"
+            },
+            {
+              "type": "pointerdown",
+              "trusted": true,
+              "key": null
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Control"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "a"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Backspace"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "n"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "o"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "-"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "m"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "a"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "t"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "c"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "h"
+            },
+            {
+              "type": "pointerdown",
+              "trusted": true,
+              "key": null
+            },
+            {
+              "type": "pointerdown",
+              "trusted": true,
+              "key": null
+            },
+            {
+              "type": "pointerdown",
+              "trusted": true,
+              "key": null
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Control"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "a"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Backspace"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "n"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "o"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "-"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "m"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "a"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "t"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "c"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "h"
+            },
+            {
+              "type": "pointerdown",
+              "trusted": true,
+              "key": null
+            },
+            {
+              "type": "pointerdown",
+              "trusted": true,
+              "key": null
+            },
+            {
+              "type": "pointerdown",
+              "trusted": true,
+              "key": null
+            },
+            {
+              "type": "pointerdown",
+              "trusted": true,
+              "key": null
+            },
+            {
+              "type": "pointerdown",
+              "trusted": true,
+              "key": null
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:30.811280+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/operations/renders?rendersFixture=1&rendersFixtureFailure=denied"
+    },
+    "result": {
+      "id": 190,
+      "result": {
+        "frameId": "F4A636436025F8288DC2E695D70AB15D",
+        "loaderId": "F8300EA18489AF01700FA55680623FD9",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.122780+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 191,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.278896+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 192,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.285175+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 193,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.290791+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 194,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.295948+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.includes(\"Render\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 195,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.301058+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.toLowerCase().includes(\"denied\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 196,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.305722+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 197,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 0,
+          "description": "0"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.310657+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__nativeInputs||[]",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 198,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": []
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.325134+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/operations/renders?rendersFixture=1&rendersFixtureFailure=unknown"
+    },
+    "result": {
+      "id": 199,
+      "result": {
+        "frameId": "F4A636436025F8288DC2E695D70AB15D",
+        "loaderId": "F766DCC3E1E11456647EA1FAD7CEF693",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.635912+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 200,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.791855+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 201,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.797911+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 202,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.803652+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 203,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.808847+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.includes(\"Render\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 204,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.814094+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.toLowerCase().includes(\"unknown\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 205,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.818632+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 206,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 0,
+          "description": "0"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.823187+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__nativeInputs||[]",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 207,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": []
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:31.838223+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/operations/renders?rendersFixture=1&rendersFixtureFailure=unsupported"
+    },
+    "result": {
+      "id": 208,
+      "result": {
+        "frameId": "F4A636436025F8288DC2E695D70AB15D",
+        "loaderId": "864A8529EF39A71449C2F4201C3DBD84",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.158239+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 209,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.314894+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 210,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.321873+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 211,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.327988+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 212,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.333661+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.includes(\"Render\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 213,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.339296+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.toLowerCase().includes(\"unsupported\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 214,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.343802+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 215,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 0,
+          "description": "0"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.348306+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__nativeInputs||[]",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 216,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": []
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.364660+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/operations/renders?rendersFixture=1&rendersFixtureFailure=unavailable"
+    },
+    "result": {
+      "id": 217,
+      "result": {
+        "frameId": "F4A636436025F8288DC2E695D70AB15D",
+        "loaderId": "36AC3232243B69EA3AE7634CFF161C4A",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.688963+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 218,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.845704+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 219,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.852938+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 220,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.859116+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 221,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.865224+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.includes(\"Render\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 222,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.870023+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.toLowerCase().includes(\"unavailable\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 223,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.875019+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 224,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 0,
+          "description": "0"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.879376+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__nativeInputs||[]",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 225,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": []
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:32.893852+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/operations/renders?rendersFixture=1&rendersFixtureFailure=error"
+    },
+    "result": {
+      "id": 226,
+      "result": {
+        "frameId": "F4A636436025F8288DC2E695D70AB15D",
+        "loaderId": "FF90CF20342F14B66549B59A481CED06",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.202965+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 227,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.359945+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 228,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.367257+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 229,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.373802+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 230,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.379998+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.includes(\"Render\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 231,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.385487+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.toLowerCase().includes(\"error\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 232,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.390691+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 233,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 0,
+          "description": "0"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.395169+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__nativeInputs||[]",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 234,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": []
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.410233+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/operations/renders?rendersFixture=1&rendersFixtureEmpty=1"
+    },
+    "result": {
+      "id": 235,
+      "result": {
+        "frameId": "F4A636436025F8288DC2E695D70AB15D",
+        "loaderId": "15C8B0A865961FEE16722A26F34CCE83",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.721444+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 236,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.878637+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 237,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.885925+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 238,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.892567+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 239,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.898864+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.includes(\"Render\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 240,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.905009+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.includes(\"No render summaries in this snapshot\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 241,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.910179+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 242,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 0,
+          "description": "0"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.915900+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.innerText",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 243,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "Skip to main content\nMP\nMedia Platform\nCreative workspace\nProduct UI language\nEnglish\n简体中文\nNavigation\nOperations\nCommands\n⌘K\nAsk Agent\nNotifications\nOPERATIONS · READ-ONLY\nProject renders\n\nFind and inspect safe render job summaries supplied for one explicit Project. This view cannot control jobs.\n\nRefresh render summaries\n\nSIMULATED RENDER DATA · localhost fixture only · no real account or permission\n\nSource Project ID\nsimulated-render-project\n\nScope comes only from the source Project shown above. Results are bounded and are not a global render inventory.\n\nRender status\nAll established statuses\nQUEUED\nSELECTING_PROVIDER\nPROVIDER_SELECTED\nEXECUTING\nCOMPLETING\nCOMPLETED\nFAILED\nCANCELLED\nREJECTED\nSort render summaries\nRender ID A–Z\nRender ID Z–A\n\n0 render summaries loaded · bounded Project snapshot.\n\n◇\nNo render summaries in this snapshot\n\nThe source returned an empty bounded snapshot. This does not establish a global absence of render jobs."
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.920221+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__nativeInputs||[]",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 244,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": []
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:33.940642+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/operations/renders?rendersFixture=1&rendersFixtureLimited=1"
+    },
+    "result": {
+      "id": 245,
+      "result": {
+        "frameId": "F4A636436025F8288DC2E695D70AB15D",
+        "loaderId": "524408A04584408F7606EFE818833051",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.252203+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 246,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.409396+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 247,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.416827+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 248,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.423232+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 249,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.429016+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.includes(\"Render\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 250,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.434388+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length===1",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 251,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.440128+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.innerText",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 252,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "Skip to main content\nMP\nMedia Platform\nCreative workspace\nProduct UI language\nEnglish\n简体中文\nNavigation\nOperations\nCommands\n⌘K\nAsk Agent\nNotifications\nOPERATIONS · READ-ONLY\nProject renders\n\nFind and inspect safe render job summaries supplied for one explicit Project. This view cannot control jobs.\n\nRefresh render summaries\n\nSIMULATED RENDER DATA · localhost fixture only · no real account or permission\n\nSource Project ID\nsimulated-render-project\n\nScope comes only from the source Project shown above. Results are bounded and are not a global render inventory.\n\nRender status\nAll established statuses\nQUEUED\nSELECTING_PROVIDER\nPROVIDER_SELECTED\nEXECUTING\nCOMPLETING\nCOMPLETED\nFAILED\nCANCELLED\nREJECTED\nSort render summaries\nRender ID A–Z\nRender ID Z–A\n\n1 render summaries loaded · limited Project snapshot; more may exist.\n\nrender-zeta\n\nCinema <literal>\n\nCOMPLETED\nInspect"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.474475+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 1,
+      "mobile": true
+    },
+    "result": {
+      "id": 253,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.492451+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"zh-CN\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 254,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.559520+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"zh-CN\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 255,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.659013+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.667694+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.scrollWidth<=window.innerWidth+1",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 257,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.674944+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"button[aria-label*=\\\"render-zeta\\\"]\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 258,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.680967+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=document.querySelector(\"button[aria-label*=\\\"render-zeta\\\"]\").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 259,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 58,
+            "y": 783
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.688988+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 58,
+      "y": 783,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 260,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.695320+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 58,
+      "y": 783,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 261,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.720715+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 58,
+      "y": 783,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 262,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.727912+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 263,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.735281+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\").textContent",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 264,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "渲染摘要详情×只读本地检查渲染任务 IDrender-zeta项目 IDsimulated-render-project时间线快照 IDtimeline-snapshot-zeta配置Cinema <literal>状态COMPLETED此安全摘要不提供任务控制、执行权限、提供方、工作器、运行时详情、制品或下载。"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.825580+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.840488+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Escape",
+      "code": "Escape",
+      "windowsVirtualKeyCode": 27,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 266,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:34.847122+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Escape",
+      "code": "Escape",
+      "windowsVirtualKeyCode": 27,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 267,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:35.004581+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")===null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 268,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:35.011831+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__nativeInputs||[]",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 269,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": [
+            {
+              "type": "pointerdown",
+              "trusted": true,
+              "key": null
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Escape"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:43:35.020411+00:00",
+    "method": "Browser.close",
+    "params": {},
+    "result": {
+      "id": 270,
+      "result": {}
+    }
+  }
+]

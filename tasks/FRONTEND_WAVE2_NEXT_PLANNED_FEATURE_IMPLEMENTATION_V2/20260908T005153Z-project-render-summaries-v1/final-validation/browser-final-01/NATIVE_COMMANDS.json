@@ -1,0 +1,126 @@
+[
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:41:28.057604+00:00",
+    "method": "Network.enable",
+    "params": {},
+    "result": {
+      "id": 1,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:41:28.059144+00:00",
+    "method": "Page.enable",
+    "params": {},
+    "result": {
+      "id": 2,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:41:28.060745+00:00",
+    "method": "Emulation.setFocusEmulationEnabled",
+    "params": {
+      "enabled": true
+    },
+    "result": {
+      "id": 3,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:41:28.062288+00:00",
+    "method": "Page.addScriptToEvaluateOnNewDocument",
+    "params": {
+      "source": "window.__nativeInputs=[];for(const type of ['keydown','pointerdown'])addEventListener(type,e=>window.__nativeInputs.push({type:e.type,trusted:e.isTrusted,key:e.key||null}),true)"
+    },
+    "result": {
+      "id": 4,
+      "result": {
+        "identifier": "1"
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:41:28.064093+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 5,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:41:28.065776+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__nativeInputs||[]",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 6,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": []
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:41:28.066712+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198http://127.0.0.1:4198/operations/renders"
+    },
+    "result": {
+      "id": 7,
+      "error": {
+        "code": -32000,
+        "message": "Cannot navigate to invalid URL"
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:41:28.072359+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__nativeInputs||[]",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 8,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": []
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:41:28.074854+00:00",
+    "method": "Browser.close",
+    "params": {},
+    "result": {
+      "id": 9,
+      "result": {}
+    }
+  }
+]

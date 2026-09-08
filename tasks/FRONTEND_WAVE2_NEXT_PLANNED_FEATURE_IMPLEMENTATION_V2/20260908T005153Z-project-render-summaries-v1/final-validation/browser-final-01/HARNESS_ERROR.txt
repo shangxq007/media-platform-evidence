@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V2/final-validation-02/browser-final-01/renders_smoke.py", line 19, in <module>
+    b.raw('Emulation.setDeviceMetricsOverride',{'width':1440,'height':1000,'deviceScaleFactor':1,'mobile':False});nav();b.wait('document.body.textContent.toLowerCase().includes("unavailable")');check('ordinary-unconfigured-no-list',count()==0);b.shot('ordinary-unavailable')
+                                                                                                                  ~~~^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V2/final-validation-02/browser-final-01/renders_smoke.py", line 17, in nav
+    b.nav(BASE+'/operations/renders'+('?' +q if q else ''));b.locale('en');b.wait('document.body.textContent.includes("Render")')
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V2/final-validation-02/browser-final-01/chromium_helpers.py", line 49, in nav
+    self.raw('Page.navigate',{'url':f'http://127.0.0.1:{port}'+path});time.sleep(.3);self.wait('!!document.querySelector(".ff-app-shell")')
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V2/final-validation-02/browser-final-01/chromium_helpers.py", line 21, in raw
+    if 'error' in r:raise RuntimeError(r)
+                    ^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: {'id': 7, 'error': {'code': -32000, 'message': 'Cannot navigate to invalid URL'}}

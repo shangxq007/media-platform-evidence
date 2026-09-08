@@ -1,0 +1,2620 @@
+[
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.042419+00:00",
+    "method": "Network.enable",
+    "params": {},
+    "result": {
+      "id": 1,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.043179+00:00",
+    "method": "Page.enable",
+    "params": {},
+    "result": {
+      "id": 2,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.044031+00:00",
+    "method": "Emulation.setFocusEmulationEnabled",
+    "params": {
+      "enabled": true
+    },
+    "result": {
+      "id": 3,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.044757+00:00",
+    "method": "Page.addScriptToEvaluateOnNewDocument",
+    "params": {
+      "source": "window.__nativeInputs=[];for(const type of ['keydown','pointerdown'])addEventListener(type,e=>window.__nativeInputs.push({type:e.type,trusted:e.isTrusted,key:e.key||null}),true)"
+    },
+    "result": {
+      "id": 4,
+      "result": {
+        "identifier": "1"
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.045867+00:00",
+    "method": "Emulation.setDeviceMetricsOverride",
+    "params": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    },
+    "result": {
+      "id": 5,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.046745+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__nativeInputs||[]",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 6,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": []
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.060791+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/operations/renders"
+    },
+    "result": {
+      "id": 7,
+      "result": {
+        "frameId": "651FF388D7594A70E60C584E40FB2A32",
+        "loaderId": "29919565737F3D5F60DEA2BFD1F60ED1",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.373603+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 8,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.536696+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 9,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.708155+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 10,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.713396+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 11,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.715293+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 12,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.716696+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.includes(\"Render\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 13,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.718066+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.toLowerCase().includes(\"unavailable\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 14,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.719490+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 15,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 0,
+          "description": "0"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.853887+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.857575+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__nativeInputs||[]",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 17,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": []
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:19.871411+00:00",
+    "method": "Page.navigate",
+    "params": {
+      "url": "http://127.0.0.1:4198/operations/renders?rendersFixture=1"
+    },
+    "result": {
+      "id": 18,
+      "result": {
+        "frameId": "651FF388D7594A70E60C584E40FB2A32",
+        "loaderId": "903AA28A4E06EB9708F9698426C5017A",
+        "isDownload": false
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.186452+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 19,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.352325+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "!!document.querySelector(\".ff-app-shell\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 20,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.354810+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const e=document.querySelector(\".ff-locale-selector select\");e.value=\"en\";e.dispatchEvent(new Event(\"input\",{bubbles:true}));e.dispatchEvent(new Event(\"change\",{bubbles:true}));})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 21,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.357274+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.documentElement.lang === \"en\"",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 22,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.359105+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.textContent.includes(\"Render\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 23,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.360843+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length===3",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 24,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.365133+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.innerText",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 25,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "Skip to main content\nMP\nMedia Platform\nCreative workspace\nProduct UI language\nEnglish\n简体中文\nNavigation\nOperations\nCommands\n⌘K\nAsk Agent\nNotifications\nOPERATIONS · READ-ONLY\nProject renders\n\nFind and inspect safe render job summaries supplied for one explicit Project. This view cannot control jobs.\n\nRefresh render summaries\n\nSIMULATED RENDER DATA · localhost fixture only · no real account or permission\n\nSource Project ID\nsimulated-render-project\n\nScope comes only from the source Project shown above. Results are bounded and are not a global render inventory.\n\nRender status\nAll established statuses\nQUEUED\nSELECTING_PROVIDER\nPROVIDER_SELECTED\nEXECUTING\nCOMPLETING\nCOMPLETED\nFAILED\nCANCELLED\nREJECTED\nSort render summaries\nRender ID A–Z\nRender ID Z–A\n\n3 render summaries loaded · bounded Project snapshot.\n\nrender-alpha\n\nSocial 原文\n\nQUEUED\nInspect\nrender-beta\n\n<b>opaque profile</b>\n\nFAILED\nInspect\nrender-zeta\n\nCinema <literal>\n\nCOMPLETED\nInspect"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.367327+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.innerText",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 26,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "Skip to main content\nMP\nMedia Platform\nCreative workspace\nProduct UI language\nEnglish\n简体中文\nNavigation\nOperations\nCommands\n⌘K\nAsk Agent\nNotifications\nOPERATIONS · READ-ONLY\nProject renders\n\nFind and inspect safe render job summaries supplied for one explicit Project. This view cannot control jobs.\n\nRefresh render summaries\n\nSIMULATED RENDER DATA · localhost fixture only · no real account or permission\n\nSource Project ID\nsimulated-render-project\n\nScope comes only from the source Project shown above. Results are bounded and are not a global render inventory.\n\nRender status\nAll established statuses\nQUEUED\nSELECTING_PROVIDER\nPROVIDER_SELECTED\nEXECUTING\nCOMPLETING\nCOMPLETED\nFAILED\nCANCELLED\nREJECTED\nSort render summaries\nRender ID A–Z\nRender ID Z–A\n\n3 render summaries loaded · bounded Project snapshot.\n\nrender-alpha\n\nSocial 原文\n\nQUEUED\nInspect\nrender-beta\n\n<b>opaque profile</b>\n\nFAILED\nInspect\nrender-zeta\n\nCinema <literal>\n\nCOMPLETED\nInspect"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.369780+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.body.innerText",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 27,
+      "result": {
+        "result": {
+          "type": "string",
+          "value": "Skip to main content\nMP\nMedia Platform\nCreative workspace\nProduct UI language\nEnglish\n简体中文\nNavigation\nOperations\nCommands\n⌘K\nAsk Agent\nNotifications\nOPERATIONS · READ-ONLY\nProject renders\n\nFind and inspect safe render job summaries supplied for one explicit Project. This view cannot control jobs.\n\nRefresh render summaries\n\nSIMULATED RENDER DATA · localhost fixture only · no real account or permission\n\nSource Project ID\nsimulated-render-project\n\nScope comes only from the source Project shown above. Results are bounded and are not a global render inventory.\n\nRender status\nAll established statuses\nQUEUED\nSELECTING_PROVIDER\nPROVIDER_SELECTED\nEXECUTING\nCOMPLETING\nCOMPLETED\nFAILED\nCANCELLED\nREJECTED\nSort render summaries\nRender ID A–Z\nRender ID Z–A\n\n3 render summaries loaded · bounded Project snapshot.\n\nrender-alpha\n\nSocial 原文\n\nQUEUED\nInspect\nrender-beta\n\n<b>opaque profile</b>\n\nFAILED\nInspect\nrender-zeta\n\nCinema <literal>\n\nCOMPLETED\nInspect"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.512001+00:00",
+    "method": "Page.captureScreenshot",
+    "params": {
+      "format": "png"
+    },
+    "result": {
+      "captured": true
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.516629+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"input[type=search][aria-label=\\\"Search render summaries\\\"]\").scrollIntoView({block:\"center\"})",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 29,
+      "result": {
+        "result": {
+          "type": "undefined"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.519588+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "(()=>{const r=document.querySelector(\"input[type=search][aria-label=\\\"Search render summaries\\\"]\").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 30,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": {
+            "x": 234,
+            "y": 376
+          }
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.524850+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseMoved",
+      "x": 234,
+      "y": 376,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 31,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.529737+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mousePressed",
+      "x": 234,
+      "y": 376,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 32,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.533948+00:00",
+    "method": "Input.dispatchMouseEvent",
+    "params": {
+      "type": "mouseReleased",
+      "x": 234,
+      "y": 376,
+      "button": "left",
+      "clickCount": 1,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 33,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.536872+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Control",
+      "code": "ControlLeft",
+      "windowsVirtualKeyCode": 17,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 34,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.539496+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 35,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.542777+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 2
+    },
+    "result": {
+      "id": 36,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.545033+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Control",
+      "code": "ControlLeft",
+      "windowsVirtualKeyCode": 17,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 37,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.577982+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "",
+      "code": "Key",
+      "windowsVirtualKeyCode": 57347,
+      "modifiers": 0,
+      "text": "",
+      "unmodifiedText": ""
+    },
+    "result": {
+      "id": 38,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.580568+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "",
+      "code": "Key",
+      "windowsVirtualKeyCode": 57347,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 39,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.741084+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "C",
+      "code": "KeyC",
+      "windowsVirtualKeyCode": 67,
+      "modifiers": 0,
+      "text": "C",
+      "unmodifiedText": "C"
+    },
+    "result": {
+      "id": 40,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.743799+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "C",
+      "code": "KeyC",
+      "windowsVirtualKeyCode": 67,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 41,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.904806+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "i",
+      "code": "KeyI",
+      "windowsVirtualKeyCode": 73,
+      "modifiers": 0,
+      "text": "i",
+      "unmodifiedText": "i"
+    },
+    "result": {
+      "id": 42,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:20.907692+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "i",
+      "code": "KeyI",
+      "windowsVirtualKeyCode": 73,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 43,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:21.067253+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "n",
+      "code": "KeyN",
+      "windowsVirtualKeyCode": 78,
+      "modifiers": 0,
+      "text": "n",
+      "unmodifiedText": "n"
+    },
+    "result": {
+      "id": 44,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:21.071179+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "n",
+      "code": "KeyN",
+      "windowsVirtualKeyCode": 78,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 45,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:21.231096+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "e",
+      "code": "KeyE",
+      "windowsVirtualKeyCode": 69,
+      "modifiers": 0,
+      "text": "e",
+      "unmodifiedText": "e"
+    },
+    "result": {
+      "id": 46,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:21.233836+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "e",
+      "code": "KeyE",
+      "windowsVirtualKeyCode": 69,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 47,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:21.393642+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "m",
+      "code": "KeyM",
+      "windowsVirtualKeyCode": 77,
+      "modifiers": 0,
+      "text": "m",
+      "unmodifiedText": "m"
+    },
+    "result": {
+      "id": 48,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:21.396388+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "m",
+      "code": "KeyM",
+      "windowsVirtualKeyCode": 77,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 49,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:21.555718+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 0,
+      "text": "a",
+      "unmodifiedText": "a"
+    },
+    "result": {
+      "id": 50,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:21.558608+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "a",
+      "code": "KeyA",
+      "windowsVirtualKeyCode": 65,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 51,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:21.712412+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelectorAll(\"button[aria-label^=\\\"Inspect render \\\"]\").length",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 52,
+      "result": {
+        "result": {
+          "type": "number",
+          "value": 0,
+          "description": "0"
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:21.717991+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 53,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:21.721131+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 54,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:21.876859+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 55,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:21.880194+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 56,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:22.035661+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 57,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:22.039009+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Tab",
+      "code": "Tab",
+      "windowsVirtualKeyCode": 9,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 58,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:22.193016+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.activeElement.getAttribute(\"aria-label\")",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 59,
+      "result": {
+        "result": {
+          "type": "object",
+          "subtype": "null",
+          "value": null
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:22.205728+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyDown",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0,
+      "text": "\r",
+      "unmodifiedText": "\r"
+    },
+    "result": {
+      "id": 60,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:22.209262+00:00",
+    "method": "Input.dispatchKeyEvent",
+    "params": {
+      "type": "keyUp",
+      "key": "Enter",
+      "code": "Enter",
+      "windowsVirtualKeyCode": 13,
+      "modifiers": 0
+    },
+    "result": {
+      "id": 61,
+      "result": {}
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:22.363155+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 62,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:22.517128+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 63,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:22.671169+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 64,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:22.824745+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 65,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:22.978317+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 66,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:23.131927+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 67,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:23.285867+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 68,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:23.440049+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 69,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:23.594250+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 70,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:23.748329+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 71,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:23.902423+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 72,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:24.056720+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 73,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:24.210987+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 74,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:24.365330+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 75,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:24.519441+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 76,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:24.673323+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 77,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:24.827401+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 78,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:24.981438+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 79,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:25.135743+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 80,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:25.290110+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 81,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:25.444266+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 82,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:25.598331+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 83,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:25.752461+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 84,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:25.906586+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 85,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:26.060842+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 86,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:26.214889+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 87,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:26.369087+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 88,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:26.523273+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 89,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:26.677509+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 90,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:26.832088+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 91,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:26.986636+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 92,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:27.141262+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 93,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:27.295684+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 94,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:27.450338+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 95,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:27.605150+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 96,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:27.759858+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 97,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:27.914327+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 98,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:28.068788+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 99,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:28.223138+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 100,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:28.377390+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 101,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:28.531666+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 102,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:28.685958+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 103,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:28.840245+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 104,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:28.994623+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 105,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:29.149306+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 106,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:29.304014+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 107,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:29.458302+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 108,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:29.613010+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 109,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:29.767563+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 110,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:29.922056+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 111,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:30.076575+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 112,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:30.231240+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 113,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:30.385998+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 114,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:30.540849+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 115,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:30.695962+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 116,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:30.851052+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 117,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:31.006078+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 118,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:31.161123+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 119,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:31.315899+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 120,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:31.470960+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 121,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:31.625600+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 122,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:31.780396+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 123,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:31.935091+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 124,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:32.090103+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 125,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:32.245290+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 126,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:32.400328+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 127,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:32.555407+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 128,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:32.710801+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 129,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:32.866054+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 130,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:33.021362+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 131,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:33.176244+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 132,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:33.331127+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 133,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:33.485924+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 134,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:33.640731+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 135,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:33.795891+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 136,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:33.951159+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 137,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:34.106355+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 138,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:34.261672+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "document.querySelector(\"[role=dialog]\")!==null",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 139,
+      "result": {
+        "result": {
+          "type": "boolean",
+          "value": false
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:34.421119+00:00",
+    "method": "Runtime.evaluate",
+    "params": {
+      "expression": "window.__nativeInputs||[]",
+      "returnByValue": true,
+      "awaitPromise": true
+    },
+    "result": {
+      "id": 140,
+      "result": {
+        "result": {
+          "type": "object",
+          "value": [
+            {
+              "type": "pointerdown",
+              "trusted": true,
+              "key": null
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Control"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "a"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": ""
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "C"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "i"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "n"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "e"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "m"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "a"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Tab"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Tab"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Tab"
+            },
+            {
+              "type": "keydown",
+              "trusted": true,
+              "key": "Enter"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "tree": "afc520c2fb8da37961cc6931e71743256b60a3e5",
+    "timestamp": "2026-09-08T00:42:34.427024+00:00",
+    "method": "Browser.close",
+    "params": {},
+    "result": {
+      "id": 141,
+      "result": {}
+    }
+  }
+]

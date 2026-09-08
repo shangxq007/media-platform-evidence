@@ -1,0 +1,1 @@
+The earlier blocked V1 detached-receipt operation is not retried. V2 evidence publication is separately authorized but must respect current approval restrictions; no authenticated call is made before a verified technical package. If an applicable restriction persists, deliver local package and separate exact blocker, never alternate routing.

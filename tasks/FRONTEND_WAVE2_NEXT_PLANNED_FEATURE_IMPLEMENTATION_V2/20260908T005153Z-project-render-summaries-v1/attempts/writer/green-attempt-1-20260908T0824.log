@@ -1,0 +1,612 @@
+
+> media-platform-frontend@0.1.0 test
+> vitest run --configLoader=runner --no-cache src/product/render-browser src/app/routeTree.test.tsx --reporter=default --reporter=json --outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V2/writer/green-attempt-1-20260908T0824.json
+
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ✓ src/product/render-browser/source.test.ts (30 tests) 24ms
+ ❯ src/product/render-browser/RenderBrowser.test.tsx (19 tests | 1 failed) 548ms
+   × RenderBrowser > shows the exact source-owned Project and only bounded safe summaries 108ms
+     → Found multiple elements with the text: /provider|worker|runtime/i
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<option[39m
+  [33mvalue[39m=[32m"SELECTING_PROVIDER"[39m
+[36m>[39m
+  [0mSELECTING_PROVIDER[0m
+[36m</option>[39m
+
+Ignored nodes: comments, script, style
+[36m<option[39m
+  [33mvalue[39m=[32m"PROVIDER_SELECTED"[39m
+[36m>[39m
+  [0mPROVIDER_SELECTED[0m
+[36m</option>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"Single-Project render summaries"[39m
+      [33mclass[39m=[32m"ff-render-browser"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-render-browser-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0mOperations · read-only[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0mProject renders[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0mFind and inspect safe render job summaries supplied for one explicit Project. This view cannot control jobs.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mRefresh render summaries[0m
+        [36m</button>[39m
+      [36m</header>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-render-origin ff-render-origin--simulated"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+        [36m>[39m
+          [0mSIMULATED RENDER DATA · localhost fixture only · no real account or permission[0m
+        [36m</span>[39m
+      [36m</p>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-property-row"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mSource Project ID[0m
+        [36m</span>[39m
+        [36m<div>[39m
+          [36m<code>[39m
+            [0msimulated-render-project[0m
+          [36m</code>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-render-boundary"[39m
+      [36m>[39m
+        [0mScope comes only from the source Project shown above. Results are bounded and are not a global render inventory.[0m
+      [36m</p>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-render-controls"[39m
+      [36m>[39m
+        [36m<input[39m
+          [33maria-label[39m=[32m"Search render summaries"[39m
+          [33mclass[39m=[32m"ff-input "[39m
+          [33mplaceholder[39m=[32m"Search render ID or profile"[39m
+          [33mtype[39m=[32m"search"[39m
+          [33mvalue[39m=[32m""[39m
+        [36m/>[39m
+        [36m<label>[39m
+          [0mRender status[0m
+          [36m<select>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m""[39m
+            [36m>[39m
+              [0mAll established statuses[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"QUEUED"[39m
+            [36m>[39m
+              [0mQUEUED[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"SELECTING_PROVIDER"[39m
+            [36m>[39m
+              [0mSELECTING_PROVIDER[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"PROVIDER_SELECTED"[39m
+            [36m>[39m
+              [0mPROVIDER_SELECTED[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"EXECUTING"[39m
+            [36m>[39m
+              [0mEXECUTING[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"COMPLETING"[39m
+            [36m>[39m
+              [0mCOMPLETING[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"COMPLETED"[39m
+            [36m>[39m
+              [0mCOMPLETED[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"FAILED"[39m
+            [36m>[39m
+              [0mFAILED[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"CANCELLED"[39m
+            [36m>[39m
+              [0mCANCELLED[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"REJECTED"[39m
+            [36m>[39m
+              [0mREJECTED[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+        [36m<label>[39m
+          [0mSort render summaries[0m
+          [36m<select>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"id-asc"[39m
+            [36m>[39m
+              [0mRender ID A–Z[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"id-desc"[39m
+            [36m>[39m
+              [0mRender ID Z–A[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+      [36m</div>[39m
+      [36m<p[39m
+        [33maria-live[39m=[32m"polite"[39m
+        [33mrole[39m=[32m"status"[39m
+      [36m>[39m
+        [0m3 render summaries loaded · bounded Project snapshot.[0m
+      [36m</p>[39m
+      [36m<ul[39m
+        [33maria-label[39m=[32m"Render summary snapshot"[39m
+        [33mclass[39m=[32m"ff-render-browser-list"[39m
+      [36m>[39m
+        [36m<li>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mrender-alpha[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"ff-render-profile"[39m
+              [36m>[39m
+                [0mSocial 原文[0m
+              [36m</p>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--neutral"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mQUEUED[0m
+              [36m</span>[39m
+              [36m<button[39m
+                [33maria-label[39m=[32m"Inspect render render-alpha"[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0mInspect[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</li>[39m
+        [36m<li>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mrender-beta[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"ff-render-profile"[39m
+              [36m>[39m
+                [0m&lt;b&gt;opaque profile&lt;/b&gt;[0m
+              [36m</p>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--neutral"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mFAILED[0m
+              [36m</span>[39m
+              [36m<button[39m
+                [33maria-label[39m=[32m"Inspect render render-beta"[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0mInspect[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</li>[39m
+        [36m<li>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mrender-zeta[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"ff-render-profile"[39m
+              [36m>[39m
+                [0mCinema &lt;literal&gt;[0m
+              [36m</p>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--neutral"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mCOMPLETED[0m
+              [36m</span>[39m
+              [36m<button[39m
+                [33maria-label[39m=[32m"Inspect render render-zeta"[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0mInspect[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</li>[39m
+      [36m</ul>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   ✓ RenderBrowser > searches ID/profile, filters established statuses, sorts IDs, and resets locally 75ms
+   ✓ RenderBrowser > distinguishes an empty Project snapshot from local no matches 15ms
+   ✓ RenderBrowser > opens five exact fields in the shared read-only dialog and Escape restores launcher focus 46ms
+   ✓ RenderBrowser > uses one stable workflow button for Refresh, Cancel and Retry and never steals moved focus asynchronously 32ms
+   ✓ RenderBrowser > clears old content and renders exact unavailable receipt explanations as text 24ms
+   ✓ RenderBrowser > clears old content and renders exact denied receipt explanations as text 36ms
+   ✓ RenderBrowser > clears old content and renders exact unknown receipt explanations as text 20ms
+   ✓ RenderBrowser > clears old content and renders exact unsupported receipt explanations as text 22ms
+   ✓ RenderBrowser > clears old content and renders exact error receipt explanations as text 23ms
+   ✓ RenderBrowser > fails closed on invalid returned content and never retains the old summary 19ms
+   ✓ RenderBrowser > retires a real valid pending response on principalId change 13ms
+   ✓ RenderBrowser > retires a real valid pending response on tenantId change 13ms
+   ✓ RenderBrowser > retires a real valid pending response on sessionId change 16ms
+   ✓ RenderBrowser > retires a real valid pending response on projectId change 13ms
+   ✓ RenderBrowser > retires real valid pending responses on adapter replacement and unmount 17ms
+   ✓ RenderBrowser > does not query initial denied/unknown sources and displays their opaque explanations 6ms
+   ✓ RenderBrowser > is unavailable by default and identifies the fixture as simulated read-only data 18ms
+   ✓ RenderBrowser > localizes controls and states in Chinese while leaving summary fields opaque 28ms
+ ✓ src/app/routeTree.test.tsx (9 tests) 2368ms
+   ✓ runtime route registration and deep-link restoration > restores Workspace, Project, and surface identity from a creative deep link and fails unauthorized commands closed  775ms
+   ✓ runtime route registration and deep-link restoration > reaches the post-H7 edit route and loads explicit canonical HEAD authority  388ms
+   ✓ runtime route registration and deep-link restoration > renders the Workspace to Projects entry without synthesizing a Project selection  354ms
+   ✓ runtime route registration and deep-link restoration > routes the existing Projects destination to the fail-closed recent-project browser without using Workspace home as its source  326ms
+   ✓ runtime route registration and deep-link restoration > routes Operations renders to the fail-closed source browser and leaves Storage behavior unchanged  354ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/product/render-browser/RenderBrowser.test.tsx > RenderBrowser > shows the exact source-owned Project and only bounded safe summaries
+TestingLibraryElementError: Found multiple elements with the text: /provider|worker|runtime/i
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<option[39m
+  [33mvalue[39m=[32m"SELECTING_PROVIDER"[39m
+[36m>[39m
+  [0mSELECTING_PROVIDER[0m
+[36m</option>[39m
+
+Ignored nodes: comments, script, style
+[36m<option[39m
+  [33mvalue[39m=[32m"PROVIDER_SELECTED"[39m
+[36m>[39m
+  [0mPROVIDER_SELECTED[0m
+[36m</option>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"Single-Project render summaries"[39m
+      [33mclass[39m=[32m"ff-render-browser"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-render-browser-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0mOperations · read-only[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0mProject renders[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0mFind and inspect safe render job summaries supplied for one explicit Project. This view cannot control jobs.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mRefresh render summaries[0m
+        [36m</button>[39m
+      [36m</header>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-render-origin ff-render-origin--simulated"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+        [36m>[39m
+          [0mSIMULATED RENDER DATA · localhost fixture only · no real account or permission[0m
+        [36m</span>[39m
+      [36m</p>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-property-row"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mSource Project ID[0m
+        [36m</span>[39m
+        [36m<div>[39m
+          [36m<code>[39m
+            [0msimulated-render-project[0m
+          [36m</code>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-render-boundary"[39m
+      [36m>[39m
+        [0mScope comes only from the source Project shown above. Results are bounded and are not a global render inventory.[0m
+      [36m</p>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-render-controls"[39m
+      [36m>[39m
+        [36m<input[39m
+          [33maria-label[39m=[32m"Search render summaries"[39m
+          [33mclass[39m=[32m"ff-input "[39m
+          [33mplaceholder[39m=[32m"Search render ID or profile"[39m
+          [33mtype[39m=[32m"search"[39m
+          [33mvalue[39m=[32m""[39m
+        [36m/>[39m
+        [36m<label>[39m
+          [0mRender status[0m
+          [36m<select>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m""[39m
+            [36m>[39m
+              [0mAll established statuses[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"QUEUED"[39m
+            [36m>[39m
+              [0mQUEUED[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"SELECTING_PROVIDER"[39m
+            [36m>[39m
+              [0mSELECTING_PROVIDER[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"PROVIDER_SELECTED"[39m
+            [36m>[39m
+              [0mPROVIDER_SELECTED[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"EXECUTING"[39m
+            [36m>[39m
+              [0mEXECUTING[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"COMPLETING"[39m
+            [36m>[39m
+              [0mCOMPLETING[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"COMPLETED"[39m
+            [36m>[39m
+              [0mCOMPLETED[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"FAILED"[39m
+            [36m>[39m
+              [0mFAILED[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"CANCELLED"[39m
+            [36m>[39m
+              [0mCANCELLED[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"REJECTED"[39m
+            [36m>[39m
+              [0mREJECTED[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+        [36m<label>[39m
+          [0mSort render summaries[0m
+          [36m<select>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"id-asc"[39m
+            [36m>[39m
+              [0mRender ID A–Z[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"id-desc"[39m
+            [36m>[39m
+              [0mRender ID Z–A[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+      [36m</div>[39m
+      [36m<p[39m
+        [33maria-live[39m=[32m"polite"[39m
+        [33mrole[39m=[32m"status"[39m
+      [36m>[39m
+        [0m3 render summaries loaded · bounded Project snapshot.[0m
+      [36m</p>[39m
+      [36m<ul[39m
+        [33maria-label[39m=[32m"Render summary snapshot"[39m
+        [33mclass[39m=[32m"ff-render-browser-list"[39m
+      [36m>[39m
+        [36m<li>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mrender-alpha[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"ff-render-profile"[39m
+              [36m>[39m
+                [0mSocial 原文[0m
+              [36m</p>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--neutral"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mQUEUED[0m
+              [36m</span>[39m
+              [36m<button[39m
+                [33maria-label[39m=[32m"Inspect render render-alpha"[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0mInspect[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</li>[39m
+        [36m<li>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mrender-beta[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"ff-render-profile"[39m
+              [36m>[39m
+                [0m&lt;b&gt;opaque profile&lt;/b&gt;[0m
+              [36m</p>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--neutral"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mFAILED[0m
+              [36m</span>[39m
+              [36m<button[39m
+                [33maria-label[39m=[32m"Inspect render render-beta"[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0mInspect[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</li>[39m
+        [36m<li>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mrender-zeta[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"ff-render-profile"[39m
+              [36m>[39m
+                [0mCinema &lt;literal&gt;[0m
+              [36m</p>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--neutral"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mCOMPLETED[0m
+              [36m</span>[39m
+              [36m<button[39m
+                [33maria-label[39m=[32m"Inspect render render-zeta"[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0mInspect[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</li>[39m
+      [36m</ul>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ getElementError node_modules/@testing-library/dom/dist/query-helpers.js:20:35
+ ❯ getMultipleElementsFoundError node_modules/@testing-library/dom/dist/query-helpers.js:23:10
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/product/render-browser/RenderBrowser.test.tsx:48:19
+     46|     expect(screen.getByText('simulated-render-project')).toBeTruthy()
+     47|     expect(screen.getByText(/not a global render inventory/i)).toBeTru…
+     48|     expect(screen.queryByText(/provider|worker|runtime/i)).toBeNull()
+       |                   ^
+     49|     expect(screen.queryByRole('button', { name: /cancel job|retry job|…
+     50|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 57 passed (58)
+   Start at  08:22:40
+   Duration  4.98s (transform 1.91s, setup 0ms, collect 2.71s, tests 2.94s, environment 805ms, prepare 373ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V2/writer/green-attempt-1-20260908T0824.json

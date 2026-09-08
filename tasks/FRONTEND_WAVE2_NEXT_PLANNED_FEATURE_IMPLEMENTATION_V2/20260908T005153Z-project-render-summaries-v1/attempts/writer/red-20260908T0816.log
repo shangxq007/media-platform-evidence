@@ -1,0 +1,61 @@
+
+> media-platform-frontend@0.1.0 test
+> vitest run --configLoader=runner --no-cache src/product/render-browser src/app/routeTree.test.tsx --reporter=default --reporter=json --outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V2/writer/red-20260908T0816.json
+
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ✓ src/app/routeTree.test.tsx (8 tests) 2009ms
+   ✓ runtime route registration and deep-link restoration > restores Workspace, Project, and surface identity from a creative deep link and fails unauthorized commands closed  757ms
+   ✓ runtime route registration and deep-link restoration > reaches the post-H7 edit route and loads explicit canonical HEAD authority  390ms
+   ✓ runtime route registration and deep-link restoration > renders the Workspace to Projects entry without synthesizing a Project selection  354ms
+   ✓ runtime route registration and deep-link restoration > routes the existing Projects destination to the fail-closed recent-project browser without using Workspace home as its source  323ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/product/render-browser/RenderBrowser.test.tsx [ src/product/render-browser/RenderBrowser.test.tsx ]
+Error: Failed to resolve import "./fixture" from "src/product/render-browser/RenderBrowser.test.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/src/product/render-browser/RenderBrowser.test.tsx:5:37
+  3  |  import { describe, expect, it, vi } from "vitest";
+  4  |  import { LocalizationProvider } from "../../localization";
+  5  |  import { createRendersFixture } from "./fixture";
+     |                                        ^
+  6  |  import { RenderBrowser } from "./RenderBrowser";
+  7  |  import { REAL_RENDER_SUMMARIES_QUERY_KEY } from "./source";
+ ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41
+ ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42655:16
+ ❯ normalizeUrl node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:40634:23
+ ❯ node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:40753:37
+ ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:40680:7
+ ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42453:18
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:35845:27
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/product/render-browser/source.test.ts [ src/product/render-browser/source.test.ts ]
+Error: Failed to resolve import "./fixture" from "src/product/render-browser/source.test.ts". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/src/product/render-browser/source.test.ts:4:62
+  1  |  import { describe, expect, it, vi } from "vitest";
+  2  |  import { createRendersFixture, localhostRendersFixture } from "./fixture";
+     |                                                                 ^
+  3  |  import {
+  4  |    REAL_RENDER_SUMMARIES_QUERY_KEY,
+ ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41
+ ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42655:16
+ ❯ normalizeUrl node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:40634:23
+ ❯ node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:40753:37
+ ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:40680:7
+ ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42453:18
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:35845:27
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 1 passed (3)
+      Tests  8 passed (8)
+   Start at  08:15:35
+   Duration  4.86s (transform 1.72s, setup 0ms, collect 1.89s, tests 2.01s, environment 856ms, prepare 336ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V2/writer/red-20260908T0816.json
