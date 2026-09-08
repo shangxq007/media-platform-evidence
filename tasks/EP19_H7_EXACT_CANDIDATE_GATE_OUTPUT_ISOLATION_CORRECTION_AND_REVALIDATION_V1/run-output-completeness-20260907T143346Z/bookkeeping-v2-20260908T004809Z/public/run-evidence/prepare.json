@@ -1,0 +1,17 @@
+{
+  "result": "PREPARED_NOT_BASELINED",
+  "run_id": "bookkeeping-v2-formal-001",
+  "candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+  "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6",
+  "base": "86d6aef94fd5e58da552e97c11473cff6eca734e",
+  "formal_gate_execution": false,
+  "qualification": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/qualification/QUALIFICATION.json",
+  "owner_contract_version": "OWNER_AUTHORIZATION_SCOPED_RUNTIME_BOOKKEEPING_V2",
+  "owner_authorization_sha256": "338a9449a678ab0de5e4a7167823e3fff983f38bac76e5deac3c029a1c4c9528",
+  "dependency_preparation": "Parent may populate only this runtime cache before baseline/seal. No copied FE assets. Fresh per-run independent clones; original checkouts never execute.",
+  "commands": {
+    "baseline": "python3 -B executor/runner.py baseline --run-id bookkeeping-v2-formal-001",
+    "preflight": "python3 -B executor/runner.py preflight --run-id bookkeeping-v2-formal-001",
+    "run": "python3 -B executor/runner.py run --run-id bookkeeping-v2-formal-001 --review /absolute/parent-review.json"
+  }
+}

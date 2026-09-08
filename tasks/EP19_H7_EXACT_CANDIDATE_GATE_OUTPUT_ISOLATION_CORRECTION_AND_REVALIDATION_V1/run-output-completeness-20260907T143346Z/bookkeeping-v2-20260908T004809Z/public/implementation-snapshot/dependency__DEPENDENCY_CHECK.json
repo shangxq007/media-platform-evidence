@@ -1,0 +1,59 @@
+{
+  "schema": "ep19-four-field-dependency-check-v2",
+  "result": "COMPLETE_WITH_TASK_LOCAL_BINDING_REQUIREMENTS",
+  "activation_authorized_by_report_alone": false,
+  "bookkeeping_fields": ["view_count", "use_count", "last_viewed_at", "last_used_at"],
+  "generic_runtime_dependencies": {
+    "curator_selection_and_lifecycle": true,
+    "curator_review_prompt_content": true,
+    "tui_skill_ranking_and_filtering": true,
+    "ordinary_prompt_builder_index": false
+  },
+  "ep19_actual_dependencies": {
+    "instruction_or_skill_dynamic_selection": false,
+    "instruction_content": false,
+    "policy_or_permission_decisions": false,
+    "qualification_applicability": false,
+    "product_commands_or_validation_inputs": false,
+    "fixed_gate_count": 29,
+    "matrix_sha256": "8323f4ee49c6a036a26eaffc3978f432756ad0759ff66a2c9f745c94ecfe24b4",
+    "task_local_fix": "Seal resolved bindings, exact matrix, instruction/support input closure, policy, qualification and executor before the window; no dynamic curator/UI gate selection"
+  },
+  "installed_writer": {
+    "target": "/home/user/.hermes/skills/.usage.json",
+    "lock": "/home/user/.hermes/skills/.usage.json.lock",
+    "lock_persistent": true,
+    "temporary_direct_child_regex": "^\\.usage_[a-z0-9_]{8}\\.tmp$",
+    "timestamp_initialization": "null_to_UTC_AWARE_ISO_STRING",
+    "complete_writer_attribution_required": false,
+    "strict_cross_field_warning": "bump_use may also change generation fields; those remain strict"
+  },
+  "private_inventory_observation": {
+    "record_count_at_dependency_audit": 222,
+    "eligible_record_count_at_final_probe": 205,
+    "ineligible_orphan_record_count_at_final_probe": 17,
+    "discovered_selected_skill_names": 221,
+    "discovered_duplicate_skill_names": 2,
+    "eligible_pointer_count_at_final_probe": 820,
+    "all_records_objects": true,
+    "counts_all_nonnegative_integer_excluding_boolean": true,
+    "timestamps_types": ["null", "UTC-aware ISO string"],
+    "raw_records_in_public_artifact": false,
+    "final_enumeration_source": "per-run PRIVATE_NOT_FOR_PUBLIC_PACKAGE policy",
+    "inventory_binding": "installed iter_skill_index_files-compatible scan plus frontmatter name; orphan records strict",
+    "exponent_overflow_recursive_rejection": true,
+    "persistent_reserved_temp_at_baseline_rejected": true
+  },
+  "source_sha256": {
+    "/home/user/.hermes/hermes-agent/tools/skill_usage.py": "82702d4736a8fc81ceb4dd5e6ce9706aa242102c84277c474c661e659a6f1aed",
+    "/home/user/.hermes/hermes-agent/utils.py": "0b943a7f82eea20361a8fee913a60fd97dea048a15da4305e298d4bee9c05c92",
+    "/home/user/.hermes/hermes-agent/agent/curator.py": "278eed4f731618bf40e28f6c12106fa0ac29dd72f7d464b0bef45df5c1583927",
+    "/home/user/.hermes/hermes-agent/tui_gateway/server.py": "2092f66d3757610638562b362d072e85e8bda4542e4cb30e248dbed0bd9b9796",
+    "/home/user/.hermes/hermes-agent/agent/prompt_builder.py": "7cd8eafb6132e892b8d9b6ccbd2551dba5921fcf83d3ddfbd5863db3cf274404",
+    "/home/user/.hermes/hermes-agent/tools/skills_tool.py": "0f205b8c2d9266d272d8c6cae3d189b86a5aebce98f03b61605d266b65f9497c",
+    "/home/user/.hermes/hermes-agent/agent/skill_commands.py": "46d4697ae6b81380eb7dbcb98def8492167ce2a75782b6dde0de1048bdbf9917",
+    "/home/user/.hermes/hermes-agent/hermes_constants.py": "f83dcbd244d269dbdca87c8d0bb7ead54100894216c7eddfcd2d4fe97f78c3fc"
+  },
+  "limitations": ["TARGETED_STATIC_AUDIT_NOT_FUTURE_GLOBAL_READER_PROOF", "NO_WRITER_ATTRIBUTION", "NO_RAW_PRIVATE_RECORD_PUBLICATION"],
+  "product_gate_execution": false
+}

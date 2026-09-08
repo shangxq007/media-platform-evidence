@@ -1,0 +1,33 @@
+// External evidence instrumentation only. No product task/configuration is skipped.
+gradle.projectsEvaluated {
+    def run = System.getenv('EP19_RUN_ROOT')
+    def helper = System.getenv('EP19_HELPER_ROOT')
+    def gate = System.getenv('EP19_GATE_ID')
+    if (!run || !helper || !gate) throw new GradleException('Missing bound external evidence namespace')
+    def app = rootProject.project(':platform-app')
+    def check = { task, boolean archive ->
+        def event = new File(run, 'runtime/producer-events/' + gate + '-' + task.name + '-' + java.util.UUID.randomUUID())
+        event.mkdirs()
+        def resource = app.tasks.named('processResources').get().destinationDir
+        def boot = app.tasks.named('bootJar').get()
+        def rule = [task:boot.path, resources_task:app.tasks.named('processResources').get().path,
+                    resources_output:resource.absolutePath, archive_file:boot.archiveFile.get().asFile.absolutePath,
+                    boot_classes:boot.manifest.effectiveManifest.attributes.get('Spring-Boot-Classes'), transforms:'NONE_SUPPORTED',
+                    producer_gate:gate, run_root:run, actual_task:task.path]
+        def ruleFile = new File(event,'rule.json')
+        ruleFile.text = groovy.json.JsonOutput.toJson(rule)
+        def argv = ['python3','-B',helper+'/packaging.py','--root',rootProject.rootDir.absolutePath,
+                    '--resources',new File(resource,'static').absolutePath,'--rule',ruleFile.absolutePath,
+                    '--output',new File(event,'check.json').absolutePath]
+        if (archive) argv += ['--jar',boot.archiveFile.get().asFile.absolutePath]
+        def log = new File(event,'native.log')
+        def process = new ProcessBuilder(argv).redirectErrorStream(true).redirectOutput(log).start()
+        if (!process.waitFor(120, java.util.concurrent.TimeUnit.SECONDS)) {
+            process.destroyForcibly(); throw new GradleException('Packaging checker timeout')
+        }
+        new File(event,'process.json').text = groovy.json.JsonOutput.toJson([argv:argv,exit:process.exitValue(),gate:gate,run:run])
+        if (process.exitValue()!=0) throw new GradleException('Exact candidate packaging check failed: '+event)
+    }
+    app.tasks.named('processResources').configure { doLast { check(delegate,false) } }
+    app.tasks.named('bootJar').configure { doLast { check(delegate,true) } }
+}

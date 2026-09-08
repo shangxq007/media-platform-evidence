@@ -1,0 +1,1520 @@
+--- /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/preimages/executor/VERSION.json
++++ /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/executor/VERSION.json
+@@ -1,5 +1,5 @@
+ {
+-  "version": "2.0.1-defect-c-file-url-correction",
++  "version": "3.0.0-scoped-runtime-bookkeeping-v2",
+   "entrypoint": "runner.py",
+   "fixed_candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+   "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6",
+@@ -8,5 +8,7 @@
+   "independent_review": "REQUIRED/PENDING",
+   "formal_execution": "PARENT_ONLY",
+   "publication": "NOT_AUTHORIZED",
+-  "revision_preimage": "revision-preimage-001"
++  "owner_contract_version": "OWNER_AUTHORIZATION_SCOPED_RUNTIME_BOOKKEEPING_V2",
++  "bookkeeping_policy": "executor/bookkeeping_v2.py",
++  "revision_preimage": "preimages/executor"
+ }
+--- /dev/null
++++ /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/executor/bookkeeping_v2.py
+@@ -0,0 +1,439 @@
++"""Owner-authorized V2 verifier for one private Hermes bookkeeping sidecar.
++
++The policy contains a bounded parsed baseline projection and is therefore marked
++PRIVATE_NOT_FOR_PUBLIC_PACKAGE.  Public receipts expose hashes, counts, changed
++JSON pointers and decisions, never Skill/Memory bodies or full usage records.
++"""
++from __future__ import annotations
++
++from datetime import datetime, timezone
++from pathlib import Path
++import hashlib
++import json
++import math
++import os
++import re
++import stat
++
++from preservation import FIELDS, absolute, identity, metadata, parent_fd
++
++
++SCHEMA = "ep19-scoped-runtime-bookkeeping-v2"
++OWNER_CONTRACT_VERSION = "OWNER_AUTHORIZATION_SCOPED_RUNTIME_BOOKKEEPING_V2"
++USAGE_PATH = Path("/home/user/.hermes/skills/.usage.json")
++SKILLS_ROOT = USAGE_PATH.parent
++LOCK_NAME = ".usage.json.lock"
++TEMP_REGEX = r"^\.usage_[a-z0-9_]{8}\.tmp$"
++MUTABLE_FIELDS = ("view_count", "use_count", "last_viewed_at", "last_used_at")
++COUNT_FIELDS = frozenset(("view_count", "use_count"))
++TIME_FIELDS = frozenset(("last_viewed_at", "last_used_at"))
++ROOT_STRICT = ("st_dev", "st_ino", "st_mode", "st_uid", "st_gid", "st_nlink")
++USAGE_STRICT = ("st_dev", "st_mode", "st_uid", "st_gid", "st_nlink")
++
++
++class PolicyError(RuntimeError):
++    pass
++
++
++def sha256(raw: bytes) -> str:
++    return hashlib.sha256(raw).hexdigest()
++
++
++def _pairs(pairs):
++    result = {}
++    for key, value in pairs:
++        if key in result:
++            raise PolicyError("DUPLICATE_JSON_KEY "+str(key))
++        result[key] = value
++    return result
++
++
++def _nonfinite(value):
++    raise PolicyError("NONFINITE_JSON "+value)
++
++
++def strict_json(raw: bytes):
++    try:
++        text = raw.decode("utf-8")
++    except UnicodeDecodeError as exc:
++        raise PolicyError("MALFORMED_JSON INVALID_UTF8") from exc
++    try:
++        value=json.loads(text, object_pairs_hook=_pairs, parse_constant=_nonfinite)
++    except PolicyError:
++        raise
++    except (json.JSONDecodeError, RecursionError, ValueError) as exc:
++        raise PolicyError("MALFORMED_JSON "+str(exc)) from exc
++    def finite(node):
++        if isinstance(node,float) and not math.isfinite(node):raise PolicyError("NONFINITE_JSON EXPONENT_OVERFLOW")
++        if isinstance(node,dict):
++            for item in node.values():finite(item)
++        elif isinstance(node,list):
++            for item in node:finite(item)
++    finite(value);return value
++
++
++def _read_stable(path):
++    """Return bytes and metadata from one FD-bound, non-symlink stable read."""
++    path = absolute(path)
++    with parent_fd(path) as (parent, name):
++        before = os.stat(name, dir_fd=parent, follow_symlinks=False)
++        if stat.S_ISLNK(before.st_mode) or not stat.S_ISREG(before.st_mode):
++            raise PolicyError("USAGE_NOT_REGULAR_OR_SYMLINK "+str(path))
++        fd = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC | os.O_NONBLOCK, dir_fd=parent)
++        try:
++            if metadata(before) != metadata(os.fstat(fd)):
++                raise PolicyError("USAGE_PATH_BINDING_CHANGED "+str(path))
++            chunks = []
++            while True:
++                chunk = os.read(fd, 1024 * 1024)
++                if not chunk:
++                    break
++                chunks.append(chunk)
++            after_fd = os.fstat(fd)
++            after_name = os.stat(name, dir_fd=parent, follow_symlinks=False)
++            if metadata(before) != metadata(after_fd) or metadata(before) != metadata(after_name):
++                raise PolicyError("USAGE_CAPTURE_UNSTABLE "+str(path))
++        finally:
++            os.close(fd)
++    raw = b"".join(chunks)
++    return raw, metadata(before)
++
++
++def _root_state(root):
++    """Stable root identity and direct-child set; no child content is read."""
++    root = absolute(root)
++    with parent_fd(root) as (parent, name):
++        before = os.stat(name, dir_fd=parent, follow_symlinks=False)
++        if stat.S_ISLNK(before.st_mode) or not stat.S_ISDIR(before.st_mode):
++            raise PolicyError("SKILLS_ROOT_NOT_DIRECTORY_OR_SYMLINK "+str(root))
++        fd = os.open(name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC, dir_fd=parent)
++        try:
++            if identity(before) != identity(os.fstat(fd)):
++                raise PolicyError("SKILLS_ROOT_PATH_BINDING_CHANGED")
++            names = sorted(os.listdir(fd))
++            if sorted(os.listdir(fd)) != names:
++                raise PolicyError("SKILLS_ROOT_ENTRY_CAPTURE_UNSTABLE")
++            after_fd = os.fstat(fd)
++            after_name = os.stat(name, dir_fd=parent, follow_symlinks=False)
++            if metadata(before) != metadata(after_fd) or metadata(before) != metadata(after_name):
++                raise PolicyError("SKILLS_ROOT_CAPTURE_UNSTABLE")
++        finally:
++            os.close(fd)
++    return {"metadata": metadata(before), "entries": names}
++
++
++def _optional_lock_state(root):
++    path = root / LOCK_NAME
++    try:
++        with parent_fd(path) as (parent, name):
++            before = os.stat(name, dir_fd=parent, follow_symlinks=False)
++            if stat.S_ISLNK(before.st_mode) or not stat.S_ISREG(before.st_mode):
++                raise PolicyError("LOCK_NOT_REGULAR_OR_SYMLINK")
++            fd = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC | os.O_NONBLOCK, dir_fd=parent)
++            try:
++                if metadata(before) != metadata(os.fstat(fd)):
++                    raise PolicyError("LOCK_PATH_BINDING_CHANGED")
++                while os.read(fd, 1024 * 1024):
++                    pass
++                if metadata(before) != metadata(os.fstat(fd)) or metadata(before) != metadata(os.stat(name, dir_fd=parent, follow_symlinks=False)):
++                    raise PolicyError("LOCK_CAPTURE_UNSTABLE")
++            finally:
++                os.close(fd)
++    except FileNotFoundError:
++        return {"state": "ABSENT", "path": str(path), "end_state": "MUST_REMAIN_ABSENT"}
++    return {"state": "PRESENT", "path": str(path), "metadata": metadata(before),
++            "end_state": "PRESERVE_EXACT_IDENTITY_TYPE_OWNER_GROUP_MODE_AND_METADATA"}
++
++
++def _json_pointer(value):
++    return str(value).replace("~", "~0").replace("/", "~1")
++
++
++def _type_name(value):
++    if value is None:
++        return "null"
++    if isinstance(value, bool):
++        return "boolean"
++    if isinstance(value, int):
++        return "integer"
++    if isinstance(value, float):
++        return "number"
++    if isinstance(value, str):
++        return "string"
++    if isinstance(value, list):
++        return "array"
++    if isinstance(value, dict):
++        return "object"
++    return type(value).__name__
++
++
++def _timestamp(value, *, allow_null):
++    if value is None:
++        if allow_null:
++            return None
++        raise PolicyError("TIMESTAMP_NULL_REGRESSION")
++    if not isinstance(value, str) or not value:
++        raise PolicyError("SCHEMA_TIMESTAMP_TYPE")
++    try:
++        parsed = datetime.fromisoformat(value)
++    except ValueError as exc:
++        raise PolicyError("SCHEMA_TIMESTAMP_FORMAT") from exc
++    if parsed.tzinfo is None or parsed.utcoffset() != timezone.utc.utcoffset(parsed):
++        raise PolicyError("SCHEMA_TIMESTAMP_NOT_UTC_AWARE")
++    return parsed
++
++
++def _validate_mutable(field, value, *, baseline=False):
++    if field in COUNT_FIELDS:
++        if isinstance(value, bool) or not isinstance(value, int) or value < 0:
++            raise PolicyError("SCHEMA_COUNT_NONNEGATIVE_INTEGER "+field)
++    elif field in TIME_FIELDS:
++        _timestamp(value, allow_null=True)
++    else:
++        raise PolicyError("UNKNOWN_MUTABLE_FIELD "+field)
++
++
++def _deep_equal(left, right):
++    if type(left) is not type(right):
++        return False
++    if isinstance(left, dict):
++        return left.keys() == right.keys() and all(_deep_equal(left[k], right[k]) for k in left)
++    if isinstance(left, list):
++        return len(left) == len(right) and all(_deep_equal(a, b) for a, b in zip(left, right))
++    return left == right
++
++
++EXCLUDED_SKILL_DIRS=frozenset((".git",".github",".hub",".archive",".curator_backups",".venv","venv","node_modules","site-packages","__pycache__",".tox",".nox",".pytest_cache",".mypy_cache",".ruff_cache"))
++SKILL_SUPPORT_DIRS=frozenset(("references","templates","assets","scripts"))
++
++def _frontmatter_name(raw,path):
++    lines=[line.strip() for line in raw.decode("utf-8",errors="replace")[:4000].split("\n")]
++    fallback=path.parent.name
++    if "---" not in lines:return fallback
++    block=lines[lines.index("---")+1:];block=block[:block.index("---")] if "---" in block else block
++    values=(line.split(":",1)[1].strip().strip("\"'") for line in block if line.startswith("name:"))
++    return next((value for value in values if value),fallback)
++
++def _discover_inventory(root):
++    """Bounded direct scan mirroring installed local iter_skill_index_files semantics."""
++    root=absolute(root);active=None;marker=root/"_org/.active_org"
++    if marker.is_file() and not marker.is_symlink():active=marker.read_text(encoding="utf-8").strip() or None
++    paths=[];org_root=str(root/"_org")
++    for directory,dirs,files in os.walk(root,followlinks=False):
++        dirs.sort();files.sort();has_skill="SKILL.md" in files
++        for name in list(dirs):
++            candidate=Path(directory)/name
++            if candidate.is_symlink():raise PolicyError("INVENTORY_SYMLINK_DIRECTORY "+str(candidate))
++        if directory==str(root) and "_org" in dirs and active is None:dirs.remove("_org")
++        elif directory==org_root:dirs[:]=[name for name in dirs if name==active]
++        dirs[:]=[name for name in dirs if name not in EXCLUDED_SKILL_DIRS and not (has_skill and name in SKILL_SUPPORT_DIRS)]
++        if "SKILL.md" in files:paths.append(Path(directory)/"SKILL.md")
++    entries=[]
++    for path in sorted(paths):
++        raw,meta=_read_stable(path);entries.append({"name":_frontmatter_name(raw,path),"path":str(path),"sha256":sha256(raw),"metadata":meta})
++    selected={};duplicates={}
++    for row in entries:
++        if row["name"] in selected:duplicates.setdefault(row["name"],[selected[row["name"]]["path"]]).append(row["path"])
++        else:selected[row["name"]]=row
++    return {"scanner":"installed-local-iter_skill_index_files-compatible-v1","entries":entries,
++            "selected":selected,"duplicates":duplicates,"selected_names":sorted(selected)}
++
++
++def create_policy(usage_path=USAGE_PATH, *, owner_sha256, dependency_sha256, selection_binding):
++    usage = absolute(usage_path); root = usage.parent
++    if usage.name != ".usage.json":
++        raise PolicyError("UNAUTHORIZED_BOOKKEEPING_TARGET")
++    raw, usage_meta = _read_stable(usage)
++    data = strict_json(raw)
++    if not isinstance(data, dict) or any(not isinstance(k, str) for k in data):
++        raise PolicyError("SCHEMA_ROOT_OBJECT_STRING_KEYS")
++    if not stat.S_ISREG(usage_meta["st_mode"]) or usage_meta["st_nlink"] != 1:
++        raise PolicyError("USAGE_LINK_COUNT_OR_TYPE")
++    inventory=_discover_inventory(root);eligible=set(data)&set(inventory["selected_names"])
++    records = {}
++    pointers = []
++    for record_id in sorted(data):
++        value = data[record_id]
++        if not isinstance(value, dict):
++            raise PolicyError("SCHEMA_RECORD_OBJECT "+record_id)
++        mutable = {};is_eligible=record_id in eligible
++        for field in MUTABLE_FIELDS:
++            if field in value and is_eligible:
++                _validate_mutable(field, value[field], baseline=True)
++                mutable[field] = value[field]
++                pointers.append("/"+_json_pointer(record_id)+"/"+field)
++        records[record_id] = {
++            "eligible":is_eligible,
++            "field_membership": sorted(value),
++            "field_schema": {k: _type_name(v) for k, v in sorted(value.items())},
++            "strict_values": {k: v for k, v in value.items() if not (is_eligible and k in MUTABLE_FIELDS)},
++            "mutable_baseline": mutable,
++            "inventory": inventory["selected"].get(record_id),
++        }
++    root_state = _root_state(root)
++    persistent=[name for name in root_state["entries"] if re.fullmatch(TEMP_REGEX,name)]
++    if persistent:raise PolicyError("PERSISTENT_RESERVED_TEMP_AT_BASELINE")
++    return {
++        "schema": SCHEMA,
++        "contract_version": OWNER_CONTRACT_VERSION,
++        "privacy": "PRIVATE_NOT_FOR_PUBLIC_PACKAGE",
++        "target": str(usage),
++        "skills_root": str(root),
++        "owner_authorization_sha256": owner_sha256,
++        "dependency_check_sha256": dependency_sha256,
++        "selection_binding": selection_binding,
++        "mutable_fields": list(MUTABLE_FIELDS),
++        "eligible_record_ids": sorted(eligible),
++        "ineligible_record_ids": sorted(set(records)-eligible),
++        "eligible_json_pointers": pointers,
++        "records": records,
++        "inventory_manifest":inventory,
++        "baseline_raw_sha256": sha256(raw),
++        "baseline_usage_metadata": usage_meta,
++        "baseline_root": root_state,
++        "lock": _optional_lock_state(root),
++        "temporary_namespace": {
++            "root": str(root), "direct_child_only": True, "regex": TEMP_REGEX,
++            "final_state": "ABSENT", "writer_attribution_required": False,
++            "unavailable_short_lived_details": "OBSERVATIONAL_LIMIT_NOT_AUTOMATIC_REJECT",
++        },
++        "claims_not_made": ["ORIGINAL_ALL_BYTES_AND_METADATA_IMMUTABLE",
++                            "COMPLETE_BOOKKEEPING_TRANSACTION_ACCOUNTING",
++                            "GLOBAL_WRITER_ATTRIBUTION_ESTABLISHED"],
++    }
++
++
++def is_reserved_temp(path, root=SKILLS_ROOT):
++    path, root = Path(path), Path(root)
++    return path.parent == root and re.fullmatch(TEMP_REGEX, path.name) is not None
++
++
++def _changed_metadata(before, current):
++    return {k: {"before": before[k], "current": current[k]} for k in FIELDS if before.get(k) != current.get(k)}
++
++
++def _reason(exc):
++    return str(exc) if str(exc) else type(exc).__name__
++
++
++def evaluate(policy):
++    """Compare a fresh stable endpoint to the sealed private baseline projection."""
++    result = {
++        "schema": "ep19-scoped-runtime-bookkeeping-evaluation-v2",
++        "OLD_STRICT_PRESERVATION_RESULT": "OLD_STRICT_REJECT",
++        "V2_INPUT_INTEGRITY_RESULT": "REJECT",
++        "V2_BOOKKEEPING_EVALUATION": "REJECT",
++        "WRITER_ATTRIBUTION": "NOT_ESTABLISHED",
++        "OBSERVATION_LIMITS": ["NO_COMPLETE_WRITER_OR_SYSCALL_LEDGER",
++                               "SHORT_LIVED_TEMP_CONTENT_MAY_DISAPPEAR_BEFORE_OPEN"],
++        "claim": "REJECT",
++        "reasons": [],
++        "changed_json_pointers": [],
++        "observed_metadata_differences": {},
++    }
++    try:
++        if policy.get("schema") != SCHEMA or policy.get("contract_version") != OWNER_CONTRACT_VERSION:
++            raise PolicyError("STALE_OR_UNKNOWN_POLICY")
++        usage = absolute(policy["target"]); root = absolute(policy["skills_root"])
++        if usage != root / ".usage.json":
++            raise PolicyError("POLICY_TARGET_BINDING")
++        raw, current_meta = _read_stable(usage)
++        current = strict_json(raw)
++        if not isinstance(current, dict) or any(not isinstance(k, str) for k in current):
++            raise PolicyError("SCHEMA_ROOT_OBJECT_STRING_KEYS")
++        baseline_meta = policy["baseline_usage_metadata"]
++        usage_diffs = _changed_metadata(baseline_meta, current_meta)
++        result["observed_metadata_differences"]["usage_file"] = usage_diffs
++        if not stat.S_ISREG(current_meta["st_mode"]):
++            raise PolicyError("USAGE_NOT_REGULAR_OR_SYMLINK")
++        if current_meta["st_nlink"] != 1:
++            raise PolicyError("USAGE_LINK_COUNT")
++        for field in USAGE_STRICT:
++            if field == "st_mode" and current_meta[field] != baseline_meta[field]:
++                raise PolicyError("USAGE_MODE_CHANGED")
++            if field in ("st_uid", "st_gid") and current_meta[field] != baseline_meta[field]:
++                raise PolicyError("USAGE_OWNER_GROUP_CHANGED")
++            if field not in ("st_mode", "st_uid", "st_gid", "st_nlink") and current_meta[field] != baseline_meta[field]:
++                raise PolicyError("USAGE_FILESYSTEM_BOUNDARY_CHANGED")
++
++        current_root = _root_state(root)
++        baseline_root = policy["baseline_root"]
++        result["observed_metadata_differences"]["skills_root"] = _changed_metadata(baseline_root["metadata"], current_root["metadata"])
++        if current_root["entries"] != baseline_root["entries"]:
++            raise PolicyError("ROOT_ENTRY_SET_CHANGED")
++        for field in ROOT_STRICT:
++            if current_root["metadata"][field] != baseline_root["metadata"][field]:
++                raise PolicyError("SKILLS_ROOT_STRICT_METADATA_CHANGED "+field)
++
++        lock = policy["lock"]
++        current_lock = _optional_lock_state(root)
++        if lock["state"] != current_lock["state"]:
++            raise PolicyError("LOCK_END_STATE_CHANGED")
++        if lock["state"] == "PRESENT" and current_lock["metadata"] != lock["metadata"]:
++            raise PolicyError("LOCK_METADATA_CHANGED")
++
++        baseline_ids = sorted(policy["records"])
++        if sorted(current) != baseline_ids:
++            raise PolicyError("RECORD_MEMBERSHIP_CHANGED")
++        if _discover_inventory(root)!=policy["inventory_manifest"]:
++            raise PolicyError("SKILL_INVENTORY_BINDING_CHANGED")
++        records = policy["records"]
++        for record_id in baseline_ids:
++            value = current[record_id]
++            if not isinstance(value, dict):
++                raise PolicyError("SCHEMA_RECORD_OBJECT "+record_id)
++            baseline = records[record_id]
++            if sorted(value) != baseline["field_membership"]:
++                raise PolicyError("FIELD_MEMBERSHIP_CHANGED "+record_id)
++            strict_values = {k: v for k, v in value.items() if not (baseline["eligible"] and k in MUTABLE_FIELDS)}
++            if not _deep_equal(strict_values, baseline["strict_values"]):
++                raise PolicyError("STRICT_VALUE_CHANGED "+record_id)
++            for field, before in baseline["mutable_baseline"].items():
++                now = value[field]
++                _validate_mutable(field, now)
++                if field in COUNT_FIELDS and now < before:
++                    raise PolicyError("COUNT_DECREASE "+record_id+" "+field)
++                if field in TIME_FIELDS:
++                    before_time = _timestamp(before, allow_null=True)
++                    now_time = _timestamp(now, allow_null=before is None)
++                    if before is not None and now is None:
++                        raise PolicyError("TIMESTAMP_NULL_REGRESSION "+record_id+" "+field)
++                    if before_time is not None and now_time < before_time:
++                        raise PolicyError("TIMESTAMP_BACKWARDS "+record_id+" "+field)
++                if not _deep_equal(before, now):
++                    result["changed_json_pointers"].append("/"+_json_pointer(record_id)+"/"+field)
++
++        exact_old = (sha256(raw) == policy["baseline_raw_sha256"] and
++                     current_meta == baseline_meta and current_root == baseline_root and current_lock == lock)
++        result["OLD_STRICT_PRESERVATION_RESULT"] = "PASS" if exact_old else "OLD_STRICT_REJECT"
++        result["V2_INPUT_INTEGRITY_RESULT"] = "PASS"
++        result["V2_BOOKKEEPING_EVALUATION"] = "PASS"
++        variation = bool(result["changed_json_pointers"] or usage_diffs or result["observed_metadata_differences"]["skills_root"])
++        result["claim"] = ("STRICT_INPUTS_PRESERVED_WITH_SCOPED_BOOKKEEPING_VARIATION" if variation else
++                           "STRICT_INPUTS_PRESERVED_NO_BOOKKEEPING_VARIATION")
++        result["baseline_raw_sha256"] = policy["baseline_raw_sha256"]
++        result["current_raw_sha256"] = sha256(raw)
++        result["current_usage_metadata"] = current_meta
++        result["current_root_metadata"] = current_root["metadata"]
++        result["current_root_entry_set_sha256"] = sha256(json.dumps(current_root["entries"], ensure_ascii=False, separators=(",", ":")).encode())
++        result["record_count"] = len(baseline_ids)
++    except Exception as exc:
++        result["reasons"].append(_reason(exc))
++    return result
++
++
++def assert_pass(evaluation):
++    if evaluation.get("V2_INPUT_INTEGRITY_RESULT") != "PASS" or evaluation.get("V2_BOOKKEEPING_EVALUATION") != "PASS":
++        raise PolicyError("V2_BOOKKEEPING_REJECT "+json.dumps(evaluation.get("reasons", [])))
++    return evaluation
++
++
++def capture_binding(policy, row):
++    """Bind a generic Collector row to the exact bytes evaluated above."""
++    path = policy["target"]
++    if path not in row:
++        raise PolicyError("BOOKKEEPING_CAPTURE_ROW_MISSING")
++    captured = row[path]
++    if captured.get("sha256") != policy["baseline_raw_sha256"] or captured.get("metadata") != policy["baseline_usage_metadata"]:
++        raise PolicyError("BOOKKEEPING_BASELINE_CAPTURE_UNBOUND")
++    return True
+--- /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/preimages/executor/coverage.py
++++ /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/executor/coverage.py
+@@ -23,7 +23,9 @@
+ def derive(run, extra_inputs=()):
+     old=json.loads((O/'PROTECTION_SCOPE.json').read_text());scope=json.loads(json.dumps(old))
+     helpers,edges=local_imports()
+-    controls=[p for p in O.iterdir() if p.is_file()] + [D/'CODEX_BRIEF.md']
++    controls=[p for p in O.iterdir() if p.is_file()] + [D/'CODEX_BRIEF.md',D/'OWNER_AUTHORIZATION.txt']
++    controls += [p for p in (D/'dependency').rglob('*') if p.is_file()] if (D/'dependency').is_dir() else []
++    controls += [D/name for name in ('NEW_EXECUTOR_IDENTITY.json','QUALIFICATION_REUSE_LEDGER.json') if (D/name).is_file()]
+     controls += [O/'qualification/CONTINUATION_PRESERVATION_CONTRACT.md',O/'observations/BEFORE.json']
+     controls += list((O/'inputs').rglob('*'))
+     controls += list((O/'owned').rglob('*'))
+@@ -36,7 +38,7 @@
+     runtime_inputs=[run/'runtime/cache/backend/gradle/init.d/ep19-packaging.gradle']
+     runtime_inputs += [p for p in frozen_roots[1].rglob('*') if p.is_file()]
+     controls += runtime_inputs
+-    controls += [p for p in (D/'tools').rglob('*') if p.is_file()]
++    controls += [p for p in (O/'tools').rglob('*') if p.is_file()]
+     instructions=list(INSTRUCTIONS)
+     # Every historical entry retained; no count is used as authority for membership.
+     protected=set(old['protected'])|set(map(str,helpers+controls+list(map(Path,extra_inputs))))
+@@ -49,6 +51,15 @@
+     scope.update(protected=sorted(protected),allowed=sorted(set(runtime)),enumeration_roots=instructions,
+                  frozen_roots=list(map(str,frozen_roots)),
+                  sealed_inputs=sorted(set(map(str,helpers+controls+list(map(Path,extra_inputs))))))
++    policy=[Path(p) for p in extra_inputs if Path(p).name=='bookkeeping-policy-v2.private.json']
++    if len(policy)!=1:raise RuntimeError('EXACT_V2_BOOKKEEPING_POLICY_REQUIRED')
++    scope['bookkeeping_policy']=str(policy[0])
++    scope['bookkeeping_target']='/home/user/.hermes/skills/.usage.json'
++    scope['instruction_selection_binding']={
++        'mechanism':'Fixed task-local 29-gate matrix and sealed instruction/input closure; no dynamic curator/UI selection during the validation window',
++        'matrix':str(O/'GATE_EXECUTION_MATRIX.json'),'matrix_sha256':digest(O/'GATE_EXECUTION_MATRIX.json'),
++        'gate_count':len(json.loads((O/'GATE_EXECUTION_MATRIX.json').read_text())['order']),
++        'usage_file_retained_in_accounting':True}
+     # Existing ignored generated trees were never enumerated by prepare_finalize.py's
+     # --others --exclude-standard. Keep that scope, record exact prune derivation.
+     pruned=[]
+@@ -79,6 +90,7 @@
+     names=['protected','repositories','metadata_roots','allowed','cross_lane','shared_git','enumeration_roots','pruned_roots','expected_missing']
+     args={k:scope[k] for k in names}
+     args['frozen_roots']=scope.get('frozen_roots',[])
++    args['bookkeeping_policy']=scope.get('bookkeeping_policy')
+     if shadow:args.update(shadow_root=scope['shadow_root'],shadow_declared=scope['shadow_declared'])
+     return args
+ 
+@@ -94,7 +106,7 @@
+     Successful synthetic preparation does not imply a qualified container runtime.
+     """
+     path=Path(path);q=json.loads(path.read_text())
+-    if q.get('schema') not in ('ep19-owner-qualified-v1','ep19-output-corrections-v2') or not q.get('dependencies'):
++    if q.get('schema') not in ('ep19-owner-qualified-v1','ep19-output-corrections-v2','ep19-bookkeeping-v2-qualified-v1') or not q.get('dependencies'):
+         raise RuntimeError('QUALIFICATION_CLOSURE_MISSING')
+     files=q['dependencies'];helpers=q.get('helpers',{})
+     if set(helpers)!=set(map(str,local_imports()[0])):
+@@ -112,6 +124,15 @@
+         raise RuntimeError('QUALIFICATION_RESULT_REJECT')
+     if q.get('result')!='PASS' or q.get('product_gate_execution') is not False:
+         raise RuntimeError('SYNTHETIC_QUALIFICATION_NOT_PASS')
++    if q.get('schema')=='ep19-bookkeeping-v2-qualified-v1':
++        required_areas=('bookkeeping_parser','bookkeeping_metadata','observer_reducer','decision_evidence',
++                        'baseline_seal','preflight','prestart','command_boundary','final_acceptance',
++                        'launch_reachability','strict_scope','evidence_write_failure','identity_binding')
++        if any(q.get(area)!='PASS' for area in required_areas):
++            raise RuntimeError('V2_QUALIFICATION_AREA_NOT_PASS')
++        for name in ('red_log','green_log','qualification_matrix','reuse_ledger'):
++            if q.get(name) not in files:raise RuntimeError('V2_QUALIFICATION_REQUIRED_DEPENDENCY '+name)
++        if not full_capsule_reuse_qualified(q):raise RuntimeError('FULL_CAPSULE_REUSE_NOT_QUALIFIED')
+     return [path,*map(Path,files)]
+ 
+ def formal_boundary_qualified(q):
+@@ -126,7 +147,17 @@
+     if r.get('coq_image')!=inv['environment']['COQ_IMAGE'] or r.get('observed_coq_image_id')!=inv['coq_image_id_raw']:
+         return False
+     if r.get('script_sha256')!=inv['pins']['candidate/scripts/formal/validate-faof2.sh']:return False
+-    if r.get('formal_wrapper_sha256')!=digest(H/'execution.py'):return False
++    if r.get('formal_wrapper_sha256')!=digest(H/'execution.py'):
++        reuse=q.get('formal_boundary_reuse')
++        if not reuse or reuse not in files:return False
++        ledger=json.loads(Path(reuse).read_text())
++        if ledger.get('result')!='PASS' or ledger.get('reused_receipt')!=path or ledger.get('reused_receipt_sha256')!=files[path]:return False
++        if ledger.get('old_wrapper_sha256')!=r.get('formal_wrapper_sha256') or ledger.get('current_wrapper_sha256')!=digest(H/'execution.py'):return False
++        def component(source):
++            tree=ast.parse(Path(source).read_text());node=next((n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='formal_sandbox'),None)
++            return hashlib.sha256(ast.dump(node,include_attributes=False).encode()).hexdigest() if node else None
++        old=ledger.get('old_wrapper_source')
++        if not old or old not in files or ledger.get('formal_sandbox_component_sha256')!=component(old) or component(H/'execution.py')!=component(old):return False
+     program=r.get('probe_program')
+     if not program or program not in files or not r.get('container_ids') or r.get('containers_remaining')!=[]:return False
+     proofs=r.get('process_receipts',[])
+@@ -137,3 +168,36 @@
+         if process.get('native_exit')!=0 or log not in files or process.get('log_sha256')!=files[log]:return False
+         if process.get('formal_wrapper_sha256')!=r['formal_wrapper_sha256']:return False
+     return q.get('formal_boundary')=='PASS'
++
++def full_capsule_reuse_qualified(q):
++    """Verify filtered A/B/C/runtime reuse without accepting an old huge closure wholesale."""
++    files=q.get('dependencies',{});path=q.get('full_capsule_reuse')
++    if not path or path not in files:return False
++    ledger=json.loads(Path(path).read_text())
++    if ledger.get('result')!='PASS' or ledger.get('historical_45_diagnostics_reused') is not False:return False
++    required={'run_isolation','artifact_copy','compile_completeness','vite_closure','packaging','frontend_boundary','formal_boundary','lean_runtime'}
++    if set(ledger.get('areas',{}))!=required or any(v!='PASS' for v in ledger['areas'].values()):return False
++    for row in ledger.get('exact_components',[]):
++        current,prior=row.get('current'),row.get('prior')
++        if not current or not prior or current not in files or prior not in files:return False
++        if files[current]!=files[prior] or row.get('sha256')!=files[current]:return False
++    for row in ledger.get('ast_components',[]):
++        current,prior,name=row.get('current'),row.get('prior'),row.get('name')
++        if not current or not prior or current not in files or prior not in files:return False
++        def component(source):
++            tree=ast.parse(Path(source).read_text());node=next((n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name==name),None)
++            return hashlib.sha256(ast.dump(node,include_attributes=False).encode()).hexdigest() if node else None
++        if not row.get('sha256') or component(current)!=row['sha256'] or component(prior)!=row['sha256']:return False
++    for row in ledger.get('native_receipts',[]):
++        process,log=row.get('process'),row.get('log')
++        if process not in files or log not in files:return False
++        receipt=json.loads(Path(process).read_text())
++        if receipt.get('native_exit')!=0 or receipt.get('log_sha256')!=files[log]:return False
++        result=row.get('result')
++        if result:
++            if result not in files:return False
++            measured=json.loads(Path(result).read_text())
++            if measured.get('result')!='PASS' or measured.get('failures',0)!=0 or measured.get('errors',0)!=0:return False
++    for source in ledger.get('programs_and_qualification_receipts',[]):
++        if source not in files:return False
++    return bool(ledger.get('exact_components') and ledger.get('native_receipts') and ledger.get('programs_and_qualification_receipts'))
+--- /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/preimages/executor/decision_evidence.py
++++ /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/executor/decision_evidence.py
+@@ -1,4 +1,4 @@
+-"""External endpoint decision receipts; no observer or preservation policy changes.
++"""External endpoint decision receipts with scoped V2 bookkeeping evaluation.
+ 
+ Exclusive, read-only receipts are append-only by this program, not tamper-proof
+ against their owner. Failed/partial writes are never removed or reused.
+@@ -12,6 +12,7 @@
+ import time
+ import uuid
+ from preservation import Collector, absolute, parent_fd, metadata, identity
++import bookkeeping_v2
+ 
+ OVERLAP_KEYS = ('protected', 'sealed_inputs', 'frozen_roots', 'enumeration_roots',
+                 'repositories', 'metadata_roots', 'expected_missing')
+@@ -174,6 +175,7 @@
+                    'observation, not proof of process history. No bodies exported.',
+                'started_ns':time.time_ns()}
+     baseline = {}; wanted = {}; current = {}; scope = None; destination_scope = None
++    bookkeeping = None
+     rejection = None
+     try:
+         scope, receipt['policy_identity'] = read_json(run/'scope.json')
+@@ -186,6 +188,9 @@
+                 destination_scope[key] = sorted(set(scope.get(key, [])) | set(scope_override.get(key, [])))
+         control, receipt['baseline_identity'] = read_json(run/'baseline.json')
+         baseline = control['entries']; wanted = dict(baseline)
++        policy_path = Path(scope['bookkeeping_policy'])
++        policy, receipt['bookkeeping_policy_identity'] = read_json(policy_path)
++        bookkeeping_v2.capture_binding(policy, baseline)
+         sources = capture(source_paths, [])
+         receipt['executor_identity'] = sources
+         if sources['result'] != 'COMPLETE':
+@@ -205,8 +210,23 @@
+         receipt['capture_errors'] = captured['errors']
+         if captured['result'] != 'COMPLETE' or captured['errors']:
+             raise RuntimeError('INCOMPLETE_CAPTURE '+json.dumps(captured['errors']))
+-        if current != wanted:
++        usage_path=policy['target'];root_path=policy['skills_root'];scoped={usage_path,root_path}
++        bookkeeping=bookkeeping_v2.assert_pass(bookkeeping_v2.evaluate(policy))
++        if (current.get(usage_path,{}).get('sha256')!=bookkeeping['current_raw_sha256'] or
++                current.get(usage_path,{}).get('metadata')!=bookkeeping['current_usage_metadata'] or
++                current.get(root_path,{}).get('metadata')!=bookkeeping['current_root_metadata']):
++            raise RuntimeError('BOOKKEEPING_DECISION_CAPTURE_UNBOUND')
++        strict_before={p:r for p,r in wanted.items() if p not in scoped}
++        strict_current={p:r for p,r in current.items() if p not in scoped}
++        if strict_current != strict_before:
+             raise RuntimeError('FROZEN_BASELINE_DRIFT_ACROSS_COMMAND_GAP')
++        receipt['OLD_STRICT_PRESERVATION_RESULT']='PASS' if current==wanted else 'OLD_STRICT_REJECT'
++        receipt['V2_INPUT_INTEGRITY_RESULT']='PASS'
++        receipt['V2_BOOKKEEPING_EVALUATION']='PASS'
++        receipt['WRITER_ATTRIBUTION']='NOT_ESTABLISHED'
++        receipt['OBSERVATION_LIMITS']=bookkeeping['OBSERVATION_LIMITS']
++        receipt['claim']=bookkeeping['claim']
++        receipt['bookkeeping_evaluation']=bookkeeping
+         receipt['decision'] = 'PASS'
+     except Exception as exc:
+         rejection = exc
+@@ -218,6 +238,22 @@
+             receipt['evidence_errors'].append(error(exc))
+     receipt.update(baseline_entries=baseline, before=wanted, current=current,
+                    differences=differences(wanted, current, receipt['capture_errors']))
++    if rejection is not None:
++        receipt['OLD_STRICT_PRESERVATION_RESULT']='PASS' if current and current==wanted else 'OLD_STRICT_REJECT'
++        receipt['V2_INPUT_INTEGRITY_RESULT']='REJECT'
++        receipt['claim']='REJECT'
++        if bookkeeping is not None:
++            receipt['V2_BOOKKEEPING_EVALUATION']=bookkeeping['V2_BOOKKEEPING_EVALUATION']
++            receipt['WRITER_ATTRIBUTION']='NOT_ESTABLISHED'
++            receipt['OBSERVATION_LIMITS']=bookkeeping['OBSERVATION_LIMITS']
++            receipt['bookkeeping_evaluation']=bookkeeping
++    if bookkeeping is None:
++        receipt.setdefault('OLD_STRICT_PRESERVATION_RESULT','NOT_ESTABLISHED')
++        receipt.setdefault('V2_INPUT_INTEGRITY_RESULT','REJECT')
++        receipt.setdefault('V2_BOOKKEEPING_EVALUATION','REJECT')
++        receipt.setdefault('WRITER_ATTRIBUTION','NOT_ESTABLISHED')
++        receipt.setdefault('OBSERVATION_LIMITS',['DECISION_CAPTURE_OR_COMPARISON_INCOMPLETE'])
++        receipt.setdefault('claim','REJECT')
+     # No second comparison read: all decision fields above come from captured values.
+     start_path = run/'runtime/START.json'
+     receipt['START'] = {'status':'NOT_ESTABLISHED', 'observed_ns':time.time_ns()}
+--- /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/preimages/executor/execution.py
++++ /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/executor/execution.py
+@@ -1,9 +1,12 @@
+ """Supported FE mount/PID isolation; backend gates remain host-native."""
+ from pathlib import Path
+ import os,subprocess,hashlib,json
+-D=Path(__file__).resolve().parents[1]
+ O=Path('/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1')
+-H=D/'executor'
++CORRECTION_ROOT=O/'run-output-completeness-20260907T143346Z'
++D=Path(__file__).resolve().parents[1]  # this continuation: the only writable root
++H=D/'executor'                        # copied executor under this continuation
++if D.parent != CORRECTION_ROOT or H.parent != D:
++ raise RuntimeError('UNEXPECTED_CONTINUATION_ROOT_RESOLUTION')
+ BASE='86d6aef94fd5e58da552e97c11473cff6eca734e'
+ SHA='689ab9456461a8d19a72d059f5157092efc43aff';TREE='6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6'
+ def git(root,*args):
+--- /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/preimages/executor/observe.py
++++ /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/executor/observe.py
+@@ -1,6 +1,7 @@
+ """Task-scoped local inotify observation; no PID attribution is inferred."""
+ from pathlib import Path
+-import ctypes,errno,hashlib,os,re,select,signal,stat,struct,subprocess,time
++import ctypes,errno,hashlib,json,os,re,select,signal,stat,struct,subprocess,time
++import bookkeeping_v2
+ MASK=0x2|0x4|0x8|0x40|0x80|0x100|0x200|0x400|0x800
+ 
+ def snapshot(paths,expected_missing=()):
+@@ -9,10 +10,14 @@
+ 
+ 
+ class Watch:
+- def __init__(self,protected,repositories,metadata_roots,allowed,cross_lane=(),shared_git=None,shadow_root=None,shadow_declared=(),enumeration_roots=(),pruned_roots=(),expected_missing=(),frozen_roots=()):
++ def __init__(self,protected,repositories,metadata_roots,allowed,cross_lane=(),shared_git=None,shadow_root=None,shadow_declared=(),enumeration_roots=(),pruned_roots=(),expected_missing=(),frozen_roots=(),bookkeeping_policy=None):
+   self.frozen_roots=list(map(Path,frozen_roots))
+   self.protected=set(map(Path,protected));self.protected_ancestors={ancestor for p in self.protected for ancestor in p.parents};self.repositories=list(map(Path,repositories));self.metadata_roots=list(map(Path,metadata_roots));self.allowed=list(map(Path,allowed));self.cross_lane=list(map(Path,cross_lane));self.shared_git=Path(shared_git) if shared_git else None;self.shadow_root=Path(shadow_root) if shadow_root else None;self.shadow_conditional=({self.shadow_root/p for p in [*shadow_declared,'.git/index','.git/index.lock']} if self.shadow_root else set())
+   self.expected_missing=set(map(str,expected_missing));self.enumeration_roots=list(map(Path,enumeration_roots));self.pruned_roots=list(map(Path,pruned_roots));self.shadow_declared=list(shadow_declared)
++  self.bookkeeping_policy=(json.loads(Path(bookkeeping_policy).read_text()) if isinstance(bookkeeping_policy,(str,Path)) else bookkeeping_policy)
++  self.bookkeeping_target=Path(self.bookkeeping_policy['target']) if self.bookkeeping_policy else None
++  self.bookkeeping_root=Path(self.bookkeeping_policy['skills_root']) if self.bookkeeping_policy else None
++  self.bookkeeping_limits=[]
+   self.libc=ctypes.CDLL(None,use_errno=True);self.fd=self.libc.inotify_init1(os.O_NONBLOCK|os.O_CLOEXEC)
+   if self.fd<0:raise OSError(ctypes.get_errno(),'inotify_init1')
+   self.watches={};self.watched_paths=set();self.events=[];self.errors=[];self.gaps=[];self.dynamic=0;self.metadata_files=set();self.metadata_dirs=set();self.shared_proof={}
+@@ -56,6 +61,12 @@
+    rel=path.relative_to(self.shared_git/'objects').as_posix()
+    if re.fullmatch(r'[0-9a-f]{2}(?:/(?:[0-9a-f]{38}|tmp_obj_.+))?',rel) and path not in self.metadata_files and path not in self.metadata_dirs:
+     return 'PENDING_SHARED_OBJECT_SCOPE_PROOF'
++  if self.bookkeeping_policy and path==self.bookkeeping_target:
++   if mask&0x4:return 'REJECT_BOOKKEEPING_TARGET_ATTRIBUTE_EVENT'
++   if mask&0x40:return 'REJECT_BOOKKEEPING_TARGET_MOVED_OUT'
++   return 'SCOPED_BOOKKEEPING_EVENT_PENDING_FINAL_EVALUATION'
++  if self.bookkeeping_policy and bookkeeping_v2.is_reserved_temp(path,self.bookkeeping_root):
++   return 'SCOPED_BOOKKEEPING_EVENT_PENDING_FINAL_EVALUATION'
+   if self.within(path,self.enumeration_roots):return 'REJECT_INSTRUCTION_EVENT'
+   if path in self.protected or self.within(path,self.frozen_roots):return 'REJECT_PROTECTED_INPUT_EVENT'
+   if self.within(path,self.metadata_roots):return 'REJECT_GIT_METADATA_EVENT'
+@@ -78,6 +89,19 @@
+     if mask&(0x8000|0x2000):self.errors.append('WATCH_LOSS')
+     if wd not in self.watches:self.errors.append('UNKNOWN_WATCH');continue
+     path=self.watches[wd]/name;category=self.classify(path,mask)
++    if category=='SCOPED_BOOKKEEPING_EVENT_PENDING_FINAL_EVALUATION' and path!=self.bookkeeping_target:
++     try:
++      s=path.lstat()
++      if stat.S_ISLNK(s.st_mode) or not stat.S_ISREG(s.st_mode) or s.st_nlink!=1:
++       category='REJECT_BOOKKEEPING_TEMP_LINK_OR_TYPE'
++      elif s.st_dev!=self.bookkeeping_policy['baseline_root']['metadata']['st_dev']:
++       category='REJECT_BOOKKEEPING_TEMP_FILESYSTEM_BOUNDARY'
++      elif s.st_uid!=self.bookkeeping_policy['baseline_usage_metadata']['st_uid'] or s.st_gid!=self.bookkeeping_policy['baseline_usage_metadata']['st_gid'] or stat.S_IMODE(s.st_mode)!=0o600:
++       category='REJECT_BOOKKEEPING_TEMP_OWNER_GROUP_MODE'
++     except FileNotFoundError:
++      self.bookkeeping_limits.append({'path':str(path),'kind':'SHORT_LIVED_TEMP_DETAILS_UNAVAILABLE','disposition':'OBSERVATIONAL_LIMIT_ONLY_FINAL_STATE_STILL_REQUIRED'})
++     except OSError as e:
++      category='REJECT_BOOKKEEPING_TEMP_CAPTURE_ERROR';self.errors.append(category+':'+type(e).__name__+':'+str(getattr(e,'errno',None)))
+     if category not in ['DECLARED_BUILD_OUTPUT','OUTSIDE_PROTECTED_PATH_INVENTORY']:
+      self.events.append({'path':str(path),'mask':mask,'cookie':cookie,'category':category,'observed_ns':time.monotonic_ns(),'writer':'NOT_ESTABLISHED'})
+     if mask&0x40000000 and mask&(0x100|0x80) and self.within(path,[*self.metadata_roots,*self.repositories,*self.enumeration_roots]) and not self.within(path,[*self.allowed,*self.pruned_roots]):
+@@ -132,6 +156,17 @@
+   except Exception as error:
+    self.shared_proof={'error_type':type(error).__name__,'reason':str(error),'disposition':'REJECT_UNRESOLVED_SHARED_METADATA_SCOPE'}
+    for e in pending:e['category']='REJECT_UNRESOLVED_SHARED_METADATA_SCOPE'
++ def resolve_bookkeeping(self):
++  if not self.bookkeeping_policy:return
++  scoped=[e for e in self.events if e['category']=='SCOPED_BOOKKEEPING_EVENT_PENDING_FINAL_EVALUATION']
++  for event in scoped:
++   path=Path(event['path']);mask=event['mask'];cookie=event.get('cookie',0)
++   if path!=self.bookkeeping_target and mask&0x40:
++    paired=any(Path(other['path'])==self.bookkeeping_target and other['mask']&0x80 and other.get('cookie')==cookie and cookie for other in scoped)
++    if not paired:event['category']='REJECT_BOOKKEEPING_TEMP_RENAME_OUTSIDE_TARGET'
++   if path==self.bookkeeping_target and mask&0x80:
++    paired=any(bookkeeping_v2.is_reserved_temp(Path(other['path']),self.bookkeeping_root) and other['mask']&0x40 and other.get('cookie')==cookie and cookie for other in scoped)
++    if not paired:event['category']='REJECT_BOOKKEEPING_TARGET_RENAME_FROM_UNREGISTERED_SOURCE'
+  def rejected(self):return bool(self.errors or any(e['category'].startswith('REJECT') for e in self.events))
+  def close(self):os.close(self.fd)
+ 
+@@ -183,12 +218,12 @@
+  def close(self):
+   if self.libc.prctl(36,self.old,0,0,0)!=0:raise OSError(ctypes.get_errno(),'RESTORE_PROCESS_SUBREAPER_MODE')
+ 
+-def run(argv,cwd,log,protected,repositories,metadata_roots,allowed,cross_lane=(),shared_git=None,env=None,timeout=2400,shadow_root=None,shadow_declared=(),enumeration_roots=(),pruned_roots=(),expected_missing=(),shadow_reconciler=None,frozen_roots=()):
++def run(argv,cwd,log,protected,repositories,metadata_roots,allowed,cross_lane=(),shared_git=None,env=None,timeout=2400,shadow_root=None,shadow_declared=(),enumeration_roots=(),pruned_roots=(),expected_missing=(),shadow_reconciler=None,frozen_roots=(),bookkeeping_policy=None):
+  import uuid
+  tag=uuid.uuid4().hex;env=dict(os.environ if env is None else env)
+  if 'GIT_INDEX_FILE' in env:raise RuntimeError('ALTERNATE_INDEX_FORBIDDEN')
+  env.update(EP19_GATE_SCOPE=tag,GIT_OPTIONAL_LOCKS='0')
+- started=time.time();watcher=Watch(protected,repositories,metadata_roots,allowed,cross_lane,shared_git,shadow_root,shadow_declared,enumeration_roots,pruned_roots,expected_missing,frozen_roots)
++ started=time.time();watcher=Watch(protected,repositories,metadata_roots,allowed,cross_lane,shared_git,shadow_root,shadow_declared,enumeration_roots,pruned_roots,expected_missing,frozen_roots,bookkeeping_policy)
+  children=ChildScope()
+  try:
+   before=snapshot(watcher.capture_paths,watcher.expected_missing);watcher.drain()
+@@ -217,9 +252,15 @@
+       except ProcessLookupError:pass
+     if time.time()-quiescence_start>15:watcher.errors.append('OWNED_PROCESS_NOT_QUIESCENT');break
+     select.select([watcher.fd],[],[],.05);watcher.drain()
+-   watcher.resolve_frontend_locks();watcher.resolve_shared();after=snapshot(watcher.capture_paths,watcher.expected_missing);watcher.drain()
++   watcher.resolve_frontend_locks();watcher.resolve_shared();after=snapshot(watcher.capture_paths,watcher.expected_missing);watcher.drain();watcher.resolve_bookkeeping()
+    if any(e['category'].startswith('PENDING_') for e in watcher.events):watcher.errors.append('LATE_SHARED_SCOPE_UNRESOLVED')
+   changed=[p for p in before.keys()|after.keys() if before.get(p)!=after.get(p)]
++  bookkeeping_evaluation=None;unapproved_changed=list(changed)
++  if watcher.bookkeeping_policy:
++   bookkeeping_evaluation=bookkeeping_v2.evaluate(watcher.bookkeeping_policy)
++   if bookkeeping_evaluation['V2_BOOKKEEPING_EVALUATION']!='PASS':watcher.errors.append('V2_BOOKKEEPING_FINAL_REJECT:'+repr(bookkeeping_evaluation['reasons']))
++   allowed_changes={str(watcher.bookkeeping_target),str(watcher.bookkeeping_root)}
++   unapproved_changed=[p for p in changed if p not in allowed_changes]
+   for p,wanted in watcher.initial_directories.items():
+    try:
+     s=Path(p).stat()
+@@ -232,8 +273,8 @@
+     reconciliation=shadow_reconciler(watcher.events,tag)
+     require_shadow_reconciliation(reconciliation,shadow_root,tag,shadow_declared)
+    except Exception as error:watcher.errors.append('SHADOW_ACCEPTANCE:'+str(error))
+-  rejected=bool(rc or changed or timed_out or watcher.rejected())
+-  return {'shadow_reconciliation':reconciliation,'result':'REJECT' if rejected else 'PASS_BOUNDED_OBSERVATION','native_exit':rc,'wrapper_exit':1 if rejected else 0,'before':before,'after':after,'changed':changed,'events':watcher.events,'shared_metadata_scope_proof':watcher.shared_proof,'observation_errors':watcher.errors,'gaps':watcher.gaps,'dynamic_watches':watcher.dynamic,'registered_watches':len(watcher.watches),'ready_before_child':True,'final_queue_drained':True,'child_pid':child.pid,'gate_process_scope':tag,'child_containment':'Linux process-local subreaper plus tag observation; private PID namespace additionally enforced for frontend','owned_processes_remaining':pending,'owned_processes_terminated':terminated,'quiescence_seconds':time.time()-quiescence_start,'start':started,'ready':ready,'end':time.time(),'timeout':timed_out,'command':argv,'cwd':str(cwd),'scope_limits':'Local inotify plus captured endpoint fields, no universal mmap/network/attribute coverage or writer PID attribution; per-command interval only. Only the exact authorized frontend ref/worktree metadata exception applies. New shared loose objects require actual content/reachability checks against the exact authorized frontend ref; unresolved checks reject; no restoration or writer attribution.'}
++  rejected=bool(rc or unapproved_changed or timed_out or watcher.rejected())
++  return {'shadow_reconciliation':reconciliation,'result':'REJECT' if rejected else 'PASS_BOUNDED_OBSERVATION','native_exit':rc,'wrapper_exit':1 if rejected else 0,'before':before,'after':after,'changed':changed,'unapproved_changed':unapproved_changed,'bookkeeping_evaluation':bookkeeping_evaluation,'bookkeeping_observation_limits':watcher.bookkeeping_limits,'events':watcher.events,'shared_metadata_scope_proof':watcher.shared_proof,'observation_errors':watcher.errors,'gaps':watcher.gaps,'dynamic_watches':watcher.dynamic,'registered_watches':len(watcher.watches),'ready_before_child':True,'final_queue_drained':True,'child_pid':child.pid,'gate_process_scope':tag,'child_containment':'Linux process-local subreaper plus tag observation; private PID namespace additionally enforced for frontend','owned_processes_remaining':pending,'owned_processes_terminated':terminated,'quiescence_seconds':time.time()-quiescence_start,'start':started,'ready':ready,'end':time.time(),'timeout':timed_out,'command':argv,'cwd':str(cwd),'scope_limits':'Local inotify plus captured endpoint fields, no universal mmap/network/attribute coverage or writer PID attribution; per-command interval only. Exact .usage.json V2 changes and verified direct-child .usage_<8 chars>.tmp events require final semantic evaluation; short-lived temp details may remain unavailable. Strict Skill/Memory events and unclassifiable gaps reject.'}
+  finally:
+   children.close();watcher.close()
+ 
+--- /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/preimages/executor/runner.py
++++ /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/executor/runner.py
+@@ -8,16 +8,34 @@
+ import namespaces, artifacts, compile_inventory
+ import bindings, coverage, freshness, observe, packaging, parsers, shadow_binding, engineering
+ import decision_evidence
++import bookkeeping_v2
+ from execution import D,O,H,BASE,SHA,TREE,exact,git,environment,frontend_sandbox,formal_sandbox
+ from preservation import Collector,INSTRUCTIONS
+ 
+ def repos(run):return namespaces.repos(run)
+ AUTHORITY=O/'owner-clarified-execution-20260907T1120Z'
+-OWNER_SHA256='bdb8ce769624677a0e5aacfaad066965d8512e2c232f18caae6ab9f88f9564ca'
++OWNER_AUTHORIZATION=D/'OWNER_AUTHORIZATION.txt'
++OWNER_SHA256='338a9449a678ab0de5e4a7167823e3fff983f38bac76e5deac3c029a1c4c9528'
++OWNER_CONTRACT_VERSION=bookkeeping_v2.OWNER_CONTRACT_VERSION
++EXECUTOR_IDENTITY=D/'NEW_EXECUTOR_IDENTITY.json'
+ REVIEW_STATES={'new_monitor_independent_review':'PENDING','preservation_mapping_independent_review':'PENDING',
+                'publication_harness_replacement':'NOT_AUTHORIZED','product_publication':'NOT_AUTHORIZED'}
+ def put(p,r):coverage.put(p,r)
+ def load(p):return json.loads(Path(p).read_text())
++def executor_identity_basis(qualification=None):
++    q=Path(qualification or D/'qualification/QUALIFICATION.json')
++    return {'schema':'ep19-bookkeeping-v2-executor-identity-v1','candidate':SHA,'tree':TREE,'base':BASE,
++            'owner_contract_version':OWNER_CONTRACT_VERSION,'owner_authorization_sha256':OWNER_SHA256,
++            'matrix_sha256':coverage.digest(O/'GATE_EXECUTION_MATRIX.json'),
++            'dependency_check_sha256':coverage.digest(D/'dependency/DEPENDENCY_CHECK.json'),
++            'qualification':str(q),'qualification_sha256':coverage.digest(q),
++            'helpers':coverage.seal(coverage.local_imports()[0])}
++def verify_executor_identity(path=EXECUTOR_IDENTITY):
++    document=load(path);basis=executor_identity_basis(document['identity_basis']['qualification'])
++    if document.get('identity_basis')!=basis:raise RuntimeError('EXECUTOR_IDENTITY_BASIS_STALE')
++    wanted=hashlib.sha256(json.dumps(basis,sort_keys=True,separators=(',',':')).encode()).hexdigest()
++    if document.get('identity')!=wanted:raise RuntimeError('EXECUTOR_IDENTITY_DIGEST_MISMATCH')
++    return document
+ def runpath(name):
+     if not re.fullmatch(r'[a-zA-Z0-9][a-zA-Z0-9_-]{1,80}',name):raise RuntimeError('INVALID_RUN_ID')
+     p=D/'outputs/continuation-runs'/name
+@@ -53,7 +71,8 @@
+             target=Path(env['GRADLE_USER_HOME'])/'init.d';target.mkdir()
+             shutil.copyfile(H/'packaging.init.gradle',target/'ep19-packaging.gradle')
+     put(run/'prepare.json',{'result':'PREPARED_NOT_BASELINED','run_id':run.name,'candidate':SHA,'tree':TREE,'base':BASE,'formal_gate_execution':False,
+-        'qualification':str(Path(qualification or AUTHORITY/'QUALIFICATION.json').absolute()),
++        'qualification':str(Path(qualification or D/'qualification/QUALIFICATION.json').absolute()),
++        'owner_contract_version':OWNER_CONTRACT_VERSION,'owner_authorization_sha256':OWNER_SHA256,
+         'dependency_preparation':'Parent may populate only this runtime cache before baseline/seal. No copied FE assets. Fresh per-run independent clones; original checkouts never execute.',
+         'commands':{'baseline':f'python3 -B executor/runner.py baseline --run-id {run.name}',
+                     'preflight':f'python3 -B executor/runner.py preflight --run-id {run.name}',
+@@ -62,7 +81,16 @@
+ def baseline(run):
+     if (run/'baseline.json').exists():raise RuntimeError('BASELINE_ALREADY_EXISTS_NEW_NAMESPACE_REQUIRED')
+     ids=identities(run);put(run/'identity.json',ids)
+-    scope=coverage.derive(run,[run/'bindings.json',run/'prepare.json',run/'identity.json',run/'source-recovery.json',run/'namespaces.json'])
++    dependency=D/'dependency/DEPENDENCY_CHECK.json'
++    if not dependency.is_file():raise RuntimeError('BOOKKEEPING_DEPENDENCY_CHECK_MISSING')
++    policy_path=run/'bookkeeping-policy-v2.private.json'
++    policy=bookkeeping_v2.create_policy(
++        owner_sha256=OWNER_SHA256,dependency_sha256=coverage.digest(dependency),
++        selection_binding={'matrix':str(O/'GATE_EXECUTION_MATRIX.json'),'matrix_sha256':coverage.digest(O/'GATE_EXECUTION_MATRIX.json'),
++                           'resolved_bindings_sha256':coverage.digest(run/'bindings.json'),'gate_count':29,
++                           'dynamic_skill_selection_during_window':False})
++    put(policy_path,policy)
++    scope=coverage.derive(run,[run/'bindings.json',run/'prepare.json',run/'identity.json',run/'source-recovery.json',run/'namespaces.json',policy_path])
+     put(run/'scope.json',scope)
+     if scope['instruction_capture']['result']!='COMPLETE':
+         put(run/'baseline.json',{'result':'INCOMPLETE','instruction_errors':scope['instruction_capture']['errors']});return 1
+@@ -71,12 +99,17 @@
+     try:
+         before=observe.snapshot(w.capture_paths,w.expected_missing);w.drain()
+         if w.errors or w.rejected():raise RuntimeError('BASELINE_OBSERVATION_REJECT')
++        bookkeeping_v2.capture_binding(policy,before)
++        initial=bookkeeping_v2.assert_pass(bookkeeping_v2.evaluate(policy))
++        if initial['OLD_STRICT_PRESERVATION_RESULT']!='PASS':raise RuntimeError('BOOKKEEPING_CHANGED_DURING_BASELINE')
+         put(run/'baseline.json',{'result':'COMPLETE','entries':before,'watches':len(w.watches),
+-                               'time':time.time(),'claim':'Current endpoints only; not historical preservation'})
++                               'time':time.time(),'claim':'Current endpoints only; not historical preservation',
++                               'bookkeeping_policy_sha256':coverage.digest(policy_path),
++                               'bookkeeping_baseline':{k:initial[k] for k in ('OLD_STRICT_PRESERVATION_RESULT','V2_INPUT_INTEGRITY_RESULT','V2_BOOKKEEPING_EVALUATION','baseline_raw_sha256','current_raw_sha256','record_count')}})
+     finally:w.close()
+     initdir=run/'runtime/cache/backend/gradle/init.d'
+     if {p.name for p in initdir.iterdir()}!={'ep19-packaging.gradle'}:raise RuntimeError('UNDECLARED_GRADLE_INIT_INPUT')
+-    inputs=[*scope['sealed_inputs'],run/'scope.json',run/'baseline.json',run/'runtime/cache/backend/gradle/init.d/ep19-packaging.gradle']
++    inputs=[*scope['sealed_inputs'],run/'scope.json',run/'baseline.json',policy_path,run/'runtime/cache/backend/gradle/init.d/ep19-packaging.gradle']
+     # Dependency configuration/binaries are measured without executing tools or gates.
+     tools={}
+     for n in ('python3','git','java','javac','node','npm','npx','bash','bwrap','podman'):
+@@ -102,11 +135,13 @@
+         q=Path(load(run/'prepare.json')['qualification']);qualification=load(q)
+         inputs=coverage.qualification_inputs(q)
+         inputs += [AUTHORITY/n for n in ('OWNER_DECISION.txt','OWNER_PROVENANCE.json','ENGINEERING_MAPPING.md')]
++        inputs += [OWNER_AUTHORIZATION,D/'dependency/DEPENDENCY_CHECK.json',EXECUTOR_IDENTITY,run/'bookkeeping-policy-v2.private.json']
+         inputs += [O/'GATE_EXECUTION_MATRIX.json',O/'PROTECTION_SCOPE.json',O/'qualification/CONTINUATION_PRESERVATION_CONTRACT.md']
+         inputs += [p for p in (O/'inputs').rglob('*') if p.is_file()]
+         inputs += [run/'runtime/cache/backend/gradle/init.d/ep19-packaging.gradle']
+         sealed=load(run/'seal.json')['files'];scope=load(run/'scope.json')
+         run_inputs={str(run/(n+'.json')) for n in ('prepare','bindings','identity','source-recovery','toolchain','scope','baseline','namespaces')}
++        run_inputs.add(str(run/'bookkeeping-policy-v2.private.json'))
+         if not run_inputs<=set(sealed):problems.append('RUN_CONTROL_INPUT_NOT_SEALED')
+         if not set(map(str,inputs))<=set(sealed):problems.append('MANDATORY_EXECUTION_INPUT_NOT_SEALED')
+         if not set(map(str,inputs))<=set(scope['protected']):problems.append('MANDATORY_EXECUTION_INPUT_NOT_OBSERVED')
+@@ -122,11 +157,13 @@
+         expected=set(scope['protected'])|set(scope['instruction_capture']['entries'])
+         if not expected<=set(load(run/'baseline.json')['entries']):problems.append('BASELINE_COVERAGE_INCOMPLETE')
+         if qualification.get('real_gradle_instrumentation')!='PASS':problems.append('REAL_GRADLE_INSTRUMENTATION_NOT_QUALIFIED')
++        if qualification.get('schema')!='ep19-bookkeeping-v2-qualified-v1':problems.append('BOOKKEEPING_V2_QUALIFICATION_REQUIRED')
+         if qualification.get('schema')=='ep19-output-corrections-v2':
+             for area in ('run_isolation','artifact_copy','compile_completeness','vite_closure','packaging'):
+                 if area not in qualification.get('areas',[]):problems.append('CORRECTION_QUALIFICATION_MISSING '+area)
+         if qualification.get('frontend_boundary')!='PASS':problems.append('FRONTEND_BOUNDARY_QUALIFICATION_NOT_PASS')
+         if not coverage.formal_boundary_qualified(qualification):problems.append('FORMAL_BOUNDARY_QUALIFICATION_NOT_PASS')
++        if not coverage.full_capsule_reuse_qualified(qualification):problems.append('FULL_CAPSULE_REUSE_NOT_PASS')
+         for area in ('collector','coverage','shadow','packaging','freshness','launch'):
+             if qualification.get(area)!='PASS':problems.append('QUALIFICATION_AREA_NOT_PASS '+area)
+         checks['qualification_closure']='PASS'
+@@ -151,6 +188,7 @@
+     if not lean.is_file():problems.append('LEAN_4_19_0_NOT_PREPARED_IN_RUN_CACHE')
+     r={'result':'ENGINEERING_READY' if not problems else 'ENGINEERING_PREFLIGHT_BLOCKED',
+        'run_id':run.name,'candidate':SHA,'tree':TREE,'base':BASE,'checks':checks,'engineering_blockers':problems,
++       'owner_contract_version':OWNER_CONTRACT_VERSION,'V2_CONTRACT_IMPLEMENTED':True,
+        'independent_review':'PENDING',**REVIEW_STATES,
+        'collector_baseline':checks['baseline'],'qualification':qualification,
+        'packaging':{'synthetic':qualification.get('packaging','NOT_RUN'),'actual':'NOT_RUN_NOT_BUILT',
+@@ -163,16 +201,21 @@
+     return r
+ 
+ def owner_authorization():
+-    if coverage.digest(AUTHORITY/'OWNER_DECISION.txt')!=OWNER_SHA256:
++    if coverage.digest(OWNER_AUTHORIZATION)!=OWNER_SHA256:
+         raise RuntimeError('OWNER_EXECUTION_AUTHORIZATION_MISSING_OR_CHANGED')
+-    if load(AUTHORITY/'OWNER_PROVENANCE.json')['instruction_sha256']!=OWNER_SHA256:
+-        raise RuntimeError('OWNER_PROVENANCE_MISMATCH')
+ 
+ def check_execution_seal(run,files):
+     # Changed copied launch/dependency sources require a new explicit seal.
+     sources=coverage.local_imports()[0]
+     if not set(map(str,sources))<=set(files):
+         raise RuntimeError('EXECUTOR_SOURCE_BINDING_MISSING')
++    policy=run/'bookkeeping-policy-v2.private.json'
++    if str(policy) not in files or str(OWNER_AUTHORIZATION) not in files or str(EXECUTOR_IDENTITY) not in files:
++        raise RuntimeError('V2_POLICY_OR_OWNER_BINDING_MISSING')
++    verify_executor_identity()
++    parsed=load(policy)
++    if parsed.get('owner_authorization_sha256')!=OWNER_SHA256 or parsed.get('contract_version')!=OWNER_CONTRACT_VERSION:
++        raise RuntimeError('V2_POLICY_OWNER_OR_VERSION_MISMATCH')
+     coverage.check_seal(files)
+     init=run/'runtime/cache/backend/gradle/init.d'
+     if {p.name for p in init.iterdir()}!={'ep19-packaging.gradle'}:
+@@ -337,6 +380,11 @@
+         raise RuntimeError('OWNER_EXECUTION_AUTHORIZATION_REQUIRED')
+     if decision.get('owner_decision_sha256')!=OWNER_SHA256:
+         raise RuntimeError('OWNER_EXECUTION_AUTHORIZATION_UNBOUND')
++    if decision.get('owner_contract_version')!=OWNER_CONTRACT_VERSION:
++        raise RuntimeError('OWNER_CONTRACT_VERSION_UNBOUND')
++    executor=verify_executor_identity()
++    if decision.get('executor_identity')!=executor['identity']:
++        raise RuntimeError('EXECUTOR_IDENTITY_UNBOUND')
+     if decision.get('independent_review')!='PENDING' or any(decision.get(k)!=v for k,v in REVIEW_STATES.items()):
+         raise RuntimeError('ENGINEERING_REVIEW_PUBLICATION_STATES_MUST_STAY_SEPARATE')
+     seal=load(run/'seal.json');check_execution_seal(run,seal['files'])
+@@ -349,6 +397,9 @@
+         raise RuntimeError('PREFLIGHT_CANDIDATE_IDENTITY_MISMATCH')
+     if decision.get('seal_sha256')!=coverage.digest(run/'seal.json') or decision.get('preflight_sha256')!=coverage.digest(run/'preflight.json'):
+         raise RuntimeError('UNBOUND_ENGINEERING_LAUNCH_RECEIPT')
++    policy_path=run/'bookkeeping-policy-v2.private.json';q=Path(load(run/'prepare.json')['qualification'])
++    if decision.get('bookkeeping_policy_sha256')!=coverage.digest(policy_path) or decision.get('qualification_sha256')!=coverage.digest(q):
++        raise RuntimeError('UNBOUND_V2_POLICY_OR_QUALIFICATION')
+     # Recompute the actual checks now; an old successful JSON cannot authorize a run.
+     current=preflight(run,write=False,decision_phase="LAUNCH_PREFLIGHT")
+     put(run/'runtime/launch-preflight.json',current)
+--- /dev/null
++++ /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/executor/test_bookkeeping_v2.py
+@@ -0,0 +1,214 @@
++"""Owner V2 controls. Fixtures only; never read or mutate real Skills/Memory."""
++from pathlib import Path
++import json
++import os
++import shutil
++import tempfile
++import unittest
++from unittest.mock import patch
++
++import bookkeeping_v2
++
++
++FIELDS = ("view_count", "use_count", "last_viewed_at", "last_used_at")
++
++
++def record(**updates):
++    value = {
++        "created_by": None,
++        "use_count": 1,
++        "view_count": 2,
++        "last_used_at": "2026-09-07T00:00:00+00:00",
++        "last_viewed_at": None,
++        "patch_count": 0,
++        "patch_generation": 0,
++        "last_reused_patch_generation": 0,
++        "last_patched_at": None,
++        "created_at": "2026-09-01T00:00:00+00:00",
++        "state": "active",
++        "pinned": False,
++        "archived_at": None,
++    }
++    value.update(updates)
++    return value
++
++
++class V2PolicyControls(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory(dir=os.environ.get("TMPDIR"))
++        self.addCleanup(self.tmp.cleanup)
++        self.root = Path(self.tmp.name) / "skills"
++        self.root.mkdir(mode=0o700)
++        for name in ("alpha", "name/with~escape"):
++            skill = self.root / name
++            skill.mkdir(parents=True)
++            (skill / "SKILL.md").write_text("---\nname: "+name+"\n---\nfixture instruction\n")
++        self.usage = self.root / ".usage.json"
++        self.lock = self.root / ".usage.json.lock"
++        self.lock.touch(mode=0o644)
++        self.data = {"alpha": record(), "name/with~escape": record(use_count=0)}
++        self.write(self.data)
++        os.chmod(self.usage, 0o600)
++        self.policy = bookkeeping_v2.create_policy(
++            self.usage,
++            owner_sha256="1" * 64,
++            dependency_sha256="2" * 64,
++            selection_binding={"matrix_sha256": "3" * 64, "gate_count": 29},
++        )
++
++    def write(self, value):
++        self.usage.write_text(json.dumps(value, sort_keys=True, indent=2) + "\n")
++
++    def evaluate(self):
++        return bookkeeping_v2.evaluate(self.policy)
++
++    def assertReject(self, reason):
++        result = self.evaluate()
++        self.assertEqual(result["V2_INPUT_INTEGRITY_RESULT"], "REJECT")
++        self.assertTrue(any(reason in item for item in result["reasons"]), result)
++
++    def test_policy_enumerates_records_fields_schema_and_escaped_pointers(self):
++        self.assertEqual(self.policy["schema"], "ep19-scoped-runtime-bookkeeping-v2")
++        self.assertEqual(self.policy["privacy"], "PRIVATE_NOT_FOR_PUBLIC_PACKAGE")
++        self.assertEqual(self.policy["eligible_record_ids"], sorted(self.data))
++        self.assertIn("/name~1with~0escape/view_count", self.policy["eligible_json_pointers"])
++        self.assertEqual(self.policy["temporary_namespace"]["regex"], r"^\.usage_[a-z0-9_]{8}\.tmp$")
++        self.assertEqual(self.policy["selection_binding"]["gate_count"], 29)
++
++    def test_unchanged_passes_both_policies(self):
++        result = self.evaluate()
++        self.assertEqual(result["OLD_STRICT_PRESERVATION_RESULT"], "PASS")
++        self.assertEqual(result["V2_INPUT_INTEGRITY_RESULT"], "PASS")
++        self.assertEqual(result["V2_BOOKKEEPING_EVALUATION"], "PASS")
++
++    def test_approved_counts_and_timestamps_pass_writer_unknown(self):
++        changed = json.loads(json.dumps(self.data))
++        changed["alpha"].update(use_count=4, view_count=3,
++                                last_used_at="2026-09-08T00:00:00+00:00",
++                                last_viewed_at="2026-09-08T00:01:00+00:00")
++        self.write(changed)
++        result = self.evaluate()
++        self.assertEqual(result["OLD_STRICT_PRESERVATION_RESULT"], "OLD_STRICT_REJECT")
++        self.assertEqual(result["V2_INPUT_INTEGRITY_RESULT"], "PASS")
++        self.assertEqual(result["WRITER_ATTRIBUTION"], "NOT_ESTABLISHED")
++        self.assertEqual(result["claim"], "STRICT_INPUTS_PRESERVED_WITH_SCOPED_BOOKKEEPING_VARIATION")
++
++    def test_atomic_replacement_and_root_times_are_compatible(self):
++        changed = json.loads(json.dumps(self.data)); changed["alpha"]["view_count"] += 1
++        temp = self.root / ".usage_abc12_3z.tmp"
++        temp.write_text(json.dumps(changed, sort_keys=True, indent=2) + "\n")
++        os.chmod(temp, 0o600)
++        os.replace(temp, self.usage)
++        result = self.evaluate()
++        self.assertEqual(result["V2_BOOKKEEPING_EVALUATION"], "PASS")
++        self.assertEqual(result["OLD_STRICT_PRESERVATION_RESULT"], "OLD_STRICT_REJECT")
++        self.assertIn("st_ino", result["observed_metadata_differences"]["usage_file"])
++
++    def test_record_insertion_and_deletion_reject(self):
++        for variant in ("insert", "delete"):
++            with self.subTest(variant=variant):
++                value = json.loads(json.dumps(self.data))
++                if variant == "insert": value["new"] = record()
++                else: value.pop("alpha")
++                self.write(value); self.assertReject("RECORD_MEMBERSHIP_CHANGED")
++                self.write(self.data)
++
++    def test_strict_and_unknown_field_changes_reject(self):
++        for field, value in (("state", "stale"), ("patch_generation", 1),
++                             ("last_reused_patch_generation", 1), ("pinned", True),
++                             ("sync", True), ("unknown", "x")):
++            with self.subTest(field=field):
++                changed = json.loads(json.dumps(self.data)); changed["alpha"][field] = value
++                self.write(changed); self.assertReject("FIELD_MEMBERSHIP_CHANGED" if field in ("sync", "unknown") else "STRICT_VALUE_CHANGED")
++                self.write(self.data)
++
++    def test_invalid_types_nonfinite_duplicates_malformed_and_decrease_reject(self):
++        cases = []
++        for field, value in (("view_count", True), ("use_count", -1),
++                             ("last_viewed_at", 7), ("last_used_at", "not-a-time")):
++            changed = json.loads(json.dumps(self.data)); changed["alpha"][field] = value
++            cases.append((field, json.dumps(changed), "SCHEMA"))
++        changed = json.loads(json.dumps(self.data)); changed["alpha"]["use_count"] = 0
++        cases.append(("decrease", json.dumps(changed), "COUNT_DECREASE"))
++        cases.extend((("nonfinite", '{"alpha":{"view_count":NaN}}', "NONFINITE_JSON"),
++                      ("duplicate", '{"alpha":{},"alpha":{}}', "DUPLICATE_JSON_KEY"),
++                      ("malformed", '{', "MALFORMED_JSON")))
++        for name, raw, reason in cases:
++            with self.subTest(name=name):
++                self.usage.write_text(raw); self.assertReject(reason); self.write(self.data)
++
++    def test_exponent_overflow_rejects_inside_unknown_nested_value(self):
++        nested=json.loads(json.dumps(self.data));nested["alpha"]["nested"]={"protected":1.0};self.write(nested)
++        policy=bookkeeping_v2.create_policy(self.usage,owner_sha256="1"*64,dependency_sha256="2"*64,selection_binding={"matrix_sha256":"3"*64,"gate_count":29})
++        raw=json.dumps(nested).replace('"protected": 1.0','"protected": 1e999')
++        self.usage.write_text(raw)
++        result=bookkeeping_v2.evaluate(policy)
++        self.assertTrue(any("NONFINITE_JSON EXPONENT_OVERFLOW" in item for item in result["reasons"]),result)
++
++    def test_timestamp_backwards_and_null_regression_reject(self):
++        for value in ("2026-09-06T00:00:00+00:00", None):
++            with self.subTest(value=value):
++                changed = json.loads(json.dumps(self.data)); changed["alpha"]["last_used_at"] = value
++                self.write(changed); self.assertReject("TIMESTAMP_"); self.write(self.data)
++
++    def test_permission_symlink_hardlink_and_root_entry_violations_reject(self):
++        os.chmod(self.usage, 0o644); self.assertReject("USAGE_MODE_CHANGED"); os.chmod(self.usage, 0o600)
++        extra = self.root / "unexpected"; extra.write_text("x"); self.assertReject("ROOT_ENTRY_SET_CHANGED"); extra.unlink()
++        hard = self.root / "hard"; os.link(self.usage, hard); self.assertReject("USAGE_LINK_COUNT"); hard.unlink()
++        real = self.root / "real"; shutil.copyfile(self.usage, real); self.usage.unlink(); self.usage.symlink_to(real)
++        self.assertReject("USAGE_NOT_REGULAR_OR_SYMLINK")
++
++    def test_persistent_temp_and_lock_change_reject(self):
++        (self.root / ".usage_abc12_3z.tmp").write_text("short-lived became persistent")
++        self.assertReject("ROOT_ENTRY_SET_CHANGED")
++        (self.root / ".usage_abc12_3z.tmp").unlink()
++        os.chmod(self.lock, 0o600); self.assertReject("LOCK_METADATA_CHANGED")
++
++    def test_persistent_reserved_temp_cannot_be_laundered_into_policy(self):
++        (self.root/".usage_abcdefgh.tmp").write_text("persistent")
++        with self.assertRaisesRegex(RuntimeError,"PERSISTENT_RESERVED_TEMP_AT_BASELINE"):
++            bookkeeping_v2.create_policy(self.usage,owner_sha256="1"*64,dependency_sha256="2"*64,selection_binding={"matrix_sha256":"3"*64,"gate_count":29})
++
++    def test_nested_category_inventory_name_is_eligible_and_orphan_is_strict(self):
++        data=json.loads(json.dumps(self.data));data["orphan-record"]=record();self.write(data)
++        policy=bookkeeping_v2.create_policy(self.usage,owner_sha256="1"*64,dependency_sha256="2"*64,selection_binding={"matrix_sha256":"3"*64,"gate_count":29})
++        self.assertIn("name/with~escape",policy["eligible_record_ids"])
++        self.assertIn("orphan-record",policy["ineligible_record_ids"])
++        data["orphan-record"]["view_count"]+=1;self.write(data)
++        result=bookkeeping_v2.evaluate(policy)
++        self.assertTrue(any("STRICT_VALUE_CHANGED orphan-record" in item for item in result["reasons"]),result)
++
++    def test_root_replacement_and_injected_owner_boundary_reject(self):
++        moved = self.root.parent / "moved-skills"
++        os.rename(self.root, moved); shutil.copytree(moved, self.root, copy_function=shutil.copy2)
++        self.assertReject("SKILLS_ROOT_STRICT_METADATA_CHANGED")
++
++    def test_injected_owner_and_filesystem_boundary_controls(self):
++        original = bookkeeping_v2._read_stable
++        for field, reason in (("st_uid", "USAGE_OWNER_GROUP_CHANGED"), ("st_dev", "USAGE_FILESYSTEM_BOUNDARY_CHANGED")):
++            with self.subTest(field=field):
++                def altered(path, selected=field):
++                    raw, meta = original(path); meta = dict(meta); meta[selected] += 1; return raw, meta
++                with patch.object(bookkeeping_v2, "_read_stable", altered):
++                    self.assertReject(reason)
++
++    def test_stable_capture_failure_rejects(self):
++        original = bookkeeping_v2._read_stable
++        def fail(path):
++            if Path(path) == self.usage: raise RuntimeError("INJECTED_STRICT_CAPTURE_GAP")
++            return original(path)
++        with patch.object(bookkeeping_v2, "_read_stable", fail):
++            self.assertReject("INJECTED_STRICT_CAPTURE_GAP")
++
++
++class ObserverClassificationControls(unittest.TestCase):
++    def test_only_exact_direct_child_namespace_is_scoped(self):
++        root = Path("/fixture/skills")
++        self.assertTrue(bookkeeping_v2.is_reserved_temp(root / ".usage_abc12_3z.tmp", root))
++        for path in (root / "nested/.usage_abc12_3z.tmp", root / ".usage_bad.tmp",
++                     root / "other.tmp", root.parent / ".usage_abc12_3z.tmp"):
++            self.assertFalse(bookkeeping_v2.is_reserved_temp(path, root), path)
++
++
++if __name__ == "__main__":
++    unittest.main(verbosity=2)
+--- /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/preimages/executor/test_continuation.py
++++ /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/executor/test_continuation.py
+@@ -69,7 +69,7 @@
+         self.assertEqual(self.capture(root,hook=hook)['result'],'INCOMPLETE')
+     def test_collector_cli_incomplete_is_nonzero(self):
+         root=self.root/'empty';root.mkdir();cfg=self.root/'scope.json';cfg.write_text(json.dumps({'roots':[str(root)],'expected_nonempty':[str(root)]}))
+-        cmd=[sys.executable,'-B',str(D/'owned/preservation.py'),'--scope',str(cfg),'--output',str(self.root/'native-receipt.json')]
++        cmd=[sys.executable,'-B',str(execution.H/'preservation.py'),'--scope',str(cfg),'--output',str(self.root/'native-receipt.json')]
+         r=subprocess.run(cmd,capture_output=True);(self.root/'native.log').write_bytes(r.stdout+r.stderr);self.assertEqual(r.returncode,1)
+     def observe(self,code,**kwargs):
+         p=self.root/'frozen';p.write_text('fixed');cmd=[sys.executable,'-B','-c',code]
+@@ -201,7 +201,7 @@
+     def test_fresh_pending_parser_reject(self):
+         with self.assertRaises(RuntimeError):self.fresh('parser_pending')
+     def test_bindings_exact_all_29(self):
+-        m=bindings.build(D/'outputs/continuation-runs/synthetic');old=json.loads((D/'GATE_EXECUTION_MATRIX.json').read_text());self.assertEqual(m['order'],old['order']);self.assertEqual(len(m['gates']),29)
++        m=bindings.build(D/'outputs/continuation-runs/synthetic');old=json.loads((execution.O/'GATE_EXECUTION_MATRIX.json').read_text());self.assertEqual(m['order'],old['order']);self.assertEqual(len(m['gates']),29)
+         for n in m['order']:
+             self.assertEqual(m['gates'][n]['authoritative_command'],old['gates'][n]['command']);self.assertTrue(m['gates'][n]['parser']);self.assertTrue(m['gates'][n]['required'])
+     def test_detached_seal_rejects_mutation(self):
+@@ -224,7 +224,7 @@
+         r=frozen.reconcile('PRIMARY',state,state,[{'path':'.git/index.lock'}],[],[])
+         self.assertEqual(r['result'],'FAIL_PRIMARY_GIT_METADATA_MUTATION')
+     def test_shadow_frozen_semantics_not_modified(self):
+-        self.assertEqual(coverage.digest(D/'owned/frozen_shadow_monitor.py'),coverage.digest(D/'inputs/original-shadow_monitor.py'))
++        self.assertEqual(coverage.digest(execution.H/'frozen_shadow_monitor.py'),coverage.digest(execution.O/'inputs/original-shadow_monitor.py'))
+     def test_runtime_namespace_command_paths(self):
+         run=D/'outputs/continuation-runs/synthetic';m=bindings.build(run)
+         for gate in m['gates'].values():
+--- /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/preimages/executor/test_isolation.py
++++ /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/executor/test_isolation.py
+@@ -1,12 +1,12 @@
+ from pathlib import Path
+ import importlib.util,json,unittest
+-D=Path(__file__).resolve().parents[1]
++from execution import D,O,H
+ class IsolationTests(unittest.TestCase):
+  def test_frontend_command_overrides_destructive_output(self):
+-  p=D/'owned/isolation.py'
++  p=H/'isolation.py'
+   if p.exists():
+    s=importlib.util.spec_from_file_location('isolation',p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);cmd=m.frontend_command(D/'outputs/frontend')
+-  else:cmd=json.loads((D/'inputs/CI_EXTRA_INVENTORY.json').read_text())['commands']['FRONTEND_BUILD']
++  else:cmd=json.loads((O/'inputs/CI_EXTRA_INVENTORY.json').read_text())['commands']['FRONTEND_BUILD']
+   self.assertIn('--outDir',cmd,'Legacy npm build leaves tracked static output/cleanup authority active')
+   self.assertEqual(cmd[cmd.index('--outDir')+1],str(D/'outputs/frontend'))
+  def test_protected_output_rejected(self):
+@@ -16,7 +16,7 @@
+   import tempfile,subprocess,sys
+   with tempfile.TemporaryDirectory(dir=D/'fixtures') as name:
+    root=Path(name); (root/'.git/objects/pack').mkdir(parents=True); f=root/'tracked.txt';f.write_text('frozen')
+-   module=D/'owned/observe.py'
++   module=H/'observe.py'
+    if module.exists():
+     s=importlib.util.spec_from_file_location('observe',module);m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+     result=m.run([sys.executable,'-B','-c','from pathlib import Path;Path('+repr(str(f))+').write_text("drift")'],root,root/'log.txt',protected=[f],repositories=[],metadata_roots=[],allowed=[])
+--- /dev/null
++++ /home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/executor/test_v2_integration.py
+@@ -0,0 +1,268 @@
++"""Integration controls for observer, decision receipts and launch reachability."""
++from pathlib import Path
++import json
++import os
++import shutil
++import sys
++import tempfile
++import unittest
++from contextlib import ExitStack
++from unittest.mock import patch
++
++import bookkeeping_v2
++import coverage
++import decision_evidence
++import execution
++import observe
++import preservation
++import runner
++
++
++def put(path, value):
++    path.parent.mkdir(parents=True, exist_ok=True)
++    path.write_text(json.dumps(value, indent=2) + "\n")
++
++
++def record():
++    return {"created_by": None, "use_count": 1, "view_count": 1,
++            "last_used_at": "2026-09-07T00:00:00+00:00", "last_viewed_at": None,
++            "patch_count": 0, "patch_generation": 0, "last_reused_patch_generation": 0,
++            "last_patched_at": None, "created_at": "2026-09-01T00:00:00+00:00",
++            "state": "active", "pinned": False, "archived_at": None}
++
++
++class Fixture(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory(dir=os.environ.get("TMPDIR"))
++        self.addCleanup(self.temp.cleanup)
++        self.base = Path(self.temp.name)
++        self.skills = self.base / "skills"; self.skills.mkdir(mode=0o700)
++        skill = self.skills / "alpha"; skill.mkdir(); self.instruction = skill / "SKILL.md"
++        self.instruction.write_text("strict instruction\n")
++        self.memory = self.base / "memory.md"; self.memory.write_text("strict memory\n")
++        self.usage = self.skills / ".usage.json"; self.lock = self.skills / ".usage.json.lock"
++        self.lock.touch(mode=0o644); self.write_usage(record()); os.chmod(self.usage, 0o600)
++        self.policy = bookkeeping_v2.create_policy(
++            self.usage, owner_sha256="1"*64, dependency_sha256="2"*64,
++            selection_binding={"matrix_sha256":"3"*64,"gate_count":29})
++
++    def write_usage(self, rec):
++        self.usage.write_text(json.dumps({"alpha":rec}, sort_keys=True, indent=2)+"\n")
++
++    def replace_usage(self, rec):
++        temp = self.skills / ".usage_abc12_3z.tmp"
++        temp.write_text(json.dumps({"alpha":rec}, sort_keys=True, indent=2)+"\n")
++        os.chmod(temp, 0o600); os.replace(temp, self.usage)
++
++
++class ObserverControls(Fixture):
++    def observed(self, script):
++        return observe.run([sys.executable,"-B","-c",script], self.base, self.base/("log-"+str(len(list(self.base.glob('log-*'))))),
++                           [self.skills,self.usage,self.lock,self.instruction,self.memory], [], [], [],
++                           enumeration_roots=[self.skills], bookkeeping_policy=self.policy, timeout=5)
++
++    def test_real_atomic_write_event_and_metadata_variation_pass(self):
++        code=("import json,os;from pathlib import Path;r=Path(%r);p=r/'.usage.json';t=r/'.usage_abc12_3z.tmp';"
++              "d=json.loads(p.read_text());d['alpha']['view_count']+=1;t.write_text(json.dumps(d,sort_keys=True,indent=2)+'\\n');"
++              "os.chmod(t,0o600);os.replace(t,p)" % str(self.skills))
++        result=self.observed(code)
++        self.assertEqual(result["wrapper_exit"],0,result)
++        self.assertEqual(result["bookkeeping_evaluation"]["OLD_STRICT_PRESERVATION_RESULT"],"OLD_STRICT_REJECT")
++        self.assertEqual(result["bookkeeping_evaluation"]["V2_INPUT_INTEGRITY_RESULT"],"PASS")
++        self.assertTrue(any(e["category"]=="SCOPED_BOOKKEEPING_EVENT_PENDING_FINAL_EVALUATION" for e in result["events"]))
++
++    def test_strict_instruction_change_prevents_acceptance_despite_rc0(self):
++        result=self.observed("from pathlib import Path;Path(%r).write_text('changed')" % str(self.instruction))
++        self.assertEqual(result["wrapper_exit"],1)
++        self.assertTrue(any(e["category"]=="REJECT_INSTRUCTION_EVENT" for e in result["events"]))
++
++    def test_memory_change_prevents_acceptance_despite_rc0(self):
++        result=self.observed("from pathlib import Path;Path(%r).write_text('changed')" % str(self.memory))
++        self.assertEqual(result["wrapper_exit"],1)
++
++    def test_temp_name_cannot_authorize_other_skill_write(self):
++        code="from pathlib import Path;p=Path(%r);p.write_text('x');p.unlink();Path(%r).write_text('changed')" % (str(self.skills/'.usage_abc12_3z.tmp'),str(self.instruction))
++        result=self.observed(code)
++        self.assertEqual(result["wrapper_exit"],1)
++        self.assertTrue(any(e["category"].startswith("REJECT") for e in result["events"]))
++
++    def test_target_attribute_event_rejects_even_if_mode_restored(self):
++        code="import os;from pathlib import Path;p=Path(%r);os.chmod(p,0o644);os.chmod(p,0o600)" % str(self.usage)
++        result=self.observed(code)
++        self.assertEqual(result["wrapper_exit"],1)
++        self.assertTrue(any(e["category"]=="REJECT_BOOKKEEPING_TARGET_ATTRIBUTE_EVENT" for e in result["events"]))
++
++    def test_reserved_temp_cross_boundary_move_rejects(self):
++        outside=self.base/"outside.tmp"
++        code="import os;from pathlib import Path;p=Path(%r);p.write_text('x');os.chmod(p,0o600);os.replace(p,Path(%r))" % (str(self.skills/'.usage_abc12_3z.tmp'),str(outside))
++        result=self.observed(code)
++        self.assertEqual(result["wrapper_exit"],1)
++        self.assertTrue(any(e["category"]=="REJECT_BOOKKEEPING_TEMP_RENAME_OUTSIDE_TARGET" for e in result["events"]))
++
++
++class DecisionReceiptControls(Fixture):
++    def setUp(self):
++        super().setUp()
++        self.run=self.base/"run"; (self.run/"runtime").mkdir(parents=True)
++        self.policy_path=self.run/"bookkeeping-policy-v2.private.json";put(self.policy_path,self.policy)
++        paths=[self.skills,self.usage,self.lock,self.instruction,self.memory]
++        baseline=preservation.capture_files(paths)
++        put(self.run/"baseline.json",{"result":"COMPLETE","entries":baseline})
++        self.scope={"protected":list(map(str,paths)),"sealed_inputs":[],"frozen_roots":[],"enumeration_roots":[str(self.skills)],
++                    "repositories":[],"metadata_roots":[],"expected_missing":[],"allowed":[str(self.run/"runtime")],
++                    "bookkeeping_policy":str(self.policy_path)}
++        put(self.run/"scope.json",self.scope)
++        self.source=self.base/"executor-source.py";self.source.write_text("fixed\n")
++
++    def compare(self):
++        return decision_evidence.compare(self.run,{},phase="CONTROL",gate=None,scope_override=None,sealed={},
++                                         source_paths=[self.source],candidate=execution.SHA,base=execution.BASE,
++                                         tree=execution.TREE,exact=lambda root:None)
++
++    def test_actual_receipt_uses_captured_values_and_preserves_old_reject(self):
++        changed=record();changed["use_count"]=2;self.replace_usage(changed)
++        saved=self.compare();receipt=json.loads(saved.read_text())
++        self.assertEqual(receipt["decision"],"PASS")
++        self.assertEqual(receipt["OLD_STRICT_PRESERVATION_RESULT"],"OLD_STRICT_REJECT")
++        self.assertEqual(receipt["V2_INPUT_INTEGRITY_RESULT"],"PASS")
++        self.assertEqual(receipt["bookkeeping_evaluation"]["current_raw_sha256"],receipt["current"][str(self.usage)]["sha256"])
++
++    def test_strict_violation_writes_rejection_receipt_and_raises(self):
++        self.memory.write_text("changed\n")
++        with self.assertRaisesRegex(RuntimeError,"FROZEN_BASELINE_DRIFT"):
++            self.compare()
++        receipts=list((self.run/"runtime/decision-evidence").glob("*.json"))
++        self.assertEqual(len(receipts),1)
++        self.assertEqual(json.loads(receipts[0].read_text())["decision"],"REJECT")
++
++    def test_evidence_write_failure_fails_closed(self):
++        with patch.object(decision_evidence.os,"write",side_effect=PermissionError(13,"INJECTED_EVIDENCE_DENIED")):
++            with self.assertRaisesRegex(RuntimeError,"DECISION_EVIDENCE_WRITE_FAILED"):
++                self.compare()
++
++
++class LaunchPathControls(unittest.TestCase):
++    def setUp(self):
++        self.temp=tempfile.TemporaryDirectory(dir=os.environ.get("TMPDIR"));self.addCleanup(self.temp.cleanup)
++        self.run=Path(self.temp.name)/"run"; (self.run/"runtime").mkdir(parents=True)
++        order=["G%02d"%i for i in range(29)]
++        put(self.run/"bindings.json",{"order":order,"gates":{n:{} for n in order}})
++        put(self.run/"seal.json",{"files":{},"run_id":self.run.name,"candidate":execution.SHA,"tree":execution.TREE,"base":execution.BASE})
++        put(self.run/"preflight.json",{"result":"ENGINEERING_READY","engineering_blockers":[],"run_id":self.run.name,
++                                        "candidate":execution.SHA,"tree":execution.TREE,"base":execution.BASE})
++        self.q=Path(self.temp.name)/"qualification.json";put(self.q,{"fixture":True})
++        self.policy=self.run/"bookkeeping-policy-v2.private.json";put(self.policy,{"fixture":True})
++        put(self.run/"prepare.json",{"qualification":str(self.q)})
++        self.review=Path(self.temp.name)/"review.json"
++        self.decision={"engineering_execution_authorization":"OWNER_AUTHORIZED","owner_decision_sha256":runner.OWNER_SHA256,
++                       "owner_contract_version":runner.OWNER_CONTRACT_VERSION,"independent_review":"PENDING",**runner.REVIEW_STATES,
++                       "run_id":self.run.name,"candidate":execution.SHA,"tree":execution.TREE,"base":execution.BASE,
++                       "executor_identity":"synthetic-executor","bookkeeping_policy_sha256":coverage.digest(self.policy),
++                       "qualification_sha256":coverage.digest(self.q),
++                       "seal_sha256":coverage.digest(self.run/"seal.json"),"preflight_sha256":coverage.digest(self.run/"preflight.json")}
++        put(self.review,self.decision);self.calls=[]
++        self.ready={"result":"ENGINEERING_READY","engineering_blockers":[],"run_id":self.run.name,
++                    "candidate":execution.SHA,"tree":execution.TREE,"base":execution.BASE}
++
++    def patches(self, compare=lambda *a,**k:None):
++        def gate(name,m,run,scope,sealed,results):
++            self.calls.append(name);return {"gate":name,"result":"PASS","native_exit":0,"wrapper_exit":0,
++                                             "run_id":run.name,"candidate":execution.SHA,"tree":execution.TREE}
++        return [patch.object(runner,"owner_authorization",lambda:None),patch.object(runner,"check_execution_seal",lambda *a:None),
++                patch.object(runner,"preflight",lambda *a,**k:self.ready),patch.object(runner,"compare_baseline",compare),
++                patch.object(runner,"run_gate",gate),patch.object(runner,"repos",lambda run:[]),
++                patch.object(runner,"load",side_effect=lambda p: self.scope_load(p)),
++                patch.object(runner,"verify_executor_identity",lambda *a:{"identity":"synthetic-executor"}),
++                patch.object(runner.freshness,"dependency",lambda *a:None)]
++
++    def scope_load(self,path):
++        path=Path(path)
++        if path==self.run/"scope.json":return {"protected":[],"allowed":[str(self.run/"runtime")]}
++        if path==self.run/"bookkeeping-policy-v2.private.json":return json.loads(self.policy.read_text())
++        return json.loads(path.read_text())
++
++    def test_genuine_v2_acceptance_reaches_all_29_mocked_expensive_gates(self):
++        put(self.run/"scope.json",{"protected":[],"allowed":[str(self.run/"runtime")]})
++        with ExitStack() as stack:
++            for item in self.patches():stack.enter_context(item)
++            self.assertEqual(runner.run_all(self.run,self.review),0)
++        self.assertEqual(len(self.calls),29)
++        self.assertTrue((self.run/"runtime/START.json").is_file())
++
++    def test_prestart_strict_violation_prevents_launch_despite_native_rc0(self):
++        put(self.run/"scope.json",{"protected":[],"allowed":[str(self.run/"runtime")]})
++        def reject(*args,**kwargs):raise RuntimeError("INJECTED_STRICT_INPUT_VIOLATION_NATIVE_RC_0")
++        with ExitStack() as stack:
++            for item in self.patches(reject):stack.enter_context(item)
++            with self.assertRaisesRegex(RuntimeError,"STRICT_INPUT_VIOLATION"):
++                runner.run_all(self.run,self.review)
++        self.assertEqual(self.calls,[]);self.assertFalse((self.run/"runtime/START.json").exists())
++
++    def test_stale_owner_and_launch_bindings_reject(self):
++        bad=Path(self.temp.name)/"owner.txt";bad.write_text("changed")
++        with patch.object(runner,"OWNER_AUTHORIZATION",bad):
++            with self.assertRaisesRegex(RuntimeError,"AUTHORIZATION_MISSING_OR_CHANGED"):runner.owner_authorization()
++        self.decision["seal_sha256"]="0"*64;put(self.review,self.decision)
++        with self.assertRaisesRegex(RuntimeError,"UNBOUND_ENGINEERING_LAUNCH_RECEIPT"):
++            with patch.object(runner,"owner_authorization",lambda:None),patch.object(runner,"check_execution_seal",lambda *a:None),patch.object(runner,"verify_executor_identity",lambda *a:{"identity":"synthetic-executor"}):
++                runner.run_all(self.run,self.review)
++
++
++class BindingControls(unittest.TestCase):
++    def setUp(self):
++        self.temp=tempfile.TemporaryDirectory(dir=os.environ.get("TMPDIR"));self.addCleanup(self.temp.cleanup)
++        self.root=Path(self.temp.name);self.run=self.root/"run";self.run.mkdir()
++        init=self.run/"runtime/cache/backend/gradle/init.d";init.mkdir(parents=True)
++        shutil.copyfile(execution.H/"packaging.init.gradle",init/"ep19-packaging.gradle")
++        self.policy=self.run/"bookkeeping-policy-v2.private.json"
++        put(self.policy,{"schema":bookkeeping_v2.SCHEMA,"contract_version":runner.OWNER_CONTRACT_VERSION,
++                         "owner_authorization_sha256":runner.OWNER_SHA256})
++        self.identity=self.root/"identity.json";put(self.identity,{"fixture":True})
++        self.files=coverage.seal(coverage.local_imports()[0]+[runner.OWNER_AUTHORIZATION,self.policy,self.identity])
++
++    def check(self,files):
++        with patch.object(runner,"EXECUTOR_IDENTITY",self.identity),patch.object(runner,"verify_executor_identity",lambda *a:{"identity":"fixture"}):
++            return runner.check_execution_seal(self.run,files)
++
++    def test_current_executor_policy_owner_seal_binding_passes(self):
++        self.check(self.files)
++
++    def test_stale_executor_identity_and_policy_reject(self):
++        stale=dict(self.files);stale[str(coverage.local_imports()[0][0])]="0"*64
++        with self.assertRaisesRegex(RuntimeError,"FROZEN_INPUT_CHANGED"):self.check(stale)
++        policy=json.loads(self.policy.read_text());policy["contract_version"]="V1";put_path=self.policy
++        put_path.write_text(json.dumps(policy)+"\n");current=dict(self.files);current[str(self.policy)]=coverage.digest(self.policy)
++        with self.assertRaisesRegex(RuntimeError,"VERSION_MISMATCH"):self.check(current)
++
++    def qualification(self):
++        files=[]
++        for name,content in (("program.py","# fixture\n"),("raw.log","ok\n"),("red.log","red\n"),("green.log","green\n")):
++            p=self.root/name;p.write_text(content);files.append(p)
++        process=self.root/"process.json";put(process,{"native_exit":0,"log_sha256":coverage.digest(self.root/"raw.log")});files.append(process)
++        result=self.root/"result.json";put(result,{"result":"PASS","tests":1,"failures":0,"errors":0});files.append(result)
++        matrix=self.root/"matrix.json";put(matrix,{"result":"PASS"});files.append(matrix)
++        reuse=self.root/"reuse.json";put(reuse,{"result":"PASS"});files.append(reuse)
++        helpers=coverage.seal(coverage.local_imports()[0]);deps={**helpers,**coverage.seal(files)}
++        q=self.root/"qualification.json"
++        areas=("bookkeeping_parser","bookkeeping_metadata","observer_reducer","decision_evidence","baseline_seal",
++               "preflight","prestart","command_boundary","final_acceptance","launch_reachability","strict_scope",
++               "evidence_write_failure","identity_binding")
++        put(q,{"schema":"ep19-bookkeeping-v2-qualified-v1","result":"PASS","helpers":helpers,"dependencies":deps,
++               "qualification_program":str(self.root/"program.py"),"raw_log":str(self.root/"raw.log"),
++               "process_receipt":str(process),"result_receipt":str(result),"red_log":str(self.root/"red.log"),
++               "green_log":str(self.root/"green.log"),"qualification_matrix":str(matrix),"reuse_ledger":str(reuse),
++               "product_gate_execution":False,**{a:"PASS" for a in areas}})
++        return q
++
++    def test_complete_and_incomplete_qualification_closure(self):
++        q=self.qualification()
++        with patch.object(coverage,"full_capsule_reuse_qualified",return_value=True):self.assertTrue(coverage.qualification_inputs(q))
++        data=json.loads(q.read_text());data["prestart"]="NOT_RUN";q.write_text(json.dumps(data)+"\n")
++        with self.assertRaisesRegex(RuntimeError,"V2_QUALIFICATION_AREA_NOT_PASS"):coverage.qualification_inputs(q)
++
++    def test_old_helper_identity_rejects(self):
++        q=self.qualification();data=json.loads(q.read_text());key=next(iter(data["helpers"]));data["helpers"][key]="0"*64;q.write_text(json.dumps(data)+"\n")
++        with self.assertRaisesRegex(RuntimeError,"QUALIFICATION_HELPER_BINDING"):coverage.qualification_inputs(q)
++
++
++if __name__=="__main__":unittest.main(verbosity=2)
