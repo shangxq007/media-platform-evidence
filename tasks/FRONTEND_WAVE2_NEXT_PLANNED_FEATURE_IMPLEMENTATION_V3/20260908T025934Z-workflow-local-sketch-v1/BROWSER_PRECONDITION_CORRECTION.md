@@ -1,0 +1,7 @@
+# Browser precondition correction and limits
+
+The initial package/planning descriptions of a fixture-free ordinary route are superseded here. The Workflow state is local, but the existing ProjectContextProvider requires the dashboard projection before rendering its shell. Browser attempt 01 lacked TREE_BINDING.json and never reached the application. Attempt 02 preserved the unconfigured workspace error with a denied inherited dev-auth bootstrap request. Neither is a successful Workflow run.
+
+Attempt 03 uses a loopback-only SIMULATED dashboard with workspace-1 plus an inert, non-credential local auth marker in the disposable browser profile. No Workflow nodes are injected and no actual authentication/integration is established. The final network assertion permits only dashboard GETs and excludes Workflow requests and HTTP mutations. The product is unchanged across browser attempts; only the external harness was corrected. Current source remains bound to 79541c256a4405e5e8cd3dd53e36e1611e9959d1.
+
+22 final assertions pass. The narrow screenshot is at document top: the board is partially below the first viewport and has internal horizontal scrolling. Some inherited headings/status text remain English; do not claim full Chinese localization or mobile editor parity. Only two final screenshots were captured (desktop English selected, narrow Chinese). No human UX acceptance is claimed.

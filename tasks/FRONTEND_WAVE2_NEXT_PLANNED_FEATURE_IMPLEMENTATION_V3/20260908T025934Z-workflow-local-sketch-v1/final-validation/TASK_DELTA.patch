@@ -1,0 +1,798 @@
+diff --git a/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md b/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+index a421a2aa..429be61b 100644
+--- a/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
++++ b/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+@@ -396,3 +396,14 @@ This task implements only explicitly Project-scoped read-only summary discovery
+ - Future one-path integration: pin frontend final tree/build and separately agreed backend version/adapter; controlled principal and explicit tenant/project, valid summaries plus denied/error/late old-response cases. Permit only the agreed read query and local inspection; zero writes/artifact access. No other frontend/backend program readiness prerequisite.
+ 
+ No new backend capability requirement ID is created. The existing FB-GAP-005 is linked in BACKEND_ENABLEMENT_REQUESTS.tsv for this consumer; full real adapter alignment remains unestablished.
++
++
++### V3 Workflow local-sketch consumption note — existing UXW1-002 / FB-GAP-002
++
++This task completes the plan's local arrangement of seven node categories, not backend Workflow definition editing or execution. No new endpoint, permission key, DTO or requirement ID is accepted. Existing Workflow application APIs remain unwired; FB-GAP-002 still governs any eventual real access. FB-GAP-003 remains Timeline-specific and is NOT assigned Workflow authority by this note.
++
++Current consumer: route-owned disposable category cards; existing SelectionScope workspaceId/projectId/surfaceId and owner lifetime delimit local state. No principal/session/request envelope exists because there is no request. Unknown canonical access never enables invocation. Empty means an empty locally authored sketch; its explicit local card limit is not a server limited-result projection. There is no loading/retry/failure network simulation; reset/cancel refers to local discard confirmation only.
++
++UXW1-002 remains a proposed optional presentation persistence dependency; this increment does not implement it or create process truth. Any future representation would need exact layout owner/resource/version, authorized safe references, typed non-disclosing failure and concurrency handling, with local fields separate from canonical process semantics.
++
++At most one future integration considered: explicitly pin frontend tree/build, backend version and accepted Workflow-version read adapter, controlled authenticated identity/Project/version and data. Read one authorized definition/version into a local arrangement projection; allowed requests are only that agreed read, no writes. Denied/unknown/error must clear unavailable content; owner/version/permission changes retire requests and reject stale results; complete/limited meaning must be server-agreed, not inferred. No integration performed now and no whole-platform readiness gate introduced.
+diff --git a/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv b/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv
+index 5be657a8..faf50b31 100644
+--- a/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv
++++ b/docs/architecture/governance/frontend-current-governed-scope-ledger-v1.tsv
+@@ -199,3 +199,7 @@ frontend/src/product/projects/fixture.ts	ACTIVE	POST_H4_ADDITION	EXPLICIT_LOCALH
+ frontend/src/product/render-browser/RenderBrowser.tsx	ACTIVE	POST_H4_ADDITION	EXPLICIT_SCOPED_RENDER_READ_ONLY_FRONTEND_CONSUMER
+ frontend/src/product/render-browser/source.ts	ACTIVE	POST_H4_ADDITION	EXPLICIT_SCOPED_RENDER_READ_ONLY_FRONTEND_CONSUMER
+ frontend/src/product/render-browser/fixture.ts	ACTIVE	POST_H4_ADDITION	EXPLICIT_SCOPED_RENDER_READ_ONLY_FRONTEND_CONSUMER
++frontend/src/product/workflow-sketch/model.ts	ACTIVE	POST_H4_ADDITION	LOCAL_WORKFLOW_SKETCH_PRESENTATION_ONLY
++frontend/src/product/workflow-sketch/model.test.ts	ACTIVE	POST_H4_ADDITION	LOCAL_WORKFLOW_SKETCH_PRESENTATION_ONLY
++frontend/src/product/workflow-sketch/WorkflowSketch.tsx	ACTIVE	POST_H4_ADDITION	LOCAL_WORKFLOW_SKETCH_PRESENTATION_ONLY
++frontend/src/product/workflow-sketch/WorkflowSketch.test.tsx	ACTIVE	POST_H4_ADDITION	LOCAL_WORKFLOW_SKETCH_PRESENTATION_ONLY
+diff --git a/docs/architecture/governance/frontend-product-path-classification-v1.tsv b/docs/architecture/governance/frontend-product-path-classification-v1.tsv
+index cf70449d..d62bf96e 100644
+--- a/docs/architecture/governance/frontend-product-path-classification-v1.tsv
++++ b/docs/architecture/governance/frontend-product-path-classification-v1.tsv
+@@ -531,3 +531,7 @@ frontend/src/product/render-browser/RenderBrowser.test.tsx	REUSE	SCOPED_RENDER_B
+ frontend/src/product/render-browser/source.ts	REUSE	EXPLICIT_SCOPED_RENDER_READ_ONLY_FRONTEND_CONSUMER
+ frontend/src/product/render-browser/source.test.ts	REUSE	SCOPED_RENDER_BOUNDARY_AND_INTERACTION_TESTS
+ frontend/src/product/render-browser/fixture.ts	REUSE	EXPLICIT_SCOPED_RENDER_READ_ONLY_FRONTEND_CONSUMER
++frontend/src/product/workflow-sketch/model.ts	REUSE	LOCAL_WORKFLOW_SKETCH_PRESENTATION_ONLY
++frontend/src/product/workflow-sketch/model.test.ts	REUSE	LOCAL_WORKFLOW_SKETCH_PRESENTATION_ONLY
++frontend/src/product/workflow-sketch/WorkflowSketch.tsx	REUSE	LOCAL_WORKFLOW_SKETCH_PRESENTATION_ONLY
++frontend/src/product/workflow-sketch/WorkflowSketch.test.tsx	REUSE	LOCAL_WORKFLOW_SKETCH_PRESENTATION_ONLY
+diff --git a/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv b/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+index 73693005..504f5489 100644
+--- a/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
++++ b/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+@@ -1,6 +1,6 @@
+ REQUEST_ID	USER_FLOW	CURRENT_GAP	DESIRED_CAPABILITY	DESIRED_APPLICATION_CONTRACT	BLOCKING_LEVEL	WAVE1_FRONTEND_FREEZE_BLOCKING	FUTURE_PRODUCT_CAPABILITY_BLOCKING	MOCK_BEHAVIOR	UX_REASON	ACCEPTANCE_CRITERIA	STATUS
+ UXW1-001	Open a project from a workspace; find and inspect a bounded recent-project snapshot	Workspace-to-project relationship cannot be verified by the current context projection (FB-GAP-001); Projects discovery requires an explicitly authenticated principal/tenant/session/Workspace-bound source; existing dashboard wrapper is not proof of that complete lifecycle boundary	Authenticated workspace project membership projection	Typed application projection of scoped project identity and display name with non-disclosing denied/not-found responses; no client tenant override; clarified UNAGREED recent-query consumption proposal and selective-integration criteria in FB-GAP-001 recent-project clarification, linked FB-GAP-009; echoed request/scope and complete/limited snapshot; no invented endpoint or DTO	BLOCKS_VERIFIED_PROJECT_CONTEXT	NO	YES	Existing workspace getHome fake is used only in tests; production retains blocked context notice; new Projects consumer uses a separate explicitly injected read-only application source and localhost-only simulated fixture; ordinary unconfigured Projects path unavailable, no HTTP or mock fallback. Existing WorkspaceHome query unchanged; no Project opening/creation/persistence	Users need trustworthy scope and understandable access boundaries	Server validates authenticated membership; invalid scope fails closed without resource disclosure; route metadata alone never grants command access; additionally reject stale/malformed/duplicate or mismatched recent snapshots, preserve unknown/denied/unsupported/unavailable/failure distinctions, cancel across source/principal/tenant/session/Workspace changes; local search/sort/detail is not server search, canonical detail or authorization	PROPOSED_CLARIFIED_FRONTEND_RECENT_PROJECT_DISCOVERY_REAL_INTEGRATION_NOT_ESTABLISHED
+-UXW1-002	Return to a canvas arrangement	Local titles, selection and placement are discarded on navigation, including intentionally local creator presentation preferences	Optional scoped presentation layout persistence	Versioned workspace/project presentation document containing local node placement, labels and approved non-semantic UI preferences separately from semantic references; authorization and concurrency checks; no canonical edges or identity writes	BLOCKS_PRESENTATION_PERSISTENCE	NO	YES	No persistence fake or endpoint; local in-memory state is visibly marked not saved	Users may expect arrangements and local presentation preferences to survive navigation	Reload restores only authorized project layout and approved presentation preferences; concurrent save conflicts are explicit; semantic identity and relationships remain unchanged	PROPOSED
++UXW1-002	Return to a canvas arrangement; optionally revisit a local Workflow planning sketch	Local titles, selection and placement are discarded on navigation, including intentionally local creator presentation preferences; V3 Workflow sketch is also intentionally disposable, not a canonical definition	Optional scoped presentation layout persistence	Versioned workspace/project presentation document containing local node placement, labels and approved non-semantic UI preferences separately from semantic references; authorization and concurrency checks; no canonical edges or identity writes; any future Workflow local layout persistence needs separately agreed reference/version binding and cannot write process definitions	BLOCKS_PRESENTATION_PERSISTENCE	NO	YES	No persistence fake or endpoint; local in-memory state is visibly marked not saved; V3 adds only local authored category cards with no fixtures, API, storage or save	Users may expect arrangements and local presentation preferences to survive navigation	Reload restores only authorized project layout and approved presentation preferences; concurrent save conflicts are explicit; semantic identity and relationships remain unchanged; preserve nonexecuting local sketch distinction and clear stale layout on relevant owner/context retirement	PROPOSED
+ UXW1-003	Browse media before previewing Add Media Clip	Existing asset gateway cannot project complete canonical logical source pins	Safe source-pin browser projection	Application projection of logical media asset, stream and artifact IDs, content digest and exact media bounds required by the existing command; no physical locations	BLOCKS_GUIDED_MEDIA_SELECTION	NO	YES	Existing unavailable asset gateway reused; scripted operation gateways stay in tests; advanced manual pin form retained	Manual opaque IDs are difficult to discover and validate	Selected media supplies a complete server-validated pin; stale or unauthorized pins fail closed; preview-before-apply remains required	PROPOSED
+ UXW1-004	Watch and scrub an actual timeline	No decoded media access or authoritative track/clip geometry projection	Authorized timeline playback and geometry read model	Revision-scoped track/clip projection with exact time basis plus safe short-lived media access abstraction; timing and ownership supplied by server	BLOCKS_REAL_PLAYBACK_AND_CLIP_EDITING	NO	YES	Production explicitly offers only a bounded 0–20 local-step simulation with placeholder V1/A1 lanes and two explicitly synthetic clips (opening and closing); no mock media or invented clip edits	Users must distinguish layout exploration from a playable edit	Playback matches the selected projected revision and exact time basis; denied access is explicit; UI never derives canonical geometry from local simulation	PROPOSED
+ UXW1-005	Use overview, visual changes, conversation, checks or merge in Review	Only history and server semantic comparison are integrated	Scoped review projections and separately authorized merge command	Typed revision-pair review projections and capability/access reasons; any future merge follows a canonical server-owned preview/confirm contract	BLOCKS_EXTENDED_REVIEW	NO	YES	Unavailable section states and disabled merge action in production; existing scripted history/compare gateways in tests only	Unavailable review tabs should not imply fabricated discussion, checks or merge authority	Empty/loading/error states are defined per projection; revision-pair scope is validated; no client merge or inferred HEAD; authorization is enforced by server	PROPOSED
+diff --git a/frontend/governance/UX_WAVE_1_REVIEW.md b/frontend/governance/UX_WAVE_1_REVIEW.md
+index 0f4e0691..ca5d1d42 100644
+--- a/frontend/governance/UX_WAVE_1_REVIEW.md
++++ b/frontend/governance/UX_WAVE_1_REVIEW.md
+@@ -143,3 +143,19 @@ Owner adoption under FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V2. Chat
+ ### Current V2 increment status
+ 
+ `FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V2` selects the foundation plan's Compact surface design records → Operations → search/filter/sort and open backed projections, limited to existing `/operations/renders` and explicit single-Project safe RenderJobSummary inspection. Scope/acceptance and exact final verification live in the task-owned external `IMPLEMENTATION_REPORT_ZH.md`; independent review is required. No new Slice or release acceptance. Storage, accepted recent Projects and other accepted creator features remain unchanged. The original V1 detached receipt remains BLOCKED_AS_REPORTED, separate from this implementation.
++
++
++## Owner adopted Render review — V3 continuation
++
++INDEPENDENT_TECHNICAL_REVIEW=PASS_BOUNDED_WITH_REPORT_ERRATA
++REVIEWED_IMPLEMENTATION_TREE=afc520c2fb8da37961cc6931e71743256b60a3e5
++PRODUCT_CORRECTION_REQUIRED=NO
++REPORT_ERRATA_REQUIRED=2
++REAL_BACKEND_INTEGRATION=NOT_ESTABLISHED
++PRODUCT_PUBLICATION=NOT_AUTHORIZED_BY_THIS_REVIEW
++
++Owner adopts independently reviewed recorded results: 141 public text hashes, patch replay against 15 final endpoints, 680 unique passing full identities (50 additions/0 removals versus 630), 282 targeted identities, 33 browser checks, 6 JS reconstructed from 16 chunks, 8 build artifacts, desktop and narrow Chinese detail screenshots. This is not fresh execution, complete 219-file verification by ChatGPT, live integration or release approval.
++
++Append-only errata: [/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V3/PRIOR_RENDER_REPORT_ERRATA.md](/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V3/PRIOR_RENDER_REPORT_ERRATA.md). Correct proposed real-source key: `render.job.summary.query`; actual Render request scope: principalId, tenantId, sessionId, projectId, not Workspace. Prior anonymous Git verification remains complete as reported; raw HTTP remains 216/219 with three timeouts. Older Projects detached receipt stays blocked and is not retried. Historical reports and broader H4/Slice1C dispositions unchanged.
++
++V3 independently authorizes one planned local Workflow node-arrangement increment, not canonical definition editing/validation/execution. Final technical result belongs in the task-owned V3 report; no product freeze or publication authority follows.
+diff --git a/frontend/src/app/routeTree.test.tsx b/frontend/src/app/routeTree.test.tsx
+index a08385b8..7c5e1663 100644
+--- a/frontend/src/app/routeTree.test.tsx
++++ b/frontend/src/app/routeTree.test.tsx
+@@ -68,6 +68,23 @@ describe('runtime route registration and deep-link restoration', () => {
+     expect(screen.queryByLabelText('Local title')).toBeNull()
+   })
+ 
++  it('integrates the disposable sketch on the Workflow route while invoke remains unavailable', async () => {
++    vi.spyOn(platformClient.workspace, 'getHome').mockResolvedValue({
++      workspace: { id: 'workspace-1', name: 'Editorial' }, tenantId: 'tenant-1',
++      recentProjects: [{ id: 'project-1', name: 'Launch film' }],
++    })
++    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } })
++    const history = createMemoryHistory({ initialEntries: ['/w/workspace-1/projects/project-1/workflow'] })
++    const router = createRouter({ routeTree, history, context: { queryClient } })
++    render(<QueryClientProvider client={queryClient}><RouterProvider router={router} /></QueryClientProvider>)
++
++    expect(await screen.findByRole('heading', { name: 'Local arrangement sketch' })).toBeTruthy()
++    const invoke = screen.getByRole('button', { name: 'Invoke workflow' }) as HTMLButtonElement
++    expect(invoke.disabled).toBe(true)
++    fireEvent.click(screen.getByRole('button', { name: 'Add CONDITION card' }))
++    expect(screen.getByTestId('workflow-sketch-node').textContent).toContain('CONDITION')
++  })
++
+   it('reaches the post-H7 edit route and loads explicit canonical HEAD authority', async () => {
+     vi.spyOn(platformClient.workspace, 'getHome').mockResolvedValue({
+       workspace: { id: 'workspace-1', name: 'Editorial' }, tenantId: 'tenant-1',
+diff --git a/frontend/src/localization/catalogs.ts b/frontend/src/localization/catalogs.ts
+index 43a5d9ad..3ebc8e96 100644
+--- a/frontend/src/localization/catalogs.ts
++++ b/frontend/src/localization/catalogs.ts
+@@ -361,7 +361,27 @@ const englishNamespaces: CatalogNamespaces = {
+     eyebrow: message('Review & collaboration'), title: message('Project review'), description: message('Choose two revisions to see what changed. Review does not apply or merge changes.'),
+     panel: message('Semantic Changes'), missingInZh: message('English fallback proof'),
+   },
+-  workflow: {},
++  workflow: {
++    region: message('Workflow local node-arrangement sketch'),
++    title: message('Local arrangement sketch'),
++    boundary: message('This sketch is local, unsaved, and cannot run. Cards do not define workflow steps, parameters, or connections.'),
++    palette: message('Add a local card'),
++    addCard: message('Add {category} card', ['category']),
++    count: message('{count} of {limit} local cards', ['count', 'limit']),
++    limitReached: message('{limit}-card limit reached. Remove a card to add another.', ['limit']),
++    bounds: message('Local board range: X {minX}–{maxX}; Y {minY}–{maxY}.', ['minX', 'maxX', 'minY', 'maxY']),
++    board: message('Local workflow sketch board'),
++    emptyTitle: message('No local cards yet'),
++    emptyBody: message('Choose a category above to begin a disposable arrangement.'),
++    position: message('X {x} · Y {y}', ['x', 'y']),
++    removeSelected: message('Remove selected card'),
++    reset: message('Reset sketch'),
++    discardTitle: message('Discard local sketch?'),
++    closeDiscard: message('Close discard dialog'),
++    discardBody: message('All cards in this page-only sketch will be removed. This cannot affect a Workflow definition.'),
++    keep: message('Keep sketch'),
++    discard: message('Discard sketch'),
++  },
+   render: {},
+   settings: {},
+   errors: {},
+@@ -708,7 +728,27 @@ const chineseNamespaces: CatalogNamespaces = {
+     "diff.noEntities": message("未返回实体详情"),
+     "diff.noEntitiesHelp": message("服务器未返回此修订对的实体详情。这不能证明没有更改。"),
+  eyebrow: message('创作 · 审阅'), title: message('审阅工作区'), description: message('选择两个修订以查看更改。审阅不会应用或合并更改。'), panel: message('语义更改') },
+-  workflow: {}, render: {}, settings: {}, errors: {},
++  workflow: {
++    region: message('工作流本地节点排列草图'),
++    title: message('本地排列草图'),
++    boundary: message('此草图仅存在于当前页面内存中，尚未保存且无法运行。卡片不定义工作流步骤、参数或连接。'),
++    palette: message('添加本地卡片'),
++    addCard: message('添加 {category} 卡片', ['category']),
++    count: message('{count} / {limit} 张本地卡片', ['count', 'limit']),
++    limitReached: message('已达到 {limit} 张卡片的上限。请移除一张卡片后再添加。', ['limit']),
++    bounds: message('本地画板范围：X {minX}–{maxX}；Y {minY}–{maxY}。', ['minX', 'maxX', 'minY', 'maxY']),
++    board: message('本地工作流草图画板'),
++    emptyTitle: message('尚无本地卡片'),
++    emptyBody: message('从上方选择类别，开始一次性排列草图。'),
++    position: message('X {x} · Y {y}', ['x', 'y']),
++    removeSelected: message('移除所选卡片'),
++    reset: message('重置草图'),
++    discardTitle: message('丢弃本地草图？'),
++    closeDiscard: message('关闭丢弃草图对话框'),
++    discardBody: message('将移除此当前页面草图中的所有卡片，但不会影响任何工作流定义。'),
++    keep: message('保留草图'),
++    discard: message('丢弃草图'),
++  }, render: {}, settings: {}, errors: {},
+ }
+ 
+ const bundledCatalogs = {
+diff --git a/frontend/src/localization/source-manifest.json b/frontend/src/localization/source-manifest.json
+index 952413f3..cad22030 100644
+--- a/frontend/src/localization/source-manifest.json
++++ b/frontend/src/localization/source-manifest.json
+@@ -332,6 +332,25 @@
+     "review.diff.noEntities",
+     "review.diff.noEntitiesHelp",
+     "review.eyebrow",
+-    "review.panel"
++    "review.panel",
++    "workflow.region",
++    "workflow.title",
++    "workflow.boundary",
++    "workflow.palette",
++    "workflow.addCard",
++    "workflow.count",
++    "workflow.limitReached",
++    "workflow.bounds",
++    "workflow.board",
++    "workflow.emptyTitle",
++    "workflow.emptyBody",
++    "workflow.position",
++    "workflow.removeSelected",
++    "workflow.reset",
++    "workflow.discardTitle",
++    "workflow.closeDiscard",
++    "workflow.discardBody",
++    "workflow.keep",
++    "workflow.discard"
+   ]
+ }
+diff --git a/frontend/src/product/workflow-sketch/WorkflowSketch.test.tsx b/frontend/src/product/workflow-sketch/WorkflowSketch.test.tsx
+new file mode 100644
+index 00000000..c32d9048
+--- /dev/null
++++ b/frontend/src/product/workflow-sketch/WorkflowSketch.test.tsx
+@@ -0,0 +1,220 @@
++import { act, createEvent, fireEvent, render, screen, waitFor } from '@testing-library/react'
++import { afterEach, describe, expect, it, vi } from 'vitest'
++import { LocalizationProvider } from '../../localization'
++import { SelectionProvider, useInteractionStore, useSelection } from '../../interaction/SelectionContext'
++import { SelectionInspector } from '../../interaction/InteractionShell'
++import type { InteractionStore, SelectionScope } from '../../interaction/model'
++import { WorkflowSketch } from './WorkflowSketch'
++import { WORKFLOW_NODE_CATEGORIES } from './model'
++
++let activeStore: InteractionStore
++function SnapshotProbe() {
++  activeStore = useInteractionStore()
++  const selection = useSelection()
++  return <output data-testid="workflow-selection">{JSON.stringify({
++    selectedRefs: selection.selectedRefs,
++    selectedObjects: selection.selectedObjects,
++    supported: selection.supported,
++  })}</output>
++}
++
++function setup(scope: SelectionScope = { workspaceId: 'workspace-1', projectId: 'project-1', surfaceId: 'workflow' }, locale: 'en' | 'zh-CN' = 'en') {
++  const content = (nextScope = scope) => (
++    <LocalizationProvider initialLocale={locale}>
++      <SelectionProvider scope={nextScope}>
++        <WorkflowSketch />
++        <SelectionInspector />
++        <SnapshotProbe />
++      </SelectionProvider>
++    </LocalizationProvider>
++  )
++  return { ...render(content()), content }
++}
++
++afterEach(() => vi.restoreAllMocks())
++
++describe('workflow local node-arrangement sketch', () => {
++  it('starts empty with a truthful boundary and all seven category entry points', () => {
++    setup()
++
++    expect(screen.getByRole('heading', { name: 'Local arrangement sketch' })).toBeTruthy()
++    expect(screen.getByText('This sketch is local, unsaved, and cannot run. Cards do not define workflow steps, parameters, or connections.')).toBeTruthy()
++    expect(screen.getByText('No local cards yet')).toBeTruthy()
++    for (const category of WORKFLOW_NODE_CATEGORIES) {
++      expect(screen.getByRole('button', { name: `Add ${category} card` })).toBeTruthy()
++    }
++    expect(screen.queryAllByTestId('workflow-sketch-node')).toHaveLength(0)
++  })
++
++  it('adds every category and converges keyboard and Inspector actions on the shared adapter', () => {
++    setup()
++    for (const category of WORKFLOW_NODE_CATEGORIES) fireEvent.click(screen.getByRole('button', { name: `Add ${category} card` }))
++    const cards = screen.getAllByTestId('workflow-sketch-node')
++    expect(cards).toHaveLength(7)
++    expect(cards.map(card => card.querySelector('.ff-badge')?.textContent)).toEqual(WORKFLOW_NODE_CATEGORIES)
++
++    const operation = cards[0]
++    act(() => operation.focus())
++    expect(operation.getAttribute('aria-pressed')).toBe('false')
++    expect(JSON.parse(screen.getByTestId('workflow-selection').textContent!).selectedRefs).toEqual([])
++    fireEvent.keyDown(operation, { key: 'Enter' })
++    expect(operation.getAttribute('aria-pressed')).toBe('true')
++    let snapshot = JSON.parse(screen.getByTestId('workflow-selection').textContent!)
++    expect(snapshot.supported).toEqual(['rename', 'move', 'reveal'])
++    expect(snapshot.selectedRefs).toEqual([{ workspaceId: 'workspace-1', projectId: 'project-1', surfaceId: 'workflow', kind: 'NODE', localId: 'workflow-node-1' }])
++    expect(snapshot.selectedObjects[0]).toMatchObject({ id: 'workflow-node-1', kind: 'NODE', title: 'OPERATION', x: 32, y: 32, reference: 'OPERATION' })
++    expect(snapshot.selectedObjects[0]).not.toHaveProperty('synthetic')
++    expect(screen.getByText('Local board range: X 16–896; Y 16–560.')).toBeTruthy()
++
++    fireEvent.change(screen.getByLabelText('Local title'), { target: { value: '<img src=x onerror=alert(1)> review' } })
++    expect(operation.getAttribute('aria-label')).toBe('<img src=x onerror=alert(1)> review')
++    expect(operation.querySelector('img')).toBeNull()
++    fireEvent.keyDown(operation, { key: 'ArrowRight' })
++    expect((screen.getByLabelText('Local X') as HTMLInputElement).value).toBe('56')
++    fireEvent.change(screen.getByLabelText('Local Y'), { target: { value: '9999' } })
++    expect((screen.getByLabelText('Local Y') as HTMLInputElement).value).toBe('560')
++
++    const reveal = vi.fn()
++    Object.defineProperty(operation, 'scrollIntoView', { configurable: true, value: reveal })
++    fireEvent.click(screen.getByRole('button', { name: 'Show primary node' }))
++    expect(reveal).toHaveBeenCalledWith({ block: 'nearest', inline: 'nearest' })
++
++    const renderCard = cards[1]
++    act(() => renderCard.focus())
++    expect(operation.getAttribute('aria-pressed')).toBe('true')
++    expect(renderCard.getAttribute('aria-pressed')).toBe('false')
++    fireEvent.keyDown(renderCard, { key: ' ' })
++    expect(operation.getAttribute('aria-pressed')).toBe('false')
++    expect(renderCard.getAttribute('aria-pressed')).toBe('true')
++    snapshot = JSON.parse(screen.getByTestId('workflow-selection').textContent!)
++    expect(snapshot.selectedObjects[0].reference).toBe('RENDER')
++  })
++
++  it('cancels native activation without selecting while text composition is in progress', () => {
++    setup()
++    fireEvent.click(screen.getByRole('button', { name: 'Add OPERATION card' }))
++    const card = screen.getByTestId('workflow-sketch-node')
++    act(() => card.focus())
++
++    const composingEnter = createEvent.keyDown(card, { key: 'Enter', isComposing: true })
++    const composingSpace = createEvent.keyDown(card, { key: ' ', keyCode: 229 })
++    fireEvent(card, composingEnter)
++    fireEvent(card, composingSpace)
++
++    expect(composingEnter.defaultPrevented).toBe(true)
++    expect(composingSpace.defaultPrevented).toBe(true)
++    expect(card.getAttribute('aria-pressed')).toBe('false')
++    expect(activeStore.getSnapshot().selectedRefs).toEqual([])
++  })
++
++  it('enforces capacity and transfers focus from the newly disabled add control to the stable board', () => {
++    setup()
++    const add = screen.getByRole('button', { name: 'Add WAIT card' })
++    for (let index = 0; index < 12; index += 1) {
++      act(() => add.focus())
++      fireEvent.click(add)
++    }
++
++    expect(screen.getAllByTestId('workflow-sketch-node')).toHaveLength(12)
++    expect(screen.getByRole('alert').textContent).toContain('12-card limit reached')
++    expect((add as HTMLButtonElement).disabled).toBe(true)
++    expect(document.activeElement).toBe(screen.getByRole('region', { name: 'Local workflow sketch board' }))
++  })
++
++  it('does not reclaim focus after programmatic nonfocused add or remove actions', () => {
++    setup()
++    const addWait = screen.getByRole('button', { name: 'Add WAIT card' })
++    const board = screen.getByRole('region', { name: 'Local workflow sketch board' })
++    act(() => board.focus())
++    for (let index = 0; index < 12; index += 1) fireEvent.click(addWait)
++    expect(document.activeElement).toBe(board)
++
++    const cards = screen.getAllByTestId('workflow-sketch-node')
++    const selected = cards[0]
++    fireEvent.click(selected)
++    act(() => cards[1].focus())
++    fireEvent.click(screen.getByRole('button', { name: 'Remove selected card' }))
++    expect(document.activeElement).toBe(cards[1])
++  })
++
++  it('removes the selected card, reconciles shared selection, and retains nonreused IDs', () => {
++    setup()
++    const add = screen.getByRole('button', { name: 'Add AGENT card' })
++    fireEvent.click(add)
++    const first = screen.getByTestId('workflow-sketch-node')
++    fireEvent.keyDown(first, { key: 'Enter' })
++    const remove = screen.getByRole('button', { name: 'Remove selected card' })
++    act(() => remove.focus())
++    fireEvent.click(remove)
++
++    expect(screen.queryAllByTestId('workflow-sketch-node')).toHaveLength(0)
++    expect(activeStore.getSnapshot().selectedRefs).toEqual([])
++    expect(document.activeElement).toBe(screen.getByRole('region', { name: 'Local workflow sketch board' }))
++
++    fireEvent.click(add)
++    fireEvent.keyDown(screen.getByTestId('workflow-sketch-node'), { key: 'Enter' })
++    expect(activeStore.getSnapshot().primaryRef?.localId).toBe('workflow-node-2')
++  })
++
++  it('cancels or confirms discard through the shared dialog with deterministic focus', async () => {
++    setup()
++    fireEvent.click(screen.getByRole('button', { name: 'Add REVIEW card' }))
++    fireEvent.click(screen.getByRole('button', { name: 'Add CONDITION card' }))
++    const reset = screen.getByRole('button', { name: 'Reset sketch' })
++    act(() => reset.focus())
++    fireEvent.click(reset)
++    expect(screen.getByRole('dialog', { name: 'Discard local sketch?' })).toBeTruthy()
++    await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Keep sketch' })))
++    fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' })
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(document.activeElement).toBe(reset)
++    expect(screen.getAllByTestId('workflow-sketch-node')).toHaveLength(2)
++
++    fireEvent.click(reset)
++    const discard = screen.getByRole('button', { name: 'Discard sketch' })
++    act(() => discard.focus())
++    fireEvent.click(discard)
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(screen.queryAllByTestId('workflow-sketch-node')).toHaveLength(0)
++    expect(document.activeElement).toBe(screen.getByRole('region', { name: 'Local workflow sketch board' }))
++  })
++
++  it('clears cards on exact scope and owner-lifetime changes without persistence or requests', () => {
++    const fetch = vi.fn()
++    vi.stubGlobal('fetch', fetch)
++    const storage = vi.spyOn(Storage.prototype, 'setItem')
++    const view = setup()
++    fireEvent.click(screen.getByRole('button', { name: 'Add INTEGRATION card' }))
++    view.rerender(view.content({ workspaceId: 'workspace-1', projectId: 'project-2', surfaceId: 'workflow' }))
++    expect(screen.queryAllByTestId('workflow-sketch-node')).toHaveLength(0)
++    fireEvent.click(screen.getByRole('button', { name: 'Add INTEGRATION card' }))
++    act(() => window.dispatchEvent(new Event('pagehide')))
++    act(() => window.dispatchEvent(new Event('pageshow')))
++    expect(screen.queryAllByTestId('workflow-sketch-node')).toHaveLength(0)
++    expect(fetch).not.toHaveBeenCalled()
++    expect(storage).not.toHaveBeenCalled()
++    vi.unstubAllGlobals()
++  })
++
++  it('retires an open reset confirmation on owner change without clearing the new owner sketch', () => {
++    const view = setup()
++    fireEvent.click(screen.getByRole('button', { name: 'Add REVIEW card' }))
++    fireEvent.click(screen.getByRole('button', { name: 'Reset sketch' }))
++    const retiredDiscard = screen.getByRole('button', { name: 'Discard sketch' })
++
++    view.rerender(view.content({ workspaceId: 'workspace-1', projectId: 'project-2', surfaceId: 'workflow' }))
++    expect(screen.queryByRole('dialog', { name: 'Discard local sketch?' })).toBeNull()
++    fireEvent.click(screen.getByRole('button', { name: 'Add CONDITION card' }))
++    fireEvent.click(retiredDiscard)
++
++    expect(screen.getAllByTestId('workflow-sketch-node')).toHaveLength(1)
++    expect(screen.getByTestId('workflow-sketch-node').textContent).toContain('CONDITION')
++  })
++
++  it('localizes the sketch controls and empty boundary in Simplified Chinese', () => {
++    setup({ workspaceId: '工作区', projectId: '项目', surfaceId: 'workflow' }, 'zh-CN')
++    expect(screen.getByRole('heading', { name: '本地排列草图' })).toBeTruthy()
++    expect(screen.getByRole('button', { name: '添加 OPERATION 卡片' })).toBeTruthy()
++    expect(screen.getByRole('region', { name: '本地工作流草图画板' })).toBeTruthy()
++  })
++})
+diff --git a/frontend/src/product/workflow-sketch/WorkflowSketch.tsx b/frontend/src/product/workflow-sketch/WorkflowSketch.tsx
+new file mode 100644
+index 00000000..1ee7b3c3
+--- /dev/null
++++ b/frontend/src/product/workflow-sketch/WorkflowSketch.tsx
+@@ -0,0 +1,173 @@
++import { useRef, useState, type CSSProperties, type KeyboardEvent } from 'react'
++import { flushSync } from 'react-dom'
++import { Badge, Button, EmptyState, Panel } from '../../components/design-system'
++import { InteractionDialog } from '../../interaction/InteractionDialog'
++import { useInteractionStore, useSelection, useSurfaceAdapter } from '../../interaction/SelectionContext'
++import type { PresentationAction, QueryAction, SelectedObject } from '../../interaction/model'
++import { useTranslation } from '../../localization'
++import {
++  WORKFLOW_NODE_CATEGORIES,
++  WORKFLOW_SKETCH_BOUNDS,
++  WORKFLOW_SKETCH_LIMIT,
++  addWorkflowSketchNode,
++  createWorkflowSketch,
++  moveWorkflowSketchNode,
++  removeWorkflowSketchNode,
++  renameWorkflowSketchNode,
++  resetWorkflowSketch,
++  type WorkflowNodeCategory,
++  type WorkflowSketchState,
++} from './model'
++
++const MOVE_STEP = 24
++const SUPPORTED_ACTIONS = ['rename', 'move', 'reveal'] as const
++
++export function WorkflowSketch() {
++  const { t } = useTranslation()
++  const store = useInteractionStore()
++  const selection = useSelection()
++  const [owned, setOwned] = useState(() => ({ store, lifetime: selection.lifetime, sketch: createWorkflowSketch(), confirmingReset: false }))
++  const ownerChanged = owned.store !== store || owned.lifetime !== selection.lifetime
++  const current = ownerChanged ? { store, lifetime: selection.lifetime, sketch: createWorkflowSketch(), confirmingReset: false } : owned
++  if (ownerChanged) setOwned(current)
++  const { sketch, confirmingReset } = current
++  const boardRef = useRef<HTMLDivElement>(null)
++  const nodeRefs = useRef(new Map<string, HTMLButtonElement>())
++
++  const updateSketch = (change: (current: WorkflowSketchState) => WorkflowSketchState) => {
++    setOwned(current => current.store === store && current.lifetime === selection.lifetime
++      ? { ...current, sketch: change(current.sketch) }
++      : current)
++  }
++  const setResetConfirmation = (confirming: boolean) => {
++    setOwned(currentOwned => currentOwned.store === store && currentOwned.lifetime === selection.lifetime
++      ? { ...currentOwned, confirmingReset: confirming }
++      : currentOwned)
++  }
++  const objects = (): readonly SelectedObject[] => sketch.nodes.map(node => ({
++    id: node.id,
++    kind: 'NODE',
++    title: node.title,
++    x: node.x,
++    y: node.y,
++    reference: node.category,
++  }))
++  const handle = (action: PresentationAction | QueryAction) => {
++    if (action.category !== 'WORKSPACE_PRESENTATION') return false
++    const exists = sketch.nodes.some(node => node.id === action.targetId)
++    if (!exists) return false
++    if (action.type === 'rename') updateSketch(current => renameWorkflowSketchNode(current, action.targetId, action.title))
++    else if (action.type === 'move') updateSketch(current => moveWorkflowSketchNode(current, action.targetId, action.x, action.y))
++    else if (action.type === 'reveal') nodeRefs.current.get(action.targetId)?.scrollIntoView({ block: 'nearest', inline: 'nearest' })
++    else return false
++    return true
++  }
++  useSurfaceAdapter({ objects, supports: SUPPORTED_ACTIONS, handle })
++
++  const selectedNode = selection.primarySelectedObject?.kind === 'NODE'
++    ? sketch.nodes.find(node => node.id === selection.primarySelectedObject?.id)
++    : undefined
++  const selectNode = (id: string) => store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: [id], primaryId: id }, 'DIRECT')
++  const addNode = (category: WorkflowNodeCategory, initiator: HTMLButtonElement) => {
++    const next = addWorkflowSketchNode(sketch, category)
++    if (next === sketch) return
++    if (next.nodes.length === WORKFLOW_SKETCH_LIMIT && document.activeElement === initiator) boardRef.current?.focus()
++    updateSketch(() => next)
++  }
++  const moveSelected = (event: KeyboardEvent<HTMLButtonElement>, id: string, x: number, y: number) => {
++    if (selection.primarySelectedObject?.id !== id || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return
++    const delta = event.key === 'ArrowLeft' ? [-MOVE_STEP, 0]
++      : event.key === 'ArrowRight' ? [MOVE_STEP, 0]
++        : event.key === 'ArrowUp' ? [0, -MOVE_STEP]
++          : event.key === 'ArrowDown' ? [0, MOVE_STEP]
++            : null
++    if (!delta) return
++    event.preventDefault()
++    store.dispatch({ category: 'WORKSPACE_PRESENTATION', type: 'move', targetId: id, x: x + delta[0], y: y + delta[1] }, 'DIRECT')
++  }
++  const onNodeKeyDown = (event: KeyboardEvent<HTMLButtonElement>, id: string, x: number, y: number) => {
++    const activates = event.key === 'Enter' || event.key === ' '
++    if (event.nativeEvent.isComposing || event.keyCode === 229) {
++      if (activates) event.preventDefault()
++      return
++    }
++    if (activates) {
++      event.preventDefault()
++      selectNode(id)
++      return
++    }
++    moveSelected(event, id, x, y)
++  }
++  const removeSelected = (initiator: HTMLButtonElement) => {
++    if (!selectedNode) return
++    store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: [] }, 'DIRECT')
++    if (document.activeElement === initiator) boardRef.current?.focus()
++    updateSketch(current => removeWorkflowSketchNode(current, selectedNode.id))
++  }
++  const discardSketch = (initiator: HTMLButtonElement) => {
++    const transferFocus = document.activeElement === initiator
++    store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: [] }, 'DIRECT')
++    flushSync(() => {
++      updateSketch(resetWorkflowSketch)
++      setResetConfirmation(false)
++    })
++    if (transferFocus) boardRef.current?.focus()
++  }
++  const atLimit = sketch.nodes.length >= WORKFLOW_SKETCH_LIMIT
++
++  return <section className="ff-workflow-sketch" aria-label={t('workflow.region')}>
++    <Panel title={t('workflow.title')}>
++      <p className="ff-workflow-boundary">{t('workflow.boundary')}</p>
++      <div className="ff-workflow-palette" aria-label={t('workflow.palette')}>
++        {WORKFLOW_NODE_CATEGORIES.map(category => <Button key={category} disabled={atLimit} onClick={event => addNode(category, event.currentTarget)}>{t('workflow.addCard', { category })}</Button>)}
++      </div>
++      <div className="ff-workflow-status-row">
++        <p role="status">{t('workflow.count', { count: sketch.nodes.length, limit: WORKFLOW_SKETCH_LIMIT })}</p>
++        {sketch.nodes.length ? <div className="ff-workflow-local-actions">
++          {selectedNode ? <Button onClick={event => removeSelected(event.currentTarget)}>{t('workflow.removeSelected')}</Button> : null}
++          <Button onClick={() => setResetConfirmation(true)}>{t('workflow.reset')}</Button>
++        </div> : null}
++      </div>
++      {atLimit ? <p role="alert" className="ff-workflow-limit">{t('workflow.limitReached', { limit: WORKFLOW_SKETCH_LIMIT })}</p> : null}
++      <p id="workflow-sketch-bounds" className="ff-workflow-bounds">{t('workflow.bounds', {
++        minX: WORKFLOW_SKETCH_BOUNDS.minX,
++        maxX: WORKFLOW_SKETCH_BOUNDS.maxX,
++        minY: WORKFLOW_SKETCH_BOUNDS.minY,
++        maxY: WORKFLOW_SKETCH_BOUNDS.maxY,
++      })}</p>
++      <div ref={boardRef} className="ff-workflow-board" role="region" aria-label={t('workflow.board')} aria-describedby="workflow-sketch-bounds" tabIndex={0}>
++        {sketch.nodes.length ? <div className="ff-workflow-board-plane">
++          {sketch.nodes.map(node => {
++            const selected = selection.selectedObjects.some(object => object.id === node.id)
++            return <button
++              key={node.id}
++              ref={element => {
++                if (element) nodeRefs.current.set(node.id, element)
++                else nodeRefs.current.delete(node.id)
++              }}
++              type="button"
++              className="ff-workflow-node"
++              style={{ '--workflow-node-x': `${node.x}px`, '--workflow-node-y': `${node.y}px` } as CSSProperties}
++              aria-label={node.title || t('common.untitled')}
++              aria-pressed={selected}
++              data-testid="workflow-sketch-node"
++              onClick={() => selectNode(node.id)}
++              onKeyDown={event => onNodeKeyDown(event, node.id, node.x, node.y)}
++            >
++              <Badge>{node.category}</Badge>
++              <strong>{node.title || t('common.untitled')}</strong>
++              <span>{t('workflow.position', { x: node.x, y: node.y })}</span>
++            </button>
++          })}
++        </div> : <EmptyState title={t('workflow.emptyTitle')} description={t('workflow.emptyBody')} />}
++      </div>
++      {confirmingReset ? <InteractionDialog title={t('workflow.discardTitle')} closeLabel={t('workflow.closeDiscard')} onClose={() => setResetConfirmation(false)}>
++        <p>{t('workflow.discardBody')}</p>
++        <div className="ff-workflow-dialog-actions">
++          <Button data-dialog-entry onClick={() => setResetConfirmation(false)}>{t('workflow.keep')}</Button>
++          <Button variant="danger" onClick={event => discardSketch(event.currentTarget)}>{t('workflow.discard')}</Button>
++        </div>
++      </InteractionDialog> : null}
++    </Panel>
++  </section>
++}
+diff --git a/frontend/src/product/workflow-sketch/model.test.ts b/frontend/src/product/workflow-sketch/model.test.ts
+new file mode 100644
+index 00000000..cfe378af
+--- /dev/null
++++ b/frontend/src/product/workflow-sketch/model.test.ts
+@@ -0,0 +1,63 @@
++import { describe, expect, it } from 'vitest'
++import {
++  WORKFLOW_NODE_CATEGORIES,
++  WORKFLOW_SKETCH_BOUNDS,
++  WORKFLOW_SKETCH_LIMIT,
++  WORKFLOW_SKETCH_TITLE_LIMIT,
++  addWorkflowSketchNode,
++  createWorkflowSketch,
++  moveWorkflowSketchNode,
++  removeWorkflowSketchNode,
++  renameWorkflowSketchNode,
++  resetWorkflowSketch,
++} from './model'
++
++describe('workflow local sketch model', () => {
++  it('begins empty and adds a category with stable local identity', () => {
++    const empty = createWorkflowSketch()
++    const one = addWorkflowSketchNode(empty, 'OPERATION')
++    const two = addWorkflowSketchNode(one, 'RENDER')
++
++    expect(empty.nodes).toEqual([])
++    expect(one.nodes).toEqual([
++      { id: 'workflow-node-1', category: 'OPERATION', title: 'OPERATION', x: 32, y: 32 },
++    ])
++    expect(two.nodes.map(node => node.id)).toEqual(['workflow-node-1', 'workflow-node-2'])
++  })
++
++  it('supports all exact categories and refuses a thirteenth local card', () => {
++    let sketch = createWorkflowSketch()
++    for (let index = 0; index < WORKFLOW_SKETCH_LIMIT; index += 1) {
++      sketch = addWorkflowSketchNode(sketch, WORKFLOW_NODE_CATEGORIES[index % WORKFLOW_NODE_CATEGORIES.length])
++    }
++    const full = sketch
++
++    expect(new Set(sketch.nodes.slice(0, 7).map(node => node.category))).toEqual(new Set(WORKFLOW_NODE_CATEGORIES))
++    expect(sketch.nodes).toHaveLength(12)
++    expect(addWorkflowSketchNode(sketch, 'WAIT')).toBe(full)
++  })
++
++  it('bounds placement and labels while rejecting invalid movement', () => {
++    const created = addWorkflowSketchNode(createWorkflowSketch(), 'CONDITION')
++    const moved = moveWorkflowSketchNode(created, 'workflow-node-1', -999, 999)
++    const renamed = renameWorkflowSketchNode(moved, 'workflow-node-1', '<img src=x onerror=alert(1)>' + 'x'.repeat(200))
++
++    expect(moved.nodes[0]).toMatchObject({ x: WORKFLOW_SKETCH_BOUNDS.minX, y: WORKFLOW_SKETCH_BOUNDS.maxY })
++    expect(renameWorkflowSketchNode(moved, 'missing', 'ignored')).toBe(moved)
++    expect(moveWorkflowSketchNode(moved, 'workflow-node-1', Infinity, 0)).toBe(moved)
++    expect(renamed.nodes[0].title).toHaveLength(WORKFLOW_SKETCH_TITLE_LIMIT)
++    expect(renamed.nodes[0].title).toContain('<img src=x onerror=alert(1)>')
++  })
++
++  it('removes and resets cards without reusing an identity in the same lifetime', () => {
++    const first = addWorkflowSketchNode(createWorkflowSketch(), 'AGENT')
++    const removed = removeWorkflowSketchNode(first, 'workflow-node-1')
++    const second = addWorkflowSketchNode(removed, 'INTEGRATION')
++    const reset = resetWorkflowSketch(second)
++    const third = addWorkflowSketchNode(reset, 'REVIEW')
++
++    expect(second.nodes.map(node => node.id)).toEqual(['workflow-node-2'])
++    expect(reset.nodes).toEqual([])
++    expect(third.nodes.map(node => node.id)).toEqual(['workflow-node-3'])
++  })
++})
+diff --git a/frontend/src/product/workflow-sketch/model.ts b/frontend/src/product/workflow-sketch/model.ts
+new file mode 100644
+index 00000000..ff5d9e0d
+--- /dev/null
++++ b/frontend/src/product/workflow-sketch/model.ts
+@@ -0,0 +1,59 @@
++export const WORKFLOW_NODE_CATEGORIES = ['OPERATION', 'RENDER', 'REVIEW', 'WAIT', 'CONDITION', 'AGENT', 'INTEGRATION'] as const
++export type WorkflowNodeCategory = typeof WORKFLOW_NODE_CATEGORIES[number]
++export const WORKFLOW_SKETCH_LIMIT = 12
++export const WORKFLOW_SKETCH_TITLE_LIMIT = 120
++export const WORKFLOW_SKETCH_BOUNDS = { minX: 16, maxX: 896, minY: 16, maxY: 560 } as const
++
++export interface WorkflowSketchNode {
++  readonly id: string
++  readonly category: WorkflowNodeCategory
++  readonly title: string
++  readonly x: number
++  readonly y: number
++}
++
++export interface WorkflowSketchState {
++  readonly nodes: readonly WorkflowSketchNode[]
++  readonly nextId: number
++}
++
++export function createWorkflowSketch(): WorkflowSketchState {
++  return { nodes: [], nextId: 1 }
++}
++
++export function addWorkflowSketchNode(state: WorkflowSketchState, category: WorkflowNodeCategory): WorkflowSketchState {
++  if (state.nodes.length >= WORKFLOW_SKETCH_LIMIT || !WORKFLOW_NODE_CATEGORIES.includes(category)) return state
++  const index = state.nodes.length
++  const node: WorkflowSketchNode = {
++    id: `workflow-node-${state.nextId}`,
++    category,
++    title: category,
++    x: 32 + (index % 4) * 220,
++    y: 32 + Math.floor(index / 4) * 136,
++  }
++  return { nodes: [...state.nodes, node], nextId: state.nextId + 1 }
++}
++
++export function moveWorkflowSketchNode(state: WorkflowSketchState, _id: string, _x: number, _y: number): WorkflowSketchState {
++  if (!Number.isFinite(_x) || !Number.isFinite(_y) || !state.nodes.some(node => node.id === _id)) return state
++  const bound = (value: number, min: number, max: number) => Math.min(max, Math.max(min, Math.round(value)))
++  const x = bound(_x, WORKFLOW_SKETCH_BOUNDS.minX, WORKFLOW_SKETCH_BOUNDS.maxX)
++  const y = bound(_y, WORKFLOW_SKETCH_BOUNDS.minY, WORKFLOW_SKETCH_BOUNDS.maxY)
++  if (state.nodes.find(node => node.id === _id)?.x === x && state.nodes.find(node => node.id === _id)?.y === y) return state
++  return { ...state, nodes: state.nodes.map(node => node.id === _id ? { ...node, x, y } : node) }
++}
++
++export function renameWorkflowSketchNode(state: WorkflowSketchState, _id: string, _title: string): WorkflowSketchState {
++  const title = _title.slice(0, WORKFLOW_SKETCH_TITLE_LIMIT)
++  if (!state.nodes.some(node => node.id === _id) || state.nodes.find(node => node.id === _id)?.title === title) return state
++  return { ...state, nodes: state.nodes.map(node => node.id === _id ? { ...node, title } : node) }
++}
++
++export function removeWorkflowSketchNode(state: WorkflowSketchState, _id: string): WorkflowSketchState {
++  if (!state.nodes.some(node => node.id === _id)) return state
++  return { ...state, nodes: state.nodes.filter(node => node.id !== _id) }
++}
++
++export function resetWorkflowSketch(state: WorkflowSketchState): WorkflowSketchState {
++  return state.nodes.length ? { nodes: [], nextId: state.nextId } : state
++}
+diff --git a/frontend/src/styles/foundation.css b/frontend/src/styles/foundation.css
+index e86169e2..79192569 100644
+--- a/frontend/src/styles/foundation.css
++++ b/frontend/src/styles/foundation.css
+@@ -92,6 +92,22 @@
+ .ff-creative-grid { display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-4); }
+ .ff-timeline-panel { grid-column: 1 / -1; }
+ .ff-graph-shell { display: grid; grid-template-columns: 220px 1fr 260px; gap: var(--space-4); min-height: 420px; }
++.ff-workflow-page { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: var(--space-4); min-width: 0; }
++.ff-workflow-sketch { min-width: 0; }
++.ff-workflow-boundary { margin-top: 0; }
++.ff-workflow-palette, .ff-workflow-local-actions, .ff-workflow-dialog-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
++.ff-workflow-status-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; }
++.ff-workflow-status-row > p, .ff-workflow-bounds { margin-block: var(--space-2); font-size: var(--text-caption); }
++.ff-workflow-limit { padding: var(--space-2) var(--space-3); color: var(--warning); background: var(--warning-muted); border-radius: var(--radius-md); }
++.ff-workflow-board { min-height: 360px; max-width: 100%; overflow: auto; border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--surface-2); }
++.ff-workflow-board:focus-visible { outline: 2px solid var(--accent-400); outline-offset: 2px; }
++.ff-workflow-board > .ff-empty { min-height: 360px; border: 0; }
++.ff-workflow-board-plane { position: relative; width: 1040px; height: 640px; background-image: radial-gradient(circle, var(--border-default) 1px, transparent 1px); background-size: 24px 24px; }
++.ff-workflow-node { position: absolute; left: var(--workflow-node-x); top: var(--workflow-node-y); display: flex; flex-direction: column; align-items: flex-start; gap: 6px; width: 176px; min-height: 88px; padding: var(--space-3); color: var(--text-primary); text-align: left; background: var(--surface-1); border: 1px solid var(--border-strong); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
++.ff-workflow-node strong { max-width: 100%; overflow-wrap: anywhere; }
++.ff-workflow-node > span:last-child { color: var(--text-tertiary); font: var(--text-micro) var(--font-mono); }
++.ff-workflow-node[aria-pressed='true'] { border-color: var(--accent-400); outline: 2px solid var(--accent-400); outline-offset: 2px; }
++.ff-workflow-dialog-actions { justify-content: flex-end; margin-top: var(--space-4); }
+ .ff-launcher-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--space-2); }
+ .ff-launcher-grid a { display: flex; justify-content: space-between; gap: var(--space-2); padding: var(--space-3); text-decoration: none; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); }
+ .ff-project-list { list-style: none; margin: 0 0 var(--space-3); padding: 0; }
+@@ -213,6 +229,7 @@ kbd { padding: 1px var(--space-1); border: 1px solid var(--border-default); bord
+   .ff-app-shell[data-surface='nle'] .ff-center-workspace::before, .ff-app-shell[data-surface='canvas'] .ff-center-workspace::before, .ff-app-shell[data-surface='workflow'] .ff-center-workspace::before, .ff-app-shell[data-surface='agent'] .ff-center-workspace::before { content: 'Desktop workspace recommended — navigation and read-only content remain available.'; display: block; padding: var(--space-2); background: var(--warning-muted); color: var(--warning); font-size: var(--text-caption); }
+   .ff-dashboard-grid > :first-child { grid-column: auto; }
+   .ff-graph-shell { grid-template-columns: 1fr; }
++  .ff-workflow-page { grid-template-columns: 1fr; }
+   .ff-creative-grid { grid-template-columns: 1fr; }
+   .ff-nle-layout { grid-template-columns: 1fr; }
+   .ff-nle-diff-panel { grid-column: auto; }
+diff --git a/frontend/src/surfaces/FoundationPages.tsx b/frontend/src/surfaces/FoundationPages.tsx
+index 93944e2a..65b6af58 100644
+--- a/frontend/src/surfaces/FoundationPages.tsx
++++ b/frontend/src/surfaces/FoundationPages.tsx
+@@ -9,6 +9,8 @@ import { useEffectiveAccessCatalog, useWorkspaceHome } from '../foundation/platf
+ import { getSurface, surfaceRegistry, type SurfaceId } from '../foundation/surfaceRegistry'
+ import { ProjectBrowser } from '../product/projects/ProjectBrowser'
+ import { RenderBrowser } from '../product/render-browser/RenderBrowser'
++import { WorkflowSketch } from '../product/workflow-sketch/WorkflowSketch'
++export { WORKFLOW_NODE_CATEGORIES as workflowNodeCategories } from '../product/workflow-sketch/model'
+ 
+ function routeParams(): { workspaceId?: string; projectId?: string } {
+   return useParams({ strict: false }) as { workspaceId?: string; projectId?: string }
+@@ -99,9 +101,8 @@ function BlockedCommand({ label, gap = 'FB-GAP-003' }: { label: string; gap?: st
+   return <Button disabled title={`Canonical application command unavailable (${gap}).`}>{label}</Button>
+ }
+ 
+-export const workflowNodeCategories = ['OPERATION', 'RENDER', 'REVIEW', 'WAIT', 'CONDITION', 'AGENT', 'INTEGRATION'] as const
+ export function WorkflowPage() {
+-  return <ProjectFrame surfaceId="workflow"><PageHeading eyebrow="Creative · Workflow" title="Process composer" description="Node categories are presentation metadata over canonical Workflow definitions and executions." actions={<BlockedCommand label="Invoke workflow" gap="FB-GAP-002" />} /><div className="ff-graph-shell"><Panel title="Node palette"><ul>{workflowNodeCategories.map(category => <li key={category}><Badge>{category}</Badge></li>)}</ul></Panel><Panel title="Workflow graph"><EmptyState title="No definition loaded" description="Select a server-projected Workflow version. Invocation remains blocked without effective access." /></Panel><Panel title="Validation"><Status label="Not validated" tone="warning" /><p>No client-side graph is treated as workflow process truth.</p></Panel></div></ProjectFrame>
++  return <ProjectFrame surfaceId="workflow"><PageHeading eyebrow="Creative · Workflow" title="Process composer" description="Arrange disposable category cards without creating a Workflow definition or execution." actions={<BlockedCommand label="Invoke workflow" gap="FB-GAP-002" />} /><div className="ff-workflow-page"><WorkflowSketch /><Panel title="Canonical workflow status"><Status label="Not loaded or validated" tone="warning" /><p>No card, title, or position on this page is treated as workflow process truth.</p></Panel></div></ProjectFrame>
+ }
+ 
+ export type AgentActionState = 'REQUEST' | 'RESOLVED_PLAN' | 'PREVIEW' | 'AUTHORIZATION' | 'RESULT'

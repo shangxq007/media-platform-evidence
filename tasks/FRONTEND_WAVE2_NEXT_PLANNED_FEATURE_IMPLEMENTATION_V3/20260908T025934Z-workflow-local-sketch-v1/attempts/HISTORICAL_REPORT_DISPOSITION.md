@@ -1,0 +1,1 @@
+Initial writer handoff reports remain byte-preserved locally. Their public copies are omitted because they include unrelated operational metadata. They are not final acceptance evidence. Raw test attempts and SOURCE_REVIEW_FINDINGS_01.md preserve the failed/passing chronology; REPORT_CORRECTION.md plus exact final gates govern this package.

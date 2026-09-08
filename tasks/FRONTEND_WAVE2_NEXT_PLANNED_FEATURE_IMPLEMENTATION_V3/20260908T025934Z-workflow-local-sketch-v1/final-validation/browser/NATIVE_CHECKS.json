@@ -1,0 +1,178 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:31.126012+00:00",
+    "name": "ordinary unconfigured route starts empty",
+    "expression": "document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\").length===0",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:31.128222+00:00",
+    "name": "local unsaved nonexecuting notice",
+    "expression": "document.body.innerText.includes(\"This sketch is local, unsaved, and cannot run.\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:32.409833+00:00",
+    "name": "seven category cards authored by native add clicks",
+    "expression": "document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\").length===7",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:32.416484+00:00",
+    "name": "DOM-targeted card focus does not select",
+    "expression": "document.querySelector(\"[data-testid=\\\"workflow-sketch-node\\\"]\").getAttribute(\"aria-pressed\")===\"false\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:32.606950+00:00",
+    "name": "native Enter selects card",
+    "expression": "document.querySelector(\"[data-testid=\\\"workflow-sketch-node\\\"]\").getAttribute(\"aria-pressed\")===\"true\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:32.610592+00:00",
+    "name": "user-authored card is not mislabeled a clip fixture",
+    "expression": "!document.body.innerText.includes(\"Synthetic fixture\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:32.807067+00:00",
+    "name": "native ArrowRight moves exactly one step through shared Inspector",
+    "expression": "Number(Array.from(document.querySelectorAll(\"label\")).find(e=>e.textContent.trim()===\"Local X\")?.querySelector(\"input\").value)===Number(\"32\")+24",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:33.181263+00:00",
+    "name": "hostile title rendered literally, no injected element",
+    "expression": "document.querySelector(\"[data-testid=\\\"workflow-sketch-node\\\"]\").getAttribute(\"aria-label\")===\"<img src=x onerror=alert(1)> local plan\" && !document.querySelector(\"[data-testid=\\\"workflow-sketch-node\\\"] img\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:33.736940+00:00",
+    "name": "native removal removes one card",
+    "expression": "document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\").length===6",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:33.740808+00:00",
+    "name": "removal retains stable focus",
+    "expression": "document.activeElement!==document.body && document.activeElement?.isConnected && !document.activeElement.disabled",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:33.942605+00:00",
+    "name": "shared discard dialog opened",
+    "expression": "document.querySelector(\"[role=dialog]\").textContent.includes(\"Discard local sketch?\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:34.116929+00:00",
+    "name": "native Escape preserves sketch",
+    "expression": "document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\").length===6 && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:34.502690+00:00",
+    "name": "native cancel preserves sketch",
+    "expression": "document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\").length===6 && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:34.896082+00:00",
+    "name": "native confirmed discard clears local cards",
+    "expression": "document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\").length===0 && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:34.900876+00:00",
+    "name": "discard focus is connected and enabled",
+    "expression": "document.activeElement!==document.body && document.activeElement?.isConnected && !document.activeElement.disabled",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:37.227402+00:00",
+    "name": "capacity is explicit and enforced",
+    "expression": "document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\").length===12 && document.body.innerText.includes(\"12-card limit reached\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:37.233609+00:00",
+    "name": "capacity transition does not leave disabled focus",
+    "expression": "document.activeElement!==document.body && !document.activeElement.disabled",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:37.769058+00:00",
+    "name": "fresh project document has no retained cards",
+    "expression": "document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\").length===0",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:38.275262+00:00",
+    "name": "Chinese creator controls and cards",
+    "expression": "document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\").length===2 && document.body.innerText.includes(\"本地排列草图\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:38.282257+00:00",
+    "name": "narrow document has no horizontal overflow",
+    "expression": "document.documentElement.scrollWidth<=window.innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:38.374589+00:00",
+    "name": "only simulated dashboard reads; no Workflow requests or mutations",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "79541c256a4405e5e8cd3dd53e36e1611e9959d1",
+    "VALIDATION_TIMESTAMP": "2026-09-08T02:54:38.386132+00:00",
+    "name": "no uncaught runtime exceptions",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  }
+]

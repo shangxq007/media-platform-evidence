@@ -1,0 +1,1 @@
+Current Owner V3 supersedes root instruction to freeze before verification: no product Git mutation authorized. Applicable root AGENTS read; no instruction bodies edited. Actual accepted frontend scope verified against afc520c2fb8da37961cc6931e71743256b60a3e5. External materialization and builds only. No backend stationarity/global census.

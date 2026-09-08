@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V3/final-validation-01/browser-final-02/workflow_smoke.py", line 22, in <module>
+    b.viewport(1440,1000);b.nav('/w/workspace-1/projects/project-1/workflow');b.locale('en')
+                          ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V3/final-validation-01/browser-final-02/chromium_helpers.py", line 51, in nav
+    self.raw('Page.navigate',{'url':f'http://127.0.0.1:{port}'+path});time.sleep(.3);self.wait('!!document.querySelector(".ff-app-shell")')
+                                                                                     ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NEXT_PLANNED_FEATURE_IMPLEMENTATION_V3/final-validation-01/browser-final-02/browser_helpers.py", line 36, in wait
+    raise AssertionError('precondition timeout: '+expression)
+AssertionError: precondition timeout: !!document.querySelector(".ff-app-shell")

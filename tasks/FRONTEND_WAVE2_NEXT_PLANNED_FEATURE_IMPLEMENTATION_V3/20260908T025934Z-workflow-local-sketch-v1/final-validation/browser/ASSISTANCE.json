@@ -1,0 +1,30 @@
+{
+  "browser": "headless Chromium",
+  "viewport_emulation": [
+    [
+      1440,
+      1000
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "CDP_focus_emulation": true,
+  "DOM_assistance": [
+    "target identification/temporary attribute",
+    "scrollIntoView",
+    "one focus-only precondition",
+    "locale input/change helper"
+  ],
+  "text_input": "CDP Input.insertText after native pointer/control-A",
+  "fixtures_injected": "simulated dashboard workspace and inert local auth marker; no Workflow nodes injected",
+  "real_backend": false,
+  "scope_check": "real document navigation only; same-document store/lifetime retirement is unit/component coverage",
+  "untested": [
+    "physical device/touch/virtual keyboard",
+    "screen reader speech",
+    "OS IME",
+    "Firefox/Safari"
+  ]
+}
