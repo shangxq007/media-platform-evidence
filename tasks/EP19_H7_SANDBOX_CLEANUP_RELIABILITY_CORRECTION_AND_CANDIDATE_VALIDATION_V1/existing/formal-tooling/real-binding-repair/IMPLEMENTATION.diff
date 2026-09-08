@@ -1,0 +1,210 @@
+--- before/executor/identity_delta.py
++++ executor/identity_delta.py
+@@ -1,7 +1,9 @@
+ """Narrow, source-backed cleanup-test delta. Reads evidence; never runs producers."""
+-from pathlib import Path
+-import csv, hashlib, io, json, re, xml.etree.ElementTree as ET
++from pathlib import Path, PurePosixPath
++import ast, csv, hashlib, io, json, re, xml.etree.ElementTree as ET
+ from collections import Counter
++from dataclasses import dataclass
++from typing import Iterable
+ import binding_contract as bc
+ import account
+ 
+@@ -13,6 +15,41 @@
+ PRODUCT_PATHS = {f'{MODULE}/src/main/java/com/example/platform/sandbox/{c}.java' for c in
+                  ('LocalBoundedProcessLauncher', 'BubblewrapSandboxProcessLauncher', 'ContainerSandboxProcessLauncher')}
+ TOOL = 'scripts/ci/change_impact_classifier.py'
++# Reviewed immutable parent/candidate bytes (see CLASSIFIER_SOURCE_PROOF.json).
++CLASSIFIER_SHA256 = 'd426f7748ef265fd9457ddd7f7cb3e0565d420ac9bb57bec7f8be3cf75cc106f'
++
++def classified_impact(source, paths):
++    """Evaluate only the pinned classifier's pure definitions, never its CLI/I/O."""
++    bc.require(sha(source)==CLASSIFIER_SHA256, 'CHANGE_IMPACT_CLASSIFIER_SOURCE')
++    parsed=ast.parse(source)
++    pure_functions={'_under','_normalise_path','classify_path'}
++    nodes=[node for node in parsed.body if isinstance(node,ast.Assign)
++           or isinstance(node,ast.FunctionDef) and node.name in pure_functions
++           or isinstance(node,ast.ClassDef) and node.name=='Classification']
++    namespace={'__name__':__name__,'re':re,'PurePosixPath':PurePosixPath,
++               'dataclass':dataclass,'Iterable':Iterable}
++    exec(compile(ast.Module(body=nodes,type_ignores=[]),TOOL+' [pure classification]','exec'),namespace)
++    return namespace['Classification'].from_paths(paths,'git_diff').as_dict()
++
++def check_impact(impact, prior, source, paths):
++    expected=classified_impact(source,paths)
++    bc.require(set(impact)==set(prior)==set(expected)
++               and type(impact['schema_version']) is int
++               and impact['schema_version']==prior['schema_version']==expected['schema_version']
++               and impact['reason']==expected['reason'], 'CHANGE_IMPACT_POLICY_OR_SCHEMA')
++    bc.require(impact['paths']==paths and type(impact['changed_path_count']) is int
++               and impact['changed_path_count']==len(paths)
++               and set(impact['path_categories'])==set(paths), 'CHANGE_IMPACT_DIFF')
++    bc.require(impact['path_categories']==expected['path_categories']
++               and impact['categories']==expected['categories'], 'CHANGE_IMPACT_CATEGORIES')
++    policy=impact['policy']
++    bc.require(isinstance(policy,dict) and set(policy)==set(prior['policy'])==set(expected['policy'])
++               and all(type(value) is bool for value in policy.values())
++               and policy==expected['policy'], 'CHANGE_IMPACT_POLICY_OR_SCHEMA')
++    # Publishing is classifier metadata only, never an action authorization.
++    # Every other historical requirement is still mandatory and unchanged.
++    bc.require(all(policy[key] is value for key,value in prior['policy'].items()
++                   if key!='runtime_image_publish'), 'CHANGE_IMPACT_REQUIRED_POLICY')
+ 
+ def encoded(value): return (json.dumps(value, indent=2, ensure_ascii=False)+'\n').encode()
+ def sha(data): return hashlib.sha256(data).hexdigest()
+@@ -78,6 +115,7 @@
+             bc.require(not Path(name).is_absolute() and '..' not in Path(name).parts and isinstance(row,list) and len(row)==2
+                        and row[0] in ('100644','100755','120000','160000') and re.fullmatch('[0-9a-f]{40}',row[1]), 'DELTA_TREE_ENTRY')
+     old=e['trees'][bc.PARENT];new=e['trees'][c['candidate']]
++    bc.require(old.get(TOOL)==new.get(TOOL) and TOOL in old, 'CHANGE_IMPACT_CLASSIFIER_CHANGED')
+     delta=changed(old,new);canonical=changed(e['trees'][bc.CANONICAL],new)
+     bc.require(e['parent_diff']==delta and e['canonical_diff']==canonical, 'DELTA_PATH_DIFF')
+     bc.require(set(delta)==set(TEST_PATHS)|PRODUCT_PATHS, 'UNREVIEWED_CHANGED_PATHS')
+@@ -115,14 +153,8 @@
+     native(e['junit_receipt'],c,junit_argv(),source_blobs,outputs)
+     raw=native(e['impact_receipt'],c,impact_argv(c['candidate']),source_blobs,{})
+     impact=bc.read(raw);prior=bc.read(bc.HISTORICAL_O/'inputs/CHANGE_IMPACT.json')
+-    bc.require(set(impact)==set(prior) and impact['policy']==prior['policy'] and impact['schema_version']==prior['schema_version'] and impact['reason']=='git_diff', 'CHANGE_IMPACT_POLICY_OR_SCHEMA')
+     paths=sorted(canonical)
+-    bc.require(impact['paths']==paths and type(impact['changed_path_count']) is int and impact['changed_path_count']==len(paths) and set(impact['path_categories'])==set(paths), 'CHANGE_IMPACT_DIFF')
+-    categories=[]
+-    for values in impact['path_categories'].values():
+-        bc.require(isinstance(values,list) and values and all(isinstance(v,str) for v in values) and len(values)==len(set(values)), 'CHANGE_IMPACT_CATEGORIES')
+-        categories += values
+-    bc.require(impact['categories']==sorted(set(categories)), 'CHANGE_IMPACT_CATEGORIES')
++    check_impact(impact,prior,artifact(e['sources'][TOOL]).read_bytes(),paths)
+     return e, wanted, raw.read_bytes()
+ 
+ def closure(evidence):
+--- before/tests/test_identity_delta.py
++++ tests/test_identity_delta.py
+@@ -14,8 +14,10 @@
+         p=root/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(data)
+         return {'path':str(p),'sha256':bc.digest(p)}
+     old={p:['100644',d.blob(b'old '+p.encode())] for p in d.PRODUCT_PATHS}
+-    old[d.TOOL]=['100644',d.blob(b'# classifier fixture\n')]
++    source=d.artifact(bc.read(bc.ROOT.parent/'candidate-preparation/native-delta-001/DELTA.json')['sources'][d.TOOL]).read_bytes()
++    old[d.TOOL]=['100644',d.blob(source)]
+     canonical=copy.deepcopy(old);old['docs/prior.md']=['100644',d.blob(b'prior')]
++    old['unclassified-input']=['100644',d.blob(b'unknown')]
+     new=copy.deepcopy(old);sources={};junit={};identities=[]
+     for name in sorted(d.PRODUCT_PATHS):
+         raw=b'new '+name.encode();new[name]=['100644',d.blob(raw)];sources[name]=artifact('sources/'+name,raw)
+@@ -27,10 +29,10 @@
+         xml=('<testsuite name="'+classname+'" tests="'+str(count)+'" failures="0" errors="0" skipped="0">'+''.join('<testcase classname="'+classname+'" name="'+m+'()"/>' for m in methods)+'</testsuite>').encode()
+         junit[classname]=artifact('xml/TEST-'+classname+'.xml',xml)
+         identities += [d.account.canonical([':'+d.MODULE+':test',classname,m+'()']) for m in methods]
+-    sources[d.TOOL]=artifact('sources/'+d.TOOL,b'# classifier fixture\n')
++    sources[d.TOOL]=artifact('sources/'+d.TOOL,source)
+     source_blobs={p:new[p][1] for p in sources}
+-    impact=bc.read(bc.HISTORICAL_O/'inputs/CHANGE_IMPACT.json');paths=sorted(d.changed(canonical,new))
+-    impact.update(paths=paths,changed_path_count=len(paths),path_categories={p:['unknown'] for p in paths},categories=['unknown'])
++    paths=sorted(d.changed(canonical,new))
++    impact=d.classified_impact(source,paths)
+     def receipt(name,argv,raw,outputs):
+         r={**{k:c[k] for k in ('candidate','tree','immediate_parent','canonical_comparison_base')},'argv':argv,'cwd':c['clone_source'],
+            'native_exit':0,'wrapper_exit':0,'pid':123,'started_ns':1,'finished_ns':2,'raw_log':artifact(name+'.log',raw),'sources':source_blobs,'outputs':outputs}
+@@ -178,3 +180,81 @@
+             self.assertEqual(parsers.parse('CHANGE_IMPACT',self.root,gate,self.root)['result'],'PASS')
+             (gate/'native.log').write_text('{}')
+             with self.assertRaisesRegex(RuntimeError,'CHANGE_IMPACT_MISMATCH'):parsers.parse('CHANGE_IMPACT',self.root,gate,self.root)
++
++
++class RealBindingControls(unittest.TestCase):
++    """Replay the sealed saved native output; never invoke its producers."""
++    DELTA_SEAL = '4be8b7982481a10599d9a43980603c30abc00a2da934eecab03ecab97562ac9e'
++
++    def test_saved_real_native_output_accepts(self):
++        p=bc.ROOT.parent/'candidate-preparation/native-delta-001/DELTA.json'
++        self.assertEqual(bc.digest(p),self.DELTA_SEAL)
++        e=bc.read(p)
++        _,ids,raw=d.validate(e,p,self.DELTA_SEAL)
++        impact=json.loads(raw)
++        self.assertEqual(len(ids),27)
++        self.assertEqual(impact['categories'],['docs','backend_test','backend_runtime','unknown'])
++        self.assertTrue(all(value is True for value in impact['policy'].values()))
++
++    def saved(self):
++        p=bc.ROOT.parent/'candidate-preparation/native-delta-001/DELTA.json'
++        self.assertEqual(bc.digest(p),self.DELTA_SEAL)
++        e=bc.read(p);r=bc.read(d.artifact(e['impact_receipt']))
++        return bc.read(d.artifact(r['raw_log'])),bc.read(bc.HISTORICAL_O/'inputs/CHANGE_IMPACT.json'),d.artifact(e['sources'][d.TOOL]).read_bytes(),sorted(e['canonical_diff'])
++
++    def rejects_impact(self,change,pattern):
++        impact,prior,source,paths=self.saved();change(impact)
++        with self.assertRaisesRegex(RuntimeError,pattern):d.check_impact(impact,prior,source,paths)
++
++    def test_alphabetical_categories_reject(self):
++        self.rejects_impact(lambda v:v.update(categories=sorted(v['categories'])),'CHANGE_IMPACT_CATEGORIES')
++
++    def test_invented_path_category_reject(self):
++        self.rejects_impact(lambda v:v['path_categories'].update({next(iter(v['path_categories'])):['invented']}),'CHANGE_IMPACT_CATEGORIES')
++
++    def test_consistent_but_wrong_categories_reject(self):
++        self.rejects_impact(lambda v:v.update(path_categories={p:['unknown'] for p in v['paths']},categories=['unknown']),'CHANGE_IMPACT_CATEGORIES')
++
++    def test_old_publish_metadata_reject(self):
++        self.rejects_impact(lambda v:v['policy'].update(runtime_image_publish=False),'CHANGE_IMPACT_POLICY')
++
++    def test_each_requirement_flag_still_mandatory(self):
++        for key in self.saved()[1]['policy']:
++            if key!='runtime_image_publish':
++                with self.subTest(key=key):
++                    self.rejects_impact(lambda v:v['policy'].update({key:False}),'CHANGE_IMPACT_POLICY')
++
++    def test_policy_integer_not_boolean_reject(self):
++        self.rejects_impact(lambda v:v['policy'].update(runtime_image_publish=1),'CHANGE_IMPACT_POLICY')
++
++    def test_policy_extra_or_missing_field_reject(self):
++        self.rejects_impact(lambda v:v['policy'].update(publish_authorized=True),'CHANGE_IMPACT_POLICY')
++        self.rejects_impact(lambda v:v['policy'].pop('full_ci'),'CHANGE_IMPACT_POLICY')
++
++    def test_unverified_classifier_source_reject(self):
++        impact,prior,source,paths=self.saved()
++        with self.assertRaisesRegex(RuntimeError,'CHANGE_IMPACT_CLASSIFIER_SOURCE'):
++            d.check_impact(impact,prior,source+b'\n',paths)
++
++    def test_pure_classification_varies_with_paths_without_io(self):
++        source=self.saved()[2]
++        # Independent expectations include multi-category paths and metadata false/true.
++        cases=[(['docs/guide.md'],['docs'],False),
++               (['sandbox-isolation-module/src/main/X.java'],['backend_runtime'],True),
++               (['docs/src/test/X.java','opaque'],['docs','backend_test','unknown'],False),
++               (['Dockerfile','frontend/src/test/x.js'],['frontend','backend_test','container'],True)]
++        import subprocess
++        with patch.object(subprocess,'run',side_effect=AssertionError('producer forbidden')), \
++             patch.object(subprocess,'Popen',side_effect=AssertionError('producer forbidden')), \
++             patch.object(Path,'open',side_effect=AssertionError('file writes/reads forbidden')):
++            for paths,categories,publish in cases:
++                result=d.classified_impact(source,paths)
++                self.assertEqual(result['categories'],categories)
++                self.assertIs(result['policy']['runtime_image_publish'],publish)
++                self.assertEqual(result['paths'],paths)
++
++    def test_source_derived_policy_cannot_drop_historical_requirements(self):
++        _,prior,source,_=self.saved();paths=['docs/guide.md']
++        impact=d.classified_impact(source,paths)
++        with self.assertRaisesRegex(RuntimeError,'CHANGE_IMPACT_REQUIRED_POLICY'):
++            d.check_impact(impact,prior,source,paths)
+--- before/tests/CONTROL_IDENTITIES.json
++++ tests/CONTROL_IDENTITIES.json
+@@ -145,5 +145,16 @@
+   "test_identity_delta.IdentityDeltaControls.test_wrong_tree",
+   "test_identity_delta.IdentityDeltaControls.test_wrong_xml_count",
+   "test_identity_delta.IdentityDeltaControls.test_wrong_xml_hash",
+-  "test_identity_delta.IdentityDeltaControls.test_wrong_xml_identity"
++  "test_identity_delta.IdentityDeltaControls.test_wrong_xml_identity",
++  "test_identity_delta.RealBindingControls.test_alphabetical_categories_reject",
++  "test_identity_delta.RealBindingControls.test_consistent_but_wrong_categories_reject",
++  "test_identity_delta.RealBindingControls.test_each_requirement_flag_still_mandatory",
++  "test_identity_delta.RealBindingControls.test_invented_path_category_reject",
++  "test_identity_delta.RealBindingControls.test_old_publish_metadata_reject",
++  "test_identity_delta.RealBindingControls.test_policy_extra_or_missing_field_reject",
++  "test_identity_delta.RealBindingControls.test_policy_integer_not_boolean_reject",
++  "test_identity_delta.RealBindingControls.test_pure_classification_varies_with_paths_without_io",
++  "test_identity_delta.RealBindingControls.test_saved_real_native_output_accepts",
++  "test_identity_delta.RealBindingControls.test_source_derived_policy_cannot_drop_historical_requirements",
++  "test_identity_delta.RealBindingControls.test_unverified_classifier_source_reject"
+ ]

@@ -1,0 +1,108 @@
+{
+  "scope": "EXACT_RECEIPTED_HOST_PID_ONLY",
+  "sampled_utc": "2026-09-08T22:07:39.867108+00:00",
+  "no_signals": true,
+  "no_global_process_or_container_enumeration": true,
+  "processes": [
+    {
+      "receipt": "runtime-regression/focused-001/PROCESS_START.json",
+      "receipt_sha256": "46a2961d8bfe42c097e4f6b6ee8b7023da665d1b96eef6eac793593f67226e15",
+      "pid": 582164,
+      "historical_start_ticks": "15164876",
+      "historical_exit": null,
+      "status": "DEPARTED_AT_SAMPLE_PID_ABSENT"
+    },
+    {
+      "receipt": "runtime-regression/stability-001/PROCESS_START.json",
+      "receipt_sha256": "505d53b654c582f84da736e9f7da70e7d31d66a8972d52bfe4ee5fd30c95ec60",
+      "pid": 586657,
+      "historical_start_ticks": "15174861",
+      "historical_exit": null,
+      "status": "DEPARTED_AT_SAMPLE_PID_ABSENT"
+    },
+    {
+      "receipt": "runtime-regression/stability-002/PROCESS_START.json",
+      "receipt_sha256": "52abbb93276244681e88328fc7cbefacad9cc7f2dd1ebe00bd3a75646cc84d33",
+      "pid": 590932,
+      "historical_start_ticks": "15178377",
+      "historical_exit": null,
+      "status": "DEPARTED_AT_SAMPLE_PID_ABSENT"
+    },
+    {
+      "receipt": "runtime-regression/stability-003/PROCESS_START.json",
+      "receipt_sha256": "742ebe202af3ca8341320a4c7e920c203b818c01e761b614a3a7a9cff584d712",
+      "pid": 595165,
+      "historical_start_ticks": "15181842",
+      "historical_exit": null,
+      "status": "DEPARTED_AT_SAMPLE_PID_ABSENT"
+    },
+    {
+      "receipt": "runtime-regression/stability-004/PROCESS_START.json",
+      "receipt_sha256": "223621819ab0cba09bb194f3e60b9cbd11dea925cb0dc62c895dc49c12aba4f6",
+      "pid": 599409,
+      "historical_start_ticks": "15185302",
+      "historical_exit": null,
+      "status": "DEPARTED_AT_SAMPLE_PID_ABSENT"
+    },
+    {
+      "receipt": "runtime-regression/stability-005/PROCESS_START.json",
+      "receipt_sha256": "e37dee8f4be3e399590ab85b52478198f499c3599e2efd6ada722ddabd2f7a9e",
+      "pid": 603638,
+      "historical_start_ticks": "15188767",
+      "historical_exit": null,
+      "status": "DEPARTED_AT_SAMPLE_PID_ABSENT"
+    },
+    {
+      "receipt": "runtime-regression/identity-001/PROCESS_START.json",
+      "receipt_sha256": "8f917f104af12abe2c8a9e38224bc4b3777a0f5e8de73507d28391f0f8d67d3d",
+      "pid": 609294,
+      "historical_start_ticks": "15203593",
+      "historical_exit": null,
+      "status": "DEPARTED_AT_SAMPLE_PID_ABSENT"
+    },
+    {
+      "receipt": "candidate-preparation/native-delta-001/junit.RECEIPT.json",
+      "receipt_sha256": "0174f8b6ce1ad12889410cda2ef6dd0d02d7e32f2bc529aa27f45ba507b2e655",
+      "pid": 610733,
+      "historical_start_ticks": null,
+      "historical_exit": 0,
+      "status": "DEPARTED_AT_SAMPLE_PID_ABSENT"
+    },
+    {
+      "receipt": "candidate-preparation/native-delta-001/impact.RECEIPT.json",
+      "receipt_sha256": "cf8b0a4664d65e6bccf36c93e3d519fc1b74d440ac9b6e9b65056650c32795ac",
+      "pid": 611161,
+      "historical_start_ticks": null,
+      "historical_exit": 0,
+      "status": "DEPARTED_AT_SAMPLE_PID_ABSENT"
+    },
+    {
+      "receipt": "formal-tooling/parent-logs/candidate-formal-once-001.process.json",
+      "receipt_sha256": "a7bf220d03b77de50777a1e6eb3bfa06322c5ecbb703dd12adcd7c5f345c1cbd",
+      "pid": 629198,
+      "historical_start_ticks": null,
+      "historical_exit": 1,
+      "status": "DEPARTED_AT_SAMPLE_PID_ABSENT"
+    },
+    {
+      "receipt": "formal-tooling/outputs/continuation-runs/candidate-formal-001/runtime/orchestration/baseline.process.json",
+      "receipt_sha256": "252cb400ff39e723a60797d9db1d411df336707bf959c56c00c3ec58ba2b9225",
+      "pid": 629201,
+      "historical_start_ticks": null,
+      "historical_exit": 1,
+      "status": "DEPARTED_AT_SAMPLE_PID_ABSENT"
+    }
+  ],
+  "not_sampled": [
+    {
+      "pid": 629175,
+      "reason": "parent-context historical outer PID; no owned receipt located in selected chain, identity unproven"
+    },
+    {
+      "pid": 10,
+      "reason": "qualification receipt namespace-local PID; host PID mapping unproven"
+    }
+  ],
+  "resource_teardown": "NOT_PROVEN: controller departure does not establish descendant/container/mount cleanup; no broad scans or probes authorized",
+  "visibility": "PUBLIC_SAFE_REDUCED_NO_COMMANDLINE_ENVIRONMENT_OR_FD_CONTENT"
+}

@@ -1,0 +1,20 @@
+test_saved_real_native_output_accepts (test_identity_delta.RealBindingControls.test_saved_real_native_output_accepts) ... ERROR
+
+======================================================================
+ERROR: test_saved_real_native_output_accepts (test_identity_delta.RealBindingControls.test_saved_real_native_output_accepts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/tests/test_identity_delta.py", line 191, in test_saved_real_native_output_accepts
+    _,ids,raw=d.validate(e,p,self.DELTA_SEAL)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/executor/identity_delta.py", line 118, in validate
+    bc.require(set(impact)==set(prior) and impact['policy']==prior['policy'] and impact['schema_version']==prior['schema_version'] and impact['reason']=='git_diff', 'CHANGE_IMPACT_POLICY_OR_SCHEMA')
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/executor/binding_contract.py", line 24, in require
+    if not ok: raise RuntimeError(reason)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CHANGE_IMPACT_POLICY_OR_SCHEMA
+
+----------------------------------------------------------------------
+Ran 1 test in 0.295s
+
+FAILED (errors=1)

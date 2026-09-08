@@ -1,0 +1,11 @@
+{"prepared_external_endpoints": {"bwrap": "/usr/bin/bwrap", "podman": "/usr/bin/podman", "socket": "/run/user/1000/podman/podman.sock", "coq_image": "docker.io/coqorg/coq@sha256:e50d77c4c5a9aa0d76ae1b343d79c5f922da3a75054b79c5dc635895438e4674", "coq_image_id": "b80d66c91b4da3a1b3c5d3e6672cf8f4ab72ed2f7a6a1f0cf7d3aef747cf6a4b", "result": "PASS"}, "preparation_disposition_sha256": "094182472cbba09db168655aebe8cca9bf855fd8cbfe0769d79e78b087685916"}
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/tools/hermes_execute_once.py", line 94, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/tools/hermes_execute_once.py", line 59, in main
+    call("baseline", "--run-id", RUN_ID, "--launcher-attempt",attempt["attempt_id"])
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/tools/hermes_execute_once.py", line 28, in call
+    if code:raise subprocess.CalledProcessError(code,command)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+subprocess.CalledProcessError: Command '['/home/user/.hermes/hermes-agent/venv/bin/python3', '-B', '/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/executor/runner.py', 'baseline', '--run-id', 'candidate-formal-001', '--launcher-attempt', '60dbb56069ad47739d3feb4f3715e4f2']' returned non-zero exit status 1.

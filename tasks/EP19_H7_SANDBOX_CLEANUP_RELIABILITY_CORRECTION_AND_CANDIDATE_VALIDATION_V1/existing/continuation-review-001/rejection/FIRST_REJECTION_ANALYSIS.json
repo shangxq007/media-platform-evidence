@@ -1,0 +1,489 @@
+{
+  "schema": "ep19-first-rejection-readonly-analysis-v1",
+  "role": "READ_ONLY_ANALYSIS_NOT_INDEPENDENT_ACCEPTANCE",
+  "lane": "BACKEND_VALIDATION",
+  "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+  "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+  "decision": "PATH_B_REQUIRED_FOR_LEDGER_RELAXATION; PATH_A_NOT_ESTABLISHED_AS_FIRST_REJECTION_CAUSE",
+  "writer": "UNKNOWN / NOT_ESTABLISHED",
+  "first_rejection": "BASELINE_OBSERVATION_REJECT",
+  "events": 3,
+  "unique_rejected_paths": 2,
+  "table": [
+    {
+      "object_event": {
+        "path": "/home/user/.hermes/skills/.curator_ledger.jsonl",
+        "mask": 2,
+        "cookie": 0,
+        "category": "REJECT_INSTRUCTION_EVENT",
+        "observed_ns": 154469523131084,
+        "writer": "NOT_ESTABLISHED"
+      },
+      "observed_endpoint": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 8448997,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 6331097,
+          "st_mtime_ns": 1788903445697266492,
+          "st_ctime_ns": 1788903445697266492,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "fa949f72d9a6621ee2c68b3db0bccd097998b16dc7cf63aca5de7984bca0bbbd",
+        "git_blob": "c73abfe934fec11c56f0cab2d74d36bb105631bf"
+      },
+      "earlier_endpoint_sha256": "b470610f505e0c67f2a85ec32108b200958c997048f8f538d9ef893abebb0aba",
+      "predicate": "observe.Watch.classify:64-70 => REJECT_INSTRUCTION_EVENT; Watch.rejected:170; runner._baseline:138",
+      "version": "OWNER_AUTHORIZATION_SCOPED_RUNTIME_BOOKKEEPING_V2",
+      "protected_target": "Skills enumeration 下未获内容豁免的 ledger",
+      "evidence_strength": "ESTABLISHED_FACT: 保存事件、端点与字节一致的实际源代码；writer UNKNOWN",
+      "supported": "严格拒绝符合现有范围；若允许 ledger 写入必须 Path B",
+      "unsupported": "不能归因 curator/Hermes；不能证明只追加、非语义或对应合法操作",
+      "classification": "A严格对象 / B扩围需新授权"
+    },
+    {
+      "object_event": {
+        "path": "/home/user/.hermes/skills/.curator_ledger.jsonl",
+        "mask": 8,
+        "cookie": 0,
+        "category": "REJECT_INSTRUCTION_EVENT",
+        "observed_ns": 154469523309623,
+        "writer": "NOT_ESTABLISHED"
+      },
+      "observed_endpoint": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 8448997,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 6331097,
+          "st_mtime_ns": 1788903445697266492,
+          "st_ctime_ns": 1788903445697266492,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "fa949f72d9a6621ee2c68b3db0bccd097998b16dc7cf63aca5de7984bca0bbbd",
+        "git_blob": "c73abfe934fec11c56f0cab2d74d36bb105631bf"
+      },
+      "earlier_endpoint_sha256": "b470610f505e0c67f2a85ec32108b200958c997048f8f538d9ef893abebb0aba",
+      "predicate": "observe.Watch.classify:64-70 => REJECT_INSTRUCTION_EVENT; Watch.rejected:170; runner._baseline:138",
+      "version": "OWNER_AUTHORIZATION_SCOPED_RUNTIME_BOOKKEEPING_V2",
+      "protected_target": "Skills enumeration 下未获内容豁免的 ledger",
+      "evidence_strength": "ESTABLISHED_FACT: 保存事件、端点与字节一致的实际源代码；writer UNKNOWN",
+      "supported": "严格拒绝符合现有范围；若允许 ledger 写入必须 Path B",
+      "unsupported": "不能归因 curator/Hermes；不能证明只追加、非语义或对应合法操作",
+      "classification": "A严格对象 / B扩围需新授权"
+    },
+    {
+      "object_event": {
+        "path": "/home/user/.hermes/skills/.usage.json.lock",
+        "mask": 8,
+        "cookie": 0,
+        "category": "REJECT_INSTRUCTION_EVENT",
+        "observed_ns": 154469524322534,
+        "writer": "NOT_ESTABLISHED"
+      },
+      "observed_endpoint": {
+        "metadata": {
+          "st_dev": 47,
+          "st_ino": 495362,
+          "st_mode": 33188,
+          "st_uid": 1000,
+          "st_gid": 100,
+          "st_size": 0,
+          "st_mtime_ns": 1782842771302693830,
+          "st_ctime_ns": 1782842771302693830,
+          "st_nlink": 1
+        },
+        "kind": "file",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      },
+      "earlier_endpoint_sha256": null,
+      "predicate": "observe.Watch.classify:64-70 => REJECT_INSTRUCTION_EVENT; Watch.rejected:170; runner._baseline:138",
+      "version": "OWNER_AUTHORIZATION_SCOPED_RUNTIME_BOOKKEEPING_V2",
+      "protected_target": "已存在、全部元数据严格保持的单一路径 lock",
+      "evidence_strength": "ESTABLISHED_FACT: 保存事件、端点与字节一致的实际源代码；writer UNKNOWN",
+      "supported": "close-write 事件已见；policy/collector 元数据完全相等、collector 空文件；运行锁操作不等同内容写入",
+      "unsupported": "不能由 mask8 证明写入字节、无中间修改、合法持锁或已被 Owner 豁免；不能自动删掉事件",
+      "classification": "C锁生命周期；A集成缺口候选，未证明为契约意义实现缺陷；B精确规则澄清"
+    },
+    {
+      "object_event": "/home/user/.hermes/skills/.usage.json policy→collector",
+      "observed_values": {
+        "policy": {
+          "sha256": "ac89a0a5e3cd046efffc6aa9acfca4a8804b30769105a4d236dbb20881351c91",
+          "metadata": {
+            "st_dev": 47,
+            "st_ino": 22589169,
+            "st_mode": 33152,
+            "st_uid": 1000,
+            "st_gid": 100,
+            "st_size": 96588,
+            "st_mtime_ns": 1788903270814698621,
+            "st_ctime_ns": 1788903270815698630,
+            "st_nlink": 1
+          }
+        },
+        "collector": {
+          "sha256": "0423d100cb536417edc9b2d8a50a806ec565fddb9b774dd695c2679b12c5d379",
+          "metadata": {
+            "st_dev": 47,
+            "st_ino": 22589275,
+            "st_mode": 33152,
+            "st_uid": 1000,
+            "st_gid": 100,
+            "st_size": 96588,
+            "st_mtime_ns": 1788903445702266536,
+            "st_ctime_ns": 1788903445704266554,
+            "st_nlink": 1
+          },
+          "kind": "file"
+        },
+        "binding": {
+          "target_present": true,
+          "hash_equal": false,
+          "metadata_equal": false,
+          "metadata_differences": {
+            "st_ino": {
+              "policy": 22589169,
+              "collector": 22589275
+            },
+            "st_mtime_ns": {
+              "policy": 1788903270814698621,
+              "collector": 1788903445702266536
+            },
+            "st_ctime_ns": {
+              "policy": 1788903270815698630,
+              "collector": 1788903445704266554
+            }
+          }
+        }
+      },
+      "predicate": "bookkeeping_v2.capture_binding:433-440 / BOOKKEEPING_BASELINE_CAPTURE_UNBOUND (未执行); runner:145 / BOOKKEEPING_CHANGED_DURING_BASELINE (未执行)",
+      "version": "OWNER_AUTHORIZATION_SCOPED_RUNTIME_BOOKKEEPING_V2",
+      "protected_target": "同一真实捕获字节与语义投影的绑定；不是所有 usage 字节不可变",
+      "evidence_strength": "ESTABLISHED_FACT 两捕获不同；SUPPORTED_STATIC_CONSEQUENCE capture_binding 必失败",
+      "supported": "D跨阶段不一致；hash/inode/mtime/ctime 不等；变更是否仅四字段未知；不能强绑",
+      "unsupported": "不是 FIRST 异常；evaluation=null，不能宣称 V2 语义 PASS 或 FAIL；不能把分时捕获当原子快照",
+      "classification": "D；E尚未证实。baseline OLD_STRICT veto 是与 V2 跨路径要求的静态冲突候选，非本次因果结论"
+    },
+    {
+      "object_event": "实际异常/执行顺序",
+      "observed_values": {
+        "exception": {
+          "path": null,
+          "type": "RuntimeError",
+          "errno": null,
+          "reason": "BASELINE_OBSERVATION_REJECT"
+        },
+        "ordering": [
+          {
+            "phase": "PREPARATION_DISPOSITION_VERIFY",
+            "time_ns": 1788903413299980400,
+            "monotonic_ns": 154395232230836
+          },
+          {
+            "phase": "POLICY_CAPTURE_BEGIN",
+            "time_ns": 1788903421726378994,
+            "monotonic_ns": 154403658629359
+          },
+          {
+            "phase": "POLICY_CAPTURE_END",
+            "time_ns": 1788903421795295826,
+            "monotonic_ns": 154403727546134
+          },
+          {
+            "phase": "OBSERVER_REGISTER_BEGIN",
+            "time_ns": 1788903440655631671,
+            "monotonic_ns": 154422587885775
+          },
+          {
+            "phase": "COLLECTOR_CAPTURE_BEGIN",
+            "time_ns": 1788903455113541093,
+            "monotonic_ns": 154437045791681
+          },
+          {
+            "phase": "COLLECTOR_CAPTURE_END",
+            "time_ns": 1788903487590543668,
+            "monotonic_ns": 154469522793885
+          },
+          {
+            "phase": "EVIDENCE_WRITE",
+            "time_ns": 1788903487755120866,
+            "monotonic_ns": 154469687370921
+          }
+        ],
+        "evaluation": null,
+        "capture_errors": [],
+        "observer_errors": [],
+        "attempt": {
+          "schema": "ep19-one-shot-attempt-v1",
+          "attempt_id": "218ce772b00949afa083a0e963ea3cf5",
+          "run_id": "candidate-formal-001",
+          "run": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/outputs/continuation-runs/candidate-formal-001",
+          "kind": "baseline",
+          "pid": 629201,
+          "consumed_ns": 1788903413294996681,
+          "retry_authorized": false,
+          "state": "CONSUMED_BEFORE_BASELINE"
+        },
+        "process_status": "BASELINE_ONLY_NO_PREFLIGHT_OR_GATES_INVOKED"
+      },
+      "predicate": "runner.py:138 before :139-145; baseline_evidence.py:20-30 为失败后诊断汇总",
+      "version": "ep19-baseline-capture-evidence-v1",
+      "protected_target": "拒绝后不建合法 baseline、不启动 preflight/gates；一次性预算",
+      "evidence_strength": "ESTABLISHED_FACT 日志与原始私有 receipt 一致",
+      "supported": "FIRST=BASELINE_OBSERVATION_REJECT；3条拒绝事件；2个独立输入文件不是两次尝试；第二文件是sanitized receipt",
+      "unsupported": "不能把 summary.binding 不等记成已经执行的 capture_binding 异常；不能刷新旧 baseline 再试",
+      "classification": "E已证实的 failclosed 行为，不是已证明 defect"
+    }
+  ],
+  "reduced_policy": {
+    "schema": "ep19-scoped-runtime-bookkeeping-v2",
+    "contract_version": "OWNER_AUTHORIZATION_SCOPED_RUNTIME_BOOKKEEPING_V2",
+    "target": "/home/user/.hermes/skills/.usage.json",
+    "skills_root": "/home/user/.hermes/skills",
+    "mutable_fields": [
+      "view_count",
+      "use_count",
+      "last_viewed_at",
+      "last_used_at"
+    ],
+    "baseline_raw_sha256": "ac89a0a5e3cd046efffc6aa9acfca4a8804b30769105a4d236dbb20881351c91",
+    "baseline_usage_metadata": {
+      "st_dev": 47,
+      "st_ino": 22589169,
+      "st_mode": 33152,
+      "st_uid": 1000,
+      "st_gid": 100,
+      "st_size": 96588,
+      "st_mtime_ns": 1788903270814698621,
+      "st_ctime_ns": 1788903270815698630,
+      "st_nlink": 1
+    },
+    "lock": {
+      "state": "PRESENT",
+      "path": "/home/user/.hermes/skills/.usage.json.lock",
+      "metadata": {
+        "st_dev": 47,
+        "st_ino": 495362,
+        "st_mode": 33188,
+        "st_uid": 1000,
+        "st_gid": 100,
+        "st_size": 0,
+        "st_mtime_ns": 1782842771302693830,
+        "st_ctime_ns": 1782842771302693830,
+        "st_nlink": 1
+      },
+      "end_state": "PRESERVE_EXACT_IDENTITY_TYPE_OWNER_GROUP_MODE_AND_METADATA"
+    },
+    "temporary_namespace": {
+      "root": "/home/user/.hermes/skills",
+      "direct_child_only": true,
+      "regex": "^\\.usage_[a-z0-9_]{8}\\.tmp$",
+      "final_state": "ABSENT",
+      "writer_attribution_required": false,
+      "unavailable_short_lived_details": "OBSERVATIONAL_LIMIT_NOT_AUTOMATIC_REJECT"
+    }
+  },
+  "scope_membership": {
+    "/home/user/.hermes/skills/.curator_ledger.jsonl": {
+      "protected": true,
+      "sealed_inputs": false
+    },
+    "/home/user/.hermes/skills/.usage.json.lock": {
+      "protected": true,
+      "sealed_inputs": false
+    },
+    "/home/user/.hermes/skills/.usage.json": {
+      "protected": true,
+      "sealed_inputs": false
+    }
+  },
+  "ledger_endpoint_difference": {
+    "preparation_sha256": "b470610f505e0c67f2a85ec32108b200958c997048f8f538d9ef893abebb0aba",
+    "collector_sha256": "fa949f72d9a6621ee2c68b3db0bccd097998b16dc7cf63aca5de7984bca0bbbd",
+    "equal": false,
+    "meaning": "分时端点内容不同；没有中间字节/追加证明"
+  },
+  "source_identity": "ef23351837c7777ed51cb6125640c73979427dac3cb205755408c1a7e7255f04",
+  "sources": [
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/outputs/continuation-runs/candidate-formal-001/runtime/decision-evidence/1788903490044393222-927687c69b0e479c8cb11c7818708134.json",
+      "sha256": "57380bf8f948e3d01422f33d19d39dac17f52ea795a5e037646a73a0a2d30ce5",
+      "size": 52630816,
+      "baseline_captured_sha256": null,
+      "matches_baseline_capture": null
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/outputs/continuation-runs/candidate-formal-001/runtime/decision-evidence/1788903493937145177-5a7e9251961848f991ff902033918190.json",
+      "sha256": "13a7a6b9ac71bb153d2366485b460c0e07a3b2b1aeada752e18695b9decaea7b",
+      "size": 5251,
+      "baseline_captured_sha256": null,
+      "matches_baseline_capture": null
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/outputs/continuation-runs/candidate-formal-001/scope.json",
+      "sha256": "e5577191715a055cad6326f11c904c5f11eacbe939c68abad5884f23932f2ff4",
+      "size": 36622745,
+      "baseline_captured_sha256": null,
+      "matches_baseline_capture": null
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/outputs/continuation-runs/candidate-formal-001/bookkeeping-policy-v2.private.json",
+      "sha256": "abcba289c40edd5a31f718853a4daeab6a3718528485ace464eadeeff93cef0b",
+      "size": 715032,
+      "baseline_captured_sha256": "abcba289c40edd5a31f718853a4daeab6a3718528485ace464eadeeff93cef0b",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/outputs/continuation-runs/candidate-formal-001/BASELINE_ATTEMPT.json",
+      "sha256": "e456edf8cd0b94db451f736cb51e86dcf7d949630a75dee21b1556a453ae6ab9",
+      "size": 467,
+      "baseline_captured_sha256": "e456edf8cd0b94db451f736cb51e86dcf7d949630a75dee21b1556a453ae6ab9",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/outputs/continuation-runs/candidate-formal-001/PREPARATION_DISPOSITION.json",
+      "sha256": "094182472cbba09db168655aebe8cca9bf855fd8cbfe0769d79e78b087685916",
+      "size": 393726,
+      "baseline_captured_sha256": "094182472cbba09db168655aebe8cca9bf855fd8cbfe0769d79e78b087685916",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/outputs/continuation-runs/candidate-formal-001/identity.json",
+      "sha256": "5c858a5aaf9298e035d2dca98442312039eb94b7acc30961d089bee6048c644b",
+      "size": 1592,
+      "baseline_captured_sha256": "5c858a5aaf9298e035d2dca98442312039eb94b7acc30961d089bee6048c644b",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/outputs/continuation-runs/candidate-formal-001/runtime/orchestration/baseline.native.log",
+      "sha256": "83a039efd9b210f99bd013c8a2262424d32f9d5e27fb9d090353c3ee2b3662cb",
+      "size": 1282,
+      "baseline_captured_sha256": null,
+      "matches_baseline_capture": null
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/outputs/continuation-runs/candidate-formal-001/runtime/orchestration/baseline.process.json",
+      "sha256": "252cb400ff39e723a60797d9db1d411df336707bf959c56c00c3ec58ba2b9225",
+      "size": 802,
+      "baseline_captured_sha256": null,
+      "matches_baseline_capture": null
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/OWNER_AUTHORIZATION.txt",
+      "sha256": "338a9449a678ab0de5e4a7167823e3fff983f38bac76e5deac3c029a1c4c9528",
+      "size": 19875,
+      "baseline_captured_sha256": "338a9449a678ab0de5e4a7167823e3fff983f38bac76e5deac3c029a1c4c9528",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/CONTINUATION_AUTHORITY.md",
+      "sha256": "a377051367ea03f88481299ddbfddffac893f3dc89f0f727864c2aed6a77f617",
+      "size": 3781,
+      "baseline_captured_sha256": "a377051367ea03f88481299ddbfddffac893f3dc89f0f727864c2aed6a77f617",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/NEW_EXECUTOR_IDENTITY.json",
+      "sha256": "1e1bc91c988cd0a6e55e5549d352192d0fbeb6297a457fa388ed30f8c4899c2f",
+      "size": 13958,
+      "baseline_captured_sha256": "1e1bc91c988cd0a6e55e5549d352192d0fbeb6297a457fa388ed30f8c4899c2f",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/dependency/DEPENDENCY_CHECK.json",
+      "sha256": "1dc683503ddfc79de72fad7cc3091de3b0ce19fa7d747c3249460edf394d025a",
+      "size": 11652,
+      "baseline_captured_sha256": "1dc683503ddfc79de72fad7cc3091de3b0ce19fa7d747c3249460edf394d025a",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/owner-clarified-execution-20260907T1120Z/OWNER_DECISION.txt",
+      "sha256": "bdb8ce769624677a0e5aacfaad066965d8512e2c232f18caae6ab9f88f9564ca",
+      "size": 15680,
+      "baseline_captured_sha256": "bdb8ce769624677a0e5aacfaad066965d8512e2c232f18caae6ab9f88f9564ca",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/bookkeeping-v2-20260908T004809Z/OWNER_AUTHORIZATION.txt",
+      "sha256": "338a9449a678ab0de5e4a7167823e3fff983f38bac76e5deac3c029a1c4c9528",
+      "size": 19875,
+      "baseline_captured_sha256": "338a9449a678ab0de5e4a7167823e3fff983f38bac76e5deac3c029a1c4c9528",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/executor/observe.py",
+      "sha256": "1d35d99763d2fca7d71d99e4967e005aaef4512fb1fe62b16aeed3a0b0382f0f",
+      "size": 21648,
+      "baseline_captured_sha256": "1d35d99763d2fca7d71d99e4967e005aaef4512fb1fe62b16aeed3a0b0382f0f",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/executor/bookkeeping_v2.py",
+      "sha256": "c3d68cf9c94ce32a74132d4fa369ae754de0fe30e4483559e48ce3f75d37c66d",
+      "size": 21495,
+      "baseline_captured_sha256": "c3d68cf9c94ce32a74132d4fa369ae754de0fe30e4483559e48ce3f75d37c66d",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/executor/baseline_evidence.py",
+      "sha256": "2902e7b176fba343e4f59b11cb86355629a858a07a518be8dfe19027c0e17f23",
+      "size": 4713,
+      "baseline_captured_sha256": "2902e7b176fba343e4f59b11cb86355629a858a07a518be8dfe19027c0e17f23",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/executor/decision_evidence.py",
+      "sha256": "01756ce567568772b18bac3a79b2cfb3342cb96e5fbab6c96a98a3e11b53bdd8",
+      "size": 15162,
+      "baseline_captured_sha256": "01756ce567568772b18bac3a79b2cfb3342cb96e5fbab6c96a98a3e11b53bdd8",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/executor/runner.py",
+      "sha256": "50bfe0bd03fafa394617feb5910b6161e6597b9fbba49b48a3c9417fa08ad702",
+      "size": 39588,
+      "baseline_captured_sha256": "50bfe0bd03fafa394617feb5910b6161e6597b9fbba49b48a3c9417fa08ad702",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/executor/sequence.py",
+      "sha256": "4344fb4066ce1a11df2a7765071d333c559a32c780bf2317958615be1b0666bb",
+      "size": 4452,
+      "baseline_captured_sha256": "4344fb4066ce1a11df2a7765071d333c559a32c780bf2317958615be1b0666bb",
+      "matches_baseline_capture": true
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/executor/coverage.py",
+      "sha256": "d8bfddd35d3ef6a998af452a4d457fbb8c7e09e39393ce6a3d9d1d62364e2118",
+      "size": 22007,
+      "baseline_captured_sha256": "d8bfddd35d3ef6a998af452a4d457fbb8c7e09e39393ce6a3d9d1d62364e2118",
+      "matches_baseline_capture": true
+    }
+  ],
+  "historical_v2_owner_copy_byte_identical": true,
+  "work_performed": {
+    "implementation": false,
+    "tests": false,
+    "new_baseline": false,
+    "probes": false,
+    "product_writes": false,
+    "skill_memory_config_source_writes_issued": false,
+    "service_pause": false
+  },
+  "limitations": [
+    "原始私有 before map 仅提取3个目标；不导出正文/记录IDs",
+    "没有 contemporaneous writer / syscall 身份",
+    "不把本次工具未发出写操作等同共享目录全局无变化",
+    "工具stdout错误输出过大的 scope 路径数组造成自动spill；不是 private before map，全量未纳入交付；没有删除/改动系统自动缓存",
+    "本报告不代替最终独立验收"
+  ],
+  "second_attempt": "BLOCKED_UNTIL_OWNER_EXPLICIT_RULE_APPROVAL_AND_ALL_PRECONDITIONS"
+}

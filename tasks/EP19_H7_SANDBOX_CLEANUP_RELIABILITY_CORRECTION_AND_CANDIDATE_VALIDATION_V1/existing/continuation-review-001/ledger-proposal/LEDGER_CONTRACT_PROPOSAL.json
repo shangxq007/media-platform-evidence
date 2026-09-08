@@ -1,0 +1,347 @@
+{
+  "schema": "ep19-ledger-noop-append-contract-proposal-v1",
+  "status": "PROPOSAL_ONLY_NOT_APPROVED_NOT_IMPLEMENTED_NOT_QUALIFIED",
+  "historical_writer": "UNKNOWN / NOT_ESTABLISHED",
+  "first_attempt": "BASELINE_OBSERVATION_REJECT remains immutable; hashes do not prove append-only; no retroactive ratification",
+  "authority": {
+    "implementation_qualification": "Already authorized in scope by current continuation; no separate routine approval demanded",
+    "new_difference": "Owner must explicitly approve this exact ledger-only contract and any separate lock/capture changes",
+    "second_attempt": "Existing conditional authorization only; blocked until approved differences, qualified implementation and complete fresh binding/readiness; not executed here"
+  },
+  "sources": [
+    {
+      "path": "/home/user/.hermes/hermes-agent/tools/skill_ledger.py",
+      "sha256": "bf7e80b0705ccd80d6307e308f6b2cbcae875585055b2f3e62b768b0168b0c34",
+      "lines": [
+        [
+          37,
+          85
+        ],
+        [
+          101,
+          133
+        ],
+        [
+          246,
+          303
+        ],
+        [
+          306,
+          402
+        ]
+      ]
+    },
+    {
+      "path": "/home/user/.hermes/hermes-agent/tools/skill_manager_tool.py",
+      "sha256": "87f088f543adbac9723ef196336f424adf2afd15a6c71c5e0e2918173df1a386",
+      "lines": [
+        [
+          695,
+          777
+        ]
+      ]
+    },
+    {
+      "path": "/home/user/.hermes/hermes-agent/tools/skill_usage.py",
+      "sha256": "82702d4736a8fc81ceb4dd5e6ce9706aa242102c84277c474c661e659a6f1aed",
+      "lines": [
+        [
+          557,
+          580
+        ]
+      ]
+    },
+    {
+      "path": "/home/user/.hermes/hermes-agent/hermes_cli/curator.py",
+      "sha256": "e9562dd6772fd128f4a498b859b493d2af8e8d7e91467af45921d4fc99c98d62",
+      "lines": [
+        [
+          384,
+          407
+        ],
+        [
+          410,
+          488
+        ]
+      ]
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/continuation-review-001/rejection/FIRST_REJECTION_REPORT.zh-CN.md",
+      "sha256": "a3ae6064d2a9bbd04423e9fb9193ff818d26fc34ac8768552acde067be96eb0c",
+      "lines": [
+        [
+          1,
+          61
+        ]
+      ]
+    },
+    {
+      "path": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/continuation-review-001/rejection/NARROW_RULE_PROPOSAL.json",
+      "sha256": "484986355e33c200793936056056cb1fd72a175ef2ba36a7ec1d19b7abc9d821",
+      "lines": [
+        [
+          1,
+          73
+        ]
+      ]
+    }
+  ],
+  "current_writer_schema": {
+    "required_emitted_keys": [
+      "id",
+      "ts",
+      "actor",
+      "action",
+      "skill",
+      "evidence",
+      "before",
+      "after"
+    ],
+    "id": "uuid4().hex[:12]",
+    "ts": "datetime.now(timezone.utc).isoformat()",
+    "actor": [
+      "curator",
+      "agent",
+      "user"
+    ],
+    "action_skill": "caller strings; writer does not enforce enum or length",
+    "evidence": "evidence or {}; caller supplied, no closed schema enforcement",
+    "before_after": "before or [] and after or []; normal snapshots list {path: str(file), sha256: sha256(blob)}",
+    "encoding": "UTF-8 JSONL; json.dumps(ensure_ascii=False) plus LF; append text mode; no writer lock/fsync/append-history attestation",
+    "errors": "disabled/failed telemetry returns None; mutation unaffected; capture failure can collapse to [] in callers"
+  },
+  "choice": {
+    "default": "KEEP_STRICT unless exact amendment approved",
+    "recommended_optional": "NOOP_MANIFEST_APPEND_SUBSET",
+    "all_records": "REJECT: changes, rollback targets, arbitrary evidence/action fields affect audit/rollback and may imply strict-body mutation",
+    "noop_meaning": "equal complete nonempty manifests anchored to bound strict inventory; not a new action=noop class; not proof the operation never wrote"
+  },
+  "exact_path": "/home/user/.hermes/skills/.curator_ledger.jsonl",
+  "scope": {
+    "profile": "default only; explicit bound home must equal /home/user/.hermes; no profile wildcard",
+    "create_allowed": false,
+    "other_paths": "No new permission, including blobs/backups/Skills/Memory/config/source. Existing V2 usage/temp and separately approved lock remain separate predicates."
+  },
+  "record_schema": {
+    "type": "object",
+    "required": [
+      "id",
+      "ts",
+      "actor",
+      "action",
+      "skill",
+      "evidence",
+      "before",
+      "after"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{12}$",
+        "unique": "across original prefix and all new records"
+      },
+      "ts": {
+        "type": "string",
+        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{6})?\\+00:00$",
+        "semantic": "valid calendar, UTC, within bound attempt wall-clock interval; nondecreasing among new rows; wall-clock rollback => reject; not writer identity proof"
+      },
+      "actor": {
+        "enum": [
+          "curator",
+          "agent",
+          "user"
+        ],
+        "semantic": "untrusted claimed label, never authorization or attribution"
+      },
+      "action": {
+        "enum": [
+          "patch",
+          "edit"
+        ]
+      },
+      "skill": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$",
+        "semantic": "exact member of prebound finite eligible_skills map; no normalization or alias correction"
+      },
+      "evidence": {
+        "type": "object",
+        "maxProperties": 0,
+        "additionalProperties": false
+      },
+      "before": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 4096,
+        "items": {
+          "type": "object",
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "type": "string",
+              "maxLength": 4096
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        }
+      },
+      "after": {
+        "same_schema_as": "before"
+      }
+    },
+    "cross_field": [
+      "before and after arrays must be deeply equal, including order; unique paths, lexicographically sorted",
+      "each path is exact prebound canonical absolute regular-file path under its single eligible skill package; no symlinks, dot segments, duplicate paths, backslashes, control chars or external paths",
+      "manifest equals entire prebound nonempty complete package manifest, contains its SKILL.md; no absent/missing capture fallback; every digest equals independently captured strict inventory at each boundary",
+      "No body/hash/path membership change, even if action claims noop; all Skill/Memory events remain strict rejects including write-then-restore",
+      "No session_id/file_path/absorbed_into/archived/ttl_days/rollback_target/restored/removed evidence; no unknown evidence whatsoever",
+      "create/delete/archive/restore/purge/pre-rollback/rollback/write_file/remove_file/noop and all other actions reject"
+    ],
+    "parser": "strict UTF-8; exactly one object per LF-ended nonblank line; no BOM/CR/duplicate keys/NaN/Infinity/trailing garbage; reject partial trailing line at boundary; do not use permissive list_entries as validator"
+  },
+  "finite_limits": {
+    "attempt_seconds_max": 3600,
+    "appended_records_max": 128,
+    "line_bytes_including_LF_max": 1048576,
+    "append_total_bytes_max": 8388608,
+    "original_prefix_bytes_max": 67108864,
+    "manifest_items_max": 4096,
+    "eligible_skills_max": 128,
+    "stable_capture_attempts_per_boundary": 3,
+    "capture_total_seconds_per_boundary_max": 5,
+    "pending_events_max": 4096,
+    "event_counts": "bounded resource limits, not one-to-one write syscall claims; coalescing exists",
+    "origin": "new conservative policy choices, not observed runtime limits; exceeding any bound rejects rather than widening/retrying run"
+  },
+  "prefix": {
+    "start": "present regular ledger; full stable raw length N0 and hash H0 with complete LF framing; original rows must parse as unique-ID objects for collision checks; historical row classes preserved opaque, never grandfathered as allowed new classes",
+    "each_capture": "same dev/ino; N_i>=N_prev>=N0; SHA256(bytes[0:N0])==H0 AND SHA256(bytes[0:N_prev])==H_prev; raw full hash/length stored each time; all suffix rows satisfy new closed schema",
+    "forbidden": [
+      "prefix modification",
+      "rewrite",
+      "truncate",
+      "rotate",
+      "delete",
+      "rename",
+      "replacement",
+      "symlink",
+      "hardlink",
+      "new file",
+      "repair existing malformed bytes"
+    ],
+    "privacy": "future validator processes private prefix in memory only, publishes capture IDs/hash/length/count/result not rows; this review does not read shared ledger",
+    "limitation": "endpoint/prefix hashes plus inotify cannot prove absence of unseen overwrite-and-restore or truncate-and-regrow; proposal accepts only bounded observed-prefix integrity if Owner expressly accepts this limitation; full syscall-history requirement cannot be met by current observer"
+  },
+  "metadata": {
+    "strict": [
+      "regular file",
+      "st_dev",
+      "st_ino",
+      "st_mode",
+      "st_uid",
+      "st_gid",
+      "st_nlink=1",
+      "resolved parent identities",
+      "persistent directory entry set"
+    ],
+    "allowed": [
+      "st_size nondecreasing and exact captured byte length",
+      "st_mtime_ns/st_ctime_ns nondecreasing, only attached to a validated growth batch; unchanged bytes require all nine original fields equal"
+    ],
+    "not_used_as_proof": "atime not in existing nine-field model; metadata and labels cannot identify writer; no ledger-driven root metadata relaxation"
+  },
+  "events": {
+    "pending_exact_masks": [
+      2,
+      8
+    ],
+    "cookie": 0,
+    "target": "only exact ledger object with bound identity",
+    "combinations": "reject combined masks and all other masks; no masking off unknown bits",
+    "allowed_sequence": "zero events requires unchanged content+metadata; close-write-only may resolve unchanged with all nine fields equal; any modify requires positive growth with valid rows and at least one close-write in same boundary batch",
+    "completion": "retain every event; drain fully before boundary; no unresolved write/partial record/pending event crosses a command/gate boundary; multiple modifies/closes allowed within finite limits, not paired to writer",
+    "reject": [
+      "attrib",
+      "create",
+      "delete",
+      "move",
+      "delete_self",
+      "move_self",
+      "unmount",
+      "ignored watch",
+      "overflow",
+      "unknown mask",
+      "cookie nonzero",
+      "change without covered events",
+      "coverage gap",
+      "unstable/incomplete read",
+      "evidence write failure"
+    ]
+  },
+  "lifecycle": {
+    "start": [
+      "Bind approved contract hash, reader/source closure, eligible skill map and strict inventory, finite budgets, candidate/matrix/executor/qualification; no ledger body as policy/selection input",
+      "Register continuous exact file+parent coverage before authoritative stable start capture; preserve strict-input continuity; no uncovered registration/capture gap",
+      "At most three bounded same-FD stat/read/stat plus path-identity checks; compute parse/hash/manifest projection from same captured bytes; bind collector and semantic policy to same capture ID; all start facts known or reject"
+    ],
+    "mid": [
+      "Retain stream, classify only exact masks into pending; strict-body/Memory/unknown events immediate reject",
+      "At each preflight/prestart/gate/command boundary, stable actual capture, both original and previous prefix verification, full suffix parse and strict-input independent comparison; no deferred incomplete rows",
+      "Reader/source/policy identity change or dynamic reader unbound => reject; never use later recapture to rewrite an earlier failed comparison"
+    ],
+    "end": [
+      "Final stable capture and drain under uninterrupted coverage; no post-capture unexplained event; all pending resolved and strict inputs complete",
+      "Seal capture IDs, observed events, prefix hashes, appended counts, policy+source+qualification binding, native exits and exact reject reasons; old strict hash delta remains factual",
+      "Any unknown/incomplete result rejects; no automatic retry or consumed attempt resurrection"
+    ]
+  },
+  "dependency": {
+    "known_readers": [
+      "skill_ledger.list_entries: newest-first, skill filter, limit affects selection",
+      "skill_ledger.get_entry: first matching ID, new duplicate ID could shadow historical target",
+      "skill_ledger.rollback_entry: before/after drives blob reads and actual write/delete; equal manifests do not make future rollback inert",
+      "hermes_cli.curator._cmd_ledger and _rollback_ledger_entry: display, target selection and explicit rollback execution"
+    ],
+    "task_rule": "Ledger must not supply authorization, instruction selection, gate criteria, candidate selection or policy. Treat ledger only as validated mutable evidence with preserved raw capture binding, not silently remove inventory coverage. Pin exact known task dependency closure and forbid ledger-reading list/rollback commands or unbound dynamic consumers in attempt matrix; unresolved dependency => reject. No claim about arbitrary future readers.",
+    "historical": "Current source and labels do not establish FIRST writer or historical implementation"
+  },
+  "controls_planned_only": {
+    "positive": [
+      "unchanged no event",
+      "close-only unchanged nine fields",
+      "one and multiple valid patch/edit rows, exact nonempty manifests and evidence {}, prefix preserved",
+      "mid and end growth using same real capture for hash/parse/collector; old strict delta retained"
+    ],
+    "negative": [
+      "changed prefix with valid suffix",
+      "overwrite then restore: documented observer indistinguishability, must not label proven syscall append-only",
+      "shrink/rotate/replace/create/link/type/metadata/attrib change",
+      "duplicate keys/id including collision with prefix; malformed UTF8/JSON/partial LF/BOM/nonfinite values",
+      "unknown keys/evidence/session_id or excluded action; before=[]/after=[]; missing package manifest",
+      "same manifests but independent strict body event; changed digest/path/manifest membership; Memory write",
+      "cap exceed/time rollback/unknown reader/watch loss/overflow/unresolved close or unstable read",
+      "policy/collector mismatched capture, stale source/qualification/Owner hash, failed evidence write"
+    ],
+    "executed": false
+  },
+  "affected_closure": [
+    "observe classifier and reducer pending handling",
+    "ledger schema/parser/prefix validator and bounded coherent capture",
+    "bookkeeping composition with strict bodies and existing V2",
+    "baseline old-strict veto decision and decision-evidence",
+    "scope/inventory/sequence/coverage/seals",
+    "preflight/prestart/per-gate/command-boundary/final acceptance",
+    "qualification/source applicability, Owner/policy/schema/eligible map/capture protocol/matrix/executor/candidate bindings"
+  ],
+  "rebind": "Requalify affected closure using disposable fixtures under existing continuation authority, bind all new hashes and complete readiness before conditional second attempt. Old qualification only where unchanged dependency applicability is demonstrated; no whole-package reuse; independent review pending. No original receipt/baseline edit.",
+  "activation": "New exact contract approval required. No guarantee next ledger append will fit subset; otherwise reject. Private capture capability and closed dependencies must qualify; inability => KEEP_STRICT, not another unspecified investigation.",
+  "execution": "Only proposal artifacts written. No tests/probes/baseline/services/process mutations/shared ledger reads/Skills Memory source config writes."
+}

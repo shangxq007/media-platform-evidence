@@ -1,0 +1,173 @@
+{
+  "candidate": {
+    "original_candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+    "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+    "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+    "canonical_comparison_base": "86d6aef94fd5e58da552e97c11473cff6eca734e",
+    "object_source": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/checkout",
+    "product_patch_sha256": "bab6aee8346f7ef47ca94f1e3da629e7ae81df2f16202706ae4966864a485690",
+    "git_parent_verified": true,
+    "tracked_and_untracked_status": "",
+    "local_only": true,
+    "product_publication": "NOT_PERFORMED"
+  },
+  "process": {
+    "at_utc": "2026-09-08T20:57:46.765110+00:00",
+    "native_exit": 0,
+    "outer_timeout": false,
+    "controller_reaped_own_root": true,
+    "sources_unchanged": true,
+    "descendant_cleanup": "Read actual product test XML separately; not global process quiescence proof"
+  },
+  "counts": {
+    "tests": 27,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "rows": [
+    {
+      "file": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/runtime-regression/identity-001/build/sandbox-isolation-module/test-results/test/TEST-com.example.platform.sandbox.CleanupFailurePropagationTest.xml",
+      "sha256": "6460501f26fc518d573e424fc49473f72f7e7bb6b755c6703d7d677583c5b0e2",
+      "suite": {
+        "name": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+        "tests": "25",
+        "skipped": "0",
+        "failures": "0",
+        "errors": "0",
+        "timestamp": "2026-09-08T20:57:45.783Z",
+        "hostname": "localhost.localdomain",
+        "time": "0.094"
+      },
+      "identities": [
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "failed_force_does_not_abort_later_force_or_root()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "container_preliminary_live_survivor_can_resolve_without_sticky_error()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "root_observation_uncertainty_is_a_blocking_survivor()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "conflicting_same_pid_never_replaces_retained_object()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "interrupted_wait_preserves_failure_and_continues_force()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "rejected_signal_while_live_stays_failed_after_force()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "unknown_retained_identity_fails_closed()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "descendant_remains_live()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "failed_enumeration_still_cleans_retained_handles_and_root()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "partial_enumeration_preserves_already_observed_handles()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "bubblewrap_aggregator_preserves_error_with_empty_survivors()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "local_primary_and_cleanup_failures_remain_separate()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "root_remains_live()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "matching_same_pid_keeps_retained_object()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "failed_signal_with_empty_survivors_stays_failed()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "container_aggregator_preserves_error_with_empty_survivors()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "exited_retained_handle_does_not_require_live_process_info()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "root_signal_exception_does_not_prevent_descendant_force()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "failed_observation_does_not_abort_root_or_other_owned_objects()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "container_final_error_with_live_helper_is_not_detached_success()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "container_two_pass_known_live_helper_contract_is_preserved()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "failed_retained_identity_observation_still_cleans_other_objects()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "transient_observation_error_is_retained_after_confirmed_exit()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "rejected_signal_after_exit_is_not_a_failure()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+          "name": "container_preserves_preliminary_error_after_successful_final_cleanup()"
+        }
+      ]
+    },
+    {
+      "file": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/runtime-regression/identity-001/build/sandbox-isolation-module/test-results/test/TEST-com.example.platform.sandbox.CleanupReliabilityTest.xml",
+      "sha256": "40cce2c2c8328ba3f9aa28765a4df77329c9264c90fe86d18d664f3f9126ae86",
+      "suite": {
+        "name": "com.example.platform.sandbox.CleanupReliabilityTest",
+        "tests": "2",
+        "skipped": "0",
+        "failures": "0",
+        "errors": "0",
+        "timestamp": "2026-09-08T20:57:45.879Z",
+        "hostname": "localhost.localdomain",
+        "time": "0.545"
+      },
+      "identities": [
+        {
+          "class": "com.example.platform.sandbox.CleanupReliabilityTest",
+          "name": "descendant_signal_exception_does_not_abort_remaining_cleanup()"
+        },
+        {
+          "class": "com.example.platform.sandbox.CleanupReliabilityTest",
+          "name": "root_completion_lag_uses_existing_grace()"
+        }
+      ]
+    }
+  ],
+  "new_unique": 27,
+  "full_backend_executed": false,
+  "historical_reference_not_new_full_suite_result": 7973
+}

@@ -1,0 +1,28 @@
+{
+  "at_utc": "2026-09-08T20:50:42.449941+00:00",
+  "task": "EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1",
+  "correction_iterations": 3,
+  "max": 3,
+  "directory_name_not_iteration_count": true,
+  "iterations": [
+    {
+      "id": 1,
+      "hypothesis": "root waits/independent cleanup and primary+Bubblewrap error propagation",
+      "green_snapshot": "verification-004-core",
+      "remaining_failure": "Container propagation"
+    },
+    {
+      "id": 2,
+      "hypothesis": "two-pass Container sticky operation errors must not be lost while preserving detached helpers",
+      "green_snapshot": "verification-006-green"
+    },
+    {
+      "id": 3,
+      "hypothesis": "confirmed-dead retained handle must not require unavailable live Info; live unknown still rejects",
+      "red_snapshot": "verification-007-retained-red",
+      "green_snapshot": "verification-008-green"
+    }
+  ],
+  "excluded": "dependency compile repair, RED tests, behavior-preserving extraction, synthetic test additions are not separate product fixes",
+  "further_product_behavior_changes": "NOT_PERMITTED_WITHIN_REMAINING_BUDGET"
+}

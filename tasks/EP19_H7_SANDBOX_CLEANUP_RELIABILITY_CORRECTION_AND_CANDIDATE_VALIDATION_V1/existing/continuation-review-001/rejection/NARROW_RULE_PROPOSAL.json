@@ -1,0 +1,73 @@
+{
+  "schema": "ep19-proposed-preservation-rule-amendment-v1",
+  "status": "PROPOSAL_ONLY_NOT_APPROVED_NOT_IMPLEMENTED_NOT_QUALIFIED",
+  "recommended_disposition": "保留 ledger strict；先由 Owner 决定是否扩大它的语义范围。仅 lock 规则不能解除 FIRST 全部拒绝。",
+  "existing": {
+    "contract": "OWNER_AUTHORIZATION_SCOPED_RUNTIME_BOOKKEEPING_V2",
+    "event_predicate": "observe.py:64-70 only exact usage and reserved temp bypass instruction reject; lock/ledger do not",
+    "baseline_binding": "bookkeeping_v2.py:439 hash AND metadata exact equality",
+    "baseline_veto": "runner.py:145 OLD_STRICT_PRESERVATION_RESULT must PASS",
+    "lock": "bookkeeping_v2.py:369-374 PRESENT and metadata exact",
+    "ledger": "sequence.py:46-48 includes ledger content inventory; no approved mutable fields"
+  },
+  "proposed_version": "OWNER_APPROVAL_REQUIRED_EP19_SCOPED_LOCK_AND_CAPTURE_BINDING_V3_PROPOSAL",
+  "exact_paths": {
+    "usage": "/home/user/.hermes/skills/.usage.json",
+    "lock": "/home/user/.hermes/skills/.usage.json.lock",
+    "skills_root": "/home/user/.hermes/skills",
+    "temp_direct_child_regex": "^\\.usage_[a-z0-9_]{8}\\.tmp$",
+    "ledger_remains_strict": "/home/user/.hermes/skills/.curator_ledger.jsonl",
+    "new_wildcards": []
+  },
+  "new_predicates": {
+    "LOCK_CLOSE_WRITE_PENDING_V3": "仅 exact lock 已存在、type regular、dev=基线、ino=基线、uid/gid/mode=基线、nlink=1、size=0、sha256=empty 且全9元数据相等；唯一候选事件 mask==8,cookie==0，保留为待裁决而不是丢弃。任何 mask含2/4/40/80/100/200/400/800、创建、删除、移动、链接/权限改变、类型或未知组合均拒绝。不能从端点相等证明没有中间写；Owner 须明确接受仅该 close-write 操作无内容证据的有限弱化。",
+    "CAPTURE_COHERENCE_V3": "同一次稳定读取返回真实raw hash、metadata及解析对象/投影；collector row须绑定该同一捕获ID和实际字节，不覆盖原行、不强行把旧policy hash赋给新行。若保留分阶段捕获，分别保存两份真实输入并对实际捕获字节做V2比较；不能依赖稍后重读声称等价。",
+    "BASELINE_APPROVED_VARIATION_V3": "若 Owner 明确允许 baseline 建立阶段存在V2变化，改 runner:145 从 old-strict PASS veto 为 strict inputs PASS AND approved semantic V2 PASS AND coherent binding AND no rejected/unresolved events AND complete coverage。OLD_STRICT_REJECT 保留为事实。此提议不宣称允许历史不一致包通过。",
+    "LEDGER_STRICT_V3": "无新增豁免；mask2/8 仍 REJECT。追加性、writer、内容schema、依赖影响未证实前，不允许按名称/JSONL扩围。"
+  },
+  "types_ranges_lifecycle": {
+    "counts": "existing registered eligible pointers only; exact int excluding bool; 0<=before<=current; no record/field membership changes",
+    "timestamps": "现有UTC-aware ISO schema；null→null或合法UTC字符串，非null不能回null；可比较值不倒退；不新增类型",
+    "usage_metadata": "regular,nlink=1,stable ancestors,dev/uid/gid/mode strict; inode,size,mtime,ctime may vary only with valid semantic capture",
+    "root_metadata": "dev,ino,mode,uid,gid,nlink strict; persistent entry set exact; size/mtime/ctime retained as observations",
+    "temp": "现有唯一正则、direct child、无子目录；可见对象regular,600,baseline owner/group,dev,nlink1；最终absent；跨界rename、严格对象事件拒绝；现有短寿命temp有限观测例外不扩至lock/ledger",
+    "lock": "仅 present→present 空文件不替换；absent/create/end-state-policy change不在本提案范围"
+  },
+  "start_mid_end": [
+    "start：先封存Owner新规则/依赖/已固定instruction与矩阵/qualification/executor，连续watch完成注册再稳定采集；不允许未覆盖严格输入gap",
+    "mid：持续保留全部事件及捕获ID；每个command boundary按同一版本比较；lock mask8标记pending并核验；严格事件、未知/缺失/队列overflow/watch loss立即failclosed",
+    "end：完整drain、所有pending已裁决、usage语义投影/strict值通过、lock全部元数据和空内容仍相等、root entry严格、temp无持久残留、strict input全覆盖；不能由最终hash一致抹掉事件"
+  ],
+  "failclosed": [
+    "读取不稳定/不完整、未知字段、重复keys/非有限数/malformed JSON",
+    "pending事件无法按精确规则裁决",
+    "缺少任一捕获/绑定/中间严格范围连续性证据",
+    "writer UNKNOWN在已明确批准usage/temp范围仍可；对其余对象不等同已批准",
+    "证据写失败或旧identity/旧policy/不完整qualification"
+  ],
+  "positive_controls_planned_only": [
+    "unchanged pass",
+    "四个批准字段与usage replacement/root variation通过且old strict reject保留",
+    "真实文件空lock仅close-write、全端点严格相同可到达新pending→approved路径",
+    "基线与collector同捕获来源成功、并验证真实允许语义变化通过"
+  ],
+  "negative_controls_planned_only": [
+    "ledger append/modify/close-write均reject（除非另获独立更窄规则）",
+    "lock写后恢复空、删除重建、inode替换、chmod、symlink/hardlink、nonempty、未知mask拒绝",
+    "usage generation/policy/pinning/state/unknown字段、非法值、计数下降、schema/membership变化拒绝",
+    "body/support/Memory/executor/auth/matrix更改拒绝",
+    "无配对/跨界temp rename、persistent temp、watch gap/overflow、不稳定读拒绝",
+    "policy/collector内容不同且缺少真实语义原件拒绝；不可强绑；evidence write failure拒绝",
+    "旧policy/identity及未覆盖qualification拒绝；native exit0也不能盖过严格拒绝"
+  ],
+  "qualification_impact": "新 predicate 涉及 observe, bookkeeping, baseline, decision_evidence, coverage, sequence,seals, preflight/prestart/per-gate/command-boundary/final acceptance；受影响 qualification 需重新授权后disposable真实FS正反例；旧qualification仅可证明未改组件且依赖/AST/范围applicability明确，不能整包继承。此任务没有运行任何控制。",
+  "rebinding": "保存旧源/原policy/失败receipt；新版本显式纳入Owner新授权sha、policy sha、精确schema/eligible pointers、依赖审查、matrix、capture协议、qualification/source digests；重新计算executor identity并重建全部binding/seal；独立review仍PENDING。不得修补001或复用其baseline，002仅预留。",
+  "ledger_expansion_if_requested": "另一个明确Owner决定，不能挤进lock修补：先从已授权范围取得真实ledger writer/reader schema与任务依赖；列明允许event种类、精确字段、类型/范围及append-only prefix完整性、历史行不可改、禁止回退/rotate/replacement，冻结到独立schema哈希。当前无足够证据填写这些字段，故建议不提交可激活的ledger放行predicate；unknown/incomplete=REJECT。哪怕Owner接受UNKNOWN writer，也不能凭此跳过语义依赖及strict-input保护。",
+  "second_attempt_conditions": [
+    "Owner明确批准所有实际需放宽的新规则（包含ledger若希望允许其变化），而非仅认可报告",
+    "受影响实现和资格验证另行获权完成；独立接受状态诚实保留",
+    "原失败不可回写，当前scope依赖与writer限制明确，严密start/mid/end捕获完整",
+    "完整新executor/policy/qualification/matrix/candidate rebind并 readiness通过",
+    "Owner明确允许第二尝试；本报告不消费预算、不自动执行"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "run_id": "candidate-formal-001",
+  "decision": "BLOCKED_BEFORE_GRAPH",
+  "reason": "BASELINE_OBSERVATION_REJECT",
+  "formal_attempts_consumed": 1,
+  "formal_attempt_budget": 2,
+  "automatic_retry": false,
+  "baseline_native_exit": 1,
+  "launcher_native_exit": 1,
+  "required_gates": 29,
+  "passed_gates": 0,
+  "failed_product_gates": 0,
+  "not_run_gates": 29,
+  "preflight": "NOT_RUN",
+  "start": "NOT_CREATED",
+  "accepted_baseline": "NOT_CREATED",
+  "seal": "NOT_CREATED",
+  "observed_rejections": [
+    {
+      "path": "/home/user/.hermes/skills/.curator_ledger.jsonl",
+      "mask": 2,
+      "cookie": 0,
+      "category": "REJECT_INSTRUCTION_EVENT",
+      "observed_ns": 154469523131084,
+      "writer": "NOT_ESTABLISHED"
+    },
+    {
+      "path": "/home/user/.hermes/skills/.curator_ledger.jsonl",
+      "mask": 8,
+      "cookie": 0,
+      "category": "REJECT_INSTRUCTION_EVENT",
+      "observed_ns": 154469523309623,
+      "writer": "NOT_ESTABLISHED"
+    },
+    {
+      "path": "/home/user/.hermes/skills/.usage.json.lock",
+      "mask": 8,
+      "cookie": 0,
+      "category": "REJECT_INSTRUCTION_EVENT",
+      "observed_ns": 154469524322534,
+      "writer": "NOT_ESTABLISHED"
+    }
+  ],
+  "writer": "NOT_ESTABLISHED",
+  "capture_errors": 0,
+  "observer_errors": 0,
+  "captured_files": 75627,
+  "policy_capture_binding": {
+    "target_present": true,
+    "hash_equal": false,
+    "metadata_equal": false,
+    "metadata_differences": {
+      "st_ino": {
+        "policy": 22589169,
+        "collector": 22589275
+      },
+      "st_mtime_ns": {
+        "policy": 1788903270814698621,
+        "collector": 1788903445702266536
+      },
+      "st_ctime_ns": {
+        "policy": 1788903270815698630,
+        "collector": 1788903445704266554
+      }
+    }
+  },
+  "binding_predicate_reached": false,
+  "subsequent_evaluation": "NOT_RUN",
+  "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+  "candidate_checkout_clean": true,
+  "launcher_log_sha256": "0899aee6487a5565adaa90abba70ded1925a00cbc14405ecb69735a5ef7a5558",
+  "baseline_duration_seconds": 81.978729828,
+  "evidence_source": "/home/user/Documents/workspace/audit-runs/EP19_H7_SANDBOX_CLEANUP_RELIABILITY_CORRECTION_AND_CANDIDATE_VALIDATION_V1/formal-tooling/outputs/continuation-runs/candidate-formal-001/runtime/decision-evidence/1788903490044393222-927687c69b0e479c8cb11c7818708134.json",
+  "full_private_map_not_exported": true,
+  "independent_review": "REQUIRED",
+  "product_publication": "NOT_PERFORMED",
+  "next_action": "Preserve failure; determine second-attempt eligibility from exact Owner conditions before any retry. Do not change protection predicates or pause services without scope authorization."
+}
