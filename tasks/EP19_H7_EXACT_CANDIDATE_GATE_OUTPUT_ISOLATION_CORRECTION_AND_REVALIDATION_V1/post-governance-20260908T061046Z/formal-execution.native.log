@@ -1,0 +1,33 @@
+{
+  "external_endpoints": {
+    "bwrap": "/usr/bin/bwrap",
+    "podman": "/usr/bin/podman",
+    "socket": "/run/user/1000/podman/podman.sock",
+    "coq_image": "docker.io/coqorg/coq@sha256:e50d77c4c5a9aa0d76ae1b343d79c5f922da3a75054b79c5dc635895438e4674",
+    "coq_image_id": "b80d66c91b4da3a1b3c5d3e6672cf8f4ab72ed2f7a6a1f0cf7d3aef747cf6a4b",
+    "result": "PASS"
+  }
+}
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/executor/runner.py", line 470, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+                                             ^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/executor/runner.py", line 463, in main
+    elif x.phase=='baseline':return baseline(run)
+                                    ^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/executor/runner.py", line 107, in baseline
+    bookkeeping_v2.capture_binding(policy,before)
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/executor/bookkeeping_v2.py", line 438, in capture_binding
+    raise PolicyError("BOOKKEEPING_BASELINE_CAPTURE_UNBOUND")
+bookkeeping_v2.PolicyError: BOOKKEEPING_BASELINE_CAPTURE_UNBOUND
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/tools/hermes_execute_once.py", line 84, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/tools/hermes_execute_once.py", line 51, in main
+    call("baseline", "--run-id", RUN_ID)
+  File "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/tools/hermes_execute_once.py", line 17, in call
+    subprocess.run([sys.executable, "-B", str(ROOT / "executor/runner.py"), *argv],
+  File "/home/user/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/home/user/.hermes/hermes-agent/venv/bin/python3', '-B', '/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/executor/runner.py', 'baseline', '--run-id', 'post-governance-formal-001']' returned non-zero exit status 1.

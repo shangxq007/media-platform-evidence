@@ -1,0 +1,417 @@
+{
+  "schema": "ep19-lean-preparation-compatibility-v1",
+  "result": "PASS",
+  "run_id": "post-governance-formal-001",
+  "candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+  "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6",
+  "base": "86d6aef94fd5e58da552e97c11473cff6eca734e",
+  "formal_gate_execution": false,
+  "lean_source_selected": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/owner-clarified-execution-20260907T1120Z/prepared-tools/lean-4.19.0-linux",
+  "lean_source_identity_verified": true,
+  "materialization_performed": true,
+  "run_local_toolchain_verified": true,
+  "disallowed_symlink_count": 0,
+  "strict_collector": {
+    "result": "COMPLETE",
+    "hashed": 4627,
+    "identity": {
+      "module": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/executor/preservation.py",
+      "module_sha256": "cfdc63fde7be1a5d3634d9425e35198ec3f9c4060b1d09197e3ad9e2c48f87a7",
+      "collector_ast_sha256": "b0106410225ec5324d13229a7c0350bc001129bbfc0ba3c92a25674d616ea357",
+      "class": "preservation.Collector",
+      "policy": "UNCHANGED_STRICT_COLLECTOR; SYMLINK/SPECIAL/UNSTABLE CAPTURE REJECTS"
+    }
+  },
+  "full_strict_tool_input_set": {
+    "roots": [
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux",
+      "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/gradle/init.d"
+    ],
+    "resolved_runtime_binaries": [
+      {
+        "path": "/home/user/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/bin/python3.11",
+        "sha256": "572cfa2a8597e2f431c785613539b1d219fa99eecf5ffb5765731a2ebc3e692a"
+      },
+      {
+        "path": "/usr/bin/alts",
+        "sha256": "3dce6bf9e943d5a79f7b754674829b29d57b222576c60f3078afa7dc5d9df4e8"
+      },
+      {
+        "path": "/usr/bin/bash",
+        "sha256": "26653c1a9214d110b91859b7097e0222a4e01da709878d5a157484ae979d0c62"
+      },
+      {
+        "path": "/usr/bin/bwrap",
+        "sha256": "164b95732e0a2aca1ced705335ca2eaa430247d6c656ee7133eb47ba2e826402"
+      },
+      {
+        "path": "/usr/bin/node",
+        "sha256": "fb888dd3cc870bd66edafaf4f471757f427d2178019be02598f644728ce419f9"
+      },
+      {
+        "path": "/usr/bin/npm",
+        "sha256": "e557feb3a1e42a365b64fbf31ea8ecae8e6db25c7efb2f844721c7557e664b10"
+      },
+      {
+        "path": "/usr/bin/npx",
+        "sha256": "e557feb3a1e42a365b64fbf31ea8ecae8e6db25c7efb2f844721c7557e664b10"
+      },
+      {
+        "path": "/usr/bin/podman",
+        "sha256": "459991b61704b240b7d6dade07fde0554bdbbf4dd11e592b22602c7c600ac610"
+      },
+      {
+        "path": "/usr/libexec/git/git",
+        "sha256": "0c2783eaea5de7128fd1e51c6360dd149302c4de4207f14a8e3b250d30155969"
+      }
+    ],
+    "lean_files": 4617,
+    "expected_files": 4627,
+    "captured_files": 4627,
+    "capture_result": "COMPLETE"
+  },
+  "native_toolchain_probe_results": {
+    "result": "PASS",
+    "version": "4.19.0",
+    "library_prefix": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux",
+    "explicit_lean": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux/bin/lean",
+    "explicit_LEAN_PATH": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux/lib/lean",
+    "explicit_LD_LIBRARY_PATH": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux/lib",
+    "system_fallback": false,
+    "receipts": [
+      {
+        "argv": [
+          "bwrap",
+          "--die-with-parent",
+          "--unshare-pid",
+          "--ro-bind",
+          "/",
+          "/",
+          "--bind",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime",
+          "--bind",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend",
+          "/tmp",
+          "--proc",
+          "/proc",
+          "--dev",
+          "/dev",
+          "--chdir",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux/bin/lean",
+          "--version"
+        ],
+        "cwd": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe",
+        "native_exit": 0,
+        "start": 1788848256.8742423,
+        "end": 1788848256.9890015,
+        "raw_log": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe/version.native.log",
+        "log_sha256": "5362a246ce2545424db10a77de8fd4694f4cf8b0170dfd43fa727acf7f7f259b",
+        "synthetic_preparation_probe": true,
+        "product_gate": false,
+        "failure": null,
+        "process_receipt": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe/version.native.log.process.json",
+        "name": "version",
+        "lean_absolute": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux/bin/lean",
+        "lean_sha256": "92c3d35b5bfaa5e0fea413a775d504cf46cd95e1345df61c2274f76779e7e023",
+        "LEAN_PATH": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux/lib/lean",
+        "LD_LIBRARY_PATH": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux/lib"
+      },
+      {
+        "argv": [
+          "bwrap",
+          "--die-with-parent",
+          "--unshare-pid",
+          "--ro-bind",
+          "/",
+          "/",
+          "--bind",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime",
+          "--bind",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend",
+          "/tmp",
+          "--proc",
+          "/proc",
+          "--dev",
+          "/dev",
+          "--chdir",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux/bin/lean",
+          "--print-prefix"
+        ],
+        "cwd": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe",
+        "native_exit": 0,
+        "start": 1788848256.9902894,
+        "end": 1788848257.1055853,
+        "raw_log": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe/prefix.native.log",
+        "log_sha256": "33083cf927eaced5afeb28447af0fbd605e70fa01ffe650d04420dafed3e4662",
+        "synthetic_preparation_probe": true,
+        "product_gate": false,
+        "failure": null,
+        "process_receipt": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe/prefix.native.log.process.json",
+        "name": "prefix",
+        "lean_absolute": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux/bin/lean",
+        "lean_sha256": "92c3d35b5bfaa5e0fea413a775d504cf46cd95e1345df61c2274f76779e7e023",
+        "LEAN_PATH": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux/lib/lean",
+        "LD_LIBRARY_PATH": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux/lib"
+      },
+      {
+        "argv": [
+          "bwrap",
+          "--die-with-parent",
+          "--unshare-pid",
+          "--ro-bind",
+          "/",
+          "/",
+          "--bind",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime",
+          "--bind",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend",
+          "/tmp",
+          "--proc",
+          "/proc",
+          "--dev",
+          "/dev",
+          "--chdir",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux/bin/lean",
+          "--root=/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe",
+          "-o",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe/PreparationProbe.olean",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe/PreparationProbe.lean"
+        ],
+        "cwd": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe",
+        "native_exit": 0,
+        "start": 1788848257.1068938,
+        "end": 1788848257.6234226,
+        "raw_log": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe/import-compile-proof.native.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "synthetic_preparation_probe": true,
+        "product_gate": false,
+        "failure": null,
+        "process_receipt": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe/import-compile-proof.native.log.process.json",
+        "name": "import-compile-proof",
+        "lean_absolute": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux/bin/lean",
+        "lean_sha256": "92c3d35b5bfaa5e0fea413a775d504cf46cd95e1345df61c2274f76779e7e023",
+        "LEAN_PATH": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux/lib/lean",
+        "LD_LIBRARY_PATH": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/cache/backend/formal-tools/lean-4.19.0-linux/lib"
+      }
+    ],
+    "output": "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/post-governance-20260908T061046Z/outputs/continuation-runs/post-governance-formal-001/runtime/tmp/backend/lean-preparation-probe/PreparationProbe.olean",
+    "output_sha256": "07710b2f6ba139581572b7c4292b247fc10f9638aafb3d5df4994ede52ab8c45"
+  },
+  "historical_counting_method": "mapping rows / regular-file logical paths only; root and directories excluded",
+  "raw_link_chains_verified": {
+    "result": "PASS",
+    "historical_manifest_sha256": "4b0196f6517c4f4016a8f838dc04ee76526b7b0c7cb2d56eb1853aa57b83d105",
+    "counting_method": "mapping rows / regular-file logical paths only; root and directories excluded",
+    "historical_file_count": 4617,
+    "historical_link_rows": 12,
+    "all_current_links_enumerated": true,
+    "all_link_chains_explicitly_resolved": true,
+    "link_count": 12,
+    "link_map": [
+      {
+        "path": "lib/libLLVM-15.0.1.so",
+        "target": "libLLVM-15.so",
+        "resolved": "lib/libLLVM-15.so",
+        "chain": [
+          {
+            "link": "lib/libLLVM-15.0.1.so",
+            "target": "libLLVM-15.so",
+            "next": "/home/user/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/formal-tools/lean-4.19.0-linux/lib/libLLVM-15.so",
+            "dev": 47,
+            "ino": 20789904
+          }
+        ],
+        "sha256": "822f719c121e82b5bd6422edacb1f94633b7c5c9bfdc2fa5b01df9cd62c13ae0"
+      },
+      {
+        "path": "lib/libLLVM.so",
+        "target": "libLLVM-15.so",
+        "resolved": "lib/libLLVM-15.so",
+        "chain": [
+          {
+            "link": "lib/libLLVM.so",
+            "target": "libLLVM-15.so",
+            "next": "/home/user/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/formal-tools/lean-4.19.0-linux/lib/libLLVM-15.so",
+            "dev": 47,
+            "ino": 20786745
+          }
+        ],
+        "sha256": "822f719c121e82b5bd6422edacb1f94633b7c5c9bfdc2fa5b01df9cd62c13ae0"
+      },
+      {
+        "path": "lib/libatomic.so",
+        "target": "libatomic.so.1.2.0",
+        "resolved": "lib/libatomic.so.1.2.0",
+        "chain": [
+          {
+            "link": "lib/libatomic.so",
+            "target": "libatomic.so.1.2.0",
+            "next": "/home/user/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/formal-tools/lean-4.19.0-linux/lib/libatomic.so.1.2.0",
+            "dev": 47,
+            "ino": 20786743
+          }
+        ],
+        "sha256": "670c1bdb838a758291ee62024a7df7d580d24332662221b66d997bff44b363ba"
+      },
+      {
+        "path": "lib/libatomic.so.1",
+        "target": "libatomic.so.1.2.0",
+        "resolved": "lib/libatomic.so.1.2.0",
+        "chain": [
+          {
+            "link": "lib/libatomic.so.1",
+            "target": "libatomic.so.1.2.0",
+            "next": "/home/user/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/formal-tools/lean-4.19.0-linux/lib/libatomic.so.1.2.0",
+            "dev": 47,
+            "ino": 20786756
+          }
+        ],
+        "sha256": "670c1bdb838a758291ee62024a7df7d580d24332662221b66d997bff44b363ba"
+      },
+      {
+        "path": "lib/libc++.so.1",
+        "target": "libc++.so.1.0",
+        "resolved": "lib/libc++.so.1.0",
+        "chain": [
+          {
+            "link": "lib/libc++.so.1",
+            "target": "libc++.so.1.0",
+            "next": "/home/user/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/formal-tools/lean-4.19.0-linux/lib/libc++.so.1.0",
+            "dev": 47,
+            "ino": 20786780
+          }
+        ],
+        "sha256": "e1529679a03b8e0a09d2ec3f3f6a1b7ff980773ebf0a4b650d1daece674ba92b"
+      },
+      {
+        "path": "lib/libc++abi.so",
+        "target": "libc++abi.so.1",
+        "resolved": "lib/libc++abi.so.1.0",
+        "chain": [
+          {
+            "link": "lib/libc++abi.so",
+            "target": "libc++abi.so.1",
+            "next": "/home/user/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/formal-tools/lean-4.19.0-linux/lib/libc++abi.so.1",
+            "dev": 47,
+            "ino": 20786767
+          },
+          {
+            "link": "lib/libc++abi.so.1",
+            "target": "libc++abi.so.1.0",
+            "next": "/home/user/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/formal-tools/lean-4.19.0-linux/lib/libc++abi.so.1.0",
+            "dev": 47,
+            "ino": 20789902
+          }
+        ],
+        "sha256": "be78eb4a6466f37e20cce280369d5c302d5f2445987e2801c0c3c5dc862aa0d2"
+      },
+      {
+        "path": "lib/libc++abi.so.1",
+        "target": "libc++abi.so.1.0",
+        "resolved": "lib/libc++abi.so.1.0",
+        "chain": [
+          {
+            "link": "lib/libc++abi.so.1",
+            "target": "libc++abi.so.1.0",
+            "next": "/home/user/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/formal-tools/lean-4.19.0-linux/lib/libc++abi.so.1.0",
+            "dev": 47,
+            "ino": 20789902
+          }
+        ],
+        "sha256": "be78eb4a6466f37e20cce280369d5c302d5f2445987e2801c0c3c5dc862aa0d2"
+      },
+      {
+        "path": "lib/libclang-cpp.so",
+        "target": "libclang-cpp.so.15",
+        "resolved": "lib/libclang-cpp.so.15",
+        "chain": [
+          {
+            "link": "lib/libclang-cpp.so",
+            "target": "libclang-cpp.so.15",
+            "next": "/home/user/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/formal-tools/lean-4.19.0-linux/lib/libclang-cpp.so.15",
+            "dev": 47,
+            "ino": 20786746
+          }
+        ],
+        "sha256": "7e22feee8175f519340ef33721b88a34b1763ce8aa8b1bbe014912fd6159e858"
+      },
+      {
+        "path": "lib/libunwind.so",
+        "target": "libunwind.so.1",
+        "resolved": "lib/libunwind.so.1.0",
+        "chain": [
+          {
+            "link": "lib/libunwind.so",
+            "target": "libunwind.so.1",
+            "next": "/home/user/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/formal-tools/lean-4.19.0-linux/lib/libunwind.so.1",
+            "dev": 47,
+            "ino": 20786741
+          },
+          {
+            "link": "lib/libunwind.so.1",
+            "target": "libunwind.so.1.0",
+            "next": "/home/user/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/formal-tools/lean-4.19.0-linux/lib/libunwind.so.1.0",
+            "dev": 47,
+            "ino": 20786740
+          }
+        ],
+        "sha256": "785a1300f431e5b843b1bc0d35f09c80aae5e63fbc6fe0a5de592e3886dfdcf7"
+      },
+      {
+        "path": "lib/libunwind.so.1",
+        "target": "libunwind.so.1.0",
+        "resolved": "lib/libunwind.so.1.0",
+        "chain": [
+          {
+            "link": "lib/libunwind.so.1",
+            "target": "libunwind.so.1.0",
+            "next": "/home/user/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/formal-tools/lean-4.19.0-linux/lib/libunwind.so.1.0",
+            "dev": 47,
+            "ino": 20786740
+          }
+        ],
+        "sha256": "785a1300f431e5b843b1bc0d35f09c80aae5e63fbc6fe0a5de592e3886dfdcf7"
+      },
+      {
+        "path": "lib/libz.so",
+        "target": "libz.so.1.2.11",
+        "resolved": "lib/libz.so.1.2.11",
+        "chain": [
+          {
+            "link": "lib/libz.so",
+            "target": "libz.so.1.2.11",
+            "next": "/home/user/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/formal-tools/lean-4.19.0-linux/lib/libz.so.1.2.11",
+            "dev": 47,
+            "ino": 20786779
+          }
+        ],
+        "sha256": "6ed9ff55c1fd9909651a9d1ee26c8813bd843f084c07ce1eeac3a81fac14094a"
+      },
+      {
+        "path": "lib/libz.so.1",
+        "target": "libz.so.1.2.11",
+        "resolved": "lib/libz.so.1.2.11",
+        "chain": [
+          {
+            "link": "lib/libz.so.1",
+            "target": "libz.so.1.2.11",
+            "next": "/home/user/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/formal-tools/lean-4.19.0-linux/lib/libz.so.1.2.11",
+            "dev": 47,
+            "ino": 20786764
+          }
+        ],
+        "sha256": "6ed9ff55c1fd9909651a9d1ee26c8813bd843f084c07ce1eeac3a81fac14094a"
+      }
+    ]
+  },
+  "preparation_compatibility_not_baseline": true,
+  "baseline_created": false,
+  "seal_created": false,
+  "preflight_result": "NOT_RUN"
+}
