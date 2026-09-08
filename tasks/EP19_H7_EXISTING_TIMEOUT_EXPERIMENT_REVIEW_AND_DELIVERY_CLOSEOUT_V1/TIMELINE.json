@@ -1,0 +1,1899 @@
+{
+  "events": [
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "cancellation": "never",
+          "capabilityEvidence": {
+            "capabilities": [
+              "BOUNDED_CAPTURE",
+              "DEVICE_NONE",
+              "ENVIRONMENT_CLEARING",
+              "FILESYSTEM_ACCESS_ISOLATION",
+              "FILESYSTEM_PATH_VALIDATION",
+              "HOST_EXPOSURE_DENIAL",
+              "NETWORK_NONE",
+              "PROCESS_TREE_CONTAINMENT",
+              "UNPRIVILEGED_EXECUTION",
+              "WALL_CLOCK_TIMEOUT"
+            ],
+            "freshlyProbed": false,
+            "kind": "diagnostic_declaration",
+            "mechanism": "diagnostic-declarative-not-probed",
+            "observedAt": "1970-01-01T00:00:00Z"
+          },
+          "captureBytes": 1024,
+          "command": [
+            "/usr/bin/timeout",
+            "30",
+            "/usr/bin/sleep",
+            "30"
+          ],
+          "environment": {},
+          "ownerAttemptMarker": "owner-attempt-consumed",
+          "timeoutMillis": 250
+        },
+        "endNano": 134568984785362,
+        "phase": "scenario",
+        "startNano": 134568984785362
+      },
+      "line": 1,
+      "missing_fields": [],
+      "object_scope": "declared scenario",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "scenario",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "pid": 529945
+        },
+        "endNano": 134569028228392,
+        "phase": "root.started.begin",
+        "startNano": 134569028228392
+      },
+      "line": 2,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "root.started.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "identity": {
+            "initialObservation": {
+              "endNano": 134569032495528,
+              "isAliveObserved": true,
+              "outcome": "matching_identity",
+              "pid": 529945,
+              "ppid": 529917,
+              "rawConfirmStat": "529945 (bwrap) S 529917 529914 529914 0 -1 4194560 165 0 0 0 0 0 0 0 20 0 1 0 13456901 3706880 327 18446744073709551615 94010843639808 94010843676809 140736266476928 0 0 0 65536 0 0 1 0 0 17 20 0 0 0 0 0 94010843703536 94010843705608 94011777269760 140736266484738 140736266485737 140736266485737 140736266485737 0\n",
+              "rawStat": "529945 (bwrap) S 529917 529914 529914 0 -1 4194560 165 0 0 0 0 0 0 0 20 0 1 0 13456901 3706880 327 18446744073709551615 94010843639808 94010843676809 140736266476928 0 0 0 65536 0 0 1 0 0 17 20 0 0 0 0 0 94010843703536 94010843705608 94011777269760 140736266484738 140736266485737 140736266485737 140736266485737 0\n",
+              "rawStatusSubset": "State:\tS (sleeping)\nPid:\t529945\nPPid:\t529917\nUid:\t1000\t1000\t1000\t1000\nNSpid:\t529945",
+              "registeredStartInstant": null,
+              "registeredStartTicks": null,
+              "startInstant": "2026-09-08T16:06:27.010Z",
+              "startNano": 134569028547229,
+              "startTicks": 13456901,
+              "state": "S"
+            },
+            "pid": 529945,
+            "registrationNano": 134569028537601,
+            "source": "root",
+            "startInstant": "2026-09-08T16:06:27.010Z",
+            "startTicks": 13456901
+          }
+        },
+        "endNano": 134569032530865,
+        "phase": "identity.registered",
+        "startNano": 134569032530865
+      },
+      "line": 3,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "identity.registered",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "pid": 529945
+        },
+        "endNano": 134569032793303,
+        "phase": "root.started.end",
+        "startNano": 134569028228392
+      },
+      "line": 4,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "root.started.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "deadlineNano": 134569288238504
+        },
+        "endNano": 134569300636263,
+        "phase": "timeout.recognized",
+        "startNano": 134569300636263
+      },
+      "line": 5,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "timeout.recognized",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "primaryFailure": {
+            "code": "PROCESS_TIMEOUT",
+            "message": "process exceeded wall-clock timeout",
+            "missingCapabilities": []
+          }
+        },
+        "endNano": 134569303629512,
+        "phase": "primary_failure.before_cleanup",
+        "startNano": 134569303629512
+      },
+      "line": 6,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "primary_failure.before_cleanup",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {},
+        "endNano": 134569303781618,
+        "phase": "cleanup.full.begin",
+        "startNano": 134569303781618
+      },
+      "line": 7,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "cleanup.full.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {},
+        "endNano": 134569306395976,
+        "phase": "descendants.enumeration.begin",
+        "startNano": 134569306395976
+      },
+      "line": 8,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "descendants.enumeration.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "pids": [
+            529946,
+            529948,
+            529949
+          ]
+        },
+        "endNano": 134569342941903,
+        "phase": "descendants.enumeration.end",
+        "startNano": 134569306395976
+      },
+      "line": 9,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "descendants.enumeration.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "identity": {
+            "initialObservation": {
+              "endNano": 134569346280035,
+              "isAliveObserved": true,
+              "outcome": "matching_identity",
+              "pid": 529949,
+              "ppid": 529948,
+              "rawConfirmStat": "529949 (sleep) S 529948 529948 529946 0 -1 4194304 79 0 0 0 0 0 0 0 20 0 1 0 13456903 2650112 341 18446744073709551615 94438510940160 94438510953953 140734595226576 0 0 0 0 0 0 1 0 0 17 75 0 0 0 0 0 94438510967760 94438510968984 94438823612416 140734595231688 140734595231706 140734595231706 140734595231721 0\n",
+              "rawStat": "529949 (sleep) S 529948 529948 529946 0 -1 4194304 79 0 0 0 0 0 0 0 20 0 1 0 13456903 2650112 341 18446744073709551615 94438510940160 94438510953953 140734595226576 0 0 0 0 0 0 1 0 0 17 75 0 0 0 0 0 94438510967760 94438510968984 94438823612416 140734595231688 140734595231706 140734595231706 140734595231721 0\n",
+              "rawStatusSubset": "State:\tS (sleeping)\nPid:\t529949\nPPid:\t529948\nUid:\t1000\t1000\t1000\t1000\nNSpid:\t529949\t3",
+              "registeredStartInstant": null,
+              "registeredStartTicks": null,
+              "startInstant": "2026-09-08T16:06:27.030Z",
+              "startNano": 134569345177953,
+              "startTicks": 13456903,
+              "state": "S"
+            },
+            "pid": 529949,
+            "registrationNano": 134569345174610,
+            "source": "root.descendants",
+            "startInstant": "2026-09-08T16:06:27.030Z",
+            "startTicks": 13456903
+          }
+        },
+        "endNano": 134569346306505,
+        "phase": "identity.registered",
+        "startNano": 134569346306505
+      },
+      "line": 10,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "identity.registered",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "identity": {
+            "initialObservation": {
+              "endNano": 134569347471584,
+              "isAliveObserved": true,
+              "outcome": "matching_identity",
+              "pid": 529948,
+              "ppid": 529946,
+              "rawConfirmStat": "529948 (timeout) S 529946 529948 529946 0 -1 4194304 82 0 0 0 0 0 0 0 20 0 1 0 13456903 2654208 348 18446744073709551615 94755124531200 94755124548785 140723688878592 0 0 0 0 3145728 90119 1 0 0 17 75 0 0 0 0 0 94755124562544 94755124564568 94756018958336 140723688886194 140723688886232 140723688886232 140723688886247 0\n",
+              "rawStat": "529948 (timeout) S 529946 529948 529946 0 -1 4194304 82 0 0 0 0 0 0 0 20 0 1 0 13456903 2654208 348 18446744073709551615 94755124531200 94755124548785 140723688878592 0 0 0 0 3145728 90119 1 0 0 17 75 0 0 0 0 0 94755124562544 94755124564568 94756018958336 140723688886194 140723688886232 140723688886232 140723688886247 0\n",
+              "rawStatusSubset": "State:\tS (sleeping)\nPid:\t529948\nPPid:\t529946\nUid:\t1000\t1000\t1000\t1000\nNSpid:\t529948\t2",
+              "registeredStartInstant": null,
+              "registeredStartTicks": null,
+              "startInstant": "2026-09-08T16:06:27.030Z",
+              "startNano": 134569346450338,
+              "startTicks": 13456903,
+              "state": "S"
+            },
+            "pid": 529948,
+            "registrationNano": 134569346448484,
+            "source": "root.descendants",
+            "startInstant": "2026-09-08T16:06:27.030Z",
+            "startTicks": 13456903
+          }
+        },
+        "endNano": 134569347501936,
+        "phase": "identity.registered",
+        "startNano": 134569347501936
+      },
+      "line": 11,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "identity.registered",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "identity": {
+            "initialObservation": {
+              "endNano": 134569348509714,
+              "isAliveObserved": true,
+              "outcome": "matching_identity",
+              "pid": 529946,
+              "ppid": 529945,
+              "rawConfirmStat": "529946 (bwrap) S 529945 529946 529946 0 -1 4194624 50 0 0 0 0 0 0 0 20 0 1 0 13456901 3706880 175 18446744073709551615 94010843639808 94010843676809 140736266476928 0 0 0 65536 0 0 1 0 0 17 15 0 0 0 0 0 94010843703536 94010843705608 94011777269760 140736266484738 140736266485737 140736266485737 140736266485737 0\n",
+              "rawStat": "529946 (bwrap) S 529945 529946 529946 0 -1 4194624 50 0 0 0 0 0 0 0 20 0 1 0 13456901 3706880 175 18446744073709551615 94010843639808 94010843676809 140736266476928 0 0 0 65536 0 0 1 0 0 17 15 0 0 0 0 0 94010843703536 94010843705608 94011777269760 140736266484738 140736266485737 140736266485737 140736266485737 0\n",
+              "rawStatusSubset": "State:\tS (sleeping)\nPid:\t529946\nPPid:\t529945\nUid:\t1000\t1000\t1000\t1000\nNSpid:\t529946\t1",
+              "registeredStartInstant": null,
+              "registeredStartTicks": null,
+              "startInstant": "2026-09-08T16:06:27.010Z",
+              "startNano": 134569347630098,
+              "startTicks": 13456901,
+              "state": "S"
+            },
+            "pid": 529946,
+            "registrationNano": 134569347627189,
+            "source": "root.descendants",
+            "startInstant": "2026-09-08T16:06:27.010Z",
+            "startTicks": 13456901
+          }
+        },
+        "endNano": 134569348534490,
+        "phase": "identity.registered",
+        "startNano": 134569348534490
+      },
+      "line": 12,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "identity.registered",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "pid": 529949
+        },
+        "endNano": 134569349122603,
+        "phase": "original_cleanup.signal.before_state.begin",
+        "startNano": 134569349122603
+      },
+      "line": 13,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "original_cleanup.signal.before_state.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "observation": {
+            "endNano": 134569349992023,
+            "isAliveObserved": true,
+            "outcome": "matching_identity",
+            "pid": 529949,
+            "ppid": 529948,
+            "rawConfirmStat": "529949 (sleep) S 529948 529948 529946 0 -1 4194304 79 0 0 0 0 0 0 0 20 0 1 0 13456903 2650112 341 18446744073709551615 94438510940160 94438510953953 140734595226576 0 0 0 0 0 0 1 0 0 17 75 0 0 0 0 0 94438510967760 94438510968984 94438823612416 140734595231688 140734595231706 140734595231706 140734595231721 0\n",
+            "rawStat": "529949 (sleep) S 529948 529948 529946 0 -1 4194304 79 0 0 0 0 0 0 0 20 0 1 0 13456903 2650112 341 18446744073709551615 94438510940160 94438510953953 140734595226576 0 0 0 0 0 0 1 0 0 17 75 0 0 0 0 0 94438510967760 94438510968984 94438823612416 140734595231688 140734595231706 140734595231706 140734595231721 0\n",
+            "rawStatusSubset": "State:\tS (sleeping)\nPid:\t529949\nPPid:\t529948\nUid:\t1000\t1000\t1000\t1000\nNSpid:\t529949\t3",
+            "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+            "registeredStartTicks": 13456903,
+            "startInstant": "2026-09-08T16:06:27.030Z",
+            "startNano": 134569349167032,
+            "startTicks": 13456903,
+            "state": "S"
+          }
+        },
+        "endNano": 134569349996542,
+        "phase": "original_cleanup.signal.before_state.end",
+        "startNano": 134569349122603
+      },
+      "line": 14,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "original_cleanup.signal.before_state.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "context": "original_cleanup",
+          "method": "ProcessHandle.destroy",
+          "pid": 529949
+        },
+        "endNano": 134569350090207,
+        "phase": "signal.begin",
+        "startNano": 134569350090207
+      },
+      "line": 15,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "exception": null,
+          "method": "ProcessHandle.destroy",
+          "pid": 529949,
+          "returned": true
+        },
+        "endNano": 134569350204054,
+        "phase": "signal.end",
+        "startNano": 134569350090207
+      },
+      "line": 16,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "pid": 529949
+        },
+        "endNano": 134569350226194,
+        "phase": "signal.after_state.begin",
+        "startNano": 134569350226194
+      },
+      "line": 17,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.after_state.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "observation": {
+            "endNano": 134569350528673,
+            "isAliveObserved": true,
+            "outcome": "identity_mismatch",
+            "pid": 529949,
+            "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+            "registeredStartTicks": 13456903,
+            "startNano": 134569350241203
+          }
+        },
+        "endNano": 134569350531921,
+        "phase": "signal.after_state.end",
+        "startNano": 134569350226194
+      },
+      "line": 18,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.after_state.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "pid": 529948
+        },
+        "endNano": 134569350574106,
+        "phase": "original_cleanup.signal.before_state.begin",
+        "startNano": 134569350574106
+      },
+      "line": 19,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "original_cleanup.signal.before_state.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "observation": {
+            "endNano": 134569350858751,
+            "isAliveObserved": true,
+            "outcome": "identity_mismatch",
+            "pid": 529948,
+            "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+            "registeredStartTicks": 13456903,
+            "startNano": 134569350589427
+          }
+        },
+        "endNano": 134569350861750,
+        "phase": "original_cleanup.signal.before_state.end",
+        "startNano": 134569350574106
+      },
+      "line": 20,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "original_cleanup.signal.before_state.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "context": "original_cleanup",
+          "method": "ProcessHandle.destroy",
+          "pid": 529948
+        },
+        "endNano": 134569350893924,
+        "phase": "signal.begin",
+        "startNano": 134569350893924
+      },
+      "line": 21,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "exception": null,
+          "method": "ProcessHandle.destroy",
+          "pid": 529948,
+          "returned": false
+        },
+        "endNano": 134569350918056,
+        "phase": "signal.end",
+        "startNano": 134569350893924
+      },
+      "line": 22,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "pid": 529948
+        },
+        "endNano": 134569350935591,
+        "phase": "signal.after_state.begin",
+        "startNano": 134569350935591
+      },
+      "line": 23,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.after_state.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "observation": {
+            "endNano": 134569350980937,
+            "isAliveObserved": false,
+            "outcome": "not_resampled",
+            "pid": 529948,
+            "reason": "identity_mismatch",
+            "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+            "registeredStartTicks": 13456903,
+            "startNano": 134569350949839
+          }
+        },
+        "endNano": 134569350983281,
+        "phase": "signal.after_state.end",
+        "startNano": 134569350935591
+      },
+      "line": 24,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.after_state.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "pid": 529946
+        },
+        "endNano": 134569351023832,
+        "phase": "original_cleanup.signal.before_state.begin",
+        "startNano": 134569351023832
+      },
+      "line": 25,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "original_cleanup.signal.before_state.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "stream": "stderr"
+        },
+        "endNano": 134569351403211,
+        "phase": "capture.implicit_close.begin",
+        "startNano": 134569351403211
+      },
+      "line": 26,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "capture.implicit_close.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "stream": "stdout"
+        },
+        "endNano": 134569351409986,
+        "phase": "capture.implicit_close.begin",
+        "startNano": 134569351409986
+      },
+      "line": 27,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "capture.implicit_close.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "stream": "stderr"
+        },
+        "endNano": 134569351543413,
+        "phase": "capture.implicit_close.end",
+        "startNano": 134569351403211
+      },
+      "line": 28,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "capture.implicit_close.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "stream": "stdout"
+        },
+        "endNano": 134569351598715,
+        "phase": "capture.implicit_close.end",
+        "startNano": 134569351409986
+      },
+      "line": 29,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "capture.implicit_close.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "observation": {
+            "endNano": 134569351855540,
+            "isAliveObserved": true,
+            "outcome": "matching_identity",
+            "pid": 529946,
+            "ppid": 529945,
+            "rawConfirmStat": "529946 (bwrap) Z 2371 529946 529946 0 -1 4227404 71 163 0 0 0 0 0 0 20 0 1 0 13456901 0 0 18446744073709551615 0 0 0 0 0 0 65536 65536 0 1 0 0 17 16 0 0 0 0 0 0 0 0 0 0 0 0 36608\n",
+            "rawStat": "529946 (bwrap) R 529945 529946 529946 0 -1 4194636 71 163 0 0 0 0 0 0 20 0 1 0 13456901 0 0 18446744073709551615 0 0 0 0 0 0 65536 0 0 0 0 0 17 16 0 0 0 0 0 0 0 0 0 0 0 0 36608\n",
+            "rawStatusSubset": "State:\tR (running)\nPid:\t529946\nPPid:\t2371\nUid:\t1000\t1000\t1000\t1000\nNSpid:\t529946\t1",
+            "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+            "registeredStartTicks": 13456901,
+            "startInstant": "2026-09-08T16:06:27.010Z",
+            "startNano": 134569351038433,
+            "startTicks": 13456901,
+            "state": "R"
+          }
+        },
+        "endNano": 134569351859557,
+        "phase": "original_cleanup.signal.before_state.end",
+        "startNano": 134569351023832
+      },
+      "line": 30,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "original_cleanup.signal.before_state.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "context": "original_cleanup",
+          "method": "ProcessHandle.destroy",
+          "pid": 529946
+        },
+        "endNano": 134569351930706,
+        "phase": "signal.begin",
+        "startNano": 134569351930706
+      },
+      "line": 31,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "exception": null,
+          "method": "ProcessHandle.destroy",
+          "pid": 529946,
+          "returned": true
+        },
+        "endNano": 134569351969741,
+        "phase": "signal.end",
+        "startNano": 134569351930706
+      },
+      "line": 32,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "pid": 529946
+        },
+        "endNano": 134569351988013,
+        "phase": "signal.after_state.begin",
+        "startNano": 134569351988013
+      },
+      "line": 33,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.after_state.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "observation": {
+            "endNano": 134569352168017,
+            "isAliveObserved": true,
+            "outcome": "missing_proc_entry",
+            "pid": 529946,
+            "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+            "registeredStartTicks": 13456901,
+            "startNano": 134569352008426
+          }
+        },
+        "endNano": 134569352171193,
+        "phase": "signal.after_state.end",
+        "startNano": 134569351988013
+      },
+      "line": 34,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.after_state.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "pid": 529945
+        },
+        "endNano": 134569352213454,
+        "phase": "original_cleanup.signal.before_state.begin",
+        "startNano": 134569352213454
+      },
+      "line": 35,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "original_cleanup.signal.before_state.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "observation": {
+            "endNano": 134569352269331,
+            "isAliveObserved": false,
+            "outcome": "unknown",
+            "pid": 529945,
+            "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+            "registeredStartTicks": 13456901,
+            "startNano": 134569352228952
+          }
+        },
+        "endNano": 134569352271752,
+        "phase": "original_cleanup.signal.before_state.end",
+        "startNano": 134569352213454
+      },
+      "line": 36,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "original_cleanup.signal.before_state.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "context": "original_cleanup",
+          "method": "Process.destroy",
+          "pid": 529945
+        },
+        "endNano": 134569352308642,
+        "phase": "signal.begin",
+        "startNano": 134569352308642
+      },
+      "line": 37,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "exception": null,
+          "method": "Process.destroy",
+          "pid": 529945,
+          "returned": "void"
+        },
+        "endNano": 134569352722996,
+        "phase": "signal.end",
+        "startNano": 134569352308642
+      },
+      "line": 38,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "pid": 529945
+        },
+        "endNano": 134569352746463,
+        "phase": "signal.after_state.begin",
+        "startNano": 134569352746463
+      },
+      "line": 39,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.after_state.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "observation": {
+            "endNano": 134569352785725,
+            "isAliveObserved": false,
+            "outcome": "not_resampled",
+            "pid": 529945,
+            "reason": "unknown_start_identity",
+            "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+            "registeredStartTicks": 13456901,
+            "startNano": 134569352759370
+          }
+        },
+        "endNano": 134569352787933,
+        "phase": "signal.after_state.end",
+        "startNano": 134569352746463
+      },
+      "line": 40,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "signal.after_state.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {},
+        "endNano": 134569354394913,
+        "phase": "survivor_scan.before_state.begin",
+        "startNano": 134569354394913
+      },
+      "line": 41,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "survivor_scan.before_state.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "interpretation": "isAlive is an observation, not proof of running or own reaping",
+          "observations": [
+            {
+              "endNano": 134569354469138,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529945,
+              "reason": "unknown_start_identity",
+              "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+              "registeredStartTicks": 13456901,
+              "startNano": 134569354435756
+            },
+            {
+              "endNano": 134569354492726,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529949,
+              "reason": "identity_mismatch",
+              "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+              "registeredStartTicks": 13456903,
+              "startNano": 134569354470974
+            },
+            {
+              "endNano": 134569354521727,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529948,
+              "reason": "identity_mismatch",
+              "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+              "registeredStartTicks": 13456903,
+              "startNano": 134569354493708
+            },
+            {
+              "endNano": 134569354541174,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529946,
+              "reason": "missing_proc_entry",
+              "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+              "registeredStartTicks": 13456901,
+              "startNano": 134569354522667
+            }
+          ]
+        },
+        "endNano": 134569354549644,
+        "phase": "survivor_scan.before_state.end",
+        "startNano": 134569354394913
+      },
+      "line": 42,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "survivor_scan.before_state.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {},
+        "endNano": 134569354642042,
+        "phase": "survivor_scan.original.begin",
+        "startNano": 134569354642042
+      },
+      "line": 43,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "survivor_scan.original.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "actualSurvivors": []
+        },
+        "endNano": 134569356377386,
+        "phase": "survivor_scan.original.end",
+        "startNano": 134569354642042
+      },
+      "line": 44,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "survivor_scan.original.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {},
+        "endNano": 134569356464216,
+        "phase": "survivor_scan.after_state.begin",
+        "startNano": 134569356464216
+      },
+      "line": 45,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "survivor_scan.after_state.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "interpretation": "isAlive is an observation, not proof of running or own reaping",
+          "observations": [
+            {
+              "endNano": 134569356520557,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529945,
+              "reason": "unknown_start_identity",
+              "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+              "registeredStartTicks": 13456901,
+              "startNano": 134569356479162
+            },
+            {
+              "endNano": 134569356543671,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529949,
+              "reason": "identity_mismatch",
+              "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+              "registeredStartTicks": 13456903,
+              "startNano": 134569356522384
+            },
+            {
+              "endNano": 134569356563380,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529948,
+              "reason": "identity_mismatch",
+              "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+              "registeredStartTicks": 13456903,
+              "startNano": 134569356544452
+            },
+            {
+              "endNano": 134569356604274,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529946,
+              "reason": "missing_proc_entry",
+              "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+              "registeredStartTicks": 13456901,
+              "startNano": 134569356564119
+            }
+          ]
+        },
+        "endNano": 134569356607187,
+        "phase": "survivor_scan.after_state.end",
+        "startNano": 134569356464216
+      },
+      "line": 46,
+      "missing_fields": [
+        "per-syscall errno",
+        "mismatch comparison operands"
+      ],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "survivor_scan.after_state.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "cleanup": {
+            "captureStreamsClosed": true,
+            "completed": true,
+            "containerName": "",
+            "containerStatus": "not-applicable",
+            "descendantsObserved": 3,
+            "detachedEngineHelpers": [],
+            "diagnostic": "cleanup{completed=true, failureCode=none, failureMessage=, survivors=[], detachedEngineHelpers=[], enginePid=not-applicable, engineClientReaped=true, containerName=not-applicable, containerStatus=not-applicable, namedContainerRemoved=true, workloadProcessesContained=true, captureStreamsClosed=true, descendantsObserved=3}",
+            "engineClientProcessId": null,
+            "engineClientReaped": true,
+            "failure": null,
+            "failureMessage": "",
+            "namedContainerRemoved": true,
+            "survivors": [],
+            "workloadProcessesContained": true
+          }
+        },
+        "endNano": 134569361995485,
+        "phase": "tree_termination.original_result",
+        "startNano": 134569361995485
+      },
+      "line": 47,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "tree_termination.original_result",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "threadId": 45,
+          "timeoutMillis": 250
+        },
+        "endNano": 134569362333032,
+        "phase": "capture.join.begin",
+        "startNano": 134569362333032
+      },
+      "line": 48,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "capture.join.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "complete": true,
+          "threadId": 45
+        },
+        "endNano": 134569362372306,
+        "phase": "capture.join.end",
+        "startNano": 134569362333032
+      },
+      "line": 49,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "capture.join.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "threadId": 47,
+          "timeoutMillis": 250
+        },
+        "endNano": 134569362383632,
+        "phase": "capture.join.begin",
+        "startNano": 134569362383632
+      },
+      "line": 50,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "capture.join.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "complete": true,
+          "threadId": 47
+        },
+        "endNano": 134569362401125,
+        "phase": "capture.join.end",
+        "startNano": 134569362383632
+      },
+      "line": 51,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "capture.join.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "stream": "stdout"
+        },
+        "endNano": 134569362415386,
+        "phase": "capture.explicit_close.begin",
+        "startNano": 134569362415386
+      },
+      "line": 52,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "capture.explicit_close.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "stream": "stdout"
+        },
+        "endNano": 134569362427919,
+        "phase": "capture.explicit_close.end",
+        "startNano": 134569362415386
+      },
+      "line": 53,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "capture.explicit_close.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "stream": "stderr"
+        },
+        "endNano": 134569362436281,
+        "phase": "capture.explicit_close.begin",
+        "startNano": 134569362436281
+      },
+      "line": 54,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "capture.explicit_close.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "stream": "stderr"
+        },
+        "endNano": 134569362447696,
+        "phase": "capture.explicit_close.end",
+        "startNano": 134569362436281
+      },
+      "line": 55,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "capture.explicit_close.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "value": true
+        },
+        "endNano": 134569362458695,
+        "phase": "capturesComplete",
+        "startNano": 134569362458695
+      },
+      "line": 56,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "capturesComplete",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "primaryFailure": {
+            "code": "PROCESS_TIMEOUT",
+            "message": "process exceeded wall-clock timeout",
+            "missingCapabilities": []
+          }
+        },
+        "endNano": 134569362535788,
+        "phase": "primary_failure.before_return",
+        "startNano": 134569362535788
+      },
+      "line": 57,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "primary_failure.before_return",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "cleanup": {
+            "captureStreamsClosed": true,
+            "completed": true,
+            "containerName": "",
+            "containerStatus": "not-applicable",
+            "descendantsObserved": 3,
+            "detachedEngineHelpers": [],
+            "diagnostic": "cleanup{completed=true, failureCode=none, failureMessage=, survivors=[], detachedEngineHelpers=[], enginePid=529945, engineClientReaped=true, containerName=not-applicable, containerStatus=not-applicable, namedContainerRemoved=true, workloadProcessesContained=true, captureStreamsClosed=true, descendantsObserved=3}",
+            "engineClientProcessId": 529945,
+            "engineClientReaped": true,
+            "failure": null,
+            "failureMessage": "",
+            "namedContainerRemoved": true,
+            "survivors": [],
+            "workloadProcessesContained": true
+          }
+        },
+        "endNano": 134569362588583,
+        "phase": "cleanup.full.end",
+        "startNano": 134569303781618
+      },
+      "line": 58,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "cleanup.full.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "originalResult": {
+            "cleanup": {
+              "captureStreamsClosed": true,
+              "completed": true,
+              "containerName": "",
+              "containerStatus": "not-applicable",
+              "descendantsObserved": 3,
+              "detachedEngineHelpers": [],
+              "diagnostic": "cleanup{completed=true, failureCode=none, failureMessage=, survivors=[], detachedEngineHelpers=[], enginePid=529945, engineClientReaped=true, containerName=not-applicable, containerStatus=not-applicable, namedContainerRemoved=true, workloadProcessesContained=true, captureStreamsClosed=true, descendantsObserved=3}",
+              "engineClientProcessId": 529945,
+              "engineClientReaped": true,
+              "failure": null,
+              "failureMessage": "",
+              "namedContainerRemoved": true,
+              "survivors": [],
+              "workloadProcessesContained": true
+            },
+            "exitCode": 143,
+            "failure": {
+              "code": "PROCESS_TIMEOUT",
+              "message": "process exceeded wall-clock timeout",
+              "missingCapabilities": []
+            },
+            "observation": {
+              "elapsedNanos": 352972288,
+              "handle": "SandboxExecutionHandle[processId=529945, launchedAt=2026-09-08T16:06:27.078262934Z]",
+              "processId": 529945,
+              "workingDirectory": "/home/user/Documents/workspace/audit-runs/EP19_H7_TIMEOUT_CLEANUP_ISOLATED_DIAGNOSTIC_EXPERIMENT_V1/evidence/runtime/workspace"
+            },
+            "originalPredicates": {
+              "cleanupCompleted": true,
+              "cleanupFailureEmpty": true,
+              "cleanupSurvivorsEmpty": true,
+              "combinedPass": true,
+              "failureCodeEqualsPROCESS_TIMEOUT": true,
+              "failurePresent": true,
+              "rootIsAliveObserved": false,
+              "rootNotAlive": true,
+              "rootPredicateEvaluation": "retained actual root ProcessHandle.isAlive; no numeric PID relookup"
+            },
+            "primaryFailure": {
+              "code": "PROCESS_TIMEOUT",
+              "message": "process exceeded wall-clock timeout",
+              "missingCapabilities": []
+            },
+            "primaryFailureRecorded": true,
+            "returnedNano": 134569363522214,
+            "stderr": {
+              "byteCount": 0,
+              "bytesBase64": "",
+              "truncated": false,
+              "utf8": ""
+            },
+            "stdout": {
+              "byteCount": 0,
+              "bytesBase64": "",
+              "truncated": false,
+              "utf8": ""
+            }
+          }
+        },
+        "endNano": 134569371150665,
+        "phase": "main.returned_original_result",
+        "startNano": 134569371150665
+      },
+      "line": 59,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "main.returned_original_result",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {},
+        "endNano": 134569371259314,
+        "phase": "follow_up.immediately_after_return.begin",
+        "startNano": 134569371259314
+      },
+      "line": 60,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "follow_up.immediately_after_return.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "interpretation": "isAlive is an observation, not proof of running or own reaping",
+          "observations": [
+            {
+              "endNano": 134569371304778,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529945,
+              "reason": "unknown_start_identity",
+              "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+              "registeredStartTicks": 13456901,
+              "startNano": 134569371274104
+            },
+            {
+              "endNano": 134569371348914,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529949,
+              "reason": "identity_mismatch",
+              "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+              "registeredStartTicks": 13456903,
+              "startNano": 134569371306398
+            },
+            {
+              "endNano": 134569371367213,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529948,
+              "reason": "identity_mismatch",
+              "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+              "registeredStartTicks": 13456903,
+              "startNano": 134569371349700
+            },
+            {
+              "endNano": 134569371387792,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529946,
+              "reason": "missing_proc_entry",
+              "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+              "registeredStartTicks": 13456901,
+              "startNano": 134569371367919
+            }
+          ]
+        },
+        "endNano": 134569371390344,
+        "phase": "follow_up.immediately_after_return.end",
+        "startNano": 134569371259314
+      },
+      "line": 61,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "follow_up.immediately_after_return.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "no timestamp in status record",
+      "event": {
+        "data": {
+          "bufferCharacterLimit": 8388608,
+          "bufferCharacters": 22360,
+          "captureDroppedBytes": 0,
+          "captureExplicitCloseErrors": 0,
+          "captureReadOrImplicitCloseErrors": 0,
+          "captureTruncationEvents": 0,
+          "diagnosticFailed": false,
+          "eventCharacterLimit": 262144,
+          "eventLimit": 8192,
+          "eventsDropped": 0,
+          "eventsRetained": 61,
+          "identitiesDropped": 0,
+          "identitiesJournaled": 4,
+          "identitiesRegistered": 4,
+          "identityLimit": 256,
+          "instrumentationErrors": 0,
+          "journalQueuePending": 0,
+          "journalThreadAlive": true,
+          "procErrors": 0,
+          "procTruncations": 0
+        },
+        "phase": "recorder.status"
+      },
+      "line": 62,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "recorder.status",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "sinceReturnNanos": 200300062
+        },
+        "endNano": 134569563825218,
+        "phase": "follow_up.delay",
+        "startNano": 134569563825218
+      },
+      "line": 63,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "follow_up.delay",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {},
+        "endNano": 134569563993530,
+        "phase": "follow_up.about_200ms_after_return.begin",
+        "startNano": 134569563993530
+      },
+      "line": 64,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "follow_up.about_200ms_after_return.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "interpretation": "isAlive is an observation, not proof of running or own reaping",
+          "observations": [
+            {
+              "endNano": 134569564253430,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529945,
+              "reason": "unknown_start_identity",
+              "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+              "registeredStartTicks": 13456901,
+              "startNano": 134569564072304
+            },
+            {
+              "endNano": 134569564317633,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529949,
+              "reason": "identity_mismatch",
+              "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+              "registeredStartTicks": 13456903,
+              "startNano": 134569564259981
+            },
+            {
+              "endNano": 134569564393392,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529948,
+              "reason": "identity_mismatch",
+              "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+              "registeredStartTicks": 13456903,
+              "startNano": 134569564319855
+            },
+            {
+              "endNano": 134569564439985,
+              "isAliveObserved": false,
+              "outcome": "not_resampled",
+              "pid": 529946,
+              "reason": "missing_proc_entry",
+              "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+              "registeredStartTicks": 13456901,
+              "startNano": 134569564395464
+            }
+          ]
+        },
+        "endNano": 134569564448049,
+        "phase": "follow_up.about_200ms_after_return.end",
+        "startNano": 134569563993530
+      },
+      "line": 65,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "follow_up.about_200ms_after_return.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "budgetMillis": 2000
+        },
+        "endNano": 134569564580484,
+        "phase": "separate_teardown.begin",
+        "startNano": 134569564580484
+      },
+      "line": 66,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "separate_teardown.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "budgetNanos": 1999582333
+        },
+        "endNano": 134569565018394,
+        "phase": "separate_teardown.root_waitFor.begin",
+        "startNano": 134569565018394
+      },
+      "line": 67,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "separate_teardown.root_waitFor.begin",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "outcome": {
+            "action": "own_Process.waitFor",
+            "meaning": "own root only; no descendant reaping claim",
+            "returned": true
+          }
+        },
+        "endNano": 134569565088255,
+        "phase": "separate_teardown.root_waitFor.end",
+        "startNano": 134569565018394
+      },
+      "line": 68,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "separate_teardown.root_waitFor.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "System.nanoTime; record order can interleave across capture threads",
+      "event": {
+        "data": {
+          "result": {
+            "actions": [
+              {
+                "action": "none",
+                "before": {
+                  "endNano": 134569564694882,
+                  "isAliveObserved": false,
+                  "outcome": "not_resampled",
+                  "pid": 529945,
+                  "reason": "unknown_start_identity",
+                  "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+                  "registeredStartTicks": 13456901,
+                  "startNano": 134569564630506
+                },
+                "exception": null,
+                "outcome": "not_resampled",
+                "pid": 529945,
+                "returned": null,
+                "startInstant": "2026-09-08T16:06:27.010Z",
+                "startTicks": 13456901
+              },
+              {
+                "action": "none",
+                "before": {
+                  "endNano": 134569564792487,
+                  "isAliveObserved": false,
+                  "outcome": "not_resampled",
+                  "pid": 529949,
+                  "reason": "identity_mismatch",
+                  "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+                  "registeredStartTicks": 13456903,
+                  "startNano": 134569564749033
+                },
+                "exception": null,
+                "outcome": "not_resampled",
+                "pid": 529949,
+                "returned": null,
+                "startInstant": "2026-09-08T16:06:27.030Z",
+                "startTicks": 13456903
+              },
+              {
+                "action": "none",
+                "before": {
+                  "endNano": 134569564874528,
+                  "isAliveObserved": false,
+                  "outcome": "not_resampled",
+                  "pid": 529948,
+                  "reason": "identity_mismatch",
+                  "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+                  "registeredStartTicks": 13456903,
+                  "startNano": 134569564833945
+                },
+                "exception": null,
+                "outcome": "not_resampled",
+                "pid": 529948,
+                "returned": null,
+                "startInstant": "2026-09-08T16:06:27.030Z",
+                "startTicks": 13456903
+              },
+              {
+                "action": "none",
+                "before": {
+                  "endNano": 134569564949484,
+                  "isAliveObserved": false,
+                  "outcome": "not_resampled",
+                  "pid": 529946,
+                  "reason": "missing_proc_entry",
+                  "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+                  "registeredStartTicks": 13456901,
+                  "startNano": 134569564909723
+                },
+                "exception": null,
+                "outcome": "not_resampled",
+                "pid": 529946,
+                "returned": null,
+                "startInstant": "2026-09-08T16:06:27.010Z",
+                "startTicks": 13456901
+              }
+            ],
+            "finalSnapshots": [
+              {
+                "endNano": 134569565160449,
+                "isAliveObserved": false,
+                "outcome": "not_resampled",
+                "pid": 529945,
+                "reason": "unknown_start_identity",
+                "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+                "registeredStartTicks": 13456901,
+                "startNano": 134569565111875
+              },
+              {
+                "endNano": 134569565210307,
+                "isAliveObserved": false,
+                "outcome": "not_resampled",
+                "pid": 529949,
+                "reason": "identity_mismatch",
+                "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+                "registeredStartTicks": 13456903,
+                "startNano": 134569565164700
+              },
+              {
+                "endNano": 134569565255040,
+                "isAliveObserved": false,
+                "outcome": "not_resampled",
+                "pid": 529948,
+                "reason": "identity_mismatch",
+                "registeredStartInstant": "2026-09-08T16:06:27.030Z",
+                "registeredStartTicks": 13456903,
+                "startNano": 134569565212853
+              },
+              {
+                "endNano": 134569565297701,
+                "isAliveObserved": false,
+                "outcome": "not_resampled",
+                "pid": 529946,
+                "reason": "missing_proc_entry",
+                "registeredStartInstant": "2026-09-08T16:06:27.010Z",
+                "registeredStartTicks": 13456901,
+                "startNano": 134569565257069
+              }
+            ],
+            "limitations": "No discovery beyond original handles; disappearance does not prove own reaping. Zombie descendants require external parent reaping. Procfs and signal operations have no hard syscall deadline; budget limits initiation and root wait.",
+            "rootWait": {
+              "action": "own_Process.waitFor",
+              "meaning": "own root only; no descendant reaping claim",
+              "returned": true
+            },
+            "unresolvedRisk": true
+          }
+        },
+        "endNano": 134569566709067,
+        "phase": "separate_teardown.end",
+        "startNano": 134569564580484
+      },
+      "line": 69,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "separate_teardown.end",
+      "source": "sources/runtime/timeline.jsonl"
+    },
+    {
+      "clock": "no timestamp in status record",
+      "event": {
+        "data": {
+          "bufferCharacterLimit": 8388608,
+          "bufferCharacters": 27261,
+          "captureDroppedBytes": 0,
+          "captureExplicitCloseErrors": 0,
+          "captureReadOrImplicitCloseErrors": 0,
+          "captureTruncationEvents": 0,
+          "diagnosticFailed": false,
+          "eventCharacterLimit": 262144,
+          "eventLimit": 8192,
+          "eventsDropped": 0,
+          "eventsRetained": 68,
+          "identitiesDropped": 0,
+          "identitiesJournaled": 4,
+          "identitiesRegistered": 4,
+          "identityLimit": 256,
+          "instrumentationErrors": 0,
+          "journalQueuePending": 0,
+          "journalThreadAlive": false,
+          "procErrors": 0,
+          "procTruncations": 0
+        },
+        "phase": "recorder.status"
+      },
+      "line": 70,
+      "missing_fields": [],
+      "object_scope": "actual retained root/descendant handles; see data identities",
+      "observation_kind": "DIRECT_RECORDED_EVENT",
+      "phase": "recorder.status",
+      "source": "sources/runtime/timeline.jsonl"
+    }
+  ],
+  "limits": "Not a linear process-state history; samples have races. KILL and wait duration not separately observed.",
+  "records": 70,
+  "status_records": 2,
+  "timed_events": 68
+}

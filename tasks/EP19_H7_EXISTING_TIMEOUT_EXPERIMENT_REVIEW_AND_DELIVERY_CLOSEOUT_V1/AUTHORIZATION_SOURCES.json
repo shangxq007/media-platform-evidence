@@ -1,0 +1,88 @@
+{
+  "A_owner_authority": "ESTABLISHED_ONCE_IN_SCOPE_MESSAGE_285277",
+  "B_received_before_start": "ESTABLISHED_IN_SESSION_RECORDS; authorization at 15:07:57Z precedes controller request at 16:06:26Z; compacted continuation 285619 also retained authorization context",
+  "C_tool_permission": "LOCAL_PREPARATION_SUCCESS_AND_EXPERIMENT_EXECUTION_RESPONSE_ESTABLISHED; explicit per-experiment approval UI decision/recovery token NOT_ESTABLISHED",
+  "D_scope": "One scenario, no original product mutation shown by selected and reused records; root assertion lookup adapted and timing perturbed; strict equivalence not established",
+  "aggregate": "PARTIAL_ESTABLISHED_OWNER_AND_RECEIPT_PRECEDE_START_TOOL_APPROVAL_CHAIN_INCOMPLETE",
+  "checked_at_utc": "2026-09-08T19:38:32.600001+00:00",
+  "limits": [
+    "Some tool responses are stored summaries, not full original approval payloads.",
+    "Session records and compaction demonstrate stored instructions, not a complete outbound-model-request attestation.",
+    "Duplicate old user message 285616 preserves original earlier timestamp; do not treat later database ID as renewed read-only restriction.",
+    "No approval implementation, configuration, refusal counter or original response changed."
+  ],
+  "missing_provenance_scope": "Only explicit historical tool recovery/approval chain; NOT Owner intent or session receipt",
+  "missing_provenance_token": "AU THORIZATION_PROVENANCE_NOT_ESTABLISHED",
+  "records": [
+    {
+      "full_message_sha256": "0f6232791793a8c7cbaccaf18876295e9faf1f373b0a6536c9f1806557600087",
+      "message_id": 285277,
+      "necessary_excerpt": "在固定候选的独立实验副本中，对已失败的 timeout 清理路径，\n   执行一次有界动态诊断实验。",
+      "role": "user",
+      "source": "default session 20260908_215737_b86f05; exact-ID read-only session database lookup",
+      "timestamp_epoch": 1788880077.1491373,
+      "timestamp_utc": "2026-09-08T15:07:57.149137+00:00",
+      "tool_call_id": null
+    },
+    {
+      "full_message_sha256": "84d3024f27618e2bf47da643048594fb07db961762d7492fcf0ec252102a8dd1",
+      "message_id": 285340,
+      "necessary_excerpt": "允许重新提交此前被拒绝的本地准备操作，经正常工具审批处理；再次拒绝立即停止",
+      "role": "user",
+      "source": "default session 20260908_215737_b86f05; exact-ID read-only session database lookup",
+      "timestamp_epoch": 1788880841.3626597,
+      "timestamp_utc": "2026-09-08T15:20:41.362660+00:00",
+      "tool_call_id": null
+    },
+    {
+      "full_message_sha256": "60814201fb0453d2a718d6bb53e5d255e0aec66aeaa9e6fc5a42183eb82cf058",
+      "message_id": 285350,
+      "necessary_excerpt": "{\"status\": \"success\", \"output\": \"{'bytes_written': 866, 'dirs_created': True, 'verified': True, 'lint': {'status': 'ok', 'output': ''}, 'resolved_path': '/home/user/Documents/workspace/audit-runs/EP19_H7_TIMEOUT_CLEANUP_ISOLATED_DIAGNOSTIC_EXPERIMENT_V1/PREPARATION_AUTHORIZATION.json', 'files_modified': ['/home/user/Documents/workspace/audit-runs/EP19_H7_TIMEOUT_CLEANUP_ISOLATED_DIAGNOSTIC_EXPERIMENT_V1/PREPARATION_AUTHORIZATION.json']}\\nPREPARATION_DIRECTORY /home/user/Documents/workspace/audit-runs/EP19_H7_TIMEOUT_CLEANUP_ISOLATED_DIAGNOSTIC_EXPERIMENT_V1\\n\", \"exit_code\": 0, \"tool_calls_made\": 1, \"duration_seconds\": 0.19, \"kernel\": {\"mode\": \"session\", \"reused\": true, \"execution_count\": 3, \"state_reset\": false}, \"stdout_truncated\": false, \"stdout_bytes_captured\": 530, \"stdout_bytes_total\": 530, \"stdout_bytes_omitted\": 0}",
+      "role": "tool",
+      "source": "default session 20260908_215737_b86f05; exact-ID read-only session database lookup",
+      "timestamp_epoch": 1788880900.2845614,
+      "timestamp_utc": "2026-09-08T15:21:40.284561+00:00",
+      "tool_call_id": "call_HW2Z8fICvRRcDNpp2wGu1Tqj"
+    },
+    {
+      "full_message_sha256": "cc86e55cc439c68903cf62d29a521030faf5b28c31b8f71c3c8dbbfc64a03860",
+      "message_id": 285698,
+      "necessary_excerpt": "[execute_code] `shutil.copyfile(ev/'compile-result.json',ev/'compile-initial...` (1 lines output)",
+      "role": "tool",
+      "source": "default session 20260908_215737_b86f05; exact-ID read-only session database lookup",
+      "timestamp_epoch": 1788883457.0179112,
+      "timestamp_utc": "2026-09-08T16:04:17.017911+00:00",
+      "tool_call_id": "call_Bvi7ZIJZEtR5x4W8La5W4Whh"
+    },
+    {
+      "full_message_sha256": "4c3a86cbe24802a0088c94303b55a010cc3e0d7398fdee04f6ef66ccc4a80100",
+      "message_id": 285701,
+      "necessary_excerpt": "{\"command\":\"python3 -B /home/user/Documents/workspace/audit-runs/EP19_H7_TIMEOUT_CLEANUP_ISOLATED_DIAGNOSTIC_EXPERIMENT_V1/run_once.py\",\"timeout\":70,\"workdir\":\"/home/user/Documents/workspace/audit-runs/EP19_H7_TIMEOUT_CLEANUP_ISOLATED_DIAGNOSTIC_EXPERIMENT_V1\"}",
+      "role": "assistant",
+      "source": "default session 20260908_215737_b86f05; exact-ID read-only session database lookup",
+      "timestamp_epoch": 1788883586.7656345,
+      "timestamp_utc": "2026-09-08T16:06:26.765635+00:00",
+      "tool_call_id": null
+    },
+    {
+      "full_message_sha256": "512141593e9e7d43d46699551159ffde3b0d570cd6026c3dcdb95d22f51f4ff2",
+      "message_id": 285702,
+      "necessary_excerpt": "[terminal] ran `python3 -B /home/user/Documents/workspace/audit-runs/EP19_H7_TIMEOUT_CLEANUP_...` -> exit 0, 1 lines output",
+      "role": "tool",
+      "source": "default session 20260908_215737_b86f05; exact-ID read-only session database lookup",
+      "timestamp_epoch": 1788883587.856193,
+      "timestamp_utc": "2026-09-08T16:06:27.856193+00:00",
+      "tool_call_id": "call_SdBkBj24Td2pA1GKUlF4ChWT"
+    },
+    {
+      "full_message_sha256": "d76f5ed24722ab9ca6e8f571e1472512cf8e574b57b5c27ca7546b0c23e2dc6b",
+      "message_id": 285738,
+      "necessary_excerpt": "当前是我因越界而停止后续操作，不是技术阻塞。",
+      "role": "assistant",
+      "source": "default session 20260908_215737_b86f05; exact-ID read-only session database lookup",
+      "timestamp_epoch": 1788884613.3933241,
+      "timestamp_utc": "2026-09-08T16:23:33.393324+00:00",
+      "tool_call_id": null
+    }
+  ]
+}

@@ -1,0 +1,408 @@
+{
+  "required": 29,
+  "counts": {
+    "PASS": 9,
+    "FAIL": 1,
+    "NOT_RUN": 19
+  },
+  "gates": {
+    "CHANGE_IMPACT": {
+      "result": "PASS",
+      "native_exit": 0,
+      "wrapper_exit": 0,
+      "reason": null,
+      "acceptance": {
+        "result": "PASS",
+        "outputs": {},
+        "parser": {
+          "result": "PASS",
+          "parser_gate": "CHANGE_IMPACT"
+        },
+        "producer": {
+          "run_id": "baseline-sequence-formal-001",
+          "gate": "CHANGE_IMPACT",
+          "candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+          "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6"
+        }
+      },
+      "preservation": null
+    },
+    "H7_FOCUSED": {
+      "result": "PASS",
+      "native_exit": 0,
+      "wrapper_exit": 0,
+      "reason": null,
+      "acceptance": {
+        "result": "PASS",
+        "outputs": {},
+        "parser": {
+          "expected": 15,
+          "executed": 15,
+          "passed": 15,
+          "skipped": 0,
+          "expected_skipped": 0,
+          "failed": 0,
+          "errored": 0,
+          "missing": 0,
+          "unexpected": 0,
+          "duplicate": 0,
+          "missing_identities": [],
+          "unexpected_identities": [],
+          "unexpected_skipped_identities": [],
+          "expected_skips_not_observed": [],
+          "result": "PASS"
+        },
+        "producer": {
+          "run_id": "baseline-sequence-formal-001",
+          "gate": "H7_FOCUSED",
+          "candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+          "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6"
+        }
+      },
+      "preservation": null
+    },
+    "H7_ENTRY": {
+      "result": "PASS",
+      "native_exit": 0,
+      "wrapper_exit": 0,
+      "reason": null,
+      "acceptance": {
+        "result": "PASS",
+        "outputs": {
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/baseline-sequence-20260908T070258Z/outputs/continuation-runs/baseline-sequence-formal-001/runtime/outputs/backend/H7_PRODUCTION_INPUT_RECEIPT.json": "299d0e0d65d73d8e528e9cc40b107a5061dcb135aa11f38a93cacfc41274e770"
+        },
+        "parser": {
+          "result": "PASS",
+          "parser_gate": "H7_ENTRY"
+        },
+        "producer": {
+          "run_id": "baseline-sequence-formal-001",
+          "gate": "H7_ENTRY",
+          "candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+          "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6"
+        }
+      },
+      "preservation": null
+    },
+    "H7_MUTATIONS": {
+      "result": "PASS",
+      "native_exit": 0,
+      "wrapper_exit": 0,
+      "reason": null,
+      "acceptance": {
+        "result": "PASS",
+        "outputs": {},
+        "parser": {
+          "expected": 13,
+          "executed": 13,
+          "passed": 13,
+          "skipped": 0,
+          "expected_skipped": 0,
+          "failed": 0,
+          "errored": 0,
+          "missing": 0,
+          "unexpected": 0,
+          "duplicate": 0,
+          "missing_identities": [],
+          "unexpected_identities": [],
+          "unexpected_skipped_identities": [],
+          "expected_skips_not_observed": [],
+          "result": "PASS"
+        },
+        "producer": {
+          "run_id": "baseline-sequence-formal-001",
+          "gate": "H7_MUTATIONS",
+          "candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+          "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6"
+        }
+      },
+      "preservation": null
+    },
+    "ARCHITECTURE_SYNTAX": {
+      "result": "PASS",
+      "native_exit": 0,
+      "wrapper_exit": 0,
+      "reason": null,
+      "acceptance": {
+        "result": "PASS",
+        "outputs": {},
+        "parser": {
+          "result": "PASS",
+          "parser_gate": "ARCHITECTURE_SYNTAX",
+          "basis": "Exact sealed command native success; producer defines exit-code contract; raw log digest retained"
+        },
+        "producer": {
+          "run_id": "baseline-sequence-formal-001",
+          "gate": "ARCHITECTURE_SYNTAX",
+          "candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+          "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6"
+        }
+      },
+      "preservation": null
+    },
+    "ARCHITECTURE": {
+      "result": "PASS",
+      "native_exit": 0,
+      "wrapper_exit": 0,
+      "reason": null,
+      "acceptance": {
+        "result": "PASS",
+        "outputs": {},
+        "parser": {
+          "result": "PASS",
+          "parser_gate": "ARCHITECTURE"
+        },
+        "producer": {
+          "run_id": "baseline-sequence-formal-001",
+          "gate": "ARCHITECTURE",
+          "candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+          "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6"
+        }
+      },
+      "preservation": null
+    },
+    "GRADLE_PREFLIGHT": {
+      "result": "PASS",
+      "native_exit": 0,
+      "wrapper_exit": 0,
+      "reason": null,
+      "acceptance": {
+        "result": "PASS",
+        "outputs": {},
+        "parser": {
+          "result": "PASS",
+          "parser_gate": "GRADLE_PREFLIGHT"
+        },
+        "producer": {
+          "run_id": "baseline-sequence-formal-001",
+          "gate": "GRADLE_PREFLIGHT",
+          "candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+          "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6"
+        }
+      },
+      "preservation": null
+    },
+    "COMPILE": {
+      "result": "PASS",
+      "native_exit": 0,
+      "wrapper_exit": 0,
+      "reason": null,
+      "acceptance": {
+        "result": "PASS",
+        "outputs": {},
+        "parser": {
+          "result": "PASS",
+          "parser_gate": "COMPILE"
+        },
+        "producer": {
+          "run_id": "baseline-sequence-formal-001",
+          "gate": "COMPILE",
+          "candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+          "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6"
+        }
+      },
+      "preservation": null
+    },
+    "AFFECTED_INTEGRATION": {
+      "result": "PASS",
+      "native_exit": 0,
+      "wrapper_exit": 0,
+      "reason": null,
+      "acceptance": {
+        "result": "PASS",
+        "outputs": {
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/baseline-sequence-20260908T070258Z/outputs/continuation-runs/baseline-sequence-formal-001/sources/backend/entitlement-module/build/test-results/test/TEST-com.example.platform.entitlement.api.EntitlementDecisionQueryPublicationTest.xml": "f29feba418f313441930fce561f59ebca8f4aa5df591e130425096f215b1d6c0",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/baseline-sequence-20260908T070258Z/outputs/continuation-runs/baseline-sequence-formal-001/sources/backend/identity-access-module/build/test-results/test/TEST-com.example.platform.identity.architecture.AuthorizationArchitectureGuardTest.xml": "e54687e15ce3ec65535a29f4b7c5a91cd0b7d2a408383d15dc128b845fbe8dab",
+          "/home/user/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/run-output-completeness-20260907T143346Z/baseline-sequence-20260908T070258Z/outputs/continuation-runs/baseline-sequence-formal-001/sources/backend/platform-app/build/test-results/test/TEST-com.example.platform.ModularityTest.xml": "01a336b1a9b9a917ec8610c045765cb10b3659d84ba9dcb852e4bf9021ad8e06"
+        },
+        "parser": {
+          "expected": 21,
+          "executed": 21,
+          "passed": 21,
+          "skipped": 0,
+          "expected_skipped": 0,
+          "failed": 0,
+          "errored": 0,
+          "missing": 0,
+          "unexpected": 0,
+          "duplicate": 0,
+          "missing_identities": [],
+          "unexpected_identities": [],
+          "unexpected_skipped_identities": [],
+          "expected_skips_not_observed": [],
+          "result": "PASS"
+        },
+        "producer": {
+          "run_id": "baseline-sequence-formal-001",
+          "gate": "AFFECTED_INTEGRATION",
+          "candidate": "689ab9456461a8d19a72d059f5157092efc43aff",
+          "tree": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6"
+        }
+      },
+      "preservation": null
+    },
+    "RUNTIME_PREFLIGHT": {
+      "result": "FAIL",
+      "native_exit": 1,
+      "wrapper_exit": 1,
+      "reason": "PROCESS_OR_PRESERVATION_REJECT",
+      "acceptance": null,
+      "preservation": null
+    },
+    "SHADOW": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "CLASSIFIER_TEST": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "GITOPS_STAGING": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "GITOPS_STAGING_EGRESS": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "GITOPS_PRODUCTION": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "GITOPS_PRODUCTION_EGRESS": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "FRONTEND_INSTALL": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "FRONTEND_LINT": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "FRONTEND_IDENTITIES": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "FRONTEND_COLLECTION": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "FRONTEND_TEST": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "FRONTEND_BUILD": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "FORMAL": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "SEMGREP": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "FULL_BACKEND": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "APPLICATION_CLASSPATH": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "APPLICATION_PROBE": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "FOUNDATION": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    },
+    "BOOTJAR": {
+      "result": "NOT_RUN",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "acceptance": null,
+      "preservation": null
+    }
+  },
+  "FULL_BACKEND": "NOT_RUN",
+  "expected_backend_test_identities": 7973,
+  "expected_backend_skips": 29
+}

@@ -1,0 +1,1218 @@
+--- a/sandbox-isolation-module/src/main/java/com/example/platform/sandbox/BubblewrapSandboxProcessLauncher.java
++++ b/sandbox-isolation-module/src/main/java/com/example/platform/sandbox/BubblewrapSandboxProcessLauncher.java
+@@ -85,11 +85,12 @@
+                     "bubblewrap process launch failed", Set.of()));
+         }
+ 
++        TimeoutDiagnosticRecorder.rootStarted(process);
+         SandboxExecutionHandle handle = new SandboxExecutionHandle(process.pid(), launchedAt);
+         CaptureReader stdout = new CaptureReader(
+-                process.getInputStream(), spec.resources().captureBytes());
++                process.getInputStream(), spec.resources().captureBytes(), "stdout");
+         CaptureReader stderr = new CaptureReader(
+-                process.getErrorStream(), spec.resources().captureBytes());
++                process.getErrorStream(), spec.resources().captureBytes(), "stderr");
+         Thread outThread = Thread.ofVirtual().start(stdout);
+         Thread errThread = Thread.ofVirtual().start(stderr);
+         SandboxFailure primaryFailure = null;
+@@ -102,6 +103,7 @@
+                 break;
+             }
+             if (System.nanoTime() >= deadline) {
++                TimeoutDiagnosticRecorder.mark("timeout.recognized", "deadlineNano", deadline);
+                 primaryFailure = SandboxFailure.of(
+                         SandboxFailureCode.PROCESS_TIMEOUT,
+                         "process exceeded wall-clock timeout", Set.of());
+@@ -118,10 +120,13 @@
+             }
+         }
+ 
++        TimeoutDiagnosticRecorder.primaryBeforeCleanup(primaryFailure);
++        long cleanupStart = TimeoutDiagnosticRecorder.begin("cleanup.full");
+         LocalBoundedProcessLauncher.TreeTermination termination =
+                 LocalBoundedProcessLauncher.terminateTreeWithHandles(
+                         process, TERMINATION_GRACE, List.of());
+         boolean capturesComplete = closeAndJoinCaptures(stdout, outThread, stderr, errThread);
++        TimeoutDiagnosticRecorder.mark("capturesComplete", "value", capturesComplete);
+         SandboxCleanupObservation cleanup = cleanupObservation(
+                 process.pid(), termination.observation(), capturesComplete);
+         OptionalInt exit = OptionalInt.empty();
+@@ -139,6 +144,9 @@
+                     setupRejected ? "bubblewrap rejected sandbox setup" : "process exited non-zero",
+                     Set.of());
+         }
++        TimeoutDiagnosticRecorder.primary(primaryFailure);
++        TimeoutDiagnosticRecorder.end("cleanup.full", cleanupStart,
++                "cleanup", TimeoutDiagnosticRecorder.cleanup(cleanup));
+         return new SandboxExecutionResult(exit, stdout.capture(), stderr.capture(),
+                 selectResultFailure(primaryFailure, cleanup),
+                 new SandboxExecutionObservation(handle,
+@@ -342,21 +350,28 @@
+     }
+ 
+     private static boolean joinCapture(Thread thread, long timeoutMillis) {
++        long start = TimeoutDiagnosticRecorder.begin("capture.join",
++                "threadId", thread.threadId(), "timeoutMillis", timeoutMillis);
+         try {
+             thread.join(timeoutMillis);
+         } catch (InterruptedException interrupted) {
+             Thread.currentThread().interrupt();
+         }
+-        return !thread.isAlive();
++        boolean complete = !thread.isAlive();
++        TimeoutDiagnosticRecorder.end("capture.join", start,
++                "threadId", thread.threadId(), "complete", complete);
++        return complete;
+     }
+ 
+     private static final class CaptureReader implements Runnable, AutoCloseable {
+         private final InputStream input;
+         private final int limit;
++        private final String stream;
+         private final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+         private volatile boolean truncated;
+ 
+-        private CaptureReader(InputStream input, long limit) {
++        private CaptureReader(InputStream input, long limit, String stream) {
++            this.stream = stream;
+             this.input = input;
+             this.limit = Math.toIntExact(Math.min(limit, Integer.MAX_VALUE));
+         }
+@@ -364,14 +379,22 @@
+         @Override
+         public void run() {
+             byte[] buffer = new byte[8192];
+-            try (input) {
++            TimeoutDiagnosticRecorder.ReaderCloseMarker marker =
++                    TimeoutDiagnosticRecorder.readerCloseMarker(stream);
++            try (input; marker) {
+                 int read;
+                 while ((read = input.read(buffer)) >= 0) {
+                     int remaining = limit - bytes.size();
+                     if (remaining > 0) bytes.write(buffer, 0, Math.min(read, remaining));
+-                    if (read > remaining) truncated = true;
++                    if (read > remaining) {
++                        truncated = true;
++                        TimeoutDiagnosticRecorder.captureTruncated(read - Math.max(0, remaining));
++                    }
+                 }
+             } catch (IOException ignored) {
++                TimeoutDiagnosticRecorder.captureError(stream, "read_or_implicit_close", ignored);
++            } finally {
++                marker.finished();
+             }
+         }
+ 
+@@ -381,9 +404,13 @@
+ 
+         @Override
+         public void close() {
++            long start = TimeoutDiagnosticRecorder.begin("capture.explicit_close", "stream", stream);
+             try {
+                 input.close();
+             } catch (IOException ignored) {
++                TimeoutDiagnosticRecorder.captureError(stream, "explicit_close", ignored);
++            } finally {
++                TimeoutDiagnosticRecorder.end("capture.explicit_close", start, "stream", stream);
+             }
+         }
+     }
+--- a/sandbox-isolation-module/src/main/java/com/example/platform/sandbox/LocalBoundedProcessLauncher.java
++++ b/sandbox-isolation-module/src/main/java/com/example/platform/sandbox/LocalBoundedProcessLauncher.java
+@@ -152,21 +152,32 @@
+             List<ProcessHandle> previouslyObserved) {
+         LinkedHashMap<Long, ProcessHandle> observed = new LinkedHashMap<>();
+         previouslyObserved.forEach(handle -> observed.put(handle.pid(), handle));
++        long enumerationStart = TimeoutDiagnosticRecorder.begin("descendants.enumeration");
+         process.descendants().forEach(handle -> observed.put(handle.pid(), handle));
++        TimeoutDiagnosticRecorder.end("descendants.enumeration", enumerationStart,
++                "pids", List.copyOf(observed.keySet()));
+         List<ProcessHandle> descendants = observed.values().stream()
+                 .sorted(Comparator.comparingLong(ProcessHandle::pid).reversed()).toList();
+-        descendants.forEach(ProcessHandle::destroy);
+-        process.destroy();
++        TimeoutDiagnosticRecorder.descendants(descendants);
++        descendants.forEach(TimeoutDiagnosticRecorder::destroy);
++        TimeoutDiagnosticRecorder.destroy(process);
+         waitUntilDead(process.toHandle(), descendants, terminationGrace);
+-        descendants.stream().filter(ProcessHandle::isAlive).forEach(ProcessHandle::destroyForcibly);
+-        if (process.isAlive()) process.destroyForcibly();
++        descendants.stream().filter(ProcessHandle::isAlive).forEach(TimeoutDiagnosticRecorder::destroyForcibly);
++        if (process.isAlive()) TimeoutDiagnosticRecorder.destroyForcibly(process);
+         waitUntilDead(process.toHandle(), descendants, terminationGrace);
++        TimeoutDiagnosticRecorder.snapshot("survivor_scan.before_state");
++        long survivorStart = TimeoutDiagnosticRecorder.begin("survivor_scan.original");
+         List<Long> survivors = new ArrayList<>();
+         descendants.stream().filter(ProcessHandle::isAlive).map(ProcessHandle::pid).forEach(survivors::add);
+         if (process.isAlive()) survivors.add(process.pid());
++        TimeoutDiagnosticRecorder.end("survivor_scan.original", survivorStart,
++                "actualSurvivors", List.copyOf(survivors));
++        TimeoutDiagnosticRecorder.snapshot("survivor_scan.after_state");
+         SandboxCleanupObservation observation = new SandboxCleanupObservation(
+                 survivors.isEmpty(), descendants.size(), survivors,
+                 survivors.isEmpty() ? "" : "processes remain alive after forced termination");
++        TimeoutDiagnosticRecorder.mark("tree_termination.original_result",
++                "cleanup", TimeoutDiagnosticRecorder.cleanup(observation));
+         return new TreeTermination(observation, descendants);
+     }
+ 
+--- /dev/null
++++ b/diagnostic/README.md
+@@ -0,0 +1,204 @@
++# EP19 H7 isolated timeout instrumentation preparation
++
++Prepared source only. No compilation, Java main, test, probe, collector, bubblewrap command,
++workload, process inspection, or `/proc` inspection was executed during preparation.
++Hermes owns compilation, durable attempt consumption, execution, and interpretation.
++There is no self-test or alternate workload mode. This is temporary instrumentation in the
++explicitly authorized independent clone, not a product correction or a capability probe.
++
++## Scope and repository state
++
++The applicable instruction file is root `AGENTS.md`, governing the whole repository.
++An including-hidden-files search found no nested `AGENTS.md`. The newer Owner instruction
++and `../WRITER_BRIEF.md` authorize this independent clone, these two production source edits,
++and diagnostic files, and prohibit commits and branch operations. They take precedence over
++the usual linked-worktree/owned-branch and committed-candidate verification workflow.
++No permanent instruction change is included; any future governance alignment is a separate
++Owner task. No integration or post-integration verification is authorized here.
++
++Preparation began with a clean, detached HEAD and empty stash:
++
++- Worktree: `/home/user/Documents/workspace/audit-runs/EP19_H7_TIMEOUT_CLEANUP_ISOLATED_DIAGNOSTIC_EXPERIMENT_V1/candidate`
++- Base HEAD: `689ab9456461a8d19a72d059f5157092efc43aff`
++- Base tree: `6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6`
++- Base parent: `86d6aef94fd5e58da552e97c11473cff6eca734e`
++- No branch, commit, Git configuration, remote, service, Skill, or Memory changes.
++- There is no newly frozen candidate SHA: this deliverable is an uncommitted source diff.
++
++Changed existing files, instrumentation only:
++
++- `sandbox-isolation-module/src/main/java/com/example/platform/sandbox/BubblewrapSandboxProcessLauncher.java`
++- `sandbox-isolation-module/src/main/java/com/example/platform/sandbox/LocalBoundedProcessLauncher.java`
++
++New files, diagnostic harness and documentation only:
++
++- `diagnostic/com/example/platform/sandbox/DiagnosticJson.java`
++- `diagnostic/com/example/platform/sandbox/TimeoutDiagnosticRecorder.java`
++- `diagnostic/com/example/platform/sandbox/TimeoutCleanupDiagnosticMain.java`
++- `diagnostic/README.md`
++
++No test, build, application configuration, or other source files are changed. The instrumented
++production sources intentionally depend on the diagnostic helper and must be compiled together
++using the command below; this diff is not intended for the normal product build.
++
++## Scenario and preserved mechanics
++
++Source material read: `BubblewrapSandboxProcessLauncherIntegrationTest` (including its
++`requirement`, `launch`, `assertFailure`, and `assertCleanupCompleteAndReaped` helpers),
++`Phase17SandboxConformance`, `BubblewrapSandboxCapabilityDetector`, `BubblewrapProcess`, both
++launchers, the real resolver, cleanup/result/observation/capability/failure types.
++
++The entry point constructs the real package-private bubblewrap launcher with exactly the
++detector's ten capabilities. The mechanism is `diagnostic-declarative-not-probed`, its timestamp
++is `Instant.EPOCH`, and serialized metadata explicitly says `freshlyProbed: false`. The
++package-private `detected` factory is only a construction mechanism here; no detection is run.
++There is one textual and dynamic `launchResolved` call, no retry, and no call to `detect`,
++`BubblewrapProcess.execute`, the original whole test, cancellation scenario, or neutral boundary.
++
++The exact workload is `/usr/bin/timeout 30 /usr/bin/sleep 30`, with `Map.of()` environment,
++250 ms timeout, 1024 capture bytes, and `SandboxCancellation.never()`. The original requirement
++shape is retained: exact input/workspace/tmp/output filesystem policy, no network, exact
++environment, no secrets, unprivileged execution, capture-only limits, and no devices.
++`workspace/immutable-input.txt` contains `immutable`, beneath the exclusive runtime directory.
++The actual resolver, command construction, process start, and shared cleanup remain in use.
++
++Static diff review checked these preserved decisions:
++
++| Operation | Preserved behavior |
++| --- | --- |
++| Discovery | Original `process.descendants()` enumeration; original map and reverse-PID sort |
++| TERM | Every original descendant `ProcessHandle.destroy()`, then root `Process.destroy()` |
++| Grace | Bubblewrap still supplies 500 ms to each original wait |
++| KILL | Original descendant `isAlive` filter and `ProcessHandle.destroyForcibly()`, then original root `isAlive` guard and `Process.destroyForcibly()` |
++| Polling | Original 10 ms cleanup sleep and 20 ms workload wait, original deadline checks |
++| Survivors | Original scan after the second grace wait; original filters, root check, and actual survivor list |
++| Capture joins | Original 250/250 ms initial joins, stdout/stderr explicit closes, 750 ms conditional joins, and `&`/`||` evaluation |
++| Capture closure | Actual original streams; try-with-resources still closes each input, with an additional marker closed immediately before it |
++| Result | Original completed calculation, primary-failure selection, exit/capture construction, and cleanup fields |
++
++Signal wrappers call the original APIs once, recording void, boolean, or returned-Process
++identity as appropriate. Runtime signal exceptions are recorded and rethrown unchanged.
++No observation skips or adds an original signal. There is no Process replacement. Capture
++IOExceptions remain handled as in the original code; diagnostic counters report them separately.
++Read and implicit-close exceptions share a counter because the original try-with-resources
++catch handles both. Capture truncation events and discarded byte counts are also recorded.
++
++The original failure/cleanup predicate conjunction is serialized individually and as
++`combinedPass`: failure present, `PROCESS_TIMEOUT`, cleanup completed, cleanup failure empty,
++survivors empty, and root not alive. To honor the brief's prohibition on observing reused or
++historical PIDs, the root predicate uses the retained actual root `ProcessHandle.isAlive()`.
++The original test instead calls `ProcessHandle.of(numericPid).map(isAlive).orElse(false)`.
++This is an explicit identity-safety adaptation: it expresses the same owned-root predicate
++without relooking up a potentially unrelated process, but is not evidence of how the original
++numeric lookup would behave under PID reuse. No later snapshot changes any original field.
++
++## Recording and teardown
++
++Events carry monotonic start/end nanoseconds. Hooks cover root start; timeout recognition;
++enumeration; before/after original signals; the original survivor scan and actual result;
++capture joins and explicit/implicit closes; `capturesComplete`; full cleanup before return;
++primary failure before cleanup and return; and the returned result. Additional state samples
++are labelled separately from the original observations.
++
++The event buffer is limited to 8192 events, 262144 encoded characters per event, and 8 Mi
++encoded characters total (UTF-16 storage can use twice that many bytes). Identity registration
++and its asynchronous journal queue are limited to 256 entries. Each proc file read is capped
++at 16384 bytes. Overflow/truncation/error counts are explicit and cause diagnostic exit 2;
++status is written outside the event buffer so overflow cannot hide it. Encoding and small
++proc reads occur on the observed thread; bulk output does not run synchronously during the
++original cleanup. The background writer persists only registered identities.
++
++Registration uses only the actual root's handle and handles from the original descendants
++enumeration. It binds `info().startInstant()` and Linux stat start ticks. The parser splits
++after the last `)` and reads state, PPID, and field-22 starttime. Later reads verify the
++retained handle's start instant, then stat ticks, then confirm both after the status read.
++Raw stat and only status State/Pid/PPid/Uid/NSpid lines are persisted for matching identities.
++There is no direct read of environ/cmdline, no global process listing, no parent inspection,
++and no PID/name-based discovery. JDK internals implementing the explicitly required
++`ProcessHandle.info()` are outside this helper's control.
++
++Missing proc entries, permission denial, parse errors, identity mismatch, unknown identity,
++and retired/not-resampled identities are separate outcomes. Once missing/mismatched/unknown
++start identity is retired, its numeric proc path is never sampled again. Retained-handle
++`isAlive` observations are still identified as observations, never proof of running. If
++`startInstant` is unavailable, the recorder conservatively reports unknown without reading
++that numeric proc directory. Processes that disappear before registration may lack raw state.
++
++After return, the main evaluates predicates and takes an immediate snapshot, durably flushes
++the original result and timeline, and takes one more snapshot targeted at return + 200 ms.
++Flush/scheduling delay can make the second snapshot later; actual times are recorded. Ordinary
++exceptions enter `finally`, which attempts evidence preservation before bounded, separate
++teardown. Output failures are explicit; failed preservation does not suppress necessary teardown.
++
++Teardown only considers registered identities with matching start identity. It records each
++action/outcome, avoids signaling observed zombies, and identifies zombie descendants as requiring
++external parent reaping. At most one separate forcible signal is attempted per eligible
++identity; the owned root Process may then receive a bounded `waitFor`. A common two-second
++deadline limits initiation of samples/actions and total requested root wait. This is not a
++hard real-time guarantee: Java scheduling and procfs/signal system calls have no hard syscall
++deadline. There are no further scans or retries. Deadline-expired final observations are
++explicitly unknown and contribute unresolved risk. No descendant reaping is claimed.
++
++Runtime artifacts, all beneath the sole argument:
++
++| File | Contents |
++| --- | --- |
++| `timeline.jsonl` | Original events, followed by appended follow-up/teardown events and out-of-band status records |
++| `result.json` | Structured original primary/result failures, every cleanup field, predicates/pass, exit, UTF-8 and Base64 captures, diagnostic status |
++| `teardown.json` | Separate per-identity actions/returns/exceptions, final snapshots, root wait, unresolved risk |
++| `recorder-status.json` | Buffer/journal/proc/capture counts and diagnostic-failure status |
++| `registered-identities.jsonl` | Asynchronously forced identity registrations, suitable for identity-bound Owner crash inspection |
++| `diagnostic-started` | Exclusive invocation reservation; not an attempt-consumption marker |
++
++JSON documents use forced temporary files and atomic replacement; timeline flushes append and
++force without truncating original events. Failure of atomic replacement is a diagnostic error.
++The identity journal is asynchronous: a crash between registration and writer force can lose
++pending registrations, and the final line can be partial. Hermes must check journal/status
++completeness and never infer a complete process inventory after a crash. Directory-entry
++durability across power loss is not claimed. JVM termination, OOM, hard kill, blocked system
++calls, and disk failure can defeat in-process evidence/finally guarantees. No alternate cleanup
++algorithm can correct the original result, and no later disappearance proves own reaping.
++
++Exit status: 0 only when original predicates pass and diagnostics did not fail; 1 when an
++original predicate fails with otherwise intact diagnostics; 2 for diagnostic/guard/output
++failure. Unresolved teardown risk remains a separate field and does not rewrite original
++assertions. A missing attempt marker or existing reservation refuses launch and emits a
++structured diagnostic error to stderr; the main never creates the Owner's consumption marker.
++
++## Proposed Hermes commands — NOT EXECUTED
++
++Use Bash from the candidate directory. Set these three paths to Hermes-provided external
++locations: an installed JDK 25, the copied spring-modulith-api JAR, and an exclusive external
++evidence directory. No download, Gradle invocation, test compilation, or detector is needed.
++
++```bash
++EP19_JDK25='/absolute/path/to/jdk-25'
++EP19_MODULITH_API_JAR='/absolute/path/to/copied/spring-modulith-api.jar'
++EP19_EVIDENCE='/absolute/path/to/exclusive/external/evidence'
++EP19_RUNTIME="$EP19_EVIDENCE/runtime"
++EP19_CLASSES="$EP19_EVIDENCE/classes"
++mkdir "$EP19_CLASSES"
++mapfile -d '' EP19_SOURCES < <(rg --files -0 sandbox-isolation-module/src/main/java diagnostic/com/example/platform/sandbox -g '*.java')
++"$EP19_JDK25/bin/javac" --release 25 -encoding UTF-8 -proc:none -cp "$EP19_MODULITH_API_JAR" -d "$EP19_CLASSES" "${EP19_SOURCES[@]}"
++```
++
++Before the following single invocation, Hermes must independently create the exclusive runtime
++directory, durably consume the authorized attempt, and create/force the regular non-symlink
++`$EP19_RUNTIME/owner-attempt-consumed` marker as part of that durable Owner transaction. Its
++contents are Owner-managed and are not read as instructions. The marker is an operational
++interlock, not cryptographic proof of external attempt accounting. Marker creation is
++deliberately absent from the commands below. Do not delete `diagnostic-started` to retry.
++
++```bash
++"$EP19_JDK25/bin/java" -cp "$EP19_CLASSES:$EP19_MODULITH_API_JAR" com.example.platform.sandbox.TimeoutCleanupDiagnosticMain "$EP19_RUNTIME"
++```
++
++Static preparation checks only: `git status --short`, `git branch --show-current`,
++`git rev-parse HEAD HEAD^{tree}`, `git rev-parse HEAD^`, `git stash list`,
++`git worktree list --porcelain`, instruction/source searches and reads, `git diff --check`,
++`git diff --no-index --check /dev/null` for each new file, and source diff review.
++Whitespace/diff checks passed; the initial branch output was empty,
++status clean, stash empty, and worktree detached at the base above. No test counts or runtime
++claims exist. Neither proposed command was run. Hermes still needs fresh compilation and
++the separately authorized real attempt; preparation cannot establish capability availability,
++the timeout outcome, capture completion, signal efficacy, zombie state, or cleanup correctness.
+--- /dev/null
++++ b/diagnostic/com/example/platform/sandbox/DiagnosticJson.java
+@@ -0,0 +1,71 @@
++package com.example.platform.sandbox;
++
++import java.util.LinkedHashMap;
++import java.util.Map;
++
++/** Small, strict stdlib encoder for diagnostic values only. */
++final class DiagnosticJson {
++    private DiagnosticJson() {}
++
++    static Map<String, Object> object(Object... pairs) {
++        if (pairs.length % 2 != 0) throw new IllegalArgumentException("unpaired JSON field");
++        Map<String, Object> result = new LinkedHashMap<>();
++        for (int i = 0; i < pairs.length; i += 2) result.put((String) pairs[i], pairs[i + 1]);
++        return result;
++    }
++
++    static String encode(Object value) {
++        StringBuilder out = new StringBuilder();
++        append(out, value);
++        return out.toString();
++    }
++
++    private static void append(StringBuilder out, Object value) {
++        if (value == null) out.append("null");
++        else if (value instanceof Boolean || value instanceof Integer || value instanceof Long) {
++            out.append(value);
++        } else if (value instanceof String text) {
++            out.append('"');
++            for (int i = 0; i < text.length(); i++) {
++                char c = text.charAt(i);
++                switch (c) {
++                    case '"' -> out.append("\\\"");
++                    case '\\' -> out.append("\\\\");
++                    case '\n' -> out.append("\\n");
++                    case '\r' -> out.append("\\r");
++                    case '\t' -> out.append("\\t");
++                    default -> {
++                        // Escape surrogate code units too: no lossy UTF-8 replacement.
++                        if (c < 0x20 || Character.isSurrogate(c)) {
++                            out.append("\\u");
++                            for (int shift = 12; shift >= 0; shift -= 4) {
++                                out.append("0123456789abcdef".charAt((c >> shift) & 15));
++                            }
++                        } else out.append(c);
++                    }
++                }
++            }
++            out.append('"');
++        } else if (value instanceof Map<?, ?> map) {
++            out.append('{');
++            boolean first = true;
++            for (var entry : map.entrySet()) {
++                if (!first) out.append(',');
++                first = false;
++                append(out, (String) entry.getKey());
++                out.append(':');
++                append(out, entry.getValue());
++            }
++            out.append('}');
++        } else if (value instanceof Iterable<?> values) {
++            out.append('[');
++            boolean first = true;
++            for (Object item : values) {
++                if (!first) out.append(',');
++                first = false;
++                append(out, item);
++            }
++            out.append(']');
++        } else throw new IllegalArgumentException("unsupported JSON type: " + value.getClass());
++    }
++}
+--- /dev/null
++++ b/diagnostic/com/example/platform/sandbox/TimeoutCleanupDiagnosticMain.java
+@@ -0,0 +1,216 @@
++package com.example.platform.sandbox;
++
++import static com.example.platform.sandbox.DiagnosticJson.object;
++import static com.example.platform.sandbox.TimeoutDiagnosticRecorder.writeJson;
++
++import java.io.IOException;
++import java.nio.file.Files;
++import java.nio.file.LinkOption;
++import java.nio.file.Path;
++import java.nio.file.StandardOpenOption;
++import java.time.Duration;
++import java.time.Instant;
++import java.util.EnumSet;
++import java.util.List;
++import java.util.Map;
++import java.util.Set;
++import java.util.concurrent.TimeUnit;
++
++/** Exactly one owner-consumed real timeout attempt. There is deliberately no self-test mode. */
++public final class TimeoutCleanupDiagnosticMain {
++    private TimeoutCleanupDiagnosticMain() {}
++
++    public static void main(String[] args) {
++        System.exit(run(args));
++    }
++
++    private static int run(String[] args) {
++        Path directory;
++        try {
++            if (args.length != 1) throw new IllegalArgumentException("one external runtime directory required");
++            directory = Path.of(args[0]).toAbsolutePath().normalize();
++            if (!Files.isDirectory(directory, LinkOption.NOFOLLOW_LINKS)
++                    || !directory.toRealPath().equals(directory)) {
++                throw new IOException("runtime directory must pre-exist without symlink components");
++            }
++            Path marker = directory.resolve("owner-attempt-consumed");
++            if (!Files.isRegularFile(marker, LinkOption.NOFOLLOW_LINKS)) {
++                throw new IOException("missing pre-existing owner-attempt-consumed marker; launch refused");
++            }
++            // CREATE_NEW atomically disallows another invocation in the same consumed attempt.
++            Files.writeString(directory.resolve("diagnostic-started"),
++                    "single timeout attempt reserved\n", StandardOpenOption.CREATE_NEW);
++            for (String name : List.of("timeline.jsonl", "result.json", "teardown.json", "recorder-status.json")) {
++                Files.createFile(directory.resolve(name));
++            }
++        } catch (Exception failure) {
++            System.err.println(DiagnosticJson.encode(object("status", "diagnostic_error",
++                    "launchAttempted", false, "error", TimeoutDiagnosticRecorder.exception(failure))));
++            return 2;
++        }
++
++        TimeoutDiagnosticRecorder recorder = null;
++        Map<String, Object> original = null;
++        Map<String, Object> teardown = object("status", "not_started", "unresolvedRisk", true);
++        Object diagnosticFailure = null;
++        boolean originalPass = false;
++        boolean launchAttempted = false;
++        boolean originalFlushed = false;
++        long returnedNano = 0;
++        try {
++            writeJson(directory.resolve("result.json"), envelope(null, null, false, false, null));
++            writeJson(directory.resolve("teardown.json"), teardown);
++            recorder = new TimeoutDiagnosticRecorder(directory);
++            recorder.activate();
++            Path workspace = Files.createDirectory(directory.resolve("workspace"));
++            Path input = Files.writeString(workspace.resolve("immutable-input.txt"), "immutable",
++                    StandardOpenOption.CREATE_NEW);
++
++            Set<SandboxCapability> declared = EnumSet.of(
++                    SandboxCapability.PROCESS_TREE_CONTAINMENT,
++                    SandboxCapability.WALL_CLOCK_TIMEOUT,
++                    SandboxCapability.FILESYSTEM_PATH_VALIDATION,
++                    SandboxCapability.FILESYSTEM_ACCESS_ISOLATION,
++                    SandboxCapability.NETWORK_NONE,
++                    SandboxCapability.ENVIRONMENT_CLEARING,
++                    SandboxCapability.BOUNDED_CAPTURE,
++                    SandboxCapability.UNPRIVILEGED_EXECUTION,
++                    SandboxCapability.HOST_EXPOSURE_DENIAL,
++                    SandboxCapability.DEVICE_NONE);
++            // Package-private factory is required by the real resolver/launcher; the mechanism
++            // and metadata explicitly identify this as a declaration, never a fresh probe.
++            SandboxRuntimeCapabilities capabilities = SandboxRuntimeCapabilities.detected(declared,
++                    "diagnostic-declarative-not-probed", Instant.EPOCH);
++            TimeoutDiagnosticRecorder.mark("scenario", "capabilityEvidence", object(
++                    "kind", "diagnostic_declaration", "freshlyProbed", false,
++                    "mechanism", capabilities.mechanism(), "observedAt", capabilities.observedAt().toString(),
++                    "capabilities", declared.stream().map(Enum::name).sorted().toList()),
++                    "command", List.of("/usr/bin/timeout", "30", "/usr/bin/sleep", "30"),
++                    "environment", Map.of(), "timeoutMillis", 250, "captureBytes", 1024,
++                    "cancellation", "never", "ownerAttemptMarker", "owner-attempt-consumed");
++            SandboxExecutionRequirement requirement = new SandboxExecutionRequirement(
++                    ProcessRequirement.of(Set.of("/usr/bin/timeout"), "/usr/bin/timeout",
++                            List.of("30", "/usr/bin/sleep", "30"), Duration.ofMillis(250)),
++                    FilesystemPolicy.exact(Set.of(input), workspace,
++                            workspace.resolve(".sandbox-tmp"), workspace.resolve(".sandbox-output"), workspace),
++                    NetworkPolicy.none(), EnvironmentPolicy.exact(Map.of()), SecretExposure.none(),
++                    PrivilegePolicy.unprivileged(), ResourceEnforcementLimits.captureOnly(1024),
++                    DeviceExposurePolicy.none());
++            BubblewrapSandboxProcessLauncher launcher = new BubblewrapSandboxProcessLauncher(
++                    Path.of("/usr/bin/bwrap"), capabilities);
++            launchAttempted = true;
++            SandboxExecutionResult result = launcher.launchResolved(requirement, SandboxCancellation.never());
++            returnedNano = System.nanoTime();
++            boolean rootAlive = recorder.rootIsAliveObserved();
++            SandboxCleanupObservation cleanup = result.observation().cleanup();
++            boolean failurePresent = result.failure().isPresent();
++            boolean failureIsTimeout = result.failure().map(f -> f.code() == SandboxFailureCode.PROCESS_TIMEOUT)
++                    .orElse(false);
++            originalPass = failurePresent && failureIsTimeout && cleanup.completed()
++                    && cleanup.failure().isEmpty() && cleanup.survivors().isEmpty() && !rootAlive;
++            original = object("returnedNano", returnedNano,
++                    "primaryFailureRecorded", recorder.primaryRecorded(), "primaryFailure", recorder.primaryFailure(),
++                    "failure", TimeoutDiagnosticRecorder.failure(result.failure().orElse(null)),
++                    "cleanup", TimeoutDiagnosticRecorder.cleanup(cleanup),
++                    "exitCode", result.exitCode().isPresent() ? result.exitCode().getAsInt() : null,
++                    "stdout", capture(result.stdout()), "stderr", capture(result.stderr()),
++                    "observation", object("processId", result.observation().handle().processId(),
++                            "workingDirectory", result.observation().workingDirectory().toString(),
++                            "elapsedNanos", result.observation().elapsed().toNanos(),
++                            "handle", result.observation().handle().toString()),
++                    "originalPredicates", object("failurePresent", failurePresent,
++                            "failureCodeEqualsPROCESS_TIMEOUT", failureIsTimeout,
++                            "cleanupCompleted", cleanup.completed(), "cleanupFailureEmpty", cleanup.failure().isEmpty(),
++                            "cleanupSurvivorsEmpty", cleanup.survivors().isEmpty(),
++                            "rootIsAliveObserved", rootAlive, "rootNotAlive", !rootAlive,
++                            "rootPredicateEvaluation", "retained actual root ProcessHandle.isAlive; no numeric PID relookup",
++                            "combinedPass", originalPass));
++            TimeoutDiagnosticRecorder.mark("main.returned_original_result", "originalResult", original);
++            recorder.snapshotAll("follow_up.immediately_after_return");
++            writeJson(directory.resolve("result.json"), envelope(original, null, originalPass, true, recorder.status()));
++            recorder.flushTimeline(directory);
++            originalFlushed = true;
++            // Measured from actual return; disk flush time is visible and may exceed 200 ms.
++            long remaining = returnedNano + TimeUnit.MILLISECONDS.toNanos(200) - System.nanoTime();
++            if (remaining > 0) TimeUnit.NANOSECONDS.sleep(remaining);
++            TimeoutDiagnosticRecorder.mark("follow_up.delay", "sinceReturnNanos", System.nanoTime() - returnedNano);
++            recorder.snapshotAll("follow_up.about_200ms_after_return");
++        } catch (Exception failure) {
++            diagnosticFailure = TimeoutDiagnosticRecorder.exception(failure);
++            if (failure instanceof InterruptedException) Thread.currentThread().interrupt();
++            if (recorder != null) recorder.diagnosticError("main", failure);
++        } finally {
++            if (recorder != null) {
++                // Best effort durable preservation is attempted before ANY separate teardown,
++                // including the exceptional path. Failure to persist never suppresses teardown.
++                if (!originalFlushed) {
++                    try {
++                        writeJson(directory.resolve("result.json"), envelope(original, diagnosticFailure,
++                                originalPass, launchAttempted, recorder.status()));
++                        recorder.flushTimeline(directory);
++                        originalFlushed = true;
++                    } catch (Exception failure) {
++                        recorder.diagnosticError("pre_teardown_flush", failure);
++                        diagnosticFailure = TimeoutDiagnosticRecorder.exception(failure);
++                    }
++                }
++                try {
++                    teardown = recorder.teardown();
++                    teardown.put("originalArtifactsFlushedBeforeTeardown", originalFlushed);
++                } catch (Exception failure) {
++                    recorder.diagnosticError("teardown", failure);
++                    teardown = object("status", "diagnostic_error", "error", TimeoutDiagnosticRecorder.exception(failure),
++                            "unresolvedRisk", true, "originalArtifactsFlushedBeforeTeardown", originalFlushed);
++                    diagnosticFailure = TimeoutDiagnosticRecorder.exception(failure);
++                }
++                try {
++                    recorder.close();
++                } catch (Exception failure) {
++                    recorder.diagnosticError("recorder_close", failure);
++                    diagnosticFailure = TimeoutDiagnosticRecorder.exception(failure);
++                }
++            }
++            try {
++                if (recorder != null && recorder.failed() && diagnosticFailure == null) {
++                    diagnosticFailure = object("type", "recorder_failure", "message", "See recorder-status.json");
++                }
++                writeJson(directory.resolve("teardown.json"), teardown);
++                writeJson(directory.resolve("result.json"), envelope(original, diagnosticFailure,
++                        originalPass, launchAttempted, recorder == null ? null : recorder.status()));
++                if (recorder != null) {
++                    recorder.flushTimeline(directory);
++                    writeJson(directory.resolve("recorder-status.json"), recorder.status());
++                } else {
++                    writeJson(directory.resolve("recorder-status.json"), object("diagnosticFailed", true,
++                            "error", diagnosticFailure));
++                }
++            } catch (Exception failure) {
++                diagnosticFailure = TimeoutDiagnosticRecorder.exception(failure);
++                System.err.println(DiagnosticJson.encode(object("status", "diagnostic_error",
++                        "during", "final_flush", "error", diagnosticFailure)));
++                // An unwritable evidence directory cannot be made reliable by further writes.
++            }
++        }
++        return diagnosticFailure != null || recorder == null || recorder.failed() ? 2 : originalPass ? 0 : 1;
++    }
++
++    private static Map<String, Object> capture(BoundedCapture capture) {
++        return object("utf8", capture.utf8(), "bytesBase64",
++                java.util.Base64.getEncoder().encodeToString(capture.bytes()),
++                "byteCount", capture.bytes().length, "truncated", capture.truncated());
++    }
++
++    private static Map<String, Object> envelope(Map<String, Object> original, Object diagnosticFailure,
++                                               boolean pass, boolean launchAttempted, Object status) {
++        if (diagnosticFailure == null && status instanceof Map<?, ?> fields
++                && Boolean.TRUE.equals(fields.get("diagnosticFailed"))) {
++            diagnosticFailure = object("type", "recorder_failure", "message", "See recorderStatus");
++        }
++        return object("status", diagnosticFailure != null ? "diagnostic_error"
++                        : original == null ? "diagnostic_incomplete" : "original_result_recorded",
++                "launchAttempted", launchAttempted, "originalResult", original,
++                "originalAssertionsPass", pass, "diagnosticFailure", diagnosticFailure,
++                "recorderStatus", status,
++                "capabilityEvidenceKind", "diagnostic_declaration_not_freshly_probed");
++    }
++}
+--- /dev/null
++++ b/diagnostic/com/example/platform/sandbox/TimeoutDiagnosticRecorder.java
+@@ -0,0 +1,557 @@
++package com.example.platform.sandbox;
++
++import static com.example.platform.sandbox.DiagnosticJson.object;
++
++import java.io.IOException;
++import java.nio.ByteBuffer;
++import java.nio.channels.FileChannel;
++import java.nio.charset.StandardCharsets;
++import java.nio.file.AccessDeniedException;
++import java.nio.file.Files;
++import java.nio.file.NoSuchFileException;
++import java.nio.file.Path;
++import java.nio.file.StandardCopyOption;
++import java.nio.file.StandardOpenOption;
++import java.time.Instant;
++import java.util.ArrayList;
++import java.util.LinkedHashMap;
++import java.util.List;
++import java.util.Map;
++import java.util.concurrent.ArrayBlockingQueue;
++import java.util.concurrent.TimeUnit;
++import java.util.concurrent.atomic.AtomicLong;
++
++/** Isolated experiment instrumentation. No collector, discovery loop, or alternate Process. */
++final class TimeoutDiagnosticRecorder implements AutoCloseable {
++    private static final int MAX_EVENTS = 8192;
++    private static final int MAX_EVENT_CHARACTERS = 262144;
++    private static final int MAX_BUFFER_CHARACTERS = 8 * 1024 * 1024;
++    private static final int MAX_IDENTITIES = 256;
++    private static final int PROC_BYTES = 16384;
++    private static volatile TimeoutDiagnosticRecorder active;
++    private final List<String> events = new ArrayList<>();
++    private int bufferCharacters;
++    private int eventsFlushed;
++    private final Map<Long, Identity> identities = new LinkedHashMap<>();
++    private final ArrayBlockingQueue<Map<String, Object>> journalQueue =
++            new ArrayBlockingQueue<>(MAX_IDENTITIES);
++    private final AtomicLong errors = new AtomicLong();
++    private final AtomicLong droppedEvents = new AtomicLong();
++    private final AtomicLong droppedIdentities = new AtomicLong();
++    private final AtomicLong procErrors = new AtomicLong();
++    private final AtomicLong procTruncations = new AtomicLong();
++    private final AtomicLong captureReadErrors = new AtomicLong();
++    private final AtomicLong captureCloseErrors = new AtomicLong();
++    private final AtomicLong captureTruncations = new AtomicLong();
++    private final AtomicLong captureDroppedBytes = new AtomicLong();
++    private final AtomicLong journalWritten = new AtomicLong();
++    private final FileChannel journal;
++    private final Thread journalThread;
++    private volatile boolean journalClosing;
++    private Process root;
++    private SandboxFailure primaryFailure;
++    private boolean primaryRecorded;
++
++    TimeoutDiagnosticRecorder(Path directory) throws IOException {
++        journal = FileChannel.open(directory.resolve("registered-identities.jsonl"),
++                StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
++        journalThread = Thread.ofPlatform().daemon(true).name("diagnostic-identity-journal")
++                .start(this::writeJournal);
++    }
++
++    void activate() {
++        if (active != null) throw new IllegalStateException("recorder already active");
++        active = this;
++    }
++
++    static long begin(String phase, Object... fields) {
++        long now = System.nanoTime();
++        record(phase + ".begin", now, now, fields);
++        return now;
++    }
++
++    static void end(String phase, long start, Object... fields) {
++        record(phase + ".end", start, System.nanoTime(), fields);
++    }
++
++    static void mark(String phase, Object... fields) {
++        long now = System.nanoTime();
++        record(phase, now, now, fields);
++    }
++
++    private static void record(String phase, long start, long end, Object... fields) {
++        TimeoutDiagnosticRecorder recorder = active;
++        if (recorder == null) return;
++        try {
++            recorder.add(object("phase", phase, "startNano", start, "endNano", end,
++                    "data", object(fields)));
++        } catch (RuntimeException failure) {
++            recorder.errors.incrementAndGet();
++        }
++    }
++
++    private synchronized void add(Map<String, Object> event) {
++        String encoded = DiagnosticJson.encode(event);
++        if (events.size() == MAX_EVENTS || encoded.length() > MAX_EVENT_CHARACTERS
++                || bufferCharacters + encoded.length() > MAX_BUFFER_CHARACTERS) {
++            droppedEvents.incrementAndGet();
++        } else {
++            events.add(encoded);
++            bufferCharacters += encoded.length();
++        }
++    }
++
++    static void rootStarted(Process process) {
++        TimeoutDiagnosticRecorder recorder = active;
++        if (recorder == null) return;
++        recorder.root = process; // Preserve the actual Process even if registration fails.
++        long start = begin("root.started", "pid", process.pid());
++        recorder.register(process.toHandle(), "root");
++        end("root.started", start, "pid", process.pid());
++    }
++
++    static void descendants(List<ProcessHandle> handles) {
++        TimeoutDiagnosticRecorder recorder = active;
++        if (recorder == null) return;
++        for (ProcessHandle handle : handles) recorder.register(handle, "root.descendants");
++    }
++
++    private void register(ProcessHandle handle, String source) {
++        if (identities.containsKey(handle.pid())) return;
++        if (identities.size() >= MAX_IDENTITIES) {
++            droppedIdentities.incrementAndGet();
++            return;
++        }
++        Identity identity = new Identity(handle, source);
++        identities.put(handle.pid(), identity);
++        Map<String, Object> initial = sample(identity, true);
++        Map<String, Object> registration = object("pid", handle.pid(), "source", source,
++                "startInstant", identity.start == null ? null : identity.start.toString(),
++                "startTicks", identity.ticks, "registrationNano", identity.registeredNano,
++                "initialObservation", initial);
++        mark("identity.registered", "identity", registration);
++        // Only bounded queue insertion on the cleanup thread. The dedicated journal writer
++        // persists registrations without bulk synchronous cleanup output.
++        if (!journalQueue.offer(registration)) errors.incrementAndGet();
++    }
++
++    static void snapshot(String phase) {
++        TimeoutDiagnosticRecorder recorder = active;
++        if (recorder != null) recorder.snapshotAll(phase);
++    }
++
++    List<Map<String, Object>> snapshotAll(String phase) {
++        long start = begin(phase);
++        List<Map<String, Object>> samples = new ArrayList<>();
++        for (Identity identity : identities.values()) samples.add(sample(identity, false));
++        end(phase, start, "observations", samples,
++                "interpretation", "isAlive is an observation, not proof of running or own reaping");
++        return samples;
++    }
++
++    private static void snapshotTarget(long pid, String phase) {
++        TimeoutDiagnosticRecorder recorder = active;
++        if (recorder == null) return;
++        Identity identity = recorder.identities.get(pid);
++        if (identity != null) {
++            long start = begin(phase, "pid", pid);
++            end(phase, start, "observation", recorder.sample(identity, false));
++        }
++    }
++
++    private Map<String, Object> sample(Identity identity, boolean registration) {
++        long start = System.nanoTime();
++        Map<String, Object> result = object("pid", identity.handle.pid(), "startNano", start,
++                "registeredStartInstant", identity.start == null ? null : identity.start.toString(),
++                "registeredStartTicks", identity.ticks);
++        try {
++            result.put("isAliveObserved", identity.handle.isAlive());
++            if (identity.retired != null) {
++                result.put("outcome", "not_resampled");
++                result.put("reason", identity.retired);
++                return result;
++            }
++            Instant before = identity.handle.info().startInstant().orElse(null);
++            if (registration) identity.start = before;
++            if (before == null || (!registration && identity.ticks == null)) {
++                identity.retired = "unknown_start_identity";
++                result.put("outcome", "unknown");
++                return result;
++            }
++            if (!before.equals(identity.start)) {
++                identity.retired = "identity_mismatch";
++                result.put("outcome", "identity_mismatch");
++                return result;
++            }
++            // No PID lookup, no parent read. Only the retained actual handle's stat/status.
++            Path proc = Path.of("/proc", Long.toString(identity.handle.pid()));
++            Stat stat = readStat(proc.resolve("stat"));
++            Instant afterStat = identity.handle.info().startInstant().orElse(null);
++            if (!before.equals(afterStat) || (!registration && !stat.ticks.equals(identity.ticks))) {
++                identity.retired = "identity_mismatch";
++                result.put("outcome", "identity_mismatch");
++                return result; // Do not retain raw evidence from a different identity.
++            }
++            if (registration) identity.ticks = stat.ticks;
++            String status = readBounded(proc.resolve("status"));
++            String subset = status.lines().filter(line -> line.startsWith("State:")
++                    || line.startsWith("Pid:") || line.startsWith("PPid:")
++                    || line.startsWith("Uid:") || line.startsWith("NSpid:"))
++                    .collect(java.util.stream.Collectors.joining("\n"));
++            Stat confirm = readStat(proc.resolve("stat"));
++            Instant after = identity.handle.info().startInstant().orElse(null);
++            if (!stat.ticks.equals(confirm.ticks) || !before.equals(after)) {
++                identity.retired = "identity_mismatch";
++                result.put("outcome", "identity_mismatch");
++                return result;
++            }
++            result.putAll(object("outcome", "matching_identity", "state", stat.state,
++                    "ppid", stat.ppid, "startTicks", stat.ticks,
++                    "startInstant", before.toString(), "rawStat", stat.raw,
++                    "rawStatusSubset", subset, "rawConfirmStat", confirm.raw));
++        } catch (NoSuchFileException missing) {
++            identity.retired = "missing_proc_entry";
++            result.put("outcome", "missing_proc_entry");
++        } catch (AccessDeniedException | SecurityException denied) {
++            procErrors.incrementAndGet();
++            result.putAll(object("outcome", "permission_denied", "error", exception(denied)));
++        } catch (IllegalArgumentException invalid) {
++            procErrors.incrementAndGet();
++            result.putAll(object("outcome", "parse_error", "error", exception(invalid)));
++        } catch (IOException | RuntimeException failure) {
++            procErrors.incrementAndGet();
++            result.putAll(object("outcome", "unknown", "error", exception(failure)));
++        } finally {
++            result.put("endNano", System.nanoTime());
++        }
++        return result;
++    }
++
++    private String readBounded(Path path) throws IOException {
++        try (var input = Files.newInputStream(path)) {
++            byte[] bytes = input.readNBytes(PROC_BYTES + 1);
++            if (bytes.length > PROC_BYTES) {
++                procTruncations.incrementAndGet();
++                throw new IOException("proc evidence exceeds byte bound");
++            }
++            return new String(bytes, StandardCharsets.UTF_8);
++        }
++    }
++
++    private Stat readStat(Path path) throws IOException {
++        String raw = readBounded(path);
++        int close = raw.lastIndexOf(')');
++        if (close < 0) throw new IllegalArgumentException("stat missing final command delimiter");
++        String[] fields = raw.substring(close + 1).trim().split("\\s+");
++        if (fields.length < 20 || fields[0].length() != 1) {
++            throw new IllegalArgumentException("stat missing state/ppid/starttime fields");
++        }
++        return new Stat(raw, fields[0], Long.parseLong(fields[1]), Long.parseLong(fields[19]));
++    }
++
++    private record Stat(String raw, String state, long ppid, Long ticks) {}
++
++    private static final class Identity {
++        final ProcessHandle handle;
++        final String source;
++        final long registeredNano = System.nanoTime();
++        Instant start;
++        Long ticks;
++        String retired;
++        Identity(ProcessHandle handle, String source) { this.handle = handle; this.source = source; }
++    }
++
++    static void destroy(Process process) {
++        long start = beforeSignal(process.pid(), "Process.destroy", "original_cleanup");
++        try {
++            process.destroy();
++            afterSignal(process.pid(), "Process.destroy", start, "void", null);
++        } catch (RuntimeException failure) {
++            afterSignal(process.pid(), "Process.destroy", start, null, failure);
++            throw failure;
++        }
++    }
++
++    static Process destroyForcibly(Process process) {
++        long start = beforeSignal(process.pid(), "Process.destroyForcibly", "original_cleanup");
++        try {
++            Process returned = process.destroyForcibly();
++            afterSignal(process.pid(), "Process.destroyForcibly", start,
++                    object("type", "Process", "sameInstance", returned == process), null);
++            return returned;
++        } catch (RuntimeException failure) {
++            afterSignal(process.pid(), "Process.destroyForcibly", start, null, failure);
++            throw failure;
++        }
++    }
++
++    static boolean destroy(ProcessHandle handle) { return signal(handle, false, "original_cleanup"); }
++    static boolean destroyForcibly(ProcessHandle handle) { return signal(handle, true, "original_cleanup"); }
++
++    private static boolean signal(ProcessHandle handle, boolean force, String context) {
++        String method = force ? "ProcessHandle.destroyForcibly" : "ProcessHandle.destroy";
++        long start = beforeSignal(handle.pid(), method, context);
++        try {
++            boolean returned = force ? handle.destroyForcibly() : handle.destroy();
++            afterSignal(handle.pid(), method, start, returned, null);
++            return returned;
++        } catch (RuntimeException failure) {
++            afterSignal(handle.pid(), method, start, null, failure);
++            throw failure;
++        }
++    }
++
++    private static long beforeSignal(long pid, String method, String context) {
++        if (context.equals("original_cleanup")) snapshotTarget(pid, context + ".signal.before_state");
++        return begin("signal", "pid", pid, "method", method, "context", context);
++    }
++
++    private static void afterSignal(long pid, String method, long start, Object returned,
++                                    RuntimeException failure) {
++        end("signal", start, "pid", pid, "method", method, "returned", returned,
++                "exception", exception(failure));
++        snapshotTarget(pid, "signal.after_state");
++    }
++
++    static void captureError(String stream, String operation, IOException failure) {
++        TimeoutDiagnosticRecorder recorder = active;
++        if (recorder == null) return;
++        if (operation.equals("read_or_implicit_close")) recorder.captureReadErrors.incrementAndGet();
++        else recorder.captureCloseErrors.incrementAndGet();
++        mark("capture.error", "stream", stream, "operation", operation, "error", exception(failure));
++    }
++
++    static void captureTruncated(long bytes) {
++        TimeoutDiagnosticRecorder recorder = active;
++        if (recorder == null) return;
++        recorder.captureTruncations.incrementAndGet();
++        recorder.captureDroppedBytes.addAndGet(bytes);
++    }
++
++    static ReaderCloseMarker readerCloseMarker(String stream) { return new ReaderCloseMarker(stream); }
++
++    static final class ReaderCloseMarker implements AutoCloseable {
++        private final String stream;
++        private long start;
++        ReaderCloseMarker(String stream) { this.stream = stream; }
++        @Override public void close() { start = begin("capture.implicit_close", "stream", stream); }
++        void finished() { end("capture.implicit_close", start, "stream", stream); }
++    }
++
++    static void primary(SandboxFailure failure) {
++        TimeoutDiagnosticRecorder recorder = active;
++        if (recorder == null) return;
++        recorder.primaryFailure = failure;
++        recorder.primaryRecorded = true;
++        mark("primary_failure.before_return", "primaryFailure", failure(failure));
++    }
++
++    static void primaryBeforeCleanup(SandboxFailure failure) {
++        TimeoutDiagnosticRecorder recorder = active;
++        if (recorder == null) return;
++        recorder.primaryFailure = failure;
++        mark("primary_failure.before_cleanup", "primaryFailure", failure(failure));
++    }
++
++    Object primaryFailure() { return failure(primaryFailure); }
++    boolean primaryRecorded() { return primaryRecorded; }
++
++    static Object failure(SandboxFailure failure) {
++        return failure == null ? null : object("code", failure.code().name(),
++                "message", failure.message(), "missingCapabilities",
++                failure.missingCapabilities().stream().map(Enum::name).sorted().toList());
++    }
++
++    static Object exception(Throwable failure) {
++        if (failure == null) return null;
++        String message = failure.getMessage();
++        if (message != null && message.length() > 2048) message = message.substring(0, 2048);
++        return object("type", failure.getClass().getName(), "message", message);
++    }
++
++    static Map<String, Object> cleanup(SandboxCleanupObservation c) {
++        return object("completed", c.completed(), "namedContainerRemoved", c.namedContainerRemoved(),
++                "engineClientReaped", c.engineClientReaped(),
++                "workloadProcessesContained", c.workloadProcessesContained(),
++                "captureStreamsClosed", c.captureStreamsClosed(), "descendantsObserved", c.descendantsObserved(),
++                "survivors", c.survivors(), "detachedEngineHelpers", c.detachedEngineHelpers(),
++                "engineClientProcessId", c.engineClientProcessId().isPresent()
++                        ? c.engineClientProcessId().getAsLong() : null,
++                "containerName", c.containerName(), "containerStatus", c.containerStatus(),
++                "failure", failure(c.failure().orElse(null)), "failureMessage", c.failureMessage(),
++                "diagnostic", c.diagnostic());
++    }
++
++    boolean rootIsAliveObserved() {
++        // Retain identity instead of looking up a possibly reused historical numeric PID.
++        return root != null && root.toHandle().isAlive();
++    }
++
++    Map<String, Object> teardown() {
++        long start = begin("separate_teardown", "budgetMillis", 2000);
++        long deadline = start + TimeUnit.SECONDS.toNanos(2);
++        List<Map<String, Object>> actions = new ArrayList<>();
++        for (Identity identity : identities.values()) {
++            if (System.nanoTime() >= deadline) {
++                actions.add(object("pid", identity.handle.pid(), "startInstant",
++                        identity.start == null ? null : identity.start.toString(), "startTicks", identity.ticks,
++                        "action", "none", "outcome", "budget_exhausted"));
++                continue;
++            }
++            Map<String, Object> observed = sample(identity, false);
++            String outcome = (String) observed.get("outcome");
++            String action = "none";
++            Object returned = null;
++            Object error = null;
++            if ("matching_identity".equals(outcome)) {
++                if ("Z".equals(observed.get("state"))) outcome = "zombie_requires_external_parent_reaping";
++                else if (Boolean.TRUE.equals(observed.get("isAliveObserved"))
++                        && System.nanoTime() < deadline) {
++                    action = "ProcessHandle.destroyForcibly";
++                    try {
++                        returned = signal(identity.handle, true, "separate_teardown");
++                        outcome = "signal_returned_not_proof_of_exit";
++                    } catch (RuntimeException failure) {
++                        error = exception(failure);
++                        outcome = "signal_exception";
++                        errors.incrementAndGet();
++                    }
++                } else outcome = Boolean.TRUE.equals(observed.get("isAliveObserved"))
++                        ? "budget_exhausted" : "not_alive_observed";
++            }
++            actions.add(object("pid", identity.handle.pid(), "startInstant",
++                    identity.start == null ? null : identity.start.toString(), "startTicks", identity.ticks,
++                    "before", observed, "action", action, "returned", returned,
++                    "exception", error, "outcome", outcome));
++        }
++        Map<String, Object> rootWait = object("action", "none");
++        long remaining = deadline - System.nanoTime();
++        if (root != null && remaining > 0) {
++            long waitStart = begin("separate_teardown.root_waitFor", "budgetNanos", remaining);
++            try {
++                boolean returned = root.waitFor(Math.max(0, deadline - System.nanoTime()), TimeUnit.NANOSECONDS);
++                rootWait = object("action", "own_Process.waitFor", "returned", returned,
++                        "meaning", "own root only; no descendant reaping claim");
++            } catch (InterruptedException interrupted) {
++                Thread.currentThread().interrupt();
++                rootWait = object("action", "own_Process.waitFor", "exception", exception(interrupted));
++                errors.incrementAndGet();
++            } finally {
++                end("separate_teardown.root_waitFor", waitStart, "outcome", rootWait);
++            }
++        }
++        List<Map<String, Object>> later = new ArrayList<>();
++        for (Identity identity : identities.values()) {
++            later.add(System.nanoTime() < deadline ? sample(identity, false)
++                    : object("pid", identity.handle.pid(), "outcome", "budget_exhausted"));
++        }
++        boolean unresolved = droppedIdentities.get() != 0 || later.stream().anyMatch(s -> {
++            if ("missing_proc_entry".equals(s.get("outcome"))) return false;
++            if ("not_resampled".equals(s.get("outcome"))
++                    && "missing_proc_entry".equals(s.get("reason"))) return false;
++            return !"matching_identity".equals(s.get("outcome"))
++                    || !Boolean.FALSE.equals(s.get("isAliveObserved")) || "Z".equals(s.get("state"));
++        });
++        Map<String, Object> result = object("actions", actions, "rootWait", rootWait,
++                "finalSnapshots", later, "unresolvedRisk", unresolved,
++                "limitations", "No discovery beyond original handles; disappearance does not prove own reaping. "
++                        + "Zombie descendants require external parent reaping. Procfs and signal operations "
++                        + "have no hard syscall deadline; budget limits initiation and root wait.");
++        end("separate_teardown", start, "result", result);
++        return result;
++    }
++
++    Map<String, Object> status() {
++        return object("eventLimit", MAX_EVENTS, "eventsRetained", eventCount(),
++                "eventCharacterLimit", MAX_EVENT_CHARACTERS,
++                "bufferCharacterLimit", MAX_BUFFER_CHARACTERS, "bufferCharacters", bufferCharacters,
++                "eventsDropped", droppedEvents.get(), "identityLimit", MAX_IDENTITIES,
++                "identitiesRegistered", identities.size(), "identitiesDropped", droppedIdentities.get(),
++                "instrumentationErrors", errors.get(), "procErrors", procErrors.get(),
++                "procTruncations", procTruncations.get(), "captureReadOrImplicitCloseErrors", captureReadErrors.get(),
++                "captureExplicitCloseErrors", captureCloseErrors.get(),
++                "captureTruncationEvents", captureTruncations.get(), "captureDroppedBytes", captureDroppedBytes.get(),
++                "identitiesJournaled", journalWritten.get(), "journalQueuePending", journalQueue.size(),
++                "journalThreadAlive", journalThread.isAlive(), "diagnosticFailed", failed());
++    }
++
++    private synchronized int eventCount() { return events.size(); }
++
++    boolean failed() {
++        return errors.get() != 0 || droppedEvents.get() != 0 || droppedIdentities.get() != 0
++                || procErrors.get() != 0 || procTruncations.get() != 0;
++    }
++
++    void diagnosticError(String phase, Throwable failure) {
++        errors.incrementAndGet();
++        mark("diagnostic.error", "during", phase, "error", exception(failure));
++    }
++
++    void flushTimeline(Path directory) throws IOException {
++        List<String> copy;
++        synchronized (this) { copy = List.copyOf(events.subList(eventsFlushed, events.size())); }
++        StringBuilder text = new StringBuilder();
++        for (String event : copy) text.append(event).append('\n');
++        // The status record is out-of-band and survives a full event buffer.
++        text.append(DiagnosticJson.encode(object("phase", "recorder.status", "data", status()))).append('\n');
++        try (FileChannel channel = FileChannel.open(directory.resolve("timeline.jsonl"),
++                StandardOpenOption.WRITE, StandardOpenOption.APPEND)) {
++            ByteBuffer bytes = StandardCharsets.UTF_8.encode(text.toString());
++            while (bytes.hasRemaining()) channel.write(bytes);
++            channel.force(true);
++        }
++        eventsFlushed += copy.size();
++    }
++
++    static void writeJson(Path path, Object value) throws IOException {
++        Path temporary = Files.createTempFile(path.getParent(), "." + path.getFileName() + "-", ".tmp");
++        try {
++            writeDurable(temporary, DiagnosticJson.encode(value) + "\n");
++            Files.move(temporary, path, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
++        } finally {
++            Files.deleteIfExists(temporary);
++        }
++    }
++
++    private static void writeDurable(Path path, String value) throws IOException {
++        try (FileChannel channel = FileChannel.open(path, StandardOpenOption.CREATE,
++                StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE)) {
++            ByteBuffer bytes = StandardCharsets.UTF_8.encode(value);
++            while (bytes.hasRemaining()) channel.write(bytes);
++            channel.force(true);
++        }
++    }
++
++    private void writeJournal() {
++        try {
++            while (!journalClosing || !journalQueue.isEmpty()) {
++                Map<String, Object> registration = journalQueue.poll(50, TimeUnit.MILLISECONDS);
++                if (registration == null) continue;
++                ByteBuffer bytes = StandardCharsets.UTF_8.encode(DiagnosticJson.encode(registration) + "\n");
++                while (bytes.hasRemaining()) journal.write(bytes);
++                journal.force(true);
++                journalWritten.incrementAndGet();
++            }
++        } catch (IOException | RuntimeException failure) {
++            diagnosticError("identity_journal", failure);
++        } catch (InterruptedException interrupted) {
++            Thread.currentThread().interrupt();
++            diagnosticError("identity_journal", interrupted);
++        }
++    }
++
++    @Override public void close() throws IOException {
++        journalClosing = true;
++        try {
++            journalThread.join(500);
++        } catch (InterruptedException interrupted) {
++            Thread.currentThread().interrupt();
++            diagnosticError("journal_join", interrupted);
++        }
++        if (journalThread.isAlive() || journalWritten.get() != identities.size()) {
++            diagnosticError("journal_incomplete", new IOException("identity journal did not finish"));
++        }
++        journal.close();
++        active = null;
++    }
++}

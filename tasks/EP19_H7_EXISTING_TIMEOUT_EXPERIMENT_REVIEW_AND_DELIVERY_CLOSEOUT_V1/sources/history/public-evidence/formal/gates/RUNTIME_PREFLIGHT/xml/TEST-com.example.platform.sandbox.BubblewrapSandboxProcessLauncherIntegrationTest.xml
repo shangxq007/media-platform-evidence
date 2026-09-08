@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.platform.sandbox.BubblewrapSandboxProcessLauncherIntegrationTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2026-09-08T08:22:00.037Z" hostname="localhost.localdomain" time="2.405">
+  <properties/>
+  <testcase name="real_bubblewrap_enforces_the_advertised_host_binary_boundaries()" classname="com.example.platform.sandbox.BubblewrapSandboxProcessLauncherIntegrationTest" time="2.405">
+    <failure message="org.opentest4j.AssertionFailedError: [cleanup{completed=false, failureCode=SANDBOX_CLEANUP_FAILED, failureMessage=bubblewrap workload descendants remain alive, survivors=[489968], detachedEngineHelpers=[], enginePid=489967, engineClientReaped=true, containerName=not-applicable, containerStatus=not-applicable, namedContainerRemoved=true, workloadProcessesContained=false, captureStreamsClosed=true, descendantsObserved=3}] &#10;Expecting value to be true but was false" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: [cleanup{completed=false, failureCode=SANDBOX_CLEANUP_FAILED, failureMessage=bubblewrap workload descendants remain alive, survivors=[489968], detachedEngineHelpers=[], enginePid=489967, engineClientReaped=true, containerName=not-applicable, containerStatus=not-applicable, namedContainerRemoved=true, workloadProcessesContained=false, captureStreamsClosed=true, descendantsObserved=3}] 
+Expecting value to be true but was false
+	at app//com.example.platform.sandbox.BubblewrapSandboxProcessLauncherIntegrationTest.assertCleanupCompleteAndReaped(BubblewrapSandboxProcessLauncherIntegrationTest.java:210)
+	at app//com.example.platform.sandbox.BubblewrapSandboxProcessLauncherIntegrationTest.real_bubblewrap_enforces_the_advertised_host_binary_boundaries(BubblewrapSandboxProcessLauncherIntegrationTest.java:129)
+</failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
