@@ -1,0 +1,309 @@
+{
+  "schema": "ep19-actual-formal-test-accounting-v2",
+  "formal_product_suites": {
+    "backend": {
+      "expectations_only": {
+        "tests": 7973,
+        "skips": 29
+      },
+      "actual_discovered": 0,
+      "actual_executed": 0,
+      "actual_pass": 0,
+      "actual_failures": 0,
+      "actual_errors": 0,
+      "actual_skips": 0,
+      "missing": "NOT_EVALUATED_SUITES_NOT_INVOKED",
+      "unexpected": "NOT_EVALUATED_SUITES_NOT_INVOKED",
+      "duplicates": "NOT_EVALUATED_SUITES_NOT_INVOKED"
+    },
+    "candidate_frontend": {
+      "expectations_only": {
+        "tests": 149
+      },
+      "actual_discovered": 0,
+      "actual_executed": 0,
+      "actual_pass": 0,
+      "actual_failures": 0,
+      "actual_errors": 0,
+      "actual_skips": 0,
+      "missing": "NOT_EVALUATED_SUITES_NOT_INVOKED",
+      "unexpected": "NOT_EVALUATED_SUITES_NOT_INVOKED",
+      "duplicates": "NOT_EVALUATED_SUITES_NOT_INVOKED"
+    },
+    "explanation": "The first gate was rejected at its preservation boundary before its product command, so no full-suite identity reconciliation exists."
+  },
+  "product_native": {
+    "status": "NOT_INVOKED",
+    "native_exit": null,
+    "wrapper_exit": 1,
+    "boundary_reason": "FROZEN_BASELINE_DRIFT_ACROSS_COMMAND_GAP"
+  },
+  "fresh_reporting_context_qualification": {
+    "scope": "LEAN_MATERIALIZATION_AFFECTED_CONTROLS_ONLY_NOT_PRODUCT_GATES",
+    "result": "PASS",
+    "tests": 19,
+    "pass": 19,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "unique": 19,
+    "duplicates": 0,
+    "identities": [
+      "test_lean_materialization.LeanMaterializationTests.test_complete_chain_is_recorded",
+      "test_lean_materialization.LeanMaterializationTests.test_cycle_is_rejected",
+      "test_lean_materialization.LeanMaterializationTests.test_external_hardlink_is_rejected",
+      "test_lean_materialization.LeanMaterializationTests.test_materialized_equivalent_has_independent_regular_files",
+      "test_lean_materialization.LeanMaterializationTests.test_missing_target_is_rejected",
+      "test_lean_materialization.LeanMaterializationTests.test_outside_target_is_rejected",
+      "test_lean_materialization.LeanMaterializationTests.test_shared_regular_inode_is_rejected",
+      "test_lean_materialization.LeanMaterializationTests.test_special_target_is_rejected",
+      "test_lean_materialization.LeanMaterializationTests.test_strict_inspection_rejects_symlink",
+      "test_lean_materialization.LeanMaterializationTests.test_symlinked_root_ancestor_is_rejected",
+      "test_lean_binding.LeanBindingTests.test_a_b_c_helpers_are_byte_unchanged",
+      "test_lean_binding.LeanBindingTests.test_failed_v2_run_is_preserved_as_not_run",
+      "test_lean_binding.LeanBindingTests.test_formal_gate_binds_run_local_lean_and_libraries",
+      "test_lean_binding.LeanBindingTests.test_hermes_entrypoints_parse_and_execution_is_ordered",
+      "test_lean_binding.LeanBindingTests.test_historical_129_controls_remain_historical",
+      "test_lean_binding.LeanBindingTests.test_native_probe_persists_receipt_before_rejecting",
+      "test_lean_binding.LeanBindingTests.test_prepare_materializes_before_prepared_receipt",
+      "test_lean_binding.LeanBindingTests.test_sandbox_algorithms_are_unchanged",
+      "test_lean_binding.LeanBindingTests.test_strict_collector_is_byte_unchanged"
+    ],
+    "historical_129_controls_executed": false,
+    "product_gate_execution": false
+  },
+  "all_29_gate_statuses": {
+    "CHANGE_IMPACT": {
+      "position": 1,
+      "result": "FAIL",
+      "reason": "FROZEN_BASELINE_DRIFT_ACROSS_COMMAND_GAP",
+      "native_exit": null,
+      "wrapper_exit": 1,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "H7_FOCUSED": {
+      "position": 2,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "H7_ENTRY": {
+      "position": 3,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "H7_MUTATIONS": {
+      "position": 4,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "ARCHITECTURE_SYNTAX": {
+      "position": 5,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "ARCHITECTURE": {
+      "position": 6,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "GRADLE_PREFLIGHT": {
+      "position": 7,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "COMPILE": {
+      "position": 8,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "AFFECTED_INTEGRATION": {
+      "position": 9,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "RUNTIME_PREFLIGHT": {
+      "position": 10,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "SHADOW": {
+      "position": 11,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "CLASSIFIER_TEST": {
+      "position": 12,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "GITOPS_STAGING": {
+      "position": 13,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "GITOPS_STAGING_EGRESS": {
+      "position": 14,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "GITOPS_PRODUCTION": {
+      "position": 15,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "GITOPS_PRODUCTION_EGRESS": {
+      "position": 16,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "FRONTEND_INSTALL": {
+      "position": 17,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "FRONTEND_LINT": {
+      "position": 18,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "FRONTEND_IDENTITIES": {
+      "position": 19,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "FRONTEND_COLLECTION": {
+      "position": 20,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "FRONTEND_TEST": {
+      "position": 21,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "FRONTEND_BUILD": {
+      "position": 22,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "FORMAL": {
+      "position": 23,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "SEMGREP": {
+      "position": 24,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "FULL_BACKEND": {
+      "position": 25,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "APPLICATION_CLASSPATH": {
+      "position": 26,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "APPLICATION_PROBE": {
+      "position": 27,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "FOUNDATION": {
+      "position": 28,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    },
+    "BOOTJAR": {
+      "position": 29,
+      "result": "NOT_RUN",
+      "reason": "PRIOR_REQUIRED_FAILURE",
+      "native_exit": null,
+      "wrapper_exit": null,
+      "product_native_invocation": "NOT_INVOKED"
+    }
+  }
+}

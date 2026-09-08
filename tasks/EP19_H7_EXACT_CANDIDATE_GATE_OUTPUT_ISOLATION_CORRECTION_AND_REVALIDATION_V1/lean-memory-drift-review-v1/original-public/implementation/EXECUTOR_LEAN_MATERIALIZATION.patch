@@ -1,0 +1,1018 @@
+diff -ruN preimages/executor-v2/coverage.py executor/coverage.py
+--- preimages/executor-v2/coverage.py	2026-09-08 10:09:00.243184271 +0800
++++ executor/coverage.py	2026-09-08 11:32:32.385622996 +0800
+@@ -23,9 +23,14 @@
+ def derive(run, extra_inputs=()):
+     old=json.loads((O/'PROTECTION_SCOPE.json').read_text());scope=json.loads(json.dumps(old))
+     helpers,edges=local_imports()
+-    controls=[p for p in O.iterdir() if p.is_file()] + [D/'CODEX_BRIEF.md',D/'OWNER_AUTHORIZATION.txt']
++    controls=[p for p in O.iterdir() if p.is_file()] + [D/'CODEX_BRIEF.md',D/'OWNER_AUTHORIZATION.txt',D/'BOUNDED_TASK.md']
+     controls += [p for p in (D/'dependency').rglob('*') if p.is_file()] if (D/'dependency').is_dir() else []
++    controls += [p for p in (D/'tools').rglob('*') if p.is_file()] if (D/'tools').is_dir() else []
+     controls += [D/name for name in ('NEW_EXECUTOR_IDENTITY.json','QUALIFICATION_REUSE_LEDGER.json') if (D/name).is_file()]
++    controls += [D/name for name in ('CHANGED_SOURCE_INVENTORY.json','IMPLEMENTATION_REPORT.zh-CN.md','PARENT_COMMANDS.md','FINAL_FIELDS.json') if (D/name).is_file()]
++    controls += [D/'HERMES_REVIEW_NOTES.md'] if (D/'HERMES_REVIEW_NOTES.md').is_file() else []
++    controls += [p for p in (D/'historical/parent-verification').rglob('*') if p.is_file()] if (D/'historical/parent-verification').is_dir() else []
++    controls += [p for p in (D/'diffs').rglob('*') if p.is_file()] if (D/'diffs').is_dir() else []
+     controls += [O/'qualification/CONTINUATION_PRESERVATION_CONTRACT.md',O/'observations/BEFORE.json']
+     controls += list((O/'inputs').rglob('*'))
+     controls += list((O/'owned').rglob('*'))
+@@ -106,7 +111,7 @@
+     Successful synthetic preparation does not imply a qualified container runtime.
+     """
+     path=Path(path);q=json.loads(path.read_text())
+-    if q.get('schema') not in ('ep19-owner-qualified-v1','ep19-output-corrections-v2','ep19-bookkeeping-v2-qualified-v1') or not q.get('dependencies'):
++    if q.get('schema') not in ('ep19-owner-qualified-v1','ep19-output-corrections-v2','ep19-bookkeeping-v2-qualified-v1','ep19-lean-materialization-qualified-v1') or not q.get('dependencies'):
+         raise RuntimeError('QUALIFICATION_CLOSURE_MISSING')
+     files=q['dependencies'];helpers=q.get('helpers',{})
+     if set(helpers)!=set(map(str,local_imports()[0])):
+@@ -133,8 +138,39 @@
+         for name in ('red_log','green_log','qualification_matrix','reuse_ledger'):
+             if q.get(name) not in files:raise RuntimeError('V2_QUALIFICATION_REQUIRED_DEPENDENCY '+name)
+         if not full_capsule_reuse_qualified(q):raise RuntimeError('FULL_CAPSULE_REUSE_NOT_QUALIFIED')
++    if q.get('schema')=='ep19-lean-materialization-qualified-v1':
++        required_areas=('lean_materialization','link_chain_rejection','collector_compatibility',
++                        'native_probe_binding','run_preparation_binding','identity_binding')
++        if any(q.get(area)!='PASS' for area in required_areas):
++            raise RuntimeError('LEAN_QUALIFICATION_AREA_NOT_PASS')
++        for name in ('fresh_result','fresh_process','fresh_log','materialization_reuse_ledger',
++                     'historical_v2_qualification'):
++            if q.get(name) not in files:raise RuntimeError('LEAN_QUALIFICATION_REQUIRED_DEPENDENCY '+name)
++        if q.get('tests')!=q.get('fresh_tests') or q.get('fresh_tests')<=0 or q.get('reused_tests')!=129:
++            raise RuntimeError('LEAN_QUALIFICATION_ACCOUNTING')
++        if not historical_v2_qualification_qualified(q):
++            raise RuntimeError('HISTORICAL_V2_QUALIFICATION_REUSE_NOT_QUALIFIED')
++        if not full_capsule_reuse_qualified(q):raise RuntimeError('FULL_CAPSULE_REUSE_NOT_QUALIFIED')
+     return [path,*map(Path,files)]
+ 
++def historical_v2_qualification_qualified(q):
++    """Validate, but never relabel, the historical 129-control V2 capsule."""
++    files=q.get('dependencies',{});path=q.get('historical_v2_qualification')
++    if not path or path not in files:return False
++    expected=D.parent/'bookkeeping-v2-20260908T004809Z/qualification/QUALIFICATION.json'
++    if Path(path)!=expected:return False
++    old=json.loads(Path(path).read_text())
++    if old.get('schema')!='ep19-bookkeeping-v2-qualified-v1' or old.get('result')!='PASS' or old.get('tests')!=129:return False
++    if old.get('product_gate_execution') is not False or not old.get('dependencies') or not old.get('helpers'):return False
++    try:check_seal(old['dependencies'])
++    except Exception:return False
++    if not set(old['helpers'])<=set(old['dependencies']):return False
++    result=json.loads(Path(old['result_receipt']).read_text())
++    process=json.loads(Path(old['process_receipt']).read_text())
++    if result.get('result')!='PASS' or result.get('tests')!=129 or result.get('failures')!=0 or result.get('errors')!=0:return False
++    if process.get('native_exit')!=0 or process.get('log_sha256')!=old['dependencies'].get(old['raw_log']):return False
++    return formal_boundary_qualified(old) and full_capsule_reuse_qualified(old)
++
+ def formal_boundary_qualified(q):
+     """A PASS label cannot substitute for the actual bound container evidence."""
+     files=q['dependencies'];path=q.get('formal_boundary_receipt')
+diff -ruN preimages/executor-v2/lean_materialization.py executor/lean_materialization.py
+--- preimages/executor-v2/lean_materialization.py	1970-01-01 08:00:00.000000000 +0800
++++ executor/lean_materialization.py	2026-09-08 11:32:32.380622949 +0800
+@@ -0,0 +1,407 @@
++"""Strict, link-aware Lean distribution materialization.
++
++The formal collector intentionally rejects links.  This module validates every
++source entry without following links during enumeration, resolves each link
++chain explicitly inside the selected root, and writes independent regular
++files into the run-local cache.  It never changes the collector policy.
++"""
++from __future__ import annotations
++
++from pathlib import Path
++import argparse
++import hashlib
++import json
++import os
++import stat
++import time
++
++
++CHUNK = 1024 * 1024
++
++
++class MaterializationError(RuntimeError):
++    pass
++
++
++def _inside(root: Path, path: Path) -> bool:
++    try:
++        path.relative_to(root)
++        return True
++    except ValueError:
++        return False
++
++
++def _canonical_root(root: Path) -> Path:
++    root = Path(root).absolute()
++    if root != Path(os.path.normpath(str(root))):
++        raise MaterializationError("NONCANONICAL_ROOT")
++    st = os.lstat(root)
++    if not stat.S_ISDIR(st.st_mode) or stat.S_ISLNK(st.st_mode):
++        raise MaterializationError("ROOT_NOT_REAL_DIRECTORY")
++    try:
++        resolved = root.resolve(strict=True)
++    except (OSError, RuntimeError) as exc:
++        raise MaterializationError("ROOT_ANCESTOR_RESOLUTION_FAILED") from exc
++    if resolved != root:
++        raise MaterializationError("ROOT_OR_ANCESTOR_SYMLINK " + str(root))
++    return root
++
++
++def _sha256_regular(path: Path) -> tuple[str, int, os.stat_result]:
++    before = os.lstat(path)
++    if not stat.S_ISREG(before.st_mode):
++        raise MaterializationError("NOT_REGULAR_FILE " + str(path))
++    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
++    try:
++        opened = os.fstat(fd)
++        if (before.st_dev, before.st_ino, before.st_mode, before.st_size) != (
++            opened.st_dev, opened.st_ino, opened.st_mode, opened.st_size
++        ):
++            raise MaterializationError("FILE_REPLACED_BEFORE_READ " + str(path))
++        digest = hashlib.sha256()
++        length = 0
++        while True:
++            block = os.read(fd, CHUNK)
++            if not block:
++                break
++            digest.update(block)
++            length += len(block)
++        after = os.fstat(fd)
++        bound = os.lstat(path)
++        wanted = (before.st_dev, before.st_ino, before.st_mode, before.st_size,
++                  before.st_mtime_ns, before.st_ctime_ns)
++        if wanted != (after.st_dev, after.st_ino, after.st_mode, after.st_size,
++                      after.st_mtime_ns, after.st_ctime_ns):
++            raise MaterializationError("FILE_CHANGED_DURING_READ " + str(path))
++        if wanted != (bound.st_dev, bound.st_ino, bound.st_mode, bound.st_size,
++                      bound.st_mtime_ns, bound.st_ctime_ns):
++            raise MaterializationError("FILE_BINDING_CHANGED " + str(path))
++        if length != before.st_size:
++            raise MaterializationError("FILE_LENGTH_MISMATCH " + str(path))
++        return digest.hexdigest(), length, before
++    finally:
++        os.close(fd)
++
++
++def resolve_link_chain(root: Path, link: Path) -> tuple[Path, list[dict]]:
++    """Resolve all components explicitly; reject cycle, missing, escape, special."""
++    root = _canonical_root(root)
++    current = Path(os.path.normpath(str(Path(link).absolute())))
++    if not _inside(root, current):
++        raise MaterializationError("LINK_START_OUTSIDE_ROOT")
++    seen: set[tuple[int, int]] = set()
++    chain: list[dict] = []
++    while True:
++        relative = current.relative_to(root)
++        cursor = root
++        parts = list(relative.parts)
++        restarted = False
++        for index, component in enumerate(parts):
++            cursor = cursor / component
++            try:
++                row = os.lstat(cursor)
++            except FileNotFoundError as exc:
++                raise MaterializationError("LINK_TARGET_MISSING " + str(cursor)) from exc
++            if stat.S_ISLNK(row.st_mode):
++                identity = (row.st_dev, row.st_ino)
++                if identity in seen:
++                    raise MaterializationError("LINK_CYCLE " + str(cursor))
++                seen.add(identity)
++                target = os.readlink(cursor)
++                candidate = Path(target) if os.path.isabs(target) else cursor.parent / target
++                if index + 1 < len(parts):
++                    candidate = candidate.joinpath(*parts[index + 1:])
++                candidate = Path(os.path.normpath(str(candidate)))
++                chain.append({
++                    "link": str(cursor.relative_to(root)),
++                    "target": target,
++                    "next": str(candidate),
++                    "dev": row.st_dev,
++                    "ino": row.st_ino,
++                })
++                if not _inside(root, candidate):
++                    raise MaterializationError("LINK_ESCAPES_ROOT " + str(cursor))
++                current = candidate
++                restarted = True
++                break
++            if index < len(parts) - 1 and not stat.S_ISDIR(row.st_mode):
++                raise MaterializationError("LINK_INTERMEDIATE_NOT_DIRECTORY " + str(cursor))
++        if restarted:
++            continue
++        final = os.lstat(current)
++        if not stat.S_ISREG(final.st_mode):
++            raise MaterializationError("LINK_TARGET_NOT_REGULAR " + str(current))
++        return current, chain
++
++
++def _mode(row: os.stat_result) -> str:
++    return format(stat.S_IMODE(row.st_mode), "04o")
++
++
++def inspect_tree(root: Path, *, allow_file_links: bool) -> dict:
++    root = _canonical_root(root)
++    directories: list[dict] = []
++    files: list[dict] = []
++    links: list[dict] = []
++    specials: list[dict] = []
++    inode_owners: dict[tuple[int, int], str] = {}
++    aliases: list[list[str]] = []
++
++    def own(path: Path, row: os.stat_result) -> None:
++        key = (row.st_dev, row.st_ino)
++        rel = "." if path == root else str(path.relative_to(root))
++        if key in inode_owners:
++            aliases.append([inode_owners[key], rel])
++        else:
++            inode_owners[key] = rel
++
++    def visit(directory: Path) -> None:
++        before = os.lstat(directory)
++        if not stat.S_ISDIR(before.st_mode) or stat.S_ISLNK(before.st_mode):
++            raise MaterializationError("ENUMERATION_DIRECTORY_REPLACED " + str(directory))
++        own(directory, before)
++        directories.append({
++            "path": "." if directory == root else str(directory.relative_to(root)),
++            "kind": "directory", "mode": _mode(before), "uid": before.st_uid,
++            "gid": before.st_gid, "nlink": before.st_nlink,
++            "dev": before.st_dev, "ino": before.st_ino,
++        })
++        with os.scandir(directory) as stream:
++            entries = sorted(list(stream), key=lambda item: os.fsencode(item.name))
++        for entry in entries:
++            path = directory / entry.name
++            if not _inside(root, path):
++                raise MaterializationError("ENUMERATION_ESCAPE " + str(path))
++            row = entry.stat(follow_symlinks=False)
++            if stat.S_ISDIR(row.st_mode):
++                visit(path)
++            elif stat.S_ISREG(row.st_mode):
++                digest, length, checked = _sha256_regular(path)
++                own(path, checked)
++                files.append({
++                    "path": str(path.relative_to(root)), "kind": "file",
++                    "size": length, "sha256": digest, "mode": _mode(checked),
++                    "uid": checked.st_uid, "gid": checked.st_gid,
++                    "nlink": checked.st_nlink, "dev": checked.st_dev,
++                    "ino": checked.st_ino, "source_path": str(path),
++                    "link_chain": [],
++                })
++            elif stat.S_ISLNK(row.st_mode):
++                target, chain = resolve_link_chain(root, path)
++                digest, length, checked = _sha256_regular(target)
++                links.append({"path": str(path.relative_to(root)), "target": os.readlink(path),
++                              "resolved": str(target.relative_to(root)), "chain": chain,
++                              "sha256": digest})
++                if not allow_file_links:
++                    continue
++                files.append({
++                    "path": str(path.relative_to(root)), "kind": "file",
++                    "size": length, "sha256": digest, "mode": _mode(checked),
++                    "uid": checked.st_uid, "gid": checked.st_gid,
++                    "nlink": 1, "dev": checked.st_dev, "ino": checked.st_ino,
++                    "source_path": str(target), "link_chain": chain,
++                })
++            else:
++                specials.append({"path": str(path.relative_to(root)),
++                                 "mode": format(row.st_mode, "o")})
++        after = os.lstat(directory)
++        if (before.st_dev, before.st_ino, before.st_mode) != (
++            after.st_dev, after.st_ino, after.st_mode
++        ):
++            raise MaterializationError("DIRECTORY_CHANGED_DURING_ENUMERATION " + str(directory))
++
++    visit(root)
++    if specials:
++        raise MaterializationError("SPECIAL_ENTRIES " + json.dumps(specials))
++    if links and not allow_file_links:
++        raise MaterializationError("DISALLOWED_SYMLINKS " + json.dumps(links))
++    if aliases:
++        raise MaterializationError("SHARED_INODE_ALIASES " + json.dumps(aliases))
++    external_hardlinks = [row["path"] for row in files if not row["link_chain"] and row["nlink"] != 1]
++    if external_hardlinks:
++        raise MaterializationError("NONINDEPENDENT_REGULAR_FILE " + repr(external_hardlinks[:10]))
++    return {
++        "root": str(root), "root_included_in_directory_count": True,
++        "files": sorted(files, key=lambda row: os.fsencode(row["path"])),
++        "directories": sorted(directories, key=lambda row: os.fsencode(row["path"])),
++        "links": sorted(links, key=lambda row: os.fsencode(row["path"])),
++        "specials": specials, "file_count": len(files),
++        "directory_count_including_root": len(directories),
++        "symlink_count": len(links), "special_count": 0,
++        "shared_inode_alias_count": 0,
++    }
++
++
++def _historical_projection(path: Path) -> tuple[dict[str, str], dict[str, str | None], str]:
++    raw = Path(path).read_bytes()
++    document = json.loads(raw)
++    rows = document.get("mapping")
++    if not isinstance(rows, list) or len(rows) != 4617:
++        raise MaterializationError("HISTORICAL_MANIFEST_COUNT_NOT_4617")
++    hashes = {row["path"]: row["destination_sha256"] for row in rows}
++    link_targets = {row["path"]: row.get("original_symlink") for row in rows}
++    if len(hashes) != len(rows):
++        raise MaterializationError("HISTORICAL_MANIFEST_DUPLICATE_PATH")
++    if any(row.get("source_sha256") != row.get("destination_sha256") for row in rows):
++        raise MaterializationError("HISTORICAL_SOURCE_DESTINATION_HASH_MISMATCH")
++    return hashes, link_targets, hashlib.sha256(raw).hexdigest()
++
++
++def verify_historical_membership(tree: dict, historical: Path) -> dict:
++    hashes, link_targets, manifest_sha = _historical_projection(historical)
++    actual = {row["path"]: row["sha256"] for row in tree["files"]}
++    if set(actual) != set(hashes):
++        raise MaterializationError("HISTORICAL_MEMBERSHIP_MISMATCH")
++    wrong = [path for path in hashes if hashes[path] != actual[path]]
++    if wrong:
++        raise MaterializationError("HISTORICAL_HASH_MISMATCH " + repr(wrong[:10]))
++    return {
++        "result": "PASS", "historical_manifest_sha256": manifest_sha,
++        "counting_method": "mapping rows / regular-file logical paths only; root and directories excluded",
++        "historical_file_count": len(hashes),
++        "historical_link_rows": sum(value is not None for value in link_targets.values()),
++    }
++
++
++def compare_raw_source(raw: dict, historical: Path) -> dict:
++    result = verify_historical_membership(raw, historical)
++    _, expected_links, _ = _historical_projection(historical)
++    actual_links = {row["path"]: row["target"] for row in raw["links"]}
++    expected = {path: target for path, target in expected_links.items() if target is not None}
++    if actual_links != expected:
++        raise MaterializationError("RAW_LINK_MAP_MISMATCH")
++    result.update({
++        "all_current_links_enumerated": True,
++        "all_link_chains_explicitly_resolved": True,
++        "link_count": len(actual_links), "link_map": raw["links"],
++    })
++    return result
++
++
++def _projection(tree: dict) -> dict[str, dict]:
++    keep = ("kind", "size", "sha256", "mode", "uid", "gid")
++    return {row["path"]: {key: row[key] for key in keep} for row in tree["files"]}
++
++
++def _directory_projection(tree: dict) -> dict[str, dict]:
++    keep = ("kind", "mode", "uid", "gid")
++    return {row["path"]: {key: row[key] for key in keep} for row in tree["directories"]}
++
++
++def materialize(source: Path, destination: Path, historical: Path,
++                raw_corroboration: Path | None = None) -> dict:
++    source = _canonical_root(source)
++    destination = Path(destination).absolute()
++    if destination.exists() or destination.is_symlink():
++        raise MaterializationError("DESTINATION_ALREADY_EXISTS")
++    if destination != Path(os.path.normpath(str(destination))):
++        raise MaterializationError("NONCANONICAL_DESTINATION")
++    # A preferred historical source has no links.  A raw fallback is accepted
++    # only through the same exhaustive enumeration and explicit chain resolver.
++    source_tree = inspect_tree(source, allow_file_links=True)
++    history = verify_historical_membership(source_tree, historical)
++    raw_result = None
++    if raw_corroboration is not None:
++        raw_tree = inspect_tree(raw_corroboration, allow_file_links=True)
++        raw_result = compare_raw_source(raw_tree, historical)
++        if _projection(raw_tree) != _projection(source_tree):
++            raise MaterializationError("RAW_AND_PREFERRED_FILE_METADATA_MISMATCH")
++        if _directory_projection(raw_tree) != _directory_projection(source_tree):
++            raise MaterializationError("RAW_AND_PREFERRED_DIRECTORY_METADATA_MISMATCH")
++
++    start = time.time()
++    destination.parent.mkdir(parents=True, exist_ok=True)
++    root_row = next(row for row in source_tree["directories"] if row["path"] == ".")
++    os.mkdir(destination, int(root_row["mode"], 8))
++    os.chmod(destination, int(root_row["mode"], 8), follow_symlinks=False)
++    for row in sorted((r for r in source_tree["directories"] if r["path"] != "."),
++                      key=lambda item: (len(Path(item["path"]).parts), os.fsencode(item["path"]))):
++        target = destination / row["path"]
++        os.mkdir(target, int(row["mode"], 8))
++        os.chmod(target, int(row["mode"], 8), follow_symlinks=False)
++    for row in source_tree["files"]:
++        target = destination / row["path"]
++        source_fd = os.open(row["source_path"], os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
++        target_fd = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW | os.O_CLOEXEC,
++                            int(row["mode"], 8))
++        try:
++            while True:
++                block = os.read(source_fd, CHUNK)
++                if not block:
++                    break
++                offset = 0
++                while offset < len(block):
++                    offset += os.write(target_fd, block[offset:])
++            os.fchmod(target_fd, int(row["mode"], 8))
++        finally:
++            os.close(target_fd)
++            os.close(source_fd)
++
++    destination_tree = inspect_tree(destination, allow_file_links=False)
++    if _projection(destination_tree) != _projection(source_tree):
++        raise MaterializationError("DESTINATION_FILE_VERIFICATION_MISMATCH")
++    if _directory_projection(destination_tree) != _directory_projection(source_tree):
++        raise MaterializationError("DESTINATION_DIRECTORY_VERIFICATION_MISMATCH")
++    source_inodes = {(row["dev"], row["ino"]) for row in source_tree["files"]}
++    destination_inodes = {(row["dev"], row["ino"]) for row in destination_tree["files"]}
++    shared = source_inodes & destination_inodes
++    if shared:
++        raise MaterializationError("SOURCE_DESTINATION_SHARED_INODES")
++    raw_intersections = None
++    if raw_corroboration is not None:
++        raw_inodes = {(row["dev"], row["ino"]) for row in raw_tree["files"]}
++        raw_intersections = {
++            "preferred_raw": len(source_inodes & raw_inodes),
++            "destination_raw": len(destination_inodes & raw_inodes),
++        }
++        if any(raw_intersections.values()):
++            raise MaterializationError("CROSS_TREE_SHARED_INODES " + repr(raw_intersections))
++    return {
++        "schema": "ep19-lean-materialization-v1", "result": "PASS",
++        "source": str(source), "destination": str(destination),
++        "selected_source": ("RAW_FULLY_VERIFIED_FALLBACK" if source_tree["symlink_count"]
++                            else "PREFERRED_HISTORICAL_MATERIALIZED"),
++        "historical_verification": history,
++        "raw_corroboration": raw_result,
++        "source_summary": {key: source_tree[key] for key in (
++            "file_count", "directory_count_including_root", "root_included_in_directory_count",
++            "symlink_count", "special_count", "shared_inode_alias_count")},
++        "destination_summary": {key: destination_tree[key] for key in (
++            "file_count", "directory_count_including_root", "root_included_in_directory_count",
++            "symlink_count", "special_count", "shared_inode_alias_count")},
++        "source_destination_shared_inode_count": 0,
++        "cross_tree_shared_inode_counts": raw_intersections,
++        "file_manifest": [{key: row[key] for key in
++                           ("path", "kind", "size", "sha256", "mode", "uid", "gid", "nlink")}
++                          for row in destination_tree["files"]],
++        "directory_manifest": [{key: row[key] for key in
++                                ("path", "kind", "mode", "uid", "gid", "nlink")}
++                               for row in destination_tree["directories"]],
++        "start": start, "end": time.time(),
++        "materialization": "INDEPENDENT_REGULAR_FILES; MODES_PRESERVED_PER_ENTRY; NO_BLIND_LINK_FOLLOWING",
++    }
++
++
++def write_json_exclusive(path: Path, value: dict) -> None:
++    with Path(path).open("x", encoding="utf-8") as stream:
++        json.dump(value, stream, indent=2, ensure_ascii=False)
++        stream.write("\n")
++
++
++def main() -> int:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--source", type=Path, required=True)
++    parser.add_argument("--destination", type=Path, required=True)
++    parser.add_argument("--historical", type=Path, required=True)
++    parser.add_argument("--raw-corroboration", type=Path)
++    parser.add_argument("--output", type=Path, required=True)
++    args = parser.parse_args()
++    result = materialize(args.source, args.destination, args.historical, args.raw_corroboration)
++    write_json_exclusive(args.output, result)
++    print(json.dumps({key: result[key] for key in ("result", "selected_source", "destination_summary")},
++                     sort_keys=True))
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff -ruN preimages/executor-v2/lean_preparation.py executor/lean_preparation.py
+--- preimages/executor-v2/lean_preparation.py	1970-01-01 08:00:00.000000000 +0800
++++ executor/lean_preparation.py	2026-09-08 11:32:32.381622958 +0800
+@@ -0,0 +1,183 @@
++"""Run-local Lean preparation and non-gate native compatibility probe."""
++from pathlib import Path
++import ast
++import hashlib
++import inspect
++import json
++import os
++import subprocess
++import shutil
++import time
++
++import coverage
++import execution
++import lean_materialization
++from preservation import Collector
++
++
++PREFERRED = (execution.O / "owner-clarified-execution-20260907T1120Z" /
++             "prepared-tools/lean-4.19.0-linux")
++RAW = Path("/home/user/Documents/workspace/audit-runs/"
++           "EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/"
++           "formal-tools/lean-4.19.0-linux")
++HISTORICAL = execution.D / "inputs/LEAN_CACHE_MATERIALIZATION.historical.json"
++LEAN_SHA256 = "92c3d35b5bfaa5e0fea413a775d504cf46cd95e1345df61c2274f76779e7e023"
++
++
++def _collector_identity() -> dict:
++    source = inspect.getsource(Collector)
++    parsed = ast.parse(source)
++    return {
++        "module": str(Path(inspect.getsourcefile(Collector)).resolve()),
++        "module_sha256": coverage.digest(Path(inspect.getsourcefile(Collector)).resolve()),
++        "collector_ast_sha256": hashlib.sha256(
++            ast.dump(parsed, include_attributes=False).encode()
++        ).hexdigest(),
++        "class": "preservation.Collector",
++        "policy": "UNCHANGED_STRICT_COLLECTOR; SYMLINK/SPECIAL/UNSTABLE CAPTURE REJECTS",
++    }
++
++
++def _native(argv: list[str], cwd: Path, env: dict[str, str], output: Path) -> dict:
++    start = time.time()
++    native_exit = None
++    failure = None
++    try:
++        with output.open("xb") as stream:
++            process = subprocess.run(argv, cwd=cwd, env=env, stdout=stream,
++                                     stderr=subprocess.STDOUT, timeout=120)
++        native_exit = process.returncode
++    except Exception as exc:
++        failure = {"type": type(exc).__name__, "message": str(exc)}
++    receipt = {
++        "argv": argv, "cwd": str(cwd), "native_exit": native_exit,
++        "start": start, "end": time.time(), "raw_log": str(output),
++        "log_sha256": coverage.digest(output) if output.is_file() else None,
++        "synthetic_preparation_probe": True, "product_gate": False,
++        "failure": failure,
++    }
++    receipt_path = output.with_suffix(output.suffix + ".process.json")
++    coverage.put(receipt_path, receipt)
++    if failure is not None:
++        raise RuntimeError("LEAN_PREPARATION_NATIVE_PROBE_EXCEPTION " + json.dumps(failure))
++    if native_exit != 0:
++        raise RuntimeError("LEAN_PREPARATION_NATIVE_PROBE_FAILED " + output.read_text(errors="replace"))
++    receipt["process_receipt"] = str(receipt_path)
++    return receipt
++
++
++def _resolved_runtime_tools() -> list[Path]:
++    result = []
++    for name in ("python3", "git", "java", "javac", "node", "npm", "npx", "bash", "bwrap", "podman"):
++        found = shutil.which(name)
++        if not found:
++            raise RuntimeError("MISSING_PREPARATION_RUNTIME_TOOL " + name)
++        resolved = Path(found).resolve(strict=True)
++        if not resolved.is_file() or resolved.is_symlink():
++            raise RuntimeError("INVALID_PREPARATION_RUNTIME_TOOL " + name)
++        result.append(resolved)
++    return sorted(set(result))
++
++
++def prepare(run: Path) -> dict:
++    run = Path(run).absolute()
++    destination = run / "runtime/cache/backend/formal-tools/lean-4.19.0-linux"
++    materialization = lean_materialization.materialize(
++        PREFERRED, destination, HISTORICAL, raw_corroboration=RAW
++    )
++    if materialization["selected_source"] != "PREFERRED_HISTORICAL_MATERIALIZED":
++        raise RuntimeError("PREFERRED_LEAN_SOURCE_NOT_SELECTED")
++    lean = destination / "bin/lean"
++    if coverage.digest(lean) != LEAN_SHA256:
++        raise RuntimeError("LEAN_BINARY_PIN_MISMATCH")
++    coverage.put(run / "lean-materialization.json", materialization)
++
++    init_root = run / "runtime/cache/backend/gradle/init.d"
++    tools = _resolved_runtime_tools()
++    expected = [str(destination / row["path"]) for row in materialization["file_manifest"]]
++    expected += [str(init_root / "ep19-packaging.gradle"), *map(str, tools)]
++    collector = Collector(roots=[destination, init_root], files=tools,
++                          expected_nonempty=[destination, init_root],
++                          expected_files=expected).capture()
++    coverage.put(run / "preparation-collector.json", collector)
++    if collector["result"] != "COMPLETE" or collector["hashed"] != len(set(expected)):
++        raise RuntimeError("STRICT_COLLECTOR_PREPARATION_INCOMPATIBLE " + repr(collector["errors"]))
++
++    probe_dir = run / "runtime/tmp/backend/lean-preparation-probe"
++    probe_dir.mkdir(parents=True, exist_ok=False)
++    source = probe_dir / "PreparationProbe.lean"
++    source.write_text(
++        "import Lean\n"
++        "open Lean\n"
++        "theorem materialized_toolchain_reflexive (n : Nat) : n = n := by rfl\n",
++        encoding="utf-8",
++    )
++    output = probe_dir / "PreparationProbe.olean"
++    env = execution.environment("backend", run)
++    env.update({
++        "LEAN": str(lean),
++        "LEAN_PATH": str(destination / "lib/lean"),
++        "LD_LIBRARY_PATH": str(destination / "lib"),
++    })
++    probes = []
++    commands = [
++        ("version", [str(lean), "--version"]),
++        ("prefix", [str(lean), "--print-prefix"]),
++        ("import-compile-proof", [str(lean), "--root=" + str(probe_dir),
++                                  "-o", str(output), str(source)]),
++    ]
++    for name, command in commands:
++        # Use the unchanged formal boundary wrapper, an absolute Lean path, and
++        # explicit library variables. This is a preparation probe, not FORMAL.
++        argv = execution.formal_sandbox(command, probe_dir, run, env)
++        receipt = _native(argv, probe_dir, env, probe_dir / (name + ".native.log"))
++        receipt["name"] = name
++        receipt["lean_absolute"] = str(lean)
++        receipt["lean_sha256"] = LEAN_SHA256
++        receipt["LEAN_PATH"] = env["LEAN_PATH"]
++        receipt["LD_LIBRARY_PATH"] = env["LD_LIBRARY_PATH"]
++        probes.append(receipt)
++    if "version 4.19.0" not in (probe_dir / "version.native.log").read_text():
++        raise RuntimeError("LEAN_VERSION_OUTPUT_MISMATCH")
++    prefix = (probe_dir / "prefix.native.log").read_text().strip()
++    if Path(prefix) != destination:
++        raise RuntimeError("LEAN_LIBRARY_PREFIX_NOT_RUN_LOCAL " + prefix)
++    if not output.is_file() or output.stat().st_size <= 0:
++        raise RuntimeError("LEAN_PROBE_OUTPUT_MISSING")
++
++    # Ensure the probe did not mutate any frozen tool input.
++    post = lean_materialization.inspect_tree(destination, allow_file_links=False)
++    if lean_materialization._projection(post) != lean_materialization._projection(
++            {"files": materialization["file_manifest"]}):
++        raise RuntimeError("LEAN_TOOLCHAIN_CHANGED_BY_PROBE")
++    result = {
++        "schema": "ep19-lean-preparation-compatibility-v1", "result": "PASS",
++        "run_id": run.name, "candidate": execution.SHA, "tree": execution.TREE,
++        "base": execution.BASE, "formal_gate_execution": False,
++        "lean_source_selected": str(PREFERRED),
++        "lean_source_identity_verified": True,
++        "materialization_performed": True,
++        "run_local_toolchain_verified": True,
++        "disallowed_symlink_count": post["symlink_count"],
++        "strict_collector": {"result": collector["result"], "hashed": collector["hashed"],
++                             "identity": _collector_identity()},
++        "full_strict_tool_input_set": {
++            "roots": [str(destination), str(init_root)],
++            "resolved_runtime_binaries": [{"path": str(path), "sha256": coverage.digest(path)} for path in tools],
++            "lean_files": 4617, "expected_files": len(set(expected)),
++            "captured_files": collector["hashed"], "capture_result": collector["result"],
++        },
++        "native_toolchain_probe_results": {
++            "result": "PASS", "version": "4.19.0", "library_prefix": prefix,
++            "explicit_lean": str(lean), "explicit_LEAN_PATH": env["LEAN_PATH"],
++            "explicit_LD_LIBRARY_PATH": env["LD_LIBRARY_PATH"],
++            "system_fallback": False, "receipts": probes,
++            "output": str(output), "output_sha256": coverage.digest(output),
++        },
++        "historical_counting_method": materialization["historical_verification"]["counting_method"],
++        "raw_link_chains_verified": materialization["raw_corroboration"],
++        "preparation_compatibility_not_baseline": True,
++        "baseline_created": False, "seal_created": False, "preflight_result": "NOT_RUN",
++    }
++    coverage.put(run / "PREPARATION_COMPATIBILITY.json", result)
++    return result
+diff -ruN preimages/executor-v2/runner.py executor/runner.py
+--- preimages/executor-v2/runner.py	2026-09-08 10:09:00.532187058 +0800
++++ executor/runner.py	2026-09-08 11:33:03.953921043 +0800
+@@ -9,6 +9,7 @@
+ import bindings, coverage, freshness, observe, packaging, parsers, shadow_binding, engineering
+ import decision_evidence
+ import bookkeeping_v2
++import lean_preparation
+ from execution import D,O,H,BASE,SHA,TREE,exact,git,environment,frontend_sandbox,formal_sandbox
+ from preservation import Collector,INSTRUCTIONS
+ 
+@@ -70,10 +71,13 @@
+         if lane=='backend':
+             target=Path(env['GRADLE_USER_HOME'])/'init.d';target.mkdir()
+             shutil.copyfile(H/'packaging.init.gradle',target/'ep19-packaging.gradle')
++    lean_result=lean_preparation.prepare(run)
+     put(run/'prepare.json',{'result':'PREPARED_NOT_BASELINED','run_id':run.name,'candidate':SHA,'tree':TREE,'base':BASE,'formal_gate_execution':False,
+         'qualification':str(Path(qualification or D/'qualification/QUALIFICATION.json').absolute()),
+         'owner_contract_version':OWNER_CONTRACT_VERSION,'owner_authorization_sha256':OWNER_SHA256,
+-        'dependency_preparation':'Parent may populate only this runtime cache before baseline/seal. No copied FE assets. Fresh per-run independent clones; original checkouts never execute.',
++        'dependency_preparation':'Run-local Lean was independently materialized and strictly verified before baseline. No copied FE assets. Fresh per-run independent clones; original checkouts never execute.',
++        'lean_preparation':str(run/'PREPARATION_COMPATIBILITY.json'),
++        'lean_preparation_result':lean_result['result'],
+         'commands':{'baseline':f'python3 -B executor/runner.py baseline --run-id {run.name}',
+                     'preflight':f'python3 -B executor/runner.py preflight --run-id {run.name}',
+                     'run':f'python3 -B executor/runner.py run --run-id {run.name} --review /absolute/parent-review.json'}})
+@@ -90,7 +94,8 @@
+                            'resolved_bindings_sha256':coverage.digest(run/'bindings.json'),'gate_count':29,
+                            'dynamic_skill_selection_during_window':False})
+     put(policy_path,policy)
+-    scope=coverage.derive(run,[run/'bindings.json',run/'prepare.json',run/'identity.json',run/'source-recovery.json',run/'namespaces.json',policy_path])
++    preparation_inputs=[run/'lean-materialization.json',run/'preparation-collector.json',run/'PREPARATION_COMPATIBILITY.json',run/'PREPARATION_REVALIDATION.json']
++    scope=coverage.derive(run,[run/'bindings.json',run/'prepare.json',run/'identity.json',run/'source-recovery.json',run/'namespaces.json',policy_path,*preparation_inputs])
+     put(run/'scope.json',scope)
+     if scope['instruction_capture']['result']!='COMPLETE':
+         put(run/'baseline.json',{'result':'INCOMPLETE','instruction_errors':scope['instruction_capture']['errors']});return 1
+@@ -115,6 +120,8 @@
+     for n in ('python3','git','java','javac','node','npm','npx','bash','bwrap','podman'):
+         p=shutil.which(n)
+         tools[n]={'path':p,'realpath':str(Path(p).resolve()) if p else None,'sha256':coverage.digest(Path(p).resolve()) if p else None}
++    lean=run/'runtime/cache/backend/formal-tools/lean-4.19.0-linux/bin/lean'
++    tools['lean-4.19.0']={'path':str(lean),'realpath':str(lean.resolve()),'sha256':coverage.digest(lean)}
+     put(run/'toolchain.json',tools);inputs.append(run/'toolchain.json')
+     inputs += [Path(t['realpath']) for t in tools.values() if t['realpath']]
+     for p in (run/'runtime/cache/backend/formal-tools').rglob('*'):
+@@ -138,7 +145,8 @@
+         inputs += [OWNER_AUTHORIZATION,D/'dependency/DEPENDENCY_CHECK.json',EXECUTOR_IDENTITY,run/'bookkeeping-policy-v2.private.json']
+         inputs += [O/'GATE_EXECUTION_MATRIX.json',O/'PROTECTION_SCOPE.json',O/'qualification/CONTINUATION_PRESERVATION_CONTRACT.md']
+         inputs += [p for p in (O/'inputs').rglob('*') if p.is_file()]
+-        inputs += [run/'runtime/cache/backend/gradle/init.d/ep19-packaging.gradle']
++        inputs += [run/'runtime/cache/backend/gradle/init.d/ep19-packaging.gradle',
++                   run/'lean-materialization.json',run/'preparation-collector.json',run/'PREPARATION_COMPATIBILITY.json',run/'PREPARATION_REVALIDATION.json']
+         sealed=load(run/'seal.json')['files'];scope=load(run/'scope.json')
+         run_inputs={str(run/(n+'.json')) for n in ('prepare','bindings','identity','source-recovery','toolchain','scope','baseline','namespaces')}
+         run_inputs.add(str(run/'bookkeeping-policy-v2.private.json'))
+@@ -157,7 +165,10 @@
+         expected=set(scope['protected'])|set(scope['instruction_capture']['entries'])
+         if not expected<=set(load(run/'baseline.json')['entries']):problems.append('BASELINE_COVERAGE_INCOMPLETE')
+         if qualification.get('real_gradle_instrumentation')!='PASS':problems.append('REAL_GRADLE_INSTRUMENTATION_NOT_QUALIFIED')
+-        if qualification.get('schema')!='ep19-bookkeeping-v2-qualified-v1':problems.append('BOOKKEEPING_V2_QUALIFICATION_REQUIRED')
++        if qualification.get('schema') not in ('ep19-bookkeeping-v2-qualified-v1','ep19-lean-materialization-qualified-v1'):problems.append('BOOKKEEPING_V2_AND_LEAN_QUALIFICATION_REQUIRED')
++        if qualification.get('schema')=='ep19-lean-materialization-qualified-v1':
++            if not coverage.historical_v2_qualification_qualified(qualification):problems.append('HISTORICAL_V2_129_REUSE_INVALID')
++            if qualification.get('fresh_tests')!=qualification.get('tests') or qualification.get('reused_tests')!=129:problems.append('FRESH_REUSED_QUALIFICATION_ACCOUNTING')
+         if qualification.get('schema')=='ep19-output-corrections-v2':
+             for area in ('run_isolation','artifact_copy','compile_completeness','vite_closure','packaging'):
+                 if area not in qualification.get('areas',[]):problems.append('CORRECTION_QUALIFICATION_MISSING '+area)
+@@ -167,6 +178,13 @@
+         for area in ('collector','coverage','shadow','packaging','freshness','launch'):
+             if qualification.get(area)!='PASS':problems.append('QUALIFICATION_AREA_NOT_PASS '+area)
+         checks['qualification_closure']='PASS'
++        preparation=load(run/'PREPARATION_COMPATIBILITY.json')
++        if preparation.get('result')!='PASS' or preparation.get('preparation_compatibility_not_baseline') is not True:problems.append('LEAN_PREPARATION_COMPATIBILITY_NOT_PASS')
++        if preparation.get('disallowed_symlink_count')!=0 or preparation.get('strict_collector',{}).get('result')!='COMPLETE':problems.append('LEAN_STRICT_COLLECTOR_INCOMPATIBLE')
++        if preparation.get('native_toolchain_probe_results',{}).get('result')!='PASS' or preparation.get('native_toolchain_probe_results',{}).get('system_fallback') is not False:problems.append('LEAN_NATIVE_PROBE_NOT_PASS')
++        revalidation=load(run/'PREPARATION_REVALIDATION.json')
++        strict_revalidation=revalidation.get('strict_collector',{})
++        if revalidation.get('result')!='PASS' or strict_revalidation.get('result')!='COMPLETE' or strict_revalidation.get('hashed')!=strict_revalidation.get('expected_files'):problems.append('LEAN_FINAL_HELPER_REVALIDATION_NOT_PASS')
+     except Exception as e:problems.append('QUALIFICATION_OR_COVERAGE_REJECT '+str(e))
+     try:
+         owner_authorization();checks['owner_authorization']='OWNER_AUTHORIZED'
+@@ -186,6 +204,7 @@
+     else:checks['matrix_keys']=load(O/'GATE_EXECUTION_MATRIX.json')['order']
+     lean=run/'runtime/cache/backend/formal-tools/lean-4.19.0-linux/bin/lean'
+     if not lean.is_file():problems.append('LEAN_4_19_0_NOT_PREPARED_IN_RUN_CACHE')
++    elif lean.is_symlink() or coverage.digest(lean)!=lean_preparation.LEAN_SHA256:problems.append('LEAN_4_19_0_RUN_LOCAL_PIN_MISMATCH')
+     r={'result':'ENGINEERING_READY' if not problems else 'ENGINEERING_PREFLIGHT_BLOCKED',
+        'run_id':run.name,'candidate':SHA,'tree':TREE,'base':BASE,'checks':checks,'engineering_blockers':problems,
+        'owner_contract_version':OWNER_CONTRACT_VERSION,'V2_CONTRACT_IMPLEMENTED':True,
+@@ -212,6 +231,8 @@
+     policy=run/'bookkeeping-policy-v2.private.json'
+     if str(policy) not in files or str(OWNER_AUTHORIZATION) not in files or str(EXECUTOR_IDENTITY) not in files:
+         raise RuntimeError('V2_POLICY_OR_OWNER_BINDING_MISSING')
++    for name in ('lean-materialization.json','preparation-collector.json','PREPARATION_COMPATIBILITY.json','PREPARATION_REVALIDATION.json'):
++        if str(run/name) not in files:raise RuntimeError('LEAN_PREPARATION_BINDING_MISSING '+name)
+     verify_executor_identity()
+     parsed=load(policy)
+     if parsed.get('owner_authorization_sha256')!=OWNER_SHA256 or parsed.get('contract_version')!=OWNER_CONTRACT_VERSION:
+@@ -291,7 +312,10 @@
+             args=run/'runtime/outputs/backend/probe.args'
+             with args.open('x') as f:f.write('\n'.join(json.dumps(a) for a in ['-cp',str(classes)+os.pathsep+cp,'ExposureProbe'])+'\n')
+         if name=='FORMAL':
+-            env.update(load(O/'inputs/PROOF_GATE_INVENTORY.json')['environment']);env['LEAN']=str(run/'runtime/cache/backend/formal-tools/lean-4.19.0-linux/bin/lean')
++            env.update(load(O/'inputs/PROOF_GATE_INVENTORY.json')['environment'])
++            lean_root=run/'runtime/cache/backend/formal-tools/lean-4.19.0-linux'
++            env.update(LEAN=str(lean_root/'bin/lean'),LEAN_PATH=str(lean_root/'lib/lean'),
++                       LD_LIBRARY_PATH=str(lean_root/'lib'))
+             # Hard-coded /tmp is confined with a mount; original product script unchanged.
+             command=formal_sandbox(command,repo,run,env)
+         if name.startswith('FRONTEND_'):
+@@ -304,7 +328,7 @@
+             command=frontend_sandbox(command,Path(spec['cwd']),writes,run)
+         dependencies_before=freshness.dependency_inputs(run,repo) if name!='FRONTEND_INSTALL' else {}
+         put(gate/'dependencies-before.json',dependencies_before)
+-        put(gate/'invocation.json',{'argv':command,'authoritative_argv':spec['authoritative_command'],'cwd':spec['cwd'],'run_id':run.name,'candidate':SHA,'tree':TREE,'sealed_inputs':sealed,'environment':{k:env.get(k) for k in ['PATH','JAVA_HOME','GRADLE_USER_HOME','HOME','TMPDIR','JAVA_TOOL_OPTIONS','DOCKER_HOST','EP19_RUN_ROOT','EP19_GATE_ID']},'before_outputs':before,'native_handling':'main child and auxiliaries have separate process receipts','output_producer':{str(p):'bound javac/argfile preparation plus main probe' if name=='APPLICATION_PROBE' else name for p in required}})
++        put(gate/'invocation.json',{'argv':command,'authoritative_argv':spec['authoritative_command'],'cwd':spec['cwd'],'run_id':run.name,'candidate':SHA,'tree':TREE,'sealed_inputs':sealed,'environment':{k:env.get(k) for k in ['PATH','JAVA_HOME','GRADLE_USER_HOME','HOME','TMPDIR','JAVA_TOOL_OPTIONS','DOCKER_HOST','EP19_RUN_ROOT','EP19_GATE_ID','LEAN','LEAN_PATH','LD_LIBRARY_PATH']},'before_outputs':before,'native_handling':'main child and auxiliaries have separate process receipts','output_producer':{str(p):'bound javac/argfile preparation plus main probe' if name=='APPLICATION_PROBE' else name for p in required}})
+         kwargs=coverage.watch_args(scope,shadow=name=='SHADOW')
+         if name=='SHADOW':kwargs['shadow_reconciler']=shadow_binding.bind(repo,env,scope['shadow_declared'],gate)
+         observed=observe.run(command,Path(spec['cwd']),gate/'native.log',env=env,timeout=spec['timeout_seconds'],**kwargs)
+diff -ruN preimages/executor-v2/test_lean_binding.py executor/test_lean_binding.py
+--- preimages/executor-v2/test_lean_binding.py	1970-01-01 08:00:00.000000000 +0800
++++ executor/test_lean_binding.py	2026-09-08 11:32:32.382622968 +0800
+@@ -0,0 +1,89 @@
++from pathlib import Path
++import ast
++import hashlib
++import json
++import unittest
++
++import coverage
++import execution
++
++
++ROOT = execution.D
++PREIMAGE = ROOT / "preimages/executor-v2"
++OLD_QUALIFICATION = ROOT.parent / "bookkeeping-v2-20260908T004809Z/qualification/QUALIFICATION.json"
++
++
++def component(path: Path, name: str) -> str:
++    tree = ast.parse(path.read_text())
++    node = next(row for row in tree.body if isinstance(row, ast.FunctionDef) and row.name == name)
++    return hashlib.sha256(ast.dump(node, include_attributes=False).encode()).hexdigest()
++
++
++class LeanBindingTests(unittest.TestCase):
++    def test_strict_collector_is_byte_unchanged(self):
++        self.assertEqual(coverage.digest(execution.H / "preservation.py"),
++                         coverage.digest(PREIMAGE / "preservation.py"))
++
++    def test_a_b_c_helpers_are_byte_unchanged(self):
++        names = ("namespaces.py", "artifacts.py", "compile_inventory.py",
++                 "vite_closure.py", "packaging.py", "freshness.py")
++        self.assertEqual(
++            {name: coverage.digest(execution.H / name) for name in names},
++            {name: coverage.digest(PREIMAGE / name) for name in names},
++        )
++
++    def test_sandbox_algorithms_are_unchanged(self):
++        for name in ("exact", "frontend_sandbox", "formal_sandbox"):
++            self.assertEqual(component(execution.H / "execution.py", name),
++                             component(PREIMAGE / "execution.py", name))
++
++    def test_historical_129_controls_remain_historical(self):
++        document = json.loads(OLD_QUALIFICATION.read_text())
++        self.assertEqual(document["result"], "PASS")
++        self.assertEqual(document["tests"], 129)
++        self.assertEqual(document["schema"], "ep19-bookkeeping-v2-qualified-v1")
++        self.assertTrue(coverage.formal_boundary_qualified(document))
++        self.assertTrue(coverage.full_capsule_reuse_qualified(document))
++
++    def test_prepare_materializes_before_prepared_receipt(self):
++        source = (execution.H / "runner.py").read_text()
++        materialize = source.index("lean_result=lean_preparation.prepare(run)")
++        receipt = source.index("put(run/'prepare.json'", materialize)
++        self.assertLess(materialize, receipt)
++
++    def test_formal_gate_binds_run_local_lean_and_libraries(self):
++        source = (execution.H / "runner.py").read_text()
++        self.assertIn("env.update(LEAN=str(lean_root/'bin/lean'),LEAN_PATH=str(lean_root/'lib/lean')", source)
++        self.assertIn("LD_LIBRARY_PATH=str(lean_root/'lib')", source)
++
++    def test_hermes_entrypoints_parse_and_execution_is_ordered(self):
++        tools = ROOT / "tools"
++        for name in ("hermes_review.py", "hermes_execute_once.py", "finalize_report.py",
++                     "revalidate_preparation.py"):
++            ast.parse((tools / name).read_text())
++        execution_source = (tools / "hermes_execute_once.py").read_text()
++        self.assertLess(execution_source.index('call("baseline"'),
++                        execution_source.index('call("preflight"'))
++        self.assertLess(execution_source.index('call("preflight"'),
++                        execution_source.index('call("run"'))
++        report_source = (tools / "finalize_report.py").read_text()
++        for field in ("FAILED_RUN_PRESERVED", "PREPARATION_COLLECTOR_COMPATIBILITY",
++                      "ACTUAL_TEST_IDENTITY_ACCOUNTING", "PACK_HISTORICAL_BYTE_IMMUTABILITY",
++                      "PUBLIC_MANIFEST_SHA256", "REMOTE_VERIFICATION"):
++            self.assertIn('"' + field + '"', report_source)
++
++    def test_native_probe_persists_receipt_before_rejecting(self):
++        source = (execution.H / "lean_preparation.py").read_text()
++        self.assertLess(source.index("coverage.put(receipt_path, receipt)"),
++                        source.index('raise RuntimeError("LEAN_PREPARATION_NATIVE_PROBE_EXCEPTION'))
++
++    def test_failed_v2_run_is_preserved_as_not_run(self):
++        stop = json.loads((ROOT / "historical/V2_STOP_CONDITION.json").read_text())
++        fields = json.loads((ROOT / "historical/V2_FINAL_FIELDS.json").read_text())
++        self.assertEqual(stop["result"], "STOP_INCOMPLETE_STRICT_INPUT_CAPTURE")
++        self.assertIs(fields["FORMAL_START_CREATED"], False)
++        self.assertEqual(fields["NOT_RUN"], 29)
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff -ruN preimages/executor-v2/test_lean_materialization.py executor/test_lean_materialization.py
+--- preimages/executor-v2/test_lean_materialization.py	1970-01-01 08:00:00.000000000 +0800
++++ executor/test_lean_materialization.py	2026-09-08 11:34:48.264905869 +0800
+@@ -0,0 +1,136 @@
++from pathlib import Path
++import hashlib
++import json
++import os
++import tempfile
++import unittest
++
++import lean_materialization as lm
++
++
++def digest(data: bytes) -> str:
++    return hashlib.sha256(data).hexdigest()
++
++
++class LeanMaterializationTests(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory(prefix="ep19-lean-materialization-")
++        self.root = Path(self.temp.name)
++
++    def tearDown(self):
++        self.temp.cleanup()
++
++    def test_strict_inspection_rejects_symlink(self):
++        source = self.root / "source"
++        source.mkdir()
++        (source / "real").write_bytes(b"bytes")
++        (source / "alias").symlink_to("real")
++        with self.assertRaisesRegex(lm.MaterializationError, "DISALLOWED_SYMLINKS"):
++            lm.inspect_tree(source, allow_file_links=False)
++
++    def test_complete_chain_is_recorded(self):
++        source = self.root / "source"
++        source.mkdir()
++        (source / "real").write_bytes(b"bytes")
++        (source / "second").symlink_to("real")
++        (source / "first").symlink_to("second")
++        target, chain = lm.resolve_link_chain(source, source / "first")
++        self.assertEqual(target, source / "real")
++        self.assertEqual([row["link"] for row in chain], ["first", "second"])
++
++    def test_cycle_is_rejected(self):
++        source = self.root / "source"
++        source.mkdir()
++        (source / "a").symlink_to("b")
++        (source / "b").symlink_to("a")
++        with self.assertRaisesRegex(lm.MaterializationError, "LINK_CYCLE"):
++            lm.resolve_link_chain(source, source / "a")
++
++    def test_missing_target_is_rejected(self):
++        source = self.root / "source"
++        source.mkdir()
++        (source / "a").symlink_to("missing")
++        with self.assertRaisesRegex(lm.MaterializationError, "LINK_TARGET_MISSING"):
++            lm.resolve_link_chain(source, source / "a")
++
++    def test_outside_target_is_rejected(self):
++        source = self.root / "source"
++        source.mkdir()
++        outside = self.root / "outside"
++        outside.write_bytes(b"outside")
++        (source / "a").symlink_to(outside)
++        with self.assertRaisesRegex(lm.MaterializationError, "LINK_ESCAPES_ROOT"):
++            lm.resolve_link_chain(source, source / "a")
++
++    def test_special_target_is_rejected(self):
++        source = self.root / "source"
++        source.mkdir()
++        os.mkfifo(source / "fifo")
++        (source / "a").symlink_to("fifo")
++        with self.assertRaisesRegex(lm.MaterializationError, "LINK_TARGET_NOT_REGULAR"):
++            lm.resolve_link_chain(source, source / "a")
++
++    def test_shared_regular_inode_is_rejected(self):
++        source = self.root / "source"
++        source.mkdir()
++        (source / "one").write_bytes(b"bytes")
++        os.link(source / "one", source / "two")
++        with self.assertRaisesRegex(lm.MaterializationError, "SHARED_INODE_ALIASES"):
++            lm.inspect_tree(source, allow_file_links=False)
++
++    def test_external_hardlink_is_rejected(self):
++        source = self.root / "source"
++        source.mkdir()
++        outside = self.root / "outside"
++        outside.write_bytes(b"bytes")
++        os.link(outside, source / "linked")
++        with self.assertRaisesRegex(lm.MaterializationError, "NONINDEPENDENT_REGULAR_FILE"):
++            lm.inspect_tree(source, allow_file_links=False)
++
++    def test_symlinked_root_ancestor_is_rejected(self):
++        real = self.root / "real"
++        real.mkdir()
++        (real / "child").mkdir()
++        alias = self.root / "alias"
++        alias.symlink_to(real, target_is_directory=True)
++        with self.assertRaisesRegex(lm.MaterializationError, "ROOT_OR_ANCESTOR_SYMLINK"):
++            lm.inspect_tree(alias / "child", allow_file_links=False)
++
++    def test_materialized_equivalent_has_independent_regular_files(self):
++        raw = self.root / "raw"
++        raw.mkdir(mode=0o750)
++        (raw / "real").write_bytes(b"bytes")
++        os.chmod(raw / "real", 0o640)
++        (raw / "alias").symlink_to("real")
++        historical = self.root / "historical.json"
++        # The production verifier requires 4617 rows. Patch its projection in
++        # this small behavioral fixture; membership mechanics remain real.
++        rows = [
++            {"path": "alias", "source_sha256": digest(b"bytes"),
++             "destination_sha256": digest(b"bytes"), "original_symlink": "real"},
++            {"path": "real", "source_sha256": digest(b"bytes"),
++             "destination_sha256": digest(b"bytes"), "original_symlink": None},
++        ]
++        historical.write_text(json.dumps({"mapping": rows}))
++        original = lm._historical_projection
++        def fixture_projection(path):
++            document = json.loads(Path(path).read_text())
++            hashes = {row["path"]: row["destination_sha256"] for row in document["mapping"]}
++            links = {row["path"]: row.get("original_symlink") for row in document["mapping"]}
++            return hashes, links, hashlib.sha256(Path(path).read_bytes()).hexdigest()
++        lm._historical_projection = fixture_projection
++        try:
++            result = lm.materialize(raw, self.root / "dest", historical)
++        finally:
++            lm._historical_projection = original
++        self.assertEqual(result["result"], "PASS")
++        self.assertTrue((self.root / "dest/alias").is_file())
++        self.assertFalse((self.root / "dest/alias").is_symlink())
++        self.assertEqual((self.root / "dest/alias").read_bytes(), b"bytes")
++        self.assertNotEqual(os.lstat(self.root / "dest/alias").st_ino,
++                            os.lstat(self.root / "dest/real").st_ino)
++        self.assertEqual(os.lstat(self.root / "dest/alias").st_nlink, 1)
++
++
++if __name__ == "__main__":
++    unittest.main()

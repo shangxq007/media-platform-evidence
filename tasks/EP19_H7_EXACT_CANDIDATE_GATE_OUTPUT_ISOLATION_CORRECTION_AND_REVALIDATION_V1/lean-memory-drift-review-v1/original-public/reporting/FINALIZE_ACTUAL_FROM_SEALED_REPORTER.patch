@@ -1,0 +1,1194 @@
+--- preimage/tools/finalize_report.py
++++ current/postprocessing/finalize_actual.py
+@@ -1,194 +1,1033 @@
+-"""Create a Chinese machine report and sanitized public package after Hermes execution."""
++#!/usr/bin/env python3
++"""Finalize the already-completed Hermes run into a sanitized evidence package.
++
++This is a reporting-only continuation.  It neither imports nor invokes the formal
++executor, and it deliberately is not part of the sealed executor identity.
++"""
++
++from __future__ import annotations
++
++from collections import Counter
+ from pathlib import Path
++import difflib
+ import hashlib
+ import json
++import os
+ import re
+ import shutil
+-import sys
++import subprocess
++import tempfile
+ import zipfile
+ 
++
+ ROOT = Path(__file__).resolve().parents[1]
+-RUN = ROOT / "outputs/continuation-runs/lean-materialized-formal-001"
++RUN_ID = "lean-materialized-formal-001"
++RUN = ROOT / "outputs" / "continuation-runs" / RUN_ID
+ DELIVERY = ROOT / "delivery"
+ PUBLIC = DELIVERY / "public"
+ 
++CANDIDATE = "689ab9456461a8d19a72d059f5157092efc43aff"
++CANDIDATE_TREE = "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6"
++BASE = "86d6aef94fd5e58da552e97c11473cff6eca734e"
++EXECUTOR_IDENTITY = "e4631b979d1b96dd40f852011d450878876838266710e4413241ab6b720e374c"
++OWNER_CONTRACT = "OWNER_AUTHORIZATION_SCOPED_RUNTIME_BOOKKEEPING_V2"
++
++DECISION_KEYS = (
++    "OLD_STRICT_PRESERVATION_RESULT",
++    "V2_INPUT_INTEGRITY_RESULT",
++    "V2_BOOKKEEPING_EVALUATION",
++)
++REQUIRED_FIELDS = (
++    "TASK", "CONTINUATION", "LANE", "CANDIDATE_COMMIT_SHA", "CANDIDATE_TREE",
++    "EXECUTOR_IDENTITY", "OWNER_CONTRACT_VERSION", "FAILED_RUN_PRESERVED",
++    "LEAN_SOURCE_SELECTED", "LEAN_SOURCE_IDENTITY_VERIFIED", "MATERIALIZATION_PERFORMED",
++    "RUN_LOCAL_TOOLCHAIN_VERIFIED", "DISALLOWED_SYMLINK_COUNT",
++    "PREPARATION_COLLECTOR_COMPATIBILITY", "NATIVE_TOOLCHAIN_PROBE_RESULTS",
++    "FRESH_QUALIFICATION_RESULTS", "REUSED_QUALIFICATION_SCOPE", "FORMAL_LAUNCH_BINDING",
++    "BASELINE_CREATED", "SEAL_CREATED", "PREFLIGHT_RESULT", "FORMAL_START_CREATED",
++    "REQUIRED_GATES", "PASS", "FAIL", "NOT_RUN", "ACTUAL_TEST_IDENTITY_ACCOUNTING",
++    "OLD_STRICT_PRESERVATION_RESULT", "V2_INPUT_INTEGRITY_RESULT",
++    "V2_BOOKKEEPING_EVALUATION", "PRODUCT_CHANGED_PATHS", "FRONTEND_LANE_INTERFERENCE",
++    "HISTORICAL_FAILURES_PRESERVED", "PACK_HISTORICAL_BYTE_IMMUTABILITY",
++    "PRODUCT_PUBLICATION", "POST_PUBLICATION_SANITY", "EP19_CLOSED", "INDEPENDENT_REVIEW",
++    "EVIDENCE_COMMIT_SHA", "REVIEW_INDEX_URL", "PUBLIC_MANIFEST_SHA256",
++    "REMOTE_VERIFICATION", "STOP",
++)
++
++TOKEN_PATTERNS = (
++    rb"gh[pousr]_[A-Za-z0-9]{30,}",
++    rb"github_pat_[A-Za-z0-9_]{40,}",
++    rb"AKIA[0-9A-Z]{16}",
++    rb"AIza[0-9A-Za-z_-]{30,}",
++    rb"-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----",
++)
++
+ 
+ def digest(path: Path) -> str:
+-    return hashlib.sha256(path.read_bytes()).hexdigest()
+-
+-
+-def put(path: Path, value) -> None:
++    hasher = hashlib.sha256()
++    with path.open("rb") as stream:
++        for block in iter(lambda: stream.read(1024 * 1024), b""):
++            hasher.update(block)
++    return hasher.hexdigest()
++
++
++def require_file(path: Path) -> Path:
++    if not path.is_file() or path.is_symlink():
++        raise RuntimeError(f"REQUIRED_REGULAR_FILE_MISSING {path}")
++    return path
++
++
++def load_required(path: Path):
++    require_file(path)
++    try:
++        return json.loads(path.read_text(encoding="utf-8"))
++    except (UnicodeDecodeError, json.JSONDecodeError) as error:
++        raise RuntimeError(f"INVALID_REQUIRED_JSON {path}: {error}") from error
++
++
++def put_json(path: Path, value) -> None:
+     path.parent.mkdir(parents=True, exist_ok=True)
+     with path.open("x", encoding="utf-8") as stream:
+-        json.dump(value, stream, indent=2, ensure_ascii=False)
++        json.dump(value, stream, indent=2, ensure_ascii=False, sort_keys=False)
+         stream.write("\n")
+ 
+ 
+-def load(path: Path, default=None):
+-    return json.loads(path.read_text()) if path.is_file() else default
+-
+-
+-def copy(source: Path, target: Path) -> None:
+-    if not source.is_file() or source.is_symlink():
+-        raise RuntimeError("UNSAFE_PUBLIC_SOURCE " + str(source))
++def put_text(path: Path, value: str) -> None:
++    path.parent.mkdir(parents=True, exist_ok=True)
++    with path.open("x", encoding="utf-8") as stream:
++        stream.write(value)
++
++
++def copy_regular(source: Path, target: Path) -> None:
++    require_file(source)
+     target.parent.mkdir(parents=True, exist_ok=True)
+-    with target.open("xb") as output:
+-        output.write(source.read_bytes())
+-
+-
+-def decision_summary() -> dict:
+-    paths = sorted((RUN / "runtime/decision-evidence").glob("*/receipt.json"))
++    with source.open("rb") as input_stream, target.open("xb") as output_stream:
++        shutil.copyfileobj(input_stream, output_stream, length=1024 * 1024)
++
++
++def private_path_alias(value: object) -> object:
++    if not isinstance(value, str):
++        return value
++    normalized = value.rstrip("/")
++    if normalized.endswith("/.hermes/skills/.usage.json"):
++        return "PRIVATE_SKILLS_USAGE_METADATA"
++    if normalized.endswith("/.hermes/skills"):
++        return "PRIVATE_SKILLS_ROOT"
++    if normalized.endswith("/.hermes/memories"):
++        return "PRIVATE_MEMORY_ROOT"
++    return value
++
++
++def decision_sort_key(path: Path, document: dict) -> tuple[int, str]:
++    timestamps = [document.get(name) for name in ("finished_ns", "started_ns")]
++    numeric = [value for value in timestamps if isinstance(value, int)]
++    return (max(numeric, default=0), path.name)
++
++
++def project_decision(path: Path, document: dict) -> dict:
++    differences = []
++    for difference in document.get("differences", []):
++        fields = []
++        for field in difference.get("fields", []):
++            fields.append({
++                "field": field.get("field"),
++                "before": field.get("before"),
++                "current": field.get("current"),
++            })
++        differences.append({
++            "path_alias": private_path_alias(difference.get("path")),
++            "categories": difference.get("categories", []),
++            "fields": fields,
++            "capture_errors": difference.get("capture_errors", []),
++        })
++    return {
++        "raw_receipt": path.name,
++        "raw_sha256": digest(path),
++        "raw_size": path.stat().st_size,
++        "schema": document.get("schema"),
++        "run_id": document.get("run_id"),
++        "phase": document.get("phase"),
++        "gate": document.get("gate"),
++        "started_ns": document.get("started_ns"),
++        "finished_ns": document.get("finished_ns"),
++        "reason": document.get("reason"),
++        "decision": document.get("decision"),
++        "gate_process_status": document.get("gate_process_status"),
++        **{key: document.get(key, "NOT_ESTABLISHED") for key in DECISION_KEYS},
++        "WRITER_ATTRIBUTION": document.get("WRITER_ATTRIBUTION", "NOT_ESTABLISHED"),
++        "OBSERVATION_LIMITS": document.get("OBSERVATION_LIMITS", []),
++        "capture_errors": document.get("capture_errors", []),
++        "evidence_errors": document.get("evidence_errors", []),
++        "differences": differences,
++        "private_skill_memory_bodies": "OMITTED",
++    }
++
++
++def collect_decisions(run: Path) -> tuple[list[dict], dict]:
++    paths = sorted((run / "runtime" / "decision-evidence").glob("*.json"))
+     if not paths:
+-        return {"OLD_STRICT_PRESERVATION_RESULT": "NOT_RUN",
+-                "V2_INPUT_INTEGRITY_RESULT": "NOT_RUN",
+-                "V2_BOOKKEEPING_EVALUATION": "NOT_RUN"}
+-    row = load(paths[-1])
+-    return {key: row.get(key, "NOT_ESTABLISHED") for key in
+-            ("OLD_STRICT_PRESERVATION_RESULT", "V2_INPUT_INTEGRITY_RESULT",
+-             "V2_BOOKKEEPING_EVALUATION")}
++        raise RuntimeError("ACTUAL_DECISION_EVIDENCE_MISSING")
++    projected = []
++    latest = None
++    latest_key = None
++    # Receipts are about 220 MB each.  Parse and project one at a time so the
++    # reporter does not retain four private full captures in memory.
++    for path in paths:
++        document = load_required(path)
++        projection = project_decision(path, document)
++        projected.append(projection)
++        key = decision_sort_key(path, document)
++        if latest_key is None or key > latest_key:
++            latest_key = key
++            latest = projection
++    assert latest is not None
++    return projected, latest
++
++
++def gate_accounting(bindings: dict, results_document: dict) -> tuple[dict, dict]:
++    order = bindings.get("order")
++    if not isinstance(order, list) or len(order) != 29 or len(set(order)) != 29:
++        raise RuntimeError("REQUIRED_GATE_ORDER_IS_NOT_EXACTLY_29_UNIQUE_GATES")
++    raw_results = results_document.get("results")
++    if not isinstance(raw_results, dict):
++        raise RuntimeError("RUNTIME_RESULTS_GATE_MAP_MISSING")
++    if set(raw_results) != set(order):
++        raise RuntimeError("RUNTIME_RESULTS_GATE_SET_MISMATCH")
++    gates = {}
++    for position, name in enumerate(order, 1):
++        row = raw_results[name]
++        gates[name] = {
++            "position": position,
++            "result": row.get("result"),
++            "reason": row.get("reason"),
++            "native_exit": row.get("native_exit"),
++            "wrapper_exit": row.get("wrapper_exit"),
++            "product_native_invocation": (
++                "NOT_INVOKED" if row.get("native_exit") is None else "INVOKED"
++            ),
++        }
++    counts = Counter(row["result"] for row in gates.values())
++    summarized = {state: counts.get(state, 0) for state in ("PASS", "FAIL", "NOT_RUN")}
++    return gates, summarized
++
++
++def build_actual_test_accounting(gates: dict, qualification_result: dict) -> dict:
++    not_evaluated = "NOT_EVALUATED_SUITES_NOT_INVOKED"
++    product_suite = {
++        "actual_discovered": 0,
++        "actual_executed": 0,
++        "actual_pass": 0,
++        "actual_failures": 0,
++        "actual_errors": 0,
++        "actual_skips": 0,
++        "missing": not_evaluated,
++        "unexpected": not_evaluated,
++        "duplicates": not_evaluated,
++    }
++    return {
++        "schema": "ep19-actual-formal-test-accounting-v2",
++        "formal_product_suites": {
++            "backend": {
++                "expectations_only": {"tests": 7973, "skips": 29},
++                **product_suite,
++            },
++            "candidate_frontend": {
++                "expectations_only": {"tests": 149},
++                **product_suite,
++            },
++            "explanation": (
++                "The first gate was rejected at its preservation boundary before its product "
++                "command, so no full-suite identity reconciliation exists."
++            ),
++        },
++        "product_native": {
++            "status": "NOT_INVOKED",
++            "native_exit": None,
++            "wrapper_exit": gates["CHANGE_IMPACT"].get("wrapper_exit"),
++            "boundary_reason": gates["CHANGE_IMPACT"].get("reason"),
++        },
++        "fresh_reporting_context_qualification": {
++            "scope": "LEAN_MATERIALIZATION_AFFECTED_CONTROLS_ONLY_NOT_PRODUCT_GATES",
++            "result": qualification_result.get("result"),
++            "tests": qualification_result.get("tests"),
++            "pass": qualification_result.get("pass"),
++            "failures": qualification_result.get("failures"),
++            "errors": qualification_result.get("errors"),
++            "skipped": qualification_result.get("skipped"),
++            "unique": qualification_result.get("unique"),
++            "duplicates": qualification_result.get("duplicates"),
++            "identities": qualification_result.get("identities", []),
++            "historical_129_controls_executed": qualification_result.get(
++                "historical_129_controls_executed"
++            ),
++            "product_gate_execution": qualification_result.get("product_gate_execution"),
++        },
++        "all_29_gate_statuses": gates,
++    }
++
++
++def git_read(repository: Path, *arguments: str) -> str:
++    environment = os.environ.copy()
++    environment["GIT_OPTIONAL_LOCKS"] = "0"
++    process = subprocess.run(
++        ["git", "-c", "core.preloadindex=false", "-c", "core.fsmonitor=false",
++         "-C", str(repository), *arguments],
++        check=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
++        env=environment,
++    )
++    if process.returncode != 0:
++        raise RuntimeError(
++            f"READ_ONLY_GIT_QUERY_FAILED {repository} {arguments}: {process.stderr.strip()}"
++        )
++    return process.stdout
++
++
++def git_source_verification(run: Path) -> dict:
++    repositories = {}
++    dirty_paths = []
++    for role in ("backend", "frontend", "shadow-fixture"):
++        repository = require_directory(run / "sources" / role)
++        head = git_read(repository, "rev-parse", "HEAD").strip()
++        tree = git_read(repository, "rev-parse", "HEAD^{tree}").strip()
++        status_lines = [line for line in git_read(
++            repository, "status", "--porcelain=v1", "--untracked-files=all"
++        ).splitlines() if line]
++        role_dirty = [line[3:] if len(line) > 3 else line for line in status_lines]
++        dirty_paths.extend(f"{role}:{path}" for path in role_dirty)
++        git_directory = Path(git_read(repository, "rev-parse", "--absolute-git-dir").strip())
++        alternates = git_directory / "objects" / "info" / "alternates"
++        repositories[role] = {
++            "path": str(repository),
++            "canonical_path": str(repository.resolve()),
++            "path_is_canonical": repository.absolute() == repository.resolve(),
++            "head": head,
++            "tree": tree,
++            "head_matches_candidate": head == CANDIDATE,
++            "tree_matches_candidate": tree == CANDIDATE_TREE,
++            "tracked_and_untracked_status": status_lines,
++            "alternates_present": alternates.exists(),
++        }
++    candidate_diff = [line for line in git_read(
++        run / "sources" / "backend", "diff", "--name-only", f"{BASE}..{CANDIDATE}"
++    ).splitlines() if line]
++    candidate_diff_status = [line for line in git_read(
++        run / "sources" / "backend", "diff", "--name-status", f"{BASE}..{CANDIDATE}"
++    ).splitlines() if line]
++    valid = all(
++        row["head_matches_candidate"] and row["tree_matches_candidate"]
++        and row["path_is_canonical"] and not row["tracked_and_untracked_status"]
++        and not row["alternates_present"]
++        for row in repositories.values()
++    )
++    return {
++        "schema": "ep19-read-only-exact-clone-verification-v1",
++        "result": "PASS" if valid else "FAIL",
++        "query_mode": "READ_ONLY_GIT_OPTIONAL_LOCKS_0",
++        "repositories": repositories,
++        "candidate_diff_from_fixed_base": candidate_diff,
++        "candidate_diff_name_status": candidate_diff_status,
++        "product_changed_paths_after_clone": sorted(dirty_paths),
++    }
++
++
++def require_directory(path: Path) -> Path:
++    if not path.is_dir() or path.is_symlink():
++        raise RuntimeError(f"REQUIRED_REAL_DIRECTORY_MISSING {path}")
++    return path
++
++
++def receipt_summary(path: Path, document: dict) -> dict:
++    summary = {"raw_sha256": digest(path), "raw_size": path.stat().st_size}
++    for key in ("schema", "result", "run_id", "candidate", "tree", "base", "time"):
++        if key in document:
++            summary[key] = document[key]
++    return summary
++
++
++def receipt_count(value: object, field: str) -> int:
++    """Normalize receipt fields represented as either aggregates or collections."""
++    if isinstance(value, bool):
++        raise RuntimeError(f"INVALID_RECEIPT_COUNT {field}: boolean")
++    if isinstance(value, int):
++        if value < 0:
++            raise RuntimeError(f"INVALID_RECEIPT_COUNT {field}: negative")
++        return value
++    if isinstance(value, (list, dict)):
++        return len(value)
++    raise RuntimeError(f"INVALID_RECEIPT_COUNT {field}: {type(value).__name__}")
++
++
++def control_binding_summary(run: Path, documents: dict[str, dict]) -> dict:
++    baseline = documents["baseline"]
++    seal = documents["seal"]
++    start = documents["start"]
++    bindings = documents["bindings"]
++    preflight = documents["preflight"]
++    launch = documents["launch"]
++    scope = documents["scope"]
++    return {
++        "schema": "ep19-actual-control-binding-summary-v1",
++        "baseline": {
++            **receipt_summary(run / "baseline.json", baseline),
++            "entry_count": receipt_count(baseline.get("entries", []), "baseline.entries"),
++            "watch_count": receipt_count(baseline.get("watches", []), "baseline.watches"),
++            "claim": baseline.get("claim"),
++            "bookkeeping_baseline": baseline.get("bookkeeping_baseline"),
++            "bookkeeping_policy_sha256": baseline.get("bookkeeping_policy_sha256"),
++        },
++        "seal": {
++            **receipt_summary(run / "seal.json", seal),
++            "file_binding_count": receipt_count(seal.get("files", {}), "seal.files"),
++            "policy_acceptance": seal.get("policy_acceptance"),
++        },
++        "preflight": {
++            **receipt_summary(run / "preflight.json", preflight),
++            "engineering_blockers": preflight.get("engineering_blockers"),
++            "owner_contract_version": preflight.get("owner_contract_version"),
++        },
++        "engineering_launch": {
++            **receipt_summary(run / "engineering-launch.json", launch),
++            "executor_identity": launch.get("executor_identity"),
++            "owner_contract_version": launch.get("owner_contract_version"),
++            "preflight_sha256": launch.get("preflight_sha256"),
++            "seal_sha256": launch.get("seal_sha256"),
++            "qualification_sha256": launch.get("qualification_sha256"),
++        },
++        "formal_start": {
++            **receipt_summary(run / "runtime" / "START.json", start),
++            "review_sha256": start.get("review_sha256"),
++            "sealed_input_count": receipt_count(
++                start.get("sealed_inputs", {}), "formal_start.sealed_inputs"
++            ),
++        },
++        "bindings": {
++            **receipt_summary(run / "bindings.json", bindings),
++            "gate_count": receipt_count(
++                bindings.get("gate_count", bindings.get("order", [])), "bindings.gate_count"
++            ),
++            "order": bindings.get("order", []),
++            "status": bindings.get("status"),
++            "authoritative_matrix_sha256": bindings.get("authoritative_matrix_sha256"),
++        },
++        "scope": {
++            **receipt_summary(run / "scope.json", scope),
++            "top_level_keys": sorted(scope),
++        },
++        "identity": receipt_summary(run / "identity.json", documents["run_identity"]),
++        "raw_private_receipts": "HASHED_AND_SUMMARIZED_NOT_COPIED",
++    }
++
++
++def preservation_verification(root: Path, identity: dict, reuse: dict,
++                              inventory: dict, seal: dict) -> dict:
++    v2 = root.parent / "bookkeeping-v2-20260908T004809Z"
++    pairs = (
++        (root / "historical/V2_FINAL_FIELDS.json", v2 / "parent-analysis/FINAL_FIELDS.json"),
++        (root / "historical/V2_STOP_CONDITION.json", v2 / "parent-analysis/STOP_CONDITION.json"),
++        (root / "preimages/NEW_EXECUTOR_IDENTITY.v2.json", v2 / "NEW_EXECUTOR_IDENTITY.json"),
++        (root / "preimages/QUALIFICATION_REUSE_LEDGER.v2.json", v2 / "QUALIFICATION_REUSE_LEDGER.json"),
++        (root / "preimages/PARENT_COMMANDS.v2.md", v2 / "PARENT_COMMANDS.md"),
++    )
++    historical = []
++    for copied, original in pairs:
++        copied_hash = digest(require_file(copied))
++        original_hash = digest(require_file(original))
++        historical.append({
++            "copied": str(copied.relative_to(root)),
++            "original": str(original),
++            "copied_sha256": copied_hash,
++            "original_sha256": original_hash,
++            "byte_identical": copied_hash == original_hash,
++        })
++    unchanged = []
++    for row in reuse.get("exact_unchanged_components", []):
++        current = require_file(Path(row["current"]))
++        prior = require_file(Path(row["prior"]))
++        current_hash, prior_hash = digest(current), digest(prior)
++        unchanged.append({
++            "name": row.get("name"),
++            "declared_sha256": row.get("sha256"),
++            "current_sha256": current_hash,
++            "preimage_sha256": prior_hash,
++            "byte_identical": current_hash == prior_hash == row.get("sha256"),
++        })
++    old_reporter = require_file(root / "tools/finalize_report.py")
++    identity_helpers = identity.get("identity_basis", {}).get("helpers", {})
++    executor_identity_value = next(
++        (value for key, value in identity_helpers.items() if key.endswith("/tools/finalize_report.py")),
++        None,
++    )
++    inventory_value = next(
++        (row.get("sha256") for row in inventory.get("changes", [])
++         if row.get("path") == "tools/finalize_report.py"),
++        None,
++    )
++    seal_value = next(
++        (value for key, value in seal.get("files", {}).items()
++         if key.endswith("/tools/finalize_report.py")),
++        None,
++    )
++    old_actual = digest(old_reporter)
++    historical_qualification = require_file(v2 / "qualification/QUALIFICATION.json")
++    expected_qualification = reuse.get("historical_v2_qualification_sha256")
++    all_pass = (
++        all(row["byte_identical"] for row in historical)
++        and all(row["byte_identical"] for row in unchanged)
++        and inventory_value == old_actual
++        and seal_value == old_actual
++        and executor_identity_value is None
++        and digest(historical_qualification) == expected_qualification
++    )
++    return {
++        "schema": "ep19-historical-and-helper-byte-verification-v1",
++        "result": "PASS" if all_pass else "FAIL",
++        "historical_v2_original_vs_copied_controls": historical,
++        "exact_unchanged_helper_preimages": unchanged,
++        "sealed_old_reporter": {
++            "path": "tools/finalize_report.py",
++            "actual_sha256": old_actual,
++            "changed_source_inventory_sha256": inventory_value,
++            "formal_seal_sha256": seal_value,
++            "matches_inventory_and_seal": old_actual == inventory_value == seal_value,
++            "executor_identity_declared_sha256": executor_identity_value,
++            "correctly_excluded_from_executor_identity_basis": executor_identity_value is None,
++        },
++        "historical_qualification": {
++            "actual_sha256": digest(historical_qualification),
++            "reuse_ledger_sha256": expected_qualification,
++            "matches": digest(historical_qualification) == expected_qualification,
++        },
++        "reporting_continuation_not_in_executor_identity": "postprocessing/finalize_actual.py",
++    }
++
++
++def lean_evidence(materialization: dict, revalidation: dict) -> tuple[dict, dict]:
++    source_manifest = {
++        "schema": "ep19-public-full-lean-source-manifest-v1",
++        "historical_verification": materialization.get("historical_verification"),
++        "source_summary": materialization.get("source_summary"),
++        "destination_summary": materialization.get("destination_summary"),
++        "source_destination_shared_inode_count": materialization.get(
++            "source_destination_shared_inode_count"
++        ),
++        "materialization": materialization.get("materialization"),
++        "file_manifest": materialization.get("file_manifest", []),
++        "directory_manifest": materialization.get("directory_manifest", []),
++        "final_strict_collector": revalidation.get("strict_collector"),
++    }
++    raw = materialization.get("raw_corroboration", {})
++    links = []
++    for link in raw.get("link_map", []):
++        links.append({
++            "path": link.get("path"),
++            "target": link.get("target"),
++            "resolved": link.get("resolved"),
++            "sha256": link.get("sha256"),
++            "chain": [{
++                "link": item.get("link"),
++                "target": item.get("target"),
++                "next": Path(item.get("next", "")).name,
++                "dev": item.get("dev"),
++                "ino": item.get("ino"),
++            } for item in link.get("chain", [])],
++        })
++    link_map = {
++        "schema": "ep19-public-lean-raw-link-map-v1",
++        "result": raw.get("result"),
++        "historical_manifest_sha256": raw.get("historical_manifest_sha256"),
++        "counting_method": raw.get("counting_method"),
++        "historical_file_count": raw.get("historical_file_count"),
++        "historical_link_rows": raw.get("historical_link_rows"),
++        "all_current_links_enumerated": raw.get("all_current_links_enumerated"),
++        "all_link_chains_explicitly_resolved": raw.get("all_link_chains_explicitly_resolved"),
++        "link_count": raw.get("link_count"),
++        "link_map": links,
++    }
++    return source_manifest, link_map
++
++
++def native_probe_summary(run: Path, preparation: dict) -> dict:
++    probe_root = run / "runtime/tmp/backend/lean-preparation-probe"
++    names = (
++        "PreparationProbe.lean", "PreparationProbe.olean", "version.native.log",
++        "prefix.native.log", "import-compile-proof.native.log",
++    )
++    files = {}
++    for name in names:
++        path = require_file(probe_root / name)
++        files[name] = {"sha256": digest(path), "size": path.stat().st_size}
++    native = preparation.get("native_toolchain_probe_results", {})
++    receipts = native.get("receipts", [])
++    return {
++        "schema": "ep19-native-lean-probe-public-summary-v1",
++        "result": native.get("result"),
++        "version": native.get("version"),
++        "system_fallback": native.get("system_fallback"),
++        "native_exits": [row.get("native_exit") for row in receipts],
++        "files": files,
++        "note": "The olean output is represented by its hash; source and three native logs are copied.",
++    }
++
++
++def safe_payload_scan(public: Path) -> dict:
++    matches = []
++    files = sorted(path for path in public.rglob("*") if path.is_file())
++    for path in files:
++        if path.is_symlink() or ".private" in path.name.lower():
++            matches.append({"path": str(path.relative_to(public)), "reason": "FORBIDDEN_PATH"})
++            continue
++        payload = path.read_bytes()
++        for pattern in TOKEN_PATTERNS:
++            if re.search(pattern, payload):
++                matches.append({"path": str(path.relative_to(public)), "reason": "CREDENTIAL_PATTERN"})
++                break
++    if matches:
++        raise RuntimeError(f"PUBLIC_SANITIZATION_REJECT {matches}")
++    return {
++        "result": "PASS", "files_scanned": len(files), "credential_matches": 0,
++        "private_policy_files": 0, "private_skill_memory_bodies": 0,
++    }
++
++
++def write_manifest(public: Path) -> tuple[Path, str, int]:
++    manifest = public / "MANIFEST.sha256"
++    payload = sorted(path for path in public.rglob("*") if path.is_file())
++    lines = [f"{digest(path)}  {path.relative_to(public).as_posix()}\n" for path in payload]
++    put_text(manifest, "".join(lines))
++    verify_manifest(public, manifest)
++    return manifest, digest(manifest), len(payload)
++
++
++def verify_manifest(public: Path, manifest: Path) -> None:
++    seen = set()
++    for line in manifest.read_text(encoding="utf-8").splitlines():
++        if "  " not in line:
++            raise RuntimeError("PUBLIC_MANIFEST_MALFORMED")
++        wanted, relative = line.split("  ", 1)
++        if relative in seen or not re.fullmatch(r"[0-9a-f]{64}", wanted):
++            raise RuntimeError(f"PUBLIC_MANIFEST_MALFORMED {relative}")
++        seen.add(relative)
++        target = public / relative
++        if not target.is_file() or target.is_symlink() or digest(target) != wanted:
++            raise RuntimeError(f"PUBLIC_MANIFEST_VERIFY_FAILED {relative}")
++
++
++def report_text(fields: dict, gates: dict, latest: dict, accounting: dict,
++                source_verification: dict, preservation: dict) -> str:
++    memory_ctime = next((
++        field for difference in latest.get("differences", [])
++        if difference.get("path_alias") == "PRIVATE_MEMORY_ROOT"
++        for field in difference.get("fields", [])
++        if field.get("field") == "metadata.st_ctime_ns"
++    ), {})
++    lines = [
++        "# EP19 H7 固定候选实际执行与停止报告", "",
++        "## 结论", "",
++        "Hermes 已完成唯一获授权的正式执行窗口。执行在第一个必需门 `CHANGE_IMPACT` 的 "
++        "`GATE_BOUNDARY` 保存检查处停止：冻结 baseline 跨命令间隙发生漂移。产品原生命令未调用，"
++        "因此 `native_exit=null` 表示 `NOT_INVOKED`，不是产品测试失败；包装器以 1 退出。未重试、"
++        "未刷新 baseline、未发布产品或证据，EP19 未关闭。", "",
++        "最终顶层判定为 `OLD_STRICT_REJECT`、`V2_INPUT_INTEGRITY_RESULT=REJECT`、"
++        "`V2_BOOKKEEPING_EVALUATION=PASS`。这里的 bookkeeping PASS 只适用于获准的四字段评估，"
++        "不能覆盖顶层 strict/input-integrity REJECT。writer attribution 仍为 `NOT_ESTABLISHED`。", "",
++        "## 实际测试身份核算", "",
++        "后端 7973（预期 skip 29）与前端 149 均只是预期。由于首门在产品命令前被拒，实际产品套件"
++        "发现数和执行数均为 0；pass/fail/error/skip 均为 0。missing、unexpected、duplicate 保持 "
++        "`NOT_EVALUATED_SUITES_NOT_INVOKED`，不伪造完整套件 reconciliation。另有 preparation 范围"
++        "的 fresh qualification 19/19 PASS；历史 129 仅按 hash/application scope 复用，不称为 fresh 129。", "",
++        "## 29 个必需门", "",
++        "| # | Gate | Result | Reason | Product native | Native exit | Wrapper exit |", 
++        "|---:|---|---|---|---|---:|---:|",
++    ]
++    for name, row in gates.items():
++        lines.append(
++            f"| {row['position']} | `{name}` | `{row['result']}` | `{row['reason']}` | "
++            f"`{row['product_native_invocation']}` | `{row['native_exit']}` | `{row['wrapper_exit']}` |"
++        )
++    lines += [
++        "", "## 保存与准备证据", "",
++        f"实际差异投影共 {len(latest.get('differences', []))} 项，只有 metadata/delta/hash，"
++        "不含 Skill/Memory 正文。Memory root 的 `metadata.st_ctime_ns` 从 "
++        f"`{memory_ctime.get('before')}` 变为 `{memory_ctime.get('current')}`；Skills root 及获准 usage metadata 也有差异。"
++        "嵌套 evaluator PASS 保持其限定语义。", "",
++        "Lean 历史文件 membership 为 4617 regular files；目录为 449（含 root）。最终同一 strict "
++        "Collector 对 4617 Lean 文件、1 Gradle init 与 9 unique runtime binaries 共完成 4627 项捕获。"
++        "真实 native probe 的 version/prefix/import+proof 三次退出均为 0，使用 run-local Lean，无 system fallback。", "",
++        f"三个隔离 clone 的只读 Git 精确性检查为 `{source_verification['result']}`；"
++        f"formal 后 product worktree changed paths 为 `{json.dumps(source_verification['product_changed_paths_after_clone'], ensure_ascii=False)}`。"
++        "固定 base 到 candidate 的四条 tracked candidate diff 另列于 SOURCE_CLONE_VERIFICATION.json，"
++        "不与本 continuation 的 product edit 混淆。", "",
++        f"V2 historical originals/copies、unchanged helper preimages、旧 reporter identity hash 的"
++        f"重新核对结果为 `{preservation['result']}`。新 post-run reporter 明确不进入已封存 executor identity。", "",
++        "## 未解决的历史事实", "",
++        "以下事实均原样保留：旧执行 5 PASS / 1 FAIL / 23 NOT_RUN；ARCHITECTURE 终止与 "
++        "FAIL_PRESERVATION；既往 command-gap drift；后续 Lean capture 失败的 29 NOT_RUN；历史 writer "
++        "unknown/NOT_ESTABLISHED 与 decision/coverage 缺口；`PACK_HISTORICAL_BYTE_IMMUTABILITY=NOT_RECOVERABLE`。"
++        "V2 不回溯重分类这些失败。", "",
++        "## 发布边界", "",
++        "`PRODUCT_PUBLICATION=NOT_ATTEMPTED`，`EVIDENCE_COMMIT_SHA`、`REVIEW_INDEX_URL` 与 remote "
++        "verification 均待 parent。manifest 的真实摘要在包顶层 detached "
++        "`FINAL_FIELDS_WITH_MANIFEST.json`，避免 manifest self-hash 循环。", "",
++        "## 机器字段", "",
++    ]
++    lines.extend(
++        f"- `{key}`: `{json.dumps(value, ensure_ascii=False, sort_keys=True)}`"
++        for key, value in fields.items()
++    )
++    lines += ["", "## STOP", "", f"`{fields['STOP']}`", ""]
++    return "\n".join(lines)
++
++
++def implementation_sources(public: Path, root: Path, inventory: dict) -> None:
++    copy_regular(root / "IMPLEMENTATION_REPORT.zh-CN.md",
++                 public / "implementation/IMPLEMENTATION_REPORT.zh-CN.md")
++    copy_regular(root / "CHANGED_SOURCE_INVENTORY.json",
++                 public / "implementation/CHANGED_SOURCE_INVENTORY.json")
++    copy_regular(root / "diffs/EXECUTOR_LEAN_MATERIALIZATION.patch",
++                 public / "implementation/EXECUTOR_LEAN_MATERIALIZATION.patch")
++    for row in inventory.get("changes", []):
++        relative = Path(row["path"])
++        source = root / relative
++        if source.suffix not in {".py", ".java", ".mjs", ".gradle"}:
++            continue
++        copy_regular(source, public / "implementation/current" / relative)
++        preimage = row.get("preimage")
++        if preimage:
++            copy_regular(Path(preimage), public / "implementation/preimages" / relative)
++
++
++def validate_actual_scene(results: dict, stop: dict, latest: dict, counts: dict) -> None:
++    expected = {
++        "result": results.get("result") == "FAIL",
++        "counts": counts == {"PASS": 0, "FAIL": 1, "NOT_RUN": 28},
++        "gate": stop.get("gate") == "CHANGE_IMPACT" == latest.get("gate"),
++        "reason": stop.get("reason") == "FROZEN_BASELINE_DRIFT_ACROSS_COMMAND_GAP"
++                  == latest.get("reason"),
++        "native_not_invoked": stop.get("native_exit") is None,
++        "wrapper_exit": stop.get("wrapper_exit") == 1,
++        "retry": stop.get("retry_authorized") is False,
++        "phase": latest.get("phase") == "GATE_BOUNDARY",
++        "old_strict": latest.get("OLD_STRICT_PRESERVATION_RESULT") == "OLD_STRICT_REJECT",
++        "input_integrity": latest.get("V2_INPUT_INTEGRITY_RESULT") == "REJECT",
++        "bookkeeping": latest.get("V2_BOOKKEEPING_EVALUATION") == "PASS",
++    }
++    failures = [name for name, passed in expected.items() if not passed]
++    if failures:
++        raise RuntimeError(f"ACTUAL_SCENE_DOES_NOT_MATCH_BOUNDED_DELIVERY {failures}")
+ 
+ 
+ def main() -> int:
+-    if PUBLIC.exists() or (DELIVERY / "PUBLIC_EVIDENCE.zip").exists():
+-        raise RuntimeError("FINAL_PACKAGE_ALREADY_EXISTS_NO_OVERWRITE")
+-    preparation = load(RUN / "PREPARATION_COMPATIBILITY.json", {})
+-    revalidation = load(RUN / "PREPARATION_REVALIDATION.json", {})
+-    qualification = load(ROOT / "qualification/QUALIFICATION.json", {})
+-    identity = load(ROOT / "NEW_EXECUTOR_IDENTITY.json", {})
+-    preflight = load(RUN / "preflight.json", {})
+-    results_doc = load(RUN / "runtime/RESULTS.json", {})
+-    bindings = load(RUN / "bindings.json", {"order": []})
+-    results = results_doc.get("results", {})
+-    gates = {name: results.get(name, {"gate": name, "result": "NOT_RUN",
+-                                     "reason": "FORMAL_GRAPH_NOT_EXECUTED"})
+-             for name in bindings.get("order", [])}
+-    counts = {state: sum(row.get("result") == state for row in gates.values())
+-              for state in ("PASS", "FAIL", "NOT_RUN")}
+-    accounting = {
+-        "schema": "ep19-actual-formal-test-accounting-v1",
+-        "expectations_only": {"backend": 7973, "backend_skips": 29, "frontend": 149},
+-        "gates": {name: {"result": row.get("result"),
+-                         "parser": row.get("acceptance", {}).get("parser"),
+-                         "reason": row.get("reason")}
+-                  for name, row in gates.items()},
+-        "qualification": {"fresh": qualification.get("fresh_qualification_results"),
+-                          "reused_historical": qualification.get("reused_tests"),
+-                          "fresh_129_claim": False},
+-    }
+-    decisions = decision_summary()
++    if DELIVERY.exists():
++        raise RuntimeError(f"DELIVERY_ALREADY_EXISTS_NO_OVERWRITE {DELIVERY}")
++
++    documents = {
++        "preparation": load_required(RUN / "PREPARATION_COMPATIBILITY.json"),
++        "revalidation": load_required(RUN / "PREPARATION_REVALIDATION.json"),
++        "materialization": load_required(RUN / "lean-materialization.json"),
++        "bindings": load_required(RUN / "bindings.json"),
++        "baseline": load_required(RUN / "baseline.json"),
++        "seal": load_required(RUN / "seal.json"),
++        "scope": load_required(RUN / "scope.json"),
++        "preflight": load_required(RUN / "preflight.json"),
++        "launch": load_required(RUN / "engineering-launch.json"),
++        "run_identity": load_required(RUN / "identity.json"),
++        "start": load_required(RUN / "runtime/START.json"),
++        "stop": load_required(RUN / "runtime/STOP.json"),
++        "results": load_required(RUN / "runtime/RESULTS.json"),
++        "qualification": load_required(ROOT / "qualification/QUALIFICATION.json"),
++        "qualification_result": load_required(ROOT / "qualification/FRESH_RESULT.json"),
++        "identity": load_required(ROOT / "NEW_EXECUTOR_IDENTITY.json"),
++        "reuse": load_required(ROOT / "QUALIFICATION_REUSE_LEDGER.json"),
++        "inventory": load_required(ROOT / "CHANGED_SOURCE_INVENTORY.json"),
++    }
++    decisions, latest = collect_decisions(RUN)
++    gates, counts = gate_accounting(documents["bindings"], documents["results"])
++    validate_actual_scene(documents["results"], documents["stop"], latest, counts)
++    if documents["identity"].get("identity") != EXECUTOR_IDENTITY:
++        raise RuntimeError("SEALED_EXECUTOR_IDENTITY_MISMATCH")
++
++    accounting = build_actual_test_accounting(gates, documents["qualification_result"])
++    source_verification = git_source_verification(RUN)
++    preservation = preservation_verification(
++        ROOT, documents["identity"], documents["reuse"], documents["inventory"],
++        documents["seal"]
++    )
++    source_manifest, link_map = lean_evidence(
++        documents["materialization"], documents["revalidation"]
++    )
++    control_summary = control_binding_summary(RUN, documents)
++    probe_summary = native_probe_summary(RUN, documents["preparation"])
++
++    stop_string = (
++        "YES_FORMAL_STOP_FIRST_GATE_CHANGE_IMPACT_GATE_BOUNDARY_"
++        "FROZEN_BASELINE_DRIFT_ACROSS_COMMAND_GAP_PRODUCT_NATIVE_NOT_INVOKED_"
++        "WRAPPER_EXIT_1_NO_RETRY"
++    )
+     fields = {
+         "TASK": "EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1",
+         "CONTINUATION": "LEAN_TOOLCHAIN_MATERIALIZATION_CORRECTION_AND_EXACT_CANDIDATE_FORMAL_CONTINUATION",
+         "LANE": "BACKEND_VALIDATION",
+-        "CANDIDATE_COMMIT_SHA": "689ab9456461a8d19a72d059f5157092efc43aff",
+-        "CANDIDATE_TREE": "6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6",
+-        "EXECUTOR_IDENTITY": identity.get("identity"),
+-        "OWNER_CONTRACT_VERSION": "OWNER_AUTHORIZATION_SCOPED_RUNTIME_BOOKKEEPING_V2",
+-        "FAILED_RUN_PRESERVED": (ROOT / "historical/V2_STOP_CONDITION.json").is_file(),
+-        "LEAN_SOURCE_SELECTED": preparation.get("lean_source_selected"),
+-        "LEAN_SOURCE_IDENTITY_VERIFIED": preparation.get("lean_source_identity_verified", False),
+-        "MATERIALIZATION_PERFORMED": preparation.get("materialization_performed", False),
+-        "RUN_LOCAL_TOOLCHAIN_VERIFIED": preparation.get("run_local_toolchain_verified", False),
+-        "DISALLOWED_SYMLINK_COUNT": preparation.get("disallowed_symlink_count"),
++        "CANDIDATE_COMMIT_SHA": CANDIDATE,
++        "CANDIDATE_TREE": CANDIDATE_TREE,
++        "EXECUTOR_IDENTITY": EXECUTOR_IDENTITY,
++        "OWNER_CONTRACT_VERSION": OWNER_CONTRACT,
++        "FAILED_RUN_PRESERVED": preservation["result"] == "PASS",
++        "LEAN_SOURCE_SELECTED": documents["preparation"].get("lean_source_selected"),
++        "LEAN_SOURCE_IDENTITY_VERIFIED": documents["preparation"].get(
++            "lean_source_identity_verified"
++        ),
++        "MATERIALIZATION_PERFORMED": documents["preparation"].get("materialization_performed"),
++        "RUN_LOCAL_TOOLCHAIN_VERIFIED": documents["preparation"].get(
++            "run_local_toolchain_verified"
++        ),
++        "DISALLOWED_SYMLINK_COUNT": documents["preparation"].get("disallowed_symlink_count"),
+         "PREPARATION_COLLECTOR_COMPATIBILITY": {
+-            "result": revalidation.get("strict_collector", {}).get("result"),
+-            "hashed": revalidation.get("strict_collector", {}).get("hashed"),
+-            "expected_files": revalidation.get("strict_collector", {}).get("expected_files")},
+-        "NATIVE_TOOLCHAIN_PROBE_RESULTS": preparation.get("native_toolchain_probe_results", {}).get("result"),
+-        "FRESH_QUALIFICATION_RESULTS": qualification.get("fresh_qualification_results"),
+-        "REUSED_QUALIFICATION_SCOPE": qualification.get("reused_qualification_scope"),
+-        "FORMAL_LAUNCH_BINDING": "CREATED" if (RUN / "engineering-launch.json").is_file() else "PENDING_HERMES_EXECUTION",
+-        "BASELINE_CREATED": (RUN / "baseline.json").is_file(),
++            "result": documents["revalidation"].get("strict_collector", {}).get("result"),
++            "hashed": documents["revalidation"].get("strict_collector", {}).get("hashed"),
++            "expected_files": documents["revalidation"].get("strict_collector", {}).get(
++                "expected_files"
++            ),
++            "composition": "4617_LEAN_PLUS_1_GRADLE_INIT_PLUS_9_UNIQUE_RUNTIME_BINARIES",
++        },
++        "NATIVE_TOOLCHAIN_PROBE_RESULTS": {
++            "result": documents["preparation"].get("native_toolchain_probe_results", {}).get(
++                "result"
++            ),
++            "native_exits": probe_summary["native_exits"],
++            "system_fallback": probe_summary["system_fallback"],
++        },
++        "FRESH_QUALIFICATION_RESULTS": documents["qualification"].get(
++            "fresh_qualification_results"
++        ),
++        "REUSED_QUALIFICATION_SCOPE": documents["qualification"].get(
++            "reused_qualification_scope"
++        ),
++        "FORMAL_LAUNCH_BINDING": {
++            "status": "CREATED_AND_USED_ONCE",
++            "executor_identity": documents["launch"].get("executor_identity"),
++        },
++        "BASELINE_CREATED": documents["baseline"].get("result") == "COMPLETE",
+         "SEAL_CREATED": (RUN / "seal.json").is_file(),
+-        "PREFLIGHT_RESULT": preflight.get("result", "NOT_RUN"),
++        "PREFLIGHT_RESULT": {
++            "result": documents["preflight"].get("result"),
++            "engineering_blockers": documents["preflight"].get("engineering_blockers"),
++        },
+         "FORMAL_START_CREATED": (RUN / "runtime/START.json").is_file(),
+-        "REQUIRED_GATES": len(bindings.get("order", [])),
+-        "PASS": counts["PASS"], "FAIL": counts["FAIL"], "NOT_RUN": counts["NOT_RUN"],
++        "REQUIRED_GATES": len(gates),
++        "PASS": counts["PASS"],
++        "FAIL": counts["FAIL"],
++        "NOT_RUN": counts["NOT_RUN"],
+         "ACTUAL_TEST_IDENTITY_ACCOUNTING": "ACTUAL_TEST_IDENTITY_ACCOUNTING.json",
+-        **decisions,
+-        "PRODUCT_CHANGED_PATHS": [], "FRONTEND_LANE_INTERFERENCE": "NONE",
+-        "HISTORICAL_FAILURES_PRESERVED": "YES",
++        **{key: latest[key] for key in DECISION_KEYS},
++        "PRODUCT_CHANGED_PATHS": source_verification["product_changed_paths_after_clone"],
++        "FRONTEND_LANE_INTERFERENCE": "NONE",
++        "HISTORICAL_FAILURES_PRESERVED": {
++            "old_gate_counts": {"PASS": 5, "FAIL": 1, "NOT_RUN": 23},
++            "architecture": "FAIL_PRESERVATION",
++            "command_gap_drift": "PRESERVED",
++            "lean_failed_run": {"PASS": 0, "FAIL": 0, "NOT_RUN": 29},
++            "writer_attribution": "NOT_ESTABLISHED",
++            "historical_decision_and_coverage_gaps": "PRESERVED",
++        },
+         "PACK_HISTORICAL_BYTE_IMMUTABILITY": "NOT_RECOVERABLE",
+-        "PRODUCT_PUBLICATION": "NOT_ATTEMPTED", "POST_PUBLICATION_SANITY": "NOT_RUN",
+-        "EP19_CLOSED": "NO", "INDEPENDENT_REVIEW": "PENDING",
+-        "EVIDENCE_COMMIT_SHA": None, "REVIEW_INDEX_URL": None,
+-        "PUBLIC_MANIFEST_SHA256": "SEE_DETACHED_FINALIZER_RECEIPT",
++        "PRODUCT_PUBLICATION": "NOT_ATTEMPTED",
++        "POST_PUBLICATION_SANITY": "NOT_RUN_PRODUCT_NOT_PUBLISHED",
++        "EP19_CLOSED": False,
++        "INDEPENDENT_REVIEW": "PENDING",
++        "EVIDENCE_COMMIT_SHA": "NOT_ATTEMPTED",
++        "REVIEW_INDEX_URL": "PENDING",
++        "PUBLIC_MANIFEST_SHA256": "DETACHED:../FINAL_FIELDS_WITH_MANIFEST.json",
+         "REMOTE_VERIFICATION": "NOT_ATTEMPTED",
+-        "STOP": ("FORMAL_EXECUTION_COMPLETE_LOCAL_EVIDENCE_READY" if results_doc
+-                 else "FORMAL_EXECUTION_NOT_RUN_OR_PREFLIGHT_BLOCKED"),
+-    }
+-    PUBLIC.mkdir(parents=True)
+-    put(PUBLIC / "FINAL_FIELDS.json", fields)
+-    put(PUBLIC / "ACTUAL_TEST_IDENTITY_ACCOUNTING.json", accounting)
+-    put(PUBLIC / "GATE_RESULTS.json", {"required": len(gates), "counts": counts,
+-                                       "gates": {name: {"result": row.get("result"),
+-                                                        "reason": row.get("reason")}
+-                                                 for name, row in gates.items()}})
+-    put(PUBLIC / "PREPARATION_SUMMARY.json", {
+-        key: preparation.get(key) for key in (
+-            "result", "run_id", "candidate", "tree", "base", "formal_gate_execution",
+-            "lean_source_selected", "lean_source_identity_verified", "materialization_performed",
+-            "run_local_toolchain_verified", "disallowed_symlink_count", "strict_collector",
+-            "full_strict_tool_input_set", "native_toolchain_probe_results",
+-            "historical_counting_method", "preparation_compatibility_not_baseline")})
+-    put(PUBLIC / "FINAL_HELPER_REVALIDATION_SUMMARY.json", {
+-        key: revalidation.get(key) for key in (
+-            "schema", "result", "run_id", "materializer_sha256", "preparation_sha256",
+-            "collector_sha256", "historical", "raw_links", "source_summary",
+-            "destination_summary", "cross_tree_shared_inode_counts", "strict_collector",
+-            "native_probe_receipts_reverified", "baseline_created", "formal_gate_execution")})
+-    put(PUBLIC / "QUALIFICATION_SUMMARY.json", {
+-        "schema": qualification.get("schema"), "result": qualification.get("result"),
+-        "fresh": qualification.get("fresh_qualification_results"),
+-        "historical_reused_tests": qualification.get("reused_tests"),
+-        "reused_scope": qualification.get("reused_qualification_scope"),
+-        "fresh_129_claim": False})
+-    for source, name in ((ROOT / "NEW_EXECUTOR_IDENTITY.json", "NEW_EXECUTOR_IDENTITY.json"),
+-                         (ROOT / "CHANGED_SOURCE_INVENTORY.json", "CHANGED_SOURCE_INVENTORY.json"),
+-                         (ROOT / "diffs/EXECUTOR_LEAN_MATERIALIZATION.patch", "EXECUTOR_LEAN_MATERIALIZATION.patch"),
+-                         (ROOT / "OWNER_AUTHORIZATION.txt", "OWNER_AUTHORIZATION.txt")):
+-        copy(source, PUBLIC / name)
+-    for source in sorted((ROOT / "historical/parent-verification").glob("*.json")):
+-        copy(source, PUBLIC / "parent-verification" / source.name)
+-    report = ["# EP19 H7 Lean 工具链物化延续执行报告", "",
+-              "本报告只记录固定候选的准备/形式化执行证据；未执行产品发布，EP19 未关闭。", "",
+-              "## 机器字段", ""]
+-    report += [f"- `{key}`: `{json.dumps(value, ensure_ascii=False, sort_keys=True)}`"
+-               for key, value in fields.items()]
+-    report += ["", "## 边界", "",
+-               "历史 V2 失败保持原判；OLD_STRICT 仅作独立诊断，不覆盖 V2 实际判定。",
+-               "公开包不含私有 Skill/Memory 正文、私有 bookkeeping policy、baseline/scope 原始捕获或凭据。", ""]
+-    (PUBLIC / "FINAL_REPORT.zh-CN.md").write_text("\n".join(report), encoding="utf-8")
+-
+-    credential = re.compile(rb"(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,}|-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----)")
+-    payload = sorted(path for path in PUBLIC.rglob("*") if path.is_file())
+-    forbidden = [path for path in payload if path.is_symlink() or path.name.endswith(".private.json")
+-                 or credential.search(path.read_bytes())]
+-    if forbidden:
+-        raise RuntimeError("PUBLIC_SANITIZATION_REJECT " + repr(forbidden))
+-    manifest = PUBLIC / "MANIFEST.sha256"
+-    manifest.write_text("".join(f"{digest(path)}  {path.relative_to(PUBLIC)}\n" for path in payload),
+-                        encoding="utf-8")
+-    for line in manifest.read_text().splitlines():
+-        wanted, relative = line.split("  ", 1)
+-        if digest(PUBLIC / relative) != wanted:
+-            raise RuntimeError("PUBLIC_MANIFEST_VERIFY_FAILED " + relative)
+-    manifest_sha = digest(manifest)
+-    archive = DELIVERY / "PUBLIC_EVIDENCE.zip"
+-    with zipfile.ZipFile(archive, "x", compression=zipfile.ZIP_DEFLATED) as output:
+-        for path in sorted(item for item in PUBLIC.rglob("*") if item.is_file()):
+-            output.write(path, str(path.relative_to(PUBLIC)))
+-    with zipfile.ZipFile(archive) as checked:
+-        if checked.testzip() is not None:
+-            raise RuntimeError("PUBLIC_ARCHIVE_VERIFY_FAILED")
+-    put(DELIVERY / "FINALIZER_RECEIPT.json", {
+-        "result": "PASS", "public_manifest_sha256": manifest_sha,
+-        "public_manifest": str(manifest), "archive": str(archive),
+-        "archive_sha256": digest(archive), "payload_files": len(payload),
+-        "private_skill_memory_bodies": 0, "private_policy_files": 0,
+-        "credential_scan_matches": 0, "publication": "NOT_ATTEMPTED"})
+-    print(json.dumps(load(DELIVERY / "FINALIZER_RECEIPT.json"), indent=2))
+-    return 0
++        "STOP": stop_string,
++    }
++    missing_fields = [key for key in REQUIRED_FIELDS if key not in fields]
++    if missing_fields:
++        raise RuntimeError(f"REQUIRED_MACHINE_FIELDS_MISSING {missing_fields}")
++
++    staging_root = Path(tempfile.mkdtemp(prefix=".finalize-actual-", dir=ROOT / "postprocessing"))
++    public = staging_root / "public"
++    public.mkdir()
++    try:
++        put_json(public / "FINAL_FIELDS.json", fields)
++        put_json(public / "ACTUAL_TEST_IDENTITY_ACCOUNTING.json", accounting)
++        put_json(public / "GATE_RESULTS.json", {
++            "schema": "ep19-all-29-actual-gate-results-v1",
++            "run_result": documents["results"].get("result"),
++            "required": len(gates), "counts": counts, "gates": gates,
++        })
++        put_json(public / "EXECUTION_BOUNDARY.json", {
++            "schema": "ep19-actual-execution-boundary-v1",
++            "result": "FAIL_PRESERVATION_BEFORE_PRODUCT_NATIVE_INVOCATION",
++            "gate": documents["stop"].get("gate"),
++            "phase": latest.get("phase"),
++            "reason": documents["stop"].get("reason"),
++            "product_native": "NOT_INVOKED",
++            "native_exit": documents["stop"].get("native_exit"),
++            "wrapper_exit": documents["stop"].get("wrapper_exit"),
++            "retry_authorized": documents["stop"].get("retry_authorized"),
++            "preservation": {key: latest[key] for key in DECISION_KEYS},
++            "writer_attribution": latest.get("WRITER_ATTRIBUTION"),
++            "stop": stop_string,
++        })
++        put_json(public / "DECISION_EVIDENCE_PROJECTIONS.json", {
++            "schema": "ep19-sanitized-actual-decision-projections-v1",
++            "receipt_count": len(decisions), "latest_receipt": latest["raw_receipt"],
++            "latest_is_top_level_gate_boundary": True, "receipts": decisions,
++        })
++        put_json(public / "CONTROL_BINDING_SUMMARY.json", control_summary)
++        put_json(public / "SOURCE_CLONE_VERIFICATION.json", source_verification)
++        put_json(public / "HISTORICAL_AND_HELPER_BYTE_VERIFICATION.json", preservation)
++        put_json(public / "LEAN_SOURCE_MANIFEST.json", source_manifest)
++        put_json(public / "LEAN_RAW_LINK_MAP.json", link_map)
++        put_json(public / "NATIVE_LEAN_PROBE.json", probe_summary)
++        put_json(public / "PREPARATION_SUMMARY.json", {
++            "preparation": {key: documents["preparation"].get(key) for key in (
++                "schema", "result", "run_id", "candidate", "tree", "base",
++                "formal_gate_execution", "lean_source_selected", "lean_source_identity_verified",
++                "materialization_performed", "run_local_toolchain_verified",
++                "disallowed_symlink_count", "historical_counting_method",
++                "preparation_compatibility_not_baseline",
++            )},
++            "revalidation": {key: documents["revalidation"].get(key) for key in (
++                "schema", "result", "run_id", "materializer_sha256", "preparation_sha256",
++                "collector_sha256", "historical", "source_summary", "destination_summary",
++                "cross_tree_shared_inode_counts", "strict_collector",
++                "native_probe_receipts_reverified", "baseline_created", "formal_gate_execution",
++            )},
++        })
++        put_json(public / "SCOPE_AND_APPLICATION_REUSE.json", {
++            "schema": "ep19-scope-and-application-reuse-public-index-v1",
++            "scope_raw_sha256": digest(RUN / "scope.json"),
++            "scope_raw_size": (RUN / "scope.json").stat().st_size,
++            "application_gates": {
++                name: gates[name] for name in (
++                    "APPLICATION_CLASSPATH", "APPLICATION_PROBE", "FOUNDATION", "BOOTJAR"
++                )
++            },
++            "qualification_reuse_ledger": "qualification/QUALIFICATION_REUSE_LEDGER.json",
++            "materialization_reuse_ledger": "qualification/MATERIALIZATION_REUSE_LEDGER.json",
++        })
++
++        copy_regular(RUN / "runtime/STOP.json", public / "runtime/STOP.json")
++        copy_regular(RUN / "runtime/RESULTS.json", public / "runtime/RESULTS.json")
++        for name in ("FRESH.native.log", "FRESH.process.json", "FRESH_RESULT.json"):
++            copy_regular(ROOT / "qualification" / name, public / "qualification" / name)
++        copy_regular(ROOT / "QUALIFICATION_REUSE_LEDGER.json",
++                     public / "qualification/QUALIFICATION_REUSE_LEDGER.json")
++        copy_regular(ROOT / "qualification/MATERIALIZATION_REUSE_LEDGER.json",
++                     public / "qualification/MATERIALIZATION_REUSE_LEDGER.json")
++        copy_regular(ROOT / "qualification/QUALIFICATION.json",
++                     public / "qualification/QUALIFICATION.json")
++        for name in ("version.native.log", "prefix.native.log",
++                     "import-compile-proof.native.log", "PreparationProbe.lean"):
++            copy_regular(RUN / "runtime/tmp/backend/lean-preparation-probe" / name,
++                         public / "native-lean-probe" / name)
++        for name in ("hermes-review.native.log", "hermes-tests.native.log",
++                     "hermes-collector.native.log"):
++            copy_regular(ROOT / name, public / "hermes" / name)
++        execution_log = require_file(ROOT / "hermes-execution.native.log")
++        put_json(public / "hermes/HERMES_EXECUTION_SANITIZED.json", {
++            "schema": "ep19-hermes-execution-selective-projection-v1",
++            "raw_log_sha256": digest(execution_log),
++            "raw_log_size": execution_log.stat().st_size,
++            "raw_log_copied": False,
++            "selection": {
++                "baseline": documents["baseline"].get("result"),
++                "preflight": documents["preflight"].get("result"),
++                "engineering_blockers": documents["preflight"].get("engineering_blockers"),
++                "runtime_result": documents["results"].get("result"),
++                "stop_gate": documents["stop"].get("gate"),
++                "stop_reason": documents["stop"].get("reason"),
++                "wrapper_exit": documents["stop"].get("wrapper_exit"),
++            },
++            "reason_raw_omitted": "LARGE_DEPENDENCY_HASH_DUMP_SELECTIVE_PROJECTION_REQUESTED",
++        })
++        for source in sorted((ROOT / "historical/parent-verification").glob("*.json")):
++            copy_regular(source, public / "parent-verification" / source.name)
++        for source in (ROOT / "historical/V2_FINAL_FIELDS.json",
++                       ROOT / "historical/V2_STOP_CONDITION.json"):
++            copy_regular(source, public / "historical" / source.name)
++        copy_regular(ROOT / "OWNER_AUTHORIZATION.txt", public / "authority/OWNER_AUTHORIZATION.txt")
++        copy_regular(ROOT / "NEW_EXECUTOR_IDENTITY.json",
++                     public / "authority/NEW_EXECUTOR_IDENTITY.json")
++        implementation_sources(public, ROOT, documents["inventory"])
++
++        old_reporter = ROOT / "tools/finalize_report.py"
++        new_reporter = ROOT / "postprocessing/finalize_actual.py"
++        copy_regular(old_reporter, public / "reporting/preimage/tools_finalize_report.py")
++        copy_regular(new_reporter, public / "reporting/current/finalize_actual.py")
++        diff_text = "".join(difflib.unified_diff(
++            old_reporter.read_text(encoding="utf-8").splitlines(keepends=True),
++            new_reporter.read_text(encoding="utf-8").splitlines(keepends=True),
++            fromfile="preimage/tools/finalize_report.py",
++            tofile="current/postprocessing/finalize_actual.py",
++        ))
++        put_text(public / "reporting/FINALIZE_ACTUAL_FROM_SEALED_REPORTER.patch", diff_text)
++        put_json(public / "reporting/PROVENANCE.json", {
++            "schema": "ep19-reporting-only-helper-provenance-v1",
++            "sealed_preimage": "preimage/tools_finalize_report.py",
++            "sealed_preimage_sha256": digest(old_reporter),
++            "adapted_helper": "current/finalize_actual.py",
++            "adapted_helper_sha256": digest(new_reporter),
++            "diff": "FINALIZE_ACTUAL_FROM_SEALED_REPORTER.patch",
++            "executor_identity": EXECUTOR_IDENTITY,
++            "executor_identity_altered": False,
++            "reporting_helper_in_executor_identity": False,
++        })
++        put_text(public / "FINAL_REPORT.zh-CN.md", report_text(
++            fields, gates, latest, accounting, source_verification, preservation
++        ))
++
++        sanitization = safe_payload_scan(public)
++        put_json(public / "SANITIZATION.json", sanitization)
++        manifest, manifest_sha256, payload_count = write_manifest(public)
++
++        detached_fields = dict(fields)
++        detached_fields["PUBLIC_MANIFEST_SHA256"] = manifest_sha256
++        detached_fields["PUBLIC_MANIFEST"] = "public/MANIFEST.sha256"
++        detached_fields["DETACHED_FROM_PUBLIC_MANIFEST"] = True
++        put_json(staging_root / "FINAL_FIELDS_WITH_MANIFEST.json", detached_fields)
++
++        detached_target = staging_root / "FINAL_FIELDS_WITH_MANIFEST.json"
++        archive_temporary = staging_root / ".PUBLIC_EVIDENCE.zip.tmp"
++        archive = staging_root / "PUBLIC_EVIDENCE.zip"
++        with zipfile.ZipFile(archive_temporary, "x", compression=zipfile.ZIP_DEFLATED) as output:
++            for path in sorted(item for item in public.rglob("*") if item.is_file()):
++                output.write(path, (Path("public") / path.relative_to(public)).as_posix())
++            output.write(detached_target, detached_target.name)
++        with zipfile.ZipFile(archive_temporary) as checked:
++            if checked.testzip() is not None:
++                raise RuntimeError("PUBLIC_ARCHIVE_CRC_VERIFY_FAILED")
++            archived_manifest = checked.read("public/MANIFEST.sha256")
++            if hashlib.sha256(archived_manifest).hexdigest() != manifest_sha256:
++                raise RuntimeError("PUBLIC_ARCHIVE_MANIFEST_HASH_MISMATCH")
++        os.replace(archive_temporary, archive)
++
++        receipt = {
++            "schema": "ep19-finalize-actual-reporting-receipt-v1",
++            "result": "PASS",
++            "run_id": RUN_ID,
++            "formal_rerun": False,
++            "baseline_refresh": False,
++            "executor_identity_altered": False,
++            "publication": "NOT_ATTEMPTED",
++            "public_manifest": "public/MANIFEST.sha256",
++            "public_manifest_sha256": manifest_sha256,
++            "detached_final_fields": detached_target.name,
++            "detached_final_fields_sha256": digest(detached_target),
++            "archive": archive.name,
++            "archive_sha256": digest(archive),
++            "manifest_payload_files": payload_count,
++            "sanitization": sanitization,
++            "stop": stop_string,
++        }
++        put_json(staging_root / "FINALIZER_RECEIPT.json", receipt)
++        os.replace(staging_root, DELIVERY)
++        print(json.dumps(receipt, indent=2, ensure_ascii=False))
++        return 0
++    finally:
++        if staging_root.exists():
++            shutil.rmtree(staging_root)
+ 
+ 
+ if __name__ == "__main__":
