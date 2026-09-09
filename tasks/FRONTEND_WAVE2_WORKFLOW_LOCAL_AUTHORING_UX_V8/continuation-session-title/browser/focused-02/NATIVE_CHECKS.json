@@ -1,0 +1,392 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:15.912170+00:00",
+    "name": "renewal-twice/authored DOM state selection and incomplete input retained",
+    "expression": "window.__savedNodes.every((e,i)=>e===Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\"))[i]) && window.__savedState===JSON.stringify(Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\")).map(e=>[e.getAttribute(\"aria-label\"),e.style.cssText,e.getAttribute(\"aria-pressed\")])) && window.__savedInput===(Array.from(document.querySelectorAll(\"label\"))).filter(e=>e.getClientRects().length && getComputedStyle(e).visibility!==\"hidden\").find(e=>e.textContent.trim()===\"Local title\")?.querySelector(\"input\") && window.__savedInput.value===\"\" && document.activeElement===window.__savedInput",
+    "passed": true,
+    "value": true,
+    "scenario_id": "renewal-twice",
+    "run_id": "en-1440-renewal-twice",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:16.326166+00:00",
+    "name": "renewal-twice/authored DOM state selection and incomplete input retained",
+    "expression": "window.__savedNodes.every((e,i)=>e===Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\"))[i]) && window.__savedState===JSON.stringify(Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\")).map(e=>[e.getAttribute(\"aria-label\"),e.style.cssText,e.getAttribute(\"aria-pressed\")])) && window.__savedInput===(Array.from(document.querySelectorAll(\"label\"))).filter(e=>e.getClientRects().length && getComputedStyle(e).visibility!==\"hidden\").find(e=>e.textContent.trim()===\"Local title\")?.querySelector(\"input\") && window.__savedInput.value===\"\" && document.activeElement===window.__savedInput",
+    "passed": true,
+    "value": true,
+    "scenario_id": "renewal-twice",
+    "run_id": "en-1440-renewal-twice",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:16.495730+00:00",
+    "name": "renewal-twice/no storage delta",
+    "expression": "true",
+    "passed": true,
+    "value": true,
+    "scenario_id": "renewal-twice",
+    "run_id": "en-1440-renewal-twice",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:16.499834+00:00",
+    "name": "renewal-twice/no application network writes or requests",
+    "expression": "true",
+    "passed": true,
+    "value": true,
+    "scenario_id": "renewal-twice",
+    "run_id": "en-1440-renewal-twice",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:18.694689+00:00",
+    "name": "new-session-principal/old owner withdrawn",
+    "expression": "Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\")).length===0 && !document.querySelector(\"[role=dialog]\") && !document.querySelector(\"#selection-inspector\")",
+    "passed": true,
+    "value": true,
+    "scenario_id": "new-session-principal",
+    "run_id": "en-1440-new-session-principal",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:19.840459+00:00",
+    "name": "new-session-principal/new editing works",
+    "expression": "Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\"))[0].getAttribute(\"aria-label\")===\"NEW\"",
+    "passed": true,
+    "value": true,
+    "scenario_id": "new-session-principal",
+    "run_id": "en-1440-new-session-principal",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:21.907279+00:00",
+    "name": "new-session-principal/old owner withdrawn",
+    "expression": "Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\")).length===0 && !document.querySelector(\"[role=dialog]\") && !document.querySelector(\"#selection-inspector\")",
+    "passed": true,
+    "value": true,
+    "scenario_id": "new-session-principal",
+    "run_id": "en-1440-new-session-principal",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:23.086108+00:00",
+    "name": "new-session-principal/new editing works",
+    "expression": "Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\"))[0].getAttribute(\"aria-label\")===\"NEW\"",
+    "passed": true,
+    "value": true,
+    "scenario_id": "new-session-principal",
+    "run_id": "en-1440-new-session-principal",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:23.706677+00:00",
+    "name": "new-session-principal/no storage delta",
+    "expression": "true",
+    "passed": true,
+    "value": true,
+    "scenario_id": "new-session-principal",
+    "run_id": "en-1440-new-session-principal",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:23.713912+00:00",
+    "name": "new-session-principal/no application network writes or requests",
+    "expression": "true",
+    "passed": true,
+    "value": true,
+    "scenario_id": "new-session-principal",
+    "run_id": "en-1440-new-session-principal",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:26.187069+00:00",
+    "name": "stale-getter-loaded/old owner withdrawn",
+    "expression": "Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\")).length===0 && !document.querySelector(\"[role=dialog]\") && !document.querySelector(\"#selection-inspector\")",
+    "passed": true,
+    "value": true,
+    "scenario_id": "stale-getter-loaded",
+    "run_id": "en-1440-stale-getter-loaded",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:27.843177+00:00",
+    "name": "stale-getter-loaded/authored DOM state selection and incomplete input retained",
+    "expression": "window.__savedNodes.every((e,i)=>e===Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\"))[i]) && window.__savedState===JSON.stringify(Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\")).map(e=>[e.getAttribute(\"aria-label\"),e.style.cssText,e.getAttribute(\"aria-pressed\")])) && window.__savedInput===(Array.from(document.querySelectorAll(\"label\"))).filter(e=>e.getClientRects().length && getComputedStyle(e).visibility!==\"hidden\").find(e=>e.textContent.trim()===\"Local title\")?.querySelector(\"input\") && window.__savedInput.value===\"\" && document.activeElement===window.__savedInput",
+    "passed": true,
+    "value": true,
+    "scenario_id": "stale-getter-loaded",
+    "run_id": "en-1440-stale-getter-loaded",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:28.063705+00:00",
+    "name": "stale-getter-loaded/authored DOM state selection and incomplete input retained",
+    "expression": "window.__savedNodes.every((e,i)=>e===Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\"))[i]) && window.__savedState===JSON.stringify(Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\")).map(e=>[e.getAttribute(\"aria-label\"),e.style.cssText,e.getAttribute(\"aria-pressed\")])) && window.__savedInput===(Array.from(document.querySelectorAll(\"label\"))).filter(e=>e.getClientRects().length && getComputedStyle(e).visibility!==\"hidden\").find(e=>e.textContent.trim()===\"Local title\")?.querySelector(\"input\") && window.__savedInput.value===\"\" && document.activeElement===window.__savedInput",
+    "passed": true,
+    "value": true,
+    "scenario_id": "stale-getter-loaded",
+    "run_id": "en-1440-stale-getter-loaded",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:28.075297+00:00",
+    "name": "stale-getter-loaded/disposed native subscriptions inert",
+    "expression": "window.__WorkflowHost.replayRetired()>0 && window.__WorkflowHost.disposedProbeDeliveries()===0",
+    "passed": true,
+    "value": true,
+    "scenario_id": "stale-getter-loaded",
+    "run_id": "en-1440-stale-getter-loaded",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:28.090516+00:00",
+    "name": "stale-getter-loaded/no storage delta",
+    "expression": "true",
+    "passed": true,
+    "value": true,
+    "scenario_id": "stale-getter-loaded",
+    "run_id": "en-1440-stale-getter-loaded",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:28.098909+00:00",
+    "name": "stale-getter-loaded/no application network writes or requests",
+    "expression": "true",
+    "passed": true,
+    "value": true,
+    "scenario_id": "stale-getter-loaded",
+    "run_id": "en-1440-stale-getter-loaded",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:30.506749+00:00",
+    "name": "logout-late-rejection/old owner withdrawn",
+    "expression": "Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\")).length===0 && !document.querySelector(\"[role=dialog]\") && !document.querySelector(\"#selection-inspector\")",
+    "passed": true,
+    "value": true,
+    "scenario_id": "logout-late-rejection",
+    "run_id": "en-1440-logout-late-rejection",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:30.517375+00:00",
+    "name": "logout-late-rejection/signout synchronous withdrawal",
+    "expression": "window.__WorkflowHost.synchronousRetirements.at(-1).cards===0",
+    "passed": true,
+    "value": true,
+    "scenario_id": "logout-late-rejection",
+    "run_id": "en-1440-logout-late-rejection",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:32.029263+00:00",
+    "name": "logout-late-rejection/late result and rejected redirect do not restore old",
+    "expression": "Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\")).length===1 && Array.from(document.querySelectorAll(\"[data-testid=\\\"workflow-sketch-node\\\"]\"))[0].getAttribute(\"aria-label\")===\"NEW\" && window.__WorkflowHost.sdkLog.some(e=>e.signout===\"rejected\")",
+    "passed": true,
+    "value": true,
+    "scenario_id": "logout-late-rejection",
+    "run_id": "en-1440-logout-late-rejection",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:32.049092+00:00",
+    "name": "logout-late-rejection/no storage delta",
+    "expression": "true",
+    "passed": true,
+    "value": true,
+    "scenario_id": "logout-late-rejection",
+    "run_id": "en-1440-logout-late-rejection",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:32.056697+00:00",
+    "name": "logout-late-rejection/no application network writes or requests",
+    "expression": "true",
+    "passed": true,
+    "value": true,
+    "scenario_id": "logout-late-rejection",
+    "run_id": "en-1440-logout-late-rejection",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:34.600500+00:00",
+    "name": "long-title-layout/full inspector title 0",
+    "expression": "(Array.from(document.querySelectorAll(\"label\"))).filter(e=>e.getClientRects().length && getComputedStyle(e).visibility!==\"hidden\").find(e=>e.textContent.trim()===\"Local title\")?.querySelector(\"input\").value===\"\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\\u4e2d\"",
+    "passed": true,
+    "value": true,
+    "scenario_id": "long-title-layout",
+    "run_id": "en-1440-long-title-layout",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:35.708656+00:00",
+    "name": "long-title-layout/full inspector title 1",
+    "expression": "(Array.from(document.querySelectorAll(\"label\"))).filter(e=>e.getClientRects().length && getComputedStyle(e).visibility!==\"hidden\").find(e=>e.textContent.trim()===\"Local title\")?.querySelector(\"input\").value===\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"",
+    "passed": true,
+    "value": true,
+    "scenario_id": "long-title-layout",
+    "run_id": "en-1440-long-title-layout",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:36.818706+00:00",
+    "name": "long-title-layout/full inspector title 2",
+    "expression": "(Array.from(document.querySelectorAll(\"label\"))).filter(e=>e.getClientRects().length && getComputedStyle(e).visibility!==\"hidden\").find(e=>e.textContent.trim()===\"Local title\")?.querySelector(\"input\").value===\"\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\\u4e2dAb9\"",
+    "passed": true,
+    "value": true,
+    "scenario_id": "long-title-layout",
+    "run_id": "en-1440-long-title-layout",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:37.043855+00:00",
+    "name": "long-title-layout/fixed cards titles contained two lines",
+    "expression": "true",
+    "passed": true,
+    "value": true,
+    "scenario_id": "long-title-layout",
+    "run_id": "en-1440-long-title-layout",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "IMPLEMENTATION_TREE": "0289714b2d4094db210b55681fa4f6a8135f7054",
+    "VALIDATION_TIMESTAMP": "2026-09-09T00:04:37.052328+00:00",
+    "name": "long-title-layout/default next row 136 spacing",
+    "expression": "false",
+    "passed": false,
+    "value": false,
+    "scenario_id": "long-title-layout",
+    "run_id": "en-1440-long-title-layout",
+    "locale": "en",
+    "viewport": [
+      1440,
+      1000
+    ]
+  }
+]
