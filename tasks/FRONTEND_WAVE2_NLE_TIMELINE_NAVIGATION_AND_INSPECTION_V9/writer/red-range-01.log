@@ -1,0 +1,601 @@
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx (14 tests | 1 failed | 13 skipped) 174ms
+   ↓ bounded Timeline navigation > distinguishes unconfigured entry, loading, true empty and partial empty without fake media
+   ↓ bounded Timeline navigation > discovers multiple tracks, empty tracks and filtered no-match only within the loaded scope
+   × bounded Timeline navigation > locates exact authored-range boundaries, end and zero without floating point or assumed FPS 171ms
+     → Unable to find an element with the text: Loaded clips at this position: 2. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"Timeline navigation"[39m
+      [33mclass[39m=[32m"ff-timeline-navigation"[39m
+      [33mtabindex[39m=[32m"-1"[39m
+    [36m>[39m
+      [36m<p>[39m
+        [0mNavigation only. No media playback or canonical editing.[0m
+      [36m</p>[39m
+      [36m<dl[39m
+        [33mclass[39m=[32m"ff-navigation-identity"[39m
+      [36m>[39m
+        [36m<dt>[39m
+          [0mProjected Project[0m
+        [36m</dt>[39m
+        [36m<dd>[39m
+          [0mp[0m
+        [36m</dd>[39m
+        [36m<dt>[39m
+          [0mProjected Timeline[0m
+        [36m</dt>[39m
+        [36m<dd>[39m
+          [0mt[0m
+        [36m</dd>[39m
+        [36m<dt>[39m
+          [0mInspected revision[0m
+        [36m</dt>[39m
+        [36m<dd>[39m
+          [0mr1[0m
+        [36m</dd>[39m
+      [36m</dl>[39m
+      [36m<span[39m
+        [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+      [36m>[39m
+        [0mIsolated verification projection · simulated[0m
+      [36m</span>[39m
+      [36m<p[39m
+        [33mrole[39m=[32m"status"[39m
+      [36m>[39m
+        [0mLoaded timeline projection[0m
+      [36m</p>[39m
+      [36m<button[39m
+        [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+      [36m>[39m
+        [0mRefresh loaded projection[0m
+      [36m</button>[39m
+      [36m<p>[39m
+        [0mComplete supplied revision projection. Search covers this loaded projection.[0m
+      [36m</p>[39m
+      [36m<label>[39m
+        [0mFilter loaded tracks and clips[0m
+        [36m<input[39m
+          [33mclass[39m=[32m"ff-input "[39m
+          [33mvalue[39m=[32m""[39m
+        [36m/>[39m
+      [36m</label>[39m
+      [36m<form[39m
+        [33mclass[39m=[32m"ff-navigation-locate"[39m
+      [36m>[39m
+        [36m<label>[39m
+          [0mExact time (integer or fraction)[0m
+          [36m<input[39m
+            [33maria-invalid[39m=[32m"false"[39m
+            [33mclass[39m=[32m"ff-input "[39m
+            [33mvalue[39m=[32m"1001/30000"[39m
+          [36m/>[39m
+        [36m</label>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+          [33mtype[39m=[32m"submit"[39m
+        [36m>[39m
+          [0mLocate time[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mLocate selected clip[0m
+        [36m</button>[39m
+      [36m</form>[39m
+      [36m<p>[39m
+        [0mExact seconds; occupied ranges include start and exclude end. Position is local navigation only.[0m
+      [36m</p>[39m
+      [36m<p>[39m
+        [0mSupplied navigation bounds[0m
+        [0m: [0m
+        [0m0[0m
+        [0m → [0m
+        [0m2[0m
+      [36m</p>[39m
+      [36m<output[39m
+        [33maria-label[39m=[32m"Local navigation position"[39m
+      [36m>[39m
+        [0m1001/30000[0m
+      [36m</output>[39m
+      [36m<p[39m
+        [33mrole[39m=[32m"status"[39m
+      [36m>[39m
+        [0mLoaded clips at this position[0m
+        [0m: [0m
+        [0m1[0m
+      [36m</p>[39m
+      [36m<div[39m
+        [33maria-label[39m=[32m"Selection actions"[39m
+        [33mclass[39m=[32m"ff-selection-bar"[39m
+        [33mdata-testid[39m=[32m"selection-actions"[39m
+        [33mrole[39m=[32m"toolbar"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-selection-title"[39m
+        [36m>[39m
+          [0mCLIP · Ending shot[0m
+        [36m</span>[39m
+        [36m<button[39m
+          [33maria-controls[39m=[32m"selection-inspector"[39m
+          [33maria-expanded[39m=[32m"true"[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mHide inspector[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mReveal primary clip[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mClear selection[0m
+        [36m</button>[39m
+        [36m<details>[39m
+          [36m<summary>[39m
+            [0mMore[0m
+          [36m</summary>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-selection-more"[39m
+          [36m>[39m
+            [36m<p>[39m
+              [0mLocal presentation only · not saved[0m
+            [36m</p>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+            [36m>[39m
+              [0mEdit local properties[0m
+            [36m</button>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-unavailable-action"[39m
+            [36m>[39m
+              [36m<button[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                [33mdisabled[39m=[32m""[39m
+              [36m>[39m
+                [0mApply canonical change[0m
+              [36m</button>[39m
+              [36m<p>[39m
+                [0mThis change cannot be applied here yet. A connected server preview and confirmation flow is required; use the existing timeline advanced controls for supported operations.[0m
+              [36m</p>[39m
+              [36m<details>[39m
+                [36m<summary>[39m
+                  [0mTechnical details[0m
+                [36m</summary>[39m
+                [36m<code>[39m
+                  [0mNo generic application gateway contract · CANONICAL_SEMANTIC rejected[0m
+                [36m</code>[39m
+              [36m</details>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</details>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mAsk Agent[0m
+        [36m</button>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-navigation-actions"[39m
+      [36m>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mInspect selected metadata[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mClear navigation selection[0m
+        [36m</button>[39m
+      [36m</div>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-canvas-guidance"[39m
+      [36m>[39m
+        [0mTab to a track or clip. Enter/Space selects; Up/Down or Home/End selects another loaded object; I inspects; Escape clears. Close details with Escape to return focus.[0m
+      [36m</p>[39m
+      [36m<div[39m
+        [33maria-label[39m=[32m"Loaded tracks and clips"[39m
+        [33mclass[39m=[32m"ff-navigation-list"[39m
+      [36m>[39m
+        [36m<section>[39m
+          [36m<button[39m
+            [33maria-pressed[39m=[32m"false"[39m
+            [33mdata-navigation-object[39m=[32m"track:v"[39m
+            [33mtitle[39m=[32m"Picture"[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [36m<span>[39m
+              [0mPicture[0m
+            [36m</span>[39m
+            [36m<small>[39m
+              [0mvideo[0m
+            [36m</small>[39m
+          [36m</button>[39m
+          [36m<ul>[39m
+            [36m<li>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"false"[39m
+                [33mdata-navigation-object[39m=[32m"clip:opening"[39m
+                [33mtitle[39m=[32m"Opening shot"[39m
+                [33mtype[39m=[32m"button"[39m
+              [36m>[39m
+                [36m<span>[39m
+                  [0mOpening shot[0m
+                [36m</span>[39m
+                [36m<small>[39m
+                  [0mvideo[0m
+                [36m</small>[39m
+              [36m</button>[39m
+              [36m<small>[39m
+                [0m0[0m
+                [0m → [0m
+                [0m1001/30000[0m
+              [36m</small>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"true"[39m
+                [33mdata-navigation-object[39m=[32m"clip:ending"[39m
+                [33mtitle[39m=[32m"Ending shot"[39m
+                [33mtype[39m=[32m"button"[39m
+              [36m>[39m
+                [36m<span>[39m
+                  [0mEnding shot[0m
+                [36m</span>[39m
+                [36m<small>[39m
+                  [0mimage[0m
+                [36m</small>[39m
+              [36m</button>[39m
+              [36m<small>[39m
+                [0m1001/30000[0m
+                [0m → [0m
+                [0m2[0m
+              [36m</small>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+        [36m</section>[39m
+        [36m<section>[39m
+          [36m<button[39m
+            [33maria-pressed[39m=[32m"false"[39m
+            [33mdata-navigation-object[39m=[32m"track:a"[39m
+            [33mtitle[39m=[32m"Audio"[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [36m<span>[39m
+              [0mAudio[0m
+            [36m</span>[39m
+            [36m<small>[39m
+              [0maudio[0m
+            [36m</small>[39m
+          [36m</button>[39m
+          [36m<p>[39m
+            [0mEmpty track[0m
+          [36m</p>[39m
+        [36m</section>[39m
+      [36m</div>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   ↓ bounded Timeline navigation > disables time actions for unknown basis and preserves logical metadata without inventing a duration
+   ↓ bounded Timeline navigation > selects by mouse and keyboard, inspects provenance, traps focus and closes back to the launcher
+   ↓ bounded Timeline navigation > preserves position, selection and scroll through inspector toggle, equal rerender and equal refresh
+   ↓ bounded Timeline navigation > locates the selected clip across filters without changing overlapping explicit target identity
+   ↓ bounded Timeline navigation > clears failed refresh metadata, supports retry and distinguishes stale and restricted responses
+   ↓ bounded Timeline navigation > rejects mismatched receipt scope, revision, duplicates, relationships and invalid time ranges
+   ↓ bounded Timeline navigation > retains full long names in accessible labels and details and localizes the main flow into Chinese
+   ↓ bounded Timeline navigation > removes missing selection on refresh and provides a focus fallback when its detail target disappears
+   ↓ bounded Timeline navigation > aborts late reads on revision and identity/access/adapter/owner changes and rejects retained controls
+   ↓ bounded Timeline navigation > withdraws metadata and rejects retained callbacks after explicit Selection owner retirement
+   ↓ rejects actual retained inspector and close callbacks when selection or dialog instance changes
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > bounded Timeline navigation > locates exact authored-range boundaries, end and zero without floating point or assumed FPS
+TestingLibraryElementError: Unable to find an element with the text: Loaded clips at this position: 2. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"Timeline navigation"[39m
+      [33mclass[39m=[32m"ff-timeline-navigation"[39m
+      [33mtabindex[39m=[32m"-1"[39m
+    [36m>[39m
+      [36m<p>[39m
+        [0mNavigation only. No media playback or canonical editing.[0m
+      [36m</p>[39m
+      [36m<dl[39m
+        [33mclass[39m=[32m"ff-navigation-identity"[39m
+      [36m>[39m
+        [36m<dt>[39m
+          [0mProjected Project[0m
+        [36m</dt>[39m
+        [36m<dd>[39m
+          [0mp[0m
+        [36m</dd>[39m
+        [36m<dt>[39m
+          [0mProjected Timeline[0m
+        [36m</dt>[39m
+        [36m<dd>[39m
+          [0mt[0m
+        [36m</dd>[39m
+        [36m<dt>[39m
+          [0mInspected revision[0m
+        [36m</dt>[39m
+        [36m<dd>[39m
+          [0mr1[0m
+        [36m</dd>[39m
+      [36m</dl>[39m
+      [36m<span[39m
+        [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+      [36m>[39m
+        [0mIsolated verification projection · simulated[0m
+      [36m</span>[39m
+      [36m<p[39m
+        [33mrole[39m=[32m"status"[39m
+      [36m>[39m
+        [0mLoaded timeline projection[0m
+      [36m</p>[39m
+      [36m<button[39m
+        [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+      [36m>[39m
+        [0mRefresh loaded projection[0m
+      [36m</button>[39m
+      [36m<p>[39m
+        [0mComplete supplied revision projection. Search covers this loaded projection.[0m
+      [36m</p>[39m
+      [36m<label>[39m
+        [0mFilter loaded tracks and clips[0m
+        [36m<input[39m
+          [33mclass[39m=[32m"ff-input "[39m
+          [33mvalue[39m=[32m""[39m
+        [36m/>[39m
+      [36m</label>[39m
+      [36m<form[39m
+        [33mclass[39m=[32m"ff-navigation-locate"[39m
+      [36m>[39m
+        [36m<label>[39m
+          [0mExact time (integer or fraction)[0m
+          [36m<input[39m
+            [33maria-invalid[39m=[32m"false"[39m
+            [33mclass[39m=[32m"ff-input "[39m
+            [33mvalue[39m=[32m"1001/30000"[39m
+          [36m/>[39m
+        [36m</label>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+          [33mtype[39m=[32m"submit"[39m
+        [36m>[39m
+          [0mLocate time[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mLocate selected clip[0m
+        [36m</button>[39m
+      [36m</form>[39m
+      [36m<p>[39m
+        [0mExact seconds; occupied ranges include start and exclude end. Position is local navigation only.[0m
+      [36m</p>[39m
+      [36m<p>[39m
+        [0mSupplied navigation bounds[0m
+        [0m: [0m
+        [0m0[0m
+        [0m → [0m
+        [0m2[0m
+      [36m</p>[39m
+      [36m<output[39m
+        [33maria-label[39m=[32m"Local navigation position"[39m
+      [36m>[39m
+        [0m1001/30000[0m
+      [36m</output>[39m
+      [36m<p[39m
+        [33mrole[39m=[32m"status"[39m
+      [36m>[39m
+        [0mLoaded clips at this position[0m
+        [0m: [0m
+        [0m1[0m
+      [36m</p>[39m
+      [36m<div[39m
+        [33maria-label[39m=[32m"Selection actions"[39m
+        [33mclass[39m=[32m"ff-selection-bar"[39m
+        [33mdata-testid[39m=[32m"selection-actions"[39m
+        [33mrole[39m=[32m"toolbar"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"ff-selection-title"[39m
+        [36m>[39m
+          [0mCLIP · Ending shot[0m
+        [36m</span>[39m
+        [36m<button[39m
+          [33maria-controls[39m=[32m"selection-inspector"[39m
+          [33maria-expanded[39m=[32m"true"[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mHide inspector[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mReveal primary clip[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mClear selection[0m
+        [36m</button>[39m
+        [36m<details>[39m
+          [36m<summary>[39m
+            [0mMore[0m
+          [36m</summary>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-selection-more"[39m
+          [36m>[39m
+            [36m<p>[39m
+              [0mLocal presentation only · not saved[0m
+            [36m</p>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+            [36m>[39m
+              [0mEdit local properties[0m
+            [36m</button>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-unavailable-action"[39m
+            [36m>[39m
+              [36m<button[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                [33mdisabled[39m=[32m""[39m
+              [36m>[39m
+                [0mApply canonical change[0m
+              [36m</button>[39m
+              [36m<p>[39m
+                [0mThis change cannot be applied here yet. A connected server preview and confirmation flow is required; use the existing timeline advanced controls for supported operations.[0m
+              [36m</p>[39m
+              [36m<details>[39m
+                [36m<summary>[39m
+                  [0mTechnical details[0m
+                [36m</summary>[39m
+                [36m<code>[39m
+                  [0mNo generic application gateway contract · CANONICAL_SEMANTIC rejected[0m
+                [36m</code>[39m
+              [36m</details>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</details>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mAsk Agent[0m
+        [36m</button>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-navigation-actions"[39m
+      [36m>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mInspect selected metadata[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+        [36m>[39m
+          [0mClear navigation selection[0m
+        [36m</button>[39m
+      [36m</div>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-canvas-guidance"[39m
+      [36m>[39m
+        [0mTab to a track or clip. Enter/Space selects; Up/Down or Home/End selects another loaded object; I inspects; Escape clears. Close details with Escape to return focus.[0m
+      [36m</p>[39m
+      [36m<div[39m
+        [33maria-label[39m=[32m"Loaded tracks and clips"[39m
+        [33mclass[39m=[32m"ff-navigation-list"[39m
+      [36m>[39m
+        [36m<section>[39m
+          [36m<button[39m
+            [33maria-pressed[39m=[32m"false"[39m
+            [33mdata-navigation-object[39m=[32m"track:v"[39m
+            [33mtitle[39m=[32m"Picture"[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [36m<span>[39m
+              [0mPicture[0m
+            [36m</span>[39m
+            [36m<small>[39m
+              [0mvideo[0m
+            [36m</small>[39m
+          [36m</button>[39m
+          [36m<ul>[39m
+            [36m<li>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"false"[39m
+                [33mdata-navigation-object[39m=[32m"clip:opening"[39m
+                [33mtitle[39m=[32m"Opening shot"[39m
+                [33mtype[39m=[32m"button"[39m
+              [36m>[39m
+                [36m<span>[39m
+                  [0mOpening shot[0m
+                [36m</span>[39m
+                [36m<small>[39m
+                  [0mvideo[0m
+                [36m</small>[39m
+              [36m</button>[39m
+              [36m<small>[39m
+                [0m0[0m
+                [0m → [0m
+                [0m1001/30000[0m
+              [36m</small>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<button[39m
+                [33maria-pressed[39m=[32m"true"[39m
+                [33mdata-navigation-object[39m=[32m"clip:ending"[39m
+                [33mtitle[39m=[32m"Ending shot"[39m
+                [33mtype[39m=[32m"button"[39m
+              [36m>[39m
+                [36m<span>[39m
+                  [0mEnding shot[0m
+                [36m</span>[39m
+                [36m<small>[39m
+                  [0mimage[0m
+                [36m</small>[39m
+              [36m</button>[39m
+              [36m<small>[39m
+                [0m1001/30000[0m
+                [0m → [0m
+                [0m2[0m
+              [36m</small>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+        [36m</section>[39m
+        [36m<section>[39m
+          [36m<button[39m
+            [33maria-pressed[39m=[32m"false"[39m
+            [33mdata-navigation-object[39m=[32m"track:a"[39m
+            [33mtitle[39m=[32m"Audio"[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [36m<span>[39m
+              [0mAudio[0m
+            [36m</span>[39m
+            [36m<small>[39m
+              [0maudio[0m
+            [36m</small>[39m
+          [36m</button>[39m
+          [36m<p>[39m
+            [0mEmpty track[0m
+          [36m</p>[39m
+        [36m</section>[39m
+      [36m</div>[39m
+    [36m</section>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:78:19
+     76|     expect(button('Opening shot').getAttribute('aria-pressed')).toBe('…
+     77|     inputTime('1001/30000')
+     78|     expect(screen.getByText('Loaded clips at this position: 2')).toBeT…
+       |                   ^
+     79|     expect(button('Opening shot').getAttribute('aria-pressed')).toBe('…
+     80|     inputTime('2')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 13 skipped (14)
+   Start at  09:27:10
+   Duration  2.24s (transform 763ms, setup 0ms, collect 1.17s, tests 174ms, environment 266ms, prepare 80ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/writer/red-range-01.tests.json

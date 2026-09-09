@@ -1,0 +1,2221 @@
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ❯ src/product/timeline/NleWorkspace.test.tsx (19 tests | 2 failed | 17 skipped) 1214ms
+   ↓ runtime NLE operation workspace > fails closed before querying when an explicit revision is absent from projected history
+   ↓ runtime NLE operation workspace > supports keyboard and button timeline controls with accessible semantics
+   ↓ runtime NLE operation workspace > leaves Space on a focused track button to native activation without toggling playback
+   ↓ runtime NLE operation workspace > selects and clears focused lanes, bounds scrubbing, and ignores modified shortcuts and form keys
+   ↓ runtime NLE operation workspace > runs bounded presentation simulation and pauses when scrubbing
+   ↓ runtime NLE operation workspace > discards a slower HEAD response after Project scope changes
+   ↓ runtime NLE operation workspace > keeps revision selection visibly disabled through APPLIED apply and authoritative readback
+   ↓ runtime NLE operation workspace > keeps revision selection visibly disabled through NO_OP apply and authoritative readback
+   ↓ runtime NLE operation workspace > defers a Project HEAD load until the original apply response and authoritative readback complete
+   ↓ runtime NLE operation workspace > invalidates a pre-apply selection load, preserves apply failure, and permits a later current selection
+   ↓ runtime NLE operation workspace > previews, explicitly confirms, and changes canonical HEAD only after APPLIED
+   ↓ runtime NLE operation workspace > shows frontend-known operation metadata, every frozen draft field, and complete preview evidence before confirmation
+   ↓ runtime NLE operation workspace > verifies NO_OP readback against the exact prior base without retrying apply
+   ↓ runtime NLE operation workspace > retries failed authoritative readback without reapplying and unlocks only after an exact retry
+   ↓ runtime NLE operation workspace > shows typed stale UX and does not assume success
+   ↓ keeps history and advanced controls collapsed while timeline playback stays reachable
+   ↓ preserves lanes and running playback across shared inspector collapse and frees preview space
+   × V9 ordinary entry never supplies synthetic tracks or playback 141ms
+     → expected <button …(2)></button> to be null
+   × V9 explains missing clip projection separately from authoritative revision data 1070ms
+     → Unable to find an element with the text: Track and clip projection unavailable. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"ff-app-shell"[39m
+      [33mdata-studio[39m=[32m"horizontal"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-page-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0mCreative · NLE[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0mTimeline editor[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0mExplore the timeline and preview changes before applying them.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<span[39m
+        [33mclass[39m=[32m"ff-status ff-status--info"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33maria-hidden[39m=[32m"true"[39m
+        [36m/>[39m
+        [0mCanonicalHead[0m
+      [36m</span>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-nle-layout"[39m
+      [36m>[39m
+        [36m<details[39m
+          [33mclass[39m=[32m"ff-nle-history"[39m
+        [36m>[39m
+          [36m<summary>[39m
+            [0mHistory & revision details[0m
+          [36m</summary>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mCanonical revision authority[0m
+              [36m</h2>[39m
+              [36m<button[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0mReload HEAD[0m
+              [36m</button>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-head-identity"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"ff-status ff-status--success"[39m
+                [36m>[39m
+                  [36m<span[39m
+                    [33maria-hidden[39m=[32m"true"[39m
+                  [36m/>[39m
+                  [0mHEAD · main[0m
+                [36m</span>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-property-row"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mRevision[0m
+                  [36m</span>[39m
+                  [36m<div>[39m
+                    [36m<code>[39m
+                      [0mrevision-R0[0m
+                    [36m</code>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-property-row"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mContent hash[0m
+                  [36m</span>[39m
+                  [36m<div>[39m
+                    [36m<code>[39m
+                      [0maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[0m
+                    [36m</code>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<h3>[39m
+                [0mRevision history[0m
+              [36m</h3>[39m
+              [36m<ol[39m
+                [33mclass[39m=[32m"ff-revision-list"[39m
+              [36m>[39m
+                [36m<li>[39m
+                  [36m<button[39m
+                    [33maria-pressed[39m=[32m"false"[39m
+                    [33mtype[39m=[32m"button"[39m
+                  [36m>[39m
+                    [36m<span>[39m
+                      [0mr[0m
+                      [0m1[0m
+                    [36m</span>[39m
+                    [36m<code>[39m
+                      [0mrevision-R0[0m
+                    [36m</code>[39m
+                    [36m<small>[39m
+                      [0mBase[0m
+                    [36m</small>[39m
+                  [36m</button>[39m
+                [36m</li>[39m
+              [36m</ol>[39m
+              [36m<p>[39m
+                [0mSelect a revision explicitly to load detail.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</details>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel ff-nle-workspace-panel"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mTimeline workspace[0m
+            [36m</h2>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-nle-stage"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-preview-host"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+                [36m>[39m
+                  [0mPresentation simulation[0m
+                [36m</span>[39m
+                [36m<strong>[39m
+                  [0mSimulation paused[0m
+                [36m</strong>[39m
+                [36m<p>[39m
+                  [0mNo media loaded · local simulation, steps 0–20[0m
+                [36m</p>[39m
+                [36m<output[39m
+                  [33mclass[39m=[32m"ff-stage-counter"[39m
+                [36m>[39m
+                  [0m00[0m
+                  [0m / 20[0m
+                [36m</output>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33maria-label[39m=[32m"Timeline playback controls"[39m
+                [33mclass[39m=[32m"ff-playback-controls"[39m
+              [36m>[39m
+                [36m<button[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                  [33mdisabled[39m=[32m""[39m
+                [36m>[39m
+                  [0mPrevious step[0m
+                [36m</button>[39m
+                [36m<button[39m
+                  [33maria-pressed[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                [36m>[39m
+                  [0mPlay[0m
+                [36m</button>[39m
+                [36m<button[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                [36m>[39m
+                  [0mNext step[0m
+                [36m</button>[39m
+                [36m<output[39m
+                  [33maria-live[39m=[32m"polite"[39m
+                [36m>[39m
+                  [0mPlayhead [0m
+                  [0m0[0m
+                [36m</output>[39m
+                [36m<button[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                [36m>[39m
+                  [0mStop / reset[0m
+                [36m</button>[39m
+              [36m</div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"ff-playhead-scrubber"[39m
+              [36m>[39m
+                [0mSimulation playhead[0m
+                [36m<input[39m
+                  [33maria-valuetext[39m=[32m"Step 0 of 20, presentation simulation"[39m
+                  [33mmax[39m=[32m"20"[39m
+                  [33mmin[39m=[32m"0"[39m
+                  [33mstep[39m=[32m"1"[39m
+                  [33mtype[39m=[32m"range"[39m
+                  [33mvalue[39m=[32m"0"[39m
+                [36m/>[39m
+              [36m</label>[39m
+              [36m<details[39m
+                [33mclass[39m=[32m"ff-timeline-help"[39m
+              [36m>[39m
+                [36m<summary>[39m
+                  [0mTimeline keyboard controls[0m
+                [36m</summary>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"ff-canvas-guidance"[39m
+                [36m>[39m
+                  [0mFocus a track: Enter/Space selects, Up/Down selects the adjacent track, Left/Right steps, Home/End jumps, Escape clears. Space on the timeline background toggles simulation.[0m
+                [36m</p>[39m
+              [36m</details>[39m
+              [36m<div[39m
+                [33maria-label[39m=[32m"Timeline presentation; use left and right arrows to move, space to play or pause, and escape to clear selection"[39m
+                [33mclass[39m=[32m"ff-canonical-timeline"[39m
+                [33mrole[39m=[32m"application"[39m
+                [33mtabindex[39m=[32m"0"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"ff-timeline-ruler"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0m0[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m5[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m10[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m15[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m20[0m
+                  [36m</span>[39m
+                  [36m<i[39m
+                    [33mstyle[39m=[32m"left: 0%;"[39m
+                  [36m/>[39m
+                [36m</div>[39m
+                [36m<button[39m
+                  [33maria-pressed[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"ff-canonical-track"[39m
+                  [33mdata-presentation-track[39m=[32m"V1"[39m
+                  [33mtype[39m=[32m"button"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mV1[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0mNo clip data loaded[0m
+                  [36m</span>[39m
+                [36m</button>[39m
+                [36m<button[39m
+                  [33maria-pressed[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"ff-canonical-track"[39m
+                  [33mdata-presentation-track[39m=[32m"A1"[39m
+                  [33mtype[39m=[32m"button"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mA1[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0mNo clip data loaded[0m
+                  [36m</span>[39m
+                [36m</button>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-synthetic-clip-fixture"[39m
+            [36m>[39m
+              [36m<label>[39m
+                [36m<input[39m
+                  [33mtype[39m=[32m"checkbox"[39m
+                [36m/>[39m
+                [0m Enable synthetic clip presentation fixture[0m
+              [36m</label>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+        [36m<details[39m
+          [33mclass[39m=[32m"ff-nle-advanced"[39m
+        [36m>[39m
+          [36m<summary>[39m
+            [0mAdd Media Clip · advanced controls[0m
+          [36m</summary>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel ff-operation-panel"[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mAdd Media Clip · advanced / provisional[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-state ff-state--unavailable"[39m
+                [33mrole[39m=[32m"note"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"ff-state__code"[39m
+                [36m>[39m
+                  [0mASSET GATEWAY · UNAVAILABLE[0m
+                [36m</span>[39m
+                [36m<p>[39m
+                  [0mUNAVAILABLE: No safe media browser projection supplies the full canonical source pin.[0m
+                  [0m Enter only canonical logical IDs below. Physical locations and provider coordinates are not accepted.[0m
+                [36m</p>[39m
+                [36m<p>[39m
+                  [0mUNKNOWN: No typed capability projection is currently available; backend validation remains authoritative.[0m
+                [36m</p>[39m
+              [36m</div>[39m
+              [36m<form>[39m
+                [36m<fieldset>[39m
+                  [36m<legend>[39m
+                    [0mCanonical source and placement pins[0m
+                  [36m</legend>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"ff-operation-fields"[39m
+                  [36m>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mTrack ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mClip ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mMedia Asset ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mMedia Stream ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mArtifact ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mSource content digest[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mSource start (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mSource end (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mTimeline start (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mTimeline end (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mRate numerator[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mRate denominator[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mDirection[0m
+                      [36m</span>[39m
+                      [36m<select>[39m
+                        [36m<option[39m
+                          [33mvalue[39m=[32m""[39m
+                        [36m>[39m
+                          [0mSelect direction[0m
+                        [36m</option>[39m
+                        [36m<option[39m
+                          [33mvalue[39m=[32m"FORWARD"[39m
+                        [36m>[39m
+                          [0mForward[0m
+                        [36m</option>[39m
+                        [36m<option[39m
+                          [33mvalue[39m=[32m"REVERSE"[39m
+                        [36m>[39m
+                          [0mReverse[0m
+                        [36m</option>[39m
+                      [36m</select>[39m
+                    [36m</label>[39m
+                  [36m</div>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"ff-operation-actions"[39m
+                  [36m>[39m
+                    [36m<button[39m
+                      [33mclass[39m=[32m"ff-button ff-button--primary "[39m
+                      [33mtype[39m=[32m"submit"[39m
+                    [36m>[39m
+                      [0mPreview operation[0m
+                    [36m</button>[39m
+                    [36m<button[39m
+                      [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                      [33mtype[39m=[32m"button"[39m
+                    [36m>[39m
+                      [0mDiscard draft[0m
+                    [36m</button>[39m
+                  [36m</div>[39m
+                [36m</fieldset>[39m
+              [36m</form>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</details>[39m
+        [36m<details[39m
+          [33mclass[39m=[32m"ff-nle-comparison"[39m
+        [36m>[39m
+          [36m<summary>[39m
+            [0mRevision comparison[0m
+          [36m</summary>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel ff-nle-diff-panel"[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mServer semantic comparison[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-empty"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m>[39m
+                  [0m◇[0m
+                [36m</span>[39m
+                [36m<h2>[39m
+                  [0mNo server comparison loaded[0m
+                [36m</h2>[39m
+                [36m<p>[39m
+                  [0mChoose two revisions and compare to see their changes.[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</details>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"ff-app-shell"[39m
+      [33mdata-studio[39m=[32m"horizontal"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-page-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0mCreative · NLE[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0mTimeline editor[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0mExplore the timeline and preview changes before applying them.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<span[39m
+        [33mclass[39m=[32m"ff-status ff-status--info"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33maria-hidden[39m=[32m"true"[39m
+        [36m/>[39m
+        [0mCanonicalHead[0m
+      [36m</span>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-nle-layout"[39m
+      [36m>[39m
+        [36m<details[39m
+          [33mclass[39m=[32m"ff-nle-history"[39m
+        [36m>[39m
+          [36m<summary>[39m
+            [0mHistory & revision details[0m
+          [36m</summary>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mCanonical revision authority[0m
+              [36m</h2>[39m
+              [36m<button[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0mReload HEAD[0m
+              [36m</button>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-head-identity"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"ff-status ff-status--success"[39m
+                [36m>[39m
+                  [36m<span[39m
+                    [33maria-hidden[39m=[32m"true"[39m
+                  [36m/>[39m
+                  [0mHEAD · main[0m
+                [36m</span>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-property-row"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mRevision[0m
+                  [36m</span>[39m
+                  [36m<div>[39m
+                    [36m<code>[39m
+                      [0mrevision-R0[0m
+                    [36m</code>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-property-row"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mContent hash[0m
+                  [36m</span>[39m
+                  [36m<div>[39m
+                    [36m<code>[39m
+                      [0maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[0m
+                    [36m</code>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<h3>[39m
+                [0mRevision history[0m
+              [36m</h3>[39m
+              [36m<ol[39m
+                [33mclass[39m=[32m"ff-revision-list"[39m
+              [36m>[39m
+                [36m<li>[39m
+                  [36m<button[39m
+                    [33maria-pressed[39m=[32m"false"[39m
+                    [33mtype[39m=[32m"button"[39m
+                  [36m>[39m
+                    [36m<span>[39m
+                      [0mr[0m
+                      [0m1[0m
+                    [36m</span>[39m
+                    [36m<code>[39m
+                      [0mrevision-R0[0m
+                    [36m</code>[39m
+                    [36m<small>[39m
+                      [0mBase[0m
+                    [36m</small>[39m
+                  [36m</button>[39m
+                [36m</li>[39m
+              [36m</ol>[39m
+              [36m<p>[39m
+                [0mSelect a revision explicitly to load detail.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</details>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel ff-nle-workspace-panel"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mTimeline workspace[0m
+            [36m</h2>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-nle-stage"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-preview-host"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+                [36m>[39m
+                  [0mPresentation simulation[0m
+                [36m</span>[39m
+                [36m<strong>[39m
+                  [0mSimulation paused[0m
+                [36m</strong>[39m
+                [36m<p>[39m
+                  [0mNo media loaded · local simulation, steps 0–20[0m
+                [36m</p>[39m
+                [36m<output[39m
+                  [33mclass[39m=[32m"ff-stage-counter"[39m
+                [36m>[39m
+                  [0m00[0m
+                  [0m / 20[0m
+                [36m</output>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33maria-label[39m=[32m"Timeline playback controls"[39m
+                [33mclass[39m=[32m"ff-playback-controls"[39m
+              [36m>[39m
+                [36m<button[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                  [33mdisabled[39m=[32m""[39m
+                [36m>[39m
+                  [0mPrevious step[0m
+                [36m</button>[39m
+                [36m<button[39m
+                  [33maria-pressed[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                [36m>[39m
+                  [0mPlay[0m
+                [36m</button>[39m
+                [36m<button[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                [36m>[39m
+                  [0mNext step[0m
+                [36m</button>[39m
+                [36m<output[39m
+                  [33maria-live[39m=[32m"polite"[39m
+                [36m>[39m
+                  [0mPlayhead [0m
+                  [0m0[0m
+                [36m</output>[39m
+                [36m<button[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                [36m>[39m
+                  [0mStop / reset[0m
+                [36m</button>[39m
+              [36m</div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"ff-playhead-scrubber"[39m
+              [36m>[39m
+                [0mSimulation playhead[0m
+                [36m<input[39m
+                  [33maria-valuetext[39m=[32m"Step 0 of 20, presentation simulation"[39m
+                  [33mmax[39m=[32m"20"[39m
+                  [33mmin[39m=[32m"0"[39m
+                  [33mstep[39m=[32m"1"[39m
+                  [33mtype[39m=[32m"range"[39m
+                  [33mvalue[39m=[32m"0"[39m
+                [36m/>[39m
+              [36m</label>[39m
+              [36m<details[39m
+                [33mclass[39m=[32m"ff-timeline-help"[39m
+              [36m>[39m
+                [36m<summary>[39m
+                  [0mTimeline keyboard controls[0m
+                [36m</summary>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"ff-canvas-guidance"[39m
+                [36m>[39m
+                  [0mFocus a track: Enter/Space selects, Up/Down selects the adjacent track, Left/Right steps, Home/End jumps, Escape clears. Space on the timeline background toggles simulation.[0m
+                [36m</p>[39m
+              [36m</details>[39m
+              [36m<div[39m
+                [33maria-label[39m=[32m"Timeline presentation; use left and right arrows to move, space to play or pause, and escape to clear selection"[39m
+                [33mclass[39m=[32m"ff-canonical-timeline"[39m
+                [33mrole[39m=[32m"application"[39m
+                [33mtabindex[39m=[32m"0"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"ff-timeline-ruler"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0m0[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m5[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m10[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m15[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m20[0m
+                  [36m</span>[39m
+                  [36m<i[39m
+                    [33mstyle[39m=[32m"left: 0%;"[39m
+                  [36m/>[39m
+                [36m</div>[39m
+                [36m<button[39m
+                  [33maria-pressed[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"ff-canonical-track"[39m
+                  [33mdata-presentation-track[39m=[32m"V1"[39m
+                  [33mtype[39m=[32m"button"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mV1[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0mNo clip data loaded[0m
+                  [36m</span>[39m
+                [36m</button>[39m
+                [36m<button[39m
+                  [33maria-pressed[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"ff-canonical-track"[39m
+                  [33mdata-presentation-track[39m=[32m"A1"[39m
+                  [33mtype[39m=[32m"button"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mA1[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0mNo clip data loaded[0m
+                  [36m</span>[39m
+                [36m</button>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-synthetic-clip-fixture"[39m
+            [36m>[39m
+              [36m<label>[39m
+                [36m<input[39m
+                  [33mtype[39m=[32m"checkbox"[39m
+                [36m/>[39m
+                [0m Enable synthetic clip presentation fixture[0m
+              [36m</label>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+        [36m<details[39m
+          [33mclass[39m=[32m"ff-nle-advanced"[39m
+        [36m>[39m
+          [36m<summary>[39m
+            [0mAdd Media Clip · advanced controls[0m
+          [36m</summary>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel ff-operation-panel"[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mAdd Media Clip · advanced / provisional[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-state ff-state--unavailable"[39m
+                [33mrole[39m=[32m"note"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"ff-state__code"[39m
+                [36m>[39m
+                  [0mASSET GATEWAY · UNAVAILABLE[0m
+                [36m</span>[39m
+                [36m<p>[39m
+                  [0mUNAVAILABLE: No safe media browser projection supplies the full canonical source pin.[0m
+                  [0m Enter only canonical logical IDs below. Physical locations and provider coordinates are not accepted.[0m
+                [36m</p>[39m
+                [36m<p>[39m
+                  [0mUNKNOWN: No typed capability projection is currently available; backend validation remains authoritative.[0m
+                [36m</p>[39m
+              [36m</div>[39m
+              [36m<form>[39m
+                [36m<fieldset>[39m
+                  [36m<legend>[39m
+                    [0mCanonical source and placement pins[0m
+                  [36m</legend>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"ff-operation-fields"[39m
+                  [36m>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mTrack ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mClip ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mMedia Asset ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mMedia Stream ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mArtifact ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mSource content digest[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mSource start (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mSource end (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mTimeline start (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mTimeline end (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mRate numerator[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mRate denominator[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mDirection[0m
+                      [36m</span>[39m
+                      [36m<select>[39m
+                        [36m<option[39m
+                          [33mvalue[39m=[32m""[39m
+                        [36m>[39m
+                          [0mSelect direction[0m
+                        [36m</option>[39m
+                        [36m<option[39m
+                          [33mvalue[39m=[32m"FORWARD"[39m
+                        [36m>[39m
+                          [0mForward[0m
+                        [36m</option>[39m
+                        [36m<option[39m
+                          [33mvalue[39m=[32m"REVERSE"[39m
+                        [36m>[39m
+                          [0mReverse[0m
+                        [36m</option>[39m
+                      [36m</select>[39m
+                    [36m</label>[39m
+                  [36m</div>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"ff-operation-actions"[39m
+                  [36m>[39m
+                    [36m<button[39m
+                      [33mclass[39m=[32m"ff-button ff-button--primary "[39m
+                      [33mtype[39m=[32m"submit"[39m
+                    [36m>[39m
+                      [0mPreview operation[0m
+                    [36m</button>[39m
+                    [36m<button[39m
+                      [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                      [33mtype[39m=[32m"button"[39m
+                    [36m>[39m
+                      [0mDiscard draft[0m
+                    [36m</button>[39m
+                  [36m</div>[39m
+                [36m</fieldset>[39m
+              [36m</form>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</details>[39m
+        [36m<details[39m
+          [33mclass[39m=[32m"ff-nle-comparison"[39m
+        [36m>[39m
+          [36m<summary>[39m
+            [0mRevision comparison[0m
+          [36m</summary>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel ff-nle-diff-panel"[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mServer semantic comparison[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-empty"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m>[39m
+                  [0m◇[0m
+                [36m</span>[39m
+                [36m<h2>[39m
+                  [0mNo server comparison loaded[0m
+                [36m</h2>[39m
+                [36m<p>[39m
+                  [0mChoose two revisions and compare to see their changes.[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</details>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/product/timeline/NleWorkspace.test.tsx > V9 ordinary entry never supplies synthetic tracks or playback
+AssertionError: expected <button …(2)></button> to be null
+
+- Expected: 
+null
+
++ Received: 
+<button
+  aria-pressed="false"
+  class="ff-button ff-button--secondary "
+>
+  Play
+</button>
+
+ ❯ src/product/timeline/NleWorkspace.test.tsx:515:58
+    513|   renderWorkspace(commands)
+    514|   await screen.findAllByText('revision-R0')
+    515|   expect(screen.queryByRole('button', { name: 'Play' })).toBeNull()
+       |                                                          ^
+    516|   expect(screen.queryByLabelText('Enable synthetic clip presentation f…
+    517|   expect(screen.queryByText('V1')).toBeNull()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/product/timeline/NleWorkspace.test.tsx > V9 explains missing clip projection separately from authoritative revision data
+TestingLibraryElementError: Unable to find an element with the text: Track and clip projection unavailable. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"ff-app-shell"[39m
+      [33mdata-studio[39m=[32m"horizontal"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-page-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0mCreative · NLE[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0mTimeline editor[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0mExplore the timeline and preview changes before applying them.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<span[39m
+        [33mclass[39m=[32m"ff-status ff-status--info"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33maria-hidden[39m=[32m"true"[39m
+        [36m/>[39m
+        [0mCanonicalHead[0m
+      [36m</span>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-nle-layout"[39m
+      [36m>[39m
+        [36m<details[39m
+          [33mclass[39m=[32m"ff-nle-history"[39m
+        [36m>[39m
+          [36m<summary>[39m
+            [0mHistory & revision details[0m
+          [36m</summary>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mCanonical revision authority[0m
+              [36m</h2>[39m
+              [36m<button[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0mReload HEAD[0m
+              [36m</button>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-head-identity"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"ff-status ff-status--success"[39m
+                [36m>[39m
+                  [36m<span[39m
+                    [33maria-hidden[39m=[32m"true"[39m
+                  [36m/>[39m
+                  [0mHEAD · main[0m
+                [36m</span>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-property-row"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mRevision[0m
+                  [36m</span>[39m
+                  [36m<div>[39m
+                    [36m<code>[39m
+                      [0mrevision-R0[0m
+                    [36m</code>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-property-row"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mContent hash[0m
+                  [36m</span>[39m
+                  [36m<div>[39m
+                    [36m<code>[39m
+                      [0maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[0m
+                    [36m</code>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<h3>[39m
+                [0mRevision history[0m
+              [36m</h3>[39m
+              [36m<ol[39m
+                [33mclass[39m=[32m"ff-revision-list"[39m
+              [36m>[39m
+                [36m<li>[39m
+                  [36m<button[39m
+                    [33maria-pressed[39m=[32m"false"[39m
+                    [33mtype[39m=[32m"button"[39m
+                  [36m>[39m
+                    [36m<span>[39m
+                      [0mr[0m
+                      [0m1[0m
+                    [36m</span>[39m
+                    [36m<code>[39m
+                      [0mrevision-R0[0m
+                    [36m</code>[39m
+                    [36m<small>[39m
+                      [0mBase[0m
+                    [36m</small>[39m
+                  [36m</button>[39m
+                [36m</li>[39m
+              [36m</ol>[39m
+              [36m<p>[39m
+                [0mSelect a revision explicitly to load detail.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</details>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel ff-nle-workspace-panel"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mTimeline workspace[0m
+            [36m</h2>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-nle-stage"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-preview-host"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+                [36m>[39m
+                  [0mPresentation simulation[0m
+                [36m</span>[39m
+                [36m<strong>[39m
+                  [0mSimulation paused[0m
+                [36m</strong>[39m
+                [36m<p>[39m
+                  [0mNo media loaded · local simulation, steps 0–20[0m
+                [36m</p>[39m
+                [36m<output[39m
+                  [33mclass[39m=[32m"ff-stage-counter"[39m
+                [36m>[39m
+                  [0m00[0m
+                  [0m / 20[0m
+                [36m</output>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33maria-label[39m=[32m"Timeline playback controls"[39m
+                [33mclass[39m=[32m"ff-playback-controls"[39m
+              [36m>[39m
+                [36m<button[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                  [33mdisabled[39m=[32m""[39m
+                [36m>[39m
+                  [0mPrevious step[0m
+                [36m</button>[39m
+                [36m<button[39m
+                  [33maria-pressed[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                [36m>[39m
+                  [0mPlay[0m
+                [36m</button>[39m
+                [36m<button[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                [36m>[39m
+                  [0mNext step[0m
+                [36m</button>[39m
+                [36m<output[39m
+                  [33maria-live[39m=[32m"polite"[39m
+                [36m>[39m
+                  [0mPlayhead [0m
+                  [0m0[0m
+                [36m</output>[39m
+                [36m<button[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                [36m>[39m
+                  [0mStop / reset[0m
+                [36m</button>[39m
+              [36m</div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"ff-playhead-scrubber"[39m
+              [36m>[39m
+                [0mSimulation playhead[0m
+                [36m<input[39m
+                  [33maria-valuetext[39m=[32m"Step 0 of 20, presentation simulation"[39m
+                  [33mmax[39m=[32m"20"[39m
+                  [33mmin[39m=[32m"0"[39m
+                  [33mstep[39m=[32m"1"[39m
+                  [33mtype[39m=[32m"range"[39m
+                  [33mvalue[39m=[32m"0"[39m
+                [36m/>[39m
+              [36m</label>[39m
+              [36m<details[39m
+                [33mclass[39m=[32m"ff-timeline-help"[39m
+              [36m>[39m
+                [36m<summary>[39m
+                  [0mTimeline keyboard controls[0m
+                [36m</summary>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"ff-canvas-guidance"[39m
+                [36m>[39m
+                  [0mFocus a track: Enter/Space selects, Up/Down selects the adjacent track, Left/Right steps, Home/End jumps, Escape clears. Space on the timeline background toggles simulation.[0m
+                [36m</p>[39m
+              [36m</details>[39m
+              [36m<div[39m
+                [33maria-label[39m=[32m"Timeline presentation; use left and right arrows to move, space to play or pause, and escape to clear selection"[39m
+                [33mclass[39m=[32m"ff-canonical-timeline"[39m
+                [33mrole[39m=[32m"application"[39m
+                [33mtabindex[39m=[32m"0"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"ff-timeline-ruler"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0m0[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m5[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m10[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m15[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m20[0m
+                  [36m</span>[39m
+                  [36m<i[39m
+                    [33mstyle[39m=[32m"left: 0%;"[39m
+                  [36m/>[39m
+                [36m</div>[39m
+                [36m<button[39m
+                  [33maria-pressed[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"ff-canonical-track"[39m
+                  [33mdata-presentation-track[39m=[32m"V1"[39m
+                  [33mtype[39m=[32m"button"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mV1[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0mNo clip data loaded[0m
+                  [36m</span>[39m
+                [36m</button>[39m
+                [36m<button[39m
+                  [33maria-pressed[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"ff-canonical-track"[39m
+                  [33mdata-presentation-track[39m=[32m"A1"[39m
+                  [33mtype[39m=[32m"button"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mA1[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0mNo clip data loaded[0m
+                  [36m</span>[39m
+                [36m</button>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-synthetic-clip-fixture"[39m
+            [36m>[39m
+              [36m<label>[39m
+                [36m<input[39m
+                  [33mtype[39m=[32m"checkbox"[39m
+                [36m/>[39m
+                [0m Enable synthetic clip presentation fixture[0m
+              [36m</label>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+        [36m<details[39m
+          [33mclass[39m=[32m"ff-nle-advanced"[39m
+        [36m>[39m
+          [36m<summary>[39m
+            [0mAdd Media Clip · advanced controls[0m
+          [36m</summary>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel ff-operation-panel"[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mAdd Media Clip · advanced / provisional[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-state ff-state--unavailable"[39m
+                [33mrole[39m=[32m"note"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"ff-state__code"[39m
+                [36m>[39m
+                  [0mASSET GATEWAY · UNAVAILABLE[0m
+                [36m</span>[39m
+                [36m<p>[39m
+                  [0mUNAVAILABLE: No safe media browser projection supplies the full canonical source pin.[0m
+                  [0m Enter only canonical logical IDs below. Physical locations and provider coordinates are not accepted.[0m
+                [36m</p>[39m
+                [36m<p>[39m
+                  [0mUNKNOWN: No typed capability projection is currently available; backend validation remains authoritative.[0m
+                [36m</p>[39m
+              [36m</div>[39m
+              [36m<form>[39m
+                [36m<fieldset>[39m
+                  [36m<legend>[39m
+                    [0mCanonical source and placement pins[0m
+                  [36m</legend>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"ff-operation-fields"[39m
+                  [36m>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mTrack ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mClip ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mMedia Asset ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mMedia Stream ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mArtifact ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mSource content digest[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mSource start (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mSource end (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mTimeline start (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mTimeline end (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mRate numerator[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mRate denominator[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mDirection[0m
+                      [36m</span>[39m
+                      [36m<select>[39m
+                        [36m<option[39m
+                          [33mvalue[39m=[32m""[39m
+                        [36m>[39m
+                          [0mSelect direction[0m
+                        [36m</option>[39m
+                        [36m<option[39m
+                          [33mvalue[39m=[32m"FORWARD"[39m
+                        [36m>[39m
+                          [0mForward[0m
+                        [36m</option>[39m
+                        [36m<option[39m
+                          [33mvalue[39m=[32m"REVERSE"[39m
+                        [36m>[39m
+                          [0mReverse[0m
+                        [36m</option>[39m
+                      [36m</select>[39m
+                    [36m</label>[39m
+                  [36m</div>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"ff-operation-actions"[39m
+                  [36m>[39m
+                    [36m<button[39m
+                      [33mclass[39m=[32m"ff-button ff-button--primary "[39m
+                      [33mtype[39m=[32m"submit"[39m
+                    [36m>[39m
+                      [0mPreview operation[0m
+                    [36m</button>[39m
+                    [36m<button[39m
+                      [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                      [33mtype[39m=[32m"button"[39m
+                    [36m>[39m
+                      [0mDiscard draft[0m
+                    [36m</button>[39m
+                  [36m</div>[39m
+                [36m</fieldset>[39m
+              [36m</form>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</details>[39m
+        [36m<details[39m
+          [33mclass[39m=[32m"ff-nle-comparison"[39m
+        [36m>[39m
+          [36m<summary>[39m
+            [0mRevision comparison[0m
+          [36m</summary>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel ff-nle-diff-panel"[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mServer semantic comparison[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-empty"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m>[39m
+                  [0m◇[0m
+                [36m</span>[39m
+                [36m<h2>[39m
+                  [0mNo server comparison loaded[0m
+                [36m</h2>[39m
+                [36m<p>[39m
+                  [0mChoose two revisions and compare to see their changes.[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</details>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"ff-app-shell"[39m
+      [33mdata-studio[39m=[32m"horizontal"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-page-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0mCreative · NLE[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0mTimeline editor[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0mExplore the timeline and preview changes before applying them.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<span[39m
+        [33mclass[39m=[32m"ff-status ff-status--info"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33maria-hidden[39m=[32m"true"[39m
+        [36m/>[39m
+        [0mCanonicalHead[0m
+      [36m</span>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-nle-layout"[39m
+      [36m>[39m
+        [36m<details[39m
+          [33mclass[39m=[32m"ff-nle-history"[39m
+        [36m>[39m
+          [36m<summary>[39m
+            [0mHistory & revision details[0m
+          [36m</summary>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel "[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mCanonical revision authority[0m
+              [36m</h2>[39m
+              [36m<button[39m
+                [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+              [36m>[39m
+                [0mReload HEAD[0m
+              [36m</button>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-head-identity"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"ff-status ff-status--success"[39m
+                [36m>[39m
+                  [36m<span[39m
+                    [33maria-hidden[39m=[32m"true"[39m
+                  [36m/>[39m
+                  [0mHEAD · main[0m
+                [36m</span>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-property-row"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mRevision[0m
+                  [36m</span>[39m
+                  [36m<div>[39m
+                    [36m<code>[39m
+                      [0mrevision-R0[0m
+                    [36m</code>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-property-row"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mContent hash[0m
+                  [36m</span>[39m
+                  [36m<div>[39m
+                    [36m<code>[39m
+                      [0maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[0m
+                    [36m</code>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<h3>[39m
+                [0mRevision history[0m
+              [36m</h3>[39m
+              [36m<ol[39m
+                [33mclass[39m=[32m"ff-revision-list"[39m
+              [36m>[39m
+                [36m<li>[39m
+                  [36m<button[39m
+                    [33maria-pressed[39m=[32m"false"[39m
+                    [33mtype[39m=[32m"button"[39m
+                  [36m>[39m
+                    [36m<span>[39m
+                      [0mr[0m
+                      [0m1[0m
+                    [36m</span>[39m
+                    [36m<code>[39m
+                      [0mrevision-R0[0m
+                    [36m</code>[39m
+                    [36m<small>[39m
+                      [0mBase[0m
+                    [36m</small>[39m
+                  [36m</button>[39m
+                [36m</li>[39m
+              [36m</ol>[39m
+              [36m<p>[39m
+                [0mSelect a revision explicitly to load detail.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</details>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel ff-nle-workspace-panel"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mTimeline workspace[0m
+            [36m</h2>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-nle-stage"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-preview-host"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+                [36m>[39m
+                  [0mPresentation simulation[0m
+                [36m</span>[39m
+                [36m<strong>[39m
+                  [0mSimulation paused[0m
+                [36m</strong>[39m
+                [36m<p>[39m
+                  [0mNo media loaded · local simulation, steps 0–20[0m
+                [36m</p>[39m
+                [36m<output[39m
+                  [33mclass[39m=[32m"ff-stage-counter"[39m
+                [36m>[39m
+                  [0m00[0m
+                  [0m / 20[0m
+                [36m</output>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33maria-label[39m=[32m"Timeline playback controls"[39m
+                [33mclass[39m=[32m"ff-playback-controls"[39m
+              [36m>[39m
+                [36m<button[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                  [33mdisabled[39m=[32m""[39m
+                [36m>[39m
+                  [0mPrevious step[0m
+                [36m</button>[39m
+                [36m<button[39m
+                  [33maria-pressed[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                [36m>[39m
+                  [0mPlay[0m
+                [36m</button>[39m
+                [36m<button[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                [36m>[39m
+                  [0mNext step[0m
+                [36m</button>[39m
+                [36m<output[39m
+                  [33maria-live[39m=[32m"polite"[39m
+                [36m>[39m
+                  [0mPlayhead [0m
+                  [0m0[0m
+                [36m</output>[39m
+                [36m<button[39m
+                  [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                [36m>[39m
+                  [0mStop / reset[0m
+                [36m</button>[39m
+              [36m</div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"ff-playhead-scrubber"[39m
+              [36m>[39m
+                [0mSimulation playhead[0m
+                [36m<input[39m
+                  [33maria-valuetext[39m=[32m"Step 0 of 20, presentation simulation"[39m
+                  [33mmax[39m=[32m"20"[39m
+                  [33mmin[39m=[32m"0"[39m
+                  [33mstep[39m=[32m"1"[39m
+                  [33mtype[39m=[32m"range"[39m
+                  [33mvalue[39m=[32m"0"[39m
+                [36m/>[39m
+              [36m</label>[39m
+              [36m<details[39m
+                [33mclass[39m=[32m"ff-timeline-help"[39m
+              [36m>[39m
+                [36m<summary>[39m
+                  [0mTimeline keyboard controls[0m
+                [36m</summary>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"ff-canvas-guidance"[39m
+                [36m>[39m
+                  [0mFocus a track: Enter/Space selects, Up/Down selects the adjacent track, Left/Right steps, Home/End jumps, Escape clears. Space on the timeline background toggles simulation.[0m
+                [36m</p>[39m
+              [36m</details>[39m
+              [36m<div[39m
+                [33maria-label[39m=[32m"Timeline presentation; use left and right arrows to move, space to play or pause, and escape to clear selection"[39m
+                [33mclass[39m=[32m"ff-canonical-timeline"[39m
+                [33mrole[39m=[32m"application"[39m
+                [33mtabindex[39m=[32m"0"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"ff-timeline-ruler"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0m0[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m5[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m10[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m15[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0m20[0m
+                  [36m</span>[39m
+                  [36m<i[39m
+                    [33mstyle[39m=[32m"left: 0%;"[39m
+                  [36m/>[39m
+                [36m</div>[39m
+                [36m<button[39m
+                  [33maria-pressed[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"ff-canonical-track"[39m
+                  [33mdata-presentation-track[39m=[32m"V1"[39m
+                  [33mtype[39m=[32m"button"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mV1[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0mNo clip data loaded[0m
+                  [36m</span>[39m
+                [36m</button>[39m
+                [36m<button[39m
+                  [33maria-pressed[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"ff-canonical-track"[39m
+                  [33mdata-presentation-track[39m=[32m"A1"[39m
+                  [33mtype[39m=[32m"button"[39m
+                [36m>[39m
+                  [36m<span>[39m
+                    [0mA1[0m
+                  [36m</span>[39m
+                  [36m<span>[39m
+                    [0mNo clip data loaded[0m
+                  [36m</span>[39m
+                [36m</button>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-synthetic-clip-fixture"[39m
+            [36m>[39m
+              [36m<label>[39m
+                [36m<input[39m
+                  [33mtype[39m=[32m"checkbox"[39m
+                [36m/>[39m
+                [0m Enable synthetic clip presentation fixture[0m
+              [36m</label>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+        [36m<details[39m
+          [33mclass[39m=[32m"ff-nle-advanced"[39m
+        [36m>[39m
+          [36m<summary>[39m
+            [0mAdd Media Clip · advanced controls[0m
+          [36m</summary>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel ff-operation-panel"[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mAdd Media Clip · advanced / provisional[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-state ff-state--unavailable"[39m
+                [33mrole[39m=[32m"note"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"ff-state__code"[39m
+                [36m>[39m
+                  [0mASSET GATEWAY · UNAVAILABLE[0m
+                [36m</span>[39m
+                [36m<p>[39m
+                  [0mUNAVAILABLE: No safe media browser projection supplies the full canonical source pin.[0m
+                  [0m Enter only canonical logical IDs below. Physical locations and provider coordinates are not accepted.[0m
+                [36m</p>[39m
+                [36m<p>[39m
+                  [0mUNKNOWN: No typed capability projection is currently available; backend validation remains authoritative.[0m
+                [36m</p>[39m
+              [36m</div>[39m
+              [36m<form>[39m
+                [36m<fieldset>[39m
+                  [36m<legend>[39m
+                    [0mCanonical source and placement pins[0m
+                  [36m</legend>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"ff-operation-fields"[39m
+                  [36m>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mTrack ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mClip ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mMedia Asset ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mMedia Stream ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mArtifact ID[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mSource content digest[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mSource start (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mSource end (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mTimeline start (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mTimeline end (exact rational)[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mRate numerator[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mRate denominator[0m
+                      [36m</span>[39m
+                      [36m<input[39m
+                        [33mautocomplete[39m=[32m"off"[39m
+                        [33mclass[39m=[32m"ff-input "[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m/>[39m
+                    [36m</label>[39m
+                    [36m<label>[39m
+                      [36m<span>[39m
+                        [0mDirection[0m
+                      [36m</span>[39m
+                      [36m<select>[39m
+                        [36m<option[39m
+                          [33mvalue[39m=[32m""[39m
+                        [36m>[39m
+                          [0mSelect direction[0m
+                        [36m</option>[39m
+                        [36m<option[39m
+                          [33mvalue[39m=[32m"FORWARD"[39m
+                        [36m>[39m
+                          [0mForward[0m
+                        [36m</option>[39m
+                        [36m<option[39m
+                          [33mvalue[39m=[32m"REVERSE"[39m
+                        [36m>[39m
+                          [0mReverse[0m
+                        [36m</option>[39m
+                      [36m</select>[39m
+                    [36m</label>[39m
+                  [36m</div>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"ff-operation-actions"[39m
+                  [36m>[39m
+                    [36m<button[39m
+                      [33mclass[39m=[32m"ff-button ff-button--primary "[39m
+                      [33mtype[39m=[32m"submit"[39m
+                    [36m>[39m
+                      [0mPreview operation[0m
+                    [36m</button>[39m
+                    [36m<button[39m
+                      [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                      [33mtype[39m=[32m"button"[39m
+                    [36m>[39m
+                      [0mDiscard draft[0m
+                    [36m</button>[39m
+                  [36m</div>[39m
+                [36m</fieldset>[39m
+              [36m</form>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</details>[39m
+        [36m<details[39m
+          [33mclass[39m=[32m"ff-nle-comparison"[39m
+        [36m>[39m
+          [36m<summary>[39m
+            [0mRevision comparison[0m
+          [36m</summary>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"ff-panel ff-nle-diff-panel"[39m
+          [36m>[39m
+            [36m<header[39m
+              [33mclass[39m=[32m"ff-panel__header"[39m
+            [36m>[39m
+              [36m<h2>[39m
+                [0mServer semantic comparison[0m
+              [36m</h2>[39m
+            [36m</header>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-panel__body"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-empty"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m>[39m
+                  [0m◇[0m
+                [36m</span>[39m
+                [36m<h2>[39m
+                  [0mNo server comparison loaded[0m
+                [36m</h2>[39m
+                [36m<p>[39m
+                  [0mChoose two revisions and compare to see their changes.[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</details>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/product/timeline/NleWorkspace.test.tsx:524:23
+    522|   renderWorkspace(new ScriptedOperationGateway(mockFailure('UNAVAILABL…
+    523|   await screen.findAllByText('revision-R0')
+    524|   expect(await screen.findByText('Track and clip projection unavailabl…
+       |                       ^
+    525|   expect(screen.getByText('Navigation only. No media playback or canon…
+    526|   expect(screen.queryByText('Empty timeline')).toBeNull()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 17 skipped (19)
+   Start at  09:13:03
+   Duration  4.65s (transform 1.61s, setup 0ms, collect 2.51s, tests 1.21s, environment 249ms, prepare 102ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/writer/red-entry-01.tests.json

@@ -1,0 +1,1118 @@
+{
+  "kind": "behavioral risk-to-test mapping; not instrumented code coverage",
+  "native_report": "focused-handoff.tests.json",
+  "counts": {
+    "total": 209,
+    "passed": 209,
+    "failed": 0,
+    "pending": 0,
+    "todo": 0,
+    "files": 9,
+    "lint_errors": 0,
+    "lint_warnings": 46
+  },
+  "risk_mapping": {
+    "ordinary entry/no synthetic or implicit playback": [
+      "V9 ordinary entry never supplies synthetic tracks or playback",
+      "V9 explains missing clip projection separately from authoritative revision data"
+    ],
+    "loading/complete empty/partial empty/no-media": [
+      "distinguishes unconfigured entry, loading, true empty and partial empty without fake media"
+    ],
+    "loaded discovery/filter/empty track": [
+      "discovers multiple tracks, empty tracks and filtered no-match only within the loaded scope"
+    ],
+    "authored exact boundaries/zero point/unsafe float/invalid input": [
+      "locates exact authored-range boundaries, end and zero without floating point or assumed FPS"
+    ],
+    "unknown units/metadata only": [
+      "disables time actions for unknown basis and preserves logical metadata without inventing a duration"
+    ],
+    "mouse/keyboard/focus trap/restore": [
+      "selects by mouse and keyboard, inspects provenance, traps focus and closes back to the launcher"
+    ],
+    "view continuity/equal access timestamp/equal data refresh": [
+      "preserves position, selection and scroll through inspector toggle, equal rerender and equal refresh"
+    ],
+    "filter-hidden explicit target/overlap": [
+      "locates the selected clip across filters without changing overlapping explicit target identity"
+    ],
+    "error/retry/stale/restricted/nondisclosure": [
+      "clears failed refresh metadata, supports retry and distinguishes stale and restricted responses"
+    ],
+    "strict receipt/target/relationship/time validation": [
+      "rejects mismatched receipt scope, revision, duplicates, relationships and invalid time ranges"
+    ],
+    "long labels/bilingual": [
+      "retains full long names in accessible labels and details and localizes the main flow into Chinese"
+    ],
+    "removed target/focus fallback": [
+      "removes missing selection on refresh and provides a focus fallback when its detail target disappears"
+    ],
+    "request lifetime/access/identity/owner": [
+      "aborts late reads on revision and identity/access/adapter/owner changes and rejects retained controls",
+      "withdraws metadata and rejects retained callbacks after explicit Selection owner retirement"
+    ],
+    "actual retained closures/dialog occurrence": [
+      "rejects actual retained inspector and close callbacks when selection or dialog instance changes"
+    ],
+    "actual NLE query/Operation/source separation": [
+      "V9 binds injected discovery to queried HEAD and explicit revision, without navigation causing Operation or media calls"
+    ],
+    "native session renewal and actual access retirement": [
+      "V9 NLE route preserves navigation through native renewal and equal access, then retires on true session or access change"
+    ]
+  },
+  "tests": [
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "runtime route registration and deep-link restoration registers every implemented page and preserved legacy link exactly once",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "runtime route registration and deep-link restoration restores Workspace, Project, and surface identity from a creative deep link and fails unauthorized commands closed",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "runtime route registration and deep-link restoration remounts the ProjectFrame subtree when same-route Workspace or Project parameters change",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "runtime route registration and deep-link restoration integrates the disposable sketch on the Workflow route while invoke remains unavailable",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "runtime route registration and deep-link restoration retires Workflow drafts and confirmations when host tenant or effective access changes without granting invocation",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "runtime route registration and deep-link restoration presents bilingual Workflow page guidance and category explanations on the existing route",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "runtime route registration and deep-link restoration reaches the post-H7 edit route and loads explicit canonical HEAD authority",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "runtime route registration and deep-link restoration renders the Workspace to Projects entry without synthesizing a Project selection",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "runtime route registration and deep-link restoration routes the existing Projects destination to the fail-closed recent-project browser without using Workspace home as its source",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "runtime route registration and deep-link restoration routes Operations renders to the fail-closed source browser and leaves Storage behavior unchanged",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "runtime route registration and deep-link restoration registers the Project Production consumer with exact route scope and no implicit fixture or request",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "runtime route registration and deep-link restoration handles Workspace API errors without inventing an empty state",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "runtime route registration and deep-link restoration preserves the historical default API export alongside the additive platform client",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement preserves the complete draft and unfinished inspector input through two ordinary SDK renewals and a render",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement retires on actual principal change and rejects old title, arrange and delete callbacks",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement retires on actual tenant change and rejects old title, arrange and delete callbacks",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement retires on actual session change and rejects old title, arrange and delete callbacks",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement retires on actual scope change and rejects old title, arrange and delete callbacks",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement retires on actual expired change and rejects old title, arrange and delete callbacks",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement retires on actual unknown expiry change and rejects old title, arrange and delete callbacks",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement retires on actual invalid expiry change and rejects old title, arrange and delete callbacks",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement retires on actual missing sid change and rejects old title, arrange and delete callbacks",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement retires on actual ambiguous tenant change and rejects old title, arrange and delete callbacks",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement preserves edits for a fresh observation of equal access but retires a changed factor or access error",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement establishes trustworthy delayed initial hydration without a fake identity switch",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement lets UserLoaded supersede initial hydration and ignores a late different initial user",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement rejects an older loaded read after a newer stored context, including an old event delivered afterwards",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement does not let an old loaded notification hide a pending genuine identity change",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement retires on SDK read failure and missing current user instead of preserving uncertain access",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement ignores pending SDK reads after signout initiation and StrictMode unmount",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement retires the Workflow owner on a workspace route change",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement retires the Workflow owner on a project route change",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement provides an unconfigured no-op subscription without constructing a manager",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement subscribes through the real export and symmetrically removes native and signout listeners",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement withdraws old Workflow content synchronously on SDK UserUnloaded and rejects retained editor/confirmation callbacks",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement withdraws old Workflow content synchronously on SDK AccessTokenExpired and rejects retained editor/confirmation callbacks",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement withdraws old Workflow content synchronously on SDK UserSignedIn and rejects retained editor/confirmation callbacks",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement withdraws old Workflow content synchronously on SDK UserSignedOut and rejects retained editor/confirmation callbacks",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement withdraws old Workflow content synchronously on SDK UserSessionChanged and rejects retained editor/confirmation callbacks",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement retires at signout initiation before redirect settles (resolve), with no draft restoration",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement retires at signout initiation before redirect settles (reject), with no draft restoration",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "Workflow native OIDC identity/session retirement ignores hydration after unload and ignores an old loaded event after a new stored session",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/app/routeTree.test.tsx",
+      "name": "V9 NLE route preserves navigation through native renewal and equal access, then retires on true session or access change",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/localization/localization.test.tsx",
+      "name": "localization runtime renders bundled English and Chinese, switches at runtime, formats values, and falls back per key",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/localization/localization.test.tsx",
+      "name": "localization runtime uses an explicit development marker for an unknown key",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/localization/localization.test.tsx",
+      "name": "localization runtime validates required interpolation parameters and ignores extras",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/localization/localization.test.tsx",
+      "name": "localization runtime keeps synchronous bundled copy through remote outage and invalid payloads, then accepts valid remote copy",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/localization/localization.test.tsx",
+      "name": "localization runtime prevents a stale locale request from replacing the current locale",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/localization/localization.test.tsx",
+      "name": "localization runtime loads a fresh-object provider once per unresolved locale and reuses resolved cache entries",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/localization/localization.test.tsx",
+      "name": "localization runtime honors an injected resolved cache without refreshing it",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/localization/localization.test.tsx",
+      "name": "localization runtime rejects validly digested remote keys and parameter contracts that diverge from English",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/localization/localization.test.tsx",
+      "name": "catalog contract provides bundled catalogs through a concrete synchronous provider boundary",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/localization/localization.test.tsx",
+      "name": "catalog contract uses the standard SHA-256 digest algorithm",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/localization/localization.test.tsx",
+      "name": "catalog contract rejects schema and catalog version mismatches, unknown fields, HTML, malformed locale/namespaces/digest/params, and digest tampering",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/localization/localization.test.tsx",
+      "name": "catalog contract contains malformed and prototype-key inputs and permits repeated placeholders under one parameter contract",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/localization/localization.test.tsx",
+      "name": "catalog contract guards every required source key",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "converges direct keyboard, toolbar, inspector, command and Agent reveal on the same selection",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "modifies a synthetic rename, applies only local presentation, and updates palette discovery",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "offers two explicit synthetic clips whose modifier selection drives shared shell contexts",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "keeps Product UI locale independent from generated Agent conversation language",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "rejects stale UI proposals and resets context synchronously across project and surface changes",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "opens Inspector through the local Agent action, closes the dialog, and restores launcher focus",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "keeps technical proposal evidence closed until diagnostics are explicitly opened",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "traps Agent focus and restores its launcher after Escape and backdrop dismissal",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "keeps Agent header, conversation body, and composer in independent regions",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "preserves internal dialog mousedown defaults, text entry and button clicks",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "refreshes adapter projections after render, invalidates old proposals, and prunes without a render loop",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "localizes shared multi-selection and unavailable commands with stable action IDs",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "binds Canvas multi-selection to Inspector, toolbar, Command and Agent and invalidates a primary-only proposal",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "increases mounted provider revision across workspace, project and surface scopes with fresh empty lifetimes",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C pagehide persisted=false retires synchronously and pageshow starts fresh without restoring proposals",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C pagehide persisted=true retires synchronously and pageshow starts fresh without restoring proposals",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C actual route query and hash preserve the same live exact owner and proposal; focus is independent",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C actual route surface change is empty and fresh with no colliding localId carry and atomic observations",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C actual route project change is empty and fresh with no colliding localId carry and atomic observations",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C actual route workspace change is empty and fresh with no colliding localId carry and atomic observations",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C actual Back and Forward recreate owners without historical membership",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C aborted precommit navigation retains the actual old owner and exact valid proposal",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C committed unresolved and ERROR targets expose no old selection or adapter and late responses cannot reactivate them",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/%20/canvas expose no old owner",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C malformed or missing route IDs and unsupported surface /w/%20/projects/p/canvas expose no old owner",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/p/unsupported expose no old owner",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/canvas expose no old owner",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C BLOCKED unknown project is explicitly provisional and confers no canonical authorization",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C StrictMode adapter and owner recreation stays usable but never resurrects a retired proposal",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C actual route commit cancels drag before old DOM retirement without partial geometry commit",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C actual route commit cancels marquee before old DOM retirement without partial geometry commit",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Slice1C actual route commit cancels pan before old DOM retirement without partial geometry commit",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "palette enters search, clamps enabled arrows, owns result Home/End and scrolls focused buttons",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "palette preserves editing and modified keys; input Enter is inert and native result click executes once",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "palette reconciles filter, no-match, all-unavailable and removed or disabled active results",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "palette resolves replacement by stable ID despite label and order changes",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "palette blocks simulated IME navigation, activation and Escape (events)",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "palette blocks simulated IME navigation, activation and Escape (native)",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "palette blocks simulated IME navigation, activation and Escape (legacy)",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "palette has localized purpose, one live status and external unavailable descriptions in en",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "palette has localized purpose, one live status and external unavailable descriptions in zh-CN",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "palette retains dialog Tab boundary trap, Escape and launcher restoration",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "palette selection projections reject retained closures and dispatch current primary/query without focus selection changes",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "palette suppresses a simulated composing Space release after composition ends",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "retained Selection commands reject changed revisions before dispatch, including untargeted actions",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "V5 discovers Canvas history in the shared palette, reconciles Inspector and keeps canonical actions disabled",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "V5 retained contextual history checks live adapter availability even before a new render",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "Workflow Agent preview rejects overlong titles before shared proposal truncation can bypass validation",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/api/app/timeline-query.gateway.test.ts",
+      "name": "canonical Timeline query mapping uses the nested Timeline semantic digest as the editing-base hash instead of the revision digest",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/api/app/timeline-query.gateway.test.ts",
+      "name": "canonical Timeline query mapping fails closed when the Timeline semantic digest is absent",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/api/app/timeline-query.gateway.test.ts",
+      "name": "canonical Timeline query mapping fails closed when response identities disagree",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/api/app/timeline-query.gateway.test.ts",
+      "name": "canonical Timeline query mapping rejects detail for a revision other than the exact requested ID",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/api/app/timeline-query.gateway.test.ts",
+      "name": "canonical Timeline query mapping rejects swapped comparison identities",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/api/app/timeline-query.gateway.test.ts",
+      "name": "canonical Timeline query mapping rejects mismatched from comparison identities",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/api/app/timeline-query.gateway.test.ts",
+      "name": "canonical Timeline query mapping rejects mismatched to comparison identities",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/NleWorkspace.test.tsx",
+      "name": "runtime NLE operation workspace fails closed before querying when an explicit revision is absent from projected history",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/NleWorkspace.test.tsx",
+      "name": "runtime NLE operation workspace discards a slower HEAD response after Project scope changes",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/NleWorkspace.test.tsx",
+      "name": "runtime NLE operation workspace keeps revision selection visibly disabled through APPLIED apply and authoritative readback",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/NleWorkspace.test.tsx",
+      "name": "runtime NLE operation workspace keeps revision selection visibly disabled through NO_OP apply and authoritative readback",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/NleWorkspace.test.tsx",
+      "name": "runtime NLE operation workspace defers a Project HEAD load until the original apply response and authoritative readback complete",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/NleWorkspace.test.tsx",
+      "name": "runtime NLE operation workspace invalidates a pre-apply selection load, preserves apply failure, and permits a later current selection",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/NleWorkspace.test.tsx",
+      "name": "runtime NLE operation workspace previews, explicitly confirms, and changes canonical HEAD only after APPLIED",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/NleWorkspace.test.tsx",
+      "name": "runtime NLE operation workspace shows frontend-known operation metadata, every frozen draft field, and complete preview evidence before confirmation",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/NleWorkspace.test.tsx",
+      "name": "runtime NLE operation workspace verifies NO_OP readback against the exact prior base without retrying apply",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/NleWorkspace.test.tsx",
+      "name": "runtime NLE operation workspace retries failed authoritative readback without reapplying and unlocks only after an exact retry",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/NleWorkspace.test.tsx",
+      "name": "runtime NLE operation workspace shows typed stale UX and does not assume success",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/NleWorkspace.test.tsx",
+      "name": "keeps history and advanced controls collapsed while navigation boundaries stay reachable",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/NleWorkspace.test.tsx",
+      "name": "V9 ordinary entry never supplies synthetic tracks or playback",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/NleWorkspace.test.tsx",
+      "name": "V9 explains missing clip projection separately from authoritative revision data",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/NleWorkspace.test.tsx",
+      "name": "V9 binds injected discovery to queried HEAD and explicit revision, without navigation causing Operation or media calls",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/SemanticDiff.test.tsx",
+      "name": "server semantic diff presentation only formats, groups, and filters server entities",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/SemanticDiff.test.tsx",
+      "name": "SemanticDiff truthful empty and localized projections shows supplied asset counters and exact ordered server identities",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/SemanticDiff.test.tsx",
+      "name": "SemanticDiff truthful empty and localized projections distinguishes summary support=false, nonzero=false with no entities",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/SemanticDiff.test.tsx",
+      "name": "SemanticDiff truthful empty and localized projections distinguishes summary support=true, nonzero=false with no entities",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/SemanticDiff.test.tsx",
+      "name": "SemanticDiff truthful empty and localized projections distinguishes summary support=true, nonzero=true with no entities",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/SemanticDiff.test.tsx",
+      "name": "SemanticDiff truthful empty and localized projections distinguishes a filtered empty list from server empty and preserves unknown opaque values",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/SemanticDiff.test.tsx",
+      "name": "SemanticDiff truthful empty and localized projections shows entity details even when summary is unsupported",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/SemanticDiff.test.tsx",
+      "name": "SemanticDiff truthful empty and localized projections localizes Chinese labels while keeping action values and server IDs unchanged",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "bounded Timeline navigation distinguishes unconfigured entry, loading, true empty and partial empty without fake media",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "bounded Timeline navigation discovers multiple tracks, empty tracks and filtered no-match only within the loaded scope",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "bounded Timeline navigation locates exact authored-range boundaries, end and zero without floating point or assumed FPS",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "bounded Timeline navigation disables time actions for unknown basis and preserves logical metadata without inventing a duration",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "bounded Timeline navigation selects by mouse and keyboard, inspects provenance, traps focus and closes back to the launcher",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "bounded Timeline navigation preserves position, selection and scroll through inspector toggle, equal rerender and equal refresh",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "bounded Timeline navigation locates the selected clip across filters without changing overlapping explicit target identity",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "bounded Timeline navigation clears failed refresh metadata, supports retry and distinguishes stale and restricted responses",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "bounded Timeline navigation rejects mismatched receipt scope, revision, duplicates, relationships and invalid time ranges",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "bounded Timeline navigation retains full long names in accessible labels and details and localizes the main flow into Chinese",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "bounded Timeline navigation removes missing selection on refresh and provides a focus fallback when its detail target disappears",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "bounded Timeline navigation aborts late reads on revision and identity/access/adapter/owner changes and rejects retained controls",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "bounded Timeline navigation withdraws metadata and rejects retained callbacks after explicit Selection owner retirement",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "rejects actual retained inspector and close callbacks when selection or dialog instance changes",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine updates canonical projection only after a fully bound APPLIED server response",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine accepts a fully bound NO_OP only while PendingApply and keeps exact HEAD",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine ignores an out-of-phase or delayed accepted result without changing canonical state",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects an accepted result owned by a different local command submission",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects an unbound PendingApply APPLIED result with a typed conflict: digest",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects an unbound PendingApply APPLIED result with a typed conflict: base",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects an unbound PendingApply APPLIED result with a typed conflict: parent",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects an unbound PendingApply APPLIED result with a typed conflict: candidate hash",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects an unbound PendingApply APPLIED result with a typed conflict: required revision",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects an unsafe PendingApply NO_OP result: created revision",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects an unsafe PendingApply NO_OP result: parent revision",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects an unsafe PendingApply NO_OP result: changed hash",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine hostile A: PendingApply rejects an ordinary HEAD replacement and retains apply ownership",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine verifies APPLIED readback only with the exact accepted HEAD and accepted child history",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects APPLIED readback with a mismatched project without replacing the accepted projection",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects APPLIED readback with a mismatched timeline without replacing the accepted projection",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects APPLIED readback with a mismatched revision without replacing the accepted projection",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects APPLIED readback with a mismatched hash without replacing the accepted projection",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects APPLIED readback history when missing accepted revision",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects APPLIED readback history when wrong accepted parent",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine verifies NO_OP readback only at the exact prior HEAD with its history entry",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects NO_OP readback with changed HEAD and preserves the accepted projection",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects NO_OP readback with missing base history and preserves the accepted projection",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine hostile B: only the current typed user-selection generation may load a revision",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine hostile C: ordinary user-selection events cannot displace PendingApply",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine hostile D: APPLIED preserves authoritative readback priority over user selection",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine hostile D: NO_OP preserves authoritative readback priority over user selection",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine hostile E: apply failure releases ownership without admitting a pre-apply selection result",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine hostile F: a valid user selection succeeds only after authoritative readback verifies",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine keeps failed readback ownership through hostile reloads and mismatches until an exact retry verifies",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine clears selected detail and comparison when authoritative HEAD reloads",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine clears an old comparison at selection start and leaves it null when compare fails",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine keeps comparison null when selecting current HEAD and rejects a delayed prior comparison",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects a stale or mismatched ordered comparison: swapped pair",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects a stale or mismatched ordered comparison: wrong from",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine rejects a stale or mismatched ordered comparison: wrong HEAD target",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine does not mutate canonical state for STALE_BASE_REVISION and requires a new preview",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine does not mutate canonical state for STALE_TARGET_REF and requires a new preview",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine does not mutate canonical state for PLAN_CHANGED and requires a new preview",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine does not mutate canonical state for AUTHORIZATION_DENIED and requires a new preview",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine does not mutate canonical state for VALIDATION and requires a new preview",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine does not mutate canonical state for UNSUPPORTED and requires a new preview",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine does not mutate canonical state for UNAVAILABLE and requires a new preview",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine does not mutate canonical state for NETWORK and requires a new preview",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "pure Timeline revision and operation state machine provides explicit rollback and re-preview transitions",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "bounded presentation step isolation maps -10 to local step 0 without changing command or server state",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "bounded presentation step isolation maps 21 to local step 20 without changing command or server state",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "bounded presentation step isolation maps 2.7 to local step 3 without changing command or server state",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "bounded presentation step isolation maps NaN to local step 0 without changing command or server state",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/editor-state.test.ts",
+      "name": "bounded presentation step isolation maps Infinity to local step 0 without changing command or server state",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/types.test.ts",
+      "name": "opaque Timeline identifiers and exact media time accepts bounded logical identifiers and exact hashes",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/types.test.ts",
+      "name": "opaque Timeline identifiers and exact media time rejects non-canonical rational media time 1.5",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/types.test.ts",
+      "name": "opaque Timeline identifiers and exact media time rejects non-canonical rational media time 1/0",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/types.test.ts",
+      "name": "opaque Timeline identifiers and exact media time rejects non-canonical rational media time 1/-2",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/types.test.ts",
+      "name": "opaque Timeline identifiers and exact media time rejects non-canonical rational media time ",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/types.test.ts",
+      "name": "opaque Timeline identifiers and exact media time rejects non-canonical rational media time 1/2/3",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/types.test.ts",
+      "name": "opaque Timeline identifiers and exact media time rejects non-logical or unbounded identifiers https://host/item",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/types.test.ts",
+      "name": "opaque Timeline identifiers and exact media time rejects non-logical or unbounded identifiers space id",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/types.test.ts",
+      "name": "opaque Timeline identifiers and exact media time rejects non-logical or unbounded identifiers ",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/types.test.ts",
+      "name": "opaque Timeline identifiers and exact media time rejects non-logical or unbounded identifiers aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "status": "passed"
+    },
+    {
+      "path": "frontend/src/product/timeline/types.test.ts",
+      "name": "opaque Timeline identifiers and exact media time keeps the canonical definition identity separate from the preview discriminator",
+      "status": "passed"
+    }
+  ],
+  "limits": [
+    "No instrumented coverage percentage claimed.",
+    "No browser/physical device/screen reader/real IdP/backend integration run by writer.",
+    "Narrow geometry is implemented in CSS; parent browser verification pending."
+  ]
+}

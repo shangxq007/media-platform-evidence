@@ -1,0 +1,2552 @@
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ✓ src/product/timeline/types.test.ts (11 tests) 16ms
+ ✓ src/product/timeline/editor-state.test.ts (50 tests) 26ms
+ ✓ src/product/timeline/SemanticDiff.test.tsx (8 tests) 116ms
+ ✓ src/api/app/timeline-query.gateway.test.ts (7 tests) 23ms
+stderr | src/product/timeline/TimelineNavigation.test.tsx > bounded Timeline navigation > aborts late reads on revision and identity/access/adapter/owner changes and rejects retained controls
+An update to NavigationSession inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to NavigationSession inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ ✓ src/product/timeline/TimelineNavigation.test.tsx (13 tests) 1112ms
+stderr | src/interaction/InteractionShell.test.tsx > Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/p/unsupported expose no old owner
+Warning: A notFoundError was encountered on the route with ID "__root__", but a notFoundComponent option was not configured, nor was a router level defaultNotFoundComponent configured. Consider configuring at least one of these to avoid TanStack Router's overly generic defaultNotFoundComponent (<p>Not Found</p>)
+
+stderr | src/interaction/InteractionShell.test.tsx > Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/canvas expose no old owner
+Warning: A notFoundError was encountered on the route with ID "__root__", but a notFoundComponent option was not configured, nor was a router level defaultNotFoundComponent configured. Consider configuring at least one of these to avoid TanStack Router's overly generic defaultNotFoundComponent (<p>Not Found</p>)
+
+ ❯ src/product/timeline/NleWorkspace.test.tsx (14 tests | 1 failed) 2786ms
+   ✓ runtime NLE operation workspace > fails closed before querying when an explicit revision is absent from projected history 7ms
+   × runtime NLE operation workspace > discards a slower HEAD response after Project scope changes 1125ms
+     → Found multiple elements with the text: revision-P2
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<code>[39m
+  [0mrevision-P2[0m
+[36m</code>[39m
+
+Ignored nodes: comments, script, style
+[36m<dd>[39m
+  [0mrevision-P2[0m
+[36m</dd>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<header[39m
+      [33mclass[39m=[32m"ff-page-heading"[39m
+    [36m>[39m
+      [36m<div>[39m
+        [36m<span>[39m
+          [0mCreative · NLE[0m
+        [36m</span>[39m
+        [36m<h1>[39m
+          [0mTimeline editor[0m
+        [36m</h1>[39m
+        [36m<p>[39m
+          [0mExplore the timeline and preview changes before applying them.[0m
+        [36m</p>[39m
+      [36m</div>[39m
+    [36m</header>[39m
+    [36m<span[39m
+      [33mclass[39m=[32m"ff-status ff-status--info"[39m
+    [36m>[39m
+      [36m<span[39m
+        [33maria-hidden[39m=[32m"true"[39m
+      [36m/>[39m
+      [0mCanonicalHead[0m
+    [36m</span>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"ff-nle-layout"[39m
+    [36m>[39m
+      [36m<details[39m
+        [33mclass[39m=[32m"ff-nle-history"[39m
+      [36m>[39m
+        [36m<summary>[39m
+          [0mHistory & revision details[0m
+        [36m</summary>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel "[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mCanonical revision authority[0m
+            [36m</h2>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+            [36m>[39m
+              [0mReload HEAD[0m
+            [36m</button>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-head-identity"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--success"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mHEAD · main[0m
+              [36m</span>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-property-row"[39m
+              [36m>[39m
+                [36m<span>[39m
+                  [0mRevision[0m
+                [36m</span>[39m
+                [36m<div>[39m
+                  [36m<code>[39m
+                    [0mrevision-P2[0m
+                  [36m</code>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-property-row"[39m
+              [36m>[39m
+                [36m<span>[39m
+                  [0mContent hash[0m
+                [36m</span>[39m
+                [36m<div>[39m
+                  [36m<code>[39m
+                    [0mdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd[0m
+                  [36m</code>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<h3>[39m
+              [0mRevision history[0m
+            [36m</h3>[39m
+            [36m<p>[39m
+              [0mNo accepted history projection.[0m
+            [36m</p>[39m
+            [36m<p>[39m
+              [0mSelect a revision explicitly to load detail.[0m
+            [36m</p>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+      [36m</details>[39m
+      [36m<section[39m
+        [33mclass[39m=[32m"ff-panel ff-nle-workspace-panel"[39m
+      [36m>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"ff-panel__header"[39m
+        [36m>[39m
+          [36m<h2>[39m
+            [0mTimeline workspace[0m
+          [36m</h2>[39m
+        [36m</header>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"ff-panel__body"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Timeline navigation"[39m
+            [33mclass[39m=[32m"ff-timeline-navigation"[39m
+            [33mtabindex[39m=[32m"-1"[39m
+          [36m>[39m
+            [36m<p>[39m
+              [0mNavigation only. No media playback or canonical editing.[0m
+            [36m</p>[39m
+            [36m<dl[39m
+              [33mclass[39m=[32m"ff-navigation-identity"[39m
+            [36m>[39m
+              [36m<dt>[39m
+                [0mProjected Project[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mproject-2[0m
+              [36m</dd>[39m
+              [36m<dt>[39m
+                [0mProjected Timeline[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mproject-2[0m
+              [36m</dd>[39m
+              [36m<dt>[39m
+                [0mInspected revision[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mrevision-P2[0m
+              [36m</dd>[39m
+            [36m</dl>[39m
+            [36m<p[39m
+              [33mrole[39m=[32m"status"[39m
+            [36m>[39m
+              [0mTrack and clip projection unavailable[0m
+            [36m</p>[39m
+            [36m<p>[39m
+              [0mThe current Timeline query supplies revision information, but no track or clip content.[0m
+            [36m</p>[39m
+          [36m</section>[39m
+        [36m</div>[39m
+      [36m</section>[39m
+      [36m<details[39m
+        [33mclass[39m=[32m"ff-nle-advanced"[39m
+      [36m>[39m
+        [36m<summary>[39m
+          [0mAdd Media Clip · advanced controls[0m
+        [36m</summary>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel ff-operation-panel"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mAdd Media Clip · advanced / provisional[0m
+            [36m</h2>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-state ff-state--unavailable"[39m
+              [33mrole[39m=[32m"note"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-state__code"[39m
+              [36m>[39m
+                [0mASSET GATEWAY · UNAVAILABLE[0m
+              [36m</span>[39m
+              [36m<p>[39m
+                [0mUNAVAILABLE: No safe media browser projection supplies the full canonical source pin.[0m
+                [0m Enter only canonical logical IDs below. Physical locations and provider coordinates are not accepted.[0m
+              [36m</p>[39m
+              [36m<p>[39m
+                [0mUNKNOWN: No typed capability projection is currently available; backend validation remains authoritative.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<form>[39m
+              [36m<fieldset>[39m
+                [36m<legend>[39m
+                  [0mCanonical source and placement pins[0m
+                [36m</legend>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-operation-fields"[39m
+                [36m>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mTrack ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mClip ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mMedia Asset ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mMedia Stream ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mArtifact ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mSource content digest[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mSource start (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mSource end (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mTimeline start (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mTimeline end (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mRate numerator[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mRate denominator[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mDirection[0m
+                    [36m</span>[39m
+                    [36m<select>[39m
+                      [36m<option[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m>[39m
+                        [0mSelect direction[0m
+                      [36m</option>[39m
+                      [36m<option[39m
+                        [33mvalue[39m=[32m"FORWARD"[39m
+                      [36m>[39m
+                        [0mForward[0m
+                      [36m</option>[39m
+                      [36m<option[39m
+                        [33mvalue[39m=[32m"REVERSE"[39m
+                      [36m>[39m
+                        [0mReverse[0m
+                      [36m</option>[39m
+                    [36m</select>[39m
+                  [36m</label>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-operation-actions"[39m
+                [36m>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"ff-button ff-button--primary "[39m
+                    [33mtype[39m=[32m"submit"[39m
+                  [36m>[39m
+                    [0mPreview operation[0m
+                  [36m</button>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                    [33mtype[39m=[32m"button"[39m
+                  [36m>[39m
+                    [0mDiscard draft[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</fieldset>[39m
+            [36m</form>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+      [36m</details>[39m
+      [36m<details[39m
+        [33mclass[39m=[32m"ff-nle-comparison"[39m
+      [36m>[39m
+        [36m<summary>[39m
+          [0mRevision comparison[0m
+        [36m</summary>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel ff-nle-diff-panel"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mServer semantic comparison[0m
+            [36m</h2>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-empty"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33maria-hidden[39m=[32m"true"[39m
+              [36m>[39m
+                [0m◇[0m
+              [36m</span>[39m
+              [36m<h2>[39m
+                [0mNo server comparison loaded[0m
+              [36m</h2>[39m
+              [36m<p>[39m
+                [0mChoose two revisions and compare to see their changes.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+      [36m</details>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<header[39m
+      [33mclass[39m=[32m"ff-page-heading"[39m
+    [36m>[39m
+      [36m<div>[39m
+        [36m<span>[39m
+          [0mCreative · NLE[0m
+        [36m</span>[39m
+        [36m<h1>[39m
+          [0mTimeline editor[0m
+        [36m</h1>[39m
+        [36m<p>[39m
+          [0mExplore the timeline and preview changes before applying them.[0m
+        [36m</p>[39m
+      [36m</div>[39m
+    [36m</header>[39m
+    [36m<span[39m
+      [33mclass[39m=[32m"ff-status ff-status--info"[39m
+    [36m>[39m
+      [36m<span[39m
+        [33maria-hidden[39m=[32m"true"[39m
+      [36m/>[39m
+      [0mCanonicalHead[0m
+    [36m</span>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"ff-nle-layout"[39m
+    [36m>[39m
+      [36m<details[39m
+        [33mclass[39m=[32m"ff-nle-history"[39m
+      [36m>[39m
+        [36m<summary>[39m
+          [0mHistory & revision details[0m
+        [36m</summary>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel "[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mCanonical revision authority[0m
+            [36m</h2>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+            [36m>[39m
+              [0mReload HEAD[0m
+            [36m</button>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-head-identity"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--success"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mHEAD · main[0m
+              [36m</span>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-property-row"[39m
+              [36m>[39m
+                [36m<span>[39m
+                  [0mRevision[0m
+                [36m</span>[39m
+                [36m<div>[39m
+                  [36m<code>[39m
+                    [0mrevision-P2[0m
+                  [36m</code>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-property-row"[39m
+              [36m>[39m
+                [36m<span>[39m
+                  [0mContent hash[0m
+                [36m</span>[39m
+                [36m<div>[39m
+                  [36m<code>[39m
+                    [0mdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd[0m
+                  [36m</code>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<h3>[39m
+              [0mRevision history[0m
+            [36m</h3>[39m
+            [36m<p>[39m
+              [0mNo accepted history projection.[0m
+            [36m</p>[39m
+            [36m<p>[39m
+              [0mSelect a revision explicitly to load detail.[0m
+            [36m</p>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+      [36m</details>[39m
+      [36m<section[39m
+        [33mclass[39m=[32m"ff-panel ff-nle-workspace-panel"[39m
+      [36m>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"ff-panel__header"[39m
+        [36m>[39m
+          [36m<h2>[39m
+            [0mTimeline workspace[0m
+          [36m</h2>[39m
+        [36m</header>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"ff-panel__body"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Timeline navigation"[39m
+            [33mclass[39m=[32m"ff-timeline-navigation"[39m
+            [33mtabindex[39m=[32m"-1"[39m
+          [36m>[39m
+            [36m<p>[39m
+              [0mNavigation only. No media playback or canonical editing.[0m
+            [36m</p>[39m
+            [36m<dl[39m
+              [33mclass[39m=[32m"ff-navigation-identity"[39m
+            [36m>[39m
+              [36m<dt>[39m
+                [0mProjected Project[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mproject-2[0m
+              [36m</dd>[39m
+              [36m<dt>[39m
+                [0mProjected Timeline[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mproject-2[0m
+              [36m</dd>[39m
+              [36m<dt>[39m
+                [0mInspected revision[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mrevision-P2[0m
+              [36m</dd>[39m
+            [36m</dl>[39m
+            [36m<p[39m
+              [33mrole[39m=[32m"status"[39m
+            [36m>[39m
+              [0mTrack and clip projection unavailable[0m
+            [36m</p>[39m
+            [36m<p>[39m
+              [0mThe current Timeline query supplies revision information, but no track or clip content.[0m
+            [36m</p>[39m
+          [36m</section>[39m
+        [36m</div>[39m
+      [36m</section>[39m
+      [36m<details[39m
+        [33mclass[39m=[32m"ff-nle-advanced"[39m
+      [36m>[39m
+        [36m<summary>[39m
+          [0mAdd Media Clip · advanced controls[0m
+        [36m</summary>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel ff-operation-panel"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mAdd Media Clip · advanced / provisional[0m
+            [36m</h2>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-state ff-state--unavailable"[39m
+              [33mrole[39m=[32m"note"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-state__code"[39m
+              [36m>[39m
+                [0mASSET GATEWAY · UNAVAILABLE[0m
+              [36m</span>[39m
+              [36m<p>[39m
+                [0mUNAVAILABLE: No safe media browser projection supplies the full canonical source pin.[0m
+                [0m Enter only canonical logical IDs below. Physical locations and provider coordinates are not accepted.[0m
+              [36m</p>[39m
+              [36m<p>[39m
+                [0mUNKNOWN: No typed capability projection is currently available; backend validation remains authoritative.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<form>[39m
+              [36m<fieldset>[39m
+                [36m<legend>[39m
+                  [0mCanonical source and placement pins[0m
+                [36m</legend>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-operation-fields"[39m
+                [36m>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mTrack ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mClip ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mMedia Asset ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mMedia Stream ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mArtifact ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mSource content digest[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mSource start (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mSource end (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mTimeline start (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mTimeline end (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mRate numerator[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mRate denominator[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mDirection[0m
+                    [36m</span>[39m
+                    [36m<select>[39m
+                      [36m<option[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m>[39m
+                        [0mSelect direction[0m
+                      [36m</option>[39m
+                      [36m<option[39m
+                        [33mvalue[39m=[32m"FORWARD"[39m
+                      [36m>[39m
+                        [0mForward[0m
+                      [36m</option>[39m
+                      [36m<option[39m
+                        [33mvalue[39m=[32m"REVERSE"[39m
+                      [36m>[39m
+                        [0mReverse[0m
+                      [36m</option>[39m
+                    [36m</select>[39m
+                  [36m</label>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-operation-actions"[39m
+                [36m>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"ff-button ff-button--primary "[39m
+                    [33mtype[39m=[32m"submit"[39m
+                  [36m>[39m
+                    [0mPreview operation[0m
+                  [36m</button>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                    [33mtype[39m=[32m"button"[39m
+                  [36m>[39m
+                    [0mDiscard draft[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</fieldset>[39m
+            [36m</form>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+      [36m</details>[39m
+      [36m<details[39m
+        [33mclass[39m=[32m"ff-nle-comparison"[39m
+      [36m>[39m
+        [36m<summary>[39m
+          [0mRevision comparison[0m
+        [36m</summary>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel ff-nle-diff-panel"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mServer semantic comparison[0m
+            [36m</h2>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-empty"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33maria-hidden[39m=[32m"true"[39m
+              [36m>[39m
+                [0m◇[0m
+              [36m</span>[39m
+              [36m<h2>[39m
+                [0mNo server comparison loaded[0m
+              [36m</h2>[39m
+              [36m<p>[39m
+                [0mChoose two revisions and compare to see their changes.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+      [36m</details>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   ✓ runtime NLE operation workspace > keeps revision selection visibly disabled through APPLIED apply and authoritative readback 288ms
+   ✓ runtime NLE operation workspace > keeps revision selection visibly disabled through NO_OP apply and authoritative readback 225ms
+   ✓ runtime NLE operation workspace > defers a Project HEAD load until the original apply response and authoritative readback complete 203ms
+   ✓ runtime NLE operation workspace > invalidates a pre-apply selection load, preserves apply failure, and permits a later current selection 134ms
+   ✓ runtime NLE operation workspace > previews, explicitly confirms, and changes canonical HEAD only after APPLIED 109ms
+   ✓ runtime NLE operation workspace > shows frontend-known operation metadata, every frozen draft field, and complete preview evidence before confirmation 119ms
+   ✓ runtime NLE operation workspace > verifies NO_OP readback against the exact prior base without retrying apply 188ms
+   ✓ runtime NLE operation workspace > retries failed authoritative readback without reapplying and unlocks only after an exact retry 219ms
+   ✓ runtime NLE operation workspace > shows typed stale UX and does not assume success 97ms
+   ✓ keeps history and advanced controls collapsed while navigation boundaries stay reachable 22ms
+   ✓ V9 ordinary entry never supplies synthetic tracks or playback 25ms
+   ✓ V9 explains missing clip projection separately from authoritative revision data 19ms
+ ✓ src/interaction/InteractionShell.test.tsx (48 tests) 2983ms
+   ✓ Slice1C actual route query and hash preserve the same live exact owner and proposal; focus is independent  413ms
+ ❯ src/app/routeTree.test.tsx (42 tests | 1 failed) 7887ms
+   ✓ runtime route registration and deep-link restoration > registers every implemented page and preserved legacy link exactly once 16ms
+   ✓ runtime route registration and deep-link restoration > restores Workspace, Project, and surface identity from a creative deep link and fails unauthorized commands closed  490ms
+   ✓ runtime route registration and deep-link restoration > remounts the ProjectFrame subtree when same-route Workspace or Project parameters change 143ms
+   ✓ runtime route registration and deep-link restoration > integrates the disposable sketch on the Workflow route while invoke remains unavailable  372ms
+   ✓ runtime route registration and deep-link restoration > retires Workflow drafts and confirmations when host tenant or effective access changes without granting invocation  304ms
+   ✓ runtime route registration and deep-link restoration > presents bilingual Workflow page guidance and category explanations on the existing route 71ms
+   × runtime route registration and deep-link restoration > reaches the post-H7 edit route and loads explicit canonical HEAD authority 1397ms
+     → Found multiple elements with the text: revision-R0
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<code>[39m
+  [0mrevision-R0[0m
+[36m</code>[39m
+
+Ignored nodes: comments, script, style
+[36m<dd>[39m
+  [0mrevision-R0[0m
+[36m</dd>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"ff-root"[39m
+      [33mdata-theme[39m=[32m"dark"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-app-shell"[39m
+        [33mdata-studio[39m=[32m"horizontal"[39m
+        [33mdata-surface[39m=[32m"nle"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33mclass[39m=[32m"skip-link"[39m
+          [33mhref[39m=[32m"#main-content"[39m
+        [36m>[39m
+          [0mSkip to main content[0m
+        [36m</a>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"ff-workspace-header"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33maria-label[39m=[32m"Media Platform home"[39m
+            [33mclass[39m=[32m"ff-brand"[39m
+            [33mhref[39m=[32m"/w/workspace-1/home"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33maria-hidden[39m=[32m"true"[39m
+            [36m>[39m
+              [0mMP[0m
+            [36m</span>[39m
+            [36m<strong>[39m
+              [0mMedia Platform[0m
+            [36m</strong>[39m
+          [36m</a>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Breadcrumb"[39m
+          [36m>[39m
+            [36m<ol[39m
+              [33mclass[39m=[32m"ff-breadcrumb"[39m
+            [36m>[39m
+              [36m<li>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/home"[39m
+                [36m>[39m
+                  [0mworkspace-1[0m
+                [36m</a>[39m
+              [36m</li>[39m
+              [36m<li>[39m
+                [36m<span[39m
+                  [33maria-current[39m=[32m"page"[39m
+                [36m>[39m
+                  [0mLaunch film[0m
+                [36m</span>[39m
+              [36m</li>[39m
+            [36m</ol>[39m
+          [36m</nav>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"ff-header-actions"[39m
+          [36m>[39m
+            [0mCreative workspace[0m
+          [36m</span>[39m
+          [36m<label[39m
+            [33mclass[39m=[32m"ff-locale-selector"[39m
+          [36m>[39m
+            [0mProduct UI language[0m
+            [36m<select>[39m
+              [36m<option[39m
+                [33mvalue[39m=[32m"en"[39m
+              [36m>[39m
+                [0mEnglish[0m
+              [36m</option>[39m
+              [36m<option[39m
+                [33mvalue[39m=[32m"zh-CN"[39m
+              [36m>[39m
+                [0m简体中文[0m
+              [36m</option>[39m
+            [36m</select>[39m
+          [36m</label>[39m
+        [36m</header>[39m
+        [36m<div[39m
+          [33maria-label[39m=[32m"Panel controls"[39m
+          [33mclass[39m=[32m"ff-shell-toolbar"[39m
+        [36m>[39m
+          [36m<details[39m
+            [33mclass[39m=[32m"ff-navigation-menu"[39m
+          [36m>[39m
+            [36m<summary>[39m
+              [0mNavigation[0m
+            [36m</summary>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-navigation-drawer"[39m
+            [36m>[39m
+              [36m<nav[39m
+                [33maria-label[39m=[32m"Global navigation"[39m
+                [33mclass[39m=[32m"ff-global-nav"[39m
+              [36m>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/home"[39m
+                [36m>[39m
+                  [0mWorkspace[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/operations/overview"[39m
+                [36m>[39m
+                  [0mOperations[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/admin/organization"[39m
+                [36m>[39m
+                  [0mAdmin[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/developer/capabilities"[39m
+                [36m>[39m
+                  [0mDeveloper[0m
+                [36m</a>[39m
+              [36m</nav>[39m
+              [36m<nav[39m
+                [33maria-label[39m=[32m"Project navigation"[39m
+                [33mclass[39m=[32m"ff-project-nav"[39m
+              [36m>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/overview"[39m
+                [36m>[39m
+                  [0mOverview[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/review"[39m
+                [36m>[39m
+                  [0mReview[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/production"[39m
+                [36m>[39m
+                  [0mProduction[0m
+                [36m</a>[39m
+              [36m</nav>[39m
+              [36m<nav[39m
+                [33maria-label[39m=[32m"Navigation drawer surfaces"[39m
+                [33mclass[39m=[32m"ff-surface-switcher"[39m
+              [36m>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/overview"[39m
+                [36m>[39m
+                  [0mOverview[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+                  [36m>[39m
+                    [0mFOUNDATION[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33maria-current[39m=[32m"page"[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/edit"[39m
+                [36m>[39m
+                  [0mEdit[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+                  [36m>[39m
+                    [0mFOUNDATION[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/canvas"[39m
+                [36m>[39m
+                  [0mCanvas[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+                  [36m>[39m
+                    [0mPREVIEW[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/agent"[39m
+                [36m>[39m
+                  [0mAgent[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+                  [36m>[39m
+                    [0mPREVIEW[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspac...
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"ff-root"[39m
+      [33mdata-theme[39m=[32m"dark"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-app-shell"[39m
+        [33mdata-studio[39m=[32m"horizontal"[39m
+        [33mdata-surface[39m=[32m"nle"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33mclass[39m=[32m"skip-link"[39m
+          [33mhref[39m=[32m"#main-content"[39m
+        [36m>[39m
+          [0mSkip to main content[0m
+        [36m</a>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"ff-workspace-header"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33maria-label[39m=[32m"Media Platform home"[39m
+            [33mclass[39m=[32m"ff-brand"[39m
+            [33mhref[39m=[32m"/w/workspace-1/home"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33maria-hidden[39m=[32m"true"[39m
+            [36m>[39m
+              [0mMP[0m
+            [36m</span>[39m
+            [36m<strong>[39m
+              [0mMedia Platform[0m
+            [36m</strong>[39m
+          [36m</a>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Breadcrumb"[39m
+          [36m>[39m
+            [36m<ol[39m
+              [33mclass[39m=[32m"ff-breadcrumb"[39m
+            [36m>[39m
+              [36m<li>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/home"[39m
+                [36m>[39m
+                  [0mworkspace-1[0m
+                [36m</a>[39m
+              [36m</li>[39m
+              [36m<li>[39m
+                [36m<span[39m
+                  [33maria-current[39m=[32m"page"[39m
+                [36m>[39m
+                  [0mLaunch film[0m
+                [36m</span>[39m
+              [36m</li>[39m
+            [36m</ol>[39m
+          [36m</nav>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"ff-header-actions"[39m
+          [36m>[39m
+            [0mCreative workspace[0m
+          [36m</span>[39m
+          [36m<label[39m
+            [33mclass[39m=[32m"ff-locale-selector"[39m
+          [36m>[39m
+            [0mProduct UI language[0m
+            [36m<select>[39m
+              [36m<option[39m
+                [33mvalue[39m=[32m"en"[39m
+              [36m>[39m
+                [0mEnglish[0m
+              [36m</option>[39m
+              [36m<option[39m
+                [33mvalue[39m=[32m"zh-CN"[39m
+              [36m>[39m
+                [0m简体中文[0m
+              [36m</option>[39m
+            [36m</select>[39m
+          [36m</label>[39m
+        [36m</header>[39m
+        [36m<div[39m
+          [33maria-label[39m=[32m"Panel controls"[39m
+          [33mclass[39m=[32m"ff-shell-toolbar"[39m
+        [36m>[39m
+          [36m<details[39m
+            [33mclass[39m=[32m"ff-navigation-menu"[39m
+          [36m>[39m
+            [36m<summary>[39m
+              [0mNavigation[0m
+            [36m</summary>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-navigation-drawer"[39m
+            [36m>[39m
+              [36m<nav[39m
+                [33maria-label[39m=[32m"Global navigation"[39m
+                [33mclass[39m=[32m"ff-global-nav"[39m
+              [36m>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/home"[39m
+                [36m>[39m
+                  [0mWorkspace[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/operations/overview"[39m
+                [36m>[39m
+                  [0mOperations[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/admin/organization"[39m
+                [36m>[39m
+                  [0mAdmin[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/developer/capabilities"[39m
+                [36m>[39m
+                  [0mDeveloper[0m
+                [36m</a>[39m
+              [36m</nav>[39m
+              [36m<nav[39m
+                [33maria-label[39m=[32m"Project navigation"[39m
+                [33mclass[39m=[32m"ff-project-nav"[39m
+              [36m>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/overview"[39m
+                [36m>[39m
+                  [0mOverview[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/review"[39m
+                [36m>[39m
+                  [0mReview[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/production"[39m
+                [36m>[39m
+                  [0mProduction[0m
+                [36m</a>[39m
+              [36m</nav>[39m
+              [36m<nav[39m
+                [33maria-label[39m=[32m"Navigation drawer surfaces"[39m
+                [33mclass[39m=[32m"ff-surface-switcher"[39m
+              [36m>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/overview"[39m
+                [36m>[39m
+                  [0mOverview[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+                  [36m>[39m
+                    [0mFOUNDATION[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33maria-current[39m=[32m"page"[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/edit"[39m
+                [36m>[39m
+                  [0mEdit[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+                  [36m>[39m
+                    [0mFOUNDATION[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/canvas"[39m
+                [36m>[39m
+                  [0mCanvas[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+                  [36m>[39m
+                    [0mPREVIEW[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/agent"[39m
+                [36m>[39m
+                  [0mAgent[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+                  [36m>[39m
+                    [0mPREVIEW[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspac...
+   ✓ runtime route registration and deep-link restoration > renders the Workspace to Projects entry without synthesizing a Project selection  348ms
+   ✓ runtime route registration and deep-link restoration > routes the existing Projects destination to the fail-closed recent-project browser without using Workspace home as its source  323ms
+   ✓ runtime route registration and deep-link restoration > routes Operations renders to the fail-closed source browser and leaves Storage behavior unchanged  347ms
+   ✓ runtime route registration and deep-link restoration > registers the Project Production consumer with exact route scope and no implicit fixture or request  350ms
+   ✓ runtime route registration and deep-link restoration > handles Workspace API errors without inventing an empty state 21ms
+   ✓ runtime route registration and deep-link restoration > preserves the historical default API export alongside the additive platform client 0ms
+   ✓ Workflow native OIDC identity/session retirement > preserves the complete draft and unfinished inspector input through two ordinary SDK renewals and a render 133ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual principal change and rejects old title, arrange and delete callbacks 173ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual tenant change and rejects old title, arrange and delete callbacks 178ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual session change and rejects old title, arrange and delete callbacks 109ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual scope change and rejects old title, arrange and delete callbacks 143ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual expired change and rejects old title, arrange and delete callbacks 163ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual unknown expiry change and rejects old title, arrange and delete callbacks 163ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual invalid expiry change and rejects old title, arrange and delete callbacks 100ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual missing sid change and rejects old title, arrange and delete callbacks 106ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual ambiguous tenant change and rejects old title, arrange and delete callbacks 109ms
+   ✓ Workflow native OIDC identity/session retirement > preserves edits for a fresh observation of equal access but retires a changed factor or access error 118ms
+   ✓ Workflow native OIDC identity/session retirement > establishes trustworthy delayed initial hydration without a fake identity switch 64ms
+   ✓ Workflow native OIDC identity/session retirement > lets UserLoaded supersede initial hydration and ignores a late different initial user 71ms
+   ✓ Workflow native OIDC identity/session retirement > rejects an older loaded read after a newer stored context, including an old event delivered afterwards 142ms
+   ✓ Workflow native OIDC identity/session retirement > does not let an old loaded notification hide a pending genuine identity change 145ms
+   ✓ Workflow native OIDC identity/session retirement > retires on SDK read failure and missing current user instead of preserving uncertain access 159ms
+   ✓ Workflow native OIDC identity/session retirement > ignores pending SDK reads after signout initiation and StrictMode unmount 98ms
+   ✓ Workflow native OIDC identity/session retirement > retires the Workflow owner on a workspace route change 109ms
+   ✓ Workflow native OIDC identity/session retirement > retires the Workflow owner on a project route change 100ms
+   ✓ Workflow native OIDC identity/session retirement > provides an unconfigured no-op subscription without constructing a manager 1ms
+   ✓ Workflow native OIDC identity/session retirement > subscribes through the real export and symmetrically removes native and signout listeners 1ms
+   ✓ Workflow native OIDC identity/session retirement > withdraws old Workflow content synchronously on SDK UserUnloaded and rejects retained editor/confirmation callbacks 107ms
+   ✓ Workflow native OIDC identity/session retirement > withdraws old Workflow content synchronously on SDK AccessTokenExpired and rejects retained editor/confirmation callbacks 102ms
+   ✓ Workflow native OIDC identity/session retirement > withdraws old Workflow content synchronously on SDK UserSignedIn and rejects retained editor/confirmation callbacks 146ms
+   ✓ Workflow native OIDC identity/session retirement > withdraws old Workflow content synchronously on SDK UserSignedOut and rejects retained editor/confirmation callbacks 174ms
+   ✓ Workflow native OIDC identity/session retirement > withdraws old Workflow content synchronously on SDK UserSessionChanged and rejects retained editor/confirmation callbacks 150ms
+   ✓ Workflow native OIDC identity/session retirement > retires at signout initiation before redirect settles (resolve), with no draft restoration 104ms
+   ✓ Workflow native OIDC identity/session retirement > retires at signout initiation before redirect settles (reject), with no draft restoration 105ms
+   ✓ Workflow native OIDC identity/session retirement > ignores hydration after unload and ignores an old loaded event after a new stored session 123ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/app/routeTree.test.tsx > runtime route registration and deep-link restoration > reaches the post-H7 edit route and loads explicit canonical HEAD authority
+TestingLibraryElementError: Found multiple elements with the text: revision-R0
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<code>[39m
+  [0mrevision-R0[0m
+[36m</code>[39m
+
+Ignored nodes: comments, script, style
+[36m<dd>[39m
+  [0mrevision-R0[0m
+[36m</dd>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"ff-root"[39m
+      [33mdata-theme[39m=[32m"dark"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-app-shell"[39m
+        [33mdata-studio[39m=[32m"horizontal"[39m
+        [33mdata-surface[39m=[32m"nle"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33mclass[39m=[32m"skip-link"[39m
+          [33mhref[39m=[32m"#main-content"[39m
+        [36m>[39m
+          [0mSkip to main content[0m
+        [36m</a>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"ff-workspace-header"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33maria-label[39m=[32m"Media Platform home"[39m
+            [33mclass[39m=[32m"ff-brand"[39m
+            [33mhref[39m=[32m"/w/workspace-1/home"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33maria-hidden[39m=[32m"true"[39m
+            [36m>[39m
+              [0mMP[0m
+            [36m</span>[39m
+            [36m<strong>[39m
+              [0mMedia Platform[0m
+            [36m</strong>[39m
+          [36m</a>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Breadcrumb"[39m
+          [36m>[39m
+            [36m<ol[39m
+              [33mclass[39m=[32m"ff-breadcrumb"[39m
+            [36m>[39m
+              [36m<li>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/home"[39m
+                [36m>[39m
+                  [0mworkspace-1[0m
+                [36m</a>[39m
+              [36m</li>[39m
+              [36m<li>[39m
+                [36m<span[39m
+                  [33maria-current[39m=[32m"page"[39m
+                [36m>[39m
+                  [0mLaunch film[0m
+                [36m</span>[39m
+              [36m</li>[39m
+            [36m</ol>[39m
+          [36m</nav>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"ff-header-actions"[39m
+          [36m>[39m
+            [0mCreative workspace[0m
+          [36m</span>[39m
+          [36m<label[39m
+            [33mclass[39m=[32m"ff-locale-selector"[39m
+          [36m>[39m
+            [0mProduct UI language[0m
+            [36m<select>[39m
+              [36m<option[39m
+                [33mvalue[39m=[32m"en"[39m
+              [36m>[39m
+                [0mEnglish[0m
+              [36m</option>[39m
+              [36m<option[39m
+                [33mvalue[39m=[32m"zh-CN"[39m
+              [36m>[39m
+                [0m简体中文[0m
+              [36m</option>[39m
+            [36m</select>[39m
+          [36m</label>[39m
+        [36m</header>[39m
+        [36m<div[39m
+          [33maria-label[39m=[32m"Panel controls"[39m
+          [33mclass[39m=[32m"ff-shell-toolbar"[39m
+        [36m>[39m
+          [36m<details[39m
+            [33mclass[39m=[32m"ff-navigation-menu"[39m
+          [36m>[39m
+            [36m<summary>[39m
+              [0mNavigation[0m
+            [36m</summary>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-navigation-drawer"[39m
+            [36m>[39m
+              [36m<nav[39m
+                [33maria-label[39m=[32m"Global navigation"[39m
+                [33mclass[39m=[32m"ff-global-nav"[39m
+              [36m>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/home"[39m
+                [36m>[39m
+                  [0mWorkspace[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/operations/overview"[39m
+                [36m>[39m
+                  [0mOperations[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/admin/organization"[39m
+                [36m>[39m
+                  [0mAdmin[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/developer/capabilities"[39m
+                [36m>[39m
+                  [0mDeveloper[0m
+                [36m</a>[39m
+              [36m</nav>[39m
+              [36m<nav[39m
+                [33maria-label[39m=[32m"Project navigation"[39m
+                [33mclass[39m=[32m"ff-project-nav"[39m
+              [36m>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/overview"[39m
+                [36m>[39m
+                  [0mOverview[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/review"[39m
+                [36m>[39m
+                  [0mReview[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/production"[39m
+                [36m>[39m
+                  [0mProduction[0m
+                [36m</a>[39m
+              [36m</nav>[39m
+              [36m<nav[39m
+                [33maria-label[39m=[32m"Navigation drawer surfaces"[39m
+                [33mclass[39m=[32m"ff-surface-switcher"[39m
+              [36m>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/overview"[39m
+                [36m>[39m
+                  [0mOverview[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+                  [36m>[39m
+                    [0mFOUNDATION[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33maria-current[39m=[32m"page"[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/edit"[39m
+                [36m>[39m
+                  [0mEdit[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+                  [36m>[39m
+                    [0mFOUNDATION[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/canvas"[39m
+                [36m>[39m
+                  [0mCanvas[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+                  [36m>[39m
+                    [0mPREVIEW[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/agent"[39m
+                [36m>[39m
+                  [0mAgent[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+                  [36m>[39m
+                    [0mPREVIEW[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspac...
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"ff-root"[39m
+      [33mdata-theme[39m=[32m"dark"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-app-shell"[39m
+        [33mdata-studio[39m=[32m"horizontal"[39m
+        [33mdata-surface[39m=[32m"nle"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33mclass[39m=[32m"skip-link"[39m
+          [33mhref[39m=[32m"#main-content"[39m
+        [36m>[39m
+          [0mSkip to main content[0m
+        [36m</a>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"ff-workspace-header"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33maria-label[39m=[32m"Media Platform home"[39m
+            [33mclass[39m=[32m"ff-brand"[39m
+            [33mhref[39m=[32m"/w/workspace-1/home"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33maria-hidden[39m=[32m"true"[39m
+            [36m>[39m
+              [0mMP[0m
+            [36m</span>[39m
+            [36m<strong>[39m
+              [0mMedia Platform[0m
+            [36m</strong>[39m
+          [36m</a>[39m
+          [36m<nav[39m
+            [33maria-label[39m=[32m"Breadcrumb"[39m
+          [36m>[39m
+            [36m<ol[39m
+              [33mclass[39m=[32m"ff-breadcrumb"[39m
+            [36m>[39m
+              [36m<li>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/home"[39m
+                [36m>[39m
+                  [0mworkspace-1[0m
+                [36m</a>[39m
+              [36m</li>[39m
+              [36m<li>[39m
+                [36m<span[39m
+                  [33maria-current[39m=[32m"page"[39m
+                [36m>[39m
+                  [0mLaunch film[0m
+                [36m</span>[39m
+              [36m</li>[39m
+            [36m</ol>[39m
+          [36m</nav>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"ff-header-actions"[39m
+          [36m>[39m
+            [0mCreative workspace[0m
+          [36m</span>[39m
+          [36m<label[39m
+            [33mclass[39m=[32m"ff-locale-selector"[39m
+          [36m>[39m
+            [0mProduct UI language[0m
+            [36m<select>[39m
+              [36m<option[39m
+                [33mvalue[39m=[32m"en"[39m
+              [36m>[39m
+                [0mEnglish[0m
+              [36m</option>[39m
+              [36m<option[39m
+                [33mvalue[39m=[32m"zh-CN"[39m
+              [36m>[39m
+                [0m简体中文[0m
+              [36m</option>[39m
+            [36m</select>[39m
+          [36m</label>[39m
+        [36m</header>[39m
+        [36m<div[39m
+          [33maria-label[39m=[32m"Panel controls"[39m
+          [33mclass[39m=[32m"ff-shell-toolbar"[39m
+        [36m>[39m
+          [36m<details[39m
+            [33mclass[39m=[32m"ff-navigation-menu"[39m
+          [36m>[39m
+            [36m<summary>[39m
+              [0mNavigation[0m
+            [36m</summary>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-navigation-drawer"[39m
+            [36m>[39m
+              [36m<nav[39m
+                [33maria-label[39m=[32m"Global navigation"[39m
+                [33mclass[39m=[32m"ff-global-nav"[39m
+              [36m>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/home"[39m
+                [36m>[39m
+                  [0mWorkspace[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/operations/overview"[39m
+                [36m>[39m
+                  [0mOperations[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/admin/organization"[39m
+                [36m>[39m
+                  [0mAdmin[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/developer/capabilities"[39m
+                [36m>[39m
+                  [0mDeveloper[0m
+                [36m</a>[39m
+              [36m</nav>[39m
+              [36m<nav[39m
+                [33maria-label[39m=[32m"Project navigation"[39m
+                [33mclass[39m=[32m"ff-project-nav"[39m
+              [36m>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/overview"[39m
+                [36m>[39m
+                  [0mOverview[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/review"[39m
+                [36m>[39m
+                  [0mReview[0m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/production"[39m
+                [36m>[39m
+                  [0mProduction[0m
+                [36m</a>[39m
+              [36m</nav>[39m
+              [36m<nav[39m
+                [33maria-label[39m=[32m"Navigation drawer surfaces"[39m
+                [33mclass[39m=[32m"ff-surface-switcher"[39m
+              [36m>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/overview"[39m
+                [36m>[39m
+                  [0mOverview[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+                  [36m>[39m
+                    [0mFOUNDATION[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33maria-current[39m=[32m"page"[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/edit"[39m
+                [36m>[39m
+                  [0mEdit[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--neutral"[39m
+                  [36m>[39m
+                    [0mFOUNDATION[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/canvas"[39m
+                [36m>[39m
+                  [0mCanvas[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+                  [36m>[39m
+                    [0mPREVIEW[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspace-1/projects/project-1/agent"[39m
+                [36m>[39m
+                  [0mAgent[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"ff-badge ff-badge--warning"[39m
+                  [36m>[39m
+                    [0mPREVIEW[0m
+                  [36m</span>[39m
+                [36m</a>[39m
+                [36m<a[39m
+                  [33mhref[39m=[32m"/w/workspac...
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/app/routeTree.test.tsx:161:25
+    159|     render(<QueryClientProvider client={queryClient}><RouterProvider r…
+    160|     await waitFor(() => expect(screen.getByRole('heading', { name: 'Ti…
+    161|     expect(await screen.findByText('revision-R0')).toBeTruthy()
+       |                         ^
+    162|     expect(screen.getByText('ASSET GATEWAY · UNAVAILABLE')).toBeTruthy…
+    163|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/product/timeline/NleWorkspace.test.tsx > runtime NLE operation workspace > discards a slower HEAD response after Project scope changes
+TestingLibraryElementError: Found multiple elements with the text: revision-P2
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<code>[39m
+  [0mrevision-P2[0m
+[36m</code>[39m
+
+Ignored nodes: comments, script, style
+[36m<dd>[39m
+  [0mrevision-P2[0m
+[36m</dd>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<header[39m
+      [33mclass[39m=[32m"ff-page-heading"[39m
+    [36m>[39m
+      [36m<div>[39m
+        [36m<span>[39m
+          [0mCreative · NLE[0m
+        [36m</span>[39m
+        [36m<h1>[39m
+          [0mTimeline editor[0m
+        [36m</h1>[39m
+        [36m<p>[39m
+          [0mExplore the timeline and preview changes before applying them.[0m
+        [36m</p>[39m
+      [36m</div>[39m
+    [36m</header>[39m
+    [36m<span[39m
+      [33mclass[39m=[32m"ff-status ff-status--info"[39m
+    [36m>[39m
+      [36m<span[39m
+        [33maria-hidden[39m=[32m"true"[39m
+      [36m/>[39m
+      [0mCanonicalHead[0m
+    [36m</span>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"ff-nle-layout"[39m
+    [36m>[39m
+      [36m<details[39m
+        [33mclass[39m=[32m"ff-nle-history"[39m
+      [36m>[39m
+        [36m<summary>[39m
+          [0mHistory & revision details[0m
+        [36m</summary>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel "[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mCanonical revision authority[0m
+            [36m</h2>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+            [36m>[39m
+              [0mReload HEAD[0m
+            [36m</button>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-head-identity"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--success"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mHEAD · main[0m
+              [36m</span>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-property-row"[39m
+              [36m>[39m
+                [36m<span>[39m
+                  [0mRevision[0m
+                [36m</span>[39m
+                [36m<div>[39m
+                  [36m<code>[39m
+                    [0mrevision-P2[0m
+                  [36m</code>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-property-row"[39m
+              [36m>[39m
+                [36m<span>[39m
+                  [0mContent hash[0m
+                [36m</span>[39m
+                [36m<div>[39m
+                  [36m<code>[39m
+                    [0mdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd[0m
+                  [36m</code>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<h3>[39m
+              [0mRevision history[0m
+            [36m</h3>[39m
+            [36m<p>[39m
+              [0mNo accepted history projection.[0m
+            [36m</p>[39m
+            [36m<p>[39m
+              [0mSelect a revision explicitly to load detail.[0m
+            [36m</p>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+      [36m</details>[39m
+      [36m<section[39m
+        [33mclass[39m=[32m"ff-panel ff-nle-workspace-panel"[39m
+      [36m>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"ff-panel__header"[39m
+        [36m>[39m
+          [36m<h2>[39m
+            [0mTimeline workspace[0m
+          [36m</h2>[39m
+        [36m</header>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"ff-panel__body"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Timeline navigation"[39m
+            [33mclass[39m=[32m"ff-timeline-navigation"[39m
+            [33mtabindex[39m=[32m"-1"[39m
+          [36m>[39m
+            [36m<p>[39m
+              [0mNavigation only. No media playback or canonical editing.[0m
+            [36m</p>[39m
+            [36m<dl[39m
+              [33mclass[39m=[32m"ff-navigation-identity"[39m
+            [36m>[39m
+              [36m<dt>[39m
+                [0mProjected Project[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mproject-2[0m
+              [36m</dd>[39m
+              [36m<dt>[39m
+                [0mProjected Timeline[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mproject-2[0m
+              [36m</dd>[39m
+              [36m<dt>[39m
+                [0mInspected revision[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mrevision-P2[0m
+              [36m</dd>[39m
+            [36m</dl>[39m
+            [36m<p[39m
+              [33mrole[39m=[32m"status"[39m
+            [36m>[39m
+              [0mTrack and clip projection unavailable[0m
+            [36m</p>[39m
+            [36m<p>[39m
+              [0mThe current Timeline query supplies revision information, but no track or clip content.[0m
+            [36m</p>[39m
+          [36m</section>[39m
+        [36m</div>[39m
+      [36m</section>[39m
+      [36m<details[39m
+        [33mclass[39m=[32m"ff-nle-advanced"[39m
+      [36m>[39m
+        [36m<summary>[39m
+          [0mAdd Media Clip · advanced controls[0m
+        [36m</summary>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel ff-operation-panel"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mAdd Media Clip · advanced / provisional[0m
+            [36m</h2>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-state ff-state--unavailable"[39m
+              [33mrole[39m=[32m"note"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-state__code"[39m
+              [36m>[39m
+                [0mASSET GATEWAY · UNAVAILABLE[0m
+              [36m</span>[39m
+              [36m<p>[39m
+                [0mUNAVAILABLE: No safe media browser projection supplies the full canonical source pin.[0m
+                [0m Enter only canonical logical IDs below. Physical locations and provider coordinates are not accepted.[0m
+              [36m</p>[39m
+              [36m<p>[39m
+                [0mUNKNOWN: No typed capability projection is currently available; backend validation remains authoritative.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<form>[39m
+              [36m<fieldset>[39m
+                [36m<legend>[39m
+                  [0mCanonical source and placement pins[0m
+                [36m</legend>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-operation-fields"[39m
+                [36m>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mTrack ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mClip ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mMedia Asset ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mMedia Stream ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mArtifact ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mSource content digest[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mSource start (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mSource end (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mTimeline start (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mTimeline end (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mRate numerator[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mRate denominator[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mDirection[0m
+                    [36m</span>[39m
+                    [36m<select>[39m
+                      [36m<option[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m>[39m
+                        [0mSelect direction[0m
+                      [36m</option>[39m
+                      [36m<option[39m
+                        [33mvalue[39m=[32m"FORWARD"[39m
+                      [36m>[39m
+                        [0mForward[0m
+                      [36m</option>[39m
+                      [36m<option[39m
+                        [33mvalue[39m=[32m"REVERSE"[39m
+                      [36m>[39m
+                        [0mReverse[0m
+                      [36m</option>[39m
+                    [36m</select>[39m
+                  [36m</label>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-operation-actions"[39m
+                [36m>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"ff-button ff-button--primary "[39m
+                    [33mtype[39m=[32m"submit"[39m
+                  [36m>[39m
+                    [0mPreview operation[0m
+                  [36m</button>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                    [33mtype[39m=[32m"button"[39m
+                  [36m>[39m
+                    [0mDiscard draft[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</fieldset>[39m
+            [36m</form>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+      [36m</details>[39m
+      [36m<details[39m
+        [33mclass[39m=[32m"ff-nle-comparison"[39m
+      [36m>[39m
+        [36m<summary>[39m
+          [0mRevision comparison[0m
+        [36m</summary>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel ff-nle-diff-panel"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mServer semantic comparison[0m
+            [36m</h2>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-empty"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33maria-hidden[39m=[32m"true"[39m
+              [36m>[39m
+                [0m◇[0m
+              [36m</span>[39m
+              [36m<h2>[39m
+                [0mNo server comparison loaded[0m
+              [36m</h2>[39m
+              [36m<p>[39m
+                [0mChoose two revisions and compare to see their changes.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+      [36m</details>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<header[39m
+      [33mclass[39m=[32m"ff-page-heading"[39m
+    [36m>[39m
+      [36m<div>[39m
+        [36m<span>[39m
+          [0mCreative · NLE[0m
+        [36m</span>[39m
+        [36m<h1>[39m
+          [0mTimeline editor[0m
+        [36m</h1>[39m
+        [36m<p>[39m
+          [0mExplore the timeline and preview changes before applying them.[0m
+        [36m</p>[39m
+      [36m</div>[39m
+    [36m</header>[39m
+    [36m<span[39m
+      [33mclass[39m=[32m"ff-status ff-status--info"[39m
+    [36m>[39m
+      [36m<span[39m
+        [33maria-hidden[39m=[32m"true"[39m
+      [36m/>[39m
+      [0mCanonicalHead[0m
+    [36m</span>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"ff-nle-layout"[39m
+    [36m>[39m
+      [36m<details[39m
+        [33mclass[39m=[32m"ff-nle-history"[39m
+      [36m>[39m
+        [36m<summary>[39m
+          [0mHistory & revision details[0m
+        [36m</summary>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel "[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mCanonical revision authority[0m
+            [36m</h2>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+            [36m>[39m
+              [0mReload HEAD[0m
+            [36m</button>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-head-identity"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-status ff-status--success"[39m
+              [36m>[39m
+                [36m<span[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                [36m/>[39m
+                [0mHEAD · main[0m
+              [36m</span>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-property-row"[39m
+              [36m>[39m
+                [36m<span>[39m
+                  [0mRevision[0m
+                [36m</span>[39m
+                [36m<div>[39m
+                  [36m<code>[39m
+                    [0mrevision-P2[0m
+                  [36m</code>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ff-property-row"[39m
+              [36m>[39m
+                [36m<span>[39m
+                  [0mContent hash[0m
+                [36m</span>[39m
+                [36m<div>[39m
+                  [36m<code>[39m
+                    [0mdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd[0m
+                  [36m</code>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<h3>[39m
+              [0mRevision history[0m
+            [36m</h3>[39m
+            [36m<p>[39m
+              [0mNo accepted history projection.[0m
+            [36m</p>[39m
+            [36m<p>[39m
+              [0mSelect a revision explicitly to load detail.[0m
+            [36m</p>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+      [36m</details>[39m
+      [36m<section[39m
+        [33mclass[39m=[32m"ff-panel ff-nle-workspace-panel"[39m
+      [36m>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"ff-panel__header"[39m
+        [36m>[39m
+          [36m<h2>[39m
+            [0mTimeline workspace[0m
+          [36m</h2>[39m
+        [36m</header>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"ff-panel__body"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Timeline navigation"[39m
+            [33mclass[39m=[32m"ff-timeline-navigation"[39m
+            [33mtabindex[39m=[32m"-1"[39m
+          [36m>[39m
+            [36m<p>[39m
+              [0mNavigation only. No media playback or canonical editing.[0m
+            [36m</p>[39m
+            [36m<dl[39m
+              [33mclass[39m=[32m"ff-navigation-identity"[39m
+            [36m>[39m
+              [36m<dt>[39m
+                [0mProjected Project[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mproject-2[0m
+              [36m</dd>[39m
+              [36m<dt>[39m
+                [0mProjected Timeline[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mproject-2[0m
+              [36m</dd>[39m
+              [36m<dt>[39m
+                [0mInspected revision[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mrevision-P2[0m
+              [36m</dd>[39m
+            [36m</dl>[39m
+            [36m<p[39m
+              [33mrole[39m=[32m"status"[39m
+            [36m>[39m
+              [0mTrack and clip projection unavailable[0m
+            [36m</p>[39m
+            [36m<p>[39m
+              [0mThe current Timeline query supplies revision information, but no track or clip content.[0m
+            [36m</p>[39m
+          [36m</section>[39m
+        [36m</div>[39m
+      [36m</section>[39m
+      [36m<details[39m
+        [33mclass[39m=[32m"ff-nle-advanced"[39m
+      [36m>[39m
+        [36m<summary>[39m
+          [0mAdd Media Clip · advanced controls[0m
+        [36m</summary>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel ff-operation-panel"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mAdd Media Clip · advanced / provisional[0m
+            [36m</h2>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-state ff-state--unavailable"[39m
+              [33mrole[39m=[32m"note"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"ff-state__code"[39m
+              [36m>[39m
+                [0mASSET GATEWAY · UNAVAILABLE[0m
+              [36m</span>[39m
+              [36m<p>[39m
+                [0mUNAVAILABLE: No safe media browser projection supplies the full canonical source pin.[0m
+                [0m Enter only canonical logical IDs below. Physical locations and provider coordinates are not accepted.[0m
+              [36m</p>[39m
+              [36m<p>[39m
+                [0mUNKNOWN: No typed capability projection is currently available; backend validation remains authoritative.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<form>[39m
+              [36m<fieldset>[39m
+                [36m<legend>[39m
+                  [0mCanonical source and placement pins[0m
+                [36m</legend>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-operation-fields"[39m
+                [36m>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mTrack ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mClip ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mMedia Asset ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mMedia Stream ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mArtifact ID[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mSource content digest[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mSource start (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mSource end (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mTimeline start (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mTimeline end (exact rational)[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mRate numerator[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mRate denominator[0m
+                    [36m</span>[39m
+                    [36m<input[39m
+                      [33mautocomplete[39m=[32m"off"[39m
+                      [33mclass[39m=[32m"ff-input "[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                  [36m<label>[39m
+                    [36m<span>[39m
+                      [0mDirection[0m
+                    [36m</span>[39m
+                    [36m<select>[39m
+                      [36m<option[39m
+                        [33mvalue[39m=[32m""[39m
+                      [36m>[39m
+                        [0mSelect direction[0m
+                      [36m</option>[39m
+                      [36m<option[39m
+                        [33mvalue[39m=[32m"FORWARD"[39m
+                      [36m>[39m
+                        [0mForward[0m
+                      [36m</option>[39m
+                      [36m<option[39m
+                        [33mvalue[39m=[32m"REVERSE"[39m
+                      [36m>[39m
+                        [0mReverse[0m
+                      [36m</option>[39m
+                    [36m</select>[39m
+                  [36m</label>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"ff-operation-actions"[39m
+                [36m>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"ff-button ff-button--primary "[39m
+                    [33mtype[39m=[32m"submit"[39m
+                  [36m>[39m
+                    [0mPreview operation[0m
+                  [36m</button>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+                    [33mtype[39m=[32m"button"[39m
+                  [36m>[39m
+                    [0mDiscard draft[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</fieldset>[39m
+            [36m</form>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+      [36m</details>[39m
+      [36m<details[39m
+        [33mclass[39m=[32m"ff-nle-comparison"[39m
+      [36m>[39m
+        [36m<summary>[39m
+          [0mRevision comparison[0m
+        [36m</summary>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"ff-panel ff-nle-diff-panel"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"ff-panel__header"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mServer semantic comparison[0m
+            [36m</h2>[39m
+          [36m</header>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"ff-panel__body"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"ff-empty"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33maria-hidden[39m=[32m"true"[39m
+              [36m>[39m
+                [0m◇[0m
+              [36m</span>[39m
+              [36m<h2>[39m
+                [0mNo server comparison loaded[0m
+              [36m</h2>[39m
+              [36m<p>[39m
+                [0mChoose two revisions and compare to see their changes.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</section>[39m
+      [36m</details>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/product/timeline/NleWorkspace.test.tsx:114:25
+    112|     await waitFor(() => expect(headCalls).toContain('project-2'))
+    113|     await act(async () => second.resolve({ ok: true, value: project2He…
+    114|     expect(await screen.findByText('revision-P2')).toBeTruthy()
+       |                         ^
+    115|     await act(async () => first.resolve({ ok: true, value: head }))
+    116|     expect(screen.getByText('revision-P2')).toBeTruthy()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 6 passed (8)
+      Tests  2 failed | 191 passed (193)
+   Start at  09:23:15
+   Duration  10.87s (transform 4.36s, setup 0ms, collect 10.53s, tests 14.95s, environment 2.15s, prepare 809ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/writer/focused-01.tests.json

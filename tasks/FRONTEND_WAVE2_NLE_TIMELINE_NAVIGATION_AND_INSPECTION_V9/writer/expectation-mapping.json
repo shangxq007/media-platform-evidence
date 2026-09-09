@@ -1,0 +1,23 @@
+{
+  "removed_simulation_tests": [
+    "supports keyboard and button timeline controls with accessible semantics",
+    "leaves Space on a focused track button to native activation without toggling playback",
+    "selects and clears focused lanes, bounds scrubbing, and ignores modified shortcuts and form keys",
+    "runs bounded presentation simulation and pauses when scrubbing",
+    "keeps history and advanced controls collapsed while timeline playback stays reachable",
+    "preserves lanes and running playback across shared inspector collapse and frees preview space"
+  ],
+  "replacement_file": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+  "mapping": {
+    "keyboard and track native Space": "selects by mouse and keyboard, inspects provenance, traps focus and closes back to the launcher; modified key preserved; native Enter/Space activation is retained by semantic buttons",
+    "scrub bounds and clock playback": "locates exact authored-range boundaries, end and zero without floating point or assumed FPS; no Play on ordinary entry; simulation clock intentionally removed",
+    "inspector viewport and selection": "preserves position, selection and scroll through inspector toggle, equal rerender and equal refresh",
+    "collapsed history/advanced": "keeps history and advanced controls collapsed while navigation boundaries stay reachable",
+    "synthetic shell tests": "all original assertions retained using an explicit test-local SyntheticClipHost; no longer mounted by NleWorkspace"
+  },
+  "retained": "All existing genuine Operation preview/confirm/apply/readback, stale revision, context races and reducer tests retained.",
+  "scoped_query_corrections": {
+    "routeTree existing HEAD route test": "revision-R0 selector code retains canonical authority assertion despite new navigation identity duplicate",
+    "NleWorkspace Project stale-read test": "revision-P2 selector code retains exact authority assertion and old revision absence"
+  }
+}

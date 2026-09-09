@@ -1,0 +1,91 @@
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ✓ src/product/timeline/types.test.ts (11 tests) 18ms
+ ✓ src/product/timeline/editor-state.test.ts (50 tests) 16ms
+ ✓ src/product/timeline/SemanticDiff.test.tsx (8 tests) 126ms
+ ✓ src/api/app/timeline-query.gateway.test.ts (7 tests) 11ms
+ ✓ src/product/timeline/TimelineNavigation.test.tsx (14 tests) 1257ms
+ ✓ src/product/timeline/NleWorkspace.test.tsx (15 tests) 1919ms
+stderr | src/interaction/InteractionShell.test.tsx > Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/p/unsupported expose no old owner
+Warning: A notFoundError was encountered on the route with ID "__root__", but a notFoundComponent option was not configured, nor was a router level defaultNotFoundComponent configured. Consider configuring at least one of these to avoid TanStack Router's overly generic defaultNotFoundComponent (<p>Not Found</p>)
+
+stderr | src/interaction/InteractionShell.test.tsx > Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/canvas expose no old owner
+Warning: A notFoundError was encountered on the route with ID "__root__", but a notFoundComponent option was not configured, nor was a router level defaultNotFoundComponent configured. Consider configuring at least one of these to avoid TanStack Router's overly generic defaultNotFoundComponent (<p>Not Found</p>)
+
+ ✓ src/interaction/InteractionShell.test.tsx (48 tests) 2905ms
+   ✓ Slice1C actual route query and hash preserve the same live exact owner and proposal; focus is independent  414ms
+ ❯ src/app/routeTree.test.tsx (43 tests | 1 failed) 6851ms
+   ✓ runtime route registration and deep-link restoration > registers every implemented page and preserved legacy link exactly once 9ms
+   ✓ runtime route registration and deep-link restoration > restores Workspace, Project, and surface identity from a creative deep link and fails unauthorized commands closed  476ms
+   ✓ runtime route registration and deep-link restoration > remounts the ProjectFrame subtree when same-route Workspace or Project parameters change 151ms
+   ✓ runtime route registration and deep-link restoration > integrates the disposable sketch on the Workflow route while invoke remains unavailable  378ms
+   ✓ runtime route registration and deep-link restoration > retires Workflow drafts and confirmations when host tenant or effective access changes without granting invocation  327ms
+   ✓ runtime route registration and deep-link restoration > presents bilingual Workflow page guidance and category explanations on the existing route 72ms
+   ✓ runtime route registration and deep-link restoration > reaches the post-H7 edit route and loads explicit canonical HEAD authority  389ms
+   ✓ runtime route registration and deep-link restoration > renders the Workspace to Projects entry without synthesizing a Project selection  353ms
+   ✓ runtime route registration and deep-link restoration > routes the existing Projects destination to the fail-closed recent-project browser without using Workspace home as its source  325ms
+   ✓ runtime route registration and deep-link restoration > routes Operations renders to the fail-closed source browser and leaves Storage behavior unchanged  349ms
+   ✓ runtime route registration and deep-link restoration > registers the Project Production consumer with exact route scope and no implicit fixture or request  344ms
+   ✓ runtime route registration and deep-link restoration > handles Workspace API errors without inventing an empty state 22ms
+   ✓ runtime route registration and deep-link restoration > preserves the historical default API export alongside the additive platform client 0ms
+   ✓ Workflow native OIDC identity/session retirement > preserves the complete draft and unfinished inspector input through two ordinary SDK renewals and a render 135ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual principal change and rejects old title, arrange and delete callbacks 167ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual tenant change and rejects old title, arrange and delete callbacks 146ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual session change and rejects old title, arrange and delete callbacks 95ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual scope change and rejects old title, arrange and delete callbacks 97ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual expired change and rejects old title, arrange and delete callbacks 97ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual unknown expiry change and rejects old title, arrange and delete callbacks 95ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual invalid expiry change and rejects old title, arrange and delete callbacks 94ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual missing sid change and rejects old title, arrange and delete callbacks 143ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual ambiguous tenant change and rejects old title, arrange and delete callbacks 157ms
+   ✓ Workflow native OIDC identity/session retirement > preserves edits for a fresh observation of equal access but retires a changed factor or access error 152ms
+   ✓ Workflow native OIDC identity/session retirement > establishes trustworthy delayed initial hydration without a fake identity switch 73ms
+   ✓ Workflow native OIDC identity/session retirement > lets UserLoaded supersede initial hydration and ignores a late different initial user 58ms
+   ✓ Workflow native OIDC identity/session retirement > rejects an older loaded read after a newer stored context, including an old event delivered afterwards 92ms
+   ✓ Workflow native OIDC identity/session retirement > does not let an old loaded notification hide a pending genuine identity change 110ms
+   ✓ Workflow native OIDC identity/session retirement > retires on SDK read failure and missing current user instead of preserving uncertain access 102ms
+   ✓ Workflow native OIDC identity/session retirement > ignores pending SDK reads after signout initiation and StrictMode unmount 91ms
+   ✓ Workflow native OIDC identity/session retirement > retires the Workflow owner on a workspace route change 120ms
+   ✓ Workflow native OIDC identity/session retirement > retires the Workflow owner on a project route change 168ms
+   ✓ Workflow native OIDC identity/session retirement > provides an unconfigured no-op subscription without constructing a manager 1ms
+   ✓ Workflow native OIDC identity/session retirement > subscribes through the real export and symmetrically removes native and signout listeners 1ms
+   ✓ Workflow native OIDC identity/session retirement > withdraws old Workflow content synchronously on SDK UserUnloaded and rejects retained editor/confirmation callbacks 184ms
+   ✓ Workflow native OIDC identity/session retirement > withdraws old Workflow content synchronously on SDK AccessTokenExpired and rejects retained editor/confirmation callbacks 116ms
+   ✓ Workflow native OIDC identity/session retirement > withdraws old Workflow content synchronously on SDK UserSignedIn and rejects retained editor/confirmation callbacks 108ms
+   ✓ Workflow native OIDC identity/session retirement > withdraws old Workflow content synchronously on SDK UserSignedOut and rejects retained editor/confirmation callbacks 104ms
+   ✓ Workflow native OIDC identity/session retirement > withdraws old Workflow content synchronously on SDK UserSessionChanged and rejects retained editor/confirmation callbacks 111ms
+   ✓ Workflow native OIDC identity/session retirement > retires at signout initiation before redirect settles (resolve), with no draft restoration 113ms
+   ✓ Workflow native OIDC identity/session retirement > retires at signout initiation before redirect settles (reject), with no draft restoration 199ms
+   ✓ Workflow native OIDC identity/session retirement > ignores hydration after unload and ignores an old loaded event after a new stored session 187ms
+   × V9 NLE route preserves navigation through native renewal and equal access, then retires on true session or access change 204ms
+     → expected true to be false // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/app/routeTree.test.tsx > V9 NLE route preserves navigation through native renewal and equal access, then retires on true session or access change
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ src/app/routeTree.test.tsx:643:30
+    641|     fireEvent.click(next)
+    642|     act(() => client.setQueryData(platformQueryKeys.effectiveAccess(['…
+    643|     expect(next.isConnected).toBe(false)
+       |                              ^
+    644|     expect(screen.queryByRole('dialog')).toBeNull()
+    645|   } finally {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 7 passed (8)
+      Tests  1 failed | 195 passed (196)
+   Start at  09:28:45
+   Duration  9.91s (transform 4.02s, setup 0ms, collect 10.69s, tests 13.10s, environment 2.20s, prepare 916ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/writer/focused-03.tests.json
