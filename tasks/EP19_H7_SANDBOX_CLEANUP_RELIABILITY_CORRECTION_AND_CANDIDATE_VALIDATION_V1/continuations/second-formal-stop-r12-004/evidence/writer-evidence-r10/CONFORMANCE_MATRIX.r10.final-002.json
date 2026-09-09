@@ -1,0 +1,92 @@
+{
+  "approved_contract_changed": false,
+  "formal_attempts_used": "1/2",
+  "formal_namespace_created": false,
+  "rows": [
+    {
+      "ar_id": "AR001",
+      "contract": "continuous baseline through FINAL/COVERAGE/SEAL observation",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9 qualification retained plus r10 integrated rerun",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r10/tooling/executor/observe.py/native_observe.py"
+    },
+    {
+      "ar_id": "AR002",
+      "contract": "exact V2 temp metadata and rename lifecycle",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9 qualification retained plus r10 integrated rerun",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r10/tooling/executor/observe.py/bookkeeping_v2.py/bookkeeping_v3.py"
+    },
+    {
+      "ar_id": "AR003",
+      "contract": "actual wall/monotonic capture window",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9 qualification retained plus r10 integrated rerun",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r10/tooling/executor/boundary.py"
+    },
+    {
+      "ar_id": "AR004",
+      "contract": "raw JSONL framing and strict decoding",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9 qualification retained plus r10 integrated rerun",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r10/tooling/executor/bookkeeping_v3.py"
+    },
+    {
+      "ar_id": "AR005",
+      "contract": "legal V2 change followed by unchanged boundary",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9 qualification retained plus r10 integrated rerun",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r10/tooling/executor/boundary.py/bookkeeping_v3.py"
+    },
+    {
+      "ar_id": "AR006",
+      "contract": "formal caller cannot inject acceptance summaries",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9 qualification retained plus r10 integrated rerun",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r10/tooling/executor/external29_driver.py/binding_contract.py"
+    },
+    {
+      "ar_id": "AR007",
+      "contract": "exact qualification/dependency/eligible-map consumer binding",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9 qualification retained plus r10 integrated rerun",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r10/tooling/executor/coverage.py/dependency_contract.py/qualification_contract.py"
+    },
+    {
+      "ar_id": "AR008",
+      "contract": "original FINAL rejection/disposition survives actual FINAL_FAILURE and FORMAL_FAILURE sink faults through production main",
+      "counterexample": "actual formal() FINAL handler with fault at actual runtime/FINAL_FAILURE.json fd; production main child with both actual sink fd writes faulted",
+      "disposition": "CLOSED_EXACT_FINITE_FINAL_BOUNDARY_AND_NATIVE_FALLBACK_SCOPE",
+      "green": "writer-evidence-r10/green-r10-final-005: 3/3 PASS identical body",
+      "outer_entry": "formal -> persist_final_boundary_failure -> formal_failure_document -> formal_persistence_failure -> main -> emit_native_failure",
+      "red": "writer-evidence-r10/red-r9-002: 3/3 intended FAIL",
+      "saved_receipt_available": "real durable FORMAL_FAILURE.json readback keeps original/secondary occurrences, contexts, types, disposition",
+      "saved_receipt_unavailable": "real child stderr bytes saved/read back; nonzero; no stderr durability claim",
+      "source": "implementation-r10/tooling/executor/external29_driver.py; causal.py"
+    },
+    {
+      "ar_id": "AR009",
+      "contract": "durable file/parent/nested directory and failure markers",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9 qualification retained plus r10 integrated rerun",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r10/tooling/executor/durability.py/artifacts.py/executor_adapter.py"
+    },
+    {
+      "ar_id": "AR010",
+      "contract": "bounded acquisition loops and shared boundary budgets",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9 qualification retained plus r10 integrated rerun",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r10/tooling/executor/capture.py/observe.py/native_observe.py"
+    }
+  ],
+  "schema": "ep19-r10-conformance-matrix-v1"
+}

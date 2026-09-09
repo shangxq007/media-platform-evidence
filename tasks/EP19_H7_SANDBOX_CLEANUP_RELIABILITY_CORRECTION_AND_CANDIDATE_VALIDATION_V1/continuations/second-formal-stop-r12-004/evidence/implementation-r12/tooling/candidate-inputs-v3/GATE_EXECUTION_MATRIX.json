@@ -1,0 +1,1165 @@
+{
+  "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+  "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+  "gate_count": 29,
+  "order": [
+    "CHANGE_IMPACT",
+    "H7_FOCUSED",
+    "H7_ENTRY",
+    "H7_MUTATIONS",
+    "ARCHITECTURE_SYNTAX",
+    "ARCHITECTURE",
+    "GRADLE_PREFLIGHT",
+    "COMPILE",
+    "AFFECTED_INTEGRATION",
+    "RUNTIME_PREFLIGHT",
+    "SHADOW",
+    "CLASSIFIER_TEST",
+    "GITOPS_STAGING",
+    "GITOPS_STAGING_EGRESS",
+    "GITOPS_PRODUCTION",
+    "GITOPS_PRODUCTION_EGRESS",
+    "FRONTEND_INSTALL",
+    "FRONTEND_LINT",
+    "FRONTEND_IDENTITIES",
+    "FRONTEND_COLLECTION",
+    "FRONTEND_TEST",
+    "FRONTEND_BUILD",
+    "FORMAL",
+    "SEMGREP",
+    "FULL_BACKEND",
+    "APPLICATION_CLASSPATH",
+    "APPLICATION_PROBE",
+    "FOUNDATION",
+    "BOOTJAR"
+  ],
+  "gates": {
+    "AFFECTED_INTEGRATION": {
+      "command": [
+        "./gradlew",
+        ":platform-app:test",
+        "--tests",
+        "com.example.platform.ModularityTest",
+        ":entitlement-module:test",
+        "--tests",
+        "com.example.platform.entitlement.api.EntitlementDecisionQueryPublicationTest",
+        ":identity-access-module:test",
+        "--tests",
+        "com.example.platform.identity.architecture.AuthorizationArchitectureGuardTest",
+        "--no-daemon",
+        "--rerun-tasks",
+        "--no-build-cache",
+        "--max-workers=8",
+        "--console=plain"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "GATE_INVENTORY.json",
+      "original_command": [
+        "./gradlew",
+        ":platform-app:test",
+        "--tests",
+        "com.example.platform.ModularityTest",
+        ":entitlement-module:test",
+        "--tests",
+        "com.example.platform.entitlement.api.EntitlementDecisionQueryPublicationTest",
+        ":identity-access-module:test",
+        "--tests",
+        "com.example.platform.identity.architecture.AuthorizationArchitectureGuardTest",
+        "--no-daemon",
+        "--rerun-tasks",
+        "--no-build-cache",
+        "--max-workers=8",
+        "--console=plain"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [
+        "Only declared generated test XML before a fresh test invocation"
+      ],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "COMPILE"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "ARCHITECTURE": {
+      "command": [
+        "bash",
+        "scripts/check-architecture-drift.sh"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "GATE_INVENTORY.json",
+      "original_command": [
+        "bash",
+        "scripts/check-architecture-drift.sh"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "ARCHITECTURE_SYNTAX"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "ARCHITECTURE_SYNTAX": {
+      "command": [
+        "bash",
+        "-n",
+        "scripts/check-architecture-drift.sh"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "GATE_INVENTORY.json",
+      "original_command": [
+        "bash",
+        "-n",
+        "scripts/check-architecture-drift.sh"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "H7_MUTATIONS"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "COMPILE": {
+      "command": [
+        "./gradlew",
+        "compileJava",
+        "compileTestJava",
+        "--no-daemon",
+        "--rerun-tasks",
+        "--no-build-cache",
+        "--max-workers=8",
+        "--parallel",
+        "--console=plain"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "GATE_INVENTORY.json",
+      "original_command": [
+        "./gradlew",
+        "compileJava",
+        "compileTestJava",
+        "--no-daemon",
+        "--rerun-tasks",
+        "--no-build-cache",
+        "--max-workers=8",
+        "--parallel",
+        "--console=plain"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "GRADLE_PREFLIGHT"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "GRADLE_PREFLIGHT": {
+      "command": [
+        "./gradlew",
+        "help",
+        "projects",
+        "--no-daemon",
+        "--console=plain"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "GATE_INVENTORY.json",
+      "original_command": [
+        "./gradlew",
+        "help",
+        "projects",
+        "--no-daemon",
+        "--console=plain"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "ARCHITECTURE"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "H7_ENTRY": {
+      "command": [
+        "python3",
+        "-B",
+        "scripts/guards/h7-architecture-guard.py",
+        "--root",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+        "--tree",
+        "fd37409d0274662abbe86f69e3d963c05b379696",
+        "--receipt",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend/H7_PRODUCTION_INPUT_RECEIPT.json"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "GATE_INVENTORY.json",
+      "original_command": [
+        "python3",
+        "-B",
+        "scripts/guards/h7-architecture-guard.py",
+        "--root",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/candidate",
+        "--tree",
+        "fd37409d0274662abbe86f69e3d963c05b379696",
+        "--receipt",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/H7_PRODUCTION_INPUT_RECEIPT.json"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "H7_FOCUSED"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "H7_FOCUSED": {
+      "command": [
+        "python3",
+        "-B",
+        "scripts/guards/test_h7_input_boundary.py"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "GATE_INVENTORY.json",
+      "original_command": [
+        "python3",
+        "-B",
+        "scripts/guards/test_h7_input_boundary.py"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "CHANGE_IMPACT"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "H7_MUTATIONS": {
+      "command": [
+        "python3",
+        "-B",
+        "scripts/guards/h7-architecture-guard.py",
+        "--root",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+        "--tree",
+        "fd37409d0274662abbe86f69e3d963c05b379696",
+        "--self-test"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "GATE_INVENTORY.json",
+      "original_command": [
+        "python3",
+        "-B",
+        "scripts/guards/h7-architecture-guard.py",
+        "--root",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/candidate",
+        "--tree",
+        "fd37409d0274662abbe86f69e3d963c05b379696",
+        "--self-test"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "H7_ENTRY"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "BOOTJAR": {
+      "command": [
+        "./gradlew",
+        ":platform-app:bootJar",
+        "-x",
+        "test",
+        "--no-daemon",
+        "--console=plain"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "FCV_STAGE2_INVENTORY.json",
+      "original_command": [
+        "./gradlew",
+        ":platform-app:bootJar",
+        "-x",
+        "test",
+        "--no-daemon",
+        "--console=plain"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "FOUNDATION"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "CLASSIFIER_TEST": {
+      "command": [
+        "python3",
+        "-B",
+        "scripts/ci/test_change_impact_classifier.py"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "FCV_STAGE2_INVENTORY.json",
+      "original_command": [
+        "python3",
+        "-B",
+        "scripts/ci/test_change_impact_classifier.py"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "SHADOW"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "FOUNDATION": {
+      "command": [
+        "./gradlew",
+        "pfirr1RemediationCheck",
+        "--no-daemon",
+        "--console=plain"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "FCV_STAGE2_INVENTORY.json",
+      "original_command": [
+        "./gradlew",
+        "pfirr1RemediationCheck",
+        "--no-daemon",
+        "--console=plain"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "APPLICATION_PROBE"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "FULL_BACKEND": {
+      "command": [
+        "python3",
+        "-B",
+        "scripts/ci/run_full_deterministic_backend_suite.py",
+        "--results-root",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+        "--manifest",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend/FULL_EXECUTION_MANIFEST.tsv",
+        "--expected-universe",
+        "TASK_ROOT/formal-tooling/candidate-inputs-v3/inputs/FULL_TEST_EXPECTED_REPOSITORY_FORMAT.tsv",
+        "--expected-skipped",
+        "29",
+        "--command",
+        "./gradlew test --no-daemon --rerun-tasks --no-build-cache --max-workers=8 --parallel --console=plain"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "FCV_STAGE2_INVENTORY.json",
+      "original_command": [
+        "python3",
+        "-B",
+        "scripts/ci/run_full_deterministic_backend_suite.py",
+        "--results-root",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/candidate",
+        "--manifest",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/FULL_EXECUTION_MANIFEST.json",
+        "--expected-universe",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/FULL_TEST_EXPECTED_REPOSITORY_FORMAT.tsv",
+        "--expected-skipped",
+        "29",
+        "--command",
+        "./gradlew test --no-daemon --rerun-tasks --no-build-cache --max-workers=8 --parallel --console=plain"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [
+        "Only declared generated test XML before a fresh test invocation"
+      ],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "SEMGREP"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "RUNTIME_PREFLIGHT": {
+      "command": [
+        "./gradlew",
+        ":sandbox-isolation-module:test",
+        "--tests",
+        "com.example.platform.sandbox.BubblewrapSandboxProcessLauncherIntegrationTest",
+        "--tests",
+        "com.example.platform.sandbox.ContainerSandboxProcessLauncherIntegrationTest",
+        "--no-daemon",
+        "--rerun-tasks",
+        "--no-build-cache",
+        "--max-workers=8",
+        "--console=plain"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "FCV_STAGE2_INVENTORY.json",
+      "original_command": [
+        "./gradlew",
+        ":sandbox-isolation-module:test",
+        "--tests",
+        "com.example.platform.sandbox.BubblewrapSandboxProcessLauncherIntegrationTest",
+        "--tests",
+        "com.example.platform.sandbox.ContainerSandboxProcessLauncherIntegrationTest",
+        "--no-daemon",
+        "--rerun-tasks",
+        "--no-build-cache",
+        "--max-workers=8",
+        "--console=plain"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [
+        "Only declared generated test XML before a fresh test invocation"
+      ],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "AFFECTED_INTEGRATION"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "GITOPS_STAGING": {
+      "command": [
+        "bash",
+        "scripts/validate-production-readiness.sh",
+        "gitops/staging"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "CI_EXTRA_INVENTORY.json",
+      "original_command": [
+        "bash",
+        "scripts/validate-production-readiness.sh",
+        "gitops/staging"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "CLASSIFIER_TEST"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "GITOPS_STAGING_EGRESS": {
+      "command": [
+        "bash",
+        "scripts/verify-egress-smoke-config.sh",
+        "gitops/staging"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "CI_EXTRA_INVENTORY.json",
+      "original_command": [
+        "bash",
+        "scripts/verify-egress-smoke-config.sh",
+        "gitops/staging"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "GITOPS_STAGING"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "GITOPS_PRODUCTION": {
+      "command": [
+        "bash",
+        "scripts/validate-production-readiness.sh",
+        "gitops/production"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "CI_EXTRA_INVENTORY.json",
+      "original_command": [
+        "bash",
+        "scripts/validate-production-readiness.sh",
+        "gitops/production"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "GITOPS_STAGING_EGRESS"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "GITOPS_PRODUCTION_EGRESS": {
+      "command": [
+        "bash",
+        "scripts/verify-egress-smoke-config.sh",
+        "gitops/production"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "CI_EXTRA_INVENTORY.json",
+      "original_command": [
+        "bash",
+        "scripts/verify-egress-smoke-config.sh",
+        "gitops/production"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "GITOPS_PRODUCTION"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "FRONTEND_INSTALL": {
+      "command": [
+        "npm",
+        "ci",
+        "--cache",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/frontend/npm"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend/frontend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend/.git/objects",
+      "original_inventory": "CI_EXTRA_INVENTORY.json",
+      "original_command": [
+        "npm",
+        "ci",
+        "--cache",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/npm-cache"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "frontend-verification",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/frontend-evidence"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/frontend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/frontend",
+      "process": "Frontend bwrap read-only host and private PID namespace",
+      "dependencies": [
+        "GITOPS_PRODUCTION_EGRESS"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "FRONTEND_LINT": {
+      "command": [
+        "npm",
+        "run",
+        "lint",
+        "--if-present"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend/frontend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend/.git/objects",
+      "original_inventory": "CI_EXTRA_INVENTORY.json",
+      "original_command": [
+        "npm",
+        "run",
+        "lint",
+        "--if-present"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "frontend-verification",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/frontend-evidence"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/frontend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/frontend",
+      "process": "Frontend bwrap read-only host and private PID namespace",
+      "dependencies": [
+        "FRONTEND_INSTALL"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "FRONTEND_IDENTITIES": {
+      "command": [
+        "npx",
+        "--no-install",
+        "vitest",
+        "list",
+        "--json"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend/frontend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend/.git/objects",
+      "original_inventory": "CI_EXTRA_INVENTORY.json",
+      "original_command": [
+        "npx",
+        "--no-install",
+        "vitest",
+        "list",
+        "--json"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "frontend-verification",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/frontend-evidence"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/frontend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/frontend",
+      "process": "Frontend bwrap read-only host and private PID namespace",
+      "dependencies": [
+        "FRONTEND_LINT"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "FRONTEND_TEST": {
+      "command": [
+        "npx",
+        "--no-install",
+        "vitest",
+        "run",
+        "--reporter=json",
+        "--outputFile=USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/frontend-evidence/FRONTEND_TEST_RESULTS.json"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend/frontend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend/.git/objects",
+      "original_inventory": "CI_EXTRA_INVENTORY.json",
+      "original_command": [
+        "npx",
+        "--no-install",
+        "vitest",
+        "run",
+        "--reporter=json",
+        "--outputFile=USER_HOME/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/FRONTEND_TEST_RESULTS.json"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "frontend-verification",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/frontend-evidence"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/frontend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/frontend",
+      "process": "Frontend bwrap read-only host and private PID namespace",
+      "dependencies": [
+        "FRONTEND_COLLECTION"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "FRONTEND_BUILD": {
+      "command": [
+        "npm",
+        "run",
+        "build",
+        "--",
+        "--outDir",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/frontend"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend/frontend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend/.git/objects",
+      "original_inventory": "CI_EXTRA_INVENTORY.json",
+      "original_command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "frontend-verification",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/frontend"
+      ],
+      "cleanup": [
+        "Vite resolved external outDir only"
+      ],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/frontend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/frontend",
+      "process": "Frontend bwrap read-only host and private PID namespace",
+      "dependencies": [
+        "FRONTEND_TEST"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "FORMAL": {
+      "command": [
+        "bash",
+        "scripts/formal/validate-faof2.sh"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "PROOF_GATE_INVENTORY.json",
+      "original_command": [
+        "bash",
+        "scripts/formal/validate-faof2.sh"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "FRONTEND_BUILD"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "SEMGREP": {
+      "command": [
+        "podman",
+        "run",
+        "--rm",
+        "--network=none",
+        "-v",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend:/src:ro",
+        "-w",
+        "/src",
+        "32381bb408fd23cdeb6d870a7c3c13eb247a7f7c876b92f0e134474bcfc753c0",
+        "semgrep",
+        "scan",
+        "--metrics=off",
+        "--disable-version-check",
+        "--error",
+        "--config",
+        ".semgrep/media-platform-architecture.yml",
+        "."
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "PROOF_GATE_INVENTORY.json",
+      "original_command": [
+        "podman",
+        "run",
+        "--rm",
+        "--network=none",
+        "-v",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_PRODUCTION_INPUT_BOUNDARY_CORRECTION_AND_PACK_MONITOR_QUALIFICATION_V1/candidate:/src:ro",
+        "-w",
+        "/src",
+        "32381bb408fd23cdeb6d870a7c3c13eb247a7f7c876b92f0e134474bcfc753c0",
+        "semgrep",
+        "scan",
+        "--metrics=off",
+        "--disable-version-check",
+        "--error",
+        "--config",
+        ".semgrep/media-platform-architecture.yml",
+        "."
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "FORMAL"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "SHADOW": {
+      "command": [
+        "bash",
+        "scripts/verify-pfirr1-jooq-authority-fail-closed.sh"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/shadow-fixture",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/shadow-fixture",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/shadow-fixture/.git/objects",
+      "original_inventory": "Recovered old commands plus required structured identity collection",
+      "original_command": [
+        "bash",
+        "scripts/verify-pfirr1-jooq-authority-fail-closed.sh"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Disposable synthetic shadow control repository seeded from exact candidate; original three declared control paths only",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "RUNTIME_PREFLIGHT"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "APPLICATION_CLASSPATH": {
+      "command": [
+        "./gradlew",
+        "-I",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/owned/classpath.init.gradle",
+        ":platform-app:ep19EvidenceClasspath",
+        "--no-daemon",
+        "--console=plain"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "Recovered old commands plus required structured identity collection",
+      "original_command": [
+        "./gradlew",
+        "-I",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/owned/classpath.init.gradle",
+        ":platform-app:ep19EvidenceClasspath",
+        "--no-daemon",
+        "--console=plain"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "FULL_BACKEND"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "APPLICATION_PROBE": {
+      "command": [
+        "java",
+        "@USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend/probe.args"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "Recovered old commands plus required structured identity collection",
+      "original_command": [
+        "java",
+        "@USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend/probe.args"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [
+        "APPLICATION_CLASSPATH"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "FRONTEND_COLLECTION": {
+      "command": [
+        "node",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/owned/collect_frontend.mjs",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend/frontend",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/frontend-evidence/COLLECTED.jsonl"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend/frontend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend/.git/objects",
+      "original_inventory": "Recovered old commands plus required structured identity collection",
+      "original_command": [
+        "node",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/owned/collect_frontend.mjs",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/frontend/frontend",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/frontend-evidence/COLLECTED.jsonl"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "frontend-verification",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/frontend-evidence"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/frontend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/frontend",
+      "process": "Frontend bwrap read-only host and private PID namespace",
+      "dependencies": [
+        "FRONTEND_IDENTITIES"
+      ],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    },
+    "CHANGE_IMPACT": {
+      "command": [
+        "python3",
+        "-B",
+        "scripts/ci/change_impact_classifier.py",
+        "--base",
+        "86d6aef94fd5e58da552e97c11473cff6eca734e",
+        "--head",
+        "a29864343ed4f630b052c20d86c23b240f13cfd0",
+        "--json"
+      ],
+      "cwd": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "repository": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend",
+      "object_database": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/sources/backend/.git/objects",
+      "original_inventory": "Recovered old commands plus required structured identity collection",
+      "original_command": [
+        "python3",
+        "-B",
+        "scripts/ci/change_impact_classifier.py",
+        "--base",
+        "86d6aef94fd5e58da552e97c11473cff6eca734e",
+        "--head",
+        "a29864343ed4f630b052c20d86c23b240f13cfd0",
+        "--json"
+      ],
+      "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+      "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+      "lane": "backend-host-native",
+      "source_scope": "Exact tracked candidate inputs; dependency inputs pinned by candidate definitions, prepared caches declared separately",
+      "outputs": [
+        "Each selected Gradle project build directory",
+        "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/outputs/backend"
+      ],
+      "cleanup": [],
+      "cache": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/cache/backend",
+      "tmp": "USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1/tmp/backend",
+      "process": "Host-native child session, no Gradle persistent daemon; tagged descendant quiescence observed",
+      "dependencies": [],
+      "preservation": "PROTECTION_SCOPE.json, local per-command inotify and exact endpoint captures; no global historical claim",
+      "rejection": "Native failure, tracked/index/HEAD/protected metadata drift, missing/invalid evidence or identity mismatch"
+    }
+  },
+  "inventories": {
+    "GATE_INVENTORY.json": "a1525b56fe55117f0357c6ccab2fe698aee723ce1369cd89446c91383ab5d368",
+    "FCV_STAGE2_INVENTORY.json": "e5334c583135976d06628a5084bc002bdeb2188b735b68bc6906307a41803832",
+    "CI_EXTRA_INVENTORY.json": "7a7e1c6e934fb1206176c81a7eca05ef117cdc3f3af83898651a992b6c8749f8",
+    "PROOF_GATE_INVENTORY.json": "692cbfc227c3c1574311699d5545062946d4d02686bede74dd79e9630649ff3d"
+  },
+  "parallelism": "Serialized entire graph. No frontend/backend shared mutable cache or artifact handoff.",
+  "packaging": "Existing Gradle processResources/bootJar uses tracked static inputs; external frontend build is not implicitly consumed. Must verify jar entry hashes against Git-tracked static bytes.",
+  "status": "PROPOSED_PRECONDITIONS_NOT_YET_ACCEPTED"
+}

@@ -1,0 +1,148 @@
+{
+  "rows": [
+    {
+      "ar_id": "AR001",
+      "contract": "continuous baseline→FINAL/COVERAGE/SEAL observation",
+      "counterexample": "historical evidence preserved",
+      "disposition": "RETAINED_RESOLVED",
+      "evidence": "writer-evidence-r7/qualification-003",
+      "green": "qualification-003 167/167 PASS",
+      "outer_entry": "actual integrated fixture qualifier",
+      "red": "historical scope not relabeled fresh",
+      "source": "observe.py/native_observe.py"
+    },
+    {
+      "ar_id": "AR002",
+      "contract": "exact V2 temp metadata and rename lifecycle",
+      "counterexample": "historical evidence preserved",
+      "disposition": "RETAINED_RESOLVED",
+      "evidence": "writer-evidence-r7/qualification-003",
+      "green": "qualification-003 167/167 PASS",
+      "outer_entry": "actual integrated fixture qualifier",
+      "red": "historical scope not relabeled fresh",
+      "source": "observe.py/bookkeeping_v2.py/bookkeeping_v3.py"
+    },
+    {
+      "ar_id": "AR003",
+      "contract": "actual wall/monotonic capture window",
+      "counterexample": "historical evidence preserved",
+      "disposition": "RETAINED_RESOLVED",
+      "evidence": "writer-evidence-r7/qualification-003",
+      "green": "qualification-003 167/167 PASS",
+      "outer_entry": "actual integrated fixture qualifier",
+      "red": "historical scope not relabeled fresh",
+      "source": "boundary.py"
+    },
+    {
+      "ar_id": "AR004",
+      "contract": "raw JSONL framing/UTF-8/key/constant rejection",
+      "counterexample": "historical evidence preserved",
+      "disposition": "RETAINED_RESOLVED",
+      "evidence": "writer-evidence-r7/qualification-003",
+      "green": "qualification-003 167/167 PASS",
+      "outer_entry": "actual integrated fixture qualifier",
+      "red": "historical scope not relabeled fresh",
+      "source": "bookkeeping_v3.py"
+    },
+    {
+      "ar_id": "AR005",
+      "contract": "accepted state commits only after durable evidence",
+      "counterexample": "historical evidence preserved",
+      "disposition": "RETAINED_RESOLVED",
+      "evidence": "writer-evidence-r7/qualification-003",
+      "green": "qualification-003 167/167 PASS",
+      "outer_entry": "actual integrated fixture qualifier",
+      "red": "historical scope not relabeled fresh",
+      "source": "boundary.py"
+    },
+    {
+      "ar_id": "AR006",
+      "contract": "no injectable success summary at formal entry",
+      "counterexample": "historical evidence preserved",
+      "disposition": "RETAINED_RESOLVED",
+      "evidence": "writer-evidence-r7/qualification-003",
+      "green": "qualification-003 167/167 PASS",
+      "outer_entry": "actual integrated fixture qualifier",
+      "red": "historical scope not relabeled fresh",
+      "source": "external29_driver.py/executor_adapter.py"
+    },
+    {
+      "ar_id": "AR007",
+      "contract": "finite actual identity/consumer/dependency/eligible binding",
+      "counterexample": "historical evidence preserved",
+      "disposition": "RETAINED_RESOLVED",
+      "evidence": "writer-evidence-r7/qualification-003",
+      "green": "qualification-003 167/167 PASS",
+      "outer_entry": "actual integrated fixture qualifier",
+      "red": "historical scope not relabeled fresh",
+      "source": "dependency_contract.py/qualification_contract.py"
+    },
+    {
+      "ar_id": "AR008",
+      "contract": "one structured causal representation retains all primary/cleanup/persistence leaves through saved and final receipts",
+      "counterexample": [
+        "actual capture→preservation→boundary→adapter→driver saved receipt",
+        "composed marker failure",
+        "real runner supplement composed failure"
+      ],
+      "disposition": "CLOSED",
+      "evidence": [
+        "writer-evidence-r7/red-predecessor-001",
+        "writer-evidence-r7/green-final-001",
+        "writer-evidence-r7/red-runner-supplement-001",
+        "writer-evidence-r7/green-runner-supplement-001"
+      ],
+      "green": [
+        "green-final-001 5/5 PASS",
+        "green-runner-supplement-001 14/14 PASS",
+        "qualification-003 167/167 PASS"
+      ],
+      "outer_entry": "external29_driver.execute_actual_graph / runner.run_gate; saved BOOKKEEPING_FAILURE checked",
+      "red": [
+        "red-predecessor-001 2 causal controls FAIL",
+        "red-runner-supplement-001 new control FAIL"
+      ],
+      "source": [
+        "causal.py",
+        "preservation.py",
+        "boundary.py",
+        "executor_adapter.py",
+        "runner.py",
+        "external29_driver.py",
+        "native_observe.py"
+      ]
+    },
+    {
+      "ar_id": "AR009",
+      "contract": "durable files/directories and immutable failure supplement",
+      "counterexample": "historical evidence preserved",
+      "disposition": "RETAINED_RESOLVED",
+      "evidence": "writer-evidence-r7/qualification-003",
+      "green": "qualification-003 167/167 PASS",
+      "outer_entry": "actual integrated fixture qualifier",
+      "red": "historical scope not relabeled fresh",
+      "source": "durability.py/artifacts.py/runner.py"
+    },
+    {
+      "ar_id": "AR010",
+      "contract": "unconditional post-acquisition fd cleanup and isolated known-PID cleanup with uncertainty retained",
+      "counterexample": [
+        "KeyboardInterrupt/MemoryError after real fd open plus close failure",
+        "actual owned children with one denied birth query"
+      ],
+      "disposition": "CLOSED",
+      "evidence": [
+        "writer-evidence-r7/red-predecessor-001",
+        "writer-evidence-r7/green-final-001"
+      ],
+      "green": "green-final-001 5/5 PASS; qualification-003 167/167 PASS",
+      "outer_entry": "capture.capture_file and ChildScope-owned real subprocess fixture",
+      "red": "red-predecessor-001 3 controls FAIL",
+      "source": [
+        "capture.py",
+        "native_observe.py"
+      ]
+    }
+  ],
+  "schema": "ep19-r7-conformance-matrix-v1"
+}

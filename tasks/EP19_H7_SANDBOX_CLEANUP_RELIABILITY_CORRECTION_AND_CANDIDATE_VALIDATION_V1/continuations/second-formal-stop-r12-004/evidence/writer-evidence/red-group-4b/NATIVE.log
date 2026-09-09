@@ -1,0 +1,51 @@
+test_adapter_latches_after_actual_evidence_path_failure (test_conformance_corrections.Group4LatchDurabilityAndBounds.test_adapter_latches_after_actual_evidence_path_failure) ... FAIL
+test_event_flood_is_bounded_during_real_drain (test_conformance_corrections.Group4LatchDurabilityAndBounds.test_event_flood_is_bounded_during_real_drain) ... FAIL
+test_evidence_failure_does_not_commit_engine_state (test_conformance_corrections.Group4LatchDurabilityAndBounds.test_evidence_failure_does_not_commit_engine_state) ... ok
+test_failure_marker_fsyncs_file_and_parent_directory (test_conformance_corrections.Group4LatchDurabilityAndBounds.test_failure_marker_fsyncs_file_and_parent_directory) ... FAIL
+test_outer_fixture_failure_latch_blocks_success_final (test_conformance_corrections.Group4LatchDurabilityAndBounds.test_outer_fixture_failure_latch_blocks_success_final) ... FAIL
+test_slow_regular_file_read_is_interrupted_inside_loop (test_conformance_corrections.Group4LatchDurabilityAndBounds.test_slow_regular_file_read_is_interrupted_inside_loop) ... FAIL
+
+======================================================================
+FAIL: test_adapter_latches_after_actual_evidence_path_failure (test_conformance_corrections.Group4LatchDurabilityAndBounds.test_adapter_latches_after_actual_evidence_path_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 237, in test_adapter_latches_after_actual_evidence_path_failure
+    with self.assertRaises(executor_adapter.NamespaceConsumed):
+AssertionError: NamespaceConsumed not raised
+
+======================================================================
+FAIL: test_event_flood_is_bounded_during_real_drain (test_conformance_corrections.Group4LatchDurabilityAndBounds.test_event_flood_is_bounded_during_real_drain)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 247, in test_event_flood_is_bounded_during_real_drain
+    self.assertIn("PENDING_EVENT_LIMIT_EXCEEDED_DURING_ACQUISITION", errors)
+AssertionError: 'PENDING_EVENT_LIMIT_EXCEEDED_DURING_ACQUISITION' not found in []
+
+======================================================================
+FAIL: test_failure_marker_fsyncs_file_and_parent_directory (test_conformance_corrections.Group4LatchDurabilityAndBounds.test_failure_marker_fsyncs_file_and_parent_directory)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 216, in test_failure_marker_fsyncs_file_and_parent_directory
+    self.assertIn("directory", observed)
+AssertionError: 'directory' not found in ['file']
+
+======================================================================
+FAIL: test_outer_fixture_failure_latch_blocks_success_final (test_conformance_corrections.Group4LatchDurabilityAndBounds.test_outer_fixture_failure_latch_blocks_success_final)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 270, in test_outer_fixture_failure_latch_blocks_success_final
+    self.assertFalse(result["success_final_emitted"])
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_slow_regular_file_read_is_interrupted_inside_loop (test_conformance_corrections.Group4LatchDurabilityAndBounds.test_slow_regular_file_read_is_interrupted_inside_loop)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 258, in test_slow_regular_file_read_is_interrupted_inside_loop
+    self.assertLess(time.monotonic() - started, 0.12)
+AssertionError: 0.18155140001908876 not less than 0.12
+
+----------------------------------------------------------------------
+Ran 6 tests in 5.349s
+
+FAILED (failures=5)

@@ -1,0 +1,626 @@
+diff -ruN '--exclude=__pycache__' '--exclude=outputs' J/implementation-r11/.source J/implementation-r12/.source
+--- J/implementation-r11/.source	2026-09-09 19:28:44.020002738 +0800
++++ J/implementation-r12/.source	2026-09-09 20:09:14.493269036 +0800
+@@ -1 +1 @@
+-implementation-r10 byte-for-byte predecessor copied before r11 test and implementation edits
++implementation-r11 byte-for-byte predecessor copied before r12 preparation-consumer test and implementation edits
+diff -ruN '--exclude=__pycache__' '--exclude=outputs' J/implementation-r11/tooling/executor/VERSION.json J/implementation-r12/tooling/executor/VERSION.json
+--- J/implementation-r11/tooling/executor/VERSION.json	2026-09-09 19:28:44.287005189 +0800
++++ J/implementation-r12/tooling/executor/VERSION.json	2026-09-09 20:14:11.831989912 +0800
+@@ -1,5 +1,5 @@
+ {
+-  "version": "4.7.0-diagnostic-cause-retention-r11",
++  "version": "4.8.0-preparation-consumer-integration-r12",
+   "entrypoint": "external29_driver.py",
+   "fixed_candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+   "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+@@ -10,7 +10,7 @@
+   "publication": "NOT_PERFORMED_BY_WRITER",
+   "owner_contract_version": "OWNER_APPROVED_EP19_LOCK_USAGE_LEDGER_V3_WITH_R5_FAILURE_TRANSITION_CORRECTION",
+   "bookkeeping_policy": "executor/bookkeeping_v3.py",
+-  "revision_preimage": "../../implementation-r10/tooling",
++  "revision_preimage": "../../implementation-r11/tooling",
+   "formal_run_id": "candidate-formal-002",
+   "formal_attempts_used_before_execution": 1
+ }
+diff -ruN '--exclude=__pycache__' '--exclude=outputs' J/implementation-r11/tooling/executor/binding_contract.py J/implementation-r12/tooling/executor/binding_contract.py
+--- J/implementation-r11/tooling/executor/binding_contract.py	2026-09-09 19:10:09.443546418 +0800
++++ J/implementation-r12/tooling/executor/binding_contract.py	2026-09-09 20:38:27.101375007 +0800
+@@ -7,8 +7,9 @@
+ HISTORICAL_O = Path('USER_HOME/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1')
+ HISTORICAL_D = HISTORICAL_O/'run-output-completeness-20260907T143346Z/baseline-sequence-20260908T070258Z'
+ PARENT = '689ab9456461a8d19a72d059f5157092efc43aff'
++OLD_TREE = '6c97c0c879aa4cd8d1c58ca338482dd8ce25eff6'
+ CANONICAL = '86d6aef94fd5e58da552e97c11473cff6eca734e'
+-SCHEMA = 'ep19-external29-runtime-binding-v1'
++SCHEMA = 'ep19-external29-runtime-binding-v2'
+ 
+ def digest(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+ def unique(pairs):
+@@ -29,7 +30,7 @@
+ 
+ def load(config, expected_digest):
+     config=exact_path(config)
+-    require(config.is_relative_to(ROOT.parents[1]/'writer-evidence-r11'), 'CONFIG_OUTSIDE_WRITER_EVIDENCE_R11')
++    require(config.is_relative_to(ROOT.parents[1]/'writer-evidence-r12'), 'CONFIG_OUTSIDE_WRITER_EVIDENCE_R12')
+     require(re.fullmatch('[0-9a-f]{64}', expected_digest or '') and digest(config)==expected_digest,
+             'CONFIG_SEAL_MISMATCH')
+     value=read(config)
+@@ -37,7 +38,8 @@
+               'canonical_comparison_base','control_root','matrix_sha256','inventories',
+               'run_id','owner','owner_sha256','dependency','dependency_sha256',
+               'qualification','qualification_sha256','adapter_qualification',
+-              'adapter_qualification_sha256','reviewed_delta','source_binding','product_patch_sha256'}
++              'adapter_qualification_sha256','product_identity_delta',
++              'external_implementation_delta','source_binding','product_patch_sha256'}
+     required.update({'applicability','applicability_sha256','private_map','private_map_sha256',
+                      'private_inventory','private_inventory_sha256'})
+     require(set(value)==required and value['schema']==SCHEMA, 'STRICT_BINDING_SCHEMA')
+@@ -58,9 +60,15 @@
+     for key in ('owner','dependency','qualification','adapter_qualification','applicability','private_map','private_inventory'):
+         path=exact_path(value[key]); require(path.is_file() and digest(path)==value[key+'_sha256'], key.upper()+'_BINDING_CHANGED')
+     import dependency_contract
+-    dependency_contract.validate(read(value['dependency']), matrix_path=matrix)
+-    delta=value['reviewed_delta']; require(set(delta)=={'path','sha256'}, 'DELTA_BINDING_SCHEMA')
+-    delta_path=exact_path(delta['path']); require(digest(delta_path)==delta['sha256'], 'DELTA_BINDING_CHANGED')
++    dependency=read(value['dependency'])
++    require(dependency.get('schema')=='ep19-writer-ledger-dependency-binding-v7',
++            'PREPARATION_CONSUMER_DEPENDENCY_BINDING_REQUIRED')
++    dependency_contract.validate(dependency, matrix_path=matrix)
++    for key,reason in (('product_identity_delta','PRODUCT_IDENTITY_DELTA'),
++                       ('external_implementation_delta','EXTERNAL_IMPLEMENTATION_DELTA')):
++        delta=value[key]; require(set(delta)=={'path','sha256'}, reason+'_BINDING_SCHEMA')
++        delta_path=exact_path(delta['path'])
++        require(delta_path.is_file() and digest(delta_path)==delta['sha256'], reason+'_BINDING_CHANGED')
+     actual={str(path):digest(path) for path in sorted(ROOT.rglob('*')) if path.is_file() and '__pycache__' not in path.parts and 'outputs' not in path.relative_to(ROOT).parts}
+     require(actual==value['source_binding'], 'INTEGRATION_SOURCE_BINDING_CHANGED')
+     return {**value, 'run_ids':[value['run_id']]}
+@@ -73,6 +81,7 @@
+ def closure():
+     value=from_environment(); control=Path(value['control_root'])
+     return [Path(os.environ['H7_BINDING_CONFIG']), Path(value['owner']), Path(value['dependency']),
+-            Path(value['qualification']), Path(value['adapter_qualification']), Path(value['reviewed_delta']['path']),
++            Path(value['qualification']), Path(value['adapter_qualification']),
++            Path(value['product_identity_delta']['path']), Path(value['external_implementation_delta']['path']),
+             Path(value['applicability']),Path(value['private_map']),Path(value['private_inventory']),
+             control/'GATE_EXECUTION_MATRIX.json', *(control/'inputs'/name for name in value['inventories'])]
+diff -ruN '--exclude=__pycache__' '--exclude=outputs' J/implementation-r11/tooling/executor/binding_qualification.py J/implementation-r12/tooling/executor/binding_qualification.py
+--- J/implementation-r11/tooling/executor/binding_qualification.py	2026-09-09 08:35:24.029257098 +0800
++++ J/implementation-r12/tooling/executor/binding_qualification.py	2026-09-09 20:18:53.280567711 +0800
+@@ -38,11 +38,11 @@
+ 
+ def check_files(files):
+     bc.require(bool(files),'EMPTY_EVIDENCE_CLOSURE')
+-    for p,h in files.items():bc.require(bc.digest(bc.path(p))==h,'EVIDENCE_SEAL_MISMATCH '+p)
++    for p,h in files.items():bc.require(bc.digest(bc.exact_path(p))==h,'EVIDENCE_SEAL_MISMATCH '+p)
+ 
+ def fresh(path):
+     """A label is insufficient: measured identities, sources, log and process agree."""
+-    path=bc.path(str(path));r=bc.read(path);files=r['sources'];check_files(files)
++    path=bc.exact_path(str(path));r=bc.read(path);files=r['sources'];check_files(files)
+     bc.require(set(files)==set(map(str,source_files())),'FRESH_SOURCE_UNIVERSE')
+     bc.require(r['binding_sha256']==os.environ.get('H7_BINDING_SHA256'),'FRESH_BINDING_STALE')
+     bc.require(r['binding_config']==os.environ.get('H7_BINDING_CONFIG'),'FRESH_BINDING_PATH')
+diff -ruN '--exclude=__pycache__' '--exclude=outputs' J/implementation-r11/tooling/executor/dependency_contract.py J/implementation-r12/tooling/executor/dependency_contract.py
+--- J/implementation-r11/tooling/executor/dependency_contract.py	2026-09-09 19:11:39.053390105 +0800
++++ J/implementation-r12/tooling/executor/dependency_contract.py	2026-09-09 20:16:33.075282395 +0800
+@@ -5,8 +5,10 @@
+ import json
+ 
+ CANDIDATE = "a29864343ed4f630b052c20d86c23b240f13cfd0"
+-REQUIRED_SOURCE_ROLES = frozenset({"fixed29_consumer_binding", "current_applicability",
+-                                   "private_eligible_map", "private_strict_inventory"})
++LEGACY_SOURCE_ROLES = frozenset({"fixed29_consumer_binding", "current_applicability",
++                                 "private_eligible_map", "private_strict_inventory"})
++REQUIRED_SOURCE_ROLES = LEGACY_SOURCE_ROLES | frozenset({"product_identity_delta",
++                                                         "external_implementation_delta"})
+ 
+ 
+ def digest(path):
+@@ -40,7 +42,8 @@
+ 
+ def _source_rows(value):
+     rows = value.get("sources")
+-    if not isinstance(rows, dict) or set(rows) != REQUIRED_SOURCE_ROLES:
++    required = REQUIRED_SOURCE_ROLES if value.get("schema")=="ep19-writer-ledger-dependency-binding-v7" else LEGACY_SOURCE_ROLES
++    if not isinstance(rows, dict) or set(rows) != required:
+         raise RuntimeError("DEPENDENCY_SOURCE_CLOSURE")
+     for role, row in rows.items():
+         if (not isinstance(row, dict) or set(row) != {"path", "sha256"} or
+@@ -55,7 +58,8 @@
+                                      "ep19-writer-ledger-dependency-binding-v3",
+                                      "ep19-writer-ledger-dependency-binding-v4",
+                                      "ep19-writer-ledger-dependency-binding-v5",
+-                                     "ep19-writer-ledger-dependency-binding-v6") or
++                                     "ep19-writer-ledger-dependency-binding-v6",
++                                     "ep19-writer-ledger-dependency-binding-v7") or
+             value.get("result") != "PASS" or
+             value.get("ledger_role") != "OBSERVATION_INTEGRITY_ONLY" or
+             value.get("ledger_consumers") != ["bookkeeping_v3.evaluate_ledger"] or
+@@ -66,6 +70,15 @@
+         if value.get(key) is not False:
+             raise RuntimeError("DEPENDENCY_FORBIDDEN_ROLE " + key)
+     sources = _source_rows(value)
++    if value.get("schema")=="ep19-writer-ledger-dependency-binding-v7":
++        product=Path(sources["product_identity_delta"]["path"])
++        external=Path(sources["external_implementation_delta"]["path"])
++        evidence=json.loads(product.read_text())
++        if (product==external or sources["product_identity_delta"]["sha256"]!=
++                "4be8b7982481a10599d9a43980603c30abc00a2da934eecab03ecab97562ac9e" or
++                evidence.get("schema")!="ep19-cleanup-identity-delta-v1" or
++                evidence.get("candidate")!=CANDIDATE or evidence.get("delta_count")!=27):
++            raise RuntimeError("PRODUCT_AND_EXTERNAL_DELTA_PROVENANCE_REJECT")
+     matrix = json.loads(Path(matrix_path).read_text())
+     fixed = json.loads(Path(sources["fixed29_consumer_binding"]["path"]).read_text())
+     if (fixed.get("schema") not in ("ep19-fixed29-consumer-source-binding-v1",
+@@ -156,7 +169,8 @@
+             if not any(row.get("path")==wanted_path and
+                        row.get("sha256")==origin.get("declared_skill_md_sha256") for row in source_rows):
+                 raise RuntimeError("INSTRUCTION_SOURCE_ORIGIN_REJECT")
+-    if value.get("schema")!="ep19-writer-ledger-dependency-binding-v6":
++    if value.get("schema") not in ("ep19-writer-ledger-dependency-binding-v6",
++                                    "ep19-writer-ledger-dependency-binding-v7"):
+         raise RuntimeError("ACTUAL_HELPER_EDGE_CLOSURE_STALE_SCHEMA")
+     scope=value.get("actual_execution_scope")
+     executor=Path(__file__).resolve().parent
+@@ -165,6 +179,8 @@
+                     "artifacts.py","durability.py","bindings.py","freshness.py",
+                     "parsers.py","vite_closure.py","vite_closure.mjs","parser_tools.py",
+                     "vite_resolution.mjs")
++    if value.get("schema")=="ep19-writer-ledger-dependency-binding-v7":
++        required_nodes=required_nodes+("execution.py","identity_delta.py","binding_contract.py","coverage.py")
+     if not isinstance(scope,dict) or set(scope.get("source_nodes",{}))!=set(required_nodes):
+         raise RuntimeError("ACTUAL_EXECUTION_SOURCE_EDGE_CLOSURE")
+     for name,wanted in scope["source_nodes"].items():
+@@ -201,6 +217,15 @@
+         {"caller":"vite_closure.validate","callee":"vite_closure.mjs","kind":"mandatory-auxiliary-process"},
+         {"caller":"runner.run_gate","callee":"artifacts.finalize","kind":"immutable-evidence-copy"},
+         {"caller":"artifacts.seal","callee":"durability.exclusive_bytes","kind":"durable-publication"}]
++    if value.get("schema")=="ep19-writer-ledger-dependency-binding-v7":
++        insertion=20
++        expected_edges[insertion:insertion]=[
++            {"caller":"external29_driver.preparation","callee":"external29_driver.modules","kind":"sealed-runtime-load"},
++            {"caller":"external29_driver.preparation","callee":"runner.prepare","kind":"actual-cli-prepare-call"},
++            {"caller":"runner.prepare","callee":"execution.verify_object_source","kind":"pre-namespace-source-verification"},
++            {"caller":"execution.verify_object_source","callee":"identity_delta.validate","kind":"product-identity-json-consumer"},
++            {"caller":"identity_delta.validate","callee":"product_identity_delta","kind":"exact-path-hash-schema-identity-native-receipt-validation"},
++            {"caller":"binding_contract.load","callee":"external_implementation_delta","kind":"separate-external-patch-byte-binding"}]
+     if scope.get("edges")!=expected_edges or scope.get("unresolved_actual_dependencies")!=[]:
+         raise RuntimeError("ACTUAL_EXECUTION_SOURCE_EDGE_SEMANTICS")
+     if scope.get("reachable_local_graph")!=reachable_local_graph():
+diff -ruN '--exclude=__pycache__' '--exclude=outputs' J/implementation-r11/tooling/executor/execution.py J/implementation-r12/tooling/executor/execution.py
+--- J/implementation-r11/tooling/executor/execution.py	2026-09-09 08:35:24.030257107 +0800
++++ J/implementation-r12/tooling/executor/execution.py	2026-09-09 20:14:11.043982701 +0800
+@@ -15,9 +15,9 @@
+  if git(source,'rev-parse',sha+'^{tree}').decode().strip()!=tree:raise RuntimeError('OBJECT_SOURCE_TREE')
+  if git(source,'rev-list','--parents','-n','1',sha).decode().strip().split()!=[sha,parent]:raise RuntimeError('OBJECT_SOURCE_PARENT')
+  git(source,'merge-base','--is-ancestor',BASE,sha)
+- if 'reviewed_delta' not in CONFIG:raise RuntimeError('SOURCE_BACKED_DELTA_REQUIRED')
++ if 'product_identity_delta' not in CONFIG:raise RuntimeError('SOURCE_BACKED_PRODUCT_IDENTITY_DELTA_REQUIRED')
+  import identity_delta
+- identity_delta.validate(CONFIG,CONFIG['reviewed_delta']['path'],CONFIG['reviewed_delta']['sha256'],git=git)
++ identity_delta.validate(CONFIG,CONFIG['product_identity_delta']['path'],CONFIG['product_identity_delta']['sha256'],git=git)
+  return True
+ 
+ def git(root,*args):
+diff -ruN '--exclude=__pycache__' '--exclude=outputs' J/implementation-r11/tooling/executor/identity_delta.py J/implementation-r12/tooling/executor/identity_delta.py
+--- J/implementation-r11/tooling/executor/identity_delta.py	2026-09-09 08:35:24.030257107 +0800
++++ J/implementation-r12/tooling/executor/identity_delta.py	2026-09-09 20:14:10.788980367 +0800
+@@ -58,7 +58,7 @@
+ 
+ def artifact(row):
+     exact_keys(row, 'path sha256', 'ARTIFACT_SCHEMA')
+-    p=bc.path(row['path']);bc.require(bc.digest(p)==row['sha256'], 'DELTA_ARTIFACT_HASH '+str(p))
++    p=bc.exact_path(row['path']);bc.require(bc.digest(p)==row['sha256'], 'DELTA_ARTIFACT_HASH '+str(p))
+     return p
+ 
+ def tree_rows(raw):
+@@ -103,7 +103,7 @@
+     return ['python3','-B',TOOL,'--base',bc.CANONICAL,'--head',candidate,'--json']
+ 
+ def validate(c, evidence, seal, git=None):
+-    p=bc.path(str(evidence));bc.require(bc.digest(p)==seal, 'DELTA_MANIFEST_SEAL');e=bc.read(p)
++    p=bc.exact_path(str(evidence));bc.require(bc.digest(p)==seal, 'DELTA_MANIFEST_SEAL');e=bc.read(p)
+     exact_keys(e, 'schema candidate tree immediate_parent canonical_comparison_base clone_source trees parent_diff canonical_diff sources junit junit_receipt impact_receipt delta_identities delta_count', 'DELTA_SCHEMA')
+     bc.require(e['schema']==SCHEMA, 'DELTA_SCHEMA')
+     for k in ('candidate','tree','immediate_parent','canonical_comparison_base','clone_source'):
+@@ -191,7 +191,7 @@
+     values['CHANGE_IMPACT.json']=impact
+     fcv=json.loads(values['FCV_STAGE2_INVENTORY.json'])
+     fcv['expected_identities']=len(full['identities']);fcv['expected_skips']=len(skips)
+-    fcv['derivation']='Historical accepted identity set and skips preserved; source-backed candidate JUnit delta bound by reviewed_delta in BINDING.json. No historical test result is a current PASS.'
++    fcv['derivation']='Historical accepted identity set and skips preserved; source-backed candidate JUnit delta bound by product_identity_delta in BINDING.json. No historical test result is a current PASS.'
+     fcv['unchanged_source_proof']=sorted(e['canonical_diff'])
+     for key in ('FULL_TEST_EXPECTED_FROZEN.tsv','FULL_TEST_EXPECTED_REPOSITORY_FORMAT.tsv'): fcv['pins'][key]=sha(values[key])
+     values['FCV_STAGE2_INVENTORY.json']=encoded(fcv)
+diff -ruN '--exclude=__pycache__' '--exclude=outputs' J/implementation-r11/tooling/executor/qualification_contract.py J/implementation-r12/tooling/executor/qualification_contract.py
+--- J/implementation-r11/tooling/executor/qualification_contract.py	2026-09-09 19:11:38.507384964 +0800
++++ J/implementation-r12/tooling/executor/qualification_contract.py	2026-09-09 20:17:53.031014398 +0800
+@@ -2,6 +2,7 @@
+ from collections import Counter
+ 
+ REQUIRED_AFFECTED_CONTROLS = frozenset({
++    "test_r12_actual_prepare.R12ActualPrepareConsumerControls.test_actual_cli_prepare_identity_contract_and_negative_matrix",
+     "test_r11_diagnostic_emission.R11ActualDiagnosticEmissionControls.test_actual_acquisition_and_marker_then_stderr_write_failure_saved",
+     "test_r11_diagnostic_emission.R11ActualDiagnosticEmissionControls.test_actual_native_gate_and_marker_then_stderr_flush_failure_saved",
+     "test_r10_final_boundary.R10ActualFinalBoundaryControls.test_actual_final_failure_writer_fault_keeps_original_in_saved_formal_receipt",
+diff -ruN '--exclude=__pycache__' '--exclude=outputs' J/implementation-r11/tooling/executor/runner.py J/implementation-r12/tooling/executor/runner.py
+--- J/implementation-r11/tooling/executor/runner.py	2026-09-09 17:25:56.160706634 +0800
++++ J/implementation-r12/tooling/executor/runner.py	2026-09-09 20:14:11.573987551 +0800
+@@ -32,6 +32,8 @@
+             'owner_contract_version':OWNER_CONTRACT_VERSION,'owner_authorization_sha256':OWNER_SHA256,
+             'matrix_sha256':coverage.digest(CONTROL/'GATE_EXECUTION_MATRIX.json'),
+             'dependency_check_sha256':coverage.digest(CONFIG['dependency']),
++            'product_identity_delta_sha256':CONFIG['product_identity_delta']['sha256'],
++            'external_implementation_delta_sha256':CONFIG['external_implementation_delta']['sha256'],
+             'qualification':str(q),'qualification_sha256':coverage.digest(q),
+             'helpers':coverage.seal(coverage.local_imports()[0]),
+             'orchestration':coverage.seal([p for p in (D/'tools').rglob('*') if p.is_file()]),
+diff -ruN '--exclude=__pycache__' '--exclude=outputs' J/implementation-r11/tooling/qualification/build_dependency_evidence.py J/implementation-r12/tooling/qualification/build_dependency_evidence.py
+--- J/implementation-r11/tooling/qualification/build_dependency_evidence.py	2026-09-09 19:11:38.774387478 +0800
++++ J/implementation-r12/tooling/qualification/build_dependency_evidence.py	2026-09-09 20:15:16.755584012 +0800
+@@ -24,6 +24,7 @@
+ def main():
+     parser=argparse.ArgumentParser()
+     for name in ("historical-fixed","applicability","private-map","private-inventory",
++                 "product-identity-delta","external-implementation-delta",
+                  "output-fixed","output-dependency"):
+         parser.add_argument("--"+name,type=Path,required=True)
+     args=parser.parse_args()
+@@ -71,17 +72,20 @@
+         "fixed29_consumer_binding":{"path":str(args.output_fixed.resolve()),"sha256":digest(args.output_fixed)},
+         "current_applicability":{"path":str(args.applicability.resolve()),"sha256":digest(args.applicability)},
+         "private_eligible_map":{"path":str(args.private_map.resolve()),"sha256":digest(args.private_map)},
+-        "private_strict_inventory":{"path":str(args.private_inventory.resolve()),"sha256":digest(args.private_inventory)}}
++        "private_strict_inventory":{"path":str(args.private_inventory.resolve()),"sha256":digest(args.private_inventory)},
++        "product_identity_delta":{"path":str(args.product_identity_delta.resolve()),"sha256":digest(args.product_identity_delta)},
++        "external_implementation_delta":{"path":str(args.external_implementation_delta.resolve()),"sha256":digest(args.external_implementation_delta)}}
+     nodes=("external29_driver.py","executor_adapter.py","boundary.py","bookkeeping_v3.py","causal.py",
+-           "runner.py","decision_evidence.py","baseline_evidence.py",
++           "runner.py","execution.py","identity_delta.py","binding_contract.py","coverage.py",
++           "decision_evidence.py","baseline_evidence.py",
+            "artifacts.py","durability.py","bindings.py","freshness.py",
+            "parsers.py","vite_closure.py","vite_closure.mjs","parser_tools.py",
+            "vite_resolution.mjs")
+     command_helper_edges={row["gate"]:row["external_helpers_after_documented_owned_to_H_rewrite"]
+                           for row in fixed["commands"]
+                           if row["external_helpers_after_documented_owned_to_H_rewrite"]}
+-    dependency={"schema":"ep19-writer-ledger-dependency-binding-v6","result":"PASS",
+-        "scope":"finite actual r11 external29 driver/adapter diagnostic emission, preflight/final persistence transport, bounded native stderr fallback, rewritten current commands/helpers/candidate sources, parser package graph, and eligibility origins",
++    dependency={"schema":"ep19-writer-ledger-dependency-binding-v7","result":"PASS",
++        "scope":"finite actual r12 external29 preparation consumer plus retained driver/adapter, commands/helpers, parser package graph, product identity evidence, external implementation delta, and eligibility origins",
+         "ledger_role":"OBSERVATION_INTEGRITY_ONLY","ledger_consumers":["bookkeeping_v3.evaluate_ledger"],
+         "unbound_dynamic_readers":[],"authorization_source":False,
+         "instruction_or_skill_selection_source":False,"candidate_selection_source":False,
+@@ -108,6 +112,12 @@
+                 {"caller":"runner.compare_baseline","callee":"decision_evidence.compare","kind":"actual-gate-decision-evidence"},
+                 {"caller":"external29_driver.main","callee":"external29_driver.emit_native_failure","kind":"production-native-error-boundary"},
+                 {"caller":"external29_driver.emit_native_failure","callee":"external29_driver.native_failure_document","kind":"bounded-sanitized-stderr-serialization"},
++                {"caller":"external29_driver.preparation","callee":"external29_driver.modules","kind":"sealed-runtime-load"},
++                {"caller":"external29_driver.preparation","callee":"runner.prepare","kind":"actual-cli-prepare-call"},
++                {"caller":"runner.prepare","callee":"execution.verify_object_source","kind":"pre-namespace-source-verification"},
++                {"caller":"execution.verify_object_source","callee":"identity_delta.validate","kind":"product-identity-json-consumer"},
++                {"caller":"identity_delta.validate","callee":"product_identity_delta","kind":"exact-path-hash-schema-identity-native-receipt-validation"},
++                {"caller":"binding_contract.load","callee":"external_implementation_delta","kind":"separate-external-patch-byte-binding"},
+                 {"caller":"runner.run_gate[FRONTEND_BUILD]","callee":"vite_resolution.mjs","kind":"mandatory-auxiliary-process"},
+                 {"caller":"vite_resolution.mjs","callee":"vite.resolveConfig","kind":"runtime-prepared-package-api"},
+                 {"caller":"runner.prepare","callee":"parser_tools.prepare","kind":"python-call"},
+diff -ruN '--exclude=__pycache__' '--exclude=outputs' J/implementation-r11/tooling/qualification/build_integration_qualification.py J/implementation-r12/tooling/qualification/build_integration_qualification.py
+--- J/implementation-r11/tooling/qualification/build_integration_qualification.py	2026-09-09 17:27:20.750511133 +0800
++++ J/implementation-r12/tooling/qualification/build_integration_qualification.py	2026-09-09 20:21:02.006749893 +0800
+@@ -29,6 +29,7 @@
+     p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--fixture-root',type=Path,required=True);a=p.parse_args()
+     a.output.mkdir(parents=True,mode=0o700);a.fixture_root.mkdir(parents=True,exist_ok=True,mode=0o700)
+     os.environ['EP19_QUALIFICATION_FIXTURE_ROOT']=str(a.fixture_root.absolute());os.environ['PYTHONDONTWRITEBYTECODE']='1'
++    os.environ['EP19_TEST_TOOLING_ROOT']=str(ROOT.absolute())
+     source_before=source_binding()
+     sys.path.insert(0,str(Path(__file__).parent));suite=unittest.defaultTestLoader.discover(str(Path(__file__).parent),pattern='test_*.py')
+     expected=sorted(identities(suite))
+diff -ruN '--exclude=__pycache__' '--exclude=outputs' J/implementation-r11/tooling/qualification/build_runtime_binding.py J/implementation-r12/tooling/qualification/build_runtime_binding.py
+--- J/implementation-r11/tooling/qualification/build_runtime_binding.py	2026-09-09 12:21:26.237074840 +0800
++++ J/implementation-r12/tooling/qualification/build_runtime_binding.py	2026-09-09 20:38:27.356377382 +0800
+@@ -10,6 +10,7 @@
+ PATCH='bab6aee8346f7ef47ca94f1e3da629e7ae81df2f16202706ae4966864a485690'
+ OWNER='b4e996d02931d722c959e9a4bbb1d0023ec0cd5e810b5b1a061299452816fd76'
+ MATRIX='57c727549bc818bbcdc8c79c2babee3096f9ca2d058df0713033b6e49a42466e'
++PRODUCT_DELTA='4be8b7982481a10599d9a43980603c30abc00a2da934eecab03ecab97562ac9e'
+ 
+ def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+ def sources(root):
+@@ -33,6 +34,17 @@
+     if str(tooling/'executor') not in sys.path:sys.path.insert(0,str(tooling/'executor'))
+     import dependency_contract
+     dependency_contract.validate(dep,matrix_path=a.matrix)
++    import identity_delta
++    identity={"candidate":CANDIDATE,"tree":TREE,"immediate_parent":PARENT,
++              "canonical_comparison_base":BASE,"clone_source":str(checkout)}
++    def git_bytes(root,*args):
++        return subprocess.check_output(['git','--no-optional-locks','-C',str(root),*args],
++            env={**os.environ,'GIT_OPTIONAL_LOCKS':'0','GIT_NO_REPLACE_OBJECTS':'1',
++                 'GIT_NO_LAZY_FETCH':'1','GIT_TERMINAL_PROMPT':'0'})
++    product_identity_delta=a.product_identity_delta.resolve()
++    if digest(product_identity_delta)!=PRODUCT_DELTA:
++        raise RuntimeError('PRODUCT_IDENTITY_DELTA_NOT_GENUINE_FIXED_EVIDENCE')
++    identity_delta.validate(identity,product_identity_delta,PRODUCT_DELTA,git=git_bytes)
+     app=json.loads(a.applicability.read_text())
+     if app.get('private_manifest_sha256')!=digest(a.private_map) or app.get('private_strict_inventory_sha256')!=digest(a.private_inventory):
+         raise RuntimeError('ELIGIBILITY_PRIVATE_PROVENANCE_REJECT')
+@@ -40,7 +52,7 @@
+     if q.get('source_binding')!=source:raise RuntimeError('QUALIFICATION_SOURCE_BINDING_STALE')
+     inventories={p.name:digest(p) for p in sorted((control/'inputs').iterdir()) if p.is_file()}
+     if a.run_id!='candidate-formal-002':raise RuntimeError('EXACT_CANDIDATE_FORMAL_002_REQUIRED')
+-    return {'schema':'ep19-external29-runtime-binding-v1','root':str(tooling),'clone_source':str(checkout),
++    return {'schema':'ep19-external29-runtime-binding-v2','root':str(tooling),'clone_source':str(checkout),
+             'candidate':CANDIDATE,'tree':TREE,'immediate_parent':PARENT,'canonical_comparison_base':BASE,
+             'product_patch_sha256':PATCH,'control_root':str(control),'matrix_sha256':MATRIX,'inventories':inventories,
+             'run_id':a.run_id,'owner':str(a.owner.resolve()),'owner_sha256':digest(a.owner),
+@@ -50,7 +62,10 @@
+             'applicability':str(a.applicability.resolve()),'applicability_sha256':digest(a.applicability),
+             'private_map':str(a.private_map.resolve()),'private_map_sha256':digest(a.private_map),
+             'private_inventory':str(a.private_inventory.resolve()),'private_inventory_sha256':digest(a.private_inventory),
+-            'reviewed_delta':{'path':str(a.reviewed_delta.resolve()),'sha256':digest(a.reviewed_delta)},'source_binding':source}
++            'product_identity_delta':{'path':str(a.product_identity_delta.resolve()),'sha256':digest(a.product_identity_delta)},
++            'external_implementation_delta':{'path':str(a.external_implementation_delta.resolve()),
++                                             'sha256':digest(a.external_implementation_delta)},
++            'source_binding':source}
+ def write(path,value):
+     executor=Path(__file__).resolve().parents[1]/'executor'
+     if str(executor) not in sys.path:sys.path.insert(0,str(executor))
+@@ -58,6 +73,9 @@
+     raw=(json.dumps(value,indent=2,sort_keys=True)+'\n').encode();durability.exclusive_bytes(path,raw,0o400)
+ def main():
+     p=argparse.ArgumentParser();
+-    for name in ('checkout','owner','dependency','qualification','adapter-qualification','matrix','tooling-root','reviewed-delta','applicability','private-map','private-inventory','output'):p.add_argument('--'+name,type=Path,required=True)
++    for name in ('checkout','owner','dependency','qualification','adapter-qualification','matrix','tooling-root',
++                 'product-identity-delta','external-implementation-delta','applicability','private-map',
++                 'private-inventory','output'):
++        p.add_argument('--'+name,type=Path,required=True)
+     p.add_argument('--run-id',required=True);a=p.parse_args();write(a.output,build(a));print(digest(a.output))
+ if __name__=='__main__':main()
+diff -ruN '--exclude=__pycache__' '--exclude=outputs' J/implementation-r11/tooling/qualification/test_r12_actual_prepare.py J/implementation-r12/tooling/qualification/test_r12_actual_prepare.py
+--- J/implementation-r11/tooling/qualification/test_r12_actual_prepare.py	1970-01-01 08:00:00.000000000 +0800
++++ J/implementation-r12/tooling/qualification/test_r12_actual_prepare.py	2026-09-09 20:38:27.619379831 +0800
+@@ -0,0 +1,243 @@
++"""Actual private prepare CLI seam; product producers are never re-run.
++
++The imported private source snapshot changes only fixture ancestry and the
++qualification precondition.  binding_contract.load, runner.prepare,
++execution.verify_object_source and identity_delta.validate remain real.
++"""
++from pathlib import Path
++import hashlib
++import json
++import os
++import shutil
++import subprocess
++import sys
++import tempfile
++import time
++import unittest
++
++
++PYTHON = Path("USER_HOME/.hermes/hermes-agent/venv/bin/python3")
++CANDIDATE = "a29864343ed4f630b052c20d86c23b240f13cfd0"
++TREE = "fd37409d0274662abbe86f69e3d963c05b379696"
++PARENT = "689ab9456461a8d19a72d059f5157092efc43aff"
++BASE = "86d6aef94fd5e58da552e97c11473cff6eca734e"
++PRODUCT_PATCH = "bab6aee8346f7ef47ca94f1e3da629e7ae81df2f16202706ae4966864a485690"
++PRODUCT_DELTA_SHA256 = "4be8b7982481a10599d9a43980603c30abc00a2da934eecab03ecab97562ac9e"
++
++
++def digest(path):
++    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
++
++
++def write_json(path, value):
++    path = Path(path)
++    path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
++    path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
++
++
++def source_binding(root):
++    root = Path(root)
++    return {str(path): digest(path) for path in sorted(root.rglob("*"))
++            if path.is_file() and "__pycache__" not in path.parts
++            and "outputs" not in path.relative_to(root).parts}
++
++
++class R12ActualPrepareConsumerControls(unittest.TestCase):
++    maxDiff = None
++
++    def test_actual_cli_prepare_identity_contract_and_negative_matrix(self):
++        tested = Path(os.environ["EP19_TEST_TOOLING_ROOT"]).resolve()
++        continuation = tested.parents[1]
++        task = continuation.parent
++        fixture_root = continuation / "fixtures-r12"
++        fixture_root.mkdir(mode=0o700, exist_ok=True)
++        snapshot = Path(tempfile.mkdtemp(prefix="implementation-r12-cli-", dir=fixture_root))
++        tooling = snapshot / "tooling"
++        shutil.copytree(tested, tooling)
++
++        # Private-only substitutions: preserve the actual target validators, while
++        # adapting this extra nesting and replacing only the already-qualified
++        # preparation precondition with a sealed fixture source check.
++        binding_path = tooling / "executor/binding_contract.py"
++        binding_text = binding_path.read_text()
++        binding_text = binding_text.replace("TASK = ROOT.parents[2]", "TASK = ROOT.parents[3]")
++        binding_text = binding_text.replace("writer-evidence-r11", "writer-evidence-r12")
++        binding_path.write_text(binding_text)
++        dependency_path = tooling / "executor/dependency_contract.py"
++        dependency_path.write_text(dependency_path.read_text().replace(
++            'resolve().parents[4]/"checkout"', 'resolve().parents[5]/"checkout"'))
++        coverage_path = tooling / "executor/coverage.py"
++        needle = "    path=Path(path);q=json.loads(path.read_text())\n"
++        private_validator = needle + (
++            "    if q.get('schema')=='ep19-r12-private-preparation-qualification-v1':\n"
++            "        required={'schema','result','purpose','product_gate_execution','formal_attempt','shared_preparation','source_binding','test_body','test_body_sha256','substitutions'}\n"
++            "        binding_contract.require(set(q)==required and q['result']=='PASS', 'PRIVATE_PREPARATION_QUALIFICATION_SCHEMA')\n"
++            "        binding_contract.require(q['purpose']=='TARGET_VALIDATOR_PATH_ONLY_NOT_INTEGRATED_QUALIFICATION' and q['product_gate_execution'] is False and q['formal_attempt'] is False and q['shared_preparation'] is False, 'PRIVATE_PREPARATION_QUALIFICATION_SCOPE')\n"
++            "        actual={str(p):digest(p) for p in sorted(D.rglob('*')) if p.is_file() and '__pycache__' not in p.parts and 'outputs' not in p.relative_to(D).parts}\n"
++            "        binding_contract.require(q['source_binding']==actual and digest(q['test_body'])==q['test_body_sha256'], 'PRIVATE_PREPARATION_QUALIFICATION_SOURCE')\n"
++            "        return [path,Path(q['test_body'])]\n")
++        self.assertIn(needle, coverage_path.read_text())
++        coverage_path.write_text(coverage_path.read_text().replace(needle, private_validator, 1))
++
++        substitutions = {
++            "binding_contract_task_ancestry": "ROOT.parents[2] -> ROOT.parents[3] for nested private fixture",
++            "dependency_checkout_ancestry": "matrix parents[4] -> parents[5] for nested private fixture",
++            "qualification_precondition": "sealed private source check; not a real integrated qualification",
++            "target_validators_substituted": False,
++            "lean_or_container_proof_claimed": False,
++        }
++        imported = source_binding(tooling)
++        evidence_root = fixture_root / "writer-evidence-r12"
++        evidence_root.mkdir(mode=0o700, exist_ok=True)
++        token = snapshot.name.removeprefix("implementation-r12-cli-")
++        q_path = evidence_root / ("PRIVATE_PREP_QUALIFICATION." + token + ".json")
++        test_body = Path(__file__).resolve()
++        write_json(q_path, {
++            "schema": "ep19-r12-private-preparation-qualification-v1",
++            "result": "PASS",
++            "purpose": "TARGET_VALIDATOR_PATH_ONLY_NOT_INTEGRATED_QUALIFICATION",
++            "product_gate_execution": False,
++            "formal_attempt": False,
++            "shared_preparation": False,
++            "source_binding": imported,
++            "test_body": str(test_body),
++            "test_body_sha256": digest(test_body),
++            "substitutions": substitutions,
++        })
++
++        fixed_path = evidence_root / ("FIXED29." + token + ".json")
++        dependency = evidence_root / ("DEPENDENCY." + token + ".json")
++        product_delta = task / "candidate-preparation/native-delta-001/DELTA.json"
++        external_delta = continuation / "writer-evidence-r11/IMPLEMENTATION.r10-to-r11.final-002.patch"
++        dependency_argv = [str(PYTHON), "-B", str(tooling / "qualification/build_dependency_evidence.py"),
++            "--historical-fixed", str(continuation / "writer-evidence-r11/INPUT_FIXED29_CONSUMER_BINDING.r11.candidate-001.json"),
++            "--applicability", str(continuation / "writer-evidence-r2/INPUT_CURRENT_APPLICABILITY.json"),
++            "--private-map", str(continuation / "private-r12/ELIGIBLE_SKILLS_MAP.private.json"),
++            "--private-inventory", str(continuation / "private-r12/STRICT_PACKAGE_INVENTORY.private.json")]
++        dependency_builder = (tooling / "qualification/build_dependency_evidence.py").read_text()
++        if "product-identity-delta" in dependency_builder:
++            dependency_argv += ["--product-identity-delta", str(product_delta),
++                                "--external-implementation-delta", str(external_delta)]
++        dependency_argv += ["--output-fixed", str(fixed_path),
++                            "--output-dependency", str(dependency)]
++        built = subprocess.run(dependency_argv, cwd=fixture_root, stdout=subprocess.PIPE,
++                               stderr=subprocess.STDOUT, timeout=120)
++        self.assertEqual(built.returncode, 0, built.stdout.decode(errors="replace"))
++
++        self.assertEqual(digest(product_delta), PRODUCT_DELTA_SHA256)
++        control = tooling / "candidate-inputs-v3"
++        base_binding = {
++            "schema": "ep19-external29-runtime-binding-v1", "root": str(tooling),
++            "clone_source": str(task / "checkout"), "candidate": CANDIDATE, "tree": TREE,
++            "immediate_parent": PARENT, "canonical_comparison_base": BASE,
++            "product_patch_sha256": PRODUCT_PATCH, "control_root": str(control),
++            "matrix_sha256": digest(control / "GATE_EXECUTION_MATRIX.json"),
++            "inventories": {p.name: digest(p) for p in sorted((control / "inputs").iterdir()) if p.is_file()},
++            "run_id": "candidate-formal-002", "owner": str(continuation / "OWNER_AUTHORIZATION.verbatim.txt"),
++            "owner_sha256": digest(continuation / "OWNER_AUTHORIZATION.verbatim.txt"),
++            "dependency": str(dependency), "dependency_sha256": digest(dependency),
++            "qualification": str(q_path), "qualification_sha256": digest(q_path),
++            "adapter_qualification": str(tooling / "adapter71-qualification.reused.json"),
++            "adapter_qualification_sha256": digest(tooling / "adapter71-qualification.reused.json"),
++            "applicability": str(continuation / "writer-evidence-r2/INPUT_CURRENT_APPLICABILITY.json"),
++            "applicability_sha256": digest(continuation / "writer-evidence-r2/INPUT_CURRENT_APPLICABILITY.json"),
++            "private_map": str(continuation / "private-r12/ELIGIBLE_SKILLS_MAP.private.json"),
++            "private_map_sha256": digest(continuation / "private-r12/ELIGIBLE_SKILLS_MAP.private.json"),
++            "private_inventory": str(continuation / "private-r12/STRICT_PACKAGE_INVENTORY.private.json"),
++            "private_inventory_sha256": digest(continuation / "private-r12/STRICT_PACKAGE_INVENTORY.private.json"),
++            "source_binding": imported,
++        }
++        corrected_contract = "product_identity_delta" in binding_path.read_text()
++        if corrected_contract:
++            base_binding["schema"] = "ep19-external29-runtime-binding-v2"
++            base_binding["product_identity_delta"] = {"path": str(product_delta), "sha256": digest(product_delta)}
++            base_binding["external_implementation_delta"] = {"path": str(external_delta), "sha256": digest(external_delta)}
++        else:
++            base_binding["reviewed_delta"] = {"path": str(external_delta), "sha256": digest(external_delta)}
++
++        run = tooling / "outputs/continuation-runs/candidate-formal-002"
++        run.mkdir(parents=True, mode=0o700)
++        sentinel = run / "PREEXISTING_PRIVATE_SENTINEL"
++        sentinel.write_text("identity validator must finish before this sentinel is reported\n")
++        original_run_bytes = sentinel.read_bytes()
++        cases_dir = evidence_root / ("CLI_CASES." + token)
++        cases_dir.mkdir(mode=0o700)
++
++        def invoke(name, value, supplied_seal=None):
++            config = evidence_root / (name + "." + token + ".binding.json")
++            write_json(config, value)
++            argv = [str(PYTHON), "-B", str(tooling / "executor/external29_driver.py"),
++                    "prepare", "--run-id", "candidate-formal-002", "--binding", str(config),
++                    "--binding-sha256", supplied_seal or digest(config)]
++            started = time.time_ns()
++            process = subprocess.run(argv, cwd=fixture_root, stdout=subprocess.PIPE,
++                                     stderr=subprocess.PIPE, timeout=120)
++            finished = time.time_ns()
++            (cases_dir / (name + ".stdout")).write_bytes(process.stdout)
++            (cases_dir / (name + ".stderr")).write_bytes(process.stderr)
++            try:
++                diagnostic = json.loads(process.stderr)
++            except Exception:
++                diagnostic = None
++            receipt = {"case": name, "argv": argv, "native_exit": process.returncode,
++                       "started_ns": started, "finished_ns": finished,
++                       "stdout_sha256": hashlib.sha256(process.stdout).hexdigest(),
++                       "stderr_sha256": hashlib.sha256(process.stderr).hexdigest(),
++                       "diagnostic": diagnostic, "run_preexisted": True,
++                       "sentinel_unchanged": sentinel.read_bytes() == original_run_bytes,
++                       "formal_attempt": False, "product_tests": False,
++                       "shared_preparation": False, "shared_probes": False}
++            write_json(cases_dir / (name + ".process.json"), receipt)
++            return receipt
++
++        positive = invoke("positive-genuine-product-identity", base_binding)
++        self.assertEqual(positive["native_exit"], 1)
++        self.assertIsNotNone(positive["diagnostic"])
++        self.assertEqual(positive["diagnostic"]["error_type"], "FileExistsError")
++        self.assertTrue(positive["sentinel_unchanged"])
++
++        # The predecessor fails the preceding assertion with the real missing API.
++        # Once corrected, every invalid binding must reject before the sentinel.
++        product_key = "product_identity_delta"
++        wrong_patch = json.loads(json.dumps(base_binding))
++        wrong_patch[product_key] = {"path": str(external_delta), "sha256": digest(external_delta)}
++        cases = [("external-patch-in-product-identity", wrong_patch, "JSONDecodeError", None)]
++        for label, mutate, expected_reason in (
++            ("wrong-product-schema", lambda value: value.__setitem__("schema", "wrong-product-schema"), "DELTA_SCHEMA"),
++            ("wrong-product-identity", lambda value: value.__setitem__("candidate", PARENT), "DELTA_CANDIDATE candidate")):
++            artifact = evidence_root / (label + "." + token + ".json")
++            value = json.loads(product_delta.read_text())
++            mutate(value); write_json(artifact, value)
++            config = json.loads(json.dumps(base_binding))
++            config[product_key] = {"path": str(artifact), "sha256": digest(artifact)}
++            cases.append((label, config, "RuntimeError", expected_reason))
++        bad_hash = json.loads(json.dumps(base_binding)); bad_hash[product_key]["sha256"] = "0" * 64
++        cases.append(("wrong-product-hash", bad_hash, "RuntimeError", "PRODUCT_IDENTITY_DELTA_BINDING_CHANGED"))
++        missing = json.loads(json.dumps(base_binding)); missing.pop(product_key)
++        cases.append(("missing-product-identity", missing, "RuntimeError", "STRICT_BINDING_SCHEMA"))
++        for name, config, error_type, reason in cases:
++            receipt = invoke(name, config)
++            self.assertEqual(receipt["native_exit"], 1, name)
++            self.assertEqual(receipt["diagnostic"]["error_type"], error_type, name)
++            if reason:
++                hashes = {row["reason_sha256"] for row in receipt["diagnostic"].get("causal_errors", [])}
++                self.assertIn(hashlib.sha256(reason.encode()).hexdigest(), hashes, name)
++            self.assertTrue(receipt["sentinel_unchanged"], name)
++
++        bad_seal = invoke("wrong-config-seal", base_binding, "0" * 64)
++        self.assertEqual(bad_seal["diagnostic"]["error_type"], "RuntimeError")
++        self.assertTrue(bad_seal["sentinel_unchanged"])
++        write_json(cases_dir / "SUMMARY.json", {
++            "result": "PASS", "corrected_contract": corrected_contract,
++            "genuine_product_delta": str(product_delta),
++            "genuine_product_delta_sha256": digest(product_delta),
++            "external_delta": str(external_delta), "external_delta_sha256": digest(external_delta),
++            "actual_cli": True, "actual_parser_modules_runner_prepare": True,
++            "actual_verify_object_source": True, "actual_identity_delta_validate": True,
++            "private_preexisting_run_cutoff": True, "namespace_creation_tested": False,
++            "target_validators_substituted": False, "substitutions": substitutions,
++        })
++
++
++if __name__ == "__main__":
++    unittest.main()

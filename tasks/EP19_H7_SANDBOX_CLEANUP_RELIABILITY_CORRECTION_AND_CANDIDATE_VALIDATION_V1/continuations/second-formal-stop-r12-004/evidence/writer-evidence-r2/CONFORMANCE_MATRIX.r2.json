@@ -1,0 +1,205 @@
+{
+  "schema": "ep19-r2-ar001-ar010-conformance-matrix-v1",
+  "overall": "ENGINEERING_CONFORMANCE_QUALIFIED_PARENT_FORMAL_NOT_EXECUTED",
+  "findings": {
+    "AR001": {
+      "disposition": "RESOLVED",
+      "contract": "Continuous strict protection through FINAL/COVERAGE/SEAL; final drain and explicit truthful observation endpoint; final durable decision contains actual continuous events.",
+      "source": [
+        "executor/external29_driver.py",
+        "executor/boundary.py",
+        "executor/native_observe.py"
+      ],
+      "counterexample": "A real fixture Memory write after strict endpoint capture but before final adjudication produced an in-memory reject while r1 persisted a PASS receipt without continuous events.",
+      "red": "red-preformal-002: test_ar001_final_receipt_contains_write_during_seal_capture FAIL with persisted STRICT_INPUT_INTEGRITY=PASS",
+      "green": [
+        "green-preformal-002: same control PASS",
+        "green-postfix-001: combined SEAL capture Memory write rejects, both observers close, durable SEAL receipt contains event and endpoint claim"
+      ],
+      "outer_path": "external29_driver.strict_check plus external29_driver.boundary(finalize_observation=True) -> RunAdapter.seal -> Engine.check",
+      "evidence": [
+        "red-preformal-002/NATIVE.log",
+        "green-preformal-002/NATIVE.log",
+        "green-postfix-001/NATIVE.log",
+        "qualification-003/RESULT.json"
+      ]
+    },
+    "AR002": {
+      "disposition": "RESOLVED",
+      "contract": "Formal seed observer has usage/root baselines and is rebound to the exact production policy; legal visible temp lifecycle passes through the same observer wiring.",
+      "source": [
+        "executor/observe.py",
+        "executor/external29_driver.py"
+      ],
+      "counterexample": "A real legal visible .usage_<8>.tmp event through the formal seed shape raised KeyError usage_baseline.",
+      "red": "red-preformal-002: test_ar002_formal_seed_accepts_visible_legal_temp_without_keyerror ERROR at observe.py policy usage_baseline",
+      "green": [
+        "green-preformal-002: visible legal temp metadata acquired without KeyError",
+        "green-postfix-001: seed observer rebind plus real paired rename is accepted"
+      ],
+      "negative_controls": [
+        "external file moved into usage rejects",
+        "temp moved outside target rejects",
+        "bad mode visible temp rejects",
+        "unpaired cookie/source/target rejects"
+      ],
+      "evidence": [
+        "green-preformal-002/NATIVE.log",
+        "green-postfix-001/NATIVE.log",
+        "regression-group-1/NATIVE.log",
+        "qualification-003/RESULT.json"
+      ]
+    },
+    "AR003": {
+      "disposition": "RESOLVED_PRESERVED",
+      "source": [
+        "executor/boundary.py",
+        "executor/bookkeeping_v3.py"
+      ],
+      "regression": "Actual wall/monotonic capture bounds, previous accepted lower bound, future timestamp rejection, and observable rollback rejection all PASS.",
+      "evidence": [
+        "regression-group-2/NATIVE.log",
+        "qualification-003/RESULT.json"
+      ]
+    },
+    "AR004": {
+      "disposition": "RESOLVED_PRESERVED",
+      "source": [
+        "executor/bookkeeping_v3.py"
+      ],
+      "regression": "Raw CR/CRLF rejects before JSON parsing while escaped CR remains valid.",
+      "evidence": [
+        "regression-group-2/NATIVE.log",
+        "qualification-003/RESULT.json"
+      ]
+    },
+    "AR005": {
+      "disposition": "RESOLVED_PRESERVED",
+      "source": [
+        "executor/boundary.py",
+        "executor/external29_driver.py"
+      ],
+      "regression": "Previous accepted usage state is retained; legal change followed by unchanged boundaries and the 29-step allowed outer fixture pass.",
+      "evidence": [
+        "qualification-003/RESULT.json",
+        "qualification-003/QUALIFICATION.native.log"
+      ]
+    },
+    "AR006": {
+      "disposition": "RESOLVED_PRESERVED",
+      "source": [
+        "executor/external29_driver.py",
+        "executor/binding_contract.py",
+        "executor/boundary.py"
+      ],
+      "regression": "Formal CLI exposes no bundle/coverage/strict injection; actual boundary performs real capture and exact binding remains mandatory.",
+      "evidence": [
+        "qualification-003/RESULT.json",
+        "RUNTIME_BINDING_VALIDATION.r2.json"
+      ]
+    },
+    "AR007": {
+      "disposition": "RESOLVED_FINITE_ACTUAL_SCOPE",
+      "contract": "Current commands/helpers/driver/source edges and instruction origins are verified from real bytes; unknown actual dependencies block; qualification v1 bypass removed; exact native identity/status and process binding reconciled.",
+      "source": [
+        "executor/dependency_contract.py",
+        "executor/qualification_contract.py",
+        "executor/coverage.py",
+        "qualification/build_dependency_evidence.py"
+      ],
+      "counterexamples": [
+        "Self-claimed candidate source with different bytes was accepted",
+        "tampered instruction-origin hash was accepted",
+        "UNKNOWN actual status passed identity accounting"
+      ],
+      "red": "red-preformal-002: all three behavioral controls FAIL because invalid inputs were accepted",
+      "green": "green-preformal-002 and qualification-003 PASS; mandatory loader independently parses the native log and verifies exact identity/status set, argv, raw_log and RESULT",
+      "historical_replacement": "PARENT_SOURCE_AFTER and SOURCE_BINDING_BEFORE are explicitly replaced by current checkout/helper byte verification and full runtime source_binding; historical evidence retains its original limited scope.",
+      "evidence": [
+        "DEPENDENCY_BINDING.r2.candidate.json",
+        "INPUT_FIXED29_CONSUMER_BINDING.r2.candidate.json",
+        "QUALIFICATION_IDENTITY_ACCOUNTING.r2.json",
+        "RUNTIME_BINDING_VALIDATION.r2.json"
+      ]
+    },
+    "AR008": {
+      "disposition": "RESOLVED",
+      "contract": "Live-state, consume, binding, observer, strict, engine and evidence failures irreversibly latch the same adapter; diagnostic marker failure cannot unlatch; success FINAL/COVERAGE/SEAL is forbidden after failure.",
+      "source": [
+        "executor/executor_adapter.py",
+        "executor/external29_driver.py",
+        "executor/boundary.py"
+      ],
+      "counterexamples": [
+        "Transient state read failure then recovery accepted",
+        "consume publication failure could be reconstructed and accepted",
+        "observer acquisition failure then recovery accepted"
+      ],
+      "red": "red-preformal-002: all latch predecessor controls FAIL",
+      "green": [
+        "green-preformal-002: all predecessor controls PASS",
+        "qualification-003: strict acquisition failure also latches actual adapter",
+        "regression-group-4: evidence failure and outer stopped guard remain PASS"
+      ],
+      "evidence": [
+        "red-preformal-002/NATIVE.log",
+        "green-preformal-002/NATIVE.log",
+        "regression-group-4/NATIVE.log",
+        "qualification-003/RESULT.json"
+      ]
+    },
+    "AR009": {
+      "disposition": "RESOLVED",
+      "contract": "Nested directory publication and files use unified fsync; actual prepare layout, consume chain, strict decisions, START/preflight/seal/failure/results use durable paths.",
+      "source": [
+        "executor/durability.py",
+        "executor/runner.py",
+        "executor/coverage.py",
+        "executor/external29_driver.py",
+        "qualification/build_runtime_binding.py"
+      ],
+      "counterexample": "Actual strict-decisions mkdir published the leaf but never fsynced the runtime parent directory.",
+      "red": "red-preformal-002: production strict_check fsync trace lacks runtime directory",
+      "green": "green-preformal-002: same production path records ordered file/direct-parent/ancestor publication; evidence write failure still prevents state commit and latches adapter",
+      "evidence": [
+        "red-preformal-002/NATIVE.log",
+        "green-preformal-002/NATIVE.log",
+        "regression-group-4/NATIVE.log"
+      ]
+    },
+    "AR010": {
+      "disposition": "RESOLVED",
+      "contract": "Shared absolute deadlines guard acquisition syscalls and loops; stat/read/readdir/temp metadata/dynamic scans are bounded; capacities reject before retaining over-limit entries; cleanup remains controlled.",
+      "source": [
+        "executor/capture.py",
+        "executor/observe.py",
+        "executor/native_observe.py",
+        "executor/preservation.py",
+        "executor/decision_evidence.py"
+      ],
+      "counterexamples": [
+        "Initial fstat delay took 0.2006s despite 0.03s budget",
+        "temp lstat drain took 15.60s instead of one shared 5s boundary"
+      ],
+      "red": "red-preformal-002: both acquisition deadline controls FAIL",
+      "green": [
+        "green-preformal-002: both exact controls PASS",
+        "green-postfix-001: postread stat, sustained real growth and directory over-capacity reject within bounds",
+        "regression-group-4: real event flood and slow read PASS"
+      ],
+      "signal_semantics": "SIGALRM handler raises CaptureError; no false claim that PEP475 always restarts a raising handler.",
+      "evidence": [
+        "red-preformal-002/NATIVE.log",
+        "green-preformal-002/NATIVE.log",
+        "green-postfix-001/NATIVE.log",
+        "regression-group-4/NATIVE.log",
+        "qualification-003/RESULT.json"
+      ]
+    }
+  },
+  "formal_attempts_used": 1,
+  "formal_attempt_budget": 2,
+  "candidate_formal_002_created": false,
+  "product_changed": false,
+  "shared_preparation_probe_baseline_formal": false
+}

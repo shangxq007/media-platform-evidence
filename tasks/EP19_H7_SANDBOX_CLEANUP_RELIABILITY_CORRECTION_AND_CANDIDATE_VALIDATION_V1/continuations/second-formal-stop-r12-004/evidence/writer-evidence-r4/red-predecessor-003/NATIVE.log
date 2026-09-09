@@ -1,0 +1,57 @@
+test_ar007_current_finite_vite_parser_graph_is_complete_and_missing_edges_reject (test_r4_remaining.R4ProductionPathControls.test_ar007_current_finite_vite_parser_graph_is_complete_and_missing_edges_reject) ... FAIL
+test_ar008_actual_outer_termination_retains_independent_protection_timeout_and_exit_causes (test_r4_remaining.R4ProductionPathControls.test_ar008_actual_outer_termination_retains_independent_protection_timeout_and_exit_causes) ... ERROR
+test_ar009_actual_vite_failure_log_uses_durable_stream (test_r4_remaining.R4ProductionPathControls.test_ar009_actual_vite_failure_log_uses_durable_stream) ... FAIL
+test_ar009_cleanup_preimage_is_durable_before_unlink_and_failed_gate_is_sealed (test_r4_remaining.R4ProductionPathControls.test_ar009_cleanup_preimage_is_durable_before_unlink_and_failed_gate_is_sealed) ... FAIL
+test_ar010_strict_baseline_failed_handoff_closes_watch_and_preserves_cleanup_failure (test_r4_remaining.R4ProductionPathControls.test_ar010_strict_baseline_failed_handoff_closes_watch_and_preserves_cleanup_failure) ... FAIL
+
+======================================================================
+ERROR: test_ar008_actual_outer_termination_retains_independent_protection_timeout_and_exit_causes (test_r4_remaining.R4ProductionPathControls.test_ar008_actual_outer_termination_retains_independent_protection_timeout_and_exit_causes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r4/tooling/qualification/test_r4_remaining.py", line 239, in test_ar008_actual_outer_termination_retains_independent_protection_timeout_and_exit_causes
+    self.assertTrue(protection["failure_dimensions"]["observer_preservation_failure"])
+                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'failure_dimensions'
+
+======================================================================
+FAIL: test_ar007_current_finite_vite_parser_graph_is_complete_and_missing_edges_reject (test_r4_remaining.R4ProductionPathControls.test_ar007_current_finite_vite_parser_graph_is_complete_and_missing_edges_reject)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r4/tooling/qualification/test_r4_remaining.py", line 162, in test_ar007_current_finite_vite_parser_graph_is_complete_and_missing_edges_reject
+    self.assertTrue(required_nodes <= set(scope["source_nodes"]), scope["source_nodes"])
+AssertionError: False is not true : {'artifacts.py': 'bccf8e809d0375de9bde7d54fe1615dd933b48dd5b173ccb9b43e5a03a34ab2c', 'bindings.py': 'c32950cd6f410129d6bdfe88f066b707b98b24587564bb6240b410f4cbe63c69', 'bookkeeping_v3.py': '3675ee06e82c7da45713fb703c2c1aed0edfab6dfb1b216e559f27faf74acebe', 'boundary.py': '5a47c793ac40e9a32eadf2aa66598b01fc0bc850e6a6ac9073b7e3b41f75eb1e', 'durability.py': '24e53d88b23a446d908983902151e8f5b6e1b3b4640c3786441ec5f9bdcd25d2', 'executor_adapter.py': 'c9ac592ef50acfe7566c9f0fb2a4275e1f961ff8e9dce2c62648a35891d6f5df', 'external29_driver.py': '912bf3ce761a72156b9f50c57b3b6601edaec9da6711a440c4e7e4f7f771154b', 'runner.py': '870c3a9532b40e90d025f49bf9be488c04bfee4d93820880710ad47a20de7d27', 'vite_resolution.mjs': '989ad04b5eef1f96e608adbbba25559ea05ad2b88fe1dc56015f7f5a8095a74c'}
+
+======================================================================
+FAIL: test_ar009_actual_vite_failure_log_uses_durable_stream (test_r4_remaining.R4ProductionPathControls.test_ar009_actual_vite_failure_log_uses_durable_stream)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r4/tooling/qualification/test_r4_remaining.py", line 314, in test_ar009_actual_vite_failure_log_uses_durable_stream
+    self.assertIn(log.parent, seen)
+AssertionError: PosixPath('J/fixtures-r4/red-predecessor-003/tmpchyf2qx5') not found in []
+
+======================================================================
+FAIL: test_ar009_cleanup_preimage_is_durable_before_unlink_and_failed_gate_is_sealed (test_r4_remaining.R4ProductionPathControls.test_ar009_cleanup_preimage_is_durable_before_unlink_and_failed_gate_is_sealed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r4/tooling/qualification/test_r4_remaining.py", line 272, in test_ar009_cleanup_preimage_is_durable_before_unlink_and_failed_gate_is_sealed
+    rows = freshness.preserve_cleanup(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "J/implementation-r3/tooling/executor/freshness.py", line 16, in preserve_cleanup
+    p.unlink()
+  File "J/implementation-r4/tooling/qualification/test_r4_remaining.py", line 266, in guarded_unlink
+    self.assertIn(destination / "0", durable_paths,
+AssertionError: PosixPath('J/fixtures-r4/red-predecessor-003/tmpupunbqro/gate/cleanup-preimages/0') not found in [] : source unlink preceded durable preimage publication
+
+======================================================================
+FAIL: test_ar010_strict_baseline_failed_handoff_closes_watch_and_preserves_cleanup_failure (test_r4_remaining.R4ProductionPathControls.test_ar010_strict_baseline_failed_handoff_closes_watch_and_preserves_cleanup_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r4/tooling/qualification/test_r4_remaining.py", line 130, in test_ar010_strict_baseline_failed_handoff_closes_watch_and_preserves_cleanup_failure
+    self.assertEqual(set(os.listdir("/proc/self/fd")), before)
+AssertionError: Items in the first set but not the second:
+'5'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.273s
+
+FAILED (failures=4, errors=1)

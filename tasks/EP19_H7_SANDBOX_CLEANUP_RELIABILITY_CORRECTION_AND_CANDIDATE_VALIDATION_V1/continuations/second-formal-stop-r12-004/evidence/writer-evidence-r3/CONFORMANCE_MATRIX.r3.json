@@ -1,0 +1,146 @@
+{
+  "disposition": {
+    "AR001": "CLOSED_BY_CURRENT_SOURCE_AND_QUALIFICATION",
+    "AR002": "CLOSED_BY_CURRENT_SOURCE_AND_QUALIFICATION",
+    "AR007": "CLOSED_BY_CURRENT_SOURCE_AND_QUALIFICATION",
+    "AR008": "CLOSED_BY_CURRENT_SOURCE_AND_QUALIFICATION",
+    "AR009": "CLOSED_BY_CURRENT_SOURCE_AND_QUALIFICATION",
+    "AR010": "CLOSED_BY_CURRENT_SOURCE_AND_QUALIFICATION"
+  },
+  "focused_green": {
+    "duration_seconds": 0.613459103,
+    "log": "J/writer-evidence-r3/green-focused-002/NATIVE.log",
+    "log_sha256": "9db81cc27205b128db1e684693501b19415420c4b5912367ac5f0694c54caabb",
+    "native_exit": 0,
+    "path": "J/writer-evidence-r3/green-focused-002",
+    "result": "PASS"
+  },
+  "integrated_qualification": {
+    "duration_seconds": null,
+    "log": "J/writer-evidence-r3/qualification-003/QUALIFICATION.native.log",
+    "log_sha256": "925a289e875cc6692b9c43f8dce9792d04bf7e8c77f99b413e5819a13b2b4f7c",
+    "native_exit": 0,
+    "path": "J/writer-evidence-r3/qualification-003",
+    "result": "PASS"
+  },
+  "issues": {
+    "AR001": {
+      "call_graph": [
+        "formal -> boundary(SEAL, finalize_observation=True)",
+        "boundary.final_event_source -> observer/continuous drain -> directory identity validation",
+        "shared endpoint -> stop_and_drain -> Engine final event adjudication -> durable decision"
+      ],
+      "green": "event is drained before controlled close and SEAL rejects",
+      "red_control": "test_ar001_event_queued_during_last_identity_check_is_rejected_before_endpoint",
+      "red_reason": "post-drain Memory event was discarded and SEAL returned PASS",
+      "source": [
+        "executor/external29_driver.py",
+        "executor/observe.py",
+        "executor/native_observe.py"
+      ]
+    },
+    "AR002": {
+      "call_graph": [
+        "formal -> observer_seed(actual applicability shape)",
+        "BoundaryObserver(seed) -> policy_builder.build -> BoundaryObserver.bind_policy",
+        "package projection equality + manifest enrichment -> legal temp rename -> Engine.check"
+      ],
+      "green": "actual package-only seed rebinds to exact manifest-bearing policy",
+      "red_control": "test_ar002_actual_observer_seed_rebind_accepts_legal_temp_rename",
+      "red_reason": "OBSERVER_POLICY_BINDING_MISMATCH eligible_map",
+      "source": [
+        "executor/external29_driver.py",
+        "executor/observe.py",
+        "qualification/policy_builder.py"
+      ]
+    },
+    "AR007": {
+      "call_graph": [
+        "formal preflight -> coverage.qualification_inputs",
+        "qualification loader -> exact argv/output/fixture/log/result bindings + identity accounting",
+        "runtime binding -> dependency_contract.validate -> current command/helper/source graph",
+        "runner FRONTEND_BUILD -> vite_resolution.mjs -> prepared vite.resolveConfig"
+      ],
+      "green": "v4 current graph and exact qualification invocation are mandatory",
+      "red_control": [
+        "test_ar007_r2_declarative_graph_is_rejected_for_missing_actual_vite_edge",
+        "test_ar007_loader_rejects_extra_qualification_flag_with_other_bindings_valid"
+      ],
+      "red_reason": "declarative empty closure and extra argv flag were accepted",
+      "source": [
+        "executor/coverage.py",
+        "executor/dependency_contract.py",
+        "qualification/build_dependency_evidence.py",
+        "executor/runner.py",
+        "executor/vite_resolution.mjs"
+      ]
+    },
+    "AR008": {
+      "call_graph": [
+        "execute_actual_graph -> runner.run_gate",
+        "run_gate caught binding/capture/evidence error -> FAIL + failure_class",
+        "driver -> RunAdapter.fail before COMMAND_AFTER/COMMAND/GATE"
+      ],
+      "green": "irreversible latch precedes every later accepting boundary",
+      "red_control": "test_ar008_actual_run_gate_caught_failure_latches_before_post_command_boundary",
+      "red_reason": "actual caught gate error left adapter live and accepted later boundaries",
+      "source": [
+        "executor/external29_driver.py",
+        "executor/runner.py",
+        "executor/executor_adapter.py"
+      ]
+    },
+    "AR009": {
+      "call_graph": [
+        "runner.run_gate -> durability.exclusive_directory(gate)",
+        "native_observe.run -> durability.exclusive_stream(native log)",
+        "runner.archive_xml -> durability.exclusive_bytes",
+        "artifacts.finalize -> seal -> exclusive_directory + exclusive_bytes -> verify -> PASS"
+      ],
+      "green": "files and newly published directory parent chains are fsynced before PASS",
+      "red_control": "test_ar009_actual_gate_and_sealed_copy_publish_parent_chain_durably",
+      "red_reason": "gate parent and sealed publication lacked required fsyncs",
+      "source": [
+        "executor/runner.py",
+        "executor/native_observe.py",
+        "executor/artifacts.py",
+        "executor/durability.py"
+      ]
+    },
+    "AR010": {
+      "call_graph": [
+        "native_observe.run -> Watch construction -> command -> final identity validation",
+        "guarded final os.stat loop -> bounded rejection -> finally ChildScope/Watch close",
+        "BoundaryObserver construction -> fd -> inventory under cleanup try"
+      ],
+      "green": "guarded stat rejects within deadline and every acquired fd closes",
+      "red_control": [
+        "test_ar010_actual_native_final_stat_is_guarded_and_resources_close",
+        "test_ar010_boundary_observer_inventory_failure_closes_constructor_fd"
+      ],
+      "red_reason": "final stat consumed injected delay; constructor inventory error leaked fd",
+      "source": [
+        "executor/native_observe.py",
+        "executor/observe.py",
+        "executor/capture.py"
+      ]
+    }
+  },
+  "predecessor": {
+    "duration_seconds": 0.774296799,
+    "log": "J/writer-evidence-r3/red-predecessor-004/NATIVE.log",
+    "log_sha256": "63c10d1bc29da006455424fe9cb91bc985d526e18552b0bbef6d7336a16afae6",
+    "native_exit": 1,
+    "path": "J/writer-evidence-r3/red-predecessor-004",
+    "result": "FAIL"
+  },
+  "preserved": {
+    "AR003": "RESOLVED_REGRESSION_PASS",
+    "AR004": "RESOLVED_REGRESSION_PASS",
+    "AR005": "RESOLVED_REGRESSION_PASS",
+    "AR006": "RESOLVED_REGRESSION_PASS",
+    "matrix29_sha256": "57c727549bc818bbcdc8c79c2babee3096f9ca2d058df0713033b6e49a42466e"
+  },
+  "result": "PASS",
+  "schema": "ep19-r3-current-source-path-coverage-v1"
+}

@@ -1,0 +1,97 @@
+test_attached_receipt_plus_marker_failure_reaches_final_gate_result (test_r6_remaining.R6ExceptionCompositionControls.test_attached_receipt_plus_marker_failure_reaches_final_gate_result) ... FAIL
+test_boundary_observer_constructor_retains_primary_and_close_failure (test_r6_remaining.R6ExceptionCompositionControls.test_boundary_observer_constructor_retains_primary_and_close_failure) ... FAIL
+test_capture_file_body_and_fd_close_failure_are_both_reported (test_r6_remaining.R6ExceptionCompositionControls.test_capture_file_body_and_fd_close_failure_are_both_reported) ... FAIL
+test_durable_stream_attempts_flush_stream_fd_and_parent_cleanup_independently (test_r6_remaining.R6ExceptionCompositionControls.test_durable_stream_attempts_flush_stream_fd_and_parent_cleanup_independently) ... FAIL
+test_durable_stream_fdopen_failure_releases_owned_raw_fd_and_syncs_parent (test_r6_remaining.R6ExceptionCompositionControls.test_durable_stream_fdopen_failure_releases_owned_raw_fd_and_syncs_parent) ... FAIL
+test_exception_after_exited_parent_terminates_actual_owned_descendant (test_r6_remaining.R6ExceptionCompositionControls.test_exception_after_exited_parent_terminates_actual_owned_descendant) ... FAIL
+test_owned_descendant_unknown_permission_and_timeout_are_distinct (test_r6_remaining.R6ExceptionCompositionControls.test_owned_descendant_unknown_permission_and_timeout_are_distinct) ... ERROR
+test_parent_fd_attempts_every_ancestor_close_and_keeps_body_failure (test_r6_remaining.R6ExceptionCompositionControls.test_parent_fd_attempts_every_ancestor_close_and_keeps_body_failure) ... FAIL
+test_vite_helper_primary_and_real_stream_fsync_failure_both_survive (test_r6_remaining.R6ExceptionCompositionControls.test_vite_helper_primary_and_real_stream_fsync_failure_both_survive) ... FAIL
+
+======================================================================
+ERROR: test_owned_descendant_unknown_permission_and_timeout_are_distinct (test_r6_remaining.R6ExceptionCompositionControls.test_owned_descendant_unknown_permission_and_timeout_are_distinct)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r6/tooling/qualification/test_r6_remaining.py", line 184, in test_owned_descendant_unknown_permission_and_timeout_are_distinct
+    receipt = native_observe.cleanup_owned_descendants(Scope(), timeout_seconds=.02)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'native_observe' has no attribute 'cleanup_owned_descendants'
+
+======================================================================
+FAIL: test_attached_receipt_plus_marker_failure_reaches_final_gate_result (test_r6_remaining.R6ExceptionCompositionControls.test_attached_receipt_plus_marker_failure_reaches_final_gate_result)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r6/tooling/qualification/test_r6_remaining.py", line 220, in test_attached_receipt_plus_marker_failure_reaches_final_gate_result
+    self.assertIn("failure marker write failed", joined)
+AssertionError: 'failure marker write failed' not found in 'original parser failure final receipt write failed'
+
+======================================================================
+FAIL: test_boundary_observer_constructor_retains_primary_and_close_failure (test_r6_remaining.R6ExceptionCompositionControls.test_boundary_observer_constructor_retains_primary_and_close_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r6/tooling/qualification/test_r6_remaining.py", line 48, in test_boundary_observer_constructor_retains_primary_and_close_failure
+    self.assertIn("boundary observer add failed", messages)
+AssertionError: 'boundary observer add failed' not found in 'OSError:boundary observer close failed'
+
+======================================================================
+FAIL: test_capture_file_body_and_fd_close_failure_are_both_reported (test_r6_remaining.R6ExceptionCompositionControls.test_capture_file_body_and_fd_close_failure_are_both_reported)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r6/tooling/qualification/test_r6_remaining.py", line 113, in test_capture_file_body_and_fd_close_failure_are_both_reported
+    self.assertIn("capture body failed", messages); self.assertIn("capture close failed", messages)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'capture body failed' not found in 'OSError:capture close failed'
+
+======================================================================
+FAIL: test_durable_stream_attempts_flush_stream_fd_and_parent_cleanup_independently (test_r6_remaining.R6ExceptionCompositionControls.test_durable_stream_attempts_flush_stream_fd_and_parent_cleanup_independently)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r6/tooling/qualification/test_r6_remaining.py", line 88, in test_durable_stream_attempts_flush_stream_fd_and_parent_cleanup_independently
+    self.assertIn(expected, messages)
+AssertionError: 'stream body failed' not found in 'OSError:raw close failed'
+
+======================================================================
+FAIL: test_durable_stream_fdopen_failure_releases_owned_raw_fd_and_syncs_parent (test_r6_remaining.R6ExceptionCompositionControls.test_durable_stream_fdopen_failure_releases_owned_raw_fd_and_syncs_parent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r6/tooling/qualification/test_r6_remaining.py", line 102, in test_durable_stream_fdopen_failure_releases_owned_raw_fd_and_syncs_parent
+    self.assertEqual(calls, ["fd.close", "parent.fsync"])
+AssertionError: Lists differ: [] != ['fd.close', 'parent.fsync']
+
+Second list contains 2 additional elements.
+First extra element 0:
+'fd.close'
+
+- []
++ ['fd.close', 'parent.fsync']
+
+======================================================================
+FAIL: test_exception_after_exited_parent_terminates_actual_owned_descendant (test_r6_remaining.R6ExceptionCompositionControls.test_exception_after_exited_parent_terminates_actual_owned_descendant)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r6/tooling/qualification/test_r6_remaining.py", line 165, in test_exception_after_exited_parent_terminates_actual_owned_descendant
+    self.assertIn(descendant, receipt.get("owned_processes_terminated", []), receipt)
+AssertionError: 11 not found in [] : {'result': 'REJECT', 'native_exit': 0, 'wrapper_exit': 1, 'child_pid': 10, 'native_invocation': True, 'start': 1788940497.153816, 'ready': 1788940497.1563103, 'end': 1788940497.5110106, 'timeout': False, 'command': ['USER_HOME/.hermes/hermes-agent/venv/bin/python3', '-B', '-c', "import pathlib,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-B','-c','import time; time.sleep(60)'],start_new_session=True)\npathlib.Path(sys.argv[1]).write_text(str(p.pid))\ntime.sleep(.15)\n", 'J/private-r6/red-fixtures-004/tmpv5cqf45a/descendant.pid'], 'cwd': 'J/private-r6/red-fixtures-004/tmpv5cqf45a', 'termination_causes': [], 'observer_terminated_child': False, 'owned_processes_remaining': [], 'owned_processes_terminated': [], 'before': {'J/private-r6/red-fixtures-004/tmpv5cqf45a/protected': {'metadata': {'st_dev': 47, 'st_ino': 23274023, 'st_mode': 33188, 'st_uid': 1000, 'st_gid': 100, 'st_size': 7, 'st_mtime_ns': 1788940497152253267, 'st_ctime_ns': 1788940497152253267, 'st_nlink': 1}, 'kind': 'file', 'sha256': '2b92ea252be0fbc26f70317cdaa7b6411ea634b50d55338cd8c495e4dbf25d1d', 'git_blob': '2bf5ad0447d3370461c6f32a0a5bc8a3177376aa'}}, 'after': {}, 'changed': [], 'unapproved_changed': [], 'events': [], 'observation_errors': [], 'gaps': [], 'failure_stage': 'PROCESS_OBSERVATION', 'failure_dimensions': {'native_invocation': True, 'native_exit': 0, 'native_command_exit_failure': False, 'product_assertion_failure': False, 'observer_preservation_failure': False, 'workload_timeout_or_cancellation': False, 'wrapper_or_environment_failure': False, 'evidence_persistence_failure': False, 'parser_helper_process_failure': False, 'cleanup_failure': False}, 'causal_errors': [{'role': 'primary', 'stage': 'PROCESS_OBSERVATION', 'error_type': 'RuntimeError', 'reason': 'observer exception after parent exit'}]}
+
+======================================================================
+FAIL: test_parent_fd_attempts_every_ancestor_close_and_keeps_body_failure (test_r6_remaining.R6ExceptionCompositionControls.test_parent_fd_attempts_every_ancestor_close_and_keeps_body_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r6/tooling/qualification/test_r6_remaining.py", line 65, in test_parent_fd_attempts_every_ancestor_close_and_keeps_body_failure
+    self.assertIn("parent body failed", messages); self.assertIn("ancestor close failed", messages)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'parent body failed' not found in 'OSError:ancestor close failed'
+
+======================================================================
+FAIL: test_vite_helper_primary_and_real_stream_fsync_failure_both_survive (test_r6_remaining.R6ExceptionCompositionControls.test_vite_helper_primary_and_real_stream_fsync_failure_both_survive)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r6/tooling/qualification/test_r6_remaining.py", line 136, in test_vite_helper_primary_and_real_stream_fsync_failure_both_survive
+    self.assertIn("exit=7", reasons); self.assertIn("controlled file fsync failed", reasons)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'exit=7' not found in 'controlled file fsync failed ViteClosureFailure:VITE_CLOSURE_LOG_PERSISTENCE_FAILURE OSError:controlled file fsync failed'
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.371s
+
+FAILED (failures=8, errors=1)

@@ -1,0 +1,194 @@
+{
+  "schema": "ep19-ar001-ar010-conformance-matrix-v1",
+  "qualification": "qualification-005",
+  "qualification_result": "107_PASS_0_FAIL_0_ERROR_0_SKIP_0_DUPLICATE_0_MISSING_0_UNEXPECTED",
+  "rows": [
+    {
+      "ar": "AR001",
+      "contract": "从正式保护窗口开始至FINAL/COVERAGE/SEAL连续观察strict正文、Memory及规定祖先；watch loss/gap/overflow fail-closed",
+      "source": [
+        "implementation/tooling/executor/external29_driver.py",
+        "implementation/tooling/executor/native_observe.py"
+      ],
+      "counterexample": "baseline watcher关闭后改变受保护路径祖先mode，下一命令endpoint不能证明跨间隙身份",
+      "red": "red-group-1 native_exit=1; outer ancestor scenario unavailable/predecessor not closed",
+      "green": "green-group-1b native_exit=0; 4/4; qualification-005 PASS",
+      "outer_path": "external29_driver.fixture ancestor-change + formal persistent native_observe.Watch lifecycle",
+      "evidence": [
+        "writer-evidence/red-group-1",
+        "writer-evidence/green-group-1b",
+        "writer-evidence/qualification-005"
+      ],
+      "disposition": "RESOLVED"
+    },
+    {
+      "ar": "AR002",
+      "contract": "V3委托仍强制V2 exact temp元数据、路径、双向rename cookie、来源/目标/完整生命周期与boundary absent",
+      "source": [
+        "implementation/tooling/executor/observe.py",
+        "implementation/tooling/executor/external29_driver.py"
+      ],
+      "counterexample": "外部文件MOVED_TO usage、非法0644短寿命temp、temp MOVED_FROM至范围外在合法endpoint下曾被接受",
+      "red": "red-group-1 native_exit=1; 3个真实FS反例错误PASS",
+      "green": "green-group-1b native_exit=0; 4/4; qualification-005 PASS",
+      "outer_path": "BoundaryObserver raw inotify -> reduce_events -> Engine.check; allowed 29-step fixture regression",
+      "evidence": [
+        "writer-evidence/red-group-1",
+        "writer-evidence/green-group-1b",
+        "writer-evidence/qualification-005"
+      ],
+      "disposition": "RESOLVED"
+    },
+    {
+      "ar": "AR003",
+      "contract": "ledger ts绑定实际capture墙钟窗和前一接受边界；单调钟用于限时，墙钟用于时间语义；回退拒绝",
+      "source": [
+        "implementation/tooling/executor/boundary.py",
+        "implementation/tooling/executor/bookkeeping_v3.py"
+      ],
+      "counterexample": "默认datetime.max使2099年记录在当前捕获中通过",
+      "red": "red-group-2 native_exit=1; future timestamp错误PASS且capture_window缺失",
+      "green": "green-group-2 native_exit=0; 4/4; qualification-005含rollback控制PASS",
+      "outer_path": "BoundaryObserver -> Engine actual wall/monotonic capture -> evaluate_ledger",
+      "evidence": [
+        "writer-evidence/red-group-2",
+        "writer-evidence/green-group-2",
+        "writer-evidence/qualification-005"
+      ],
+      "disposition": "RESOLVED"
+    },
+    {
+      "ar": "AR004",
+      "contract": "JSON parser前执行原始字节JSONL framing；拒绝CRLF/raw CR/BOM/空行/半行/非法UTF-8，escaped CR合法",
+      "source": [
+        "implementation/tooling/executor/bookkeeping_v3.py"
+      ],
+      "counterexample": "JSON+CRLF去LF后遗留CR被json.loads当尾随空白接受",
+      "red": "red-group-2 native_exit=1; CRLF错误PASS",
+      "green": "green-group-2 native_exit=0; raw CR拒绝且escaped CR通过; qualification-005 PASS",
+      "outer_path": "real ledger append capture -> evaluate_ledger -> _jsonl_lines -> strict_json",
+      "evidence": [
+        "writer-evidence/red-group-2",
+        "writer-evidence/green-group-2",
+        "writer-evidence/qualification-005"
+      ],
+      "disposition": "RESOLVED"
+    },
+    {
+      "ar": "AR005",
+      "contract": "合法usage变化后下一不变boundary不得误拒绝",
+      "source": [
+        "implementation/tooling/executor/boundary.py"
+      ],
+      "counterexample": "历史finding：错误以policy baseline替代previous_usage比较",
+      "red": "历史已解决，本continuation不伪造新RED",
+      "green": "qualification-005 fresh control test_multiple_and_previous_prefix_ledger_appends_pass及usage outer controls PASS",
+      "outer_path": "单一RunAdapter/Engine跨重复COMMAND/GATE及29-step allowed fixture",
+      "evidence": [
+        "writer-evidence/qualification-005"
+      ],
+      "disposition": "RESOLVED_PRESERVED_NO_REGRESSION"
+    },
+    {
+      "ar": "AR006",
+      "contract": "正式入口不可注入bundle/coverage/strict摘要制造接受",
+      "source": [
+        "implementation/tooling/executor/external29_driver.py",
+        "implementation/tooling/executor/binding_contract.py",
+        "implementation/tooling/executor/boundary.py"
+      ],
+      "counterexample": "历史finding：直接caller可重放bundle或缺省接受摘要",
+      "red": "历史已解决，本continuation不伪造新RED",
+      "green": "qualification-005 fresh external29 CLI/outer path controls PASS",
+      "outer_path": "formal CLI仅接收sealed binding/review/provenance路径，capture由observer和Engine实际取得",
+      "evidence": [
+        "writer-evidence/qualification-005",
+        "writer-evidence/RUNTIME_BINDING.candidate-formal-002.final.json"
+      ],
+      "disposition": "RESOLVED_PRESERVED_NO_REGRESSION"
+    },
+    {
+      "ar": "AR007",
+      "contract": "必需control身份和unique/missing/unexpected/fail/error/skip/duplicate全对账；native/process/result/source/dependency/applicability/eligible map预绑定",
+      "source": [
+        "implementation/tooling/executor/qualification_contract.py",
+        "implementation/tooling/executor/dependency_contract.py",
+        "implementation/tooling/executor/coverage.py",
+        "implementation/tooling/qualification/policy_builder.py",
+        "implementation/tooling/qualification/build_runtime_binding.py"
+      ],
+      "counterexample": "仅tests总数与PASS字段可接受无control rows；缺失consumer/source与未预绑定private map默认为闭合",
+      "red": "red-group-3 native_exit=1; 5/5 expected controls ERROR on missing validators",
+      "green": "green-group-3 native_exit=0; 5/5; qualification-005 107 unique全身份PASS",
+      "outer_path": "build_integration_qualification -> qualification_contract -> coverage.qualification_inputs -> binding_contract/dependency_contract -> policy_builder",
+      "evidence": [
+        "writer-evidence/red-group-3",
+        "writer-evidence/green-group-3",
+        "writer-evidence/DEPENDENCY_BINDING.v2.json",
+        "writer-evidence/qualification-005",
+        "writer-evidence/RUNTIME_BINDING.candidate-formal-002.final.json"
+      ],
+      "disposition": "RESOLVED"
+    },
+    {
+      "ar": "AR008",
+      "contract": "证据成功持久化后才提交session/previous_usage；任一异常锁死adapter；失败后不得成功FINAL/COVERAGE/SEAL",
+      "source": [
+        "implementation/tooling/executor/boundary.py",
+        "implementation/tooling/executor/executor_adapter.py",
+        "implementation/tooling/executor/external29_driver.py"
+      ],
+      "counterexample": "private/public evidence路径失败后adapter曾可恢复并继续FINAL，session在write前推进",
+      "red": "red-group-4b native_exit=1; adapter未锁死且outer evidence-failure仍发成功final",
+      "green": "green-group-4b native_exit=0; 6/6; qualification-005 PASS",
+      "outer_path": "external29_driver.fixture evidence-failure -> RunAdapter -> Engine/write_evidence",
+      "evidence": [
+        "writer-evidence/red-group-4b",
+        "writer-evidence/green-group-4b",
+        "writer-evidence/qualification-005"
+      ],
+      "disposition": "RESOLVED"
+    },
+    {
+      "ar": "AR009",
+      "contract": "private/public/consume/failure marker统一fsync文件、直接父目录及新建嵌套目录发布；marker失败仍进程内fail-closed",
+      "source": [
+        "implementation/tooling/executor/durability.py",
+        "implementation/tooling/executor/boundary.py",
+        "implementation/tooling/executor/executor_adapter.py",
+        "implementation/tooling/executor/external29_driver.py",
+        "implementation/tooling/executor/sequence.py"
+      ],
+      "counterexample": "failure marker只fsync文件、private子目录及新建父链未fsync",
+      "red": "red-group-4b native_exit=1; syscall observation仅见file fsync",
+      "green": "green-group-4b native_exit=0; file+directory fsync观察PASS; qualification-005 PASS",
+      "outer_path": "RunAdapter failure marker and Engine private/public evidence through durability.exclusive_bytes",
+      "evidence": [
+        "writer-evidence/red-group-4b",
+        "writer-evidence/green-group-4b",
+        "writer-evidence/qualification-005"
+      ],
+      "disposition": "RESOLVED"
+    },
+    {
+      "ar": "AR010",
+      "contract": "deadline/capacity在file/directory/event实际获取循环内执行；每boundary共享3次/5秒；阻塞调用受控可收尾",
+      "source": [
+        "implementation/tooling/executor/capture.py",
+        "implementation/tooling/executor/bookkeeping_v3.py",
+        "implementation/tooling/executor/observe.py",
+        "implementation/tooling/executor/native_observe.py"
+      ],
+      "counterexample": "slow read读到EOF后才查时限；event drain到EAGAIN后才由reducer查4096；每文件重置3次",
+      "red": "red-group-4b native_exit=1; slow real-file read 0.181551400s越过0.12s约束且drain无获取期拒绝",
+      "green": "green-group-4b native_exit=0; 6/6; actual 1200-file event flood capped; qualification-005 PASS",
+      "outer_path": "capture_file guarded read loop + capture_bundle outer shared retry + real inotify drain capacity",
+      "evidence": [
+        "writer-evidence/red-group-4b",
+        "writer-evidence/green-group-4b",
+        "writer-evidence/qualification-005"
+      ],
+      "disposition": "RESOLVED"
+    }
+  ]
+}

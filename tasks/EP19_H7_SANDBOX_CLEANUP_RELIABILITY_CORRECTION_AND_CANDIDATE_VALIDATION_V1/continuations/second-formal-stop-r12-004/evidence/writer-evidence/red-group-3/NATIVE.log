@@ -1,0 +1,52 @@
+test_dependency_source_closure_and_private_hashes_are_mandatory (test_conformance_corrections.Group3IdentityAndProvenance.test_dependency_source_closure_and_private_hashes_are_mandatory) ... ERROR
+test_mandatory_affected_controls_are_fixed_independently (test_conformance_corrections.Group3IdentityAndProvenance.test_mandatory_affected_controls_are_fixed_independently) ... ERROR
+test_missing_duplicate_unexpected_and_skip_are_all_rejected (test_conformance_corrections.Group3IdentityAndProvenance.test_missing_duplicate_unexpected_and_skip_are_all_rejected) ... ERROR
+test_private_eligibility_must_hash_bind_to_reviewed_applicability (test_conformance_corrections.Group3IdentityAndProvenance.test_private_eligibility_must_hash_bind_to_reviewed_applicability) ... ERROR
+test_second_formal_run_id_is_exact_not_a_family (test_conformance_corrections.Group3IdentityAndProvenance.test_second_formal_run_id_is_exact_not_a_family) ... ERROR
+
+======================================================================
+ERROR: test_dependency_source_closure_and_private_hashes_are_mandatory (test_conformance_corrections.Group3IdentityAndProvenance.test_dependency_source_closure_and_private_hashes_are_mandatory)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 180, in test_dependency_source_closure_and_private_hashes_are_mandatory
+    import dependency_contract
+ModuleNotFoundError: No module named 'dependency_contract'
+
+======================================================================
+ERROR: test_mandatory_affected_controls_are_fixed_independently (test_conformance_corrections.Group3IdentityAndProvenance.test_mandatory_affected_controls_are_fixed_independently)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 162, in test_mandatory_affected_controls_are_fixed_independently
+    import qualification_contract
+ModuleNotFoundError: No module named 'qualification_contract'
+
+======================================================================
+ERROR: test_missing_duplicate_unexpected_and_skip_are_all_rejected (test_conformance_corrections.Group3IdentityAndProvenance.test_missing_duplicate_unexpected_and_skip_are_all_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 170, in test_missing_duplicate_unexpected_and_skip_are_all_rejected
+    import qualification_contract
+ModuleNotFoundError: No module named 'qualification_contract'
+
+======================================================================
+ERROR: test_private_eligibility_must_hash_bind_to_reviewed_applicability (test_conformance_corrections.Group3IdentityAndProvenance.test_private_eligibility_must_hash_bind_to_reviewed_applicability)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 188, in test_private_eligibility_must_hash_bind_to_reviewed_applicability
+    from qualification import policy_builder as unused  # pragma: no cover
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'qualification'
+
+======================================================================
+ERROR: test_second_formal_run_id_is_exact_not_a_family (test_conformance_corrections.Group3IdentityAndProvenance.test_second_formal_run_id_is_exact_not_a_family)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 193, in test_second_formal_run_id_is_exact_not_a_family
+    self.assertTrue(binding_contract.valid_run_id("candidate-formal-002"))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'binding_contract' has no attribute 'valid_run_id'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.012s
+
+FAILED (errors=5)

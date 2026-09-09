@@ -1,0 +1,234 @@
+{
+  "red-r8-002": {
+    "count": 3,
+    "unique": 3,
+    "statuses": {
+      "FAIL": 2,
+      "PASS": 1
+    },
+    "native_result_equal": true,
+    "process_status_equal": true,
+    "log_hash_equal": true,
+    "result_hash_equal": true,
+    "native_exit": 1,
+    "wrapper_exit": 0,
+    "before_after_equal": true,
+    "snapshots": {
+      "count_each": 79,
+      "bad": [],
+      "stable": true,
+      "current_differences": [
+        [
+          "before",
+          "J/implementation-r9/tooling/qualification/build_dependency_evidence.py"
+        ],
+        [
+          "before",
+          "J/implementation-r9/tooling/qualification/run_integrated_parent.py"
+        ],
+        [
+          "before",
+          "J/implementation-r9/tooling/qualification/run_source_bound_group.py"
+        ],
+        [
+          "after",
+          "J/implementation-r9/tooling/qualification/build_dependency_evidence.py"
+        ],
+        [
+          "after",
+          "J/implementation-r9/tooling/qualification/run_integrated_parent.py"
+        ],
+        [
+          "after",
+          "J/implementation-r9/tooling/qualification/run_source_bound_group.py"
+        ]
+      ]
+    },
+    "test_hashes": [
+      [
+        "J/implementation-r9/tooling/qualification/test_r9_preflight_persistence.py",
+        "e95b6b5048c781dd8894f59712db150f12272b3b7472aeb0e34fe3ce1dc22941"
+      ]
+    ]
+  },
+  "green-r9-final-002": {
+    "count": 3,
+    "unique": 3,
+    "statuses": {
+      "PASS": 3
+    },
+    "native_result_equal": true,
+    "process_status_equal": true,
+    "log_hash_equal": true,
+    "result_hash_equal": true,
+    "native_exit": 0,
+    "wrapper_exit": 0,
+    "before_after_equal": true,
+    "snapshots": {
+      "count_each": 79,
+      "bad": [],
+      "stable": true,
+      "current_differences": []
+    },
+    "test_hashes": [
+      [
+        "J/implementation-r9/tooling/qualification/test_r9_preflight_persistence.py",
+        "e95b6b5048c781dd8894f59712db150f12272b3b7472aeb0e34fe3ce1dc22941"
+      ]
+    ]
+  },
+  "qualification-001/integrated": {
+    "count": 173,
+    "unique": 173,
+    "statuses": {
+      "PASS": 173
+    },
+    "native_result_equal": true,
+    "process_status_equal": true,
+    "log_hash_equal": true,
+    "result_hash_equal": true,
+    "native_exit": 0,
+    "wrapper_exit": 0,
+    "before_after_equal": true
+  },
+  "qualification-001": {
+    "snapshots": {
+      "count_each": 118,
+      "bad": [],
+      "stable": true,
+      "current_differences": []
+    },
+    "test_hashes": [
+      [
+        "J/implementation-r9/tooling/qualification/test_r9_preflight_persistence.py",
+        "e95b6b5048c781dd8894f59712db150f12272b3b7472aeb0e34fe3ce1dc22941"
+      ]
+    ]
+  },
+  "source_count": 119,
+  "retained_bytes": {
+    "causal.py": true,
+    "durability.py": true,
+    "executor_adapter.py": true,
+    "boundary.py": true,
+    "observe.py": true,
+    "capture.py": true,
+    "runner.py": true,
+    "bookkeeping_v3.py": true
+  },
+  "qualification_ids": {
+    "ast_count": 173,
+    "ast_unique": 173,
+    "expected_equal": true,
+    "mandatory_count": 88,
+    "mandatory_in_actual": true,
+    "expected_actual_equal": true
+  },
+  "qualification_dependencies": {
+    "J/implementation-r9/tooling/adapter71-qualification.reused.json": true,
+    "J/implementation-r9/tooling/candidate-qualification-v3.reused.json": true,
+    "J/writer-evidence-r9/qualification-001/integrated/PROCESS.json": true,
+    "J/writer-evidence-r9/qualification-001/integrated/QUALIFICATION.native.log": true,
+    "J/writer-evidence-r9/qualification-001/integrated/RESULT.json": true
+  },
+  "binding": {
+    "sha256": "3c06598cce6771acfb7451ac235bd5ac265fa76eec843726cb674f2861b9a4b2",
+    "run_id": "candidate-formal-002",
+    "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+    "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+    "product_patch_sha256": "bab6aee8346f7ef47ca94f1e3da629e7ae81df2f16202706ae4966864a485690",
+    "source_count": 118,
+    "current_sources_equal": true,
+    "qualification_sources_equal": true,
+    "qualification_hash_equal": true,
+    "dependency_hash_equal": true
+  },
+  "mandatory_authority": {
+    "r8": 85,
+    "r9": 88,
+    "retained": true,
+    "added": [
+      "test_r9_preflight_persistence.R9ActualPreflightPersistenceControls.test_actual_preflight_write_failure_is_secondary_to_original_disposition",
+      "test_r9_preflight_persistence.R9ActualPreflightPersistenceControls.test_final_failure_sink_fault_retains_available_original_and_secondaries",
+      "test_r9_preflight_persistence.R9ActualPreflightPersistenceControls.test_original_preflight_failure_alone_has_real_saved_final_readback"
+    ],
+    "q_exact_equal": true
+  },
+  "red_real_predecessor": {
+    "count": 60,
+    "all_equal_actual_r8": true,
+    "tested_tooling": "J/implementation-r8/tooling"
+  },
+  "delta": {
+    ".source": {
+      "before": "e15cf992abce0f58a1c1c7186e7215ad9fe2226ee7dc5b0c61cd7696318cdd93",
+      "after": "d6fde343be52a78527818ee270074e5d07067a9b3dc3d9b10ff7e18900e068d1"
+    },
+    "tooling/executor/VERSION.json": {
+      "before": "53b14685fab83f2c0e5464af9ae47517101850075560c380e5b02fe66fc3a770",
+      "after": "c15931626d0435568c3e70bd50f7c57e8ebdc0ae4acdff731981d37e8d4c3e7f"
+    },
+    "tooling/executor/binding_contract.py": {
+      "before": "ee4dc21dbaae96e6c925503b9f87af69157da54036e744947a0b2fc9971dcab5",
+      "after": "642d826071c2b8aa41adc776bcb93dbb9a9a7bd78d5dc56d8d1db923e2739255"
+    },
+    "tooling/executor/dependency_contract.py": {
+      "before": "98ba3fa5edbdf0fcbb1457a1ebbd4c521411b955ce1a0b4639d7bcce6baae6d3",
+      "after": "8f8601e51e57238ebba3220794fb543d96406c39f737a5ab1caedae9b8e13138"
+    },
+    "tooling/executor/external29_driver.py": {
+      "before": "50bab069e7447d0a17b6794376079cd8cc86396522de48278bc410e3798ec9f2",
+      "after": "4851f5e690d5db2c0094f621fa8558121b7534f50a3e50217ddb5d5ab4080b37"
+    },
+    "tooling/executor/qualification_contract.py": {
+      "before": "ad0b12f8171bc24c6d12f5914c09472134eab301626d36b725db682c545c8ab7",
+      "after": "c409df8d048b9e1dc1f900d6379763a99f2731c9ac86b690785a8d7e002ef4e8"
+    },
+    "tooling/qualification/build_dependency_evidence.py": {
+      "before": "0a32edab8dab91d37729ff7acc2180c66a9fc277a1ad061f8f5be75351e2abe2",
+      "after": "c6af0365b26e4492fce4aadddbe02cc15ab4930f265aa7a31223e5332aa13283"
+    },
+    "tooling/qualification/run_integrated_parent.py": {
+      "before": "c3476b890adeb61ddd43988658f139695ed6995e9ff54eea6ac9660d75ff609a",
+      "after": "d325b64f209c325c9f95c82cad3d1b47b189042a89cb7d618b0d690a4a2d0662"
+    },
+    "tooling/qualification/run_source_bound_group.py": {
+      "before": "3aeaafac102acfc2501756e446a9cf9a82fe230eaf95f5bc64384c7e50966235",
+      "after": "92757b304ecf36e7287fa0a757a7f25f24a80e5ef7a3c9f4de1a67553f1f1a8a"
+    },
+    "tooling/qualification/test_r9_preflight_persistence.py": {
+      "before": null,
+      "after": "e95b6b5048c781dd8894f59712db150f12272b3b7472aeb0e34fe3ce1dc22941"
+    }
+  },
+  "saved_loader": {
+    "result": "PASS",
+    "native_exit": 0,
+    "wrapper_exit": 0,
+    "snapshot_count_each": 120,
+    "bad": [],
+    "stable": true,
+    "binding_hash_equal": true,
+    "log_hash_equal": true,
+    "validation_hash_equal": true,
+    "validator_hash_equal": true,
+    "reviewer_ran_loader": false
+  },
+  "fixture_retention": {
+    "red-r8-002": [],
+    "green-r9-final-002": []
+  },
+  "source_stability": {
+    "count_before": 119,
+    "count_after": 119,
+    "equal": true
+  },
+  "scope_disposition": {
+    "B7-008-3": "SUPPORTED_CLOSED_EXACT_FINITE_SCOPE",
+    "B8-B-1": "SUPPORTED_CLOSED_EXACT_FINITE_SCOPE",
+    "B7-008-1/2": "RETAINED_SCOPED_CLOSURE",
+    "AR001..007/009/010": "RETAINED_PRIOR_SCOPE",
+    "independent_final_acceptance": false,
+    "new_reachable_defects_in_reviewed_chain": []
+  }
+}

@@ -1,0 +1,6 @@
+gradle.projectsEvaluated {
+  def p0 = rootProject.project(":platform-app")
+  p0.tasks.register("ep19EvidenceClasspath") { doLast { new File(System.getenv("EP19_RUN_ROOT"), "runtime/outputs/backend/classpath.txt").text = p0.sourceSets.test.runtimeClasspath.asPath } }
+  def p1 = rootProject.project(":sandbox-isolation-module")
+  p1.tasks.register("ep19SandboxClasspath") { doLast { new File(System.getenv("EP19_RUN_ROOT"), "runtime/outputs/backend/engine-classpath.txt").text = p1.sourceSets.test.runtimeClasspath.asPath } }
+}

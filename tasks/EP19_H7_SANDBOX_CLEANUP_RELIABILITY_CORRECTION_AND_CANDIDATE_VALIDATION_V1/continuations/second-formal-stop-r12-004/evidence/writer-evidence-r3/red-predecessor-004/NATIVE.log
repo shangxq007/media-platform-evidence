@@ -1,0 +1,80 @@
+test_ar001_event_queued_during_last_identity_check_is_rejected_before_endpoint (test_r3_remaining.RemainingProductionPathControls.test_ar001_event_queued_during_last_identity_check_is_rejected_before_endpoint) ... FAIL
+test_ar002_actual_observer_seed_rebind_accepts_legal_temp_rename (test_r3_remaining.RemainingProductionPathControls.test_ar002_actual_observer_seed_rebind_accepts_legal_temp_rename) ... ERROR
+test_ar007_loader_rejects_extra_qualification_flag_with_other_bindings_valid (test_r3_remaining.RemainingProductionPathControls.test_ar007_loader_rejects_extra_qualification_flag_with_other_bindings_valid) ... FAIL
+test_ar007_r2_declarative_graph_is_rejected_for_missing_actual_vite_edge (test_r3_remaining.RemainingProductionPathControls.test_ar007_r2_declarative_graph_is_rejected_for_missing_actual_vite_edge) ... FAIL
+test_ar008_actual_run_gate_caught_failure_latches_before_post_command_boundary (test_r3_remaining.RemainingProductionPathControls.test_ar008_actual_run_gate_caught_failure_latches_before_post_command_boundary) ... FAIL
+test_ar009_actual_gate_and_sealed_copy_publish_parent_chain_durably (test_r3_remaining.RemainingProductionPathControls.test_ar009_actual_gate_and_sealed_copy_publish_parent_chain_durably) ... FAIL
+test_ar010_actual_native_final_stat_is_guarded_and_resources_close (test_r3_remaining.RemainingProductionPathControls.test_ar010_actual_native_final_stat_is_guarded_and_resources_close) ... FAIL
+test_ar010_boundary_observer_inventory_failure_closes_constructor_fd (test_r3_remaining.RemainingProductionPathControls.test_ar010_boundary_observer_inventory_failure_closes_constructor_fd) ... FAIL
+
+======================================================================
+ERROR: test_ar002_actual_observer_seed_rebind_accepts_legal_temp_rename (test_r3_remaining.RemainingProductionPathControls.test_ar002_actual_observer_seed_rebind_accepts_legal_temp_rename)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 141, in test_ar002_actual_observer_seed_rebind_accepts_legal_temp_rename
+    observer.bind_policy(self.policy)
+  File "J/implementation-r3/tooling/executor/observe.py", line 164, in bind_policy
+    raise RuntimeError("OBSERVER_POLICY_BINDING_MISMATCH " + key)
+RuntimeError: OBSERVER_POLICY_BINDING_MISMATCH eligible_map
+
+======================================================================
+FAIL: test_ar001_event_queued_during_last_identity_check_is_rejected_before_endpoint (test_r3_remaining.RemainingProductionPathControls.test_ar001_event_queued_during_last_identity_check_is_rejected_before_endpoint)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 120, in test_ar001_event_queued_during_last_identity_check_is_rejected_before_endpoint
+    with self.assertRaises(Exception):
+AssertionError: Exception not raised
+
+======================================================================
+FAIL: test_ar007_loader_rejects_extra_qualification_flag_with_other_bindings_valid (test_r3_remaining.RemainingProductionPathControls.test_ar007_loader_rejects_extra_qualification_flag_with_other_bindings_valid)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 193, in test_ar007_loader_rejects_extra_qualification_flag_with_other_bindings_valid
+    with self.assertRaisesRegex(RuntimeError, "INTEGRATION_PROCESS_ARGV_BINDING_REJECT"):
+AssertionError: RuntimeError not raised
+
+======================================================================
+FAIL: test_ar007_r2_declarative_graph_is_rejected_for_missing_actual_vite_edge (test_r3_remaining.RemainingProductionPathControls.test_ar007_r2_declarative_graph_is_rejected_for_missing_actual_vite_edge)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 155, in test_ar007_r2_declarative_graph_is_rejected_for_missing_actual_vite_edge
+    with self.assertRaisesRegex(RuntimeError, "ACTUAL_HELPER_EDGE_CLOSURE"):
+AssertionError: RuntimeError not raised
+
+======================================================================
+FAIL: test_ar008_actual_run_gate_caught_failure_latches_before_post_command_boundary (test_r3_remaining.RemainingProductionPathControls.test_ar008_actual_run_gate_caught_failure_latches_before_post_command_boundary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 218, in test_ar008_actual_run_gate_caught_failure_latches_before_post_command_boundary
+    self.assertTrue(adapter.failed)
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_ar009_actual_gate_and_sealed_copy_publish_parent_chain_durably (test_r3_remaining.RemainingProductionPathControls.test_ar009_actual_gate_and_sealed_copy_publish_parent_chain_durably)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 245, in test_ar009_actual_gate_and_sealed_copy_publish_parent_chain_durably
+    self.assertIn(str(gates), seen)
+AssertionError: 'J/fixtures-r3/red-predecessor-004/tmp6o2hkxio/durable-run/runtime/gates' not found in ['J/fixtures-r3/red-predecessor-004/tmp6o2hkxio/durable-run/runtime/gates/FIXTURE']
+
+======================================================================
+FAIL: test_ar010_actual_native_final_stat_is_guarded_and_resources_close (test_r3_remaining.RemainingProductionPathControls.test_ar010_actual_native_final_stat_is_guarded_and_resources_close)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 273, in test_ar010_actual_native_final_stat_is_guarded_and_resources_close
+    self.assertLess(time.monotonic() - started, 0.15)
+AssertionError: 0.26018340000882745 not less than 0.15
+
+======================================================================
+FAIL: test_ar010_boundary_observer_inventory_failure_closes_constructor_fd (test_r3_remaining.RemainingProductionPathControls.test_ar010_boundary_observer_inventory_failure_closes_constructor_fd)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 286, in test_ar010_boundary_observer_inventory_failure_closes_constructor_fd
+    self.assertEqual(after, before)
+AssertionError: Items in the first set but not the second:
+'5'
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.613s
+
+FAILED (failures=7, errors=1)

@@ -1,0 +1,1029 @@
+{
+  "argv": [
+    "USER_HOME/.hermes/hermes-agent/venv/bin/python3",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "test_r11_diagnostic_emission"
+  ],
+  "child_pid_namespace": "pid:[4026534932]",
+  "control_ids": [
+    "test_r11_diagnostic_emission.R11ActualDiagnosticEmissionControls.test_actual_acquisition_and_marker_then_stderr_write_failure_saved",
+    "test_r11_diagnostic_emission.R11ActualDiagnosticEmissionControls.test_actual_native_gate_and_marker_then_stderr_flush_failure_saved"
+  ],
+  "control_statuses": {
+    "test_r11_diagnostic_emission.R11ActualDiagnosticEmissionControls.test_actual_acquisition_and_marker_then_stderr_write_failure_saved": "FAIL",
+    "test_r11_diagnostic_emission.R11ActualDiagnosticEmissionControls.test_actual_native_gate_and_marker_then_stderr_flush_failure_saved": "FAIL"
+  },
+  "cwd": "J/implementation-r11/tooling/qualification",
+  "dependency_binding": "J/writer-evidence-r10/DEPENDENCY_BINDING.r10.candidate-003.json",
+  "dependency_sha256_after": "c6f4217a9e3bb16ac0a8fae4f368b59f9fb839c68d9782d8ebc63ea287ef95df",
+  "dependency_sha256_before": "c6f4217a9e3bb16ac0a8fae4f368b59f9fb839c68d9782d8ebc63ea287ef95df",
+  "duration_seconds": 0.241184004,
+  "finished_monotonic_ns": 203089641165459,
+  "finished_wall_ns": 1788952107708917197,
+  "formal_attempt": false,
+  "fresh_replay": true,
+  "historical_execution_bytes_claimed": false,
+  "native_exit": 1,
+  "native_status": "FAIL",
+  "parent_pid_namespace": "pid:[4026534932]",
+  "pid": 9,
+  "product_tests": false,
+  "raw_log": "J/writer-evidence-r11/red-r10-001/NATIVE.log",
+  "raw_log_sha256": "f1a319a97b01dd15045cd7f4b13c8c8c0dce8c1033b4884e713b0bf2b9512428",
+  "result_receipt": "J/writer-evidence-r11/red-r10-001/RESULT.json",
+  "result_sha256": "b4423c3cd55b6872aedfcb96ca1efbae83c165ae80649421430154f6ad51ef79",
+  "schema": "ep19-r9-parent-process-v1",
+  "shared_baseline": false,
+  "shared_preparation": false,
+  "shared_probes": false,
+  "source_binding_after": {
+    "J/implementation-r10/tooling/executor/ExposureProbe.java": "327ef74f80c6993808526b22bb379fbfdd6fb063f7a6307b52ce33639074d35d",
+    "J/implementation-r10/tooling/executor/VERSION.json": "137bb6c95bb1290e10bfb02d8cd49cc1994e86e31b90420b3981bc8822236326",
+    "J/implementation-r10/tooling/executor/account.py": "0ec7573b3291218da34c0be289ecb46aef0f5c6e1932d80afc0a17db10da8259",
+    "J/implementation-r10/tooling/executor/artifacts.py": "7ccb717436a918612ba2b49fe342d0a3ef5e2723bf29082ca03ca53db493778b",
+    "J/implementation-r10/tooling/executor/baseline_evidence.py": "2902e7b176fba343e4f59b11cb86355629a858a07a518be8dfe19027c0e17f23",
+    "J/implementation-r10/tooling/executor/binding_contract.py": "9792ad4a3691ec17421c963c171ba759198a781f6e334cc03ff52499db5bdbff",
+    "J/implementation-r10/tooling/executor/binding_qualification.py": "582d67a8fe4eac0e037372c02fe7e7ec97ce10e4b448590d4c20ff2fa22b7a22",
+    "J/implementation-r10/tooling/executor/bindings.py": "c32950cd6f410129d6bdfe88f066b707b98b24587564bb6240b410f4cbe63c69",
+    "J/implementation-r10/tooling/executor/bookkeeping_v2.py": "64c72c4203a198e4123a5812863327d5ea8270995314387069498d445b7b764e",
+    "J/implementation-r10/tooling/executor/bookkeeping_v3.py": "3675ee06e82c7da45713fb703c2c1aed0edfab6dfb1b216e559f27faf74acebe",
+    "J/implementation-r10/tooling/executor/boundary.py": "5369c80b094d91a881b4d3dfb3f6d71888a9f99325673a51815fe78e4d899f93",
+    "J/implementation-r10/tooling/executor/capture.py": "06ebd6ddfe2a9b08ea042fbe83c02087b18ac60428727cd48e4e8a6016bcb8df",
+    "J/implementation-r10/tooling/executor/causal.py": "1c93a51cf914dd6f8299e9dca7d0a524de7d535505206fdb9b309718035cf515",
+    "J/implementation-r10/tooling/executor/classpath.init.gradle": "ba4814f13edfa67393d62309a547e8cb434e66514cdc993aef81af50dd191f57",
+    "J/implementation-r10/tooling/executor/collect_frontend.mjs": "692c12e38d864d6110192cf9e9a61f5e91000e1de1ef71f857d4a73d174e3c11",
+    "J/implementation-r10/tooling/executor/compile.init.gradle": "c3efe1970c854a6087268f7368594a45ab956e2ea0c0a35a981a5e7aba1e564a",
+    "J/implementation-r10/tooling/executor/compile_inventory.py": "1b1fe1ab47e64226171d47f069bec9232b8d604c63f0a70e3882c9f2f6cdf91a",
+    "J/implementation-r10/tooling/executor/coverage.py": "36c8f947a2eda290ec78e0ce3be067ef35c754dc37a2d951f4bcfdb9b2438ddf",
+    "J/implementation-r10/tooling/executor/decision_evidence.py": "06f350be602a6e079b4afe929b513345d85377359fe695391b53e0183a3f3c9f",
+    "J/implementation-r10/tooling/executor/dependency_contract.py": "ab185442aade663f421b64af24a7b7c2bc75d4fb6b5bfacb97a05d32a00978c0",
+    "J/implementation-r10/tooling/executor/durability.py": "308805ff2685196c5660d349e9791050ba11e7abede806ee45313b8c476b103d",
+    "J/implementation-r10/tooling/executor/engineering.py": "e895d246660dc6ddceb21c86dd703d41275f33a268f4eb536f9e9b0adc48c990",
+    "J/implementation-r10/tooling/executor/execution.py": "84bbb927b15072796eb5ca835cf137921055a895c2fd2d265b2a623e1081fccf",
+    "J/implementation-r10/tooling/executor/executor_adapter.py": "adfe88cb61429b6687aed600929a090115bc16a4042416b35542ea94a90d1fdf",
+    "J/implementation-r10/tooling/executor/external29_driver.py": "fbebf93117ecdc469e1b6d0767fdaf81e8c8268df54392d561c139994285be3a",
+    "J/implementation-r10/tooling/executor/freshness.py": "8f2ed88aa7a781c27efaa53ec80c314d32129cd39e6f937107297d50bd4669b6",
+    "J/implementation-r10/tooling/executor/frozen_shadow_monitor.py": "bb63de244007818956aa151ecceae98bf8c4fa50c45f2f7ee09bc74d63d21d0b",
+    "J/implementation-r10/tooling/executor/identity_delta.py": "e724dc6a6aa5ab9b3e498a5668276375e8aa13e2fccba0c5c73dd0975219a440",
+    "J/implementation-r10/tooling/executor/isolation.py": "4c0277d71479bb65cfd453a68799c53f7ed22e6b31cb72fce256859a7b9a4dc5",
+    "J/implementation-r10/tooling/executor/lean_materialization.py": "b082fff3453e1cf0cdd4d17f300c2aa54f8fc02339822766db73b8277e9fc297",
+    "J/implementation-r10/tooling/executor/lean_preparation.py": "c3862c3206c02f6c2f51a4c410b1957b8e9e760894949b8deb56efdaae0098e4",
+    "J/implementation-r10/tooling/executor/matrix.py": "76c0c5aec3cf9a4b850f792814fcf3053e34396e1a71c4d4e79f7fe73a6815ab",
+    "J/implementation-r10/tooling/executor/namespaces.py": "5610d6e27fad0343f26d2133eaaddb6bd59674f0d31ccc3657ffcd6c4da8d9f3",
+    "J/implementation-r10/tooling/executor/native_observe.py": "6b8f308f3ef0d4a735344a07801c2550a6acc591f24b72f359123a20c8d49d70",
+    "J/implementation-r10/tooling/executor/observe.py": "b36502c0fd2e140a882cde740683fd8af5043808d5ed7f4bf2cce7b9038c97de",
+    "J/implementation-r10/tooling/executor/packaging.init.gradle": "fd3c8ce83acd27274b616ee32de17352ba2b533bc9dbce875fb93f3a6921a6e4",
+    "J/implementation-r10/tooling/executor/packaging.py": "e7eb80c587d11e4c33ac8d1eb5485aa975e8fcc5a7beb1dde6d654dfd47ec299",
+    "J/implementation-r10/tooling/executor/parser_tools.py": "ae883f34dd75034fb4dbbde1aa7bc547f1bd0281308ef3dada0130a90e72c515",
+    "J/implementation-r10/tooling/executor/parsers.py": "92dd841bc5d57ca33b51dfa9be088812130641c91cc00e3f144fae56ad10aac3",
+    "J/implementation-r10/tooling/executor/preflight.py": "536211ae18cda30a9cc2290689f4923eac7502005b629ea1dfe77a284fd5b914",
+    "J/implementation-r10/tooling/executor/prepare.py": "f199697ad274077537840b6a7b08402fd06ecfa193b89e47323fad9ff8ed9e0d",
+    "J/implementation-r10/tooling/executor/prepare_finalize.py": "dc68828ad5b42f6ec9d5b02403952d68207ce6f272138de4aa8f8cc62f7ef90d",
+    "J/implementation-r10/tooling/executor/preservation.py": "e4de7957968afb10ba26bf59253ea897b32cdb457150108d06ffae63386b420f",
+    "J/implementation-r10/tooling/executor/qualification_contract.py": "96d529e25152f5a94d434fa38371803ca6fe098b5f32374a0e3dd22ef3b8372e",
+    "J/implementation-r10/tooling/executor/qualify_frontend.py": "013af0fd6a54ac97c8b3c7fab44d6fbeb1e14f1a4cffdb8e49df0c27987111d4",
+    "J/implementation-r10/tooling/executor/runner.py": "7d20f1cf59fcb79df5c704072683888eb46edf4146ab544082bb0b65215d0646",
+    "J/implementation-r10/tooling/executor/sequence.py": "ab85a2a6e26b02d9f11166660dbe0d0757864f70c0de35171aaab60b4449df5e",
+    "J/implementation-r10/tooling/executor/shadow_binding.py": "eaf4933c7785dc421149681a09f62e4809a5c985da8d5d9cf81a878c493cf71e",
+    "J/implementation-r10/tooling/executor/test_account.py": "e0367c95ef5d37ef997a5a33be7e58e4fe2828d6b9af35c4597a822e4a5adf97",
+    "J/implementation-r10/tooling/executor/test_bookkeeping_v2.py": "d71ec5eede3d93dfa8d071bfc5fe9df3f86c429e382c1ac626406c56d4026dba",
+    "J/implementation-r10/tooling/executor/test_continuation.py": "630401bb64ba2251b1a273b3dc8d64607ea4f61cfc252376aeba87631ed5c4ef",
+    "J/implementation-r10/tooling/executor/test_contract.py": "3fc1b622f5a1f6c18b38bd1f3d908bc956cfd9cace746fbfed5b0c27b94efa4a",
+    "J/implementation-r10/tooling/executor/test_isolation.py": "43065b9e8bd2893535909d58f7e1008e67137e55642ccd8d2f43c130ad61857d",
+    "J/implementation-r10/tooling/executor/test_lean_binding.py": "947c2951de922d964311bbf81da5eb6dd2ca745f206303a00a86b395aef70f40",
+    "J/implementation-r10/tooling/executor/test_lean_materialization.py": "8ca17c5ff613528c4843c47d4330a39908af743fb842c26c98c32a3dc10f4d0c",
+    "J/implementation-r10/tooling/executor/test_owner_preparation.py": "8bd6d3343101564bde44ebd06fece088d6b494d87ee5ebf79717ec004b2d93f6",
+    "J/implementation-r10/tooling/executor/test_v2_integration.py": "dacc18f0d099a55b2dc6fb9555aabfc19703cd1b42cfb897af4e5281b830cd36",
+    "J/implementation-r10/tooling/executor/vite_closure.mjs": "c384d54525bfa558a0d488d2c76562f926e8ec7c1e61a4434cecf1d153d379b8",
+    "J/implementation-r10/tooling/executor/vite_closure.py": "365b0f070200a9e87f7c6bd2dcc6afdc9da5b695561237fe6cf761cfde7f0e3a",
+    "J/implementation-r10/tooling/executor/vite_resolution.mjs": "989ad04b5eef1f96e608adbbba25559ea05ad2b88fe1dc56015f7f5a8095a74c",
+    "J/implementation-r11/tooling/qualification/build_dependency_evidence.py": "c19d7f66b8cd75c3599105f94a19370a7e3c1c0c43d285b81873f582a85bc8e2",
+    "J/implementation-r11/tooling/qualification/build_integration_qualification.py": "67cdb0300064d2b1c3f235266a954c08a8089650d286f6a1d31cfef2b5bb905d",
+    "J/implementation-r11/tooling/qualification/build_runtime_binding.py": "d687fa392234107a3479ab9d1964b6c4853d61025683203a99d2433af492b319",
+    "J/implementation-r11/tooling/qualification/candidate_binding.py": "620fc5ecf5608561468a97cc2963007cc153067442d9c9c4b185496a47464847",
+    "J/implementation-r11/tooling/qualification/policy_builder.py": "d1c52c68625b26eff6084cdaaade7476fcc37fa3bb8f2ec42b9ccd0e7f4cad8f",
+    "J/implementation-r11/tooling/qualification/run_group.py": "ead2a0000b4acfb26881a7ceb74d289d548f378f17012ecb81f3ebc8384ef3d4",
+    "J/implementation-r11/tooling/qualification/run_integrated_parent.py": "d325b64f209c325c9f95c82cad3d1b47b189042a89cb7d618b0d690a4a2d0662",
+    "J/implementation-r11/tooling/qualification/run_source_bound_group.py": "92757b304ecf36e7287fa0a757a7f25f24a80e5ef7a3c9f4de1a67553f1f1a8a",
+    "J/implementation-r11/tooling/qualification/test_approved_contract.py": "6b96436eb4da521b9dd564cb18c194bbd8ad865900dac74a1db374624d2fa54e",
+    "J/implementation-r11/tooling/qualification/test_conformance_corrections.py": "1ccb7c99c37a828778050129171370d60f64c756082fae43f955ee3f207d695d",
+    "J/implementation-r11/tooling/qualification/test_external29_integration.py": "07f43f94c0b03f2f04931bda226ac7171df8cc0c7cc3faff65a91801e300e1f6",
+    "J/implementation-r11/tooling/qualification/test_r10_final_boundary.py": "cc52670015283b685b6b0575b8b84dc59e98f9ba6eb5925cef7128412fa63bad",
+    "J/implementation-r11/tooling/qualification/test_r11_diagnostic_emission.py": "08611fdad2b4ab8724642d3a5a298e8ee0307c71e0c9689f0c2c134034152c78",
+    "J/implementation-r11/tooling/qualification/test_r3_remaining.py": "5871417ad3e438f0c0c6d8c0ca352f6d900db5e16d3116c92d5f2d463d474938",
+    "J/implementation-r11/tooling/qualification/test_r4_remaining.py": "e4fa16c011a1e0bd8d8d68616c0dd15fa3682df83e210d342b52b6e52b8b02d5",
+    "J/implementation-r11/tooling/qualification/test_r5_remaining.py": "b76bb2b0abce5cb788cbd3c2e92f47e35556f14274fead6f8268938170d00e16",
+    "J/implementation-r11/tooling/qualification/test_r6_remaining.py": "52b8f8a633d5529c8770c03ffaa083b5cd704051db4f43c6a27207a933427591",
+    "J/implementation-r11/tooling/qualification/test_r7_remaining.py": "eabddeb989727178a57b503be4acf4ce443fa6b96922f14727bc1ef204fcdd3a",
+    "J/implementation-r11/tooling/qualification/test_r7_runner_supplement.py": "9944dd46ee94ed6fe7094732b4aa220539117057b1d74b5fc9d054cb474ce858",
+    "J/implementation-r11/tooling/qualification/test_r8_transport.py": "e447308b4ed7498102e1731e8235b3001666bbc342275b62d9915e0b95a321a9",
+    "J/implementation-r11/tooling/qualification/test_r9_preflight_persistence.py": "e95b6b5048c781dd8894f59712db150f12272b3b7472aeb0e34fe3ce1dc22941"
+  },
+  "source_binding_before": {
+    "J/implementation-r10/tooling/executor/ExposureProbe.java": "327ef74f80c6993808526b22bb379fbfdd6fb063f7a6307b52ce33639074d35d",
+    "J/implementation-r10/tooling/executor/VERSION.json": "137bb6c95bb1290e10bfb02d8cd49cc1994e86e31b90420b3981bc8822236326",
+    "J/implementation-r10/tooling/executor/account.py": "0ec7573b3291218da34c0be289ecb46aef0f5c6e1932d80afc0a17db10da8259",
+    "J/implementation-r10/tooling/executor/artifacts.py": "7ccb717436a918612ba2b49fe342d0a3ef5e2723bf29082ca03ca53db493778b",
+    "J/implementation-r10/tooling/executor/baseline_evidence.py": "2902e7b176fba343e4f59b11cb86355629a858a07a518be8dfe19027c0e17f23",
+    "J/implementation-r10/tooling/executor/binding_contract.py": "9792ad4a3691ec17421c963c171ba759198a781f6e334cc03ff52499db5bdbff",
+    "J/implementation-r10/tooling/executor/binding_qualification.py": "582d67a8fe4eac0e037372c02fe7e7ec97ce10e4b448590d4c20ff2fa22b7a22",
+    "J/implementation-r10/tooling/executor/bindings.py": "c32950cd6f410129d6bdfe88f066b707b98b24587564bb6240b410f4cbe63c69",
+    "J/implementation-r10/tooling/executor/bookkeeping_v2.py": "64c72c4203a198e4123a5812863327d5ea8270995314387069498d445b7b764e",
+    "J/implementation-r10/tooling/executor/bookkeeping_v3.py": "3675ee06e82c7da45713fb703c2c1aed0edfab6dfb1b216e559f27faf74acebe",
+    "J/implementation-r10/tooling/executor/boundary.py": "5369c80b094d91a881b4d3dfb3f6d71888a9f99325673a51815fe78e4d899f93",
+    "J/implementation-r10/tooling/executor/capture.py": "06ebd6ddfe2a9b08ea042fbe83c02087b18ac60428727cd48e4e8a6016bcb8df",
+    "J/implementation-r10/tooling/executor/causal.py": "1c93a51cf914dd6f8299e9dca7d0a524de7d535505206fdb9b309718035cf515",
+    "J/implementation-r10/tooling/executor/classpath.init.gradle": "ba4814f13edfa67393d62309a547e8cb434e66514cdc993aef81af50dd191f57",
+    "J/implementation-r10/tooling/executor/collect_frontend.mjs": "692c12e38d864d6110192cf9e9a61f5e91000e1de1ef71f857d4a73d174e3c11",
+    "J/implementation-r10/tooling/executor/compile.init.gradle": "c3efe1970c854a6087268f7368594a45ab956e2ea0c0a35a981a5e7aba1e564a",
+    "J/implementation-r10/tooling/executor/compile_inventory.py": "1b1fe1ab47e64226171d47f069bec9232b8d604c63f0a70e3882c9f2f6cdf91a",
+    "J/implementation-r10/tooling/executor/coverage.py": "36c8f947a2eda290ec78e0ce3be067ef35c754dc37a2d951f4bcfdb9b2438ddf",
+    "J/implementation-r10/tooling/executor/decision_evidence.py": "06f350be602a6e079b4afe929b513345d85377359fe695391b53e0183a3f3c9f",
+    "J/implementation-r10/tooling/executor/dependency_contract.py": "ab185442aade663f421b64af24a7b7c2bc75d4fb6b5bfacb97a05d32a00978c0",
+    "J/implementation-r10/tooling/executor/durability.py": "308805ff2685196c5660d349e9791050ba11e7abede806ee45313b8c476b103d",
+    "J/implementation-r10/tooling/executor/engineering.py": "e895d246660dc6ddceb21c86dd703d41275f33a268f4eb536f9e9b0adc48c990",
+    "J/implementation-r10/tooling/executor/execution.py": "84bbb927b15072796eb5ca835cf137921055a895c2fd2d265b2a623e1081fccf",
+    "J/implementation-r10/tooling/executor/executor_adapter.py": "adfe88cb61429b6687aed600929a090115bc16a4042416b35542ea94a90d1fdf",
+    "J/implementation-r10/tooling/executor/external29_driver.py": "fbebf93117ecdc469e1b6d0767fdaf81e8c8268df54392d561c139994285be3a",
+    "J/implementation-r10/tooling/executor/freshness.py": "8f2ed88aa7a781c27efaa53ec80c314d32129cd39e6f937107297d50bd4669b6",
+    "J/implementation-r10/tooling/executor/frozen_shadow_monitor.py": "bb63de244007818956aa151ecceae98bf8c4fa50c45f2f7ee09bc74d63d21d0b",
+    "J/implementation-r10/tooling/executor/identity_delta.py": "e724dc6a6aa5ab9b3e498a5668276375e8aa13e2fccba0c5c73dd0975219a440",
+    "J/implementation-r10/tooling/executor/isolation.py": "4c0277d71479bb65cfd453a68799c53f7ed22e6b31cb72fce256859a7b9a4dc5",
+    "J/implementation-r10/tooling/executor/lean_materialization.py": "b082fff3453e1cf0cdd4d17f300c2aa54f8fc02339822766db73b8277e9fc297",
+    "J/implementation-r10/tooling/executor/lean_preparation.py": "c3862c3206c02f6c2f51a4c410b1957b8e9e760894949b8deb56efdaae0098e4",
+    "J/implementation-r10/tooling/executor/matrix.py": "76c0c5aec3cf9a4b850f792814fcf3053e34396e1a71c4d4e79f7fe73a6815ab",
+    "J/implementation-r10/tooling/executor/namespaces.py": "5610d6e27fad0343f26d2133eaaddb6bd59674f0d31ccc3657ffcd6c4da8d9f3",
+    "J/implementation-r10/tooling/executor/native_observe.py": "6b8f308f3ef0d4a735344a07801c2550a6acc591f24b72f359123a20c8d49d70",
+    "J/implementation-r10/tooling/executor/observe.py": "b36502c0fd2e140a882cde740683fd8af5043808d5ed7f4bf2cce7b9038c97de",
+    "J/implementation-r10/tooling/executor/packaging.init.gradle": "fd3c8ce83acd27274b616ee32de17352ba2b533bc9dbce875fb93f3a6921a6e4",
+    "J/implementation-r10/tooling/executor/packaging.py": "e7eb80c587d11e4c33ac8d1eb5485aa975e8fcc5a7beb1dde6d654dfd47ec299",
+    "J/implementation-r10/tooling/executor/parser_tools.py": "ae883f34dd75034fb4dbbde1aa7bc547f1bd0281308ef3dada0130a90e72c515",
+    "J/implementation-r10/tooling/executor/parsers.py": "92dd841bc5d57ca33b51dfa9be088812130641c91cc00e3f144fae56ad10aac3",
+    "J/implementation-r10/tooling/executor/preflight.py": "536211ae18cda30a9cc2290689f4923eac7502005b629ea1dfe77a284fd5b914",
+    "J/implementation-r10/tooling/executor/prepare.py": "f199697ad274077537840b6a7b08402fd06ecfa193b89e47323fad9ff8ed9e0d",
+    "J/implementation-r10/tooling/executor/prepare_finalize.py": "dc68828ad5b42f6ec9d5b02403952d68207ce6f272138de4aa8f8cc62f7ef90d",
+    "J/implementation-r10/tooling/executor/preservation.py": "e4de7957968afb10ba26bf59253ea897b32cdb457150108d06ffae63386b420f",
+    "J/implementation-r10/tooling/executor/qualification_contract.py": "96d529e25152f5a94d434fa38371803ca6fe098b5f32374a0e3dd22ef3b8372e",
+    "J/implementation-r10/tooling/executor/qualify_frontend.py": "013af0fd6a54ac97c8b3c7fab44d6fbeb1e14f1a4cffdb8e49df0c27987111d4",
+    "J/implementation-r10/tooling/executor/runner.py": "7d20f1cf59fcb79df5c704072683888eb46edf4146ab544082bb0b65215d0646",
+    "J/implementation-r10/tooling/executor/sequence.py": "ab85a2a6e26b02d9f11166660dbe0d0757864f70c0de35171aaab60b4449df5e",
+    "J/implementation-r10/tooling/executor/shadow_binding.py": "eaf4933c7785dc421149681a09f62e4809a5c985da8d5d9cf81a878c493cf71e",
+    "J/implementation-r10/tooling/executor/test_account.py": "e0367c95ef5d37ef997a5a33be7e58e4fe2828d6b9af35c4597a822e4a5adf97",
+    "J/implementation-r10/tooling/executor/test_bookkeeping_v2.py": "d71ec5eede3d93dfa8d071bfc5fe9df3f86c429e382c1ac626406c56d4026dba",
+    "J/implementation-r10/tooling/executor/test_continuation.py": "630401bb64ba2251b1a273b3dc8d64607ea4f61cfc252376aeba87631ed5c4ef",
+    "J/implementation-r10/tooling/executor/test_contract.py": "3fc1b622f5a1f6c18b38bd1f3d908bc956cfd9cace746fbfed5b0c27b94efa4a",
+    "J/implementation-r10/tooling/executor/test_isolation.py": "43065b9e8bd2893535909d58f7e1008e67137e55642ccd8d2f43c130ad61857d",
+    "J/implementation-r10/tooling/executor/test_lean_binding.py": "947c2951de922d964311bbf81da5eb6dd2ca745f206303a00a86b395aef70f40",
+    "J/implementation-r10/tooling/executor/test_lean_materialization.py": "8ca17c5ff613528c4843c47d4330a39908af743fb842c26c98c32a3dc10f4d0c",
+    "J/implementation-r10/tooling/executor/test_owner_preparation.py": "8bd6d3343101564bde44ebd06fece088d6b494d87ee5ebf79717ec004b2d93f6",
+    "J/implementation-r10/tooling/executor/test_v2_integration.py": "dacc18f0d099a55b2dc6fb9555aabfc19703cd1b42cfb897af4e5281b830cd36",
+    "J/implementation-r10/tooling/executor/vite_closure.mjs": "c384d54525bfa558a0d488d2c76562f926e8ec7c1e61a4434cecf1d153d379b8",
+    "J/implementation-r10/tooling/executor/vite_closure.py": "365b0f070200a9e87f7c6bd2dcc6afdc9da5b695561237fe6cf761cfde7f0e3a",
+    "J/implementation-r10/tooling/executor/vite_resolution.mjs": "989ad04b5eef1f96e608adbbba25559ea05ad2b88fe1dc56015f7f5a8095a74c",
+    "J/implementation-r11/tooling/qualification/build_dependency_evidence.py": "c19d7f66b8cd75c3599105f94a19370a7e3c1c0c43d285b81873f582a85bc8e2",
+    "J/implementation-r11/tooling/qualification/build_integration_qualification.py": "67cdb0300064d2b1c3f235266a954c08a8089650d286f6a1d31cfef2b5bb905d",
+    "J/implementation-r11/tooling/qualification/build_runtime_binding.py": "d687fa392234107a3479ab9d1964b6c4853d61025683203a99d2433af492b319",
+    "J/implementation-r11/tooling/qualification/candidate_binding.py": "620fc5ecf5608561468a97cc2963007cc153067442d9c9c4b185496a47464847",
+    "J/implementation-r11/tooling/qualification/policy_builder.py": "d1c52c68625b26eff6084cdaaade7476fcc37fa3bb8f2ec42b9ccd0e7f4cad8f",
+    "J/implementation-r11/tooling/qualification/run_group.py": "ead2a0000b4acfb26881a7ceb74d289d548f378f17012ecb81f3ebc8384ef3d4",
+    "J/implementation-r11/tooling/qualification/run_integrated_parent.py": "d325b64f209c325c9f95c82cad3d1b47b189042a89cb7d618b0d690a4a2d0662",
+    "J/implementation-r11/tooling/qualification/run_source_bound_group.py": "92757b304ecf36e7287fa0a757a7f25f24a80e5ef7a3c9f4de1a67553f1f1a8a",
+    "J/implementation-r11/tooling/qualification/test_approved_contract.py": "6b96436eb4da521b9dd564cb18c194bbd8ad865900dac74a1db374624d2fa54e",
+    "J/implementation-r11/tooling/qualification/test_conformance_corrections.py": "1ccb7c99c37a828778050129171370d60f64c756082fae43f955ee3f207d695d",
+    "J/implementation-r11/tooling/qualification/test_external29_integration.py": "07f43f94c0b03f2f04931bda226ac7171df8cc0c7cc3faff65a91801e300e1f6",
+    "J/implementation-r11/tooling/qualification/test_r10_final_boundary.py": "cc52670015283b685b6b0575b8b84dc59e98f9ba6eb5925cef7128412fa63bad",
+    "J/implementation-r11/tooling/qualification/test_r11_diagnostic_emission.py": "08611fdad2b4ab8724642d3a5a298e8ee0307c71e0c9689f0c2c134034152c78",
+    "J/implementation-r11/tooling/qualification/test_r3_remaining.py": "5871417ad3e438f0c0c6d8c0ca352f6d900db5e16d3116c92d5f2d463d474938",
+    "J/implementation-r11/tooling/qualification/test_r4_remaining.py": "e4fa16c011a1e0bd8d8d68616c0dd15fa3682df83e210d342b52b6e52b8b02d5",
+    "J/implementation-r11/tooling/qualification/test_r5_remaining.py": "b76bb2b0abce5cb788cbd3c2e92f47e35556f14274fead6f8268938170d00e16",
+    "J/implementation-r11/tooling/qualification/test_r6_remaining.py": "52b8f8a633d5529c8770c03ffaa083b5cd704051db4f43c6a27207a933427591",
+    "J/implementation-r11/tooling/qualification/test_r7_remaining.py": "eabddeb989727178a57b503be4acf4ce443fa6b96922f14727bc1ef204fcdd3a",
+    "J/implementation-r11/tooling/qualification/test_r7_runner_supplement.py": "9944dd46ee94ed6fe7094732b4aa220539117057b1d74b5fc9d054cb474ce858",
+    "J/implementation-r11/tooling/qualification/test_r8_transport.py": "e447308b4ed7498102e1731e8235b3001666bbc342275b62d9915e0b95a321a9",
+    "J/implementation-r11/tooling/qualification/test_r9_preflight_persistence.py": "e95b6b5048c781dd8894f59712db150f12272b3b7472aeb0e34fe3ce1dc22941"
+  },
+  "source_binding_stable": true,
+  "source_snapshot_after": {
+    "J/implementation-r10/tooling/executor/ExposureProbe.java": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/ExposureProbe.java",
+      "snapshot_sha256": "327ef74f80c6993808526b22bb379fbfdd6fb063f7a6307b52ce33639074d35d",
+      "source_sha256": "327ef74f80c6993808526b22bb379fbfdd6fb063f7a6307b52ce33639074d35d"
+    },
+    "J/implementation-r10/tooling/executor/VERSION.json": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/VERSION.json",
+      "snapshot_sha256": "137bb6c95bb1290e10bfb02d8cd49cc1994e86e31b90420b3981bc8822236326",
+      "source_sha256": "137bb6c95bb1290e10bfb02d8cd49cc1994e86e31b90420b3981bc8822236326"
+    },
+    "J/implementation-r10/tooling/executor/account.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/account.py",
+      "snapshot_sha256": "0ec7573b3291218da34c0be289ecb46aef0f5c6e1932d80afc0a17db10da8259",
+      "source_sha256": "0ec7573b3291218da34c0be289ecb46aef0f5c6e1932d80afc0a17db10da8259"
+    },
+    "J/implementation-r10/tooling/executor/artifacts.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/artifacts.py",
+      "snapshot_sha256": "7ccb717436a918612ba2b49fe342d0a3ef5e2723bf29082ca03ca53db493778b",
+      "source_sha256": "7ccb717436a918612ba2b49fe342d0a3ef5e2723bf29082ca03ca53db493778b"
+    },
+    "J/implementation-r10/tooling/executor/baseline_evidence.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/baseline_evidence.py",
+      "snapshot_sha256": "2902e7b176fba343e4f59b11cb86355629a858a07a518be8dfe19027c0e17f23",
+      "source_sha256": "2902e7b176fba343e4f59b11cb86355629a858a07a518be8dfe19027c0e17f23"
+    },
+    "J/implementation-r10/tooling/executor/binding_contract.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/binding_contract.py",
+      "snapshot_sha256": "9792ad4a3691ec17421c963c171ba759198a781f6e334cc03ff52499db5bdbff",
+      "source_sha256": "9792ad4a3691ec17421c963c171ba759198a781f6e334cc03ff52499db5bdbff"
+    },
+    "J/implementation-r10/tooling/executor/binding_qualification.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/binding_qualification.py",
+      "snapshot_sha256": "582d67a8fe4eac0e037372c02fe7e7ec97ce10e4b448590d4c20ff2fa22b7a22",
+      "source_sha256": "582d67a8fe4eac0e037372c02fe7e7ec97ce10e4b448590d4c20ff2fa22b7a22"
+    },
+    "J/implementation-r10/tooling/executor/bindings.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/bindings.py",
+      "snapshot_sha256": "c32950cd6f410129d6bdfe88f066b707b98b24587564bb6240b410f4cbe63c69",
+      "source_sha256": "c32950cd6f410129d6bdfe88f066b707b98b24587564bb6240b410f4cbe63c69"
+    },
+    "J/implementation-r10/tooling/executor/bookkeeping_v2.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/bookkeeping_v2.py",
+      "snapshot_sha256": "64c72c4203a198e4123a5812863327d5ea8270995314387069498d445b7b764e",
+      "source_sha256": "64c72c4203a198e4123a5812863327d5ea8270995314387069498d445b7b764e"
+    },
+    "J/implementation-r10/tooling/executor/bookkeeping_v3.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/bookkeeping_v3.py",
+      "snapshot_sha256": "3675ee06e82c7da45713fb703c2c1aed0edfab6dfb1b216e559f27faf74acebe",
+      "source_sha256": "3675ee06e82c7da45713fb703c2c1aed0edfab6dfb1b216e559f27faf74acebe"
+    },
+    "J/implementation-r10/tooling/executor/boundary.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/boundary.py",
+      "snapshot_sha256": "5369c80b094d91a881b4d3dfb3f6d71888a9f99325673a51815fe78e4d899f93",
+      "source_sha256": "5369c80b094d91a881b4d3dfb3f6d71888a9f99325673a51815fe78e4d899f93"
+    },
+    "J/implementation-r10/tooling/executor/capture.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/capture.py",
+      "snapshot_sha256": "06ebd6ddfe2a9b08ea042fbe83c02087b18ac60428727cd48e4e8a6016bcb8df",
+      "source_sha256": "06ebd6ddfe2a9b08ea042fbe83c02087b18ac60428727cd48e4e8a6016bcb8df"
+    },
+    "J/implementation-r10/tooling/executor/causal.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/causal.py",
+      "snapshot_sha256": "1c93a51cf914dd6f8299e9dca7d0a524de7d535505206fdb9b309718035cf515",
+      "source_sha256": "1c93a51cf914dd6f8299e9dca7d0a524de7d535505206fdb9b309718035cf515"
+    },
+    "J/implementation-r10/tooling/executor/classpath.init.gradle": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/classpath.init.gradle",
+      "snapshot_sha256": "ba4814f13edfa67393d62309a547e8cb434e66514cdc993aef81af50dd191f57",
+      "source_sha256": "ba4814f13edfa67393d62309a547e8cb434e66514cdc993aef81af50dd191f57"
+    },
+    "J/implementation-r10/tooling/executor/collect_frontend.mjs": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/collect_frontend.mjs",
+      "snapshot_sha256": "692c12e38d864d6110192cf9e9a61f5e91000e1de1ef71f857d4a73d174e3c11",
+      "source_sha256": "692c12e38d864d6110192cf9e9a61f5e91000e1de1ef71f857d4a73d174e3c11"
+    },
+    "J/implementation-r10/tooling/executor/compile.init.gradle": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/compile.init.gradle",
+      "snapshot_sha256": "c3efe1970c854a6087268f7368594a45ab956e2ea0c0a35a981a5e7aba1e564a",
+      "source_sha256": "c3efe1970c854a6087268f7368594a45ab956e2ea0c0a35a981a5e7aba1e564a"
+    },
+    "J/implementation-r10/tooling/executor/compile_inventory.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/compile_inventory.py",
+      "snapshot_sha256": "1b1fe1ab47e64226171d47f069bec9232b8d604c63f0a70e3882c9f2f6cdf91a",
+      "source_sha256": "1b1fe1ab47e64226171d47f069bec9232b8d604c63f0a70e3882c9f2f6cdf91a"
+    },
+    "J/implementation-r10/tooling/executor/coverage.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/coverage.py",
+      "snapshot_sha256": "36c8f947a2eda290ec78e0ce3be067ef35c754dc37a2d951f4bcfdb9b2438ddf",
+      "source_sha256": "36c8f947a2eda290ec78e0ce3be067ef35c754dc37a2d951f4bcfdb9b2438ddf"
+    },
+    "J/implementation-r10/tooling/executor/decision_evidence.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/decision_evidence.py",
+      "snapshot_sha256": "06f350be602a6e079b4afe929b513345d85377359fe695391b53e0183a3f3c9f",
+      "source_sha256": "06f350be602a6e079b4afe929b513345d85377359fe695391b53e0183a3f3c9f"
+    },
+    "J/implementation-r10/tooling/executor/dependency_contract.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/dependency_contract.py",
+      "snapshot_sha256": "ab185442aade663f421b64af24a7b7c2bc75d4fb6b5bfacb97a05d32a00978c0",
+      "source_sha256": "ab185442aade663f421b64af24a7b7c2bc75d4fb6b5bfacb97a05d32a00978c0"
+    },
+    "J/implementation-r10/tooling/executor/durability.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/durability.py",
+      "snapshot_sha256": "308805ff2685196c5660d349e9791050ba11e7abede806ee45313b8c476b103d",
+      "source_sha256": "308805ff2685196c5660d349e9791050ba11e7abede806ee45313b8c476b103d"
+    },
+    "J/implementation-r10/tooling/executor/engineering.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/engineering.py",
+      "snapshot_sha256": "e895d246660dc6ddceb21c86dd703d41275f33a268f4eb536f9e9b0adc48c990",
+      "source_sha256": "e895d246660dc6ddceb21c86dd703d41275f33a268f4eb536f9e9b0adc48c990"
+    },
+    "J/implementation-r10/tooling/executor/execution.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/execution.py",
+      "snapshot_sha256": "84bbb927b15072796eb5ca835cf137921055a895c2fd2d265b2a623e1081fccf",
+      "source_sha256": "84bbb927b15072796eb5ca835cf137921055a895c2fd2d265b2a623e1081fccf"
+    },
+    "J/implementation-r10/tooling/executor/executor_adapter.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/executor_adapter.py",
+      "snapshot_sha256": "adfe88cb61429b6687aed600929a090115bc16a4042416b35542ea94a90d1fdf",
+      "source_sha256": "adfe88cb61429b6687aed600929a090115bc16a4042416b35542ea94a90d1fdf"
+    },
+    "J/implementation-r10/tooling/executor/external29_driver.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/external29_driver.py",
+      "snapshot_sha256": "fbebf93117ecdc469e1b6d0767fdaf81e8c8268df54392d561c139994285be3a",
+      "source_sha256": "fbebf93117ecdc469e1b6d0767fdaf81e8c8268df54392d561c139994285be3a"
+    },
+    "J/implementation-r10/tooling/executor/freshness.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/freshness.py",
+      "snapshot_sha256": "8f2ed88aa7a781c27efaa53ec80c314d32129cd39e6f937107297d50bd4669b6",
+      "source_sha256": "8f2ed88aa7a781c27efaa53ec80c314d32129cd39e6f937107297d50bd4669b6"
+    },
+    "J/implementation-r10/tooling/executor/frozen_shadow_monitor.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/frozen_shadow_monitor.py",
+      "snapshot_sha256": "bb63de244007818956aa151ecceae98bf8c4fa50c45f2f7ee09bc74d63d21d0b",
+      "source_sha256": "bb63de244007818956aa151ecceae98bf8c4fa50c45f2f7ee09bc74d63d21d0b"
+    },
+    "J/implementation-r10/tooling/executor/identity_delta.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/identity_delta.py",
+      "snapshot_sha256": "e724dc6a6aa5ab9b3e498a5668276375e8aa13e2fccba0c5c73dd0975219a440",
+      "source_sha256": "e724dc6a6aa5ab9b3e498a5668276375e8aa13e2fccba0c5c73dd0975219a440"
+    },
+    "J/implementation-r10/tooling/executor/isolation.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/isolation.py",
+      "snapshot_sha256": "4c0277d71479bb65cfd453a68799c53f7ed22e6b31cb72fce256859a7b9a4dc5",
+      "source_sha256": "4c0277d71479bb65cfd453a68799c53f7ed22e6b31cb72fce256859a7b9a4dc5"
+    },
+    "J/implementation-r10/tooling/executor/lean_materialization.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/lean_materialization.py",
+      "snapshot_sha256": "b082fff3453e1cf0cdd4d17f300c2aa54f8fc02339822766db73b8277e9fc297",
+      "source_sha256": "b082fff3453e1cf0cdd4d17f300c2aa54f8fc02339822766db73b8277e9fc297"
+    },
+    "J/implementation-r10/tooling/executor/lean_preparation.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/lean_preparation.py",
+      "snapshot_sha256": "c3862c3206c02f6c2f51a4c410b1957b8e9e760894949b8deb56efdaae0098e4",
+      "source_sha256": "c3862c3206c02f6c2f51a4c410b1957b8e9e760894949b8deb56efdaae0098e4"
+    },
+    "J/implementation-r10/tooling/executor/matrix.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/matrix.py",
+      "snapshot_sha256": "76c0c5aec3cf9a4b850f792814fcf3053e34396e1a71c4d4e79f7fe73a6815ab",
+      "source_sha256": "76c0c5aec3cf9a4b850f792814fcf3053e34396e1a71c4d4e79f7fe73a6815ab"
+    },
+    "J/implementation-r10/tooling/executor/namespaces.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/namespaces.py",
+      "snapshot_sha256": "5610d6e27fad0343f26d2133eaaddb6bd59674f0d31ccc3657ffcd6c4da8d9f3",
+      "source_sha256": "5610d6e27fad0343f26d2133eaaddb6bd59674f0d31ccc3657ffcd6c4da8d9f3"
+    },
+    "J/implementation-r10/tooling/executor/native_observe.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/native_observe.py",
+      "snapshot_sha256": "6b8f308f3ef0d4a735344a07801c2550a6acc591f24b72f359123a20c8d49d70",
+      "source_sha256": "6b8f308f3ef0d4a735344a07801c2550a6acc591f24b72f359123a20c8d49d70"
+    },
+    "J/implementation-r10/tooling/executor/observe.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/observe.py",
+      "snapshot_sha256": "b36502c0fd2e140a882cde740683fd8af5043808d5ed7f4bf2cce7b9038c97de",
+      "source_sha256": "b36502c0fd2e140a882cde740683fd8af5043808d5ed7f4bf2cce7b9038c97de"
+    },
+    "J/implementation-r10/tooling/executor/packaging.init.gradle": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/packaging.init.gradle",
+      "snapshot_sha256": "fd3c8ce83acd27274b616ee32de17352ba2b533bc9dbce875fb93f3a6921a6e4",
+      "source_sha256": "fd3c8ce83acd27274b616ee32de17352ba2b533bc9dbce875fb93f3a6921a6e4"
+    },
+    "J/implementation-r10/tooling/executor/packaging.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/packaging.py",
+      "snapshot_sha256": "e7eb80c587d11e4c33ac8d1eb5485aa975e8fcc5a7beb1dde6d654dfd47ec299",
+      "source_sha256": "e7eb80c587d11e4c33ac8d1eb5485aa975e8fcc5a7beb1dde6d654dfd47ec299"
+    },
+    "J/implementation-r10/tooling/executor/parser_tools.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/parser_tools.py",
+      "snapshot_sha256": "ae883f34dd75034fb4dbbde1aa7bc547f1bd0281308ef3dada0130a90e72c515",
+      "source_sha256": "ae883f34dd75034fb4dbbde1aa7bc547f1bd0281308ef3dada0130a90e72c515"
+    },
+    "J/implementation-r10/tooling/executor/parsers.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/parsers.py",
+      "snapshot_sha256": "92dd841bc5d57ca33b51dfa9be088812130641c91cc00e3f144fae56ad10aac3",
+      "source_sha256": "92dd841bc5d57ca33b51dfa9be088812130641c91cc00e3f144fae56ad10aac3"
+    },
+    "J/implementation-r10/tooling/executor/preflight.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/preflight.py",
+      "snapshot_sha256": "536211ae18cda30a9cc2290689f4923eac7502005b629ea1dfe77a284fd5b914",
+      "source_sha256": "536211ae18cda30a9cc2290689f4923eac7502005b629ea1dfe77a284fd5b914"
+    },
+    "J/implementation-r10/tooling/executor/prepare.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/prepare.py",
+      "snapshot_sha256": "f199697ad274077537840b6a7b08402fd06ecfa193b89e47323fad9ff8ed9e0d",
+      "source_sha256": "f199697ad274077537840b6a7b08402fd06ecfa193b89e47323fad9ff8ed9e0d"
+    },
+    "J/implementation-r10/tooling/executor/prepare_finalize.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/prepare_finalize.py",
+      "snapshot_sha256": "dc68828ad5b42f6ec9d5b02403952d68207ce6f272138de4aa8f8cc62f7ef90d",
+      "source_sha256": "dc68828ad5b42f6ec9d5b02403952d68207ce6f272138de4aa8f8cc62f7ef90d"
+    },
+    "J/implementation-r10/tooling/executor/preservation.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/preservation.py",
+      "snapshot_sha256": "e4de7957968afb10ba26bf59253ea897b32cdb457150108d06ffae63386b420f",
+      "source_sha256": "e4de7957968afb10ba26bf59253ea897b32cdb457150108d06ffae63386b420f"
+    },
+    "J/implementation-r10/tooling/executor/qualification_contract.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/qualification_contract.py",
+      "snapshot_sha256": "96d529e25152f5a94d434fa38371803ca6fe098b5f32374a0e3dd22ef3b8372e",
+      "source_sha256": "96d529e25152f5a94d434fa38371803ca6fe098b5f32374a0e3dd22ef3b8372e"
+    },
+    "J/implementation-r10/tooling/executor/qualify_frontend.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/qualify_frontend.py",
+      "snapshot_sha256": "013af0fd6a54ac97c8b3c7fab44d6fbeb1e14f1a4cffdb8e49df0c27987111d4",
+      "source_sha256": "013af0fd6a54ac97c8b3c7fab44d6fbeb1e14f1a4cffdb8e49df0c27987111d4"
+    },
+    "J/implementation-r10/tooling/executor/runner.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/runner.py",
+      "snapshot_sha256": "7d20f1cf59fcb79df5c704072683888eb46edf4146ab544082bb0b65215d0646",
+      "source_sha256": "7d20f1cf59fcb79df5c704072683888eb46edf4146ab544082bb0b65215d0646"
+    },
+    "J/implementation-r10/tooling/executor/sequence.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/sequence.py",
+      "snapshot_sha256": "ab85a2a6e26b02d9f11166660dbe0d0757864f70c0de35171aaab60b4449df5e",
+      "source_sha256": "ab85a2a6e26b02d9f11166660dbe0d0757864f70c0de35171aaab60b4449df5e"
+    },
+    "J/implementation-r10/tooling/executor/shadow_binding.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/shadow_binding.py",
+      "snapshot_sha256": "eaf4933c7785dc421149681a09f62e4809a5c985da8d5d9cf81a878c493cf71e",
+      "source_sha256": "eaf4933c7785dc421149681a09f62e4809a5c985da8d5d9cf81a878c493cf71e"
+    },
+    "J/implementation-r10/tooling/executor/test_account.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/test_account.py",
+      "snapshot_sha256": "e0367c95ef5d37ef997a5a33be7e58e4fe2828d6b9af35c4597a822e4a5adf97",
+      "source_sha256": "e0367c95ef5d37ef997a5a33be7e58e4fe2828d6b9af35c4597a822e4a5adf97"
+    },
+    "J/implementation-r10/tooling/executor/test_bookkeeping_v2.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/test_bookkeeping_v2.py",
+      "snapshot_sha256": "d71ec5eede3d93dfa8d071bfc5fe9df3f86c429e382c1ac626406c56d4026dba",
+      "source_sha256": "d71ec5eede3d93dfa8d071bfc5fe9df3f86c429e382c1ac626406c56d4026dba"
+    },
+    "J/implementation-r10/tooling/executor/test_continuation.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/test_continuation.py",
+      "snapshot_sha256": "630401bb64ba2251b1a273b3dc8d64607ea4f61cfc252376aeba87631ed5c4ef",
+      "source_sha256": "630401bb64ba2251b1a273b3dc8d64607ea4f61cfc252376aeba87631ed5c4ef"
+    },
+    "J/implementation-r10/tooling/executor/test_contract.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/test_contract.py",
+      "snapshot_sha256": "3fc1b622f5a1f6c18b38bd1f3d908bc956cfd9cace746fbfed5b0c27b94efa4a",
+      "source_sha256": "3fc1b622f5a1f6c18b38bd1f3d908bc956cfd9cace746fbfed5b0c27b94efa4a"
+    },
+    "J/implementation-r10/tooling/executor/test_isolation.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/test_isolation.py",
+      "snapshot_sha256": "43065b9e8bd2893535909d58f7e1008e67137e55642ccd8d2f43c130ad61857d",
+      "source_sha256": "43065b9e8bd2893535909d58f7e1008e67137e55642ccd8d2f43c130ad61857d"
+    },
+    "J/implementation-r10/tooling/executor/test_lean_binding.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/test_lean_binding.py",
+      "snapshot_sha256": "947c2951de922d964311bbf81da5eb6dd2ca745f206303a00a86b395aef70f40",
+      "source_sha256": "947c2951de922d964311bbf81da5eb6dd2ca745f206303a00a86b395aef70f40"
+    },
+    "J/implementation-r10/tooling/executor/test_lean_materialization.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/test_lean_materialization.py",
+      "snapshot_sha256": "8ca17c5ff613528c4843c47d4330a39908af743fb842c26c98c32a3dc10f4d0c",
+      "source_sha256": "8ca17c5ff613528c4843c47d4330a39908af743fb842c26c98c32a3dc10f4d0c"
+    },
+    "J/implementation-r10/tooling/executor/test_owner_preparation.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/test_owner_preparation.py",
+      "snapshot_sha256": "8bd6d3343101564bde44ebd06fece088d6b494d87ee5ebf79717ec004b2d93f6",
+      "source_sha256": "8bd6d3343101564bde44ebd06fece088d6b494d87ee5ebf79717ec004b2d93f6"
+    },
+    "J/implementation-r10/tooling/executor/test_v2_integration.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/test_v2_integration.py",
+      "snapshot_sha256": "dacc18f0d099a55b2dc6fb9555aabfc19703cd1b42cfb897af4e5281b830cd36",
+      "source_sha256": "dacc18f0d099a55b2dc6fb9555aabfc19703cd1b42cfb897af4e5281b830cd36"
+    },
+    "J/implementation-r10/tooling/executor/vite_closure.mjs": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/vite_closure.mjs",
+      "snapshot_sha256": "c384d54525bfa558a0d488d2c76562f926e8ec7c1e61a4434cecf1d153d379b8",
+      "source_sha256": "c384d54525bfa558a0d488d2c76562f926e8ec7c1e61a4434cecf1d153d379b8"
+    },
+    "J/implementation-r10/tooling/executor/vite_closure.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/vite_closure.py",
+      "snapshot_sha256": "365b0f070200a9e87f7c6bd2dcc6afdc9da5b695561237fe6cf761cfde7f0e3a",
+      "source_sha256": "365b0f070200a9e87f7c6bd2dcc6afdc9da5b695561237fe6cf761cfde7f0e3a"
+    },
+    "J/implementation-r10/tooling/executor/vite_resolution.mjs": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/executor/vite_resolution.mjs",
+      "snapshot_sha256": "989ad04b5eef1f96e608adbbba25559ea05ad2b88fe1dc56015f7f5a8095a74c",
+      "source_sha256": "989ad04b5eef1f96e608adbbba25559ea05ad2b88fe1dc56015f7f5a8095a74c"
+    },
+    "J/implementation-r11/tooling/qualification/build_dependency_evidence.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/build_dependency_evidence.py",
+      "snapshot_sha256": "c19d7f66b8cd75c3599105f94a19370a7e3c1c0c43d285b81873f582a85bc8e2",
+      "source_sha256": "c19d7f66b8cd75c3599105f94a19370a7e3c1c0c43d285b81873f582a85bc8e2"
+    },
+    "J/implementation-r11/tooling/qualification/build_integration_qualification.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/build_integration_qualification.py",
+      "snapshot_sha256": "67cdb0300064d2b1c3f235266a954c08a8089650d286f6a1d31cfef2b5bb905d",
+      "source_sha256": "67cdb0300064d2b1c3f235266a954c08a8089650d286f6a1d31cfef2b5bb905d"
+    },
+    "J/implementation-r11/tooling/qualification/build_runtime_binding.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/build_runtime_binding.py",
+      "snapshot_sha256": "d687fa392234107a3479ab9d1964b6c4853d61025683203a99d2433af492b319",
+      "source_sha256": "d687fa392234107a3479ab9d1964b6c4853d61025683203a99d2433af492b319"
+    },
+    "J/implementation-r11/tooling/qualification/candidate_binding.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/candidate_binding.py",
+      "snapshot_sha256": "620fc5ecf5608561468a97cc2963007cc153067442d9c9c4b185496a47464847",
+      "source_sha256": "620fc5ecf5608561468a97cc2963007cc153067442d9c9c4b185496a47464847"
+    },
+    "J/implementation-r11/tooling/qualification/policy_builder.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/policy_builder.py",
+      "snapshot_sha256": "d1c52c68625b26eff6084cdaaade7476fcc37fa3bb8f2ec42b9ccd0e7f4cad8f",
+      "source_sha256": "d1c52c68625b26eff6084cdaaade7476fcc37fa3bb8f2ec42b9ccd0e7f4cad8f"
+    },
+    "J/implementation-r11/tooling/qualification/run_group.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/run_group.py",
+      "snapshot_sha256": "ead2a0000b4acfb26881a7ceb74d289d548f378f17012ecb81f3ebc8384ef3d4",
+      "source_sha256": "ead2a0000b4acfb26881a7ceb74d289d548f378f17012ecb81f3ebc8384ef3d4"
+    },
+    "J/implementation-r11/tooling/qualification/run_integrated_parent.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/run_integrated_parent.py",
+      "snapshot_sha256": "d325b64f209c325c9f95c82cad3d1b47b189042a89cb7d618b0d690a4a2d0662",
+      "source_sha256": "d325b64f209c325c9f95c82cad3d1b47b189042a89cb7d618b0d690a4a2d0662"
+    },
+    "J/implementation-r11/tooling/qualification/run_source_bound_group.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/run_source_bound_group.py",
+      "snapshot_sha256": "92757b304ecf36e7287fa0a757a7f25f24a80e5ef7a3c9f4de1a67553f1f1a8a",
+      "source_sha256": "92757b304ecf36e7287fa0a757a7f25f24a80e5ef7a3c9f4de1a67553f1f1a8a"
+    },
+    "J/implementation-r11/tooling/qualification/test_approved_contract.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/test_approved_contract.py",
+      "snapshot_sha256": "6b96436eb4da521b9dd564cb18c194bbd8ad865900dac74a1db374624d2fa54e",
+      "source_sha256": "6b96436eb4da521b9dd564cb18c194bbd8ad865900dac74a1db374624d2fa54e"
+    },
+    "J/implementation-r11/tooling/qualification/test_conformance_corrections.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/test_conformance_corrections.py",
+      "snapshot_sha256": "1ccb7c99c37a828778050129171370d60f64c756082fae43f955ee3f207d695d",
+      "source_sha256": "1ccb7c99c37a828778050129171370d60f64c756082fae43f955ee3f207d695d"
+    },
+    "J/implementation-r11/tooling/qualification/test_external29_integration.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/test_external29_integration.py",
+      "snapshot_sha256": "07f43f94c0b03f2f04931bda226ac7171df8cc0c7cc3faff65a91801e300e1f6",
+      "source_sha256": "07f43f94c0b03f2f04931bda226ac7171df8cc0c7cc3faff65a91801e300e1f6"
+    },
+    "J/implementation-r11/tooling/qualification/test_r10_final_boundary.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/test_r10_final_boundary.py",
+      "snapshot_sha256": "cc52670015283b685b6b0575b8b84dc59e98f9ba6eb5925cef7128412fa63bad",
+      "source_sha256": "cc52670015283b685b6b0575b8b84dc59e98f9ba6eb5925cef7128412fa63bad"
+    },
+    "J/implementation-r11/tooling/qualification/test_r11_diagnostic_emission.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/test_r11_diagnostic_emission.py",
+      "snapshot_sha256": "08611fdad2b4ab8724642d3a5a298e8ee0307c71e0c9689f0c2c134034152c78",
+      "source_sha256": "08611fdad2b4ab8724642d3a5a298e8ee0307c71e0c9689f0c2c134034152c78"
+    },
+    "J/implementation-r11/tooling/qualification/test_r3_remaining.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/test_r3_remaining.py",
+      "snapshot_sha256": "5871417ad3e438f0c0c6d8c0ca352f6d900db5e16d3116c92d5f2d463d474938",
+      "source_sha256": "5871417ad3e438f0c0c6d8c0ca352f6d900db5e16d3116c92d5f2d463d474938"
+    },
+    "J/implementation-r11/tooling/qualification/test_r4_remaining.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/test_r4_remaining.py",
+      "snapshot_sha256": "e4fa16c011a1e0bd8d8d68616c0dd15fa3682df83e210d342b52b6e52b8b02d5",
+      "source_sha256": "e4fa16c011a1e0bd8d8d68616c0dd15fa3682df83e210d342b52b6e52b8b02d5"
+    },
+    "J/implementation-r11/tooling/qualification/test_r5_remaining.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/test_r5_remaining.py",
+      "snapshot_sha256": "b76bb2b0abce5cb788cbd3c2e92f47e35556f14274fead6f8268938170d00e16",
+      "source_sha256": "b76bb2b0abce5cb788cbd3c2e92f47e35556f14274fead6f8268938170d00e16"
+    },
+    "J/implementation-r11/tooling/qualification/test_r6_remaining.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/test_r6_remaining.py",
+      "snapshot_sha256": "52b8f8a633d5529c8770c03ffaa083b5cd704051db4f43c6a27207a933427591",
+      "source_sha256": "52b8f8a633d5529c8770c03ffaa083b5cd704051db4f43c6a27207a933427591"
+    },
+    "J/implementation-r11/tooling/qualification/test_r7_remaining.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/test_r7_remaining.py",
+      "snapshot_sha256": "eabddeb989727178a57b503be4acf4ce443fa6b96922f14727bc1ef204fcdd3a",
+      "source_sha256": "eabddeb989727178a57b503be4acf4ce443fa6b96922f14727bc1ef204fcdd3a"
+    },
+    "J/implementation-r11/tooling/qualification/test_r7_runner_supplement.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/test_r7_runner_supplement.py",
+      "snapshot_sha256": "9944dd46ee94ed6fe7094732b4aa220539117057b1d74b5fc9d054cb474ce858",
+      "source_sha256": "9944dd46ee94ed6fe7094732b4aa220539117057b1d74b5fc9d054cb474ce858"
+    },
+    "J/implementation-r11/tooling/qualification/test_r8_transport.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/test_r8_transport.py",
+      "snapshot_sha256": "e447308b4ed7498102e1731e8235b3001666bbc342275b62d9915e0b95a321a9",
+      "source_sha256": "e447308b4ed7498102e1731e8235b3001666bbc342275b62d9915e0b95a321a9"
+    },
+    "J/implementation-r11/tooling/qualification/test_r9_preflight_persistence.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.after/qualification/test_r9_preflight_persistence.py",
+      "snapshot_sha256": "e95b6b5048c781dd8894f59712db150f12272b3b7472aeb0e34fe3ce1dc22941",
+      "source_sha256": "e95b6b5048c781dd8894f59712db150f12272b3b7472aeb0e34fe3ce1dc22941"
+    }
+  },
+  "source_snapshot_before": {
+    "J/implementation-r10/tooling/executor/ExposureProbe.java": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/ExposureProbe.java",
+      "snapshot_sha256": "327ef74f80c6993808526b22bb379fbfdd6fb063f7a6307b52ce33639074d35d",
+      "source_sha256": "327ef74f80c6993808526b22bb379fbfdd6fb063f7a6307b52ce33639074d35d"
+    },
+    "J/implementation-r10/tooling/executor/VERSION.json": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/VERSION.json",
+      "snapshot_sha256": "137bb6c95bb1290e10bfb02d8cd49cc1994e86e31b90420b3981bc8822236326",
+      "source_sha256": "137bb6c95bb1290e10bfb02d8cd49cc1994e86e31b90420b3981bc8822236326"
+    },
+    "J/implementation-r10/tooling/executor/account.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/account.py",
+      "snapshot_sha256": "0ec7573b3291218da34c0be289ecb46aef0f5c6e1932d80afc0a17db10da8259",
+      "source_sha256": "0ec7573b3291218da34c0be289ecb46aef0f5c6e1932d80afc0a17db10da8259"
+    },
+    "J/implementation-r10/tooling/executor/artifacts.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/artifacts.py",
+      "snapshot_sha256": "7ccb717436a918612ba2b49fe342d0a3ef5e2723bf29082ca03ca53db493778b",
+      "source_sha256": "7ccb717436a918612ba2b49fe342d0a3ef5e2723bf29082ca03ca53db493778b"
+    },
+    "J/implementation-r10/tooling/executor/baseline_evidence.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/baseline_evidence.py",
+      "snapshot_sha256": "2902e7b176fba343e4f59b11cb86355629a858a07a518be8dfe19027c0e17f23",
+      "source_sha256": "2902e7b176fba343e4f59b11cb86355629a858a07a518be8dfe19027c0e17f23"
+    },
+    "J/implementation-r10/tooling/executor/binding_contract.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/binding_contract.py",
+      "snapshot_sha256": "9792ad4a3691ec17421c963c171ba759198a781f6e334cc03ff52499db5bdbff",
+      "source_sha256": "9792ad4a3691ec17421c963c171ba759198a781f6e334cc03ff52499db5bdbff"
+    },
+    "J/implementation-r10/tooling/executor/binding_qualification.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/binding_qualification.py",
+      "snapshot_sha256": "582d67a8fe4eac0e037372c02fe7e7ec97ce10e4b448590d4c20ff2fa22b7a22",
+      "source_sha256": "582d67a8fe4eac0e037372c02fe7e7ec97ce10e4b448590d4c20ff2fa22b7a22"
+    },
+    "J/implementation-r10/tooling/executor/bindings.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/bindings.py",
+      "snapshot_sha256": "c32950cd6f410129d6bdfe88f066b707b98b24587564bb6240b410f4cbe63c69",
+      "source_sha256": "c32950cd6f410129d6bdfe88f066b707b98b24587564bb6240b410f4cbe63c69"
+    },
+    "J/implementation-r10/tooling/executor/bookkeeping_v2.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/bookkeeping_v2.py",
+      "snapshot_sha256": "64c72c4203a198e4123a5812863327d5ea8270995314387069498d445b7b764e",
+      "source_sha256": "64c72c4203a198e4123a5812863327d5ea8270995314387069498d445b7b764e"
+    },
+    "J/implementation-r10/tooling/executor/bookkeeping_v3.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/bookkeeping_v3.py",
+      "snapshot_sha256": "3675ee06e82c7da45713fb703c2c1aed0edfab6dfb1b216e559f27faf74acebe",
+      "source_sha256": "3675ee06e82c7da45713fb703c2c1aed0edfab6dfb1b216e559f27faf74acebe"
+    },
+    "J/implementation-r10/tooling/executor/boundary.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/boundary.py",
+      "snapshot_sha256": "5369c80b094d91a881b4d3dfb3f6d71888a9f99325673a51815fe78e4d899f93",
+      "source_sha256": "5369c80b094d91a881b4d3dfb3f6d71888a9f99325673a51815fe78e4d899f93"
+    },
+    "J/implementation-r10/tooling/executor/capture.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/capture.py",
+      "snapshot_sha256": "06ebd6ddfe2a9b08ea042fbe83c02087b18ac60428727cd48e4e8a6016bcb8df",
+      "source_sha256": "06ebd6ddfe2a9b08ea042fbe83c02087b18ac60428727cd48e4e8a6016bcb8df"
+    },
+    "J/implementation-r10/tooling/executor/causal.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/causal.py",
+      "snapshot_sha256": "1c93a51cf914dd6f8299e9dca7d0a524de7d535505206fdb9b309718035cf515",
+      "source_sha256": "1c93a51cf914dd6f8299e9dca7d0a524de7d535505206fdb9b309718035cf515"
+    },
+    "J/implementation-r10/tooling/executor/classpath.init.gradle": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/classpath.init.gradle",
+      "snapshot_sha256": "ba4814f13edfa67393d62309a547e8cb434e66514cdc993aef81af50dd191f57",
+      "source_sha256": "ba4814f13edfa67393d62309a547e8cb434e66514cdc993aef81af50dd191f57"
+    },
+    "J/implementation-r10/tooling/executor/collect_frontend.mjs": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/collect_frontend.mjs",
+      "snapshot_sha256": "692c12e38d864d6110192cf9e9a61f5e91000e1de1ef71f857d4a73d174e3c11",
+      "source_sha256": "692c12e38d864d6110192cf9e9a61f5e91000e1de1ef71f857d4a73d174e3c11"
+    },
+    "J/implementation-r10/tooling/executor/compile.init.gradle": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/compile.init.gradle",
+      "snapshot_sha256": "c3efe1970c854a6087268f7368594a45ab956e2ea0c0a35a981a5e7aba1e564a",
+      "source_sha256": "c3efe1970c854a6087268f7368594a45ab956e2ea0c0a35a981a5e7aba1e564a"
+    },
+    "J/implementation-r10/tooling/executor/compile_inventory.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/compile_inventory.py",
+      "snapshot_sha256": "1b1fe1ab47e64226171d47f069bec9232b8d604c63f0a70e3882c9f2f6cdf91a",
+      "source_sha256": "1b1fe1ab47e64226171d47f069bec9232b8d604c63f0a70e3882c9f2f6cdf91a"
+    },
+    "J/implementation-r10/tooling/executor/coverage.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/coverage.py",
+      "snapshot_sha256": "36c8f947a2eda290ec78e0ce3be067ef35c754dc37a2d951f4bcfdb9b2438ddf",
+      "source_sha256": "36c8f947a2eda290ec78e0ce3be067ef35c754dc37a2d951f4bcfdb9b2438ddf"
+    },
+    "J/implementation-r10/tooling/executor/decision_evidence.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/decision_evidence.py",
+      "snapshot_sha256": "06f350be602a6e079b4afe929b513345d85377359fe695391b53e0183a3f3c9f",
+      "source_sha256": "06f350be602a6e079b4afe929b513345d85377359fe695391b53e0183a3f3c9f"
+    },
+    "J/implementation-r10/tooling/executor/dependency_contract.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/dependency_contract.py",
+      "snapshot_sha256": "ab185442aade663f421b64af24a7b7c2bc75d4fb6b5bfacb97a05d32a00978c0",
+      "source_sha256": "ab185442aade663f421b64af24a7b7c2bc75d4fb6b5bfacb97a05d32a00978c0"
+    },
+    "J/implementation-r10/tooling/executor/durability.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/durability.py",
+      "snapshot_sha256": "308805ff2685196c5660d349e9791050ba11e7abede806ee45313b8c476b103d",
+      "source_sha256": "308805ff2685196c5660d349e9791050ba11e7abede806ee45313b8c476b103d"
+    },
+    "J/implementation-r10/tooling/executor/engineering.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/engineering.py",
+      "snapshot_sha256": "e895d246660dc6ddceb21c86dd703d41275f33a268f4eb536f9e9b0adc48c990",
+      "source_sha256": "e895d246660dc6ddceb21c86dd703d41275f33a268f4eb536f9e9b0adc48c990"
+    },
+    "J/implementation-r10/tooling/executor/execution.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/execution.py",
+      "snapshot_sha256": "84bbb927b15072796eb5ca835cf137921055a895c2fd2d265b2a623e1081fccf",
+      "source_sha256": "84bbb927b15072796eb5ca835cf137921055a895c2fd2d265b2a623e1081fccf"
+    },
+    "J/implementation-r10/tooling/executor/executor_adapter.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/executor_adapter.py",
+      "snapshot_sha256": "adfe88cb61429b6687aed600929a090115bc16a4042416b35542ea94a90d1fdf",
+      "source_sha256": "adfe88cb61429b6687aed600929a090115bc16a4042416b35542ea94a90d1fdf"
+    },
+    "J/implementation-r10/tooling/executor/external29_driver.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/external29_driver.py",
+      "snapshot_sha256": "fbebf93117ecdc469e1b6d0767fdaf81e8c8268df54392d561c139994285be3a",
+      "source_sha256": "fbebf93117ecdc469e1b6d0767fdaf81e8c8268df54392d561c139994285be3a"
+    },
+    "J/implementation-r10/tooling/executor/freshness.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/freshness.py",
+      "snapshot_sha256": "8f2ed88aa7a781c27efaa53ec80c314d32129cd39e6f937107297d50bd4669b6",
+      "source_sha256": "8f2ed88aa7a781c27efaa53ec80c314d32129cd39e6f937107297d50bd4669b6"
+    },
+    "J/implementation-r10/tooling/executor/frozen_shadow_monitor.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/frozen_shadow_monitor.py",
+      "snapshot_sha256": "bb63de244007818956aa151ecceae98bf8c4fa50c45f2f7ee09bc74d63d21d0b",
+      "source_sha256": "bb63de244007818956aa151ecceae98bf8c4fa50c45f2f7ee09bc74d63d21d0b"
+    },
+    "J/implementation-r10/tooling/executor/identity_delta.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/identity_delta.py",
+      "snapshot_sha256": "e724dc6a6aa5ab9b3e498a5668276375e8aa13e2fccba0c5c73dd0975219a440",
+      "source_sha256": "e724dc6a6aa5ab9b3e498a5668276375e8aa13e2fccba0c5c73dd0975219a440"
+    },
+    "J/implementation-r10/tooling/executor/isolation.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/isolation.py",
+      "snapshot_sha256": "4c0277d71479bb65cfd453a68799c53f7ed22e6b31cb72fce256859a7b9a4dc5",
+      "source_sha256": "4c0277d71479bb65cfd453a68799c53f7ed22e6b31cb72fce256859a7b9a4dc5"
+    },
+    "J/implementation-r10/tooling/executor/lean_materialization.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/lean_materialization.py",
+      "snapshot_sha256": "b082fff3453e1cf0cdd4d17f300c2aa54f8fc02339822766db73b8277e9fc297",
+      "source_sha256": "b082fff3453e1cf0cdd4d17f300c2aa54f8fc02339822766db73b8277e9fc297"
+    },
+    "J/implementation-r10/tooling/executor/lean_preparation.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/lean_preparation.py",
+      "snapshot_sha256": "c3862c3206c02f6c2f51a4c410b1957b8e9e760894949b8deb56efdaae0098e4",
+      "source_sha256": "c3862c3206c02f6c2f51a4c410b1957b8e9e760894949b8deb56efdaae0098e4"
+    },
+    "J/implementation-r10/tooling/executor/matrix.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/matrix.py",
+      "snapshot_sha256": "76c0c5aec3cf9a4b850f792814fcf3053e34396e1a71c4d4e79f7fe73a6815ab",
+      "source_sha256": "76c0c5aec3cf9a4b850f792814fcf3053e34396e1a71c4d4e79f7fe73a6815ab"
+    },
+    "J/implementation-r10/tooling/executor/namespaces.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/namespaces.py",
+      "snapshot_sha256": "5610d6e27fad0343f26d2133eaaddb6bd59674f0d31ccc3657ffcd6c4da8d9f3",
+      "source_sha256": "5610d6e27fad0343f26d2133eaaddb6bd59674f0d31ccc3657ffcd6c4da8d9f3"
+    },
+    "J/implementation-r10/tooling/executor/native_observe.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/native_observe.py",
+      "snapshot_sha256": "6b8f308f3ef0d4a735344a07801c2550a6acc591f24b72f359123a20c8d49d70",
+      "source_sha256": "6b8f308f3ef0d4a735344a07801c2550a6acc591f24b72f359123a20c8d49d70"
+    },
+    "J/implementation-r10/tooling/executor/observe.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/observe.py",
+      "snapshot_sha256": "b36502c0fd2e140a882cde740683fd8af5043808d5ed7f4bf2cce7b9038c97de",
+      "source_sha256": "b36502c0fd2e140a882cde740683fd8af5043808d5ed7f4bf2cce7b9038c97de"
+    },
+    "J/implementation-r10/tooling/executor/packaging.init.gradle": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/packaging.init.gradle",
+      "snapshot_sha256": "fd3c8ce83acd27274b616ee32de17352ba2b533bc9dbce875fb93f3a6921a6e4",
+      "source_sha256": "fd3c8ce83acd27274b616ee32de17352ba2b533bc9dbce875fb93f3a6921a6e4"
+    },
+    "J/implementation-r10/tooling/executor/packaging.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/packaging.py",
+      "snapshot_sha256": "e7eb80c587d11e4c33ac8d1eb5485aa975e8fcc5a7beb1dde6d654dfd47ec299",
+      "source_sha256": "e7eb80c587d11e4c33ac8d1eb5485aa975e8fcc5a7beb1dde6d654dfd47ec299"
+    },
+    "J/implementation-r10/tooling/executor/parser_tools.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/parser_tools.py",
+      "snapshot_sha256": "ae883f34dd75034fb4dbbde1aa7bc547f1bd0281308ef3dada0130a90e72c515",
+      "source_sha256": "ae883f34dd75034fb4dbbde1aa7bc547f1bd0281308ef3dada0130a90e72c515"
+    },
+    "J/implementation-r10/tooling/executor/parsers.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/parsers.py",
+      "snapshot_sha256": "92dd841bc5d57ca33b51dfa9be088812130641c91cc00e3f144fae56ad10aac3",
+      "source_sha256": "92dd841bc5d57ca33b51dfa9be088812130641c91cc00e3f144fae56ad10aac3"
+    },
+    "J/implementation-r10/tooling/executor/preflight.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/preflight.py",
+      "snapshot_sha256": "536211ae18cda30a9cc2290689f4923eac7502005b629ea1dfe77a284fd5b914",
+      "source_sha256": "536211ae18cda30a9cc2290689f4923eac7502005b629ea1dfe77a284fd5b914"
+    },
+    "J/implementation-r10/tooling/executor/prepare.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/prepare.py",
+      "snapshot_sha256": "f199697ad274077537840b6a7b08402fd06ecfa193b89e47323fad9ff8ed9e0d",
+      "source_sha256": "f199697ad274077537840b6a7b08402fd06ecfa193b89e47323fad9ff8ed9e0d"
+    },
+    "J/implementation-r10/tooling/executor/prepare_finalize.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/prepare_finalize.py",
+      "snapshot_sha256": "dc68828ad5b42f6ec9d5b02403952d68207ce6f272138de4aa8f8cc62f7ef90d",
+      "source_sha256": "dc68828ad5b42f6ec9d5b02403952d68207ce6f272138de4aa8f8cc62f7ef90d"
+    },
+    "J/implementation-r10/tooling/executor/preservation.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/preservation.py",
+      "snapshot_sha256": "e4de7957968afb10ba26bf59253ea897b32cdb457150108d06ffae63386b420f",
+      "source_sha256": "e4de7957968afb10ba26bf59253ea897b32cdb457150108d06ffae63386b420f"
+    },
+    "J/implementation-r10/tooling/executor/qualification_contract.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/qualification_contract.py",
+      "snapshot_sha256": "96d529e25152f5a94d434fa38371803ca6fe098b5f32374a0e3dd22ef3b8372e",
+      "source_sha256": "96d529e25152f5a94d434fa38371803ca6fe098b5f32374a0e3dd22ef3b8372e"
+    },
+    "J/implementation-r10/tooling/executor/qualify_frontend.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/qualify_frontend.py",
+      "snapshot_sha256": "013af0fd6a54ac97c8b3c7fab44d6fbeb1e14f1a4cffdb8e49df0c27987111d4",
+      "source_sha256": "013af0fd6a54ac97c8b3c7fab44d6fbeb1e14f1a4cffdb8e49df0c27987111d4"
+    },
+    "J/implementation-r10/tooling/executor/runner.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/runner.py",
+      "snapshot_sha256": "7d20f1cf59fcb79df5c704072683888eb46edf4146ab544082bb0b65215d0646",
+      "source_sha256": "7d20f1cf59fcb79df5c704072683888eb46edf4146ab544082bb0b65215d0646"
+    },
+    "J/implementation-r10/tooling/executor/sequence.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/sequence.py",
+      "snapshot_sha256": "ab85a2a6e26b02d9f11166660dbe0d0757864f70c0de35171aaab60b4449df5e",
+      "source_sha256": "ab85a2a6e26b02d9f11166660dbe0d0757864f70c0de35171aaab60b4449df5e"
+    },
+    "J/implementation-r10/tooling/executor/shadow_binding.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/shadow_binding.py",
+      "snapshot_sha256": "eaf4933c7785dc421149681a09f62e4809a5c985da8d5d9cf81a878c493cf71e",
+      "source_sha256": "eaf4933c7785dc421149681a09f62e4809a5c985da8d5d9cf81a878c493cf71e"
+    },
+    "J/implementation-r10/tooling/executor/test_account.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/test_account.py",
+      "snapshot_sha256": "e0367c95ef5d37ef997a5a33be7e58e4fe2828d6b9af35c4597a822e4a5adf97",
+      "source_sha256": "e0367c95ef5d37ef997a5a33be7e58e4fe2828d6b9af35c4597a822e4a5adf97"
+    },
+    "J/implementation-r10/tooling/executor/test_bookkeeping_v2.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/test_bookkeeping_v2.py",
+      "snapshot_sha256": "d71ec5eede3d93dfa8d071bfc5fe9df3f86c429e382c1ac626406c56d4026dba",
+      "source_sha256": "d71ec5eede3d93dfa8d071bfc5fe9df3f86c429e382c1ac626406c56d4026dba"
+    },
+    "J/implementation-r10/tooling/executor/test_continuation.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/test_continuation.py",
+      "snapshot_sha256": "630401bb64ba2251b1a273b3dc8d64607ea4f61cfc252376aeba87631ed5c4ef",
+      "source_sha256": "630401bb64ba2251b1a273b3dc8d64607ea4f61cfc252376aeba87631ed5c4ef"
+    },
+    "J/implementation-r10/tooling/executor/test_contract.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/test_contract.py",
+      "snapshot_sha256": "3fc1b622f5a1f6c18b38bd1f3d908bc956cfd9cace746fbfed5b0c27b94efa4a",
+      "source_sha256": "3fc1b622f5a1f6c18b38bd1f3d908bc956cfd9cace746fbfed5b0c27b94efa4a"
+    },
+    "J/implementation-r10/tooling/executor/test_isolation.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/test_isolation.py",
+      "snapshot_sha256": "43065b9e8bd2893535909d58f7e1008e67137e55642ccd8d2f43c130ad61857d",
+      "source_sha256": "43065b9e8bd2893535909d58f7e1008e67137e55642ccd8d2f43c130ad61857d"
+    },
+    "J/implementation-r10/tooling/executor/test_lean_binding.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/test_lean_binding.py",
+      "snapshot_sha256": "947c2951de922d964311bbf81da5eb6dd2ca745f206303a00a86b395aef70f40",
+      "source_sha256": "947c2951de922d964311bbf81da5eb6dd2ca745f206303a00a86b395aef70f40"
+    },
+    "J/implementation-r10/tooling/executor/test_lean_materialization.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/test_lean_materialization.py",
+      "snapshot_sha256": "8ca17c5ff613528c4843c47d4330a39908af743fb842c26c98c32a3dc10f4d0c",
+      "source_sha256": "8ca17c5ff613528c4843c47d4330a39908af743fb842c26c98c32a3dc10f4d0c"
+    },
+    "J/implementation-r10/tooling/executor/test_owner_preparation.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/test_owner_preparation.py",
+      "snapshot_sha256": "8bd6d3343101564bde44ebd06fece088d6b494d87ee5ebf79717ec004b2d93f6",
+      "source_sha256": "8bd6d3343101564bde44ebd06fece088d6b494d87ee5ebf79717ec004b2d93f6"
+    },
+    "J/implementation-r10/tooling/executor/test_v2_integration.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/test_v2_integration.py",
+      "snapshot_sha256": "dacc18f0d099a55b2dc6fb9555aabfc19703cd1b42cfb897af4e5281b830cd36",
+      "source_sha256": "dacc18f0d099a55b2dc6fb9555aabfc19703cd1b42cfb897af4e5281b830cd36"
+    },
+    "J/implementation-r10/tooling/executor/vite_closure.mjs": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/vite_closure.mjs",
+      "snapshot_sha256": "c384d54525bfa558a0d488d2c76562f926e8ec7c1e61a4434cecf1d153d379b8",
+      "source_sha256": "c384d54525bfa558a0d488d2c76562f926e8ec7c1e61a4434cecf1d153d379b8"
+    },
+    "J/implementation-r10/tooling/executor/vite_closure.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/vite_closure.py",
+      "snapshot_sha256": "365b0f070200a9e87f7c6bd2dcc6afdc9da5b695561237fe6cf761cfde7f0e3a",
+      "source_sha256": "365b0f070200a9e87f7c6bd2dcc6afdc9da5b695561237fe6cf761cfde7f0e3a"
+    },
+    "J/implementation-r10/tooling/executor/vite_resolution.mjs": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/executor/vite_resolution.mjs",
+      "snapshot_sha256": "989ad04b5eef1f96e608adbbba25559ea05ad2b88fe1dc56015f7f5a8095a74c",
+      "source_sha256": "989ad04b5eef1f96e608adbbba25559ea05ad2b88fe1dc56015f7f5a8095a74c"
+    },
+    "J/implementation-r11/tooling/qualification/build_dependency_evidence.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/build_dependency_evidence.py",
+      "snapshot_sha256": "c19d7f66b8cd75c3599105f94a19370a7e3c1c0c43d285b81873f582a85bc8e2",
+      "source_sha256": "c19d7f66b8cd75c3599105f94a19370a7e3c1c0c43d285b81873f582a85bc8e2"
+    },
+    "J/implementation-r11/tooling/qualification/build_integration_qualification.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/build_integration_qualification.py",
+      "snapshot_sha256": "67cdb0300064d2b1c3f235266a954c08a8089650d286f6a1d31cfef2b5bb905d",
+      "source_sha256": "67cdb0300064d2b1c3f235266a954c08a8089650d286f6a1d31cfef2b5bb905d"
+    },
+    "J/implementation-r11/tooling/qualification/build_runtime_binding.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/build_runtime_binding.py",
+      "snapshot_sha256": "d687fa392234107a3479ab9d1964b6c4853d61025683203a99d2433af492b319",
+      "source_sha256": "d687fa392234107a3479ab9d1964b6c4853d61025683203a99d2433af492b319"
+    },
+    "J/implementation-r11/tooling/qualification/candidate_binding.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/candidate_binding.py",
+      "snapshot_sha256": "620fc5ecf5608561468a97cc2963007cc153067442d9c9c4b185496a47464847",
+      "source_sha256": "620fc5ecf5608561468a97cc2963007cc153067442d9c9c4b185496a47464847"
+    },
+    "J/implementation-r11/tooling/qualification/policy_builder.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/policy_builder.py",
+      "snapshot_sha256": "d1c52c68625b26eff6084cdaaade7476fcc37fa3bb8f2ec42b9ccd0e7f4cad8f",
+      "source_sha256": "d1c52c68625b26eff6084cdaaade7476fcc37fa3bb8f2ec42b9ccd0e7f4cad8f"
+    },
+    "J/implementation-r11/tooling/qualification/run_group.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/run_group.py",
+      "snapshot_sha256": "ead2a0000b4acfb26881a7ceb74d289d548f378f17012ecb81f3ebc8384ef3d4",
+      "source_sha256": "ead2a0000b4acfb26881a7ceb74d289d548f378f17012ecb81f3ebc8384ef3d4"
+    },
+    "J/implementation-r11/tooling/qualification/run_integrated_parent.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/run_integrated_parent.py",
+      "snapshot_sha256": "d325b64f209c325c9f95c82cad3d1b47b189042a89cb7d618b0d690a4a2d0662",
+      "source_sha256": "d325b64f209c325c9f95c82cad3d1b47b189042a89cb7d618b0d690a4a2d0662"
+    },
+    "J/implementation-r11/tooling/qualification/run_source_bound_group.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/run_source_bound_group.py",
+      "snapshot_sha256": "92757b304ecf36e7287fa0a757a7f25f24a80e5ef7a3c9f4de1a67553f1f1a8a",
+      "source_sha256": "92757b304ecf36e7287fa0a757a7f25f24a80e5ef7a3c9f4de1a67553f1f1a8a"
+    },
+    "J/implementation-r11/tooling/qualification/test_approved_contract.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/test_approved_contract.py",
+      "snapshot_sha256": "6b96436eb4da521b9dd564cb18c194bbd8ad865900dac74a1db374624d2fa54e",
+      "source_sha256": "6b96436eb4da521b9dd564cb18c194bbd8ad865900dac74a1db374624d2fa54e"
+    },
+    "J/implementation-r11/tooling/qualification/test_conformance_corrections.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/test_conformance_corrections.py",
+      "snapshot_sha256": "1ccb7c99c37a828778050129171370d60f64c756082fae43f955ee3f207d695d",
+      "source_sha256": "1ccb7c99c37a828778050129171370d60f64c756082fae43f955ee3f207d695d"
+    },
+    "J/implementation-r11/tooling/qualification/test_external29_integration.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/test_external29_integration.py",
+      "snapshot_sha256": "07f43f94c0b03f2f04931bda226ac7171df8cc0c7cc3faff65a91801e300e1f6",
+      "source_sha256": "07f43f94c0b03f2f04931bda226ac7171df8cc0c7cc3faff65a91801e300e1f6"
+    },
+    "J/implementation-r11/tooling/qualification/test_r10_final_boundary.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/test_r10_final_boundary.py",
+      "snapshot_sha256": "cc52670015283b685b6b0575b8b84dc59e98f9ba6eb5925cef7128412fa63bad",
+      "source_sha256": "cc52670015283b685b6b0575b8b84dc59e98f9ba6eb5925cef7128412fa63bad"
+    },
+    "J/implementation-r11/tooling/qualification/test_r11_diagnostic_emission.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/test_r11_diagnostic_emission.py",
+      "snapshot_sha256": "08611fdad2b4ab8724642d3a5a298e8ee0307c71e0c9689f0c2c134034152c78",
+      "source_sha256": "08611fdad2b4ab8724642d3a5a298e8ee0307c71e0c9689f0c2c134034152c78"
+    },
+    "J/implementation-r11/tooling/qualification/test_r3_remaining.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/test_r3_remaining.py",
+      "snapshot_sha256": "5871417ad3e438f0c0c6d8c0ca352f6d900db5e16d3116c92d5f2d463d474938",
+      "source_sha256": "5871417ad3e438f0c0c6d8c0ca352f6d900db5e16d3116c92d5f2d463d474938"
+    },
+    "J/implementation-r11/tooling/qualification/test_r4_remaining.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/test_r4_remaining.py",
+      "snapshot_sha256": "e4fa16c011a1e0bd8d8d68616c0dd15fa3682df83e210d342b52b6e52b8b02d5",
+      "source_sha256": "e4fa16c011a1e0bd8d8d68616c0dd15fa3682df83e210d342b52b6e52b8b02d5"
+    },
+    "J/implementation-r11/tooling/qualification/test_r5_remaining.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/test_r5_remaining.py",
+      "snapshot_sha256": "b76bb2b0abce5cb788cbd3c2e92f47e35556f14274fead6f8268938170d00e16",
+      "source_sha256": "b76bb2b0abce5cb788cbd3c2e92f47e35556f14274fead6f8268938170d00e16"
+    },
+    "J/implementation-r11/tooling/qualification/test_r6_remaining.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/test_r6_remaining.py",
+      "snapshot_sha256": "52b8f8a633d5529c8770c03ffaa083b5cd704051db4f43c6a27207a933427591",
+      "source_sha256": "52b8f8a633d5529c8770c03ffaa083b5cd704051db4f43c6a27207a933427591"
+    },
+    "J/implementation-r11/tooling/qualification/test_r7_remaining.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/test_r7_remaining.py",
+      "snapshot_sha256": "eabddeb989727178a57b503be4acf4ce443fa6b96922f14727bc1ef204fcdd3a",
+      "source_sha256": "eabddeb989727178a57b503be4acf4ce443fa6b96922f14727bc1ef204fcdd3a"
+    },
+    "J/implementation-r11/tooling/qualification/test_r7_runner_supplement.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/test_r7_runner_supplement.py",
+      "snapshot_sha256": "9944dd46ee94ed6fe7094732b4aa220539117057b1d74b5fc9d054cb474ce858",
+      "source_sha256": "9944dd46ee94ed6fe7094732b4aa220539117057b1d74b5fc9d054cb474ce858"
+    },
+    "J/implementation-r11/tooling/qualification/test_r8_transport.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/test_r8_transport.py",
+      "snapshot_sha256": "e447308b4ed7498102e1731e8235b3001666bbc342275b62d9915e0b95a321a9",
+      "source_sha256": "e447308b4ed7498102e1731e8235b3001666bbc342275b62d9915e0b95a321a9"
+    },
+    "J/implementation-r11/tooling/qualification/test_r9_preflight_persistence.py": {
+      "snapshot": "J/writer-evidence-r11/red-r10-001/sources.before/qualification/test_r9_preflight_persistence.py",
+      "snapshot_sha256": "e95b6b5048c781dd8894f59712db150f12272b3b7472aeb0e34fe3ce1dc22941",
+      "source_sha256": "e95b6b5048c781dd8894f59712db150f12272b3b7472aeb0e34fe3ce1dc22941"
+    }
+  },
+  "source_snapshot_stable": true,
+  "started_monotonic_ns": 203089399981455,
+  "started_wall_ns": 1788952107467731150,
+  "tested_tooling": "J/implementation-r10/tooling",
+  "wrapper_exit": 0,
+  "wrapper_status": "PASS"
+}

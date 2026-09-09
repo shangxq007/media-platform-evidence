@@ -1,0 +1,106 @@
+{
+  "approved_contract_changed": false,
+  "formal_attempts_used": "1/2",
+  "formal_namespace_created": false,
+  "rows": [
+    {
+      "ar_id": "AR001",
+      "contract": "continuous baseline through FINAL/COVERAGE/SEAL observation",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9/qualification-001 (173/173 PASS; prior mandatory 85 retained)",
+      "outer_entry": "unchanged integrated fixture-only actual paths",
+      "red": "historical exact-scope evidence preserved; not relabeled fresh",
+      "source": "implementation-r9/tooling/executor/observe.py/native_observe.py"
+    },
+    {
+      "ar_id": "AR002",
+      "contract": "exact V2 temp metadata and rename lifecycle",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9/qualification-001 (173/173 PASS; prior mandatory 85 retained)",
+      "outer_entry": "unchanged integrated fixture-only actual paths",
+      "red": "historical exact-scope evidence preserved; not relabeled fresh",
+      "source": "implementation-r9/tooling/executor/observe.py/bookkeeping_v2.py/bookkeeping_v3.py"
+    },
+    {
+      "ar_id": "AR003",
+      "contract": "actual wall/monotonic capture window",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9/qualification-001 (173/173 PASS; prior mandatory 85 retained)",
+      "outer_entry": "unchanged integrated fixture-only actual paths",
+      "red": "historical exact-scope evidence preserved; not relabeled fresh",
+      "source": "implementation-r9/tooling/executor/boundary.py"
+    },
+    {
+      "ar_id": "AR004",
+      "contract": "raw JSONL framing and strict decoding",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9/qualification-001 (173/173 PASS; prior mandatory 85 retained)",
+      "outer_entry": "unchanged integrated fixture-only actual paths",
+      "red": "historical exact-scope evidence preserved; not relabeled fresh",
+      "source": "implementation-r9/tooling/executor/bookkeeping_v3.py"
+    },
+    {
+      "ar_id": "AR005",
+      "contract": "legal V2 change followed by unchanged boundary",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9/qualification-001 (173/173 PASS; prior mandatory 85 retained)",
+      "outer_entry": "unchanged integrated fixture-only actual paths",
+      "red": "historical exact-scope evidence preserved; not relabeled fresh",
+      "source": "implementation-r9/tooling/executor/boundary.py/bookkeeping_v3.py"
+    },
+    {
+      "ar_id": "AR006",
+      "contract": "formal caller cannot inject acceptance summaries",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9/qualification-001 (173/173 PASS; prior mandatory 85 retained)",
+      "outer_entry": "unchanged integrated fixture-only actual paths",
+      "red": "historical exact-scope evidence preserved; not relabeled fresh",
+      "source": "implementation-r9/tooling/executor/external29_driver.py/binding_contract.py"
+    },
+    {
+      "ar_id": "AR007",
+      "contract": "exact qualification/dependency/eligible-map consumer binding",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9/qualification-001 (173/173 PASS; prior mandatory 85 retained)",
+      "outer_entry": "unchanged integrated fixture-only actual paths",
+      "red": "historical exact-scope evidence preserved; not relabeled fresh",
+      "source": "implementation-r9/tooling/executor/coverage.py/dependency_contract.py/qualification_contract.py"
+    },
+    {
+      "ar_id": "AR008",
+      "contract": "original failure/disposition remains primary across actual preflight and final sink persistence failures",
+      "counterexample": "actual durability.exclusive_bytes write fault at preflight.json after structured capture failure",
+      "disposition": "CLOSED_EXACT_FINITE_PERSISTENCE_SCOPE",
+      "evidence": [
+        "writer-evidence-r9/red-r8-002",
+        "writer-evidence-r9/green-r9-final-002",
+        "writer-evidence-r9/qualification-001"
+      ],
+      "failed_final_sink": "no durable receipt claimed; raised fallback retains original, preflight-write, and final-sink occurrences",
+      "green": "writer-evidence-r9/green-r9-final-002: 3/3 PASS with identical test body",
+      "outer_entry": "engineering_preflight -> runner.put; formal_failure_document; formal catch -> formal_persistence_failure",
+      "red": "writer-evidence-r9/red-r8-002: original-only PASS; compound preflight and final-sink controls FAIL",
+      "saved_readback": "real exclusive file write/fsync/close and JSON readback; temporary bounded fixture, not a formal receipt",
+      "source": "implementation-r9/tooling/executor/external29_driver.py"
+    },
+    {
+      "ar_id": "AR009",
+      "contract": "durable file/parent/nested directory and failure-marker publication",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9/qualification-001 (173/173 PASS; prior mandatory 85 retained)",
+      "outer_entry": "unchanged integrated fixture-only actual paths",
+      "red": "historical exact-scope evidence preserved; not relabeled fresh",
+      "source": "implementation-r9/tooling/executor/durability.py/artifacts.py/executor_adapter.py"
+    },
+    {
+      "ar_id": "AR010",
+      "contract": "bounded actual acquisition loops and shared boundary budgets",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r9/qualification-001 (173/173 PASS; prior mandatory 85 retained)",
+      "outer_entry": "unchanged integrated fixture-only actual paths",
+      "red": "historical exact-scope evidence preserved; not relabeled fresh",
+      "source": "implementation-r9/tooling/executor/capture.py/observe.py/native_observe.py"
+    }
+  ],
+  "schema": "ep19-r9-conformance-matrix-v1"
+}

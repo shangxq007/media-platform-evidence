@@ -1,0 +1,191 @@
+{
+  "approved_contract_changed": false,
+  "b10": {
+    "B10-A-1": "CLOSED_EXACT_ACTUAL_ACQUISITION_AND_GATE_SCOPE"
+  },
+  "b9": {
+    "B9-B-1": "RETAINED_SUPPORTED_CLOSED_EXACT_SCOPE",
+    "B9-B-2": "RETAINED_SUPPORTED_CLOSED_EXACT_NATIVE_MAIN_SCOPE"
+  },
+  "formal_attempts_used": "1/2",
+  "formal_namespace_created": false,
+  "rows": [
+    {
+      "ar_id": "AR001",
+      "contract": "continuous protection baseline through FINAL/COVERAGE/SEAL",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r10 exact disposition plus r11 integrated 178/178 regression",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r11/tooling/executor retained source binding"
+    },
+    {
+      "ar_id": "AR002",
+      "contract": "exact V2 temp metadata and rename lifecycle",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r10 exact disposition plus r11 integrated 178/178 regression",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r11/tooling/executor retained source binding"
+    },
+    {
+      "ar_id": "AR003",
+      "contract": "actual wall/monotonic capture window",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r10 exact disposition plus r11 integrated 178/178 regression",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r11/tooling/executor retained source binding"
+    },
+    {
+      "ar_id": "AR004",
+      "contract": "raw JSONL framing and strict decoding",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r10 exact disposition plus r11 integrated 178/178 regression",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r11/tooling/executor retained source binding"
+    },
+    {
+      "ar_id": "AR005",
+      "contract": "legal V2 change followed by unchanged boundary",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r10 exact disposition plus r11 integrated 178/178 regression",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r11/tooling/executor retained source binding"
+    },
+    {
+      "ar_id": "AR006",
+      "contract": "formal caller cannot inject acceptance summaries",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r10 exact disposition plus r11 integrated 178/178 regression",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r11/tooling/executor retained source binding"
+    },
+    {
+      "ar_id": "AR007",
+      "contract": "exact qualification/dependency/eligible-map consumer binding",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r10 exact disposition plus r11 integrated 178/178 regression",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r11/tooling/executor retained source binding"
+    },
+    {
+      "ar_id": "AR008",
+      "contract": "failure latch and original structured result before fallible diagnostics",
+      "counterexample": "actual formal acquisition/native-gate primary plus actual marker failure followed by actual diagnostic stderr write/flush failure",
+      "disposition": "B10_A_1_CLOSED_EXACT_ACTUAL_SCOPE",
+      "evidence": {
+        "green": {
+          "acquisition": {
+            "bytes": 33330,
+            "contexts_present": true,
+            "gate_result_assigned_before_emission": true,
+            "native_exit": null,
+            "path": "J/fixtures-r11/green-r11-final-001/acquisition-diagnostic-failure/FORMAL_FAILURE.json",
+            "sha256": "160922c4e99212d8f213b0fcb110c3c4670cbf7b84dcdaf591b2d0485747cce1",
+            "stderr_persistence_claim": false,
+            "types": [
+              "FileNotFoundError",
+              "RuntimeError",
+              "DiagnosticStderrFailure"
+            ],
+            "unique_occurrences": true
+          },
+          "gate": {
+            "bytes": 29694,
+            "contexts_present": true,
+            "gate_result_assigned_before_emission": true,
+            "native_exit": 73,
+            "path": "J/fixtures-r11/green-r11-final-001/gate-diagnostic-failure/FORMAL_FAILURE.json",
+            "sha256": "9208eb9d512bb1f73417117e062e5443766b163ac0d1c20b5d78d7c451743e97",
+            "stderr_persistence_claim": false,
+            "types": [
+              "NativeGateFailure",
+              "RuntimeError",
+              "DiagnosticStderrFailure"
+            ],
+            "unique_occurrences": true
+          }
+        },
+        "integrated": {
+          "acquisition": {
+            "bytes": 33308,
+            "contexts_present": true,
+            "gate_result_assigned_before_emission": true,
+            "native_exit": null,
+            "path": "J/fixtures-r11/qualification-001/acquisition-diagnostic-failure/FORMAL_FAILURE.json",
+            "sha256": "d256eb47209827e1c45ebdc5060a71c265afc2c81608beb4b561db093d30b46b",
+            "stderr_persistence_claim": false,
+            "types": [
+              "FileNotFoundError",
+              "RuntimeError",
+              "DiagnosticStderrFailure"
+            ],
+            "unique_occurrences": true
+          },
+          "gate": {
+            "bytes": 29694,
+            "contexts_present": true,
+            "gate_result_assigned_before_emission": true,
+            "native_exit": 73,
+            "path": "J/fixtures-r11/qualification-001/gate-diagnostic-failure/FORMAL_FAILURE.json",
+            "sha256": "35cce58e3ef9ce8d4f13d1d56087ebf94d3554e74009bf0ffbd8be3b159a5fea",
+            "stderr_persistence_claim": false,
+            "types": [
+              "NativeGateFailure",
+              "RuntimeError",
+              "DiagnosticStderrFailure"
+            ],
+            "unique_occurrences": true
+          }
+        },
+        "red": {
+          "acquisition": {
+            "bytes": 11946,
+            "contexts_present": true,
+            "gate_result_assigned_before_emission": false,
+            "native_exit": null,
+            "path": "J/fixtures-r11/red-r10-001/acquisition-diagnostic-failure/FORMAL_FAILURE.json",
+            "sha256": "ab8204fb42be122fa5c527c7b32c06d18b6cb544f634f7ab1ed0ee4369ae7384",
+            "stderr_persistence_claim": null,
+            "types": [
+              "DiagnosticStderrFailure"
+            ],
+            "unique_occurrences": true
+          },
+          "gate": {
+            "bytes": 9761,
+            "contexts_present": true,
+            "gate_result_assigned_before_emission": false,
+            "native_exit": null,
+            "path": "J/fixtures-r11/red-r10-001/gate-diagnostic-failure/FORMAL_FAILURE.json",
+            "sha256": "c2eef9d617615e9517e9c7cedffe6ad691a08edc24baf9297052a2de058eb94c",
+            "stderr_persistence_claim": null,
+            "types": [
+              "DiagnosticStderrFailure"
+            ],
+            "unique_occurrences": true
+          }
+        }
+      },
+      "green": "writer-evidence-r11/green-r11-final-001 2/2 PASS; acquisition and gate independently checked",
+      "outer_entry": "formal -> execute_actual_graph -> latching/runner error -> adapter marker -> emit_persistence_uncertainty -> formal_failure_document",
+      "red": "writer-evidence-r11/red-r10-001 2/2 intended FAIL; saved FORMAL_FAILURE contained only DiagnosticStderrFailure and no assigned fixture gate result",
+      "source": "implementation-r11/tooling/executor/external29_driver.py; decision_evidence.py; baseline_evidence.py; causal.py"
+    },
+    {
+      "ar_id": "AR009",
+      "contract": "durable file/parent/nested directory and failure markers",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r10 exact disposition plus r11 integrated 178/178 regression",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r11/tooling/executor retained source binding"
+    },
+    {
+      "ar_id": "AR010",
+      "contract": "bounded acquisition loops and shared boundary budgets",
+      "disposition": "RETAINED_RESOLVED",
+      "green": "writer-evidence-r10 exact disposition plus r11 integrated 178/178 regression",
+      "red": "historical exact-scope evidence retained; not relabeled fresh",
+      "source": "implementation-r11/tooling/executor retained source binding"
+    }
+  ],
+  "schema": "ep19-r11-conformance-matrix-v1"
+}

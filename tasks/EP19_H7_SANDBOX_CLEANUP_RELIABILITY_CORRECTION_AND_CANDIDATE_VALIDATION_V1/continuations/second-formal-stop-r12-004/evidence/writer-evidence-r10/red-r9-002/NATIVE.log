@@ -1,0 +1,48 @@
+test_actual_final_failure_writer_fault_keeps_original_in_saved_formal_receipt (test_r10_final_boundary.R10ActualFinalBoundaryControls.test_actual_final_failure_writer_fault_keeps_original_in_saved_formal_receipt) ... FAIL
+test_production_main_saved_stderr_has_structured_original_and_both_sink_failures (test_r10_final_boundary.R10ActualFinalBoundaryControls.test_production_main_saved_stderr_has_structured_original_and_both_sink_failures) ... FAIL
+test_unavailable_stderr_returns_false_without_persistence_claim (test_r10_final_boundary.R10ActualFinalBoundaryControls.test_unavailable_stderr_returns_false_without_persistence_claim) ... FAIL
+
+======================================================================
+FAIL: test_actual_final_failure_writer_fault_keeps_original_in_saved_formal_receipt (test_r10_final_boundary.R10ActualFinalBoundaryControls.test_actual_final_failure_writer_fault_keeps_original_in_saved_formal_receipt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r10/tooling/qualification/test_r10_final_boundary.py", line 177, in test_actual_final_failure_writer_fault_keeps_original_in_saved_formal_receipt
+    self.assertIn("RuntimeError", by_type, rows)
+AssertionError: 'RuntimeError' not found in {'OSError': {'association': 'same-operation', 'contexts': [{'association': 'same-operation', 'context_id': 'context-dc008e93d3cf4128ab33c7916d07ef00', 'parent_context_id': None, 'role': 'primary', 'stage': 'FORMAL_BODY'}], 'error_type': 'OSError', 'leaf_index': 0, 'occurrence_id': 'occurrence-ff8ffa223d924e939c56615549da4ad7', 'reason': 'r10 actual FINAL_FAILURE.json write failure', 'role': 'primary', 'schema': 'ep19-structured-causal-error-v2', 'stage': 'FORMAL_BODY'}} : [{'association': 'same-operation', 'contexts': [{'association': 'same-operation', 'context_id': 'context-dc008e93d3cf4128ab33c7916d07ef00', 'parent_context_id': None, 'role': 'primary', 'stage': 'FORMAL_BODY'}], 'error_type': 'OSError', 'leaf_index': 0, 'occurrence_id': 'occurrence-ff8ffa223d924e939c56615549da4ad7', 'reason': 'r10 actual FINAL_FAILURE.json write failure', 'role': 'primary', 'schema': 'ep19-structured-causal-error-v2', 'stage': 'FORMAL_BODY'}]
+
+======================================================================
+FAIL: test_production_main_saved_stderr_has_structured_original_and_both_sink_failures (test_r10_final_boundary.R10ActualFinalBoundaryControls.test_production_main_saved_stderr_has_structured_original_and_both_sink_failures)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r10/tooling/qualification/test_r10_final_boundary.py", line 284, in test_production_main_saved_stderr_has_structured_original_and_both_sink_failures
+    parsed = json.loads(process.stderr)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "USER_HOME/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "USER_HOME/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "USER_HOME/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 3 (char 2)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "J/implementation-r10/tooling/qualification/test_r10_final_boundary.py", line 286, in test_production_main_saved_stderr_has_structured_original_and_both_sink_failures
+    self.fail("production stderr is not structured JSON: " + str(error))
+AssertionError: production stderr is not structured JSON: Expecting value: line 1 column 3 (char 2)
+
+======================================================================
+FAIL: test_unavailable_stderr_returns_false_without_persistence_claim (test_r10_final_boundary.R10ActualFinalBoundaryControls.test_unavailable_stderr_returns_false_without_persistence_claim)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r10/tooling/qualification/test_r10_final_boundary.py", line 308, in test_unavailable_stderr_returns_false_without_persistence_claim
+    self.assertTrue(callable(emitter), "production native emitter is missing")
+AssertionError: False is not true : production native emitter is missing
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.172s
+
+FAILED (failures=3)

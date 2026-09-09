@@ -1,0 +1,345 @@
+{
+  "runs": {
+    "red-r10-001": {
+      "snapshots": {
+        "before": {
+          "count": 81,
+          "current_source_differences": [
+            "J/implementation-r11/tooling/qualification/build_dependency_evidence.py"
+          ],
+          "snapshot_intrinsic_mismatches": []
+        },
+        "after": {
+          "count": 81,
+          "current_source_differences": [
+            "J/implementation-r11/tooling/qualification/build_dependency_evidence.py"
+          ],
+          "snapshot_intrinsic_mismatches": []
+        }
+      },
+      "source_maps_equal": true,
+      "native_exit": 1,
+      "wrapper_exit": 0,
+      "native": {
+        "count": 2,
+        "unique": 2,
+        "process_matches": true,
+        "log_hash_matches": true,
+        "result_hash_matches": true,
+        "status_counts": {
+          "FAIL": 2
+        }
+      },
+      "result_projection_matches": true
+    },
+    "green-r11-final-002": {
+      "snapshots": {
+        "before": {
+          "count": 81,
+          "bad": []
+        },
+        "after": {
+          "count": 81,
+          "bad": []
+        }
+      },
+      "source_maps_equal": true,
+      "native_exit": 0,
+      "wrapper_exit": 0,
+      "native": {
+        "count": 2,
+        "unique": 2,
+        "process_matches": true,
+        "log_hash_matches": true,
+        "result_hash_matches": true,
+        "status_counts": {
+          "PASS": 2
+        }
+      },
+      "result_projection_matches": true
+    },
+    "qualification-002": {
+      "snapshots": {
+        "before": {
+          "count": 120,
+          "bad": []
+        },
+        "after": {
+          "count": 120,
+          "bad": []
+        }
+      },
+      "source_maps_equal": true,
+      "native_exit": 0,
+      "wrapper_exit": 0
+    },
+    "qualification-002/integrated": {
+      "native": {
+        "count": 178,
+        "unique": 178,
+        "process_matches": true,
+        "log_hash_matches": true,
+        "result_hash_matches": true,
+        "status_counts": {
+          "PASS": 178
+        }
+      },
+      "result_projection_matches": true
+    }
+  },
+  "receipts": [
+    {
+      "run": "red-r10-001",
+      "scenario": "acquisition",
+      "sha256": "ab8204fb42be122fa5c527c7b32c06d18b6cb544f634f7ab1ed0ee4369ae7384",
+      "bytes": 11946,
+      "readback_match": true,
+      "types": [
+        "DiagnosticStderrFailure"
+      ],
+      "unique_occurrences": true,
+      "bad_context_edges": [],
+      "context_overflow": false,
+      "contexts": [
+        1
+      ],
+      "gate_present": false,
+      "native_exit_readback": null,
+      "native_exit_receipt": null,
+      "write_calls": 1,
+      "flush_calls": 0,
+      "semantic_success_artifacts_allowed": null,
+      "stderr_persistence_claim": null
+    },
+    {
+      "run": "red-r10-001",
+      "scenario": "gate",
+      "sha256": "c2eef9d617615e9517e9c7cedffe6ad691a08edc24baf9297052a2de058eb94c",
+      "bytes": 9761,
+      "readback_match": true,
+      "types": [
+        "DiagnosticStderrFailure"
+      ],
+      "unique_occurrences": true,
+      "bad_context_edges": [],
+      "context_overflow": false,
+      "contexts": [
+        1
+      ],
+      "gate_present": false,
+      "native_exit_readback": 73,
+      "native_exit_receipt": null,
+      "write_calls": 2,
+      "flush_calls": 1,
+      "semantic_success_artifacts_allowed": null,
+      "stderr_persistence_claim": null
+    },
+    {
+      "run": "green-r11-final-002",
+      "scenario": "acquisition",
+      "sha256": "4caf6100c16cc494dcb35ef8861e00003cda9f57e11fff4cd6c091f2c9a6e8e0",
+      "bytes": 33330,
+      "readback_match": true,
+      "types": [
+        "FileNotFoundError",
+        "RuntimeError",
+        "DiagnosticStderrFailure"
+      ],
+      "unique_occurrences": true,
+      "bad_context_edges": [],
+      "context_overflow": false,
+      "contexts": [
+        6,
+        4,
+        6
+      ],
+      "gate_present": true,
+      "native_exit_readback": null,
+      "native_exit_receipt": null,
+      "write_calls": 1,
+      "flush_calls": 0,
+      "semantic_success_artifacts_allowed": false,
+      "stderr_persistence_claim": false
+    },
+    {
+      "run": "green-r11-final-002",
+      "scenario": "gate",
+      "sha256": "2f7fab3ecadaf4f2775de2c6bd9faca979f5b5971b7c41b32e5d9daf1212d66e",
+      "bytes": 29694,
+      "readback_match": true,
+      "types": [
+        "NativeGateFailure",
+        "RuntimeError",
+        "DiagnosticStderrFailure"
+      ],
+      "unique_occurrences": true,
+      "bad_context_edges": [],
+      "context_overflow": false,
+      "contexts": [
+        8,
+        4,
+        6
+      ],
+      "gate_present": true,
+      "native_exit_readback": 73,
+      "native_exit_receipt": 73,
+      "write_calls": 2,
+      "flush_calls": 1,
+      "semantic_success_artifacts_allowed": false,
+      "stderr_persistence_claim": false
+    },
+    {
+      "run": "qualification-002",
+      "scenario": "acquisition",
+      "sha256": "89db6a9ca8743c1ffa3f668d51a8fac6bfd5ae237aafb284ea35afb8121d2440",
+      "bytes": 33308,
+      "readback_match": true,
+      "types": [
+        "FileNotFoundError",
+        "RuntimeError",
+        "DiagnosticStderrFailure"
+      ],
+      "unique_occurrences": true,
+      "bad_context_edges": [],
+      "context_overflow": false,
+      "contexts": [
+        6,
+        4,
+        6
+      ],
+      "gate_present": true,
+      "native_exit_readback": null,
+      "native_exit_receipt": null,
+      "write_calls": 1,
+      "flush_calls": 0,
+      "semantic_success_artifacts_allowed": false,
+      "stderr_persistence_claim": false
+    },
+    {
+      "run": "qualification-002",
+      "scenario": "gate",
+      "sha256": "cb04a9bdeb70fd4decb96e1c46c731d6e02fe230acbd36321fd9deca6d4e0c64",
+      "bytes": 29694,
+      "readback_match": true,
+      "types": [
+        "NativeGateFailure",
+        "RuntimeError",
+        "DiagnosticStderrFailure"
+      ],
+      "unique_occurrences": true,
+      "bad_context_edges": [],
+      "context_overflow": false,
+      "contexts": [
+        8,
+        4,
+        6
+      ],
+      "gate_present": true,
+      "native_exit_readback": 73,
+      "native_exit_receipt": 73,
+      "write_calls": 2,
+      "flush_calls": 1,
+      "semantic_success_artifacts_allowed": false,
+      "stderr_persistence_claim": false
+    }
+  ],
+  "manifests": {
+    "FINAL_MANIFEST.r11.final-002.sha256": {
+      "count": 1699,
+      "bad": [],
+      "sha256": "4b9f63ee81a6facb3cebb776be1861a26b3589ce125ff648843b6d5885e3e742"
+    },
+    "FIXTURE_MANIFEST.r11.final-002.sha256": {
+      "count": 686,
+      "bad": [],
+      "sha256": "10cab564c75421405566495cfc4d7f17ae7e080a411d89db868aabd0caef1099"
+    }
+  },
+  "red_historical_current_difference": "build_dependency_evidence.py differs from current final source; both historical snapshots internally valid and before/after stable",
+  "retained_main_functions": {
+    "main": true,
+    "emit_native_failure": true,
+    "native_failure_document": true,
+    "formal_persistence_failure": true,
+    "persist_final_boundary_failure": true
+  },
+  "r10_native_main": {
+    "stderr_sha256": "baee81acb4d54ecdc43fe0b819a2a4769aab12d8418b0ef18a56662bd7b8c9c9",
+    "stderr_bytes": 4255,
+    "stdout_bytes": 0,
+    "process": {
+      "argv": [
+        "USER_HOME/.hermes/hermes-agent/venv/bin/python3",
+        "-B",
+        "J/fixtures-r11/qualification-002/tmpf3g60jf1/invoke_native_main.py"
+      ],
+      "candidate_formal_namespace_created": false,
+      "cwd": "J/fixtures-r11/qualification-002/tmpf3g60jf1",
+      "finished_wall_ns": 1788953365404866604,
+      "formal_attempt": false,
+      "native_exit": 1,
+      "product_tests": false,
+      "schema": "ep19-r10-native-main-parent-process-v1",
+      "shared_baseline": false,
+      "shared_preparation": false,
+      "shared_probes": false,
+      "started_wall_ns": 1788953365276604832,
+      "stderr": "J/fixtures-r11/qualification-002/native-main-fallback/STDERR.bin",
+      "stderr_sha256": "baee81acb4d54ecdc43fe0b819a2a4769aab12d8418b0ef18a56662bd7b8c9c9",
+      "stdout": "J/fixtures-r11/qualification-002/native-main-fallback/STDOUT.bin",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "parsed_matches": true,
+    "types": [
+      "RuntimeError",
+      "OSError",
+      "OSError"
+    ],
+    "hashes_match": true
+  },
+  "identities": {
+    "ast_count": 178,
+    "unique": 178,
+    "expected_match": true,
+    "actual_match": true,
+    "mandatory_count": 93,
+    "mandatory_ast_count": 93,
+    "mandatory_match": true
+  },
+  "source_test_sha256": "08611fdad2b4ab8724642d3a5a298e8ee0307c71e0c9689f0c2c134034152c78",
+  "driver_sha256": "9113ff32a75edf8ee00ecec976cccb70b5c0e226ce88b386973e913e8a3ade4c",
+  "emission_audit": [
+    {
+      "site": "external29_driver.py:300 / :623-634",
+      "status": "SUPPORTED_EXACT_WRITE_FLUSH",
+      "basis": "owned result+exception before actual print; focused and integrated saved disk receipts"
+    },
+    {
+      "site": "decision_evidence.py:273-293",
+      "status": "SUPPORTED_STATIC_DIRECT_CALLER",
+      "basis": "original comparison and persistence rows owned before print; diagnostic appended secondary; no dedicated fresh write/flush control claimed"
+    },
+    {
+      "site": "baseline_evidence.py:52-68",
+      "status": "SUPPORTED_STATIC_IMPORTED_DEPENDENCY",
+      "basis": "preexisting evidence persistence failure owned before print; diagnostic secondary; not strict_baseline; no arbitrary original baseline cause guarantee"
+    },
+    {
+      "site": "external29_driver.py:575-593,853-859",
+      "status": "RETAINED_R10",
+      "basis": "same function bytes; actual saved native main stderr and unavailable helper control PASS"
+    },
+    {
+      "site": "external29_driver.py:811,828; runner.py:613",
+      "status": "NOT_ACTIVE_FORMAL_EXCEPTION_REPORTERS",
+      "basis": "fixture result already durable; identity already durable; legacy preflight result stdout not driver actual formal handler"
+    },
+    {
+      "site": "tools/run_logged.py",
+      "status": "EXCLUDED_PREPARATION_WRAPPER",
+      "basis": "outside exact delegated formal/driver/adapter diagnostic scope"
+    }
+  ],
+  "source_before_after_equal": true,
+  "source_count": 73
+}

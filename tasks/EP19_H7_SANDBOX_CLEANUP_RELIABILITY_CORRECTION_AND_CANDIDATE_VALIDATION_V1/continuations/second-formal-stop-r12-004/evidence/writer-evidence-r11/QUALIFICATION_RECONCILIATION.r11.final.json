@@ -1,0 +1,152 @@
+{
+  "focused": {
+    "green": {
+      "duration_seconds": 0.24210753,
+      "native_exit": 0,
+      "path": "J/writer-evidence-r11/green-r11-final-001",
+      "statuses": {
+        "test_r11_diagnostic_emission.R11ActualDiagnosticEmissionControls.test_actual_acquisition_and_marker_then_stderr_write_failure_saved": "PASS",
+        "test_r11_diagnostic_emission.R11ActualDiagnosticEmissionControls.test_actual_native_gate_and_marker_then_stderr_flush_failure_saved": "PASS"
+      },
+      "wrapper_exit": 0
+    },
+    "red": {
+      "duration_seconds": 0.241184004,
+      "native_exit": 1,
+      "path": "J/writer-evidence-r11/red-r10-001",
+      "statuses": {
+        "test_r11_diagnostic_emission.R11ActualDiagnosticEmissionControls.test_actual_acquisition_and_marker_then_stderr_write_failure_saved": "FAIL",
+        "test_r11_diagnostic_emission.R11ActualDiagnosticEmissionControls.test_actual_native_gate_and_marker_then_stderr_flush_failure_saved": "FAIL"
+      },
+      "wrapper_exit": 0
+    },
+    "saved_receipts": {
+      "green": {
+        "acquisition": {
+          "bytes": 33330,
+          "contexts_present": true,
+          "gate_result_assigned_before_emission": true,
+          "native_exit": null,
+          "path": "J/fixtures-r11/green-r11-final-001/acquisition-diagnostic-failure/FORMAL_FAILURE.json",
+          "sha256": "160922c4e99212d8f213b0fcb110c3c4670cbf7b84dcdaf591b2d0485747cce1",
+          "stderr_persistence_claim": false,
+          "types": [
+            "FileNotFoundError",
+            "RuntimeError",
+            "DiagnosticStderrFailure"
+          ],
+          "unique_occurrences": true
+        },
+        "gate": {
+          "bytes": 29694,
+          "contexts_present": true,
+          "gate_result_assigned_before_emission": true,
+          "native_exit": 73,
+          "path": "J/fixtures-r11/green-r11-final-001/gate-diagnostic-failure/FORMAL_FAILURE.json",
+          "sha256": "9208eb9d512bb1f73417117e062e5443766b163ac0d1c20b5d78d7c451743e97",
+          "stderr_persistence_claim": false,
+          "types": [
+            "NativeGateFailure",
+            "RuntimeError",
+            "DiagnosticStderrFailure"
+          ],
+          "unique_occurrences": true
+        }
+      },
+      "integrated": {
+        "acquisition": {
+          "bytes": 33308,
+          "contexts_present": true,
+          "gate_result_assigned_before_emission": true,
+          "native_exit": null,
+          "path": "J/fixtures-r11/qualification-001/acquisition-diagnostic-failure/FORMAL_FAILURE.json",
+          "sha256": "d256eb47209827e1c45ebdc5060a71c265afc2c81608beb4b561db093d30b46b",
+          "stderr_persistence_claim": false,
+          "types": [
+            "FileNotFoundError",
+            "RuntimeError",
+            "DiagnosticStderrFailure"
+          ],
+          "unique_occurrences": true
+        },
+        "gate": {
+          "bytes": 29694,
+          "contexts_present": true,
+          "gate_result_assigned_before_emission": true,
+          "native_exit": 73,
+          "path": "J/fixtures-r11/qualification-001/gate-diagnostic-failure/FORMAL_FAILURE.json",
+          "sha256": "35cce58e3ef9ce8d4f13d1d56087ebf94d3554e74009bf0ffbd8be3b159a5fea",
+          "stderr_persistence_claim": false,
+          "types": [
+            "NativeGateFailure",
+            "RuntimeError",
+            "DiagnosticStderrFailure"
+          ],
+          "unique_occurrences": true
+        }
+      },
+      "red": {
+        "acquisition": {
+          "bytes": 11946,
+          "contexts_present": true,
+          "gate_result_assigned_before_emission": false,
+          "native_exit": null,
+          "path": "J/fixtures-r11/red-r10-001/acquisition-diagnostic-failure/FORMAL_FAILURE.json",
+          "sha256": "ab8204fb42be122fa5c527c7b32c06d18b6cb544f634f7ab1ed0ee4369ae7384",
+          "stderr_persistence_claim": null,
+          "types": [
+            "DiagnosticStderrFailure"
+          ],
+          "unique_occurrences": true
+        },
+        "gate": {
+          "bytes": 9761,
+          "contexts_present": true,
+          "gate_result_assigned_before_emission": false,
+          "native_exit": null,
+          "path": "J/fixtures-r11/red-r10-001/gate-diagnostic-failure/FORMAL_FAILURE.json",
+          "sha256": "c2eef9d617615e9517e9c7cedffe6ad691a08edc24baf9297052a2de058eb94c",
+          "stderr_persistence_claim": null,
+          "types": [
+            "DiagnosticStderrFailure"
+          ],
+          "unique_occurrences": true
+        }
+      }
+    },
+    "test_sha256": "08611fdad2b4ab8724642d3a5a298e8ee0307c71e0c9689f0c2c134034152c78"
+  },
+  "integrated": {
+    "duplicates": [],
+    "duration_seconds": 21.597831043,
+    "errored": 0,
+    "executed": 178,
+    "expected": 178,
+    "failed": 0,
+    "invalid_status_rows": [],
+    "mandatory_added": 2,
+    "mandatory_final": 93,
+    "mandatory_prior": 91,
+    "missing": [],
+    "native_exit": 0,
+    "parent_native_exit": 0,
+    "parent_wrapper_exit": 0,
+    "passed": 178,
+    "path": "J/writer-evidence-r11/qualification-001",
+    "pid_claim": "writer-owned subprocess namespace identity; not independent Hermes attestation",
+    "qualification_sha256": "1ed9a6647cd6bbff66016f31778ccf1bf484f960f1c4d1e0a95181c97ee0cf6f",
+    "skipped": 0,
+    "unexpected": [],
+    "wrapper_exit": 0
+  },
+  "runtime_loader": {
+    "binding_sha256": "3246789277a6154e7a04d54a5b71ebf1bd44b66b7a03f329af091b467986e9cb",
+    "duration_seconds": 1.006348086,
+    "native_exit": 0,
+    "result": "PASS",
+    "snapshot_count": 122,
+    "source_count": 120,
+    "wrapper_exit": 0
+  },
+  "schema": "ep19-r11-qualification-reconciliation-v1"
+}

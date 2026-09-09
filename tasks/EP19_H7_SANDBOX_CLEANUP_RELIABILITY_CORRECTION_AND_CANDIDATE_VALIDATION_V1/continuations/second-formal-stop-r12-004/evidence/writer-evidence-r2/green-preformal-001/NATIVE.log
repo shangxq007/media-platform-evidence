@@ -1,0 +1,24 @@
+test_ar001_final_receipt_contains_write_during_seal_capture (test_conformance_corrections.PreformalActualRed.test_ar001_final_receipt_contains_write_during_seal_capture) ... ok
+test_ar002_formal_seed_accepts_visible_legal_temp_without_keyerror (test_conformance_corrections.PreformalActualRed.test_ar002_formal_seed_accepts_visible_legal_temp_without_keyerror) ... ok
+test_ar007_candidate_consumer_claim_is_checked_against_real_bytes (test_conformance_corrections.PreformalActualRed.test_ar007_candidate_consumer_claim_is_checked_against_real_bytes) ... ok
+test_ar007_instruction_selection_origin_hash_is_verified (test_conformance_corrections.PreformalActualRed.test_ar007_instruction_selection_origin_hash_is_verified) ... ok
+test_ar007_unknown_actual_status_cannot_pass_identity_accounting (test_conformance_corrections.PreformalActualRed.test_ar007_unknown_actual_status_cannot_pass_identity_accounting) ... ok
+test_ar008_consume_write_failure_cannot_be_resurrected (test_conformance_corrections.PreformalActualRed.test_ar008_consume_write_failure_cannot_be_resurrected) ... ok
+test_ar008_outer_observer_failure_latches_same_adapter (test_conformance_corrections.PreformalActualRed.test_ar008_outer_observer_failure_latches_same_adapter) ... ok
+test_ar008_transient_live_state_parse_failure_irreversibly_latches (test_conformance_corrections.PreformalActualRed.test_ar008_transient_live_state_parse_failure_irreversibly_latches) ... ok
+test_ar009_strict_decision_creation_fsyncs_publishing_runtime_directory (test_conformance_corrections.PreformalActualRed.test_ar009_strict_decision_creation_fsyncs_publishing_runtime_directory) ... ok
+test_ar010_blocking_initial_fstat_is_interrupted_and_cleaned_up (test_conformance_corrections.PreformalActualRed.test_ar010_blocking_initial_fstat_is_interrupted_and_cleaned_up) ... ok
+test_ar010_temp_metadata_stat_is_bounded_inside_real_drain (test_conformance_corrections.PreformalActualRed.test_ar010_temp_metadata_stat_is_bounded_inside_real_drain) ... FAIL
+
+======================================================================
+FAIL: test_ar010_temp_metadata_stat_is_bounded_inside_real_drain (test_conformance_corrections.PreformalActualRed.test_ar010_temp_metadata_stat_is_bounded_inside_real_drain)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r2/tooling/qualification/test_conformance_corrections.py", line 479, in test_ar010_temp_metadata_stat_is_bounded_inside_real_drain
+    self.assertIn("EVENT_ACQUISITION_TIME_LIMIT_EXCEEDED", watcher.errors)
+AssertionError: 'EVENT_ACQUISITION_TIME_LIMIT_EXCEEDED' not found in []
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.138s
+
+FAILED (failures=1)

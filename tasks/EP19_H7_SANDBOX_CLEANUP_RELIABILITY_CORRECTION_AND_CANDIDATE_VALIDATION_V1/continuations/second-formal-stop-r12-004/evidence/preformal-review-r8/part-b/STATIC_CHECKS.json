@@ -1,0 +1,179 @@
+{
+  "binding": {
+    "sha256": "5728eafccf0f13665c963cdaf9c3773a7fe76450f5251c2047b33514881d4b20",
+    "tooling_count": 117,
+    "current_source_match": true,
+    "run_id": "candidate-formal-002",
+    "qualification_hash_match": true,
+    "dependency_hash_match": true
+  },
+  "source_index": {
+    "successor_count": 118,
+    "actual_implementation_noncache_count": 118,
+    "current_index_exact": true,
+    "predecessor_index_exact": true
+  },
+  "snapshots": {
+    "red-predecessor-002": {
+      "count": 78,
+      "all_snapshot_bytes_match": true,
+      "pre_post_equal": true,
+      "current_equal_count": 74,
+      "changed_since_run": [
+        "implementation-r8/tooling/qualification/build_dependency_evidence.py",
+        "implementation-r8/tooling/qualification/build_integration_qualification.py",
+        "implementation-r8/tooling/qualification/run_integrated_parent.py",
+        "implementation-r8/tooling/qualification/run_source_bound_group.py"
+      ]
+    },
+    "green-final-001": {
+      "count": 78,
+      "all_snapshot_bytes_match": true,
+      "pre_post_equal": true,
+      "current_equal_count": 75,
+      "changed_since_run": [
+        "implementation-r8/tooling/executor/binding_contract.py",
+        "implementation-r8/tooling/qualification/run_integrated_parent.py",
+        "implementation-r8/tooling/qualification/run_source_bound_group.py"
+      ]
+    },
+    "qualification-003": {
+      "count": 117,
+      "all_snapshot_bytes_match": true,
+      "pre_post_equal": true,
+      "current_equal_count": 117
+    },
+    "runtime-loader-002": {
+      "count": 119,
+      "all_snapshot_bytes_match": true,
+      "pre_post_equal": true,
+      "current_equal_count": 119
+    }
+  },
+  "same_body": {
+    "red": "e447308b4ed7498102e1731e8235b3001666bbc342275b62d9915e0b95a321a9",
+    "green": "e447308b4ed7498102e1731e8235b3001666bbc342275b62d9915e0b95a321a9"
+  },
+  "runs": {
+    "red-predecessor-002": {
+      "native_count": 3,
+      "unique": 3,
+      "statuses": {
+        "ERROR": 2,
+        "FAIL": 1
+      },
+      "native_equals_result": true,
+      "process_status_equal": true,
+      "native_exit": 1,
+      "wrapper_exit": 0,
+      "log_hash_equal": true,
+      "result_hash_equal": true
+    },
+    "green-final-001": {
+      "native_count": 3,
+      "unique": 3,
+      "statuses": {
+        "PASS": 3
+      },
+      "native_equals_result": true,
+      "process_status_equal": true,
+      "native_exit": 0,
+      "wrapper_exit": 0,
+      "log_hash_equal": true,
+      "result_hash_equal": true,
+      "parser_note": "First control emits diagnostic JSON before standalone ok; reconciled prefix/status lines."
+    },
+    "qualification-003/integrated": {
+      "native_count": 170,
+      "unique": 170,
+      "statuses": {
+        "PASS": 170
+      },
+      "native_equals_result": true,
+      "process_status_equal": true,
+      "native_exit": 0,
+      "wrapper_exit": 0,
+      "log_hash_equal": true,
+      "result_hash_equal": true
+    }
+  },
+  "expected": {
+    "ast_count": 170,
+    "ast_unique": 170,
+    "exact_qualification_set": true,
+    "mandatory_count": 85,
+    "mandatory_exact": true,
+    "mandatory_subset": true,
+    "qualification_dependencies": {
+      "J/implementation-r8/tooling/adapter71-qualification.reused.json": true,
+      "J/implementation-r8/tooling/candidate-qualification-v3.reused.json": true,
+      "J/writer-evidence-r8/qualification-003/integrated/PROCESS.json": true,
+      "J/writer-evidence-r8/qualification-003/integrated/QUALIFICATION.native.log": true,
+      "J/writer-evidence-r8/qualification-003/integrated/RESULT.json": true
+    }
+  },
+  "manifest": {
+    "count": 1879,
+    "mismatches": [],
+    "sha256": "3845ff4761d54fc3b73bb0116e513b878c4121d1b32698bcb0d9ad1c85ba1a44"
+  },
+  "dependency_graph": {
+    "nodes": 39,
+    "edges": 125,
+    "exact": true,
+    "parser_packages": 8,
+    "parser_files": 216,
+    "parser_mismatches": [],
+    "source_receipt_hashes": {
+      "current_applicability": true,
+      "fixed29_consumer_binding": true,
+      "private_eligible_map": true,
+      "private_strict_inventory": true
+    }
+  },
+  "parent": {
+    "source_bindings_equal_runtime": true,
+    "native_hash": true,
+    "result_hash": true,
+    "native_exit": 0,
+    "wrapper_exit": 0
+  },
+  "loader": {
+    "validation_hash": true,
+    "native_hash": true,
+    "validator_hash": true,
+    "native_json_equals_validation": true,
+    "binding_hash": true,
+    "result": "PASS",
+    "native_exit": 0,
+    "wrapper_exit": 0,
+    "pid_matches_namespace_local": true
+  },
+  "red_predecessor_executor": {
+    "count": 60,
+    "matches_r7": true
+  },
+  "delta": {
+    "count": 13,
+    "declared_count": 13,
+    "changed": [
+      ".source",
+      "tooling/executor/binding_contract.py",
+      "tooling/executor/causal.py",
+      "tooling/executor/dependency_contract.py",
+      "tooling/executor/executor_adapter.py",
+      "tooling/executor/external29_driver.py",
+      "tooling/executor/qualification_contract.py",
+      "tooling/executor/runner.py",
+      "tooling/qualification/build_dependency_evidence.py",
+      "tooling/qualification/build_integration_qualification.py",
+      "tooling/qualification/run_integrated_parent.py",
+      "tooling/qualification/run_source_bound_group.py",
+      "tooling/qualification/test_r8_transport.py"
+    ],
+    "patch_hash": "893f247589cadc932e4bdb18226347fd6e4dbd51d46407ce34cb7555d55ded56",
+    "record_hash": "7a901cebe1c24b6ec41717a5d8c5d80b21bdbd5bbbd565941211289cbeb7e03d",
+    "exact_rows": true
+  },
+  "read_only_source_unchanged": true
+}

@@ -1,0 +1,97 @@
+{
+  "status": "ADVISORY_RECONCILIATION_NOT_AUTHORITY_LEDGER",
+  "EP19_CLOSED": false,
+  "original_append_target": "NOT_ESTABLISHED",
+  "new_authority_ledger_created": false,
+  "rows": [
+    {
+      "condition": "固定产品/预算不漂移",
+      "existing_source": "OWNER:46–61、268、278–300",
+      "historical_evidence": "Owner固定输入；K历史身份/预算",
+      "current_status": "FIXED_INPUTS_BOUND_NO_NEW_PRODUCT_CHANGE",
+      "remaining_action": "最终 source/binding/matrix/qualification 与固定候选一致的正式入口核对",
+      "authorized_boundary": "可完成；不得制造新产品候选/第三次尝试"
+    },
+    {
+      "condition": "外部契约符合性",
+      "existing_source": "OWNER:129–224、234–262",
+      "historical_evidence": "K_REPORT:56–69 记录8 OPEN、AR005/006 RESOLVED（历史静态审查）",
+      "current_status": "QUALIFICATION_REVIEW_SUPPORTED_NOT_ENGINEERING_PASS",
+      "remaining_action": "AR001/002/003/004/007/008/009/010逐项真实RED/GREEN、受影响回归、真实外层资格与源符合性；005/006不回归",
+      "authorized_boundary": "可完成；不读取并行implementation，故当前结果未核验"
+    },
+    {
+      "condition": "资格/依赖/运行绑定",
+      "existing_source": "OWNER:173–183、268–276",
+      "historical_evidence": "旧87控制与旧资格仅其适用范围，K_REPORT:39–52",
+      "current_status": "PREPARATION_BOUND_BUT_FORMAL_ELIGIBILITY_REJECTED",
+      "remaining_action": "必需身份集合及unique/duplicate/missing/unexpected/failed/errored/skipped核算、真实依赖消费者来源、最终输入隔离/绑定",
+      "authorized_boundary": "可完成；不是等待再批A/B/C"
+    },
+    {
+      "condition": "正式完整29门及保全",
+      "existing_source": "OWNER:278–300；H7_MATRIX:5–35、1162–1165",
+      "historical_evidence": "candidate-formal-001历史0 PASS/29 NOT_RUN；K_REPORT:75–78",
+      "current_status": "NOT_SATISFIED_29_NOT_RUN_BUDGET_EXHAUSTED",
+      "remaining_action": "唯一candidate-formal-002按consume语义执行；逐门native及接受结果、freshness、隔离、最终保全/捕获/持久性",
+      "authorized_boundary": "条件满足可直接执行；第二次失败后不得重跑"
+    },
+    {
+      "condition": "完整后端身份",
+      "existing_source": "OWNER:55、284–296；H7_MATRIX:470–484",
+      "historical_evidence": "8000身份/29 skipped只是EXPECTED；旧7973/7944/29属于旧FCV",
+      "current_status": "NOT_SATISFIED_NOT_RUN",
+      "remaining_action": "按实际结果列EXPECTED、DISCOVERED/EXECUTED、PASSED、FAILED、ERRORED、SKIPPED、MISSING、UNEXPECTED、DUPLICATE",
+      "authorized_boundary": "不用预期填实绩；skip不得计PASS"
+    },
+    {
+      "condition": "H7/EP19既有语义及打包",
+      "existing_source": "H7_MATRIX:37–54、242–329；OWNER:217–226",
+      "historical_evidence": "恢复原H7 focused/entry/mutations及EP19 affected integration位置",
+      "current_status": "NOT_SATISFIED_NOT_RUN",
+      "remaining_action": "在同一29门中获得33规则未弱化、原测试身份、compiled/application census、foundation、BOOTJAR和static→resources→JAR映射的适用结果",
+      "authorized_boundary": "不另加重复产品门禁；旧矩阵绑定父候选689ab…且原status=PROPOSED，不直接作为新launch-ready"
+    },
+    {
+      "condition": "独立接受",
+      "existing_source": "OWNER:302–312；POLICY_RECOVERY:15–17",
+      "historical_evidence": "K仅咨询审查；独立最终接受未建立",
+      "current_status": "INDEPENDENT_FAILURE_REVIEW_COMPLETED_BLOCKED_NO_ENGINEERING_ACCEPTANCE",
+      "remaining_action": "保留独立失败结论；不能代签工程接受；恢复工作需后续明确授权。",
+      "authorized_boundary": "已授权；工程通过≠独立接受，本子任务不代签"
+    },
+    {
+      "condition": "原验收记录追加",
+      "existing_source": "OWNER:314–325",
+      "historical_evidence": "找到上述原关闭回执，未证实活动原账本定位",
+      "current_status": "BLOCKED_ORIGINAL_AUTHORITY_APPEND_TARGET_NOT_ESTABLISHED",
+      "remaining_action": "找到原权威验收账本的精确文件/记录键和来源，随后仅追加已满足且获独立接受项",
+      "authorized_boundary": "已授权追加的“动作类别”；目标尚未证实，不得猜路径或另建第二账本"
+    },
+    {
+      "condition": "修正候选规范产品发布",
+      "existing_source": "OWNER:321–325；PUBLICATION_REPORT:18–38、94–106",
+      "historical_evidence": "只有旧86d6…发布历史；当前a298…未发布",
+      "current_status": "NOT_PERFORMED_CURRENT_CANDIDATE_NOT_AUTHORIZED",
+      "remaining_action": "在后续产品发布授权下将已接受精确候选规范集成/正常发布，并核对main/origin/tree及可达性；不得重写历史",
+      "authorized_boundary": "本轮不授权merge/push/deploy；证据仓库发布不能代替"
+    },
+    {
+      "condition": "发布后sanity闭合",
+      "existing_source": "ORIGINAL_CLOSURE_RECEIPT:9–18；PUBLICATION_REPORT:108–155、233–240；SANITY_IDENTITIES:1–111",
+      "historical_evidence": "旧compile/universe PASS；architecture失败/中断，后续未运行；旧20 guards实际0不是PASS",
+      "current_status": "NOT_RUN_CURRENT_CANDIDATE",
+      "remaining_action": "在实际发布身份上完成既有architecture、Modulith、application/authority census、20 guard identities、foundation、bootJar/build等sanity及其保全/绑定，处理历史失败而非覆写",
+      "authorized_boundary": "尚待产品发布阶段；不新增全量串行/容器构建要求；已有同身份结果的适用性应核对，不机械重复"
+    },
+    {
+      "condition": "证据交付",
+      "existing_source": "OWNER:329–356；K_REPORT:275–297",
+      "historical_evidence": "旧证据包发布成功只是历史交付",
+      "current_status": "LOCAL_CANDIDATE_ONLY_PARENT_PUBLICATION_PENDING",
+      "remaining_action": "本轮最终中文报告/索引/结果/独立评审/关闭对账/manifest，按授权证据仓库普通追加发布并匿名固定提交逐字节核对",
+      "authorized_boundary": "可完成；发布失败仍可离线独立审查，成功不提升工程结论"
+    }
+  ],
+  "history_source": "evidence/closure-recovery/CLOSURE_MATRIX.json"
+}

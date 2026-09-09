@@ -1,0 +1,123 @@
+test_ar001_event_queued_during_last_identity_check_is_rejected_before_endpoint (test_r3_remaining.RemainingProductionPathControls.test_ar001_event_queued_during_last_identity_check_is_rejected_before_endpoint) ... FAIL
+test_ar002_actual_observer_seed_rebind_accepts_legal_temp_rename (test_r3_remaining.RemainingProductionPathControls.test_ar002_actual_observer_seed_rebind_accepts_legal_temp_rename) ... ERROR
+test_ar007_loader_rejects_extra_qualification_flag_with_other_bindings_valid (test_r3_remaining.RemainingProductionPathControls.test_ar007_loader_rejects_extra_qualification_flag_with_other_bindings_valid) ... FAIL
+test_ar007_r2_declarative_graph_is_rejected_for_missing_actual_vite_edge (test_r3_remaining.RemainingProductionPathControls.test_ar007_r2_declarative_graph_is_rejected_for_missing_actual_vite_edge) ... FAIL
+test_ar008_actual_run_gate_caught_failure_latches_before_post_command_boundary (test_r3_remaining.RemainingProductionPathControls.test_ar008_actual_run_gate_caught_failure_latches_before_post_command_boundary) ... ERROR
+test_ar009_actual_gate_and_sealed_copy_publish_parent_chain_durably (test_r3_remaining.RemainingProductionPathControls.test_ar009_actual_gate_and_sealed_copy_publish_parent_chain_durably) ... ERROR
+test_ar010_actual_native_final_stat_is_guarded_and_resources_close (test_r3_remaining.RemainingProductionPathControls.test_ar010_actual_native_final_stat_is_guarded_and_resources_close) ... ERROR
+test_ar010_boundary_observer_inventory_failure_closes_constructor_fd (test_r3_remaining.RemainingProductionPathControls.test_ar010_boundary_observer_inventory_failure_closes_constructor_fd) ... FAIL
+
+======================================================================
+ERROR: test_ar002_actual_observer_seed_rebind_accepts_legal_temp_rename (test_r3_remaining.RemainingProductionPathControls.test_ar002_actual_observer_seed_rebind_accepts_legal_temp_rename)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 134, in test_ar002_actual_observer_seed_rebind_accepts_legal_temp_rename
+    seed = external29_driver.observer_seed({}, applicability, root=self.skills)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: observer_seed() got an unexpected keyword argument 'root'
+
+======================================================================
+ERROR: test_ar008_actual_run_gate_caught_failure_latches_before_post_command_boundary (test_r3_remaining.RemainingProductionPathControls.test_ar008_actual_run_gate_caught_failure_latches_before_post_command_boundary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 192, in test_ar008_actual_run_gate_caught_failure_latches_before_post_command_boundary
+    runner = self._actual_runner()
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 78, in _actual_runner
+    spec.loader.exec_module(module)
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "J/implementation-r3/tooling/executor/runner.py", line 8, in <module>
+    import namespaces, artifacts, compile_inventory
+  File "J/implementation-r3/tooling/executor/namespaces.py", line 4, in <module>
+    from execution import D,O,H,SHA,TREE,BASE,git,exact,environment,PARENT,CLONE_SOURCE,verify_object_source
+ImportError: cannot import name 'CLONE_SOURCE' from 'execution' (unknown location)
+
+======================================================================
+ERROR: test_ar009_actual_gate_and_sealed_copy_publish_parent_chain_durably (test_r3_remaining.RemainingProductionPathControls.test_ar009_actual_gate_and_sealed_copy_publish_parent_chain_durably)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 219, in test_ar009_actual_gate_and_sealed_copy_publish_parent_chain_durably
+    runner = self._actual_runner()
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 78, in _actual_runner
+    spec.loader.exec_module(module)
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "J/implementation-r3/tooling/executor/runner.py", line 8, in <module>
+    import namespaces, artifacts, compile_inventory
+  File "J/implementation-r3/tooling/executor/namespaces.py", line 4, in <module>
+    from execution import D,O,H,SHA,TREE,BASE,git,exact,environment,PARENT,CLONE_SOURCE,verify_object_source
+ImportError: cannot import name 'CLONE_SOURCE' from 'execution' (unknown location)
+
+======================================================================
+ERROR: test_ar010_actual_native_final_stat_is_guarded_and_resources_close (test_r3_remaining.RemainingProductionPathControls.test_ar010_actual_native_final_stat_is_guarded_and_resources_close)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 264, in test_ar010_actual_native_final_stat_is_guarded_and_resources_close
+    result = native_observe.run(
+             ^^^^^^^^^^^^^^^^^^^
+  File "J/implementation-r3/tooling/executor/native_observe.py", line 261, in run
+    started=time.time();watcher=Watch(protected,repositories,metadata_roots,allowed,cross_lane,shared_git,shadow_root,shadow_declared,enumeration_roots,pruned_roots,expected_missing,frozen_roots,bookkeeping_policy)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "J/implementation-r3/tooling/executor/native_observe.py", line 42, in __init__
+    self.initial_directories={str(p):identity(bounded_capture.guarded_call(self.initial_acquisition_deadline,os.stat,p)) for p in self.watches.values()}
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "J/implementation-r3/tooling/executor/native_observe.py", line 42, in <dictcomp>
+    self.initial_directories={str(p):identity(bounded_capture.guarded_call(self.initial_acquisition_deadline,os.stat,p)) for p in self.watches.values()}
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "J/implementation-r3/tooling/executor/capture.py", line 65, in guarded_call
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "USER_HOME/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/unittest/mock.py", line 1124, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "USER_HOME/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/unittest/mock.py", line 1128, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "USER_HOME/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/unittest/mock.py", line 1189, in _execute_mock_call
+    result = effect(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 256, in delayed_final
+    time.sleep(0.20)
+  File "J/implementation-r3/tooling/executor/capture.py", line 42, in expired
+    raise CaptureError("CAPTURE_TIME_LIMIT_EXCEEDED_DURING_ACQUISITION")
+capture.CaptureError: CAPTURE_TIME_LIMIT_EXCEEDED_DURING_ACQUISITION
+
+======================================================================
+FAIL: test_ar001_event_queued_during_last_identity_check_is_rejected_before_endpoint (test_r3_remaining.RemainingProductionPathControls.test_ar001_event_queued_during_last_identity_check_is_rejected_before_endpoint)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 116, in test_ar001_event_queued_during_last_identity_check_is_rejected_before_endpoint
+    with self.assertRaises(Exception):
+AssertionError: Exception not raised
+
+======================================================================
+FAIL: test_ar007_loader_rejects_extra_qualification_flag_with_other_bindings_valid (test_r3_remaining.RemainingProductionPathControls.test_ar007_loader_rejects_extra_qualification_flag_with_other_bindings_valid)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 188, in test_ar007_loader_rejects_extra_qualification_flag_with_other_bindings_valid
+    with self.assertRaisesRegex(RuntimeError, "INTEGRATION_PROCESS_ARGV_BINDING_REJECT"):
+AssertionError: RuntimeError not raised
+
+======================================================================
+FAIL: test_ar007_r2_declarative_graph_is_rejected_for_missing_actual_vite_edge (test_r3_remaining.RemainingProductionPathControls.test_ar007_r2_declarative_graph_is_rejected_for_missing_actual_vite_edge)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 150, in test_ar007_r2_declarative_graph_is_rejected_for_missing_actual_vite_edge
+    with self.assertRaisesRegex(RuntimeError, "ACTUAL_HELPER_EDGE_CLOSURE"):
+AssertionError: RuntimeError not raised
+
+======================================================================
+FAIL: test_ar010_boundary_observer_inventory_failure_closes_constructor_fd (test_r3_remaining.RemainingProductionPathControls.test_ar010_boundary_observer_inventory_failure_closes_constructor_fd)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 283, in test_ar010_boundary_observer_inventory_failure_closes_constructor_fd
+    self.assertEqual(after, before)
+AssertionError: Items in the first set but not the second:
+'5'
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.285s
+
+FAILED (failures=4, errors=4)

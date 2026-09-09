@@ -1,0 +1,488 @@
+{
+  "identities": {
+    "derived": 178,
+    "unique": 178,
+    "mandatory": 93,
+    "expected_equal": true,
+    "mandatory_equal": true,
+    "missing": [],
+    "unexpected": [],
+    "duplicates": [],
+    "nonpass": [],
+    "mandatory_missing": []
+  },
+  "runs": {
+    "red-r10-001": {
+      "count": 2,
+      "statuses": {
+        "FAIL": 2
+      },
+      "native_result_equal": true,
+      "process_status_equal": true,
+      "native_hash": true,
+      "result_hash": true,
+      "native_exit": 1,
+      "wrapper_exit": 0
+    },
+    "green-r11-final-002": {
+      "count": 2,
+      "statuses": {
+        "PASS": 2
+      },
+      "native_result_equal": true,
+      "process_status_equal": true,
+      "native_hash": true,
+      "result_hash": true,
+      "native_exit": 0,
+      "wrapper_exit": 0
+    },
+    "qualification-002/integrated": {
+      "count": 178,
+      "statuses": {
+        "PASS": 178
+      },
+      "native_result_equal": true,
+      "process_status_equal": true,
+      "native_hash": true,
+      "result_hash": true,
+      "native_exit": 0,
+      "wrapper_exit": 0
+    }
+  },
+  "snapshots": {
+    "red-r10-001": [
+      {
+        "side": "before",
+        "count": 81,
+        "bad": [],
+        "live_drift": [
+          "J/implementation-r11/tooling/qualification/build_dependency_evidence.py"
+        ]
+      },
+      {
+        "side": "after",
+        "count": 81,
+        "bad": [],
+        "live_drift": [
+          "J/implementation-r11/tooling/qualification/build_dependency_evidence.py"
+        ]
+      }
+    ],
+    "green-r11-final-002": [
+      {
+        "side": "before",
+        "count": 81,
+        "bad": [],
+        "live_drift": []
+      },
+      {
+        "side": "after",
+        "count": 81,
+        "bad": [],
+        "live_drift": []
+      }
+    ],
+    "qualification-002": [
+      {
+        "side": "before",
+        "count": 120,
+        "bad": [],
+        "live_drift": []
+      },
+      {
+        "side": "after",
+        "count": 120,
+        "bad": [],
+        "live_drift": []
+      }
+    ],
+    "runtime-loader-final-002": [
+      {
+        "side": "before",
+        "count": 122,
+        "bad": [],
+        "live_drift": []
+      },
+      {
+        "side": "after",
+        "count": 122,
+        "bad": [],
+        "live_drift": []
+      }
+    ],
+    "qualification-001": [
+      {
+        "side": "before",
+        "count": 120,
+        "bad": [],
+        "live_drift": [
+          "J/implementation-r11/tooling/executor/VERSION.json"
+        ]
+      },
+      {
+        "side": "after",
+        "count": 120,
+        "bad": [],
+        "live_drift": [
+          "J/implementation-r11/tooling/executor/VERSION.json"
+        ]
+      }
+    ],
+    "runtime-loader-final-001": [
+      {
+        "side": "before",
+        "count": 122,
+        "bad": [],
+        "live_drift": [
+          "J/implementation-r11/tooling/executor/VERSION.json"
+        ]
+      },
+      {
+        "side": "after",
+        "count": 122,
+        "bad": [],
+        "live_drift": [
+          "J/implementation-r11/tooling/executor/VERSION.json"
+        ]
+      }
+    ]
+  },
+  "manifests": {
+    "FINAL_MANIFEST.r11.final-002.sha256writer-evidence-r11": {
+      "count": 1699,
+      "bad": [],
+      "sha256": "4b9f63ee81a6facb3cebb776be1861a26b3589ce125ff648843b6d5885e3e742"
+    },
+    "FIXTURE_MANIFEST.r11.final-002.sha256fixtures-r11": {
+      "count": 686,
+      "bad": [],
+      "sha256": "10cab564c75421405566495cfc4d7f17ae7e080a411d89db868aabd0caef1099"
+    },
+    "FINAL_MANIFEST.r10.final-002.sha256writer-evidence-r10": {
+      "count": 2921,
+      "bad": [],
+      "sha256": "e41204d53530f3d683f465c41863991f0782d5bcdf642dacd8cbebb4bcbed9a5"
+    }
+  },
+  "binding": {
+    "sha256": "2c0bd9206991c35dd46215f040c627a46079864eeb8a8825e06132a93ff4be9a",
+    "source_count": 120,
+    "sources_bad": [],
+    "refs": {
+      "adapter_qualification": true,
+      "applicability": true,
+      "dependency": true,
+      "owner": true,
+      "qualification": true
+    },
+    "reviewed_delta_hash": true,
+    "inventories_equal": true
+  },
+  "graph": {
+    "nodes": 39,
+    "edges": 126,
+    "exact": true
+  },
+  "consumer": {
+    "candidate_sources": 90,
+    "bad_sources": [],
+    "helpers": 10,
+    "bad_helpers": [],
+    "command_count": 29,
+    "command_equal": true
+  },
+  "parser_packages": {
+    "count": 8,
+    "file_count": 216,
+    "bad": []
+  },
+  "delta": {
+    "count": 10,
+    "exact": true,
+    "paths": [
+      ".source",
+      "tooling/executor/VERSION.json",
+      "tooling/executor/baseline_evidence.py",
+      "tooling/executor/binding_contract.py",
+      "tooling/executor/decision_evidence.py",
+      "tooling/executor/dependency_contract.py",
+      "tooling/executor/external29_driver.py",
+      "tooling/executor/qualification_contract.py",
+      "tooling/qualification/build_dependency_evidence.py",
+      "tooling/qualification/test_r11_diagnostic_emission.py"
+    ]
+  },
+  "source_universe": {
+    "implementation_count": 121,
+    "tooling_exact": true,
+    "qualification_maps_exact": true,
+    "qualification_dependencies_bad": []
+  },
+  "snapshot_endpoint_equal": {
+    "red-r10-001": true,
+    "green-r11-final-002": true,
+    "qualification-002": true,
+    "runtime-loader-final-002": true,
+    "qualification-001": true,
+    "runtime-loader-final-001": true
+  },
+  "saved_receipts": {
+    "red-r10-001/acquisition": {
+      "sha256": "ab8204fb42be122fa5c527c7b32c06d18b6cb544f634f7ab1ed0ee4369ae7384",
+      "hash_equal": true,
+      "types": [
+        "DiagnosticStderrFailure"
+      ],
+      "unique": true,
+      "contexts": true,
+      "gate_result": null,
+      "semantic_success_artifacts_allowed": null,
+      "stderr_persistence_claim": null,
+      "native_exit_readback": null,
+      "native_exit_receipt": null
+    },
+    "red-r10-001/gate": {
+      "sha256": "c2eef9d617615e9517e9c7cedffe6ad691a08edc24baf9297052a2de058eb94c",
+      "hash_equal": true,
+      "types": [
+        "DiagnosticStderrFailure"
+      ],
+      "unique": true,
+      "contexts": true,
+      "gate_result": null,
+      "semantic_success_artifacts_allowed": null,
+      "stderr_persistence_claim": null,
+      "native_exit_readback": 73,
+      "native_exit_receipt": null
+    },
+    "green-r11-final-002/acquisition": {
+      "sha256": "4caf6100c16cc494dcb35ef8861e00003cda9f57e11fff4cd6c091f2c9a6e8e0",
+      "hash_equal": true,
+      "types": [
+        "FileNotFoundError",
+        "RuntimeError",
+        "DiagnosticStderrFailure"
+      ],
+      "unique": true,
+      "contexts": true,
+      "gate_result": "FAIL",
+      "semantic_success_artifacts_allowed": false,
+      "stderr_persistence_claim": false,
+      "native_exit_readback": null,
+      "native_exit_receipt": null
+    },
+    "green-r11-final-002/gate": {
+      "sha256": "2f7fab3ecadaf4f2775de2c6bd9faca979f5b5971b7c41b32e5d9daf1212d66e",
+      "hash_equal": true,
+      "types": [
+        "NativeGateFailure",
+        "RuntimeError",
+        "DiagnosticStderrFailure"
+      ],
+      "unique": true,
+      "contexts": true,
+      "gate_result": "FAIL",
+      "semantic_success_artifacts_allowed": false,
+      "stderr_persistence_claim": false,
+      "native_exit_readback": 73,
+      "native_exit_receipt": 73
+    },
+    "qualification-002/acquisition": {
+      "sha256": "89db6a9ca8743c1ffa3f668d51a8fac6bfd5ae237aafb284ea35afb8121d2440",
+      "hash_equal": true,
+      "types": [
+        "FileNotFoundError",
+        "RuntimeError",
+        "DiagnosticStderrFailure"
+      ],
+      "unique": true,
+      "contexts": true,
+      "gate_result": "FAIL",
+      "semantic_success_artifacts_allowed": false,
+      "stderr_persistence_claim": false,
+      "native_exit_readback": null,
+      "native_exit_receipt": null
+    },
+    "qualification-002/gate": {
+      "sha256": "cb04a9bdeb70fd4decb96e1c46c731d6e02fe230acbd36321fd9deca6d4e0c64",
+      "hash_equal": true,
+      "types": [
+        "NativeGateFailure",
+        "RuntimeError",
+        "DiagnosticStderrFailure"
+      ],
+      "unique": true,
+      "contexts": true,
+      "gate_result": "FAIL",
+      "semantic_success_artifacts_allowed": false,
+      "stderr_persistence_claim": false,
+      "native_exit_readback": 73,
+      "native_exit_receipt": 73
+    }
+  },
+  "handoff": {
+    "exact_filename": true,
+    "exact_hash": true,
+    "qualified_interpreter": "USER_HOME/.hermes/hermes-agent/venv/bin/python3",
+    "remaining_placeholders": [
+      "ABS_PARENT_DISPOSITION",
+      "ABS_PARENT_REVIEW"
+    ]
+  },
+  "private_binding": {
+    "map_hash": true,
+    "inventory_hash": true,
+    "eligible_set_exact": true,
+    "origin_hashes_ok": true,
+    "declared_origin_exact": true
+  },
+  "source_hash_document": {
+    "predecessor": true,
+    "successor": true
+  },
+  "loader": {
+    "result": "PASS",
+    "native_exit": 0,
+    "wrapper_exit": 0,
+    "log_hash": true,
+    "validation_hash": true,
+    "binding_hash": true,
+    "native_document_equal": true,
+    "wrapper_self_in_snapshot": false
+  },
+  "fixed_identity": {
+    "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+    "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+    "immediate_parent": "689ab9456461a8d19a72d059f5157092efc43aff",
+    "canonical_comparison_base": "86d6aef94fd5e58da552e97c11473cff6eca734e",
+    "product_patch_sha256": "bab6aee8346f7ef47ca94f1e3da629e7ae81df2f16202706ae4966864a485690",
+    "run_id": "candidate-formal-002"
+  },
+  "retained": {
+    "matrix_identical": true,
+    "old_tests_identical": true,
+    "core_unchanged": {
+      "causal.py": true,
+      "runner.py": true,
+      "coverage.py": true,
+      "durability.py": true,
+      "capture.py": true,
+      "native_observe.py": true,
+      "observe.py": true,
+      "executor_adapter.py": true,
+      "boundary.py": true,
+      "bookkeeping_v2.py": true,
+      "bookkeeping_v3.py": true,
+      "artifacts.py": true,
+      "freshness.py": true,
+      "binding_qualification.py": true
+    }
+  },
+  "test_same_body": {
+    "red-r10-001": "08611fdad2b4ab8724642d3a5a298e8ee0307c71e0c9689f0c2c134034152c78",
+    "green-r11-final-002": "08611fdad2b4ab8724642d3a5a298e8ee0307c71e0c9689f0c2c134034152c78",
+    "qualification-002": "08611fdad2b4ab8724642d3a5a298e8ee0307c71e0c9689f0c2c134034152c78"
+  },
+  "all_preserved_snapshots": [
+    {
+      "path": "green-r11-001/sources.after/SOURCE_SNAPSHOT.json",
+      "count": 81,
+      "bad": []
+    },
+    {
+      "path": "green-r11-001/sources.before/SOURCE_SNAPSHOT.json",
+      "count": 81,
+      "bad": []
+    },
+    {
+      "path": "green-r11-final-001/sources.after/SOURCE_SNAPSHOT.json",
+      "count": 81,
+      "bad": []
+    },
+    {
+      "path": "green-r11-final-001/sources.before/SOURCE_SNAPSHOT.json",
+      "count": 81,
+      "bad": []
+    },
+    {
+      "path": "green-r11-final-002/sources.after/SOURCE_SNAPSHOT.json",
+      "count": 81,
+      "bad": []
+    },
+    {
+      "path": "green-r11-final-002/sources.before/SOURCE_SNAPSHOT.json",
+      "count": 81,
+      "bad": []
+    },
+    {
+      "path": "qualification-001/sources.after/SOURCE_SNAPSHOT.json",
+      "count": 120,
+      "bad": []
+    },
+    {
+      "path": "qualification-001/sources.before/SOURCE_SNAPSHOT.json",
+      "count": 120,
+      "bad": []
+    },
+    {
+      "path": "qualification-002/sources.after/SOURCE_SNAPSHOT.json",
+      "count": 120,
+      "bad": []
+    },
+    {
+      "path": "qualification-002/sources.before/SOURCE_SNAPSHOT.json",
+      "count": 120,
+      "bad": []
+    },
+    {
+      "path": "red-r10-001/sources.after/SOURCE_SNAPSHOT.json",
+      "count": 81,
+      "bad": []
+    },
+    {
+      "path": "red-r10-001/sources.before/SOURCE_SNAPSHOT.json",
+      "count": 81,
+      "bad": []
+    },
+    {
+      "path": "runtime-loader-final-001/sources.after/SOURCE_SNAPSHOT.json",
+      "count": 122,
+      "bad": []
+    },
+    {
+      "path": "runtime-loader-final-001/sources.before/SOURCE_SNAPSHOT.json",
+      "count": 122,
+      "bad": []
+    },
+    {
+      "path": "runtime-loader-final-002/sources.after/SOURCE_SNAPSHOT.json",
+      "count": 122,
+      "bad": []
+    },
+    {
+      "path": "runtime-loader-final-002/sources.before/SOURCE_SNAPSHOT.json",
+      "count": 122,
+      "bad": []
+    }
+  ],
+  "parent": {
+    "native_exit": 0,
+    "wrapper_exit": 0,
+    "log_hash": true,
+    "result_hash": true,
+    "source_before_equal": true,
+    "source_after_equal": true
+  },
+  "context_edges": {
+    "green-r11-final-002/acquisition": [],
+    "green-r11-final-002/gate": [],
+    "qualification-002/acquisition": [],
+    "qualification-002/gate": []
+  },
+  "review_preservation": {
+    "before_count": 1952,
+    "after_count": 1952,
+    "exact_equal": true,
+    "changed": []
+  }
+}

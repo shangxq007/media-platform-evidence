@@ -1,0 +1,6 @@
+gradle.projectsEvaluated {
+  def p0 = rootProject.project(":platform-app")
+  p0.tasks.register("ep19EvidenceClasspath") { doLast { new File("USER_HOME/Documents/workspace/audit-runs/EP19_EXACT_CANDIDATE_CANONICAL_PUBLICATION_AND_POST_PUBLICATION_VERIFICATION_V1/classpath.txt").text = p0.sourceSets.test.runtimeClasspath.asPath } }
+  def p1 = rootProject.project(":sandbox-isolation-module")
+  p1.tasks.register("ep19SandboxClasspath") { doLast { new File("USER_HOME/Documents/workspace/audit-runs/EP19_EXACT_CANDIDATE_CANONICAL_PUBLICATION_AND_POST_PUBLICATION_VERIFICATION_V1/engine-classpath.txt").text = p1.sourceSets.test.runtimeClasspath.asPath } }
+}

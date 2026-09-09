@@ -1,0 +1,89 @@
+{
+  "focused": {
+    "green": {
+      "duration_seconds": 0.309702515,
+      "native_exit": 0,
+      "path": "J/writer-evidence-r10/green-r10-final-005",
+      "statuses": {
+        "test_r10_final_boundary.R10ActualFinalBoundaryControls.test_actual_final_failure_writer_fault_keeps_original_in_saved_formal_receipt": "PASS",
+        "test_r10_final_boundary.R10ActualFinalBoundaryControls.test_production_main_saved_stderr_has_structured_original_and_both_sink_failures": "PASS",
+        "test_r10_final_boundary.R10ActualFinalBoundaryControls.test_unavailable_stderr_returns_false_without_persistence_claim": "PASS"
+      },
+      "wrapper_exit": 0
+    },
+    "red": {
+      "duration_seconds": 0.310145258,
+      "native_exit": 1,
+      "path": "J/writer-evidence-r10/red-r9-002",
+      "statuses": {
+        "test_r10_final_boundary.R10ActualFinalBoundaryControls.test_actual_final_failure_writer_fault_keeps_original_in_saved_formal_receipt": "FAIL",
+        "test_r10_final_boundary.R10ActualFinalBoundaryControls.test_production_main_saved_stderr_has_structured_original_and_both_sink_failures": "FAIL",
+        "test_r10_final_boundary.R10ActualFinalBoundaryControls.test_unavailable_stderr_returns_false_without_persistence_claim": "FAIL"
+      },
+      "wrapper_exit": 0
+    },
+    "saved_native_stderr": {
+      "bytes": 4255,
+      "contexts_present": true,
+      "occurrences": 3,
+      "path": "J/fixtures-r10/green-r10-final-005/native-main-fallback/STDERR.bin",
+      "private_reasons_exposed": false,
+      "sha256": "70aad8f61027e9017ba46a394105e96cebde753159026e6a461dd58fb61b4bc2",
+      "stderr_persistence_claim": false,
+      "types": [
+        "RuntimeError",
+        "OSError",
+        "OSError"
+      ],
+      "unique_occurrences": true
+    },
+    "test_sha256": "cc52670015283b685b6b0575b8b84dc59e98f9ba6eb5925cef7128412fa63bad"
+  },
+  "integrated": {
+    "duplicates": [],
+    "duration_seconds": 21.382632958,
+    "errored": 0,
+    "executed": 176,
+    "expected": 176,
+    "failed": 0,
+    "mandatory_added": 3,
+    "mandatory_final": 91,
+    "mandatory_prior": 88,
+    "missing": [],
+    "native_exit": 0,
+    "parent_native_exit": 0,
+    "parent_wrapper_exit": 0,
+    "passed": 176,
+    "path": "J/writer-evidence-r10/qualification-004",
+    "pid_claim": "writer-owned subprocess namespace PID; not independent OS attestation",
+    "qualification_sha256": "298ac98360cade820cb355587030be791d0a93ee1ef7b08983b28564f0707a6d",
+    "saved_native_stderr": {
+      "bytes": 4255,
+      "contexts_present": true,
+      "occurrences": 3,
+      "path": "J/fixtures-r10/qualification-004/native-main-fallback/STDERR.bin",
+      "private_reasons_exposed": false,
+      "sha256": "ad82e35cb1c7a1bcea831b88ef66fbf0153386c0745e42cabef2f33f8617f219",
+      "stderr_persistence_claim": false,
+      "types": [
+        "RuntimeError",
+        "OSError",
+        "OSError"
+      ],
+      "unique_occurrences": true
+    },
+    "skipped": 0,
+    "unexpected": [],
+    "wrapper_exit": 0
+  },
+  "runtime_loader": {
+    "binding_sha256": "39bf8a0f3a92b34116981ed814e51cc5966c24bb20901dc7c07c5ab6ad61c24b",
+    "duration_seconds": 1.027418321,
+    "native_exit": 0,
+    "result": "PASS",
+    "snapshot_count": 121,
+    "source_count": 119,
+    "wrapper_exit": 0
+  },
+  "schema": "ep19-r10-qualification-reconciliation-v1"
+}

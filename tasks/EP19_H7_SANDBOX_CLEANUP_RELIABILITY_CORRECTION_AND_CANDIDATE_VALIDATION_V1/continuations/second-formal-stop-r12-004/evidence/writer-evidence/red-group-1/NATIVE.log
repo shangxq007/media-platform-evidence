@@ -1,0 +1,54 @@
+test_bad_mode_short_lived_temp_is_rejected_by_real_observer (test_conformance_corrections.Group1ContinuousAndTemp.test_bad_mode_short_lived_temp_is_rejected_by_real_observer) ... FAIL
+test_external_file_moved_into_usage_is_rejected_by_real_observer (test_conformance_corrections.Group1ContinuousAndTemp.test_external_file_moved_into_usage_is_rejected_by_real_observer) ... FAIL
+test_outer_fixture_exercises_continuous_ancestor_rejection (test_conformance_corrections.Group1ContinuousAndTemp.test_outer_fixture_exercises_continuous_ancestor_rejection) ... FAIL
+test_temp_moved_outside_without_usage_target_is_rejected (test_conformance_corrections.Group1ContinuousAndTemp.test_temp_moved_outside_without_usage_target_is_rejected) ... FAIL
+
+======================================================================
+FAIL: test_bad_mode_short_lived_temp_is_rejected_by_real_observer (test_conformance_corrections.Group1ContinuousAndTemp.test_bad_mode_short_lived_temp_is_rejected_by_real_observer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 97, in test_bad_mode_short_lived_temp_is_rejected_by_real_observer
+    self.assertEqual(result["decision"], "REJECT", result)
+AssertionError: 'PASS' != 'REJECT'
+- PASS
++ REJECT
+ : {'schema': 'ep19-approved-boundary-decision-v3', 'boundary_id': '0000-gate-6f8052ca37744573b49789c5fbd9797b', 'phase': 'GATE', 'started_ns': 1788923618009585433, 'finished_ns': 1788923618011429199, 'STRICT_INPUT_INTEGRITY': 'PASS', 'APPROVED_BOOKKEEPING_SEMANTICS': 'PASS', 'CAPTURE_BINDING_COHERENT': 'YES', 'REJECTED_OR_UNRESOLVED_EVENTS': 0, 'COVERAGE_COMPLETE': 'YES', 'OLD_STRICT_PRESERVATION_RESULT': 'PASS', 'usage': {'result': 'PASS', 'capture_id': 'c06913affa9a4d4b12bf4d0faf4145d17425a0f64525e056f045817e450a923d', 'source_id': '5225ad59f55b60552d4e2f70f5084282acf6f99b1870ae237f19d13bfd427aac', 'changed_json_pointers': [], 'old_strict': 'PASS'}, 'lock': {'result': 'PASS', 'capture_id': 'efc501ff471d67e3db87b5f951bad062935ab6bf383b757a33b1be4cf8663eb5', 'source_id': '459a93829b61838e90f20086a5f8b7723f9f4c403484bbe43725b63e78e05e24', 'old_strict': 'PASS'}, 'ledger': {'result': 'PASS', 'capture_id': '6891bdae556485e8d5d9298065057c64e71270ab159e4344fd98d75cc11c2f80', 'source_id': 'e7124c015036ac2b9d9a1ebe16d16924e2082dd404b584c485e6e27235422727', 'appended_this_boundary': 0, 'appended_total': 0, 'appended_bytes_total': 0, 'old_strict': 'PASS'}, 'strict': {'result': 'PASS', 'capture_id': '916471b6c836ad4692dc7e13d622bbf9b7f6c7790e2e84cf3f31464146803281'}, 'events': [{'path': 'J/fixtures/red-group-1/tmpt1givbb3/skills/.usage_badmode1.tmp', 'mask': 256, 'cookie': 0, 'observed_ns': 174599941583983, 'writer': 'NOT_ESTABLISHED', 'category': 'ACCEPTED_USAGE_V2_EVENT'}, {'path': 'J/fixtures/red-group-1/tmpt1givbb3/skills/.usage_badmode1.tmp', 'mask': 2, 'cookie': 0, 'observed_ns': 174599941594025, 'writer': 'NOT_ESTABLISHED', 'category': 'ACCEPTED_USAGE_V2_EVENT'}, {'path': 'J/fixtures/red-group-1/tmpt1givbb3/skills/.usage_badmode1.tmp', 'mask': 8, 'cookie': 0, 'observed_ns': 174599941601550, 'writer': 'NOT_ESTABLISHED', 'category': 'ACCEPTED_USAGE_V2_EVENT'}, {'path': 'J/fixtures/red-group-1/tmpt1givbb3/skills/.usage_badmode1.tmp', 'mask': 4, 'cookie': 0, 'observed_ns': 174599941607866, 'writer': 'NOT_ESTABLISHED', 'category': 'ACCEPTED_USAGE_V2_EVENT'}, {'path': 'J/fixtures/red-group-1/tmpt1givbb3/skills/.usage_badmode1.tmp', 'mask': 512, 'cookie': 0, 'observed_ns': 174599941697916, 'writer': 'NOT_ESTABLISHED', 'category': 'ACCEPTED_USAGE_V2_EVENT'}], 'event_reasons': [], 'reasons': [], 'writer_attribution': 'NOT_ESTABLISHED', 'ledger_role': 'OBSERVATION_INTEGRITY_ONLY', 'accepted_observational_limit': 'Endpoint and original/previous-prefix checks cannot detect an overwrite-restore or truncate-regrow completed between covered captures.', 'decision': 'PASS'}
+
+======================================================================
+FAIL: test_external_file_moved_into_usage_is_rejected_by_real_observer (test_conformance_corrections.Group1ContinuousAndTemp.test_external_file_moved_into_usage_is_rejected_by_real_observer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 86, in test_external_file_moved_into_usage_is_rejected_by_real_observer
+    self.assertEqual(result["decision"], "REJECT", result)
+AssertionError: 'PASS' != 'REJECT'
+- PASS
++ REJECT
+ : {'schema': 'ep19-approved-boundary-decision-v3', 'boundary_id': '0000-gate-c4207fa5dc9e45868b48f8b6a291b3e9', 'phase': 'GATE', 'started_ns': 1788923618013904824, 'finished_ns': 1788923618014612733, 'STRICT_INPUT_INTEGRITY': 'PASS', 'APPROVED_BOOKKEEPING_SEMANTICS': 'PASS', 'CAPTURE_BINDING_COHERENT': 'YES', 'REJECTED_OR_UNRESOLVED_EVENTS': 0, 'COVERAGE_COMPLETE': 'YES', 'OLD_STRICT_PRESERVATION_RESULT': 'OLD_STRICT_REJECT', 'usage': {'result': 'PASS', 'capture_id': 'ae09daa6708c6a6cec45e1efc6b969a0926ea919ed9f70a4087bf032f3a7beb6', 'source_id': '4c3138f37b8e8d9d92752ad554cb551be4dbc2e82ae571d48b27296de8db4568', 'changed_json_pointers': [], 'old_strict': 'OLD_STRICT_REJECT'}, 'lock': {'result': 'PASS', 'capture_id': '5d68b9601eb383f6070cd31245d060869dc1c7f6f91ab7498c203cd16c3882ca', 'source_id': '6219f4be26b0fde7385e3e87d1cf6324e5bc4078c817a85469e72277c4afa677', 'old_strict': 'PASS'}, 'ledger': {'result': 'PASS', 'capture_id': 'b9cb8e458311ab2aaba1ca13736ba02998844a43aaf41ea65b01cafb361c0679', 'source_id': '0100a519827f57ca3f089825eda0a75310e0e9fe3c6c9c074ec1aa028df5b8ba', 'appended_this_boundary': 0, 'appended_total': 0, 'appended_bytes_total': 0, 'old_strict': 'PASS'}, 'strict': {'result': 'PASS', 'capture_id': 'f8564a6a9941a7417c8781d03c8a74f6df03276284d85d61e77b242493718c68'}, 'events': [{'path': 'J/fixtures/red-group-1/tmptj6ojjrj/skills/.usage.json', 'mask': 128, 'cookie': 108155, 'observed_ns': 174599946100041, 'writer': 'NOT_ESTABLISHED', 'category': 'ACCEPTED_USAGE_V2_EVENT'}], 'event_reasons': [], 'reasons': [], 'writer_attribution': 'NOT_ESTABLISHED', 'ledger_role': 'OBSERVATION_INTEGRITY_ONLY', 'accepted_observational_limit': 'Endpoint and original/previous-prefix checks cannot detect an overwrite-restore or truncate-regrow completed between covered captures.', 'decision': 'PASS'}
+
+======================================================================
+FAIL: test_outer_fixture_exercises_continuous_ancestor_rejection (test_conformance_corrections.Group1ContinuousAndTemp.test_outer_fixture_exercises_continuous_ancestor_rejection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 118, in test_outer_fixture_exercises_continuous_ancestor_rejection
+    self.assertEqual(process.returncode, 0, process.stderr)
+AssertionError: 2 != 0 : usage: external29_driver.py fixture [-h] --fixture-root FIXTURE_ROOT --output
+                                    OUTPUT --scenario
+                                    {allowed,disallowed,bad-coverage,capture-failure}
+external29_driver.py fixture: error: argument --scenario: invalid choice: 'ancestor-change' (choose from 'allowed', 'disallowed', 'bad-coverage', 'capture-failure')
+
+
+======================================================================
+FAIL: test_temp_moved_outside_without_usage_target_is_rejected (test_conformance_corrections.Group1ContinuousAndTemp.test_temp_moved_outside_without_usage_target_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 108, in test_temp_moved_outside_without_usage_target_is_rejected
+    self.assertEqual(result["decision"], "REJECT", result)
+AssertionError: 'PASS' != 'REJECT'
+- PASS
++ REJECT
+ : {'schema': 'ep19-approved-boundary-decision-v3', 'boundary_id': '0000-gate-761940b9c5f146f5a6b2c52979cb2f72', 'phase': 'GATE', 'started_ns': 1788923618101794363, 'finished_ns': 1788923618104008986, 'STRICT_INPUT_INTEGRITY': 'PASS', 'APPROVED_BOOKKEEPING_SEMANTICS': 'PASS', 'CAPTURE_BINDING_COHERENT': 'YES', 'REJECTED_OR_UNRESOLVED_EVENTS': 0, 'COVERAGE_COMPLETE': 'YES', 'OLD_STRICT_PRESERVATION_RESULT': 'PASS', 'usage': {'result': 'PASS', 'capture_id': '0b4e4128116b460fb21dc9443b5b7ed44de23b8031b12084eba06f7939aec18b', 'source_id': 'e907ee551af4e83afca78dab81e423e82333caa6f52dbf34786b6cd30eecd811', 'changed_json_pointers': [], 'old_strict': 'PASS'}, 'lock': {'result': 'PASS', 'capture_id': 'f2d7b6d5c17a21ba7643fdb619b86aeb3ef796c9a35ab7052c1957b96597ba12', 'source_id': 'fcf50b5e7545615d3993e96fd50d3dbd0aa5085f5f4cad1d5869d26100c99d90', 'old_strict': 'PASS'}, 'ledger': {'result': 'PASS', 'capture_id': 'c51bc258025c200a95b0e5ea4356586ff5d4bed567b43390a8cfb430c0c839c6', 'source_id': '9ed59d361c5dfaa777cc87ff7c8a55dd62a60cb1d55f7ebc27973a105900d209', 'appended_this_boundary': 0, 'appended_total': 0, 'appended_bytes_total': 0, 'old_strict': 'PASS'}, 'strict': {'result': 'PASS', 'capture_id': 'f60471f9ea13ad07b0944598d1d77cd882b68c426faf583251dda214c3dc1b65'}, 'events': [{'path': 'J/fixtures/red-group-1/tmpmx97o5yw/skills/.usage_moveout1.tmp', 'mask': 256, 'cookie': 0, 'observed_ns': 174600029740805, 'writer': 'NOT_ESTABLISHED', 'category': 'ACCEPTED_USAGE_V2_EVENT'}, {'path': 'J/fixtures/red-group-1/tmpmx97o5yw/skills/.usage_moveout1.tmp', 'mask': 2, 'cookie': 0, 'observed_ns': 174600029768944, 'writer': 'NOT_ESTABLISHED', 'category': 'ACCEPTED_USAGE_V2_EVENT'}, {'path': 'J/fixtures/red-group-1/tmpmx97o5yw/skills/.usage_moveout1.tmp', 'mask': 8, 'cookie': 0, 'observed_ns': 174600029789075, 'writer': 'NOT_ESTABLISHED', 'category': 'ACCEPTED_USAGE_V2_EVENT'}, {'path': 'J/fixtures/red-group-1/tmpmx97o5yw/skills/.usage_moveout1.tmp', 'mask': 4, 'cookie': 0, 'observed_ns': 174600029807314, 'writer': 'NOT_ESTABLISHED', 'category': 'ACCEPTED_USAGE_V2_EVENT'}, {'path': 'J/fixtures/red-group-1/tmpmx97o5yw/skills/.usage_moveout1.tmp', 'mask': 64, 'cookie': 108156, 'observed_ns': 174600029977046, 'writer': 'NOT_ESTABLISHED', 'category': 'ACCEPTED_USAGE_V2_EVENT'}], 'event_reasons': [], 'reasons': [], 'writer_attribution': 'NOT_ESTABLISHED', 'ledger_role': 'OBSERVATION_INTEGRITY_ONLY', 'accepted_observational_limit': 'Endpoint and original/previous-prefix checks cannot detect an overwrite-restore or truncate-regrow completed between covered captures.', 'decision': 'PASS'}
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.099s
+
+FAILED (failures=4)

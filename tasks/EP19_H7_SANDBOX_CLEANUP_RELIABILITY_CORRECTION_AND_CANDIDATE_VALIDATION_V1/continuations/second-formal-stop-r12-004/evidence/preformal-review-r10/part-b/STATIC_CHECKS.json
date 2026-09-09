@@ -1,0 +1,396 @@
+{
+  "identities": {
+    "ast_count": 176,
+    "unique": 176,
+    "expected_equal": true,
+    "mandatory": 91,
+    "mandatory_equal": true,
+    "prior_retained": true,
+    "added": [
+      "test_r10_final_boundary.R10ActualFinalBoundaryControls.test_actual_final_failure_writer_fault_keeps_original_in_saved_formal_receipt",
+      "test_r10_final_boundary.R10ActualFinalBoundaryControls.test_production_main_saved_stderr_has_structured_original_and_both_sink_failures",
+      "test_r10_final_boundary.R10ActualFinalBoundaryControls.test_unavailable_stderr_returns_false_without_persistence_claim"
+    ]
+  },
+  "runs": {
+    "red-r9-002": {
+      "native_count": 3,
+      "unique": 3,
+      "counts": {
+        "FAIL": 3
+      },
+      "native_result_equal": true,
+      "process_equal": true,
+      "log_hash_equal": true,
+      "result_hash_equal": true,
+      "native_exit": 1,
+      "wrapper_exit": 0
+    },
+    "green-r10-final-005": {
+      "native_count": 3,
+      "unique": 3,
+      "counts": {
+        "PASS": 3
+      },
+      "native_result_equal": true,
+      "process_equal": true,
+      "log_hash_equal": true,
+      "result_hash_equal": true,
+      "native_exit": 0,
+      "wrapper_exit": 0
+    },
+    "qualification-004/integrated": {
+      "native_count": 176,
+      "unique": 176,
+      "counts": {
+        "PASS": 176
+      },
+      "native_result_equal": true,
+      "process_equal": true,
+      "log_hash_equal": true,
+      "result_hash_equal": true,
+      "native_exit": 0,
+      "wrapper_exit": 0
+    }
+  },
+  "snapshots": {
+    "red-r9-002": {
+      "count": 80,
+      "bad": [],
+      "stable": true,
+      "current_differences": [],
+      "test_hashes": [
+        "cc52670015283b685b6b0575b8b84dc59e98f9ba6eb5925cef7128412fa63bad"
+      ]
+    },
+    "green-r10-final-005": {
+      "count": 80,
+      "bad": [],
+      "stable": true,
+      "current_differences": [],
+      "test_hashes": [
+        "cc52670015283b685b6b0575b8b84dc59e98f9ba6eb5925cef7128412fa63bad"
+      ]
+    },
+    "qualification-004": {
+      "count": 119,
+      "bad": [],
+      "stable": true,
+      "current_differences": [],
+      "test_hashes": [
+        "cc52670015283b685b6b0575b8b84dc59e98f9ba6eb5925cef7128412fa63bad"
+      ]
+    },
+    "runtime-loader-final-003": {
+      "count": 121,
+      "bad": [],
+      "stable": true,
+      "current_differences": [],
+      "test_hashes": [
+        "cc52670015283b685b6b0575b8b84dc59e98f9ba6eb5925cef7128412fa63bad"
+      ]
+    }
+  },
+  "source_binding": {
+    "count": 119,
+    "current_match": true,
+    "qualification_equal": true,
+    "qualification_dependencies_match": true,
+    "binding_hash": "39bf8a0f3a92b34116981ed814e51cc5966c24bb20901dc7c07c5ab6ad61c24b"
+  },
+  "manifest": {
+    "FINAL_MANIFEST.r10.final-002.sha256": {
+      "rows": 2921,
+      "bad": [],
+      "private_not_read": [],
+      "sha256": "e41204d53530f3d683f465c41863991f0782d5bcdf642dacd8cbebb4bcbed9a5"
+    },
+    "FINAL_MANIFEST.r9.sha256": {
+      "rows": 1406,
+      "bad": [],
+      "private_not_read": [],
+      "sha256": "56a9c714b0412b7d9f671d7ded3418bbe192967355604edcd0073ce71155068c"
+    }
+  },
+  "retained": {
+    "runner.py": true,
+    "coverage.py": true,
+    "durability.py": true,
+    "artifacts.py": true,
+    "bookkeeping_v2.py": true,
+    "bookkeeping_v3.py": true,
+    "boundary.py": true,
+    "capture.py": true,
+    "observe.py": true,
+    "native_observe.py": true,
+    "executor_adapter.py": true,
+    "binding_qualification.py": true
+  },
+  "matrix_unchanged": true,
+  "dependency": {
+    "graph_nodes": 39,
+    "graph_edges": 125,
+    "graph_equal": true,
+    "source_nodes_match": true,
+    "packages": {
+      "acorn": {
+        "files": 10,
+        "match": true,
+        "package_hash": true
+      },
+      "entities": {
+        "files": 58,
+        "match": true,
+        "package_hash": true
+      },
+      "nanoid": {
+        "files": 26,
+        "match": true,
+        "package_hash": true
+      },
+      "parse5": {
+        "files": 33,
+        "match": true,
+        "package_hash": true
+      },
+      "picocolors": {
+        "files": 7,
+        "match": true,
+        "package_hash": true
+      },
+      "postcss": {
+        "files": 55,
+        "match": true,
+        "package_hash": true
+      },
+      "postcss-value-parser": {
+        "files": 9,
+        "match": true,
+        "package_hash": true
+      },
+      "source-map-js": {
+        "files": 18,
+        "match": true,
+        "package_hash": true
+      }
+    },
+    "candidate_consumers": 90,
+    "candidate_bytes_match": true,
+    "helpers_match": true,
+    "commands": 29,
+    "commands_equal": true,
+    "private_digest_declarations_equal": true,
+    "private_bytes_read": false
+  },
+  "saved_failure": {
+    "red-r9-002": {
+      "available_bytes": 8119,
+      "available_hash_match": true,
+      "inner_empty": true,
+      "available_types": [
+        "OSError"
+      ],
+      "native_exit": 1,
+      "stdout_empty": true,
+      "stderr_bytes": 7739,
+      "stderr_hash_match": true,
+      "json": false
+    },
+    "green-r10-final-005": {
+      "available_bytes": 15026,
+      "available_hash_match": true,
+      "inner_empty": true,
+      "available_types": [
+        "RuntimeError",
+        "OSError"
+      ],
+      "native_exit": 1,
+      "stdout_empty": true,
+      "stderr_bytes": 4255,
+      "stderr_hash_match": true,
+      "json": true,
+      "parsed_equal": true,
+      "types": [
+        "RuntimeError",
+        "OSError",
+        "OSError"
+      ],
+      "unique_occurrences": true,
+      "contexts_nonempty": true,
+      "no_reason_body_keys": true,
+      "no_fixture_private_bodies": true,
+      "disposition": "IRREVERSIBLY_LATCHED_REJECT",
+      "transport": "BEST_EFFORT_NOT_DURABLE",
+      "no_persistence_claim": true
+    },
+    "qualification-004": {
+      "available_bytes": 15026,
+      "available_hash_match": true,
+      "inner_empty": true,
+      "available_types": [
+        "RuntimeError",
+        "OSError"
+      ],
+      "native_exit": 1,
+      "stdout_empty": true,
+      "stderr_bytes": 4255,
+      "stderr_hash_match": true,
+      "json": true,
+      "parsed_equal": true,
+      "types": [
+        "RuntimeError",
+        "OSError",
+        "OSError"
+      ],
+      "unique_occurrences": true,
+      "contexts_nonempty": true,
+      "no_reason_body_keys": true,
+      "no_fixture_private_bodies": true,
+      "disposition": "IRREVERSIBLY_LATCHED_REJECT",
+      "transport": "BEST_EFFORT_NOT_DURABLE",
+      "no_persistence_claim": true
+    }
+  },
+  "loader": {
+    "validation": "PASS",
+    "native_exit": 0,
+    "wrapper_exit": 0,
+    "validation_hash": true,
+    "native_hash": true,
+    "validator_hash": true,
+    "binding_hash": true,
+    "namespace_pid_equal": true
+  },
+  "delta": {
+    "before": 119,
+    "after": 120,
+    "count": 9,
+    "match": true,
+    "files": [
+      {
+        "path": ".source",
+        "before_sha256": "d6fde343be52a78527818ee270074e5d07067a9b3dc3d9b10ff7e18900e068d1",
+        "after_sha256": "97a5bb339d78cd8969668c31031aac4c027fb7855afea420a2a0cf76e9d9465f",
+        "status": "CHANGED"
+      },
+      {
+        "path": "tooling/executor/VERSION.json",
+        "before_sha256": "c15931626d0435568c3e70bd50f7c57e8ebdc0ae4acdff731981d37e8d4c3e7f",
+        "after_sha256": "137bb6c95bb1290e10bfb02d8cd49cc1994e86e31b90420b3981bc8822236326",
+        "status": "CHANGED"
+      },
+      {
+        "path": "tooling/executor/binding_contract.py",
+        "before_sha256": "642d826071c2b8aa41adc776bcb93dbb9a9a7bd78d5dc56d8d1db923e2739255",
+        "after_sha256": "9792ad4a3691ec17421c963c171ba759198a781f6e334cc03ff52499db5bdbff",
+        "status": "CHANGED"
+      },
+      {
+        "path": "tooling/executor/causal.py",
+        "before_sha256": "d80d775fd7401448c53c1f31dfc139617be4d5d18b02ff7b6628690c26a9900b",
+        "after_sha256": "1c93a51cf914dd6f8299e9dca7d0a524de7d535505206fdb9b309718035cf515",
+        "status": "CHANGED"
+      },
+      {
+        "path": "tooling/executor/dependency_contract.py",
+        "before_sha256": "8f8601e51e57238ebba3220794fb543d96406c39f737a5ab1caedae9b8e13138",
+        "after_sha256": "ab185442aade663f421b64af24a7b7c2bc75d4fb6b5bfacb97a05d32a00978c0",
+        "status": "CHANGED"
+      },
+      {
+        "path": "tooling/executor/external29_driver.py",
+        "before_sha256": "4851f5e690d5db2c0094f621fa8558121b7534f50a3e50217ddb5d5ab4080b37",
+        "after_sha256": "fbebf93117ecdc469e1b6d0767fdaf81e8c8268df54392d561c139994285be3a",
+        "status": "CHANGED"
+      },
+      {
+        "path": "tooling/executor/qualification_contract.py",
+        "before_sha256": "c409df8d048b9e1dc1f900d6379763a99f2731c9ac86b690785a8d7e002ef4e8",
+        "after_sha256": "96d529e25152f5a94d434fa38371803ca6fe098b5f32374a0e3dd22ef3b8372e",
+        "status": "CHANGED"
+      },
+      {
+        "path": "tooling/qualification/build_dependency_evidence.py",
+        "before_sha256": "c6af0365b26e4492fce4aadddbe02cc15ab4930f265aa7a31223e5332aa13283",
+        "after_sha256": "c19d7f66b8cd75c3599105f94a19370a7e3c1c0c43d285b81873f582a85bc8e2",
+        "status": "CHANGED"
+      },
+      {
+        "path": "tooling/qualification/test_r10_final_boundary.py",
+        "before_sha256": null,
+        "after_sha256": "cc52670015283b685b6b0575b8b84dc59e98f9ba6eb5925cef7128412fa63bad",
+        "status": "ADDED"
+      }
+    ]
+  },
+  "new_helper_calls": {
+    "persist_final_boundary_failure": [
+      "Path",
+      "causal.raise_composed",
+      "final_boundary_failure_document",
+      "runner.put"
+    ],
+    "main": [
+      "_dispatch_main",
+      "emit_native_failure"
+    ],
+    "emit_native_failure": [
+      "(json.dumps(document, sort_keys=True, separators=(',', ':')) + '\\n').encode",
+      "json.dumps",
+      "len",
+      "memoryview",
+      "native_failure_document",
+      "os.write"
+    ],
+    "native_failure_document": [
+      "_bounded_public_text",
+      "_public_causal_rows",
+      "_public_disposition",
+      "bool",
+      "causal_rows",
+      "getattr",
+      "len",
+      "type"
+    ]
+  },
+  "parent_source_maps_match": true,
+  "parser_file_total": 216,
+  "fixed_identity": {
+    "candidate": true,
+    "tree": true,
+    "product_patch_sha256": true,
+    "immediate_parent": true,
+    "canonical_comparison_base": true,
+    "run_id": true
+  },
+  "parent_receipts": {
+    "log_hash": true,
+    "result_hash": true,
+    "native_exit": 0,
+    "wrapper_exit": 0
+  },
+  "topology": {
+    "green-r10-final-005": {
+      "native_context_ids": 9,
+      "native_parent_edges_resolved": true,
+      "native_truncated": false,
+      "available_original_occurrences_retained": true,
+      "available_reject": true,
+      "available_inner_persisted_false": true
+    },
+    "qualification-004": {
+      "native_context_ids": 9,
+      "native_parent_edges_resolved": true,
+      "native_truncated": false,
+      "available_original_occurrences_retained": true,
+      "available_reject": true,
+      "available_inner_persisted_false": true
+    }
+  },
+  "review_hash_scope": {
+    "count": 3161,
+    "unchanged": true,
+    "implementation_r10_count": 120,
+    "changed": []
+  }
+}

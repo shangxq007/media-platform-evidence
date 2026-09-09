@@ -1,0 +1,34 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "USER_HOME/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/unittest/__main__.py", line 18, in <module>
+    main(module=None)
+  File "USER_HOME/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/unittest/main.py", line 101, in __init__
+    self.parseArgs(argv)
+  File "USER_HOME/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/unittest/main.py", line 150, in parseArgs
+    self.createTests()
+  File "USER_HOME/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/unittest/main.py", line 161, in createTests
+    self.test = self.testLoader.loadTestsFromNames(self.testNames,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "USER_HOME/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/unittest/loader.py", line 232, in loadTestsFromNames
+    suites = [self.loadTestsFromName(name, module) for name in names]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "USER_HOME/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/unittest/loader.py", line 232, in <listcomp>
+    suites = [self.loadTestsFromName(name, module) for name in names]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "USER_HOME/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/unittest/loader.py", line 162, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "J/implementation-r3/tooling/qualification/test_r3_remaining.py", line 23, in <module>
+    import artifacts
+  File "J/implementation-r3/tooling/executor/artifacts.py", line 4, in <module>
+    from execution import SHA,TREE
+  File "J/implementation-r3/tooling/executor/execution.py", line 5, in <module>
+    CONFIG=from_environment()
+           ^^^^^^^^^^^^^^^^^^
+  File "J/implementation-r3/tooling/executor/binding_contract.py", line 69, in from_environment
+    require(bool(os.environ.get('H7_BINDING_CONFIG')) and bool(os.environ.get('H7_BINDING_SHA256')),
+  File "J/implementation-r3/tooling/executor/binding_contract.py", line 22, in require
+    if not value: raise RuntimeError(reason)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: SEALED_CANDIDATE_INPUT_REQUIRED

@@ -1,0 +1,109 @@
+test_driver_marker_failure_preserves_gate_primary_and_secondary (test_r5_remaining.R5FailureTransitionControls.test_driver_marker_failure_preserves_gate_primary_and_secondary) ... FAIL
+test_final_receipt_failure_reaches_driver_with_prior_native_and_parser_facts (test_r5_remaining.R5FailureTransitionControls.test_final_receipt_failure_reaches_driver_with_prior_native_and_parser_facts) ... FAIL
+test_formal_cleanup_attempts_observer_after_continuous_close_failure (test_r5_remaining.R5FailureTransitionControls.test_formal_cleanup_attempts_observer_after_continuous_close_failure) ... FAIL
+test_formal_cleanup_retains_original_and_cleanup_causes (test_r5_remaining.R5FailureTransitionControls.test_formal_cleanup_retains_original_and_cleanup_causes) ... FAIL
+test_native_observer_exception_retains_executed_child_and_compound_causes (test_r5_remaining.R5FailureTransitionControls.test_native_observer_exception_retains_executed_child_and_compound_causes) ... FAIL
+test_postseal_failure_uses_bound_immutable_supplement (test_r5_remaining.R5FailureTransitionControls.test_postseal_failure_uses_bound_immutable_supplement) ... FAIL
+test_runner_parser_evidence_exception_is_not_product_failure (test_r5_remaining.R5FailureTransitionControls.test_runner_parser_evidence_exception_is_not_product_failure) ... FAIL
+test_runner_product_assertion_remains_separate (test_r5_remaining.R5FailureTransitionControls.test_runner_product_assertion_remains_separate) ... ok
+test_supplement_persistence_failure_stays_secondary_and_never_success (test_r5_remaining.R5FailureTransitionControls.test_supplement_persistence_failure_stays_secondary_and_never_success) ... ERROR
+test_vite_helper_nonzero_is_process_not_product_failure (test_r5_remaining.R5FailureTransitionControls.test_vite_helper_nonzero_is_process_not_product_failure) ... FAIL
+test_vite_launch_failure_is_environment_not_product (test_r5_remaining.R5FailureTransitionControls.test_vite_launch_failure_is_environment_not_product) ... FAIL
+test_vite_log_fsync_failure_is_evidence_not_product (test_r5_remaining.R5FailureTransitionControls.test_vite_log_fsync_failure_is_evidence_not_product) ... FAIL
+
+======================================================================
+ERROR: test_supplement_persistence_failure_stays_secondary_and_never_success (test_r5_remaining.R5FailureTransitionControls.test_supplement_persistence_failure_stays_secondary_and_never_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r5/tooling/qualification/test_r5_remaining.py", line 470, in test_supplement_persistence_failure_stays_secondary_and_never_success
+    self.assertIn("controlled supplement persistence failure", result["failure_supplement_error"])
+                                                               ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'failure_supplement_error'
+
+======================================================================
+FAIL: test_driver_marker_failure_preserves_gate_primary_and_secondary (test_r5_remaining.R5FailureTransitionControls.test_driver_marker_failure_preserves_gate_primary_and_secondary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r5/tooling/qualification/test_r5_remaining.py", line 342, in test_driver_marker_failure_preserves_gate_primary_and_secondary
+    self.assertEqual(result["reason"], "original gate rejection")
+AssertionError: 'failure marker persistence failed' != 'original gate rejection'
+- failure marker persistence failed
++ original gate rejection
+
+
+======================================================================
+FAIL: test_final_receipt_failure_reaches_driver_with_prior_native_and_parser_facts (test_r5_remaining.R5FailureTransitionControls.test_final_receipt_failure_reaches_driver_with_prior_native_and_parser_facts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r5/tooling/qualification/test_r5_remaining.py", line 396, in test_final_receipt_failure_reaches_driver_with_prior_native_and_parser_facts
+    self.assertEqual(result["native_exit"], 0)
+AssertionError: None != 0
+
+======================================================================
+FAIL: test_formal_cleanup_attempts_observer_after_continuous_close_failure (test_r5_remaining.R5FailureTransitionControls.test_formal_cleanup_attempts_observer_after_continuous_close_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r5/tooling/qualification/test_r5_remaining.py", line 181, in test_formal_cleanup_attempts_observer_after_continuous_close_failure
+    self.assertTrue(observer.closed, flattened(error))
+AssertionError: False is not true : ['OSError:first cleanup failed']
+
+======================================================================
+FAIL: test_formal_cleanup_retains_original_and_cleanup_causes (test_r5_remaining.R5FailureTransitionControls.test_formal_cleanup_retains_original_and_cleanup_causes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r5/tooling/qualification/test_r5_remaining.py", line 186, in test_formal_cleanup_retains_original_and_cleanup_causes
+    self.assertTrue(any("original formal failure" in row for row in messages), messages)
+AssertionError: False is not true : ['OSError:first cleanup failed']
+
+======================================================================
+FAIL: test_native_observer_exception_retains_executed_child_and_compound_causes (test_r5_remaining.R5FailureTransitionControls.test_native_observer_exception_retains_executed_child_and_compound_causes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r5/tooling/qualification/test_r5_remaining.py", line 214, in test_native_observer_exception_retains_executed_child_and_compound_causes
+    self.assertIsInstance(receipt, dict, flattened(caught.exception))
+AssertionError: None is not an instance of <class 'dict'> : ['ExceptionGroup:NATIVE_OBSERVE_PRIMARY_AND_CLEANUP_FAILURE (2 sub-exceptions)', 'OSError:native log fsync failure', 'OSError:native watcher cleanup failure']
+
+======================================================================
+FAIL: test_postseal_failure_uses_bound_immutable_supplement (test_r5_remaining.R5FailureTransitionControls.test_postseal_failure_uses_bound_immutable_supplement)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r5/tooling/qualification/test_r5_remaining.py", line 459, in test_postseal_failure_uses_bound_immutable_supplement
+    self.assertTrue(result["failure_evidence_sealed"])
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_runner_parser_evidence_exception_is_not_product_failure (test_r5_remaining.R5FailureTransitionControls.test_runner_parser_evidence_exception_is_not_product_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r5/tooling/qualification/test_r5_remaining.py", line 251, in test_runner_parser_evidence_exception_is_not_product_failure
+    self.assertTrue(result["failure_dimensions"]["evidence_persistence_failure"])
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_vite_helper_nonzero_is_process_not_product_failure (test_r5_remaining.R5FailureTransitionControls.test_vite_helper_nonzero_is_process_not_product_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r5/tooling/qualification/test_r5_remaining.py", line 271, in test_vite_helper_nonzero_is_process_not_product_failure
+    self.assertTrue(dimensions.get("parser_helper_process_failure"), flattened(caught.exception))
+AssertionError: None is not true : ['RuntimeError:VITE_CLOSURE_REJECT J/fixtures-r5/red-predecessor-002/tmp6sscsp38/closure.json.native.log']
+
+======================================================================
+FAIL: test_vite_launch_failure_is_environment_not_product (test_r5_remaining.R5FailureTransitionControls.test_vite_launch_failure_is_environment_not_product)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r5/tooling/qualification/test_r5_remaining.py", line 307, in test_vite_launch_failure_is_environment_not_product
+    self.assertTrue(dimensions.get("wrapper_or_environment_failure"), flattened(caught.exception))
+AssertionError: None is not true : ['FileNotFoundError:node missing']
+
+======================================================================
+FAIL: test_vite_log_fsync_failure_is_evidence_not_product (test_r5_remaining.R5FailureTransitionControls.test_vite_log_fsync_failure_is_evidence_not_product)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r5/tooling/qualification/test_r5_remaining.py", line 297, in test_vite_log_fsync_failure_is_evidence_not_product
+    self.assertTrue(dimensions.get("evidence_persistence_failure"), flattened(caught.exception))
+AssertionError: None is not true : ['OSError:vite log fsync failure']
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.550s
+
+FAILED (failures=10, errors=1)

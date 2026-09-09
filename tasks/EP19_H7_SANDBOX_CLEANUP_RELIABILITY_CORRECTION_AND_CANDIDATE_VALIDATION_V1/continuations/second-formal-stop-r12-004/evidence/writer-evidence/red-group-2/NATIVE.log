@@ -1,0 +1,40 @@
+test_boundary_receipt_binds_actual_wall_and_monotonic_window (test_conformance_corrections.Group2TimeAndFraming.test_boundary_receipt_binds_actual_wall_and_monotonic_window) ... ERROR
+test_crlf_ledger_record_rejected_as_raw_framing (test_conformance_corrections.Group2TimeAndFraming.test_crlf_ledger_record_rejected_as_raw_framing) ... FAIL
+test_escaped_cr_is_distinct_from_raw_cr (test_conformance_corrections.Group2TimeAndFraming.test_escaped_cr_is_distinct_from_raw_cr) ... ok
+test_future_ledger_timestamp_rejected_against_actual_capture_end (test_conformance_corrections.Group2TimeAndFraming.test_future_ledger_timestamp_rejected_against_actual_capture_end) ... FAIL
+
+======================================================================
+ERROR: test_boundary_receipt_binds_actual_wall_and_monotonic_window (test_conformance_corrections.Group2TimeAndFraming.test_boundary_receipt_binds_actual_wall_and_monotonic_window)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 154, in test_boundary_receipt_binds_actual_wall_and_monotonic_window
+    window = result["capture_window"]
+             ~~~~~~^^^^^^^^^^^^^^^^^^
+KeyError: 'capture_window'
+
+======================================================================
+FAIL: test_crlf_ledger_record_rejected_as_raw_framing (test_conformance_corrections.Group2TimeAndFraming.test_crlf_ledger_record_rejected_as_raw_framing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 139, in test_crlf_ledger_record_rejected_as_raw_framing
+    self.assertEqual(result["decision"], "REJECT", result)
+AssertionError: 'PASS' != 'REJECT'
+- PASS
++ REJECT
+ : {'schema': 'ep19-approved-boundary-decision-v3', 'boundary_id': '0000-gate-b835a97b3c614132842a0e95c97f6859', 'phase': 'GATE', 'started_ns': 1788923632329855483, 'finished_ns': 1788923632330718966, 'STRICT_INPUT_INTEGRITY': 'PASS', 'APPROVED_BOOKKEEPING_SEMANTICS': 'PASS', 'CAPTURE_BINDING_COHERENT': 'YES', 'REJECTED_OR_UNRESOLVED_EVENTS': 0, 'COVERAGE_COMPLETE': 'YES', 'OLD_STRICT_PRESERVATION_RESULT': 'OLD_STRICT_REJECT', 'usage': {'result': 'PASS', 'capture_id': 'bf855f51a3d3c205ff41847fec4b11e1f490018f28108e77836adb8553fbbf1b', 'source_id': '2720cd63e9e251e12cc0cae3f0121e0e2fb2848fa62171b682a5fc61193735cd', 'changed_json_pointers': [], 'old_strict': 'PASS'}, 'lock': {'result': 'PASS', 'capture_id': '7d5e682420bd50dd356e50f6c0c8162739bddb8711cc4a8782486a52b9c9c677', 'source_id': '674e4e086e93e8f9c81f97ec2727bd97ff4930c7f56fa7fbda6031e2cd2dfdea', 'old_strict': 'PASS'}, 'ledger': {'result': 'PASS', 'capture_id': 'd28846abd14342abebf4cd13de9dcbe86c93293c07d5e47e2ce1d65759d25569', 'source_id': '72928805b0edd5faa5aab4328918b56c8de5559d296da067cbda4777df8fcba1', 'appended_this_boundary': 1, 'appended_total': 1, 'appended_bytes_total': 744, 'old_strict': 'OLD_STRICT_REJECT'}, 'strict': {'result': 'PASS', 'capture_id': 'd4bdb699ea287ff57dbe0d0648e835ba9bf1121b5374039575e55b6afc987a05'}, 'events': [{'path': 'J/fixtures/red-group-2/tmpn0mj03af/skills/.curator_ledger.jsonl', 'mask': 2, 'cookie': 0, 'observed_ns': 174614258850940, 'writer': 'NOT_ESTABLISHED', 'category': 'ACCEPTED_LEDGER_PENDING_RESOLVED'}, {'path': 'J/fixtures/red-group-2/tmpn0mj03af/skills/.curator_ledger.jsonl', 'mask': 8, 'cookie': 0, 'observed_ns': 174614258861241, 'writer': 'NOT_ESTABLISHED', 'category': 'ACCEPTED_LEDGER_PENDING_RESOLVED'}], 'event_reasons': [], 'reasons': [], 'writer_attribution': 'NOT_ESTABLISHED', 'ledger_role': 'OBSERVATION_INTEGRITY_ONLY', 'accepted_observational_limit': 'Endpoint and original/previous-prefix checks cannot detect an overwrite-restore or truncate-regrow completed between covered captures.', 'decision': 'PASS'}
+
+======================================================================
+FAIL: test_future_ledger_timestamp_rejected_against_actual_capture_end (test_conformance_corrections.Group2TimeAndFraming.test_future_ledger_timestamp_rejected_against_actual_capture_end)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation/tooling/qualification/test_conformance_corrections.py", line 131, in test_future_ledger_timestamp_rejected_against_actual_capture_end
+    self.assertEqual(result["decision"], "REJECT", result)
+AssertionError: 'PASS' != 'REJECT'
+- PASS
++ REJECT
+ : {'schema': 'ep19-approved-boundary-decision-v3', 'boundary_id': '0000-gate-c9708a05c02e41d9bc7622fc3fc456f2', 'phase': 'GATE', 'started_ns': 1788923632339842361, 'finished_ns': 1788923632340640906, 'STRICT_INPUT_INTEGRITY': 'PASS', 'APPROVED_BOOKKEEPING_SEMANTICS': 'PASS', 'CAPTURE_BINDING_COHERENT': 'YES', 'REJECTED_OR_UNRESOLVED_EVENTS': 0, 'COVERAGE_COMPLETE': 'YES', 'OLD_STRICT_PRESERVATION_RESULT': 'OLD_STRICT_REJECT', 'usage': {'result': 'PASS', 'capture_id': 'ae30f3297cae0b9171ef78c42769e9f35a9d4d25061566e46cb485be6ac79ecf', 'source_id': 'f85d4cdb22c09fec2bd138dd822ea0acad038f966379f1d2ca6a9ca41c196043', 'changed_json_pointers': [], 'old_strict': 'PASS'}, 'lock': {'result': 'PASS', 'capture_id': '4f39faf48a0c53124a92c440f6cbafef794c5e1ec1ffbde1a780730f7daf064e', 'source_id': 'e443f8ddc754d5133732a99b0ddee0db6d2e8ec72327031c15340f16785a517d', 'old_strict': 'PASS'}, 'ledger': {'result': 'PASS', 'capture_id': 'cf282ef04ed315cad3eaf0ac60b3668b0595a499577033c65386bd0b5680e107', 'source_id': '86e127254afc864fb3c756afa36001426b090efe46d677a078d36d8346967f85', 'appended_this_boundary': 1, 'appended_total': 1, 'appended_bytes_total': 743, 'old_strict': 'OLD_STRICT_REJECT'}, 'strict': {'result': 'PASS', 'capture_id': '4f410027300e2f94eb6a24708aaf34cf0ea7ce6792a514d1bce352d516bc0ee5'}, 'events': [{'path': 'J/fixtures/red-group-2/tmp3sicti0j/skills/.curator_ledger.jsonl', 'mask': 2, 'cookie': 0, 'observed_ns': 174614267823999, 'writer': 'NOT_ESTABLISHED', 'category': 'ACCEPTED_LEDGER_PENDING_RESOLVED'}, {'path': 'J/fixtures/red-group-2/tmp3sicti0j/skills/.curator_ledger.jsonl', 'mask': 8, 'cookie': 0, 'observed_ns': 174614267833974, 'writer': 'NOT_ESTABLISHED', 'category': 'ACCEPTED_LEDGER_PENDING_RESOLVED'}], 'event_reasons': [], 'reasons': [], 'writer_attribution': 'NOT_ESTABLISHED', 'ledger_role': 'OBSERVATION_INTEGRITY_ONLY', 'accepted_observational_limit': 'Endpoint and original/previous-prefix checks cannot detect an overwrite-restore or truncate-regrow completed between covered captures.', 'decision': 'PASS'}
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.021s
+
+FAILED (failures=2, errors=1)

@@ -1,0 +1,238 @@
+{
+  "binding_hash": "2bfe0792c93fb55859f95c672d9c75dde6083dae536d8092c8999dfb8e393dd3",
+  "binding_source_mismatches": [],
+  "delta_hash_checks": [
+    {
+      "path": "TASK_ROOT/candidate-preparation/native-delta-001/DELTA.json",
+      "matches": true
+    },
+    {
+      "path": "J/writer-evidence-r12/IMPLEMENTATION.r11-to-r12.final-004.patch",
+      "matches": true
+    },
+    {
+      "path": "TASK_ROOT/candidate-preparation/native-delta-001/sources/sandbox-isolation-module/src/main/java/com/example/platform/sandbox/BubblewrapSandboxProcessLauncher.java",
+      "matches": true
+    },
+    {
+      "path": "TASK_ROOT/candidate-preparation/native-delta-001/sources/sandbox-isolation-module/src/main/java/com/example/platform/sandbox/ContainerSandboxProcessLauncher.java",
+      "matches": true
+    },
+    {
+      "path": "TASK_ROOT/candidate-preparation/native-delta-001/sources/sandbox-isolation-module/src/main/java/com/example/platform/sandbox/LocalBoundedProcessLauncher.java",
+      "matches": true
+    },
+    {
+      "path": "TASK_ROOT/candidate-preparation/native-delta-001/sources/sandbox-isolation-module/src/test/java/com/example/platform/sandbox/CleanupFailurePropagationTest.java",
+      "matches": true
+    },
+    {
+      "path": "TASK_ROOT/candidate-preparation/native-delta-001/sources/sandbox-isolation-module/src/test/java/com/example/platform/sandbox/CleanupReliabilityTest.java",
+      "matches": true
+    },
+    {
+      "path": "TASK_ROOT/candidate-preparation/native-delta-001/sources/scripts/ci/change_impact_classifier.py",
+      "matches": true
+    },
+    {
+      "path": "TASK_ROOT/candidate-preparation/native-delta-001/build/sandbox-isolation-module/test-results/test/TEST-com.example.platform.sandbox.CleanupReliabilityTest.xml",
+      "matches": true
+    },
+    {
+      "path": "TASK_ROOT/candidate-preparation/native-delta-001/build/sandbox-isolation-module/test-results/test/TEST-com.example.platform.sandbox.CleanupFailurePropagationTest.xml",
+      "matches": true
+    },
+    {
+      "path": "TASK_ROOT/candidate-preparation/native-delta-001/junit.RECEIPT.json",
+      "matches": true
+    },
+    {
+      "path": "TASK_ROOT/candidate-preparation/native-delta-001/impact.RECEIPT.json",
+      "matches": true
+    },
+    {
+      "path": "TASK_ROOT/candidate-preparation/native-delta-001/junit.stdout.log",
+      "matches": true
+    },
+    {
+      "path": "TASK_ROOT/candidate-preparation/native-delta-001/impact.stdout.log",
+      "matches": true
+    }
+  ],
+  "red-r11-preparation-consumer-final-004": {
+    "snapshot_mismatches": [],
+    "raw_log_match": true,
+    "result_match": true,
+    "snapshot_before_after_equal": true
+  },
+  "green-r12-preparation-consumer-final-005": {
+    "snapshot_mismatches": [],
+    "raw_log_match": true,
+    "result_match": true,
+    "snapshot_before_after_equal": true
+  },
+  "red_cases": [
+    {
+      "case": "positive-genuine-product-identity",
+      "exit": 1,
+      "type": "AttributeError",
+      "reasons": [
+        "97863e69ab6779d2ba89485b262716ae8d167eca604f7e3536880eff0c10a790"
+      ],
+      "stdout_match": true,
+      "stderr_match": true,
+      "sentinel_unchanged": true
+    }
+  ],
+  "green_cases": [
+    {
+      "case": "external-patch-in-product-identity",
+      "exit": 1,
+      "type": "JSONDecodeError",
+      "reasons": [
+        "3907c9d78564ed01790f2033302005884c4d08eef5a1655352645f3fcc76ae8e"
+      ],
+      "stdout_match": true,
+      "stderr_match": true,
+      "sentinel_unchanged": true
+    },
+    {
+      "case": "missing-product-identity",
+      "exit": 1,
+      "type": "RuntimeError",
+      "reasons": [
+        "da5a78cde7c0327775f6a765a844a42173ef25982c40d884d99c2b29fafc6543"
+      ],
+      "stdout_match": true,
+      "stderr_match": true,
+      "sentinel_unchanged": true
+    },
+    {
+      "case": "positive-genuine-product-identity",
+      "exit": 1,
+      "type": "FileExistsError",
+      "reasons": [
+        "8e93d16e91a51d32157943da692cd8b62792a51c2f52bf16403ea1f844eabb2b"
+      ],
+      "stdout_match": true,
+      "stderr_match": true,
+      "sentinel_unchanged": true
+    },
+    {
+      "case": "wrong-config-seal",
+      "exit": 1,
+      "type": "RuntimeError",
+      "reasons": [
+        "00deef5e7d0b5425d017b836b096d0eef9caf844e648632db9424bf8c88d993a"
+      ],
+      "stdout_match": true,
+      "stderr_match": true,
+      "sentinel_unchanged": true
+    },
+    {
+      "case": "wrong-product-hash",
+      "exit": 1,
+      "type": "RuntimeError",
+      "reasons": [
+        "2c952f38fa412b66fc8b6be0717ba846f0bffcb953fb362a4072f1cb9ebf14cf"
+      ],
+      "stdout_match": true,
+      "stderr_match": true,
+      "sentinel_unchanged": true
+    },
+    {
+      "case": "wrong-product-identity",
+      "exit": 1,
+      "type": "RuntimeError",
+      "reasons": [
+        "450fa0b20189c75e4f9d257335ac161df3a051e65690b0554f06c286d7fc3a2a"
+      ],
+      "stdout_match": true,
+      "stderr_match": true,
+      "sentinel_unchanged": true
+    },
+    {
+      "case": "wrong-product-schema",
+      "exit": 1,
+      "type": "RuntimeError",
+      "reasons": [
+        "40e556b9266f51fbf3233cf63007d7118cfe919fe81f1b6d0ce09a74fe235485"
+      ],
+      "stdout_match": true,
+      "stderr_match": true,
+      "sentinel_unchanged": true
+    }
+  ],
+  "red_fixture": {
+    "source_hash_mismatches": [],
+    "executor_changed_files": [
+      "binding_contract.py",
+      "coverage.py",
+      "dependency_contract.py"
+    ],
+    "critical_unchanged": true
+  },
+  "green_fixture": {
+    "source_hash_mismatches": [],
+    "executor_changed_files": [
+      "binding_contract.py",
+      "coverage.py",
+      "dependency_contract.py"
+    ],
+    "critical_unchanged": true
+  },
+  "product_xml": {
+    "classes": [
+      {
+        "class": "com.example.platform.sandbox.CleanupReliabilityTest",
+        "count": 2,
+        "declared": "2",
+        "bad": 0
+      },
+      {
+        "class": "com.example.platform.sandbox.CleanupFailurePropagationTest",
+        "count": 25,
+        "declared": "25",
+        "bad": 0
+      }
+    ],
+    "count": 27,
+    "unique": 27,
+    "identity_set_matches": true
+  },
+  "reason_hash": "97863e69ab6779d2ba89485b262716ae8d167eca604f7e3536880eff0c10a790",
+  "source_binding_count": 121,
+  "before_after_mismatches": [],
+  "external_delta": {
+    "counts": [
+      121,
+      122
+    ],
+    "changed_count": 13,
+    "changed_paths": [
+      ".source",
+      "tooling/executor/VERSION.json",
+      "tooling/executor/binding_contract.py",
+      "tooling/executor/binding_qualification.py",
+      "tooling/executor/dependency_contract.py",
+      "tooling/executor/execution.py",
+      "tooling/executor/identity_delta.py",
+      "tooling/executor/qualification_contract.py",
+      "tooling/executor/runner.py",
+      "tooling/qualification/build_dependency_evidence.py",
+      "tooling/qualification/build_integration_qualification.py",
+      "tooling/qualification/build_runtime_binding.py",
+      "tooling/qualification/test_r12_actual_prepare.py"
+    ],
+    "record_paths_equal": true,
+    "record_hash_mismatches": []
+  },
+  "loader_receipt": {
+    "native_exit": 0,
+    "wrapper_exit": 0,
+    "raw_log_matches": true,
+    "binding_matches": true,
+    "snapshot_failures": []
+  },
+  "verification_tool_issue": "Static receipt parser initially assumed raw_log; corrected to actual native_log_sha256. No reviewed executable ran."
+}

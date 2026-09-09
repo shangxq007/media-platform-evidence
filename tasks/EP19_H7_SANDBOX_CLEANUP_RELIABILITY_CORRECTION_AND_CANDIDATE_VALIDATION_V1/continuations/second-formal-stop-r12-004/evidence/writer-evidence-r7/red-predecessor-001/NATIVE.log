@@ -1,0 +1,74 @@
+test_actual_adapter_composed_marker_failure_reaches_driver_final_diagnostic (test_r7_remaining.R7ReviewerFindingControls.test_actual_adapter_composed_marker_failure_reaches_driver_final_diagnostic) ... {"diagnostic_persistence_uncertain": true, "error_types": ["ExceptionGroup", "RuntimeError"], "gate": "FIXTURE", "result": "FAIL", "schema": "ep19-sanitized-native-persistence-uncertainty-v1", "stages": ["GATE_OR_POST_COMMAND", "UNKNOWN"], "success_allowed": false}
+FAIL
+test_capture_preservation_boundary_adapter_driver_saved_receipt_keeps_leaf_causes (test_r7_remaining.R7ReviewerFindingControls.test_capture_preservation_boundary_adapter_driver_saved_receipt_keeps_leaf_causes) ... {"diagnostic_persistence_uncertain": true, "error_types": ["BoundaryReject", "ExceptionGroup"], "gate": "FIXTURE", "result": "FAIL", "schema": "ep19-sanitized-native-persistence-uncertainty-v1", "stages": ["GATE_OR_POST_COMMAND", "UNKNOWN"], "success_allowed": false}
+FAIL
+test_keyboard_interrupt_after_actual_fd_acquisition_releases_and_retains_both_causes (test_r7_remaining.R7ReviewerFindingControls.test_keyboard_interrupt_after_actual_fd_acquisition_releases_and_retains_both_causes) ... FAIL
+test_known_owned_descendants_are_isolated_when_one_identity_query_fails (test_r7_remaining.R7ReviewerFindingControls.test_known_owned_descendants_are_isolated_when_one_identity_query_fails) ... FAIL
+test_memory_error_after_actual_fd_acquisition_releases_and_retains_both_causes (test_r7_remaining.R7ReviewerFindingControls.test_memory_error_after_actual_fd_acquisition_releases_and_retains_both_causes) ... FAIL
+
+======================================================================
+FAIL: test_actual_adapter_composed_marker_failure_reaches_driver_final_diagnostic (test_r7_remaining.R7ReviewerFindingControls.test_actual_adapter_composed_marker_failure_reaches_driver_final_diagnostic)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r7/tooling/qualification/test_r7_remaining.py", line 251, in test_actual_adapter_composed_marker_failure_reaches_driver_final_diagnostic
+    self.assertIn(expected, joined, final)
+AssertionError: 'r7 marker write leaf' not found in 'r7 original gate leaf EXCLUSIVE_BYTES_BODY_AND_PUBLICATION_FAILURE (3 sub-exceptions) EXCLUSIVE_BYTES_BODY_AND_PUBLICATION_FAILURE (3 sub-exceptions)' : {'gate': 'FIXTURE', 'result': 'FAIL', 'wrapper_exit': 1, 'error_type': 'RuntimeError', 'reason': 'r7 original gate leaf', 'traceback': 'Traceback (most recent call last):\n  File "J/implementation-r7/tooling/executor/external29_driver.py", line 361, in execute_actual_graph\n    result=runner.run_gate(name,matrix,run,scope,sealed,results)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "J/implementation-r7/tooling/qualification/test_r7_remaining.py", line 231, in run_gate\n    raise RuntimeError("r7 original gate leaf")\nRuntimeError: r7 original gate leaf\n', 'failure_stage': 'GATE_OR_POST_COMMAND', 'causal_errors': [{'role': 'secondary', 'stage': 'GATE_OR_POST_COMMAND', 'error_type': 'RuntimeError', 'reason': 'r7 original gate leaf'}, {'role': 'failure-marker-persistence', 'phase': 'GATE_OR_POST_COMMAND_FIXTURE', 'error_type': 'ExceptionGroup', 'reason': 'EXCLUSIVE_BYTES_BODY_AND_PUBLICATION_FAILURE (3 sub-exceptions)', 'primary_error_type': 'RuntimeError', 'primary_reason': 'r7 original gate leaf'}], 'secondary_failures': [{'role': 'failure-marker-persistence', 'phase': 'GATE_OR_POST_COMMAND_FIXTURE', 'error_type': 'ExceptionGroup', 'reason': 'EXCLUSIVE_BYTES_BODY_AND_PUBLICATION_FAILURE (3 sub-exceptions)', 'primary_error_type': 'RuntimeError', 'primary_reason': 'r7 original gate leaf'}], 'diagnostic_persistence_uncertain': True, 'diagnostic_delivery': 'SANITIZED_NATIVE_LOG_PLUS_IN_MEMORY_RESULT', 'failure_dimensions': {'native_invocation': False, 'native_exit': None, 'native_command_exit_failure': False, 'product_assertion_failure': False, 'observer_preservation_failure': False, 'workload_timeout_or_cancellation': False, 'wrapper_or_environment_failure': False, 'evidence_persistence_failure': False, 'parser_helper_process_failure': False, 'cleanup_failure': False}, 'failure_classes': ['UNCLASSIFIED_FAILURE'], 'failure_class': 'UNCLASSIFIED_FAILURE', 'candidate': 's', 'tree': 't'}
+
+======================================================================
+FAIL: test_capture_preservation_boundary_adapter_driver_saved_receipt_keeps_leaf_causes (test_r7_remaining.R7ReviewerFindingControls.test_capture_preservation_boundary_adapter_driver_saved_receipt_keeps_leaf_causes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r7/tooling/qualification/test_r7_remaining.py", line 212, in test_capture_preservation_boundary_adapter_driver_saved_receipt_keeps_leaf_causes
+    self.assertIn(expected, " ".join(row.get("reason", "") for row in saved_rows), saved)
+AssertionError: 'r7 preservation primary leaf' not found in '' : {'attempt_id': 'faf1a09790c74bfcbce8c9c3401d975c', 'baseline_rebuild_authorized': False, 'decision': {'decision': 'REJECT', 'reasons': ['BoundaryReject:EVIDENCE_WRITE_FAILED'], 'semantic_success_artifacts_allowed': False}, 'failed_ns': 1788942883940539455, 'phase': 'COMMAND', 'retry_authorized': False, 'schema': 'ep19-approved-bookkeeping-failure-v3'}
+
+======================================================================
+FAIL: test_keyboard_interrupt_after_actual_fd_acquisition_releases_and_retains_both_causes (test_r7_remaining.R7ReviewerFindingControls.test_keyboard_interrupt_after_actual_fd_acquisition_releases_and_retains_both_causes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r7/tooling/qualification/test_r7_remaining.py", line 116, in test_keyboard_interrupt_after_actual_fd_acquisition_releases_and_retains_both_causes
+    self._capture_cancellation(KeyboardInterrupt("r7 capture keyboard primary"))
+  File "J/implementation-r7/tooling/qualification/test_r7_remaining.py", line 102, in _capture_cancellation
+    self.assertEqual(opened, closed)
+AssertionError: Lists differ: [4] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+4
+
+- [4]
+?  -
+
++ []
+
+======================================================================
+FAIL: test_known_owned_descendants_are_isolated_when_one_identity_query_fails (test_r7_remaining.R7ReviewerFindingControls.test_known_owned_descendants_are_isolated_when_one_identity_query_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r7/tooling/qualification/test_r7_remaining.py", line 152, in test_known_owned_descendants_are_isolated_when_one_identity_query_fails
+    self.assertIn(controlled_pid, receipt["terminated"], receipt)
+AssertionError: 12 not found in [] : {'result': 'NOT_QUIESCENT', 'owned_identities': {}, 'terminated': [], 'remaining': [], 'errors': [{'kind': 'OWNED_DESCENDANT_DISCOVERY_PERMISSION', 'error_type': 'PermissionError', 'reason': 'r7 controlled birth denial'}, {'kind': 'OWNED_DESCENDANT_FINAL_DISCOVERY_PERMISSION', 'error_type': 'PermissionError', 'reason': 'r7 controlled birth denial'}, {'kind': 'OWNED_DESCENDANT_CLEANUP_TIMEOUT', 'remaining': []}], 'timeout_seconds': 0.08, 'scope': 'ChildScope children minus pre-existing children, exact retained PID/birth identity'}
+
+======================================================================
+FAIL: test_memory_error_after_actual_fd_acquisition_releases_and_retains_both_causes (test_r7_remaining.R7ReviewerFindingControls.test_memory_error_after_actual_fd_acquisition_releases_and_retains_both_causes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "J/implementation-r7/tooling/qualification/test_r7_remaining.py", line 119, in test_memory_error_after_actual_fd_acquisition_releases_and_retains_both_causes
+    self._capture_cancellation(MemoryError("r7 capture memory primary"))
+  File "J/implementation-r7/tooling/qualification/test_r7_remaining.py", line 102, in _capture_cancellation
+    self.assertEqual(opened, closed)
+AssertionError: Lists differ: [4] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+4
+
+- [4]
+?  -
+
++ []
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.132s
+
+FAILED (failures=5)
