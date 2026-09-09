@@ -1,0 +1,53 @@
+{
+  "schema": "ep19-writer-qualification-results-v1",
+  "final_result": "PASS",
+  "final_namespace": "green-009",
+  "fresh_tests": 71,
+  "unique_tests": 71,
+  "repeated_tests": 0,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "reused_tests": 0,
+  "red": {
+    "namespace": "red",
+    "tests": 4,
+    "failures": 4,
+    "errors": 0,
+    "expected": "approved V3 behaviors exist",
+    "actual": "predecessor lacks same-capture, ledger, composite baseline APIs and rejects exact lock close",
+    "preserved": true
+  },
+  "iterations": [
+    {"namespace": "green-001", "tests": 66, "result": "PASS_SUPERSEDED_BY_SOURCE_CHANGE"},
+    {"namespace": "green-002", "tests": 68, "result": "PASS_SUPERSEDED_BY_SOURCE_CHANGE"},
+    {"namespace": "green-003", "tests": 69, "result": "PASS_SUPERSEDED_BY_SOURCE_CHANGE"},
+    {"namespace": "green-004", "tests": 69, "control_result": "PASS", "builder_result": "FAIL_PRESERVED", "reason": "difflib generator slicing TypeError"},
+    {"namespace": "green-005", "tests": 69, "result": "PASS_SUPERSEDED_BY_SOURCE_CHANGE"},
+    {"namespace": "green-006", "tests": 70, "result": "PASS_SUPERSEDED_BY_SOURCE_CHANGE"},
+    {"namespace": "green-007", "tests": 70, "result": "PASS_SUPERSEDED_BY_SOURCE_CHANGE"},
+    {"namespace": "green-008", "tests": 71, "result": "PASS_SUPERSEDED_BY_GLOBAL_CAPTURE_DEADLINE_CORRECTION"},
+    {"namespace": "green-009", "tests": 71, "unique": 71, "duplicates": 0, "failures": 0, "errors": 0, "result": "PASS_CURRENT_SOURCE_BOUND"}
+  ],
+  "final_receipts": {
+    "native_log": {"path": "writer-evidence/green-009/GREEN.native.log", "sha256": "2e26d0ce07927dc0d1f4f2f9f1b760aa2d070b121efc255732e81a68973351fa"},
+    "process": {"path": "writer-evidence/green-009/PROCESS.json", "sha256": "425b649fe69d288820113333987ee7a6c15a6c4b8a305a01b695e7bedc9fe0ad"},
+    "result": {"path": "writer-evidence/green-009/RESULT.json", "sha256": "f7da4af5cdf21d63bbc592221ea36770d1dd19c111e1da0c66f4da551af82e4e"},
+    "qualification": {"path": "writer-evidence/green-009/QUALIFICATION.json", "sha256": "578544172a105b78d8d7ffa2e7e0ac2e5ce78d242db885aa560a2837a4b278b7"},
+    "implementation_diff": {"path": "writer-evidence/green-009/IMPLEMENTATION.diff", "sha256": "741a36f10b29f2655a1575cdff5ae11c97ee24249e6e5394ee46723707d9f810", "git_apply_check": "PASS"}
+  },
+  "coverage": [
+    "same-byte stat/read/stat capture and source/capture IDs",
+    "usage four-field V2 success and schema/type/member/monotonic negatives",
+    "exact empty lock mask=8 cookie=0 and replacement/content/mode/mask negatives",
+    "ledger single/multiple/previous-prefix success and strict eight-field/prefix/identity/framing/time negatives",
+    "real inotify fixture events, strict body write-restore, watch loss and overflow",
+    "baseline/preflight/prestart/command/gate/final/coverage/seal shared reducer",
+    "inclusive exact/over resource predicates and actual 128/129 record boundary",
+    "missing/incoherent/unstable capture, evidence write failure, stale binding/policy and failed namespace"
+  ],
+  "product_tests": false,
+  "formal_preparation": false,
+  "formal_baseline": false,
+  "formal_attempt": false
+}

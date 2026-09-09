@@ -1,0 +1,176 @@
+{
+  "schema": "ep19-adapter-advisory-source-review-v1",
+  "role": "ADVISORY_INDEPENDENT_SOURCE_REVIEW_NOT_FINAL_ACCEPTANCE",
+  "owner_decision_sha256": "4f431b08fda1066719b63d9753f5db202f5c1191371c33d9d99fed66dd5b01ff",
+  "result": "CONFORMANCE_DEFECTS_IDENTIFIED",
+  "finding_count": 10,
+  "findings": [
+    {
+      "id": "AR001",
+      "severity": "HIGH",
+      "title": "Strict scope and ancestor coverage are not implemented by this adapter",
+      "source_locations": [
+        "tooling/executor/observe.py:119-127",
+        "tooling/executor/bookkeeping_v3.py:202-232,495-507",
+        "tooling/executor/capture.py:147-172"
+      ],
+      "contract": "Owner 46,77,111,131,211; ledger proposal 202-204,243-259,292-301.",
+      "counterexample": "With eligible alpha and an existing ineligible beta directory, change beta/support.txt in place. The root entry set and alpha manifest stay equal; the observer watches root and alpha directories, not beta; directory watches are not recursive. No event or capture covers beta/support.txt, and default strict_input_integrity=True allows PASS. Memory and external strict objects are also absent. chmod an ancestor above skills similarly changes no compared ancestor row. This is a concrete adapter coverage gap, not a claim that an unreviewed outer integration cannot supply coverage.",
+      "recommendation": "Capture and bind the full independent strict inventory and required ancestor identities/entry sets, with continuous coverage; require an authenticated strict result rather than default True. Package manifests currently retain only path/hash, not strict metadata or directory identity.",
+      "test_gap": "Tests 369-380 cover only eligible alpha; test 413 only supplies a false flag.",
+      "verification": "STATIC_REASONING_NOT_EXECUTED"
+    },
+    {
+      "id": "AR002",
+      "severity": "HIGH",
+      "title": "Usage temporary-file lifecycle is widened beyond V2",
+      "source_locations": [
+        "tooling/executor/observe.py:39-48,68-104",
+        "tooling/executor/bookkeeping_v3.py:495-505"
+      ],
+      "contract": "Owner 72-79; narrow proposal 33,59.",
+      "counterexample": "Move a temp named .usage_abc12_3z.tmp out of skills to an unobserved directory. Its MOVED_FROM event is accepted with any cookie, no matching MOVED_TO is required, and final absence passes. Likewise an externally supplied file renamed to .usage.json is accepted with MOVED_TO without a paired approved temp source. No visible-temp mode 0600, owner/group/dev/nlink check exists in the reducer. These are event/lifecycle violations even when usage endpoint bytes are legal.",
+      "recommendation": "Restore exact V2 rename pairing, scope and visible-temp metadata checks; do not treat every event bearing an approved temp name as resolved.",
+      "test_gap": "Atomic replacement positive 120-129 supplies the valid pair; no negative unpaired/cross-boundary temp test exists.",
+      "verification": "STATIC_REASONING_NOT_EXECUTED"
+    },
+    {
+      "id": "AR003",
+      "severity": "HIGH",
+      "title": "Ledger timestamps are bounded by caller values, not actual capture time",
+      "source_locations": [
+        "tooling/executor/boundary.py:89-99,117-119",
+        "tooling/executor/bookkeeping_v3.py:368-382"
+      ],
+      "contract": "Owner 119; ledger proposal 147 and 330.",
+      "counterexample": "Engine(policy) defaults window_end to datetime.max. An otherwise valid appended row dated 2099-01-01T00:00:00+00:00 passes at a 2026 boundary with matching modify/close events. Even an explicit future end permits future timestamps before that time has occurred. No observed wall-clock rollback check exists; time.time_ns fields are recorded without comparison.",
+      "recommendation": "Bind start to the actual protected start and end to actual boundary capture time; reject wall-clock rollback, without adding a 3600-second cap.",
+      "test_gap": "Fixture 66-70 injects a two-day window; timestamp negative 341-343 checks only a value beyond that injected end.",
+      "verification": "STATIC_REASONING_NOT_EXECUTED"
+    },
+    {
+      "id": "AR004",
+      "severity": "MEDIUM",
+      "title": "Ledger parser accepts forbidden carriage-return framing",
+      "source_locations": [
+        "tooling/executor/bookkeeping_v3.py:181-195,416-430,81-103"
+      ],
+      "contract": "Owner 119; ledger proposal 208 explicitly says no CR.",
+      "counterexample": "Take any otherwise valid ledger record and encode JSON followed by CR LF. bytes.splitlines(keepends=True) retains CR LF; line.endswith(LF) passes; line[:-1] still contains CR, which json.loads accepts as trailing whitespace. A CR used as JSON whitespace inside the object before the ending LF is likewise not explicitly prohibited. The accepted schema forbids CR.",
+      "recommendation": "Reject CR bytes in ledger framing explicitly, including original-prefix framing as applicable; keep usage parsing separate.",
+      "test_gap": "Existing malformed/UTF8/half-line tests do not include CRLF.",
+      "verification": "STATIC_REASONING_NOT_EXECUTED"
+    },
+    {
+      "id": "AR005",
+      "severity": "HIGH",
+      "title": "An unchanged boundary after an approved usage change is falsely rejected",
+      "source_locations": [
+        "tooling/executor/bookkeeping_v3.py:311-353",
+        "tooling/executor/boundary.py:123,131-135,179-180",
+        "tooling/executor/observe.py:82-83"
+      ],
+      "contract": "Owner 88-98,190-201; narrow proposal 37-39.",
+      "counterexample": "Baseline usage count is 1. At COMMAND it legally becomes 2 with covered usage events and passes. At the next GATE no usage write occurs and count remains 2. evaluate_usage compares against the original policy baseline, still returns OLD_STRICT_REJECT; usage_variation remains true and the empty new event batch triggers USAGE_VARIATION_WITHOUT_COVERED_EVENT. The same occurs immediately after approved baseline variation. The session advances ledger only.",
+      "recommendation": "Retain old-strict differences against original baseline, but compute per-boundary event requirements from a separately retained previous successful real usage capture.",
+      "test_gap": "Tests 101-118 check one variation only; all-eight-phases test 94-99 uses fully unchanged input.",
+      "verification": "STATIC_REASONING_NOT_EXECUTED"
+    },
+    {
+      "id": "AR006",
+      "severity": "HIGH",
+      "title": "Caller assertions and replayed bundles can manufacture complete PASS",
+      "source_locations": [
+        "tooling/executor/boundary.py:70-99,101-119,137-160,178-187",
+        "tooling/executor/bookkeeping_v3.py:303-308",
+        "tooling/executor/executor_adapter.py:38-42,65-71"
+      ],
+      "contract": "Owner 81-101,142-143,228-238,260-267.",
+      "counterexample": "Call RunAdapter with no binding; retain a prior coherent bundle, then pass it to baseline(bundle=old_bundle) without observer or evidence_dir. Defaults claim coverage and strict integrity. There is no fresh capture, byte/hash/source-ID recomputation, capture-age check, mandatory evidence, or mandatory expected binding. Changing all capture IDs and their matching dictionary values together also passes coherence equality. Supplying just binding schema plus ledger_use and no expected fields bypasses candidate/source/Owner validation. This is a public adapter fail-open trust boundary, not a claim of malicious code injection into a protected executor.",
+      "recommendation": "Separate fixture injection from production APIs. Require actual bound captures, observer continuity, complete strict inventory, exact immutable runtime binding and durable evidence before PASS; never default missing attestations to success.",
+      "test_gap": "Tests 382-386 mutate only one side of the ID comparison; stale-binding tests provide the expected candidate themselves; no missing binding/replayed bundle control.",
+      "verification": "STATIC_REASONING_NOT_EXECUTED"
+    },
+    {
+      "id": "AR007",
+      "severity": "HIGH",
+      "title": "Candidate binding accepts fabricated qualification and incomplete dependency evidence",
+      "source_locations": [
+        "tooling/qualification/candidate_binding.py:56-73,74-92",
+        "tooling/qualification/test_approved_contract.py:521-535",
+        "tooling/qualification/build_qualification.py:123-136"
+      ],
+      "contract": "Owner 142-143,212,219-220,228-238,260-267.",
+      "counterexample": "A qualification object containing only schema, result=PASS and current source_binding passes candidate_binding.build; its process/result/log receipt paths, hashes, control identities, fresh count and per-area coverage need not exist. The positive test at 525-527 constructs exactly that object. A dependency document containing schema/result/ledger_role also passes when consumers and dynamic readers are omitted because missing defaults are empty. No actual consumer/source closure is validated here. Output does not bind a policy/eligible map, wrapper/init or exclusive runtime directories.",
+      "recommendation": "Require and verify actual receipt/hash/control closure and complete dependency evidence; include every required binding or explicitly defer them to a mandatory checked final binding stage.",
+      "test_gap": "The purported actual builder positive demonstrates the minimal forged PASS payload rather than fresh qualification provenance. Existing green-009 is real internally consistent evidence, but the builder does not require it.",
+      "verification": "STATIC_REASONING_NOT_EXECUTED"
+    },
+    {
+      "id": "AR008",
+      "severity": "HIGH",
+      "title": "Evidence-write exceptions do not poison the run and session advances before durability",
+      "source_locations": [
+        "tooling/executor/boundary.py:178-187",
+        "tooling/executor/executor_adapter.py:65-83"
+      ],
+      "contract": "Owner 101,167,212,284-289; ledger proposal 286,303.",
+      "counterexample": "With an otherwise valid baseline, give evidence_dir an existing regular file. Engine updates its ledger session, then write_evidence raises BoundaryReject. RunAdapter.boundary never reaches its decision != PASS branch, so BOOKKEEPING_FAILURE.json is not written. The same adapter can then call preflight() without evidence_dir: _require_live sees only its consumed marker and permits PASS. A valid ledger suffix consumed by the failed evidence write has also already advanced the session.",
+      "recommendation": "Latch failure on exceptions as well as explicit rejection, update accepted session only after durable evidence, and prohibit further phases after any failed formal acceptance.",
+      "test_gap": "Evidence failure test 418-422 uses Engine directly; namespace failure test 434-447 tests only returned REJECT, not exceptions.",
+      "verification": "STATIC_REASONING_NOT_EXECUTED"
+    },
+    {
+      "id": "AR009",
+      "severity": "HIGH",
+      "title": "Attempt/failure namespace markers are not crash-durable directory entries",
+      "source_locations": [
+        "tooling/executor/executor_adapter.py:22-34,45-56,73-83",
+        "tooling/executor/boundary.py:46-64",
+        "tooling/qualification/policy_builder.py:41-50"
+      ],
+      "contract": "Owner 167,269,284-289; ledger proposal 292-293,303.",
+      "counterexample": "The marker file is fsynced, but its containing directory (and a newly created run directory parent) is never fsynced before baseline capture. A power-loss recovery may retain file data but lose the new directory entry; a subsequent adapter then sees neither consumed nor failure marker and admits another baseline. Similarly private evidence file data is fsynced but its private directory entry is not. Also policy_builder captures authoritative policy baseline inputs before RunAdapter.baseline consumes its namespace; this sequencing is left to the caller.",
+      "recommendation": "Fsync the directories needed to durably publish namespace markers before the first authoritative baseline capture, and failure markers before returning failure. Place policy capture inside the same consumed/covered lifecycle; fsync private evidence directory.",
+      "test_gap": "No crash-order or directory-fsync qualification exists; tests check live filesystem presence only. Crash outcome is a permitted filesystem failure window, not an executed crash test.",
+      "verification": "STATIC_REASONING_NOT_EXECUTED"
+    },
+    {
+      "id": "AR010",
+      "severity": "MEDIUM",
+      "title": "Capture/event resource budgets are not enforced across actual acquisition",
+      "source_locations": [
+        "tooling/executor/capture.py:53-65,82-100,147-168",
+        "tooling/executor/bookkeeping_v3.py:202-222",
+        "tooling/executor/observe.py:140-174,68-73",
+        "tooling/qualification/test_approved_contract.py:495-519"
+      ],
+      "contract": "Owner 153-165; ledger proposal 218-222.",
+      "counterexample": "capture_file checks elapsed time before an attempt and after the entire read, not inside its read loop. A continuously growing usage file has no byte cap and can keep returning chunks beyond five seconds without reaching the clock check. Observer drain likewise appends without checking pending_events_max and can drain indefinitely while events arrive; only the later reducer notices excess. The three-attempt allowance resets for usage, lock, ledger and every manifest file rather than being a shared per-boundary retry budget; two failed reads then success on usage, followed by two failed reads then success on lock are accepted if total time fits.",
+      "recommendation": "Check deadlines and event count during acquisition, fail closed immediately on actual excess, and make the intended per-boundary attempt accounting explicit/shared. Ordinary reads of different required files must remain possible; do not confuse the number of files with retry rounds.",
+      "test_gap": "Generic enforce_limit exact/over checks at 495-501 only prove a numeric helper. Actual tests cover record count and reducer event list, but not sustained acquisition, cumulative retry consumption, or full-size fixtures for every declared cap.",
+      "verification": "STATIC_REASONING_NOT_EXECUTED"
+    }
+  ],
+  "writer_evidence": {
+    "run": "green-009",
+    "reported_tests": 71,
+    "enumerated_unique_controls": 71,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "native_exit_claim": 0,
+    "receipt_hashes_match": true,
+    "source_binding_matches_current_files": true,
+    "independently_executed": false
+  },
+  "limits": [
+    "No tests, probes, formal gate, baseline or shared bookkeeping reads executed.",
+    "No integration-001 content read; full 29-gate driver integration is outside this review.",
+    "V2 source not independently reviewed; four-field and lifecycle comparison uses incorporated approved narrow proposal. Previous-capture usage monotonicity is not independently asserted as a separate defect.",
+    "Local approved proposal copies reviewed and hashed; remote fixed commit payload not independently fetched.",
+    "Historical writer remains UNKNOWN / NOT_ESTABLISHED.",
+    "Ledger hidden overwrite-restore/truncate-regrow is Owner-accepted LIMIT, not a finding. No 3600-second cap is required.",
+    "Scope is partial advisory static review, not independent final acceptance or a new approval prerequisite."
+  ]
+}

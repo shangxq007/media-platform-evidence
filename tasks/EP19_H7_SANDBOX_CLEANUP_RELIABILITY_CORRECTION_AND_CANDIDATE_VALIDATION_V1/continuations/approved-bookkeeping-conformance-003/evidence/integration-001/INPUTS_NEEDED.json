@@ -1,0 +1,35 @@
+{
+  "schema": "ep19-external29-parent-inputs-v1",
+  "fixed_inputs_already_present": {
+    "runtime_binding": "integration-001/evidence/RUNTIME_BINDING_LAUNCH_READY.json",
+    "qualification": "integration-001/evidence/qualification-005/QUALIFICATION.json",
+    "owner": "OWNER_DECISION.verbatim.txt",
+    "dependency": "writer-evidence/DEPENDENCY_BINDING.json",
+    "applicability": "dependency-review/CURRENT_APPLICABILITY.json",
+    "private_eligible_map": "dependency-review/private/ELIGIBLE_SKILLS_MAP.private.json",
+    "matrix": "integration-001/tooling/candidate-inputs-v3/GATE_EXECUTION_MATRIX.json"
+  },
+  "parent_created_inputs": {
+    "disposition": {
+      "path": "integration-001/evidence/PARENT_DISPOSITION_INPUT.json",
+      "required_fields": {
+        "result": "READY",
+        "instructions_preloaded": true,
+        "no_governance_during_window": true,
+        "no_unrelated_activity_during_window": true,
+        "pending_required_instructions": [],
+        "new_required_instruction_action": "STOP",
+        "external_process_nonwriting": "NOT_ESTABLISHED",
+        "preloaded_instruction_paths": "NONEMPTY_ARRAY_OF_ACTUALLY_LOADED_ABSOLUTE_PATHS"
+      }
+    },
+    "implementation_review": {
+      "path": "integration-001/evidence/PARENT_IMPLEMENTATION_REVIEW.json",
+      "required_fields": {
+        "implementation_review": "PASS",
+        "independent_final_acceptance": "PENDING"
+      }
+    }
+  },
+  "note": "These are parent attestations after actual review/preloading, not a new Owner approval request. The formal CLI validates them and consumes the only remaining attempt itself."
+}
