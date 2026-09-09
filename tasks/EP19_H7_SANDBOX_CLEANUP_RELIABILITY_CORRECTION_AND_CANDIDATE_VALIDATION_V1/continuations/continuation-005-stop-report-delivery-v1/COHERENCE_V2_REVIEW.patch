@@ -1,0 +1,421 @@
+--- before/executor/binding_contract.py
++++ candidate/executor/binding_contract.py
+@@ -3,7 +3,8 @@
+ import hashlib, json, os, re
+ 
+ ROOT = Path(__file__).resolve().parents[1]
+-TASK = ROOT.parents[2]
++PACKAGE = ROOT.parents[2]
++TASK = Path('/REVIEW_ONLY/EP19/continuation-005')
+ HISTORICAL_O = Path('/REVIEW_ONLY/home/Documents/workspace/audit-runs/EP19_H7_EXACT_CANDIDATE_GATE_OUTPUT_ISOLATION_CORRECTION_AND_REVALIDATION_V1')
+ HISTORICAL_D = HISTORICAL_O/'run-output-completeness-20260907T143346Z/baseline-sequence-20260908T070258Z'
+ PARENT = '689ab9456461a8d19a72d059f5157092efc43aff'
+@@ -30,8 +31,8 @@
+ 
+ def load(config, expected_digest):
+     config=exact_path(config)
+-    require(config.is_relative_to(ROOT.parents[1]/'coherence-writer-evidence-v1'),
+-            'CONFIG_OUTSIDE_COHERENCE_WRITER_EVIDENCE_V1')
++    require(config.is_relative_to(PACKAGE/'integration'),
++            'CONFIG_OUTSIDE_INTEGRATED_CORRECTION_V2')
+     require(re.fullmatch('[0-9a-f]{64}', expected_digest or '') and digest(config)==expected_digest,
+             'CONFIG_SEAL_MISMATCH')
+     value=read(config)
+@@ -71,9 +72,14 @@
+     require(eligibility_coherence.identity(contract)==value['eligibility_contract_sha256'],
+             'ELIGIBILITY_CONTRACT_IDENTITY_CHANGED')
+     control_implementation=exact_path(value['control_plane_implementation'])
+-    require(control_implementation.is_file() and
++    require(control_implementation.name=='canonical_publication_control.py' and
++            'ep19_successor_acceptance.py' not in str(control_implementation) and
++            control_implementation.is_file() and
+             digest(control_implementation)==value['control_plane_implementation_sha256'],
+-            'CONTROL_PLANE_IMPLEMENTATION_BYTES_CHANGED')
++            'ORIGINAL_UNIQUE_CONTROL_PLANE_IMPLEMENTATION_BYTES_CHANGED')
++    source_text=control_implementation.read_text(encoding='utf-8')
++    require('class StateTransaction' in source_text and 'class EP19AcceptanceControl' in source_text,
++            'ORIGINAL_CONTROLLER_INTEGRATION_MISSING')
+     import dependency_contract
+     dependency=read(value['dependency'])
+     require(dependency.get('schema')=='ep19-writer-ledger-dependency-binding-v8',
+--- before/executor/eligibility_admission.py
++++ candidate/executor/eligibility_admission.py
+@@ -26,10 +26,12 @@
+ def validate_admission_receipt(path, *, config, contract, review, control):
+     value = coherence.load(path)
+     required = {
+-        "schema", "result", "formal_attempt", "formal_budget_consumed", "run_id",
++        "schema", "result", "formal_attempt", "formal_budget_consumed", "run_id", "candidate", "tree",
+         "contract_id", "contract_sha256", "binding_sha256", "review_sha256",
+         "control_plane_evidence_sha256", "preparation", "comparison",
+         "new_allowance_total", "new_allowance_used", "global_ordinal",
++        "capture_private", "capture_private_sha256", "comparison_private", "comparison_private_sha256",
++        "comparison_public", "comparison_public_sha256",
+     }
+     _require(isinstance(value, dict) and set(value) == required, "ADMISSION_RECEIPT_SCHEMA")
+     _require(value.get("schema") == "ep19-preconsumption-admission-v1" and value.get("result") == "PASS",
+@@ -51,6 +53,20 @@
+              comparison.get("phase") == "PRECONSUMPTION_ADMISSION" and
+              comparison.get("capture_complete") is True and not comparison.get("differences"),
+              "ADMISSION_COHERENCE_NOT_PASS")
++    private_path = Path(value.get("capture_private", ""))
++    comparison_private_path = Path(value.get("comparison_private", ""))
++    public_path = Path(value.get("comparison_public", ""))
++    _require(private_path.is_file() and comparison_private_path.is_file() and public_path.is_file() and
++             coherence.digest(private_path) == value.get("capture_private_sha256") and
++             coherence.digest(comparison_private_path) == value.get("comparison_private_sha256") and
++             coherence.digest(public_path) == value.get("comparison_public_sha256"),
++             "ADMISSION_CAPTURE_BYTES_CHANGED")
++    capture = coherence.load(private_path)
++    recomputed = coherence.compare(contract, capture)
++    _require(recomputed.get("result") == "PASS" and
++             recomputed == coherence.load(comparison_private_path) and
++             coherence.public_projection(recomputed) == coherence.load(public_path) == comparison,
++             "ADMISSION_COMPARISON_RECOMPUTATION_REJECT")
+     return value
+ 
+ 
+@@ -60,6 +76,10 @@
+     binding = Path(binding).absolute(); contract_path = Path(contract_path).absolute()
+     review = Path(review).absolute(); control = Path(control).absolute()
+     run = Path(run).absolute(); output = Path(output).absolute()
++    if not allow_fixture:
++        resolved_run = run.resolve(); resolved_output = output.resolve(strict=False)
++        _require(resolved_output.is_relative_to(resolved_run) and resolved_output != resolved_run,
++                 "ADMISSION_OUTPUT_OUTSIDE_TASK_PRIVATE_RUN")
+     _require(config.get("binding_sha256") == coherence.digest(binding), "ADMISSION_BINDING_CHANGED")
+     contract = coherence.validate_contract(coherence.load(contract_path), allow_fixture=allow_fixture)
+     _require(config.get("eligibility_contract") == str(contract_path) and
+@@ -69,25 +89,39 @@
+              "ADMISSION_RUN_ID_REJECT")
+     _require(not any((run / name).exists() for name in FORBIDDEN_BEFORE_CONSUME),
+              "ADMISSION_AFTER_CONSUMPTION_FORBIDDEN")
+-    coherence.validate_review(review)
++    coherence.validate_review(review, allow_fixture=allow_fixture)
+     coherence.validate_control_plane(contract, control, allow_fixture=allow_fixture)
+     coherence.validate_version_chain(contract, config, review)
+     preparation = (verify_preparation(contract, run) if verify_preparation is not None
+                    else coherence.validate_preparation(contract, run))
+     capture = coherence.capture_actual(contract, "PRECONSUMPTION_ADMISSION")
+     private_path = output / "COHERENCE_CAPTURE.private.json"
++    try:
++        _write(private_path, capture, 0o600)
++    except Exception:
++        # The comparison persistence below retains the primary coherence result
++        # and both diagnostic sink failures. A PASS can never proceed without
++        # the raw capture because the post-evaluation check is fail closed.
++        pass
++    comparison_private_path = output / "COHERENCE_COMPARISON.private.json"
+     public_path = output / "COHERENCE_COMPARISON.json"
+-    public = coherence.evaluate_capture(contract, capture, private_path, public_path)
++    public = coherence.evaluate_capture(contract, capture, comparison_private_path, public_path)
++    _require(private_path.is_file() and coherence.load(private_path) == capture,
++             "ADMISSION_RAW_CAPTURE_PERSISTENCE_REJECT")
+     _require(not any((run / name).exists() for name in FORBIDDEN_BEFORE_CONSUME),
+              "ADMISSION_CONCURRENT_CONSUMPTION_REJECT")
+     receipt = {
+         "schema": "ep19-preconsumption-admission-v1", "result": "PASS",
+         "formal_attempt": False, "formal_budget_consumed": False,
+-        "run_id": run.name, "contract_id": contract["contract_id"],
++        "run_id": run.name, "candidate": contract["candidate_identity"]["candidate"],
++        "tree": contract["candidate_identity"]["tree"], "contract_id": contract["contract_id"],
+         "contract_sha256": coherence.identity(contract),
+         "binding_sha256": config["binding_sha256"], "review_sha256": coherence.digest(review),
+         "control_plane_evidence_sha256": coherence.digest(control),
+         "preparation": preparation, "comparison": public,
++        "capture_private": str(private_path), "capture_private_sha256": coherence.digest(private_path),
++        "comparison_private": str(comparison_private_path), "comparison_private_sha256": coherence.digest(comparison_private_path),
++        "comparison_public": str(public_path), "comparison_public_sha256": coherence.digest(public_path),
+         "new_allowance_total": 1, "new_allowance_used": 0, "global_ordinal": 3,
+     }
+     _write(output / "ADMISSION.json", receipt)
+--- before/executor/eligibility_coherence.py
++++ candidate/executor/eligibility_coherence.py
+@@ -31,6 +31,12 @@
+     "stable_capture_attempts_per_boundary": 3,
+     "capture_total_seconds_per_boundary_max": 5,
+     "pending_events_max": 4096,
++}
++EXACT_REAL_INPUTS = {
++    "map": ("/REVIEW_ONLY/EP19/continuation-005/coherence-private-v1/candidate-002/ELIGIBLE_SKILLS_MAP.private.json", "e11d53df2eb5f352c75fa734d0b7823a657fa85ab04ff8ca8ea875929efea948"),
++    "inventory": ("/REVIEW_ONLY/EP19/continuation-005/coherence-private-v1/candidate-002/STRICT_PACKAGE_INVENTORY.private.json", "7131215ac152847ae2bef69f14ea8a87577597bc6eb0682d1b959483d4a4bfc6"),
++    "instructions": ("/REVIEW_ONLY/EP19/continuation-005/coherence-private-v1/candidate-002/PROSPECTIVE_INSTRUCTION_IDENTITIES.private.json", "f710815d3d2aa8c770172f24fe2afa047da3b1a5bef8b4b909ebbefe60618c73"),
++    "semantic": ("/REVIEW_ONLY/EP19/continuation-005/input-semantic-review/FINDINGS.json", "e077e9b54ff52c95aeba23fe5343d968b6a3124a1bb09e76ed3264117fa7859e"),
+ }
+ CONTRACT_KEYS = {
+     "schema", "contract_id", "task", "capture_root", "fixture_only",
+@@ -156,11 +162,17 @@
+     _require(len(names) == len(set(names)), "PACKAGE_DUPLICATE")
+     _require(names == sorted(names), "PACKAGE_NONCANONICAL_ORDER")
+     _require(len({str(path) for path in roots}) == len(roots), "PACKAGE_ROOT_DUPLICATE")
++    if not value["fixture_only"]:
++        _require(len(names) == 7, "EXACT_ACCEPTED_PACKAGE_COUNT_REJECT")
+     strict_rows = value.get("strict_inventory")
+     _validate_rows(strict_rows, label="STRICT_INVENTORY")
+     _require(strict_rows == sorted(flattened, key=lambda row: row["path"]), "STRICT_INVENTORY_MANIFEST_PROJECTION_MISMATCH")
++    if not value["fixture_only"]:
++        _require(len(strict_rows) == 107, "EXACT_ACCEPTED_MEMBER_COUNT_REJECT")
+     instructions = value.get("instruction_projection")
+     instruction_paths = _validate_rows(instructions, label="INSTRUCTION_PROJECTION")
++    if not value["fixture_only"]:
++        _require(len(instructions) == 15, "EXACT_ACCEPTED_INSTRUCTION_COUNT_REJECT")
+     inventory = {row["path"]: row["sha256"] for row in strict_rows}
+     _require(all(inventory.get(row["path"]) == row["sha256"] for row in instructions),
+              "INSTRUCTION_PROJECTION_OUTSIDE_INVENTORY")
+@@ -172,6 +184,9 @@
+     semantic_path = _canonical_absolute(semantic.get("path"), "SEMANTIC_ACCEPTANCE_PATH")
+     _require(semantic_path.is_file() and digest(semantic_path) == semantic.get("sha256"),
+              "SEMANTIC_ACCEPTANCE_BYTES_CHANGED")
++    if not value["fixture_only"]:
++        _require((str(semantic_path), semantic.get("sha256")) == EXACT_REAL_INPUTS["semantic"],
++                 "EXACT_SEMANTIC_ACCEPTANCE_SOURCE_REJECT")
+     decision = load(semantic_path)
+     _require(semantic.get("decision") == SEMANTIC_DECISION == decision.get("decision"),
+              "SEMANTIC_ACCEPTANCE_DECISION")
+@@ -215,11 +230,27 @@
+     return actual
+ 
+ 
+-def validate_review(review):
++def validate_review(review, *, allow_fixture=False):
+     value = load(review)
+     _require(value.get("implementation_review") == "PASS" and
+              value.get("independent_final_acceptance") in ("PENDING", "REQUIRED"),
+              "INDEPENDENT_IMPLEMENTATION_REVIEW_REQUIRED")
++    if not allow_fixture:
++        _require(value.get("schema") == "ep19-integrated-correction-independent-review-v1" and
++                 value.get("decision") == "APPROVED" and value.get("approved") is True and
++                 value.get("reviewer_role") == "INDEPENDENT_TECHNICAL_REVIEWER" and
++                 isinstance(value.get("reviewer_actor"), str) and value["reviewer_actor"],
++                 "INDEPENDENT_MACHINE_REVIEW_SCHEMA_REJECT")
++        sources = value.get("reviewed_sources")
++        _require(isinstance(sources, list) and sources, "INDEPENDENT_REVIEWED_SOURCES_MISSING")
++        seen = set()
++        for row in sources:
++            _require(isinstance(row, dict) and set(row) == {"path", "sha256"},
++                     "INDEPENDENT_REVIEW_SOURCE_SCHEMA")
++            path = _canonical_absolute(row.get("path"), "INDEPENDENT_REVIEW_SOURCE_PATH")
++            _require(path.is_file() and digest(path) == row.get("sha256") and str(path) not in seen,
++                     "INDEPENDENT_REVIEW_SOURCE_BYTES_CHANGED")
++            seen.add(str(path))
+     return value
+ 
+ 
+@@ -233,8 +264,10 @@
+         "publication_route_ready", "dependencies_ready", "idempotency_key",
+         "live_state_mutated_by_writer", "implementation_sha256",
+     }
++    if value.get("fixture_only") is False:
++        required.add("controller_receipt")
+     _require(isinstance(value, dict) and set(value) == required, "CONTROL_PLANE_EVIDENCE_SCHEMA")
+-    _require(value.get("schema") == "ep19-original-control-plane-admission-evidence-v1" and
++    _require(value.get("schema") == "ep19-original-controller-registration-evidence-v2" and
+              value.get("result") == "PASS", "CONTROL_PLANE_EVIDENCE_NOT_PASS")
+     _require(value.get("fixture_only") is False or allow_fixture and value.get("fixture_only") is True,
+              "CONTROL_PLANE_FIXTURE_FORBIDDEN")
+@@ -255,15 +288,34 @@
+     _require(value.get("live_state_mutated_by_writer") is False, "WRITER_LIVE_STATE_MUTATION_REJECT")
+     _require(isinstance(value.get("idempotency_key"), str) and value["idempotency_key"],
+              "CONTROL_PLANE_IDEMPOTENCY_MISSING")
++    if value.get("fixture_only") is False:
++        reference = value.get("controller_receipt")
++        _require(isinstance(reference, dict) and set(reference) == {"path", "sha256"},
++                 "ORIGINAL_CONTROLLER_NATIVE_RECEIPT_REQUIRED")
++        receipt_path = _canonical_absolute(reference.get("path"), "ORIGINAL_CONTROLLER_RECEIPT_PATH")
++        _require(receipt_path.is_file() and digest(receipt_path) == reference.get("sha256"),
++                 "ORIGINAL_CONTROLLER_RECEIPT_BYTES_CHANGED")
++        receipt = load(receipt_path)
++        _require(receipt.get("schema") == "ep19-original-controller-admission-readback-v1" and
++                 receipt.get("result") == "PASS" and receipt.get("candidate") == candidate["candidate"] and
++                 receipt.get("tree") == candidate["tree"] and
++                 receipt.get("successor_id") == expected["successor_id"] and
++                 receipt.get("controller_sha256") == expected["implementation_sha256"] and
++                 receipt.get("same_locked_snapshot") is True and
++                 all(isinstance(receipt.get(key), str) and HASH_RE.fullmatch(receipt[key])
++                     for key in ("queue_sha256", "ledger_sha256", "slot_sha256", "transaction_id")),
++                 "ORIGINAL_CONTROLLER_NATIVE_RECEIPT_REJECT")
+     return value
+ 
+ 
+-def validate_control_consumption(contract, receipt, *, admission_control_sha256, allow_fixture=False):
++def validate_control_consumption(contract, receipt, *, admission_control_sha256,
++                                 admission_receipt_sha256, allow_fixture=False):
+     value = load(receipt)
+     required = {"schema", "result", "fixture_only", "successor_id", "authorization_id",
+         "candidate", "formal_attempt_id", "historical_formal_consumed", "new_used_before",
+         "new_used_after", "global_ordinal", "auto_retry", "idempotency_key", "transaction_id",
+-        "implementation_sha256", "admission_control_evidence_sha256", "performed_by_parent"}
++        "implementation_sha256", "admission_control_evidence_sha256",
++        "admission_receipt_sha256", "performed_by_parent"}
+     _require(isinstance(value, dict) and set(value) == required, "CONTROL_PLANE_CONSUME_EVIDENCE_SCHEMA")
+     _require(value.get("schema") == "ep19-original-control-plane-formal-consume-evidence-v1" and
+              value.get("result") == "PASS", "CONTROL_PLANE_CONSUME_NOT_PASS")
+@@ -283,6 +335,8 @@
+              "CONTROL_PLANE_CONSUME_BUDGET_REJECT")
+     _require(value.get("admission_control_evidence_sha256") == admission_control_sha256,
+              "CONTROL_PLANE_CONSUME_ADMISSION_LINK_REJECT")
++    _require(value.get("admission_receipt_sha256") == admission_receipt_sha256,
++             "CONTROL_PLANE_CONSUME_ADMISSION_BYTES_LINK_REJECT")
+     _require(value.get("performed_by_parent") is True and
+              all(isinstance(value.get(key), str) and value[key] for key in ("idempotency_key", "transaction_id")),
+              "CONTROL_PLANE_CONSUME_TRANSACTION_REJECT")
+--- before/executor/external29_driver.py
++++ candidate/executor/external29_driver.py
+@@ -672,7 +672,8 @@
+         admission,config=config,contract=contract,review=review,control=control)
+     control_consume=Path(args.control_plane_consume_evidence).absolute()
+     coherence.validate_control_consumption(
+-        contract,control_consume,admission_control_sha256=digest(control))
++        contract,control_consume,admission_control_sha256=digest(control),
++        admission_receipt_sha256=digest(admission))
+     return contract_path,control,control_consume,admission,contract,admitted
+ 
+ def formal(args):
+--- before/qualification/build_eligibility_contract.py
++++ candidate/qualification/build_eligibility_contract.py
+@@ -30,6 +30,13 @@
+                  "control-plane-implementation", "output"):
+         parser.add_argument("--" + name, type=Path, required=True)
+     args = parser.parse_args()
++    exact = coherence.EXACT_REAL_INPUTS
++    supplied = {"map": args.private_map, "inventory": args.strict_inventory,
++                "instructions": args.instruction_identities, "semantic": args.semantic_acceptance}
++    for role, path in supplied.items():
++        expected_path, expected_sha = exact[role]
++        if str(path.resolve()) != expected_path or not path.is_file() or digest(path) != expected_sha:
++            raise RuntimeError("EXACT_ACCEPTED_INPUT_SOURCE_REJECT " + role)
+     mapping = coherence.load(args.private_map)["eligible_skills"]
+     strict_source = coherence.load(args.strict_inventory)
+     strict = [{"path": row["path"], "sha256": row["sha256"]}
+@@ -43,6 +50,8 @@
+         if len(skill_rows) != 1: raise RuntimeError("PACKAGE_SKILL_MD_REJECT " + skill)
+         packages.append({"skill": skill, "package_root": str(Path(skill_rows[0]["path"]).parent),
+                          "manifest": manifest})
++    if (len(packages), len(strict), len(instructions)) != (7, 107, 15):
++        raise RuntimeError("EXACT_ACCEPTED_INPUT_CARDINALITY_REJECT")
+     chain = {"candidate": CANDIDATE, "tree": TREE, "product_patch_sha256": PATCH,
+         "matrix_sha256": digest(args.matrix), "dependency_sha256": digest(args.dependency),
+         "qualification_sha256": digest(args.qualification),
+--- before/qualification/build_runtime_binding.py
++++ candidate/qualification/build_runtime_binding.py
+@@ -58,6 +58,12 @@
+     if contract['attempt_authority']['run_id']!=a.run_id or contract['candidate_identity']!={
+             'candidate':CANDIDATE,'tree':TREE,'immediate_parent':PARENT,'product_patch_sha256':PATCH}:
+         raise RuntimeError('ELIGIBILITY_CONTRACT_CANDIDATE_OR_ATTEMPT_REJECT')
++    exact_packages=[{'skill':skill,'package_root':str(Path(next(row['path'] for row in manifest if Path(row['path']).name=='SKILL.md')).parent),'manifest':manifest}
++                    for skill,manifest in sorted(json.loads(a.private_map.read_text())['eligible_skills'].items())]
++    exact_inventory=[{'path':row['path'],'sha256':row['sha256']}
++                     for row in json.loads(a.private_inventory.read_text())['entries']]
++    if contract['packages']!=exact_packages or contract['strict_inventory']!=exact_inventory:
++        raise RuntimeError('RUNTIME_ACCEPTED_INPUT_CONTRACT_SUBSTITUTION_REJECT')
+     result={'schema':'ep19-external29-runtime-binding-v3','root':str(tooling),'clone_source':str(checkout),
+             'candidate':CANDIDATE,'tree':TREE,'immediate_parent':PARENT,'canonical_comparison_base':BASE,
+             'product_patch_sha256':PATCH,'control_root':str(control),'matrix_sha256':MATRIX,'inventories':inventories,
+--- before/qualification/policy_builder.py
++++ candidate/qualification/policy_builder.py
+@@ -68,6 +68,15 @@
+         contract_packages = {row["skill"]: row["package_root"] for row in contract["packages"]}
+         if packages != contract_packages:
+             raise coherence.CoherenceError("APPLICABILITY_CONTRACT_PROJECTION_REJECT")
++        declared_packages = declared.get("eligible_skills")
++        expected_manifests = {row["skill"]: row["manifest"] for row in contract["packages"]}
++        if declared_packages != expected_manifests:
++            raise coherence.CoherenceError("PRIVATE_MAP_CONTRACT_SUBSTITUTION_REJECT")
++        inventory_value = json.loads(Path(private_inventory).read_text())
++        projected_inventory = [{"path": row["path"], "sha256": row["sha256"]}
++                               for row in inventory_value.get("entries", [])]
++        if projected_inventory != contract["strict_inventory"]:
++            raise coherence.CoherenceError("PRIVATE_INVENTORY_CONTRACT_SUBSTITUTION_REJECT")
+     started_wall = __import__("time").time_ns()
+     started_mono = __import__("time").monotonic_ns()
+     policy = bk.create_policy(
+--- before/qualification/test_eligibility_coherence.py
++++ candidate/qualification/test_eligibility_coherence.py
+@@ -72,7 +72,7 @@
+         self.review = write(self.base / "REVIEW.json", {
+             "implementation_review": "PASS", "independent_final_acceptance": "PENDING"})
+         self.control = write(self.base / "CONTROL.json", {
+-            "schema": "ep19-original-control-plane-admission-evidence-v1", "result": "PASS",
++            "schema": "ep19-original-controller-registration-evidence-v2", "result": "PASS",
+             "fixture_only": True, "successor_id": "EP19-SYNTHETIC-SUCCESSOR",
+             "predecessor_id": "EP19-EXACT-CANDIDATE-CANONICAL-PUBLICATION-V1",
+             "authorization_id": "EP19_ELIGIBILITY_COHERENCE_RECOVERY_AND_CONTROLLED_CLOSURE_V1",
+@@ -160,6 +160,43 @@
+         self.assertFalse(result["formal_budget_consumed"])
+         self.assertFalse(any((self.f.run / name).exists() for name in admission.FORBIDDEN_BEFORE_CONSUME))
+ 
++    def test_admission_validation_recomputes_persisted_capture_bytes(self):
++        result = self.f.admit()
++        capture = self.f.base / "admission/COHERENCE_CAPTURE.private.json"
++        capture.write_text("{}\n", encoding="utf-8")
++        config = {**self.f.config, "binding_sha256": sha(self.f.binding)}
++        with self.assertRaises(coherence.CoherenceError):
++            admission.validate_admission_receipt(self.f.base / "admission/ADMISSION.json",
++                config=config, contract=self.f.contract_value, review=self.f.review,
++                control=self.f.control)
++
++    def test_nonfixture_control_self_report_without_controller_receipt_rejects(self):
++        value = coherence.load(self.f.control); value["fixture_only"] = False
++        control = write(self.f.base / "CONTROL-NONFIXTURE.json", value)
++        with self.assertRaises(coherence.CoherenceError):
++            coherence.validate_control_plane(self.f.contract_value, control)
++
++    def test_nonfixture_admission_output_must_be_inside_run(self):
++        contract = copy.deepcopy(self.f.contract_value); contract["fixture_only"] = False
++        contract["capture_root"] = str(self.f.root)
++        contract_path = write(self.f.base / "CONTRACT-NONFIXTURE.json", contract)
++        config = {**self.f.config, "binding_sha256": sha(self.f.binding),
++            "eligibility_contract": str(contract_path),
++            "eligibility_contract_sha256": coherence.identity(contract)}
++        control_value = coherence.load(self.f.control); control_value["fixture_only"] = False
++        control = write(self.f.base / "CONTROL-NONFIXTURE-OUTPUT.json", control_value)
++        with mock_patch.object(bk, "PRODUCTION_ROOT", self.f.root), self.assertRaises(coherence.CoherenceError):
++            admission.admit(config=config, binding=self.f.binding, contract_path=contract_path,
++                review=self.f.review, control=control, run=self.f.run,
++                output=self.f.base / "outside-run", allow_fixture=False)
++
++    def test_nonfixture_contract_cannot_shrink_exact_7_107_15_projection(self):
++        contract = copy.deepcopy(self.f.contract_value); contract["fixture_only"] = False
++        contract["capture_root"] = str(self.f.root)
++        with mock_patch.object(bk, "PRODUCTION_ROOT", self.f.root), self.assertRaisesRegex(
++                coherence.CoherenceError, "EXACT_ACCEPTED_PACKAGE_COUNT_REJECT"):
++            coherence.validate_contract(contract)
++
+     def test_actual_cli_consistent_green_and_no_formal_marker(self):
+         output = self.f.base / "cli-green"
+         command = [sys.executable, "-B", str(EXECUTOR / "external29_driver.py"), "coherence-fixture",
+@@ -197,7 +234,8 @@
+                                        "eligible": True, "errors": []} for row in self.f.packages]}
+         private_map = {"schema": "ep19-eligible-package-manifest-candidate-v1",
+                        "eligible_skills": {row["skill"]: row["manifest"] for row in self.f.packages}}
+-        inventory = {"schema": "fixture"}; dependency = {"fixture": True}; owner = self.f.base / "OWNER"
++        inventory = {"schema": "fixture", "entries": copy.deepcopy(self.f.contract_value["strict_inventory"])}
++        dependency = {"fixture": True}; owner = self.f.base / "OWNER"
+         owner.write_text("owner\n")
+         map_path = write(self.f.base / "MAP.json", private_map); inv_path = write(self.f.base / "INV.json", inventory)
+         app.update(private_manifest_sha256=sha(map_path), private_strict_inventory_sha256=sha(inv_path))
+@@ -265,9 +303,11 @@
+             "historical_formal_consumed": "2/2", "new_used_before": 0, "new_used_after": 1,
+             "global_ordinal": 3, "auto_retry": False, "idempotency_key": "synthetic-consume-001",
+             "transaction_id": "synthetic-transaction-001", "implementation_sha256": "5" * 64,
+-            "admission_control_evidence_sha256": sha(self.f.control), "performed_by_parent": True})
++            "admission_control_evidence_sha256": sha(self.f.control),
++            "admission_receipt_sha256": sha(self.f.semantic), "performed_by_parent": True})
+         coherence.validate_control_consumption(self.f.contract_value, consume,
+-            admission_control_sha256=sha(self.f.control), allow_fixture=True)
++            admission_control_sha256=sha(self.f.control),
++            admission_receipt_sha256=sha(self.f.semantic), allow_fixture=True)
+         with mock_patch.object(external29_driver, "ROOT", self.f.base):
+             first = external29_driver.consume_formal(marker_run, self.f.binding, self.f.review,
+                 self.f.contract, self.f.control, consume, self.f.semantic)
+--- before/qualification/test_external29_integration.py
++++ candidate/qualification/test_external29_integration.py
+@@ -39,7 +39,7 @@
+         self.assertEqual(len(matrix['order']),29);self.assertEqual(set(matrix['order']),set(matrix['gates']))
+         self.assertEqual(len(set(matrix['order'])),29);self.assertTrue(all(matrix['gates'][k]['command'] for k in matrix['order']))
+     def test_existing_matrix_timeout_values_are_not_rewritten(self):
+-        source=ROOT.parents[2]/'formal-tooling/candidate-inputs-v3/GATE_EXECUTION_MATRIX.json'
++        source=ROOT.parents[1]/'before/coherence/tooling/candidate-inputs-v3/GATE_EXECUTION_MATRIX.json'
+         self.assertEqual(hashlib.sha256(source.read_bytes()).digest(),hashlib.sha256((ROOT/'candidate-inputs-v3/GATE_EXECUTION_MATRIX.json').read_bytes()).digest())
+     def test_runtime_wrapper_and_gradle_init_closure_present(self):
+         for name in ('runner.py','native_observe.py','observe.py','boundary.py','executor_adapter.py','compile.init.gradle','packaging.init.gradle','vite_closure.mjs'):

@@ -1,0 +1,38 @@
+{
+  "schema": "ep19-integrated-correction-v2-finite-edit-allowlist",
+  "created_before_source_edits": true,
+  "authority_state": {
+    "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+    "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+    "immediate_parent": "689ab9456461a8d19a72d059f5157092efc43aff",
+    "product_patch_sha256": "bab6aee8346f7ef47ca94f1e3da629e7ae81df2f16202706ae4966864a485690",
+    "historical_formal": "2/2",
+    "new_formal_total": 1,
+    "new_formal_used": 0,
+    "global_next_ordinal": 3,
+    "new_product_fixes": 0,
+    "formal_ready": false,
+    "integration_ready": false
+  },
+  "targets": [
+    {"candidate_path": "candidate/controller/scripts/canonical_publication_control.py", "source_path": "original-controller-correction-v1/candidate/scripts/canonical_publication_control.py", "source_sha256": "a58cccd502c9f4ed704c6d4396fe03176c9f2115c7a14e2beb486eda3ceeca65", "reason": "CP-01..03 original reader, transaction, constrained ordering and native evidence consumer"},
+    {"candidate_path": "candidate/controller/references/protocol-v1.json", "source_path": "original-controller-correction-v1/candidate/references/protocol-v1.json", "source_sha256": "121d90bb0e0af61f18800d084ed719ddef46c414fd778a23ea45b6744c787065", "reason": "CP-02 original protocol transition restriction and exact exception semantics"},
+    {"candidate_path": "candidate/controller/tests/test_canonical_publication_control.py", "source_path": "original-controller-correction-v1/candidate/tests/test_canonical_publication_control.py", "source_sha256": "2f53760e97f91add87c45786e5ac974bb9fbc94f462ea54483328b39865177bd", "reason": "source-bound CP RED/GREEN additions while preserving test identities"},
+    {"candidate_path": "parent-handoff/INSTALL_AFTER_COORDINATION_AND_REVIEW.py", "source_path": "original-controller-correction-v1/parent-handoff/INSTALL_AFTER_COORDINATION_AND_REVIEW.py", "source_sha256": "0f5770e2c6928fb07626981c7f920c95226da97a9e8621cf8cc6f2f87ecee051", "reason": "CP-04 exact manifest-bound recovery and safe existing maintenance coordination"},
+    {"candidate_path": "parent-handoff/INSTALL_MANIFEST.json", "source_path": "original-controller-correction-v1/parent-handoff/INSTALL_MANIFEST.json", "source_sha256": "903573f485e3db2da761b3b51da6aa306043d4b0c6427e8de9966e9afb2d2c17", "reason": "generated exact v2 source paths, expected-before identities and candidate hashes; added before this target was edited"},
+    {"candidate_path": "tests/test_install_handoff.py", "source_path": "original-controller-correction-v1/tests/test_install_handoff.py", "source_sha256": "2b4f1d052f77ff7d059025829974b5a4a32e7e1ec58850127ecefd264eea6ebd", "reason": "CP-04 source-bound interruption/CAS/recovery qualification"},
+    {"candidate_path": "candidate/coherence/tooling/executor/eligibility_coherence.py", "source_path": "coherence-implementation-v1/tooling/executor/eligibility_coherence.py", "source_sha256": "d8d47957afdb9d4a8f2d4ad1cf0e5e9d0cde601830e4245c0fea095caf872bb9", "reason": "COH-IR-01..03 exact original-controller/native-receipt/input closure validation"},
+    {"candidate_path": "candidate/coherence/tooling/executor/eligibility_admission.py", "source_path": "coherence-implementation-v1/tooling/executor/eligibility_admission.py", "source_sha256": "a4c32eb311223efd0b6be8e0c482f25dcd1b2214ecb01fb6d9a745c65d3e4108", "reason": "COH-IR-02/04 byte recomputation and task-private output confinement"},
+    {"candidate_path": "candidate/coherence/tooling/executor/external29_driver.py", "source_path": "coherence-implementation-v1/tooling/executor/external29_driver.py", "source_sha256": "5fb047db3de25fb96ce322c08faad3600d5bc0677666025e06387e92b1b38809", "reason": "COH-IR-02 admission/control-consume byte and attempt linkage"},
+    {"candidate_path": "candidate/coherence/tooling/executor/binding_contract.py", "source_path": "coherence-implementation-v1/tooling/executor/binding_contract.py", "source_sha256": "cab29ebba70863b07f2c747d95be1967f42e66c91e4b2382a0dce849c5aa13a6", "reason": "COH-IR-01 original unique controller binding validation"},
+    {"candidate_path": "candidate/coherence/tooling/qualification/build_eligibility_contract.py", "source_path": "coherence-implementation-v1/tooling/qualification/build_eligibility_contract.py", "source_sha256": "8243f56f956fefdbf5e0dfe19b0829cb1608eb392beeccf17f4e25dc6745fc50", "reason": "COH-IR-01/03 exact controller and accepted finite inputs at contract construction"},
+    {"candidate_path": "candidate/coherence/tooling/qualification/build_runtime_binding.py", "source_path": "coherence-implementation-v1/tooling/qualification/build_runtime_binding.py", "source_sha256": "29b03ca13f84f466e6ec31f65d9b0fc34f90736b32c3bafeff17b6f5aceeecd0", "reason": "COH-IR-01/03 runtime binding to same accepted finite sources"},
+    {"candidate_path": "candidate/coherence/tooling/qualification/policy_builder.py", "source_path": "coherence-implementation-v1/tooling/qualification/policy_builder.py", "source_sha256": "052ef2c0c4f76305ea5cc8cc792418a4c0640db0878ecaa93bd47ce9e800dca0", "reason": "COH-IR-03 final policy consumer exact input closure"},
+    {"candidate_path": "candidate/coherence/tooling/qualification/test_eligibility_coherence.py", "source_path": "coherence-implementation-v1/tooling/qualification/test_eligibility_coherence.py", "source_sha256": "4a5d8e8a126ceca9915b64538cf766d9a9e9da84adc259da47d788132441edc8", "reason": "COH defect source-bound tests without renaming predecessors"},
+    {"candidate_path": "candidate/coherence/tooling/qualification/test_external29_integration.py", "source_path": "coherence-implementation-v1/tooling/qualification/test_external29_integration.py", "source_sha256": "07f43f94c0b03f2f04931bda226ac7171df8cc0c7cc3faff65a91801e300e1f6", "reason": "COH admission/formal interface regression tests"},
+    {"candidate_path": "integration/INTEGRATION_REQUIREMENTS.json", "source_path": "coherence-writer-evidence-v1/INTEGRATION_REQUIREMENTS.json", "source_sha256": "db264e2de5b92e11e958d91e38d4947c9f65639e6735a6966fab62f9fd65d380", "reason": "replace rejected second-controller identity with corrected original-controller candidate and honest blockers"},
+    {"candidate_path": "parent-handoff/PARENT_SEQUENTIAL_COMMANDS.md", "source_path": "coherence-writer-evidence-v1/PARENT_SEQUENTIAL_COMMANDS.md", "source_sha256": "1e2f77ed0f3f29c618c4c09354fb49b0e9539a8fba00f513041baba0537361d4", "reason": "safe existing-review/maintenance handoff only; no authorization expansion"}
+  ],
+  "sealed_or_shared_edits_allowed": false,
+  "live_authority_edits_allowed": false
+}

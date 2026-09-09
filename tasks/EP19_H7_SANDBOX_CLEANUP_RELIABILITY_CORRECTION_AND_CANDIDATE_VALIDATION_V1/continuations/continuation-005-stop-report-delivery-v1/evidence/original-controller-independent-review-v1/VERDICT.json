@@ -1,0 +1,178 @@
+{
+  "schema": "ep19-original-controller-independent-review-v1",
+  "decision": "REJECTED",
+  "approved": false,
+  "install_authorized": false,
+  "reviewer_role": "INDEPENDENT_TECHNICAL_REVIEWER",
+  "review_scope": "CONTINUATION_OF_EXISTING_CP_01_THROUGH_CP_04",
+  "new_gate_created": false,
+  "controller_scoped_implementation_pass": false,
+  "scoped_support": [
+    "integrated original-controller acceptance consumer",
+    "common main transaction lock/journal/sequence",
+    "candidate-bound direct-FF SlotControl branch",
+    "JSON bytes/digest parsing",
+    "original-target expected-before and idempotent transaction replay"
+  ],
+  "findings": [
+    {
+      "id": "CP-01",
+      "decision": "NOT_CLOSED",
+      "status": "PARTIALLY_CORRECTED",
+      "blocking": true,
+      "summary": "原 stable reader 绕锁；inspect/readback 锁后混合快照；recovery 未严格完整验证",
+      "source_lines": [
+        "C:95-109,1614-1618",
+        "C:1024-1033",
+        "C:968-1006",
+        "C:183-206,304-322",
+        "T:504-560"
+      ]
+    },
+    {
+      "id": "CP-02",
+      "decision": "NOT_CLOSED",
+      "status": "PARTIALLY_CORRECTED",
+      "blocking": true,
+      "summary": "真实 direct-FF ordering 靠通用 transition 跨越冻结/review，entry 被忽略，fresh/readback 未绑定本次观测",
+      "source_lines": [
+        "C:605-627,863-965,1207-1224,1657-1664",
+        "P:24-38",
+        "T:597-616"
+      ]
+    },
+    {
+      "id": "CP-03",
+      "decision": "NOT_CLOSED",
+      "status": "PARTIALLY_CORRECTED",
+      "blocking": true,
+      "summary": "evidence bytes 完整性已改善，但 caller 自洽 identity/PASS 无真实 producer/attempt/独立 reviewer provenance",
+      "source_lines": [
+        "C:123-144,1036-1068,1134-1158,1202-1224,1230-1262",
+        "T:450-485,607-622"
+      ]
+    },
+    {
+      "id": "CP-04",
+      "decision": "NOT_CLOSED",
+      "status": "PARTIALLY_CORRECTED",
+      "blocking": true,
+      "summary": "逐文件部分激活无消费阻断；check/replace 无排他 CAS；journal 行未绑定 manifest；安装早于 admission",
+      "source_lines": [
+        "I:69-88,91-136,163-181",
+        "IT:16-65",
+        "parent-handoff/INSTALL_MANIFEST.json:5-22"
+      ]
+    }
+  ],
+  "source_line_aliases": {
+    "C": "original-controller-correction-v1/candidate/scripts/canonical_publication_control.py",
+    "P": "original-controller-correction-v1/candidate/references/protocol-v1.json",
+    "T": "original-controller-correction-v1/candidate/tests/test_canonical_publication_control.py",
+    "I": "original-controller-correction-v1/parent-handoff/INSTALL_AFTER_COORDINATION_AND_REVIEW.py",
+    "IT": "original-controller-correction-v1/tests/test_install_handoff.py"
+  },
+  "patch_sha256": "b0288047b1d09d8af8f78ee7aa73ec9bb39258241feb01010d500f123a5d1ebf",
+  "installer_sha256": "0f5770e2c6928fb07626981c7f920c95226da97a9e8621cf8cc6f2f87ecee051",
+  "install_manifest_sha256": "b2f1aa5e5b4612fcbd7e4521e60f5859c241ba5aac07c1c8110c57f271698c53",
+  "install_manifest_file_sha256": "903573f485e3db2da761b3b51da6aa306043d4b0c6427e8de9966e9afb2d2c17",
+  "reviewed_targets": [
+    {
+      "path": "/REVIEW_ONLY/original-controller/scripts/canonical_publication_control.py",
+      "candidate_sha256": "a58cccd502c9f4ed704c6d4396fe03176c9f2115c7a14e2beb486eda3ceeca65"
+    },
+    {
+      "path": "/REVIEW_ONLY/original-controller/references/protocol-v1.json",
+      "candidate_sha256": "121d90bb0e0af61f18800d084ed719ddef46c414fd778a23ea45b6744c787065"
+    },
+    {
+      "path": "/REVIEW_ONLY/original-controller/tests/test_canonical_publication_control.py",
+      "candidate_sha256": "2f53760e97f91add87c45786e5ac974bb9fbc94f462ea54483328b39865177bd"
+    }
+  ],
+  "static_verification": {
+    "manifest_entries": 76,
+    "unique_entries": 76,
+    "matched": 76,
+    "mismatches": [],
+    "unlisted_files": [
+      "MANIFEST.sha256"
+    ],
+    "manifest_sha256": "a0ab41c61a26aa72c08f575d246fb99199ac1797e38800bf8776ec93d59c150e",
+    "patch_reconstruction": [
+      {
+        "before": "before/references/protocol-v1.json",
+        "candidate": "candidate/references/protocol-v1.json",
+        "exact_reconstruction": true,
+        "sha256": "121d90bb0e0af61f18800d084ed719ddef46c414fd778a23ea45b6744c787065"
+      },
+      {
+        "before": "before/scripts/canonical_publication_control.py",
+        "candidate": "candidate/scripts/canonical_publication_control.py",
+        "exact_reconstruction": true,
+        "sha256": "a58cccd502c9f4ed704c6d4396fe03176c9f2115c7a14e2beb486eda3ceeca65"
+      },
+      {
+        "before": "before/tests/test_canonical_publication_control.py",
+        "candidate": "candidate/tests/test_canonical_publication_control.py",
+        "exact_reconstruction": true,
+        "sha256": "2f53760e97f91add87c45786e5ac974bb9fbc94f462ea54483328b39865177bd"
+      }
+    ],
+    "candidate_code_imported_or_executed": false
+  },
+  "saved_native_evidence": {
+    "freshly_executed_by_reviewer": false,
+    "predecessor": {
+      "tests": 29,
+      "exit_code": 0
+    },
+    "red": {
+      "tests": 34,
+      "failures": 1,
+      "errors": 4,
+      "exit_code": 1
+    },
+    "candidate": {
+      "tests": 38,
+      "exit_code": 0
+    },
+    "installer": {
+      "tests": 4,
+      "exit_code": 0
+    },
+    "patch_program_exit_code": 127,
+    "git_apply_check_saved_exit_code": 0,
+    "git_apply_saved_exit_code": 0,
+    "qualification_sufficiency": "INSUFFICIENT_FOR_CP_CLOSURE"
+  },
+  "coherence_final_006_decision": "REJECTED",
+  "integration_ready": false,
+  "formal_ready": false,
+  "real_readiness": "BLOCKED",
+  "registration_authorized": false,
+  "formal_authorized": false,
+  "slot_authorized": false,
+  "publication_authorized": false,
+  "closure_authorized": false,
+  "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+  "budgets": {
+    "historical_formal": "2/2",
+    "new_formal_total": 1,
+    "new_formal_used": 0,
+    "global_next_ordinal": 3,
+    "new_product_fixes": 0,
+    "changed_by_review": false
+  },
+  "verification_mode": "STATIC_READ_ONLY_EXCEPT_TWO_AUTHORIZED_REPORT_FILES",
+  "fresh_tests_run": false,
+  "probes_run": false,
+  "live_state_read_or_modified": false,
+  "installer_run": false,
+  "formal_run": false,
+  "network_or_credentials_accessed": false,
+  "skills_or_memory_modified": false,
+  "report_path": "/REVIEW_ONLY/EP19/continuation-005/original-controller-independent-review-v1/FINAL.zh-CN.md",
+  "report_sha256": "ec437461fa2e64c7f1608cdabc4fb12bbc23eb210a62620373352844647434d9",
+  "history_preserved": true
+}

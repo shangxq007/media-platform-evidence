@@ -1,0 +1,37 @@
+{
+  "schema": "ep19-integrated-correction-v2-affected-source-qualification",
+  "scope": "PRIVATE_SOURCE_BOUND_SYNTHETIC_ONLY",
+  "result": "PASS",
+  "total_green_tests": 80,
+  "green": [
+    {"group": "original_controller", "tests": 43, "failures": 0, "errors": 0, "exit_code": 0, "native_log": "qualification/green/controller.native.log", "native_log_sha256": "0df2a9b6e9472ca03730f5c3f708d0ba889b4d68534dd6f54407d5d237a67627"},
+    {"group": "coherence_and_external29_interface", "tests": 31, "failures": 0, "errors": 0, "exit_code": 0, "native_log": "qualification/green/coherence.native.log", "native_log_sha256": "06d2943bade5244bd9c169b8a4a8618f8bf261b4904a3779077c38636f3f35a5"},
+    {"group": "installer_handoff", "tests": 6, "failures": 0, "errors": 0, "exit_code": 0, "native_log": "qualification/green/installer.native.log", "native_log_sha256": "bef6f6a574b6cc149ae13ddd7ad8323256e2a40cdaf9785b2a4244cbdb87588b"}
+  ],
+  "red": [
+    {"group": "original_controller", "tests": 42, "failures": 7, "errors": 1, "exit_code": 1, "native_log": "qualification/red/controller.native.log", "native_log_sha256": "c15eb22fae0ae2a25e652466b99250140f4fdcaceab9385dd59ac202f834f796"},
+    {"group": "coherence", "tests": 14, "failures": 3, "errors": 0, "exit_code": 1, "native_log": "qualification/red/coherence.native.log", "native_log_sha256": "3347b8c24a9607b4ab553f0e2df8d724e085b0524f44d1b0b5e3f8f82fead88f"},
+    {"group": "installer_handoff", "tests": 6, "failures": 0, "errors": 2, "exit_code": 1, "native_log": "qualification/red/installer.native.log", "native_log_sha256": "ad2a7207d0a97ab2e292e4aee548a198777128a373f6695235bb6d754fbba587"}
+  ],
+  "test_identity_accounting": [
+    {"file": "candidate/controller/tests/test_canonical_publication_control.py", "before": 38, "after": 43, "removed_or_renamed": 0, "added": 5},
+    {"file": "candidate/coherence/qualification/test_eligibility_coherence.py", "before": 11, "after": 15, "removed_or_renamed": 0, "added": 4},
+    {"file": "candidate/coherence/qualification/test_external29_integration.py", "before": 16, "after": 16, "removed_or_renamed": 0, "added": 0},
+    {"file": "tests/test_install_handoff.py", "before": 4, "after": 6, "removed_or_renamed": 0, "added": 2}
+  ],
+  "static_checks": {
+    "python_ast_parse": "PASS",
+    "json_parse": "PASS",
+    "git_apply_check_against_preserved_original_three_targets": "PASS",
+    "git_apply_reconstruction_exact_candidate_hashes": true,
+    "patch_program_available": false,
+    "patch_program_observed_error": "patch: command not found"
+  },
+  "not_executed": [
+    "product tests or gates", "prepare", "real admission", "formal", "slot acquisition",
+    "direct-FF publication", "network", "credentials", "installer main", "shared writes", "live state writes"
+  ],
+  "fixture_is_real_readiness": false,
+  "formal_budget_consumed": false,
+  "product_budget_consumed": false
+}

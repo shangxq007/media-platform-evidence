@@ -1,0 +1,46 @@
+Script started on 2026-09-10 00:53:28+08:00 [COMMAND="python3 -B -m unittest -v qualification/test_eligibility_coherence.py" <not executed on terminal>]
+test_actual_cli_consistent_green_and_no_formal_marker (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_actual_cli_consistent_green_and_no_formal_marker) ... ok
+test_admission_validation_recomputes_persisted_capture_bytes (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_admission_validation_recomputes_persisted_capture_bytes) ... FAIL
+test_change_after_prepare_and_admission_rejects_postconsume_policy (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_change_after_prepare_and_admission_rejects_postconsume_policy) ... ok
+test_conflicting_manifest_rejects_admission_without_consumption (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_conflicting_manifest_rejects_admission_without_consumption) ... ok
+test_consistent_inputs_pass_real_admission_consumer_without_consumption (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_consistent_inputs_pass_real_admission_consumer_without_consumption) ... ok
+test_contract_limits_and_abc_roles_remain_exact (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_contract_limits_and_abc_roles_remain_exact) ... ok
+test_mixed_old_new_version_chain_rejects (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_mixed_old_new_version_chain_rejects) ... ok
+test_nonfixture_admission_output_must_be_inside_run (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_nonfixture_admission_output_must_be_inside_run) ... FAIL
+test_nonfixture_control_self_report_without_controller_receipt_rejects (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_nonfixture_control_self_report_without_controller_receipt_rejects) ... FAIL
+test_qualification_pass_without_coherence_never_ready (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_qualification_pass_without_coherence_never_ready) ... ok
+test_real_difference_writer_failure_preserves_primary_and_secondary (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_real_difference_writer_failure_preserves_primary_and_secondary) ... ok
+test_scope_missing_extra_duplicate_order_and_path_normalization_reject (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_scope_missing_extra_duplicate_order_and_path_normalization_reject) ... ok
+test_two_historical_type_preexisting_differences_are_same_capture (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_two_historical_type_preexisting_differences_are_same_capture) ... ok
+test_unique_budget_duplicate_consume_has_no_double_consumption (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_unique_budget_duplicate_consume_has_no_double_consumption) ... ok
+
+======================================================================
+FAIL: test_admission_validation_recomputes_persisted_capture_bytes (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_admission_validation_recomputes_persisted_capture_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/REVIEW_ONLY/EP19/continuation-005/integrated-correction-v2/candidate/coherence/qualification/test_eligibility_coherence.py", line 168, in test_admission_validation_recomputes_persisted_capture_bytes
+    with self.assertRaises(coherence.CoherenceError):
+AssertionError: CoherenceError not raised
+
+======================================================================
+FAIL: test_nonfixture_admission_output_must_be_inside_run (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_nonfixture_admission_output_must_be_inside_run)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/REVIEW_ONLY/EP19/continuation-005/integrated-correction-v2/candidate/coherence/qualification/test_eligibility_coherence.py", line 188, in test_nonfixture_admission_output_must_be_inside_run
+    with mock_patch.object(bk, "PRODUCTION_ROOT", self.f.root), self.assertRaises(coherence.CoherenceError):
+AssertionError: CoherenceError not raised
+
+======================================================================
+FAIL: test_nonfixture_control_self_report_without_controller_receipt_rejects (qualification.test_eligibility_coherence.BoundedEligibilityCoherence.test_nonfixture_control_self_report_without_controller_receipt_rejects)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/REVIEW_ONLY/EP19/continuation-005/integrated-correction-v2/candidate/coherence/qualification/test_eligibility_coherence.py", line 176, in test_nonfixture_control_self_report_without_controller_receipt_rejects
+    with self.assertRaises(coherence.CoherenceError):
+AssertionError: CoherenceError not raised
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.419s
+
+FAILED (failures=3)
+
+Script done on 2026-09-10 00:53:29+08:00 [COMMAND_EXIT_CODE="1"]

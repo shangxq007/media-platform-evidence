@@ -1,0 +1,59 @@
+{
+  "schema": "ep19-coherence-independent-implementation-review-verdict-v1",
+  "review_target": "coherence-implementation-v1/final-006",
+  "decision": "REJECTED",
+  "implementation_review": "REJECT",
+  "scoped_closure": false,
+  "formal_ready": false,
+  "integration_ready": false,
+  "real_readiness": "BLOCKED",
+  "control_plane_candidate_trust": "REJECTED_NOT_TRUSTED",
+  "formal_attempt_consumed_by_review": false,
+  "product_gate_execution_by_review": false,
+  "tests_or_loaders_executed_by_review": false,
+  "supported_controls": [
+    "SHARED_COHERENCE_COMPARATOR_WIRED_TO_ADMISSION_AND_FORMAL_POLICY",
+    "SAME_CAPTURE_BOUNDED_FAILURE_DIFFERENCES_AND_DUAL_SINK_PERSISTENCE",
+    "NORMAL_ADMISSION_PATH_CREATES_NO_FORMAL_BASELINE_OR_START_MARKER",
+    "LOCAL_FORMAL_MARKER_ENCODES_HISTORY_2_OF_2_NEW_1_GLOBAL_ORDINAL_3",
+    "CURRENT_SOURCE_BOUND_RECORD_ACCOUNTS_191_UNIQUE_PASS_AND_106_MANDATORY",
+    "EXACT_ACCEPTED_SEMANTIC_DECISION_IS_PRESENT_IN_CURRENT_CANDIDATE_002_ARTIFACTS"
+  ],
+  "findings": [
+    {
+      "id": "COH-IR-01",
+      "severity": "BLOCKER",
+      "title": "交付仍把已被否决的独立第二控制机制作为精确控制面实现身份",
+      "disposition": "REJECT"
+    },
+    {
+      "id": "COH-IR-02",
+      "severity": "BLOCKER",
+      "title": "控制面、consume、实现 review 与 admission 回执可由字段自报，未核验真实证据字节及来源语义",
+      "disposition": "REJECT"
+    },
+    {
+      "id": "COH-IR-03",
+      "severity": "BLOCKER",
+      "title": "最终 contract/runtime builder 未把调用者提供的有限输入与 final-006 依赖中的精确接受对象闭合，允许替换或缩小投影",
+      "disposition": "REJECT"
+    },
+    {
+      "id": "COH-IR-04",
+      "severity": "HIGH",
+      "title": "真实 admission 的输出目录未限制在任务私有命名空间，持久化器会创建任意可写祖先目录",
+      "disposition": "REJECT"
+    }
+  ],
+  "required_state": {
+    "historical_formal": "2/2_UNCHANGED",
+    "new_formal_allowance": "1_TOTAL_0_USED",
+    "global_next_ordinal": 3,
+    "formal_or_admission_authorized_by_this_review": false,
+    "canonical_controller_change_authorized_by_this_review": false
+  },
+  "review_scope": "既定 coherence-implementation-v1 独立静态实现复核；未建立新审查程序或新验收门",
+  "report": "coherence-independent-review/FINAL.zh-CN.md",
+  "source_hashes": "coherence-independent-review/SOURCE_HASHES.json",
+  "manifest": "coherence-independent-review/MANIFEST.sha256"
+}

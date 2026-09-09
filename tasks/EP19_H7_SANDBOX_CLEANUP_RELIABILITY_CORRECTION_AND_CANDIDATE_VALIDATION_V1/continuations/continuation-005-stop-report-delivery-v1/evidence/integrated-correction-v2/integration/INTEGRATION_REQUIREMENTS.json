@@ -1,0 +1,50 @@
+{
+  "schema": "ep19-integrated-controller-coherence-requirements-v2",
+  "status": "CORRECTED_SOURCE_ONLY_PENDING_EXISTING_REVIEW_AND_SAFE_MAINTENANCE",
+  "formal_attempt_consumed": false,
+  "new_allowance": {"total": 1, "used": 0, "global_next_ordinal": 3},
+  "original_unique_controller": {
+    "candidate_path": "/REVIEW_ONLY/EP19/continuation-005/integrated-correction-v2/candidate/controller/scripts/canonical_publication_control.py",
+    "candidate_sha256": "e3931e0c414e84ae1340b4b39ab747b744eb6f96947babd99d936a2bf268f8a0",
+    "installed_path": "/REVIEW_ONLY/original-controller/scripts/canonical_publication_control.py",
+    "expected_before_sha256": "6c30fa0a6b43ed07595f53db1fb53eea914ae64c7ebc98435bc80816c6275362",
+    "second_controller_accepted": false,
+    "rejected_historical_second_controller_sha256": "b8c1d9a197ea8682129efddfa46e074b2c1e68c145bcdd3260cca1b91d03bd4a"
+  },
+  "coherence_consumers": {
+    "eligibility_coherence.py": "ef202e952d151ba6a368054ef29c940393db695a7acb3b4b4b4d74e03997ebb8",
+    "eligibility_admission.py": "76ce85e526850dd05b808d1053786eb89fb70f891d020d0d037ce1ce116df67f",
+    "external29_driver.py": "16d754618bfc45ac7f8c022bcf9f85e5bf975cab07a6abb304908f29903c4f4a",
+    "binding_contract.py": "601f9b4df95f28658b82620847fe5dbe07a5df5a9299a13aa633616e67cf3a96"
+  },
+  "accepted_finite_inputs": {
+    "packages": 7, "members": 107, "instructions": 15, "unchanged_reused": 105, "accepted_changes": 2,
+    "map": {"path": "/REVIEW_ONLY/EP19/continuation-005/coherence-private-v1/candidate-002/ELIGIBLE_SKILLS_MAP.private.json", "sha256": "e11d53df2eb5f352c75fa734d0b7823a657fa85ab04ff8ca8ea875929efea948"},
+    "inventory": {"path": "/REVIEW_ONLY/EP19/continuation-005/coherence-private-v1/candidate-002/STRICT_PACKAGE_INVENTORY.private.json", "sha256": "7131215ac152847ae2bef69f14ea8a87577597bc6eb0682d1b959483d4a4bfc6"},
+    "instructions_source": {"path": "/REVIEW_ONLY/EP19/continuation-005/coherence-private-v1/candidate-002/PROSPECTIVE_INSTRUCTION_IDENTITIES.private.json", "sha256": "f710815d3d2aa8c770172f24fe2afa047da3b1a5bef8b4b909ebbefe60618c73"},
+    "semantic_acceptance": {"path": "/REVIEW_ONLY/EP19/continuation-005/input-semantic-review/FINDINGS.json", "sha256": "e077e9b54ff52c95aeba23fe5343d968b6a3124a1bb09e76ed3264117fa7859e"}
+  },
+  "real_receipt_interfaces": {
+    "registration_readback": "ep19-original-controller-admission-readback-v1",
+    "registration_binding": "ep19-original-controller-registration-evidence-v2",
+    "preconsumption_admission": "ep19-preconsumption-admission-v1",
+    "formal_consume": "ep19-original-control-plane-formal-consume-evidence-v1",
+    "admission_requires_raw_capture_and_recomputed_private_public_comparison": true,
+    "formal_consume_binds_exact_admission_bytes": true
+  },
+  "actual_blockers": [
+    "Existing independent review has not approved these corrected exact source bytes.",
+    "No existing original-manager maintenance/consumer-quiescence interlock was found for all three shared targets and the complete check/replace/recovery window.",
+    "Corrected controller is not installed; no native registration readback or formal-consume receipt exists.",
+    "No real admission has run and no formal allowance has been consumed."
+  ],
+  "forbidden_substitutions": [
+    "No historical ep19_successor_acceptance.py identity.",
+    "No fixture or caller-declared PASS as real readiness.",
+    "No task-local invented maintenance lock.",
+    "No admission, formal, slot, publication or closure before actual installed integration and existing review acceptance."
+  ],
+  "formal_ready": false,
+  "integration_ready": false,
+  "real_readiness": "BLOCKED"
+}

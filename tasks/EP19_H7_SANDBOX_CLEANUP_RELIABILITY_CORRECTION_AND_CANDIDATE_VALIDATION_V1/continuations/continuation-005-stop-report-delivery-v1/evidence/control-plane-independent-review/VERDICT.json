@@ -1,0 +1,98 @@
+{
+  "SCHEMA_VERSION": "EP19_CONTROL_PLANE_INDEPENDENT_TECHNICAL_REVIEW_V1",
+  "REVIEW_DATE": "2026-09-09",
+  "REVIEW_ROLE": "INDEPENDENT_TECHNICAL_REVIEWER_NOT_IMPLEMENTER",
+  "REVIEW_MODE": "STATIC_EVIDENCE_ONLY",
+  "DECISION": "REJECTED_SUBSTANTIVE_CONTROL_PLANE_NONCOMPLIANCE",
+  "APPROVED": false,
+  "HANDOFF_AUTHORIZED": false,
+  "LIVE_REGISTRATION_AUTHORIZED": false,
+  "INSTALL_AUTHORIZED": false,
+  "FORMAL_OR_PRODUCT_EXECUTION_AUTHORIZED": false,
+  "PUBLICATION_OR_CLOSURE_AUTHORIZED": false,
+  "CANDIDATE_QUALIFICATION_IS_LIVE_INSTALLATION": false,
+  "CANDIDATE": {
+    "SHA": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+    "TREE": "fd37409d0274662abbe86f69e3d963c05b379696",
+    "IMMEDIATE_PARENT": "689ab9456461a8d19a72d059f5157092efc43aff",
+    "PATCH_SHA256": "bab6aee8346f7ef47ca94f1e3da629e7ae81df2f16202706ae4966864a485690",
+    "STATIC_CONTRACT_BINDING_EXACT": true,
+    "OPERATIONAL_DIRECT_FF_INTEGRATION_COMPLIANT": false
+  },
+  "BUDGETS_UNCHANGED_BY_REVIEW": {
+    "FORMAL_HISTORICAL": "2/2",
+    "FORMAL_NEW": "0/1_USED",
+    "PRODUCT_HISTORICAL": "3/3",
+    "PRODUCT_NEW": "0/0_USED"
+  },
+  "BLOCKERS": [
+    {
+      "ID": "CP-01",
+      "SEVERITY": "CRITICAL",
+      "PREDICATE": "ORIGINAL_SINGLE_CONTROL_MECHANISM_AND_COHERENT_PERSISTENCE",
+      "RESULT": "FAIL",
+      "SUMMARY": "Separate successor writer uses an unshared lock; original QueueControl neither locks with it nor checks ledger/recovery journal, so concurrency and partial-state fail-closed claims do not cover original readers."
+    },
+    {
+      "ID": "CP-02",
+      "SEVERITY": "CRITICAL",
+      "PREDICATE": "CANDIDATE_BOUND_DIRECT_FF_USES_ORIGINAL_SLOT_STATE_PROTOCOL",
+      "RESULT": "FAIL",
+      "SUMMARY": "Original SlotControl supports exact normal two-parent publication only; GREEN never consumes slot state and tests manufacture CANONICAL/PUBLISHED by direct fixture edit."
+    },
+    {
+      "ID": "CP-03",
+      "SEVERITY": "CRITICAL",
+      "PREDICATE": "ACCEPTANCE_IS_DERIVED_FROM_ACTUAL_INDEPENDENT_RECEIPT_BYTES",
+      "RESULT": "FAIL",
+      "SUMMARY": "Evidence paths are not opened and hashes are not recomputed; nonexistent paths and dummy hex digests pass closure tests. Review independence is only actor-string inequality."
+    },
+    {
+      "ID": "CP-04",
+      "SEVERITY": "HIGH",
+      "PREDICATE": "HANDOFF_OVERWRITE_SAFETY_AUTHORITY_AND_END_TO_END_IDEMPOTENCY",
+      "RESULT": "FAIL",
+      "SUMMARY": "Handoff unconditionally installs separate files, does not parse review decision content, and cannot replay after successful registration because it requires successor count zero."
+    }
+  ],
+  "CONFIRMED_POSITIVES": [
+    "Exact candidate/tree/parent/patch constants are bound in the static contract.",
+    "Historical predecessor bytes and 22-event prefix are preserved in synthetic artifacts.",
+    "Current live successor count is zero and original-root candidate files are absent.",
+    "Budget declarations match Owner: formal historical 2/2 plus new 1 used 0; product historical 3/3 plus new 0."
+  ],
+  "ACTUAL_DENY_EVIDENCE": {
+    "CAPTURED_HANDOFF_GUARD_EXIT_CODE": 64,
+    "CAPTURED_HANDOFF_GUARD_STDERR": "independent technical review approval is required",
+    "PROVES_ORIGINAL_ROOT_WRITE_DENIAL": false,
+    "PROVES_SHARED_SKILL_WRITE_DENIAL": false,
+    "RAW_INSTALL_PERMISSION_DENIAL_PRESENT": false,
+    "SANDBOX_POLICY_NOT_TREATED_AS_ACTUAL_DENIAL": true,
+    "CURRENT_SCOPE_FORBIDS_SHARED_SKILL_MODIFICATION": true
+  },
+  "NECESSARY_ADMIN_ACTION": "DO_NOT_RETRY_OR_RUN_CURRENT_HANDOFF. Owner/shared-Skill maintainer must explicitly authorize a maintainer of the actual canonical shared controller to integrate the correction into canonical_publication_control.py plus its protocol/tests, after which this same existing independent-review gate performs conventional Sol review; no additional review round is created.",
+  "REQUIRED_CORRECTIONS": [
+    "Merge successor/acceptance into the actual canonical controller with one shared queue/ledger transaction lock and fail-closed readers.",
+    "Implement the a298-only direct-FF exception inside the original SlotControl/state transition call chain without weakening the default two-parent path.",
+    "Read and hash actual receipt files and parse their candidate/gate/native/acceptance/reviewer semantics.",
+    "Replace handoff with expected-before or absent-or-identical installation and end-to-end interruption-safe replay.",
+    "Exercise actual QueueControl, SlotControl and merged acceptance consumer in source-bound synthetic integration tests, then obtain the existing conventional Sol independent review."
+  ],
+  "NO_NEW_LEDGER_GATE_OR_REVIEW_ROUND_REQUIRED": true,
+  "MUTATIONS_PERFORMED": {
+    "IMPLEMENTATION": false,
+    "SHARED_SKILL_OR_MEMORY": false,
+    "LIVE_QUEUE_LEDGER_SLOT": false,
+    "INSTALLATION": false,
+    "REVIEW_DIRECTORY_ONLY": true
+  },
+  "EXECUTIONS_PERFORMED": {
+    "TESTS": false,
+    "PROBES": false,
+    "PRODUCT": false,
+    "FORMAL": false,
+    "NETWORK": false,
+    "CREDENTIALS": false,
+    "HANDOFF": false
+  }
+}

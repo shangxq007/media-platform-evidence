@@ -1,0 +1,43 @@
+Script started on 2026-09-10 00:53:28+08:00 [COMMAND="python3 -B -m unittest -v tests/test_install_handoff.py" <not executed on terminal>]
+test_interrupted_install_replays_to_exact_bytes (tests.test_install_handoff.InstallHandoffTests.test_interrupted_install_replays_to_exact_bytes) ... ok
+test_no_existing_maintenance_coordination_fails_closed_before_install (tests.test_install_handoff.InstallHandoffTests.test_no_existing_maintenance_coordination_fails_closed_before_install) ... ERROR
+test_real_manifest_binds_installer_candidates_and_expected_before (tests.test_install_handoff.InstallHandoffTests.test_real_manifest_binds_installer_candidates_and_expected_before) ... ok
+test_recovery_journal_must_match_exact_manifest_rows (tests.test_install_handoff.InstallHandoffTests.test_recovery_journal_must_match_exact_manifest_rows) ... ERROR
+test_review_body_not_environment_controls_approval (tests.test_install_handoff.InstallHandoffTests.test_review_body_not_environment_controls_approval) ... ok
+test_unknown_overwrite_is_rejected_before_any_write (tests.test_install_handoff.InstallHandoffTests.test_unknown_overwrite_is_rejected_before_any_write) ... ok
+
+======================================================================
+ERROR: test_no_existing_maintenance_coordination_fails_closed_before_install (tests.test_install_handoff.InstallHandoffTests.test_no_existing_maintenance_coordination_fails_closed_before_install)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/REVIEW_ONLY/EP19/continuation-005/integrated-correction-v2/tests/test_install_handoff.py", line 73, in test_no_existing_maintenance_coordination_fails_closed_before_install
+    status = installer.assess_existing_maintenance_coordination()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'install_handoff' has no attribute 'assess_existing_maintenance_coordination'
+
+======================================================================
+ERROR: test_recovery_journal_must_match_exact_manifest_rows (tests.test_install_handoff.InstallHandoffTests.test_recovery_journal_must_match_exact_manifest_rows)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/REVIEW_ONLY/EP19/continuation-005/integrated-correction-v2/tests/test_install_handoff.py", line 70, in test_recovery_journal_must_match_exact_manifest_rows
+    installer.install_targets(manifest, journal)
+  File "/REVIEW_ONLY/EP19/continuation-005/integrated-correction-v2/parent-handoff/INSTALL_AFTER_COORDINATION_AND_REVIEW.py", line 123, in install_targets
+    current = digest(target)
+              ^^^^^^^^^^^^^^
+  File "/REVIEW_ONLY/EP19/continuation-005/integrated-correction-v2/parent-handoff/INSTALL_AFTER_COORDINATION_AND_REVIEW.py", line 42, in digest
+    return digest_bytes(path.read_bytes())
+                        ^^^^^^^^^^^^^^^^^
+  File "/REVIEW_ONLY/home/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py", line 1050, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/REVIEW_ONLY/home/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpum3l5z0j/other'
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.023s
+
+FAILED (errors=2)
+
+Script done on 2026-09-10 00:53:29+08:00 [COMMAND_EXIT_CODE="1"]

@@ -1,0 +1,133 @@
+{
+  "protocol_version": "CANONICAL_PUBLICATION_CONTROL_V1",
+  "resource_name": "MEDIA_PLATFORM_CANONICAL_PUBLICATION_SLOT",
+  "mode": ["FAIL_CLOSED", "CONTROL_PLANE_ONLY", "FORWARD_CUTOVER", "ACTIVE_TASK_SAFE_TRANSITION"],
+  "laws": [
+    "CANONICAL_MAIN_PUBLICATION_QUEUE_V1",
+    "TWO_PHASE_CANONICAL_INTEGRATION_VALIDATION_V1",
+    "CANDIDATE_EVIDENCE_IS_DISTINCT_FROM_INTEGRATION_EVIDENCE_V1",
+    "MAIN_ADVANCE_INVALIDATES_MERGE_OBJECT_NOT_AUTOMATICALLY_ALL_EVIDENCE_V1",
+    "DELTA_AWARE_GATE_EVIDENCE_REUSE_V1",
+    "UNKNOWN_DELTA_FAILS_CLOSED_TO_REVALIDATION_V1",
+    "VALIDATION_INTENSITY_IS_CHANGE_IMPACT_DRIVEN_V1",
+    "FROZEN_INTEGRATION_RETAINS_PUBLICATION_SLOT_THROUGH_INDEPENDENT_REVIEW_V1",
+    "GATE_INPUT_FINGERPRINT_V1=ADOPTED_INCREMENTALLY",
+    "CONTROL_PLANE_UPGRADE_IS_FORWARD_CUTOVER_NOT_GLOBAL_RESTART_V1",
+    "IN_FLIGHT_ENGINEERING_TASKS_CONTINUE_UNCHANGED_V1",
+    "IN_FLIGHT_CANDIDATES_PRESERVE_ALL_VALID_EVIDENCE_V1",
+    "NEW_CANONICAL_PUBLICATION_ATTEMPTS_USE_QUEUE_AFTER_CUTOVER_V1",
+    "ENGINEERING_CONCURRENCY_PRESERVED=YES"
+  ],
+  "states": [
+    "ENGINEERING", "PREVALIDATING", "READY_FOR_CANONICAL_QUEUE", "QUEUED", "SLOT_ACQUIRED", "INTEGRATING", "VALIDATING_INTEGRATION", "FROZEN_FOR_REVIEW", "INDEPENDENT_REVIEW", "APPROVED_FOR_PUBLICATION", "PUBLISHING", "CANONICAL", "RELEASED_FAILED", "STALE_MERGE_REQUIRES_REBUILD"
+  ],
+  "transitions": {
+    "ENGINEERING": ["PREVALIDATING", "RELEASED_FAILED"],
+    "PREVALIDATING": ["READY_FOR_CANONICAL_QUEUE", "RELEASED_FAILED"],
+    "READY_FOR_CANONICAL_QUEUE": ["QUEUED", "PREVALIDATING", "RELEASED_FAILED"],
+    "QUEUED": ["SLOT_ACQUIRED", "PREVALIDATING", "RELEASED_FAILED"],
+    "SLOT_ACQUIRED": ["INTEGRATING", "RELEASED_FAILED"],
+    "INTEGRATING": ["VALIDATING_INTEGRATION", "RELEASED_FAILED", "STALE_MERGE_REQUIRES_REBUILD"],
+    "VALIDATING_INTEGRATION": ["FROZEN_FOR_REVIEW", "RELEASED_FAILED", "STALE_MERGE_REQUIRES_REBUILD"],
+    "FROZEN_FOR_REVIEW": ["INDEPENDENT_REVIEW", "RELEASED_FAILED", "STALE_MERGE_REQUIRES_REBUILD"],
+    "INDEPENDENT_REVIEW": ["APPROVED_FOR_PUBLICATION", "RELEASED_FAILED", "STALE_MERGE_REQUIRES_REBUILD"],
+    "APPROVED_FOR_PUBLICATION": ["PUBLISHING", "RELEASED_FAILED", "STALE_MERGE_REQUIRES_REBUILD"],
+    "PUBLISHING": ["CANONICAL", "RELEASED_FAILED", "STALE_MERGE_REQUIRES_REBUILD"],
+    "CANONICAL": [],
+    "RELEASED_FAILED": ["PREVALIDATING"],
+    "STALE_MERGE_REQUIRES_REBUILD": ["QUEUED", "RELEASED_FAILED"]
+  },
+  "queue_entry_schema": {
+    "required": ["QUEUE_ENTRY_ID", "LANE_ID", "EXACT_IMPLEMENTATION_OR_DR_CANDIDATE_SHA", "CANDIDATE_TREE", "CURRENT_STATE", "DEPENDENCIES", "READY_TIMESTAMP", "PUBLICATION_PRIORITY", "SLOT_HOLDER", "CANONICAL_PARENT_1", "INTEGRATION_SHA", "INTEGRATION_TREE", "INDEPENDENT_REVIEW_STATUS", "PUBLICATION_STATUS", "FAILURE_REASON"]
+  },
+  "priority_policy": [
+    {"priority": 1, "lane_class": "H7"},
+    {"priority": 2, "lane_class": "STORAGE_MIGRATION_WHEN_READY"},
+    {"priority": 3, "lane_class": "H6_CORRECTED"},
+    {"priority": 4, "lane_class": "STUDIO_S0"},
+    {"priority": 5, "lane_class": "H9_CORRECTED_OR_UPSTREAM"}
+  ],
+  "phases": {
+    "A": {"slot_required": false, "output_evidence_class": "CANDIDATE_EVIDENCE"},
+    "B": {"slot_required": true, "fresh_main_required": true, "explicit_integration_object_required": true, "output_evidence_class": "INTEGRATION_EVIDENCE"}
+  },
+  "evidence_schema": {
+    "required": ["EVIDENCE_CLASS", "GATE_NAME", "SUBJECT_SHA", "SUBJECT_TREE", "RESULT", "TIMESTAMP", "PROTOCOL_VERSION"],
+    "evidence_classes": ["CANDIDATE_EVIDENCE", "INTEGRATION_EVIDENCE"],
+    "reuse_levels": ["FULL", "PARTIAL", "NONE"]
+  },
+  "reuse_receipt_schema": {
+    "required": ["GATE_NAME", "PREVIOUS_EVIDENCE_SOURCE", "PREVIOUS_INTEGRATION_OR_CANDIDATE_SHA", "OLD_INPUT_FINGERPRINT_IF_AVAILABLE", "NEW_INPUT_FINGERPRINT_IF_AVAILABLE", "DELTA_CLASSES", "REUSE_REASON", "REUSE_DECISION"],
+    "reuse_decisions": ["ALLOWED", "DENIED"]
+  },
+  "always_fresh_integration_gates": [
+    "MERGE_OBJECT_IDENTITY", "PARENT_COUNT", "PARENT_ORDER", "PARENT_1_EQUALS_SLOT_FRESH_CANONICAL_MAIN", "PARENT_2_EQUALS_EXACT_ACCEPTED_LANE_CANDIDATE", "CONFLICT_COUNT", "CHANGED_PATH_CLASSIFICATION", "UNCLASSIFIED_CHANGED_PATH_COUNT", "GIT_DIFF_CHECK", "RELEVANT_ARCHITECTURE_AUTHORITY_GUARD", "WORKTREE_CLEANLINESS", "FINAL_ORIGIN_MAIN_RACE_CHECK", "REMOTE_CANDIDATE_READBACK", "POST_PUBLICATION_MAIN_READBACK"
+  ],
+  "publication_slot": {
+    "max_holders": 1,
+    "mechanism": ["Linux fcntl.flock", "persisted holder state", "atomic JSON writes"],
+    "scope": ["fresh canonical base selection", "explicit integration object", "delta-aware integration validation", "freeze", "independent final review", "exact publication authorization", "remote readback", "release"],
+    "retention": "The same holder retains the slot from FROZEN_FOR_REVIEW through INDEPENDENT_REVIEW until PUBLICATION_SUCCESS or EXPLICIT_FAIL_CLOSED_RELEASE."
+  },
+  "lock_ordering": {
+    "resources_are_distinct": true,
+    "order": ["CANONICAL_PUBLICATION_SLOT", "WORKTREE_REGISTRY"],
+    "worktree_registry_scope": "bounded registry mutation only",
+    "release_rule": "Release WORKTREE_REGISTRY immediately; retain CANONICAL_PUBLICATION_SLOT through review/publication.",
+    "inverse_order": "DENIED"
+  },
+  "publication_authorization_receipt_schema": {
+    "required": ["OWNER", "QUEUE_ENTRY_ID", "CANDIDATE_SHA", "CANDIDATE_TREE", "FRESH_CANONICAL_PARENT_1", "INTEGRATION_SHA", "INTEGRATION_TREE", "EXACT_PARENT_1", "EXACT_PARENT_2", "CURRENT_OBSERVED_MAIN", "TIMESTAMP", "PROTOCOL_VERSION", "AUTHORIZATION"],
+    "authorization": "EXACT_NORMAL_PUBLICATION_ONLY",
+    "forbidden": ["FORCE_PUSH", "HISTORY_REWRITE"]
+  },
+  "remote_identity_readback_receipt_schema": {
+    "required": ["RECEIPT_TYPE", "GATE_NAME", "OWNER", "QUEUE_ENTRY_ID", "CANDIDATE_SHA", "CANDIDATE_TREE", "FRESH_CANONICAL_PARENT_1", "INTEGRATION_SHA", "INTEGRATION_TREE", "EXPECTED_SHA", "OBSERVED_SHA", "RESULT", "TIMESTAMP", "PROTOCOL_VERSION"],
+    "gates": ["REMOTE_CANDIDATE_READBACK", "POST_PUBLICATION_MAIN_READBACK"],
+    "mismatch_policy": "DENIED"
+  },
+  "state_transaction": {
+    "version": "CANONICAL_PUBLICATION_STATE_TRANSACTION_V1",
+    "lock": ".canonical-publication-state.lock",
+    "recovery_journal": ".canonical-publication-state-transaction.json",
+    "authorities": ["queue.json", "transition-ledger.json", "slot.json"],
+    "partial_or_uncertain_reader_policy": "DENIED",
+    "lock_order": ["CANONICAL_PUBLICATION_SLOT", "CANONICAL_PUBLICATION_STATE"]
+  },
+  "ep19_successor": {
+    "successor_id": "EP19-ELIGIBILITY-COHERENCE-RECOVERY-SUCCESSOR-V1",
+    "predecessor_id": "EP19-EXACT-CANDIDATE-CANONICAL-PUBLICATION-V1",
+    "authorization_id": "EP19_ELIGIBILITY_COHERENCE_RECOVERY_AND_CONTROLLED_CLOSURE_V1",
+    "candidate": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+    "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+    "immediate_parent": "689ab9456461a8d19a72d059f5157092efc43aff",
+    "product_patch_sha256": "bab6aee8346f7ef47ca94f1e3da629e7ae81df2f16202706ae4966864a485690",
+    "formal_attempt_id": "EP19-CANDIDATE-FORMAL-OWNER-EXTENSION-001",
+    "historical_formal_consumed": "2/2",
+    "new_formal_total": 1,
+    "global_next_ordinal": 3,
+    "product_fix_budget": "3/3_PLUS_0",
+    "direct_ff_authorization": "EXACT_A298_DIRECT_FAST_FORWARD_EXCEPTION",
+    "formal_gate_order": [
+      "CHANGE_IMPACT", "H7_FOCUSED", "H7_ENTRY", "H7_MUTATIONS", "ARCHITECTURE_SYNTAX",
+      "ARCHITECTURE", "GRADLE_PREFLIGHT", "COMPILE", "AFFECTED_INTEGRATION", "RUNTIME_PREFLIGHT",
+      "SHADOW", "CLASSIFIER_TEST", "GITOPS_STAGING", "GITOPS_STAGING_EGRESS", "GITOPS_PRODUCTION",
+      "GITOPS_PRODUCTION_EGRESS", "FRONTEND_INSTALL", "FRONTEND_LINT", "FRONTEND_IDENTITIES",
+      "FRONTEND_COLLECTION", "FRONTEND_TEST", "FRONTEND_BUILD", "FORMAL", "SEMGREP", "FULL_BACKEND",
+      "APPLICATION_CLASSPATH", "APPLICATION_PROBE", "FOUNDATION", "BOOTJAR"
+    ],
+    "post_publication_sanity_gates": [
+      "ARCHITECTURE", "SPRING_MODULITH", "APPLICATION_MODULES_COMPILED_CENSUS",
+      "AUTHORITY_COMPILED_CENSUS", "EP19_GUARD_IDENTITIES_20", "FOUNDATION", "JOOQ", "PFIRR", "BOOTJAR", "BUILD"
+    ],
+    "evidence_policy": {
+      "path_must_be_regular_file": true,
+      "sha256_must_match_bytes": true,
+      "native_exit_code": 0,
+      "native_result": "PASS",
+      "acceptance": "ACCEPTED",
+      "environment_approval_override": false
+    }
+  },
+  "publication_behavior": "This control plane emits authorization/readback receipts only. It never invokes Git publication or source-code writes."
+}

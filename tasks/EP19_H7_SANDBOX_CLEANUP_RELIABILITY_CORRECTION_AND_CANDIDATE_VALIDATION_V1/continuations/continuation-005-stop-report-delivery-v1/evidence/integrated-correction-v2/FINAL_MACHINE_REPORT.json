@@ -1,0 +1,67 @@
+{
+  "schema": "ep19-integrated-correction-v2-final-machine-report",
+  "implementation_status": "SOURCE_CORRECTION_COMPLETE_PENDING_EXISTING_INDEPENDENT_REVIEW",
+  "decision_is_independent_approval": false,
+  "install_authorized": false,
+  "installed_integration": false,
+  "formal_ready": false,
+  "integration_ready": false,
+  "real_readiness": "BLOCKED",
+  "candidate": {
+    "sha": "a29864343ed4f630b052c20d86c23b240f13cfd0",
+    "tree": "fd37409d0274662abbe86f69e3d963c05b379696",
+    "immediate_parent": "689ab9456461a8d19a72d059f5157092efc43aff",
+    "product_patch_sha256": "bab6aee8346f7ef47ca94f1e3da629e7ae81df2f16202706ae4966864a485690"
+  },
+  "budgets": {
+    "historical_formal": "2/2",
+    "new_formal_total": 1,
+    "new_formal_used": 0,
+    "global_next_ordinal": 3,
+    "historical_product": "3/3",
+    "new_product_fixes": 0,
+    "changed_by_this_correction": false
+  },
+  "dispositions": [
+    {"id": "CP-01", "source_disposition": "CORRECTED", "real_integration": "NOT_INSTALLED", "evidence": ["locked stable-state readback", "same-lock inspect/identity readback", "exact three-authority recovery validation", "cross QueueControl/EP19AcceptanceControl writer test"]},
+    {"id": "CP-02", "source_disposition": "CORRECTED", "real_integration": "NOT_INSTALLED_NO_REAL_PUBLICATION_RECEIPTS", "evidence": ["EP19 generic controlled-edge denial", "SlotControl.prepare_ep19_direct_ff", "exact caller entry binding", "dedicated CLI", "default normal two-parent behavior retained"]},
+    {"id": "CP-03", "source_disposition": "CORRECTED_FAIL_CLOSED", "real_integration": "AWAITING_ACCEPTED_NATIVE_PRODUCER_AND_REVIEW_RECEIPTS", "evidence": ["regular source/stdout/stderr bytes and SHA-256", "producer attempt/actor/timing/source binding", "formal gate/seal/reviewer/publication/sanity provenance", "self-declared identity negative test"]},
+    {"id": "CP-04", "source_disposition": "CORRECTED_FAIL_CLOSED", "real_integration": "BLOCKED_MISSING_EXISTING_COORDINATION_MECHANISM", "evidence": ["journal rows exactly rebound to reviewed manifest", "unknown overwrite rejection", "installer main refuses before any target write when original maintenance interlock is absent"]},
+    {"id": "COH-IR-01", "source_disposition": "CORRECTED", "real_integration": "ORIGINAL_CONTROLLER_NOT_INSTALLED_OR_REVIEWED", "evidence": ["canonical_publication_control.py exact source binding", "historical second controller explicitly rejected", "registration/formal-consume interface split"]},
+    {"id": "COH-IR-02", "source_disposition": "CORRECTED_FAIL_CLOSED", "real_integration": "NO_REAL_RECEIPTS_YET", "evidence": ["controller same-snapshot receipt bytes", "raw admission capture persisted", "private comparison recomputed", "public projection equality", "formal consume binds exact ADMISSION.json SHA-256"]},
+    {"id": "COH-IR-03", "source_disposition": "CORRECTED", "real_integration": "BUILDERS_NOT_RUN_BECAUSE REVIEW_AND_INSTALL_PENDING", "evidence": ["exact accepted input paths/hashes", "7/107/15 cardinality", "runtime map/inventory equality", "policy map/inventory equality", "shrunken nonfixture projection negative test"]},
+    {"id": "COH-IR-04", "source_disposition": "CORRECTED", "real_integration": "REAL_ADMISSION_NOT_RUN", "evidence": ["nonfixture output must resolve below exact task-private run", "outside-run negative test"]}
+  ],
+  "source_identities": {
+    "controller": {"path": "candidate/controller/scripts/canonical_publication_control.py", "sha256": "e3931e0c414e84ae1340b4b39ab747b744eb6f96947babd99d936a2bf268f8a0"},
+    "protocol": {"path": "candidate/controller/references/protocol-v1.json", "sha256": "4f1cc6a2c5cde04279920cdcb429fdb69f97ca08c34dd6da628fc2fe024d4e25"},
+    "controller_tests": {"path": "candidate/controller/tests/test_canonical_publication_control.py", "sha256": "32fbc8741daecfc64135d556192fbee147a0b8e10f30844e1f2e0622999f3057"},
+    "original_targets_patch": {"path": "ORIGINAL_TARGETS.patch", "sha256": "a947dd4268630314b8d8e337360eaec0c3dd4aea0bdedbccfe3b3226c146026b"},
+    "installer": {"path": "parent-handoff/INSTALL_AFTER_COORDINATION_AND_REVIEW.py", "sha256": "1aeadcd978407bdb3f95d78961e78c93a6115a064885ce43d0ff4a986bdd43da"},
+    "install_manifest": {"path": "parent-handoff/INSTALL_MANIFEST.json", "sha256": "bbe9f0cd7f0ba33242e8e4232154ce8f391191f2b7093d7067a0a7222e81359a"},
+    "eligibility_coherence": {"path": "candidate/coherence/executor/eligibility_coherence.py", "sha256": "ef202e952d151ba6a368054ef29c940393db695a7acb3b4b4b4d74e03997ebb8"},
+    "eligibility_admission": {"path": "candidate/coherence/executor/eligibility_admission.py", "sha256": "76ce85e526850dd05b808d1053786eb89fb70f891d020d0d037ce1ce116df67f"},
+    "external29_driver": {"path": "candidate/coherence/executor/external29_driver.py", "sha256": "16d754618bfc45ac7f8c022bcf9f85e5bf975cab07a6abb304908f29903c4f4a"},
+    "binding_contract": {"path": "candidate/coherence/executor/binding_contract.py", "sha256": "601f9b4df95f28658b82620847fe5dbe07a5df5a9299a13aa633616e67cf3a96"},
+    "qualification": {"path": "QUALIFICATION.json", "sha256": "921c8852813b2af5d21561c0fb1ae4ec510a4820f4ae82a7292e71780cb5f870"},
+    "integration_requirements": {"path": "integration/INTEGRATION_REQUIREMENTS.json", "sha256": "eebdb56e181aed60fe756a00273cd1af49213b94452d4482d68257ff47093e0c"}
+  },
+  "qualification": {"result": "PASS", "green_tests": 80, "removed_or_renamed_test_identities": 0, "private_fixtures_are_real_readiness": false},
+  "actual_shared_readback": {
+    "controller_sha256": "6c30fa0a6b43ed07595f53db1fb53eea914ae64c7ebc98435bc80816c6275362",
+    "protocol_sha256": "84948fb444af035185f28ba847fb364a38d84c05801daeeb7af86785abf01a65",
+    "tests_sha256": "498f2b5834c771f22616b744475286109a9280f8226b717862acbc8f8ed76cfb",
+    "equals_expected_before": true,
+    "equals_candidate": false,
+    "writes_performed": false
+  },
+  "actual_blocker": {
+    "code": "BLOCKED_MISSING_EXISTING_COORDINATION_MECHANISM",
+    "missing": "original manager interlock covering every old/new controller consumer and all three shared targets throughout expected-before check, replacement, readback, recovery and re-enable",
+    "publication_slot_substitution_allowed": false,
+    "task_local_lock_substitution_allowed": false
+  },
+  "operations_not_performed": ["shared install", "live queue/ledger/slot write", "real prepare", "real admission", "formal", "product tests/gates", "network", "credentials", "router", "publication", "closure"],
+  "history_preserved": true,
+  "return_to_existing_review_only": true
+}
