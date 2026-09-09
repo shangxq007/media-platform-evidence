@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10-final02/runner/combined.py", line 128, in <module>
+    for id,fn in journeys:run(id,fn)
+                          ~~~^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10-final02/runner/combined.py", line 20, in run
+    try:fn();row['status']='PASS'
+        ~~^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10-final02/runner/combined.py", line 121, in longDetail
+    fresh();ev('(()=>{let e=document.querySelector(".ff-publication");let f=e[Object.keys(e).find(k=>k.startsWith("__reactFiber$"))];while(f){if(f.memoizedProps?.source?.adapter){window.__source=f.memoizedProps.source;break}f=f.return}const read=__source.adapter.read;__source.adapter={origin:"isolated-verification",read:async(r,s)=>{const d=await read(r,s);d.plans[0].summary="Long permitted summary. ".repeat(300);return d}};__V10.replace();return true})()');b.wait('document.querySelectorAll(".ff-publication-row").length===12');button('Opening story')
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10-final02/runner/browser_helpers.py", line 37, in wait
+    raise AssertionError('precondition timeout: '+expression)
+AssertionError: precondition timeout: document.querySelectorAll(".ff-publication-row").length===12
