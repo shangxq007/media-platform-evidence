@@ -1,0 +1,98 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:57:15.651167+00:00",
+    "name": "calendar en1440 width bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:57:15.872218+00:00",
+    "name": "calendar en390 width bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:57:16.144667+00:00",
+    "name": "calendar zh-CN1440 width bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:57:16.357602+00:00",
+    "name": "calendar zh-CN390 width bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:57:17.103842+00:00",
+    "name": "narrow native ShiftTab trap",
+    "expression": "document.querySelector(\"[role=dialog]\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:57:17.368216+00:00",
+    "name": "narrow escape focus return",
+    "expression": "document.activeElement.matches(\".ff-publication-row button\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:57:19.084741+00:00",
+    "name": "refresh query zone selection scroll retained without reopen",
+    "expression": "document.querySelector(\".ff-publication input\").value===\"story\" && document.querySelectorAll(\".ff-publication select\")[3].value===\"Asia/Shanghai\" && document.querySelector(\".ff-publication-row button[aria-pressed=true]\").textContent===\"Second story\" && document.querySelector(\".ff-publication-results\").scrollTop===__returnScroll && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:57:19.300695+00:00",
+    "name": "complete empty safe focus fallback",
+    "expression": "document.activeElement.matches(\".ff-publication\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:57:20.610634+00:00",
+    "name": "old dismiss cannot close new same ID occurrence",
+    "expression": "!!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:57:21.427780+00:00",
+    "name": "old date view filter sort zone callbacks inert",
+    "expression": "document.querySelector(\".ff-publication input\").value===\"\" && document.querySelectorAll(\".ff-publication select\")[3].value===\"UTC\" && !document.querySelector(\".ff-publication-calendar\") && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:57:21.603840+00:00",
+    "name": "no browser mutation attempt",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:57:21.610836+00:00",
+    "name": "no intercepted mutation or remote permitted",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:59:02.902235+00:00",
+    "name": "restricted title copy artifact failure URL absent full DOM attributes",
+    "expression": "![\"PRIVATE_TITLE_SENTINEL\",\"PRIVATE_SUMMARY_SENTINEL\",\"PRIVATE_COPY_SENTINEL\",\"PRIVATE_ARTIFACT_SENTINEL\",\"PRIVATE_MEDIA_SENTINEL\",\"PRIVATE_FAILURE_SENTINEL\",\"PRIVATE_URL_SENTINEL\"].some(s=>document.documentElement.outerHTML.includes(s))",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:59:02.905888+00:00",
+    "name": "restricted preserves permitted plan attempt external IDs",
+    "expression": "[\"one\",\"try1\",\"try2\",\"external1\"].every(s=>document.querySelector(\"[role=dialog]\").innerText.includes(s))",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:59:02.908900+00:00",
+    "name": "denied artifact reference omitted",
+    "expression": "![...document.querySelectorAll(\"[role=dialog] code\")].some(e=>e.textContent===\"output\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:59:03.289137+00:00",
+    "name": "list denied withdraws all details",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:59:03.418994+00:00",
+    "name": "no browser mutation attempt",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:59:03.422574+00:00",
+    "name": "no intercepted mutation or remote permitted",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  }
+]

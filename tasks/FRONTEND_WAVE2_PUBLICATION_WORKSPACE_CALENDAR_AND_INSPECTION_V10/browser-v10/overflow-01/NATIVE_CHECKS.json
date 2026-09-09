@@ -1,0 +1,18 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:01:06.574294+00:00",
+    "name": "native overflow opens full chosen day agenda",
+    "expression": "document.querySelectorAll(\".ff-publication-agenda .ff-publication-row\").length===7 && [...document.querySelectorAll(\".ff-publication-day button\")].some(e=>e.getAttribute(\"aria-label\")===\"2024-03-10\" && e.getAttribute(\"aria-pressed\")===\"true\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:01:07.828951+00:00",
+    "name": "DST source timestamps immutable and source not reread",
+    "expression": "__V10.reads.length===1 && document.querySelector(\".ff-publication-agenda\").innerText.includes(\"2024-03-10T06:59:00Z\") && document.querySelector(\".ff-publication-agenda\").innerText.includes(\"2024-03-10T07:01:00Z\")",
+    "passed": true,
+    "value": true
+  }
+]

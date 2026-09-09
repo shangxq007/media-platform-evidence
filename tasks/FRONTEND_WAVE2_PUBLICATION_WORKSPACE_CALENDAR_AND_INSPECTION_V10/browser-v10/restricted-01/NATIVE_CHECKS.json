@@ -1,0 +1,18 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:58:14.551843+00:00",
+    "name": "restricted title copy artifact failure URL absent full DOM attributes",
+    "expression": "![\"PRIVATE_TITLE_SENTINEL\",\"PRIVATE_SUMMARY_SENTINEL\",\"PRIVATE_COPY_SENTINEL\",\"PRIVATE_ARTIFACT_SENTINEL\",\"PRIVATE_MEDIA_SENTINEL\",\"PRIVATE_FAILURE_SENTINEL\",\"PRIVATE_URL_SENTINEL\"].some(s=>document.documentElement.outerHTML.includes(s))",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:58:14.555102+00:00",
+    "name": "restricted retains independent logical IDs",
+    "expression": "[\"one\",\"output\",\"try1\",\"try2\",\"external1\"].every(s=>document.querySelector(\"[role=dialog]\").innerText.includes(s))",
+    "passed": false,
+    "value": false
+  }
+]
