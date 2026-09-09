@@ -1,0 +1,1002 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:16.499747+00:00",
+    "name": "ordinary no injected provider",
+    "expression": "!window.__V10 && !document.querySelector(\".ff-publication-row\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:17.666879+00:00",
+    "name": "actual AppShell publication route",
+    "expression": "!!document.querySelector(\"[data-surface=publication]\") && __V10.reads.length===1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:17.674099+00:00",
+    "name": "all publication actions explicit non-submit",
+    "expression": "[...document.querySelectorAll(\".ff-publication button\")].every(e=>e.getAttribute(\"type\")===\"button\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:18.232278+00:00",
+    "name": "native Enter no spurious submission",
+    "expression": "__submits.length===0 && document.querySelectorAll(\".ff-publication-row\").length===1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:18.442159+00:00",
+    "name": "native dialog initial focus",
+    "expression": "document.querySelector(\"[role=dialog]\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:18.603522+00:00",
+    "name": "native Tab contained",
+    "expression": "document.querySelector(\"[role=dialog]\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:18.954740+00:00",
+    "name": "Escape restores launcher",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.matches(\".ff-publication-row button\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:19.616297+00:00",
+    "name": "en1440 viewport bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:19.851027+00:00",
+    "name": "en390 viewport bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:20.100711+00:00",
+    "name": "zh-CN1440 viewport bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:20.317939+00:00",
+    "name": "zh-CN390 viewport bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:29.345602+00:00",
+    "name": "DST day seven supplied rows",
+    "expression": "document.querySelectorAll(\".ff-publication-agenda .ff-publication-row\").length===7",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:29.562507+00:00",
+    "name": "NY cross-midnight excludes midnight from March10",
+    "expression": "document.querySelectorAll(\".ff-publication-agenda .ff-publication-row\").length===6",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:29.819306+00:00",
+    "name": "cross midnight assigned prior civil day",
+    "expression": "document.querySelector(\".ff-publication-agenda\").innerText.includes(\"midnight\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:29.828790+00:00",
+    "name": "unscheduled and invalid separate",
+    "expression": "document.querySelector(\"[aria-label=Unscheduled]\").innerText.includes(\"unscheduled\") && document.querySelector(\"[aria-label=\\\"Indeterminate date\\\"]\").innerText.includes(\"invalid\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:30.125080+00:00",
+    "name": "leap29 exists no30",
+    "expression": "!!document.querySelector(\"[aria-label=\\\"2024-02-29\\\"]\") && !document.querySelector(\"[aria-label=\\\"2024-02-30\\\"]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:30.661157+00:00",
+    "name": "year boundary December2023",
+    "expression": "document.querySelector(\".ff-publication-results h2\").textContent===\"2023-12\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:30.934862+00:00",
+    "name": "year rollover January2024",
+    "expression": "document.querySelector(\".ff-publication-results h2\").textContent===\"2024-01\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:31.397914+00:00",
+    "name": "today explicitly current",
+    "expression": "!!document.querySelector(\"[aria-current=date][aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:32.457086+00:00",
+    "name": "stable second account only",
+    "expression": "document.querySelectorAll(\".ff-publication-row\").length===1 && document.querySelector(\".ff-publication-row\").innerText.includes(\"Second story\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:32.711784+00:00",
+    "name": "account retained calendar",
+    "expression": "document.querySelectorAll(\".ff-publication select\")[0].value===\"b\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:33.291599+00:00",
+    "name": "unknown raw filter",
+    "expression": "document.querySelectorAll(\".ff-publication-row\").length===1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:33.985430+00:00",
+    "name": "tie asc stable",
+    "expression": "[...document.querySelectorAll(\".ff-publication-row button\")].map(e=>e.textContent).join(\",\")===\"tie-a,tie-z\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:34.168944+00:00",
+    "name": "tie desc stable",
+    "expression": "[...document.querySelectorAll(\".ff-publication-row button\")].map(e=>e.textContent).join(\",\")===\"tie-a,tie-z\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:34.900134+00:00",
+    "name": "restricted full DOM omission",
+    "expression": "!document.documentElement.outerHTML.includes(\"RESTRICTED_COPY_SENTINEL\") && !document.documentElement.outerHTML.includes(\"RESTRICTED_SUMMARY_SENTINEL\") && !document.documentElement.outerHTML.includes(\"SECRET_URL\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:35.171490+00:00",
+    "name": "independent attempt/external identities",
+    "expression": "[\"try1\",\"try2\",\"external1\",\"unknown\",\"Delivery rejected\"].every(t=>document.querySelector(\"[role=dialog]\").innerText.includes(t))",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:35.181989+00:00",
+    "name": "no URL in detail attributes",
+    "expression": "!document.querySelector(\"[role=dialog]\").outerHTML.includes(\"SECRET_URL\") && !document.querySelector(\"[role=dialog] a\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:36.610942+00:00",
+    "name": "close preserves result scroll",
+    "expression": "document.querySelector(\".ff-publication-results\").scrollTop===__returnScroll",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:36.900098+00:00",
+    "name": "removed selection no dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !document.querySelector(\".ff-publication-row button[aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:37.759904+00:00",
+    "name": "partial not complete claim",
+    "expression": "document.querySelector(\".ff-publication\").innerText.includes(\"partial\") || document.querySelector(\".ff-publication\").innerText.includes(\"Partial\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:38.034127+00:00",
+    "name": "same ID does not reopen",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:38.873600+00:00",
+    "name": "same SDK renewal preserves dialog",
+    "expression": "!!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:38.912200+00:00",
+    "name": "retired old binding cannot reread",
+    "expression": "!document.querySelector(\".ff-publication-row\") && __V10.reads.length===1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:39.256079+00:00",
+    "name": "new binding no detail revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:40.130491+00:00",
+    "name": "retained old callbacks and late read inert",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.querySelectorAll(\".ff-publication-row\").length===12 && document.querySelector(\".ff-publication input\").value===\"\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:41.208966+00:00",
+    "name": "calendar en1440 width bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:41.432647+00:00",
+    "name": "calendar en390 width bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:41.666061+00:00",
+    "name": "calendar zh-CN1440 width bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:41.899483+00:00",
+    "name": "calendar zh-CN390 width bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:42.849606+00:00",
+    "name": "narrow native ShiftTab trap",
+    "expression": "document.querySelector(\"[role=dialog]\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:43.169864+00:00",
+    "name": "narrow escape focus return",
+    "expression": "document.activeElement.matches(\".ff-publication-row button\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:45.163959+00:00",
+    "name": "refresh query zone selection scroll retained without reopen",
+    "expression": "document.querySelector(\".ff-publication input\").value===\"story\" && document.querySelectorAll(\".ff-publication select\")[3].value===\"Asia/Shanghai\" && document.querySelector(\".ff-publication-row button[aria-pressed=true]\").textContent===\"Second story\" && document.querySelector(\".ff-publication-results\").scrollTop===__returnScroll && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:45.438293+00:00",
+    "name": "complete empty safe focus fallback",
+    "expression": "document.activeElement.matches(\".ff-publication\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:46.945209+00:00",
+    "name": "old dismiss cannot close new same ID occurrence",
+    "expression": "!!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:47.920353+00:00",
+    "name": "old date view filter sort zone callbacks inert",
+    "expression": "document.querySelector(\".ff-publication input\").value===\"\" && document.querySelectorAll(\".ff-publication select\")[3].value===\"UTC\" && !document.querySelector(\".ff-publication-calendar\") && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:49.489299+00:00",
+    "name": "restricted title copy artifact failure URL absent full DOM attributes",
+    "expression": "![\"PRIVATE_TITLE_SENTINEL\",\"PRIVATE_SUMMARY_SENTINEL\",\"PRIVATE_COPY_SENTINEL\",\"PRIVATE_ARTIFACT_SENTINEL\",\"PRIVATE_MEDIA_SENTINEL\",\"PRIVATE_FAILURE_SENTINEL\",\"PRIVATE_URL_SENTINEL\"].some(s=>document.documentElement.outerHTML.includes(s))",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:49.500945+00:00",
+    "name": "restricted preserves permitted plan attempt external IDs",
+    "expression": "[\"one\",\"try1\",\"try2\",\"external1\"].every(s=>document.querySelector(\"[role=dialog]\").innerText.includes(s))",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:49.510584+00:00",
+    "name": "denied artifact reference omitted",
+    "expression": "![...document.querySelectorAll(\"[role=dialog] code\")].some(e=>e.textContent===\"output\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:20:49.975543+00:00",
+    "name": "list denied withdraws all details",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:01.375806+00:00",
+    "name": "native overflow opens full chosen day agenda",
+    "expression": "document.querySelectorAll(\".ff-publication-agenda .ff-publication-row\").length===7 && [...document.querySelectorAll(\".ff-publication-day button\")].some(e=>e.getAttribute(\"aria-label\")===\"2024-03-10\" && e.getAttribute(\"aria-pressed\")===\"true\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:02.843090+00:00",
+    "name": "DST source timestamps immutable and source not reread",
+    "expression": "__V10.reads.length===1 && document.querySelector(\".ff-publication-agenda\").innerText.includes(\"2024-03-10T06:59:00Z\") && document.querySelector(\".ff-publication-agenda\").innerText.includes(\"2024-03-10T07:01:00Z\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:03.715700+00:00",
+    "name": "dark en visible localized placeholder",
+    "expression": "(()=>{const e=document.querySelector(\".ff-publication input\");const r=e.getBoundingClientRect();return e.placeholder===\"Search supplied publications\" && e.value===\"\" && r.width>0 && r.height>0 && getComputedStyle(e).visibility===\"visible\"})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:04.012341+00:00",
+    "name": "dark en 1440 select0 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"0\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:04.040011+00:00",
+    "name": "dark en 1440 select0 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:04.719794+00:00",
+    "name": "dark en 1440 select1 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"1\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:04.748065+00:00",
+    "name": "dark en 1440 select1 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:05.427235+00:00",
+    "name": "dark en 1440 select2 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"2\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:05.455636+00:00",
+    "name": "dark en 1440 select2 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:06.133927+00:00",
+    "name": "dark en 1440 select3 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"3\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:06.161749+00:00",
+    "name": "dark en 1440 select3 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:07.157574+00:00",
+    "name": "dark en 390 select0 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"0\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:07.185438+00:00",
+    "name": "dark en 390 select0 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:07.823950+00:00",
+    "name": "dark en 390 select1 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"1\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:07.852402+00:00",
+    "name": "dark en 390 select1 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:08.460041+00:00",
+    "name": "dark en 390 select2 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"2\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:08.489491+00:00",
+    "name": "dark en 390 select2 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:09.089144+00:00",
+    "name": "dark en 390 select3 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"3\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:09.127429+00:00",
+    "name": "dark en 390 select3 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:09.685691+00:00",
+    "name": "dark zh-CN visible localized placeholder",
+    "expression": "(()=>{const e=document.querySelector(\".ff-publication input\");const r=e.getBoundingClientRect();return e.placeholder===\"\\u641c\\u7d22\\u5df2\\u63d0\\u4f9b\\u7684\\u53d1\\u5e03\\u5185\\u5bb9\" && e.value===\"\" && r.width>0 && r.height>0 && getComputedStyle(e).visibility===\"visible\"})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:10.021023+00:00",
+    "name": "dark zh-CN 1440 select0 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"0\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:10.051150+00:00",
+    "name": "dark zh-CN 1440 select0 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:10.757103+00:00",
+    "name": "dark zh-CN 1440 select1 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"1\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:10.787572+00:00",
+    "name": "dark zh-CN 1440 select1 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:11.503493+00:00",
+    "name": "dark zh-CN 1440 select2 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"2\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:11.533701+00:00",
+    "name": "dark zh-CN 1440 select2 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:12.247981+00:00",
+    "name": "dark zh-CN 1440 select3 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"3\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:12.280243+00:00",
+    "name": "dark zh-CN 1440 select3 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:13.295457+00:00",
+    "name": "dark zh-CN 390 select0 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"0\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:13.327558+00:00",
+    "name": "dark zh-CN 390 select0 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:13.972881+00:00",
+    "name": "dark zh-CN 390 select1 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"1\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:14.004261+00:00",
+    "name": "dark zh-CN 390 select1 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:14.632453+00:00",
+    "name": "dark zh-CN 390 select2 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"2\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:14.666113+00:00",
+    "name": "dark zh-CN 390 select2 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:15.318575+00:00",
+    "name": "dark zh-CN 390 select3 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"3\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:15.351885+00:00",
+    "name": "dark zh-CN 390 select3 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:15.929934+00:00",
+    "name": "light en visible localized placeholder",
+    "expression": "(()=>{const e=document.querySelector(\".ff-publication input\");const r=e.getBoundingClientRect();return e.placeholder===\"Search supplied publications\" && e.value===\"\" && r.width>0 && r.height>0 && getComputedStyle(e).visibility===\"visible\"})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:16.304576+00:00",
+    "name": "light en 1440 select0 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"0\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:16.338347+00:00",
+    "name": "light en 1440 select0 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:17.072723+00:00",
+    "name": "light en 1440 select1 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"1\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:17.106966+00:00",
+    "name": "light en 1440 select1 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:17.845924+00:00",
+    "name": "light en 1440 select2 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"2\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:17.883077+00:00",
+    "name": "light en 1440 select2 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:18.606594+00:00",
+    "name": "light en 1440 select3 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"3\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:18.642152+00:00",
+    "name": "light en 1440 select3 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:19.665085+00:00",
+    "name": "light en 390 select0 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"0\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:19.702012+00:00",
+    "name": "light en 390 select0 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:20.333145+00:00",
+    "name": "light en 390 select1 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"1\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:20.368177+00:00",
+    "name": "light en 390 select1 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:21.065043+00:00",
+    "name": "light en 390 select2 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"2\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:21.102779+00:00",
+    "name": "light en 390 select2 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:21.802246+00:00",
+    "name": "light en 390 select3 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"3\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:21.840057+00:00",
+    "name": "light en 390 select3 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:22.409311+00:00",
+    "name": "light zh-CN visible localized placeholder",
+    "expression": "(()=>{const e=document.querySelector(\".ff-publication input\");const r=e.getBoundingClientRect();return e.placeholder===\"\\u641c\\u7d22\\u5df2\\u63d0\\u4f9b\\u7684\\u53d1\\u5e03\\u5185\\u5bb9\" && e.value===\"\" && r.width>0 && r.height>0 && getComputedStyle(e).visibility===\"visible\"})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:22.794766+00:00",
+    "name": "light zh-CN 1440 select0 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"0\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:22.833566+00:00",
+    "name": "light zh-CN 1440 select0 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:23.598955+00:00",
+    "name": "light zh-CN 1440 select1 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"1\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:23.637703+00:00",
+    "name": "light zh-CN 1440 select1 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:24.390584+00:00",
+    "name": "light zh-CN 1440 select2 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"2\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:24.429915+00:00",
+    "name": "light zh-CN 1440 select2 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:25.225555+00:00",
+    "name": "light zh-CN 1440 select3 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"3\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:25.284974+00:00",
+    "name": "light zh-CN 1440 select3 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:26.344820+00:00",
+    "name": "light zh-CN 390 select0 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"0\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:26.393998+00:00",
+    "name": "light zh-CN 390 select0 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:27.116249+00:00",
+    "name": "light zh-CN 390 select1 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"1\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:27.159724+00:00",
+    "name": "light zh-CN 390 select1 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:27.862988+00:00",
+    "name": "light zh-CN 390 select2 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"2\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:27.904738+00:00",
+    "name": "light zh-CN 390 select2 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:28.614237+00:00",
+    "name": "light zh-CN 390 select3 native opened",
+    "expression": "document.querySelector(\"[data-native-select=\\\"3\\\"]\").matches(\":open\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:28.657303+00:00",
+    "name": "light zh-CN 390 select3 options contrast 4.5",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:30.057015+00:00",
+    "name": "isolated Project context reaches actual Publication without provider",
+    "expression": "document.body.innerText.includes(\"ISOLATED PROJECT CONTEXT\") && !document.body.innerText.includes(\"Workspace context unavailable\") && __V10.reads.length===0 && !document.querySelector(\".ff-publication-row\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:30.078762+00:00",
+    "name": "no provider source-not-connected message",
+    "expression": "document.querySelector(\".ff-publication\").innerText.toLowerCase().includes(\"not connected\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:32.113519+00:00",
+    "name": "long detail 1440 viewport bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:32.514302+00:00",
+    "name": "long detail 390 viewport bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:32.901104+00:00",
+    "name": "no browser mutation attempt",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+    "VALIDATION_TIMESTAMP": "2026-09-09T05:21:32.923459+00:00",
+    "name": "no intercepted mutation or remote permitted",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  }
+]
