@@ -1,0 +1,37 @@
+{
+  "project": "postiz-v11-empty-14e238fa9d",
+  "app_release": "v2.23.0",
+  "app_source_commit": "1e4c8dd5c4f70c4d0abd01e23cc42d5b533d1ab9",
+  "compose_source_commit": "dd4969e5e694cd009619a0d53cff14c21104580b",
+  "ports": {
+    "postiz": 45071,
+    "spotlight": 45072,
+    "temporal-ui": 45073
+  },
+  "containers": [
+    "postiz-v11-empty-14e238fa9d-postiz",
+    "postiz-v11-empty-14e238fa9d-postiz-postgres",
+    "postiz-v11-empty-14e238fa9d-postiz-redis",
+    "postiz-v11-empty-14e238fa9d-spotlight",
+    "postiz-v11-empty-14e238fa9d-temporal-elasticsearch",
+    "postiz-v11-empty-14e238fa9d-temporal-postgresql",
+    "postiz-v11-empty-14e238fa9d-temporal",
+    "postiz-v11-empty-14e238fa9d-temporal-admin-tools",
+    "postiz-v11-empty-14e238fa9d-temporal-ui"
+  ],
+  "volumes": [
+    "postiz-v11-empty-14e238fa9d-postgres-volume",
+    "postiz-v11-empty-14e238fa9d-postiz-redis-data",
+    "postiz-v11-empty-14e238fa9d-postiz-config",
+    "postiz-v11-empty-14e238fa9d-postiz-uploads",
+    "postiz-v11-empty-14e238fa9d-temporal-postgres-data",
+    "postiz-v11-empty-14e238fa9d-temporal-elasticsearch-data"
+  ],
+  "networks": [
+    "postiz-v11-empty-14e238fa9d-postiz-network",
+    "postiz-v11-empty-14e238fa9d-temporal-network"
+  ],
+  "secret_file": "TASKROOT/deployment/private/local.env",
+  "secret_mode": "0o600",
+  "status": "PREPARED_NOT_STARTED"
+}

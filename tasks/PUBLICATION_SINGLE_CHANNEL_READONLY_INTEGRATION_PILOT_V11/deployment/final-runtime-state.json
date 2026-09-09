@@ -1,0 +1,72 @@
+{
+  "status": "PREPARED_ONLY_IMAGE_PULL_BLOCKED",
+  "LOCAL_EMPTY_INSTANCE_CHECK": "NOT_RUN_NO_POSTIZ_INSTANCE",
+  "engine_inventory": [
+    {
+      "args": [
+        "ps",
+        "-a",
+        "--format",
+        "{{.Names}} {{.Status}} {{.Ports}}"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "volume",
+        "ls",
+        "--format",
+        "{{.Name}}"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "network",
+        "ls",
+        "--format",
+        "{{.Name}}"
+      ],
+      "exit": 0,
+      "stdout": "podman\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "images",
+        "--format",
+        "{{.ID}} {{.Repository}} {{.Digest}}"
+      ],
+      "exit": 0,
+      "stdout": "82d6cb5ce521 docker.io/library/redis sha256:74566c6910d13ae61e7ce73ebd3127438a1fe805b309b097c323142719ec8a5b\n80f4c7a5e916 docker.io/library/postgres sha256:f1c3376c26f2609ab9f29f71f824103fe2fcd8ee0346485cb6122a4f93df6f94\n1bea307dfb3e docker.io/library/postgres sha256:18cfe3ef5e6815560c98237d6216d1e5119702fb0f3894c8785dd58b8bbe5d73\n2277dbccadde docker.io/temporalio/auto-setup sha256:607d68caa111338d754771efb876c92dfcdae06d056e4530bb31cd0f37406e6a\n59cf58dd31db docker.io/library/elasticsearch sha256:9a6443f55243f6acbfeb4a112d15eb3b9aac74bf25e0e39fa19b3ddd3a6879d0\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "image",
+        "exists",
+        "ghcr.io/gitroomhq/postiz-app@sha256:785f97312f66a347fb96cdccc4ded5a33ced69a672c89a9adc8054e7d6a21dc5"
+      ],
+      "exit": 1,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "port_readback": {
+    "45071": [],
+    "45072": [],
+    "45073": []
+  },
+  "scoped_engine_processes": [],
+  "postiz_containers_started": false,
+  "auth": "NO_CREDENTIALS_NO_ACCOUNTS_CREATED",
+  "public_api_calls": 0,
+  "db_reads": 0,
+  "oauth_or_connect_calls": 0,
+  "public_social_sends": 0,
+  "retained": "task-private engine image cache, generated throwaway secrets, tooling and configuration; preflight network removed and route container --rm cleaned"
+}

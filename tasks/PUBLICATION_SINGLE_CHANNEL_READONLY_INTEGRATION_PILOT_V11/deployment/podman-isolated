@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+"""Task-owned engine storage; never address the default Podman store."""
+import os
+from pathlib import Path
+D=Path(__file__).resolve().parent
+private=D/'private'
+for name in ['engine','run','networks','tmp','cache']:
+    (private/name).mkdir(mode=0o700,exist_ok=True)
+env=os.environ.copy()
+env.update(TMPDIR=str(private/'tmp'),XDG_CACHE_HOME=str(private/'cache'),REGISTRY_AUTH_FILE=str(private/'registry-auth.json'),PYTHONDONTWRITEBYTECODE='1')
+auth=private/'registry-auth.json'
+if not auth.exists():
+    fd=os.open(auth,os.O_CREAT|os.O_EXCL|os.O_WRONLY,0o600)
+    with os.fdopen(fd,'w') as f: f.write('{"auths":{}}\n')
+if any(a in ('run','create','start') for a in os.sys.argv[1:]):
+    for key in list(env):
+        if key.lower().endswith('_proxy'): env.pop(key)
+args=['/usr/bin/podman','--root',str(private/'engine'),'--runroot',str(private/'run'),'--storage-driver=vfs','--network-config-dir',str(private/'networks'),'--tmpdir',str(private/'tmp'),'--events-backend=file',*os.sys.argv[1:]]
+os.execve(args[0],args,env)

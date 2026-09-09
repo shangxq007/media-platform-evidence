@@ -1,0 +1,419 @@
+services:
+  postiz:
+    image: ghcr.io/gitroomhq/postiz-app@sha256:785f97312f66a347fb96cdccc4ded5a33ced69a672c89a9adc8054e7d6a21dc5
+    container_name: postiz-v11-empty-14e238fa9d-postiz
+    restart: 'no'
+    environment:
+      MAIN_URL: http://127.0.0.1:45071
+      FRONTEND_URL: http://127.0.0.1:45071
+      NEXT_PUBLIC_BACKEND_URL: http://127.0.0.1:45071/api
+      JWT_SECRET: ${V11_JWT_SECRET:?private env required}
+      DATABASE_URL: postgresql://postiz-user:${V11_POSTGRES_PASSWORD:?private env
+        required}@postiz-postgres:5432/postiz-db-local
+      REDIS_URL: redis://postiz-redis:6379
+      BACKEND_INTERNAL_URL: http://localhost:3000
+      TEMPORAL_ADDRESS: temporal:7233
+      IS_GENERAL: 'true'
+      DISABLE_REGISTRATION: 'true'
+      RUN_CRON: 'false'
+      STORAGE_PROVIDER: local
+      UPLOAD_DIRECTORY: /uploads
+      NEXT_PUBLIC_UPLOAD_DIRECTORY: /uploads
+      X_API_KEY: ''
+      X_API_SECRET: ''
+      LINKEDIN_CLIENT_ID: ''
+      LINKEDIN_CLIENT_SECRET: ''
+      REDDIT_CLIENT_ID: ''
+      REDDIT_CLIENT_SECRET: ''
+      GITHUB_CLIENT_ID: ''
+      GITHUB_CLIENT_SECRET: ''
+      BEEHIIVE_API_KEY: ''
+      BEEHIIVE_PUBLICATION_ID: ''
+      THREADS_APP_ID: ''
+      THREADS_APP_SECRET: ''
+      FACEBOOK_APP_ID: ''
+      FACEBOOK_APP_SECRET: ''
+      YOUTUBE_CLIENT_ID: ''
+      YOUTUBE_CLIENT_SECRET: ''
+      TIKTOK_CLIENT_ID: ''
+      TIKTOK_CLIENT_SECRET: ''
+      PINTEREST_CLIENT_ID: ''
+      PINTEREST_CLIENT_SECRET: ''
+      DRIBBBLE_CLIENT_ID: ''
+      DRIBBBLE_CLIENT_SECRET: ''
+      DISCORD_CLIENT_ID: ''
+      DISCORD_CLIENT_SECRET: ''
+      DISCORD_BOT_TOKEN_ID: ''
+      SLACK_ID: ''
+      SLACK_SECRET: ''
+      SLACK_SIGNING_SECRET: ''
+      MASTODON_URL: ''
+      MASTODON_CLIENT_ID: ''
+      MASTODON_CLIENT_SECRET: ''
+      OPENAI_API_KEY: ''
+      NEXT_PUBLIC_DISCORD_SUPPORT: ''
+      NEXT_PUBLIC_POLOTNO: ''
+      API_LIMIT: '30'
+      FEE_AMOUNT: '0.05'
+      STRIPE_PUBLISHABLE_KEY: ''
+      STRIPE_SECRET_KEY: ''
+      STRIPE_SIGNING_KEY: ''
+      STRIPE_SIGNING_KEY_CONNECT: ''
+      NX_ADD_PLUGINS: 'false'
+      NEXT_TELEMETRY_DISABLED: '1'
+      DO_NOT_TRACK: '1'
+    volumes:
+    - postiz-config:/config/
+    - postiz-uploads:/uploads/
+    networks:
+    - postiz-network
+    - temporal-network
+    healthcheck:
+      test:
+      - CMD
+      - node
+      - -e
+      - const r=require('http').get('http://localhost:5000/',res=>process.exit(res.statusCode<500?0:1));r.on('error',()=>process.exit(1));r.setTimeout(4000,()=>{r.destroy();process.exit(1)})
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+    depends_on:
+      postiz-postgres:
+        condition: service_healthy
+      postiz-redis:
+        condition: service_healthy
+      temporal:
+        condition: service_healthy
+    platform: linux/amd64
+    pull_policy: missing
+    security_opt:
+    - no-new-privileges:true
+    cap_drop:
+    - NET_RAW
+    - NET_ADMIN
+    pids_limit: 512
+    mem_limit: 4g
+    labels:
+      audit.task: PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11
+      audit.instance: postiz-v11-empty-14e238fa9d
+    ports:
+    - 127.0.0.1:45071:5000
+  postiz-postgres:
+    image: docker.io/library/postgres@sha256:18cfe3ef5e6815560c98237d6216d1e5119702fb0f3894c8785dd58b8bbe5d73
+    container_name: postiz-v11-empty-14e238fa9d-postiz-postgres
+    restart: 'no'
+    environment:
+      POSTGRES_PASSWORD: ${V11_POSTGRES_PASSWORD:?private env required}
+      POSTGRES_USER: postiz-user
+      POSTGRES_DB: postiz-db-local
+    volumes:
+    - postgres-volume:/var/lib/postgresql/data
+    networks:
+    - postiz-network
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U postiz-user -d postiz-db-local
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    platform: linux/amd64
+    pull_policy: missing
+    security_opt:
+    - no-new-privileges:true
+    cap_drop:
+    - NET_RAW
+    - NET_ADMIN
+    pids_limit: 512
+    mem_limit: 2g
+    labels:
+      audit.task: PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11
+      audit.instance: postiz-v11-empty-14e238fa9d
+  postiz-redis:
+    image: docker.io/library/redis@sha256:74566c6910d13ae61e7ce73ebd3127438a1fe805b309b097c323142719ec8a5b
+    container_name: postiz-v11-empty-14e238fa9d-postiz-redis
+    restart: 'no'
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - redis-cli ping | grep -q PONG
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    volumes:
+    - postiz-redis-data:/data
+    networks:
+    - postiz-network
+    platform: linux/amd64
+    pull_policy: missing
+    security_opt:
+    - no-new-privileges:true
+    cap_drop:
+    - NET_RAW
+    - NET_ADMIN
+    pids_limit: 512
+    mem_limit: 2g
+    labels:
+      audit.task: PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11
+      audit.instance: postiz-v11-empty-14e238fa9d
+    environment: {}
+  spotlight:
+    profiles:
+    - disabled-auxiliary
+    pull_policy: missing
+    container_name: postiz-v11-empty-14e238fa9d-spotlight
+    restart: 'no'
+    image: ghcr.io/getsentry/spotlight@sha256:daba2de5136fc8db0a0cde45280aa4d369b5ea0a394fe762c86aa42294a11d4d
+    networks:
+    - postiz-network
+    platform: linux/amd64
+    security_opt:
+    - no-new-privileges:true
+    cap_drop:
+    - NET_RAW
+    - NET_ADMIN
+    pids_limit: 512
+    mem_limit: 2g
+    labels:
+      audit.task: PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11
+      audit.instance: postiz-v11-empty-14e238fa9d
+    environment: {}
+    ports:
+    - 127.0.0.1:45072:8969
+  temporal-elasticsearch:
+    container_name: postiz-v11-empty-14e238fa9d-temporal-elasticsearch
+    image: docker.io/library/elasticsearch@sha256:9a6443f55243f6acbfeb4a112d15eb3b9aac74bf25e0e39fa19b3ddd3a6879d0
+    restart: 'no'
+    environment:
+      cluster.routing.allocation.disk.threshold_enabled: 'true'
+      cluster.routing.allocation.disk.watermark.low: 512mb
+      cluster.routing.allocation.disk.watermark.high: 256mb
+      cluster.routing.allocation.disk.watermark.flood_stage: 128mb
+      discovery.type: single-node
+      ES_JAVA_OPTS: -Xms256m -Xmx256m
+      xpack.security.enabled: 'false'
+    networks:
+    - temporal-network
+    expose:
+    - 9200
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - curl -fsS "http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=5s"
+        || exit 1
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+    volumes:
+    - temporal-elasticsearch-data:/usr/share/elasticsearch/data
+    platform: linux/amd64
+    pull_policy: missing
+    security_opt:
+    - no-new-privileges:true
+    cap_drop:
+    - NET_RAW
+    - NET_ADMIN
+    pids_limit: 512
+    mem_limit: 2g
+    labels:
+      audit.task: PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11
+      audit.instance: postiz-v11-empty-14e238fa9d
+  temporal-postgresql:
+    container_name: postiz-v11-empty-14e238fa9d-temporal-postgresql
+    image: docker.io/library/postgres@sha256:f1c3376c26f2609ab9f29f71f824103fe2fcd8ee0346485cb6122a4f93df6f94
+    restart: 'no'
+    environment:
+      POSTGRES_PASSWORD: ${V11_TEMPORAL_PASSWORD:?private env required}
+      POSTGRES_USER: temporal
+    networks:
+    - temporal-network
+    expose:
+    - 5432
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U temporal
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    volumes:
+    - temporal-postgres-data:/var/lib/postgresql/data
+    platform: linux/amd64
+    pull_policy: missing
+    security_opt:
+    - no-new-privileges:true
+    cap_drop:
+    - NET_RAW
+    - NET_ADMIN
+    pids_limit: 512
+    mem_limit: 2g
+    labels:
+      audit.task: PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11
+      audit.instance: postiz-v11-empty-14e238fa9d
+  temporal:
+    container_name: postiz-v11-empty-14e238fa9d-temporal
+    restart: 'no'
+    image: docker.io/temporalio/auto-setup@sha256:607d68caa111338d754771efb876c92dfcdae06d056e4530bb31cd0f37406e6a
+    depends_on:
+      temporal-postgresql:
+        condition: service_healthy
+      temporal-elasticsearch:
+        condition: service_healthy
+    environment:
+      DB: postgres12
+      DB_PORT: '5432'
+      POSTGRES_USER: temporal
+      POSTGRES_PWD: ${V11_TEMPORAL_PASSWORD:?private env required}
+      POSTGRES_SEEDS: temporal-postgresql
+      DYNAMIC_CONFIG_FILE_PATH: config/dynamicconfig/development-sql.yaml
+      ENABLE_ES: 'true'
+      ES_SEEDS: temporal-elasticsearch
+      ES_VERSION: v7
+      TEMPORAL_NAMESPACE: default
+    networks:
+    - temporal-network
+    healthcheck:
+      test:
+      - CMD
+      - temporal
+      - operator
+      - cluster
+      - health
+      - --address
+      - temporal:7233
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    volumes:
+    - ./dynamicconfig:/etc/temporal/config/dynamicconfig:ro
+    labels:
+      audit.task: PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11
+      audit.instance: postiz-v11-empty-14e238fa9d
+    platform: linux/amd64
+    pull_policy: missing
+    security_opt:
+    - no-new-privileges:true
+    cap_drop:
+    - NET_RAW
+    - NET_ADMIN
+    pids_limit: 512
+    mem_limit: 2g
+  temporal-admin-tools:
+    container_name: postiz-v11-empty-14e238fa9d-temporal-admin-tools
+    image: docker.io/temporalio/admin-tools@sha256:01537b62d995f27a0f0d33a01ac4caa6779622f454fb2eb36fed0dccd45c6244
+    restart: 'no'
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+      TEMPORAL_CLI_ADDRESS: temporal:7233
+    networks:
+    - temporal-network
+    stdin_open: true
+    depends_on:
+      temporal:
+        condition: service_healthy
+    tty: true
+    platform: linux/amd64
+    pull_policy: missing
+    security_opt:
+    - no-new-privileges:true
+    cap_drop:
+    - NET_RAW
+    - NET_ADMIN
+    pids_limit: 512
+    mem_limit: 2g
+    labels:
+      audit.task: PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11
+      audit.instance: postiz-v11-empty-14e238fa9d
+    profiles:
+    - disabled-auxiliary
+  temporal-ui:
+    container_name: postiz-v11-empty-14e238fa9d-temporal-ui
+    image: docker.io/temporalio/ui@sha256:cb17ea423d76a8a19a269d0bcd81fc12eee1f6365acd2a56b590dafb35696a95
+    restart: 'no'
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+      TEMPORAL_CORS_ORIGINS: http://127.0.0.1:45073
+    networks:
+    - temporal-network
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:8080/healthz
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    depends_on:
+      temporal:
+        condition: service_healthy
+    platform: linux/amd64
+    pull_policy: missing
+    security_opt:
+    - no-new-privileges:true
+    cap_drop:
+    - NET_RAW
+    - NET_ADMIN
+    pids_limit: 512
+    mem_limit: 2g
+    labels:
+      audit.task: PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11
+      audit.instance: postiz-v11-empty-14e238fa9d
+    ports:
+    - 127.0.0.1:45073:8080
+    profiles:
+    - disabled-auxiliary
+volumes:
+  postgres-volume:
+    name: postiz-v11-empty-14e238fa9d-postgres-volume
+    external: false
+    labels:
+      audit.instance: postiz-v11-empty-14e238fa9d
+  postiz-redis-data:
+    name: postiz-v11-empty-14e238fa9d-postiz-redis-data
+    external: false
+    labels:
+      audit.instance: postiz-v11-empty-14e238fa9d
+  postiz-config:
+    name: postiz-v11-empty-14e238fa9d-postiz-config
+    external: false
+    labels:
+      audit.instance: postiz-v11-empty-14e238fa9d
+  postiz-uploads:
+    name: postiz-v11-empty-14e238fa9d-postiz-uploads
+    external: false
+    labels:
+      audit.instance: postiz-v11-empty-14e238fa9d
+  temporal-postgres-data:
+    name: postiz-v11-empty-14e238fa9d-temporal-postgres-data
+    external: false
+    labels:
+      audit.instance: postiz-v11-empty-14e238fa9d
+  temporal-elasticsearch-data:
+    name: postiz-v11-empty-14e238fa9d-temporal-elasticsearch-data
+    external: false
+    labels:
+      audit.instance: postiz-v11-empty-14e238fa9d
+networks:
+  postiz-network:
+    name: postiz-v11-empty-14e238fa9d-postiz-network
+    external: false
+    labels:
+      audit.instance: postiz-v11-empty-14e238fa9d
+    driver: bridge
+    internal: true
+  temporal-network:
+    name: postiz-v11-empty-14e238fa9d-temporal-network
+    external: false
+    labels:
+      audit.instance: postiz-v11-empty-14e238fa9d
+    driver: bridge
+    internal: true
+name: postiz-v11-empty-14e238fa9d

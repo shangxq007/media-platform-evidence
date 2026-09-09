@@ -1,0 +1,122 @@
+[
+  {
+    "source_id": 1,
+    "url": "https://docs.postiz.com/public-api/introduction.md",
+    "path": "sources/introduction.md",
+    "line_start": 56,
+    "line_end": 56,
+    "quote": "**90 requests per hour** (100 for the cloud) limit applies to only the create post endpoint."
+  },
+  {
+    "source_id": 2,
+    "url": "https://docs.postiz.com/public-api/oauth.md",
+    "path": "sources/oauth.md",
+    "line_start": 14,
+    "line_end": 14,
+    "quote": "OAuth tokens work with all the same Public API endpoints as API keys."
+  },
+  {
+    "source_id": 3,
+    "url": "https://docs.postiz.com/self-host/installation/docker-compose.md",
+    "path": "sources/docker-compose.md",
+    "line_start": 66,
+    "line_end": 70,
+    "quote": "The full, up-to-date Docker Compose file is maintained in the\n[gitroomhq/postiz-docker-compose](https://github.com/gitroomhq/postiz-docker-compose)\nrepository. Cloning that repository (see the steps above) gives you the\n`docker-compose.yaml` together with the `dynamicconfig` directory that the\nTemporal service mounts, so there is nothing to copy by hand."
+  },
+  {
+    "source_id": 4,
+    "url": "https://docs.postiz.com/public-api/integrations/list.md",
+    "path": "sources/integrations-list.md",
+    "line_start": 100,
+    "line_end": 116,
+    "quote": "  /integrations:\n    get:\n      tags:\n        - Integrations\n      summary: List all integrations\n      description: Returns all connected social media channels for your organization.\n      operationId: listIntegrations\n      parameters:\n        - name: group\n          in: query\n          required: false\n          description: >-\n            Filter integrations by customer (group) ID. Returns only channels\n            assigned to the given group.\n          schema:\n            type: string\n      responses:"
+  },
+  {
+    "source_id": 5,
+    "url": "https://docs.postiz.com/public-api/posts/list.md",
+    "path": "sources/posts-list.md",
+    "line_start": 100,
+    "line_end": 130,
+    "quote": "  /posts:\n    get:\n      tags:\n        - Posts\n      summary: List posts\n      description: Get posts within a date range.\n      operationId: listPosts\n      parameters:\n        - name: startDate\n          in: query\n          required: true\n          description: Start date in UTC ISO format\n          schema:\n            type: string\n            format: date-time\n          example: '2024-12-01T00:00:00.000Z'\n        - name: endDate\n          in: query\n          required: true\n          description: End date in UTC ISO format\n          schema:\n            type: string\n            format: date-time\n          example: '2024-12-31T23:59:59.000Z'\n        - name: customer\n          in: query\n          required: false\n          description: Filter by customer ID\n          schema:\n            type: string\n      responses:"
+  },
+  {
+    "source_id": 13,
+    "url": "https://raw.githubusercontent.com/gitroomhq/postiz-app/1e4c8dd5c4f70c4d0abd01e23cc42d5b533d1ab9/apps/backend/src/public-api/routes/v1/public.integrations.controller.ts",
+    "path": "sources/upstream/apps/backend/src/public-api/routes/v1/public.integrations.controller.ts",
+    "line_start": 302,
+    "line_end": 326,
+    "quote": "  @Get('/integrations')\n  async listIntegration(\n    @GetOrgFromRequest() org: Organization,\n    @Query('group') group?: string\n  ) {\n    Sentry.metrics.count('public_api-request', 1);\n    return (await this._integrationService.getIntegrationsList(org.id))\n      .filter((integration) => !group || integration.customer?.id === group)\n      .map((integration) => ({\n        id: integration.id,\n        name: integration.name,\n        identifier: integration.providerIdentifier,\n        picture: integration.picture,\n        disabled: integration.disabled,\n        profile: integration.profile,\n        customer: integration.customer\n          ? {\n              id: integration.customer.id,\n              name: integration.customer.name,\n            }\n          : undefined,\n      }));\n  }\n\n  @Get('/social/:integration')"
+  },
+  {
+    "source_id": 14,
+    "url": "https://raw.githubusercontent.com/gitroomhq/postiz-app/1e4c8dd5c4f70c4d0abd01e23cc42d5b533d1ab9/apps/backend/src/services/auth/public.auth.middleware.ts",
+    "path": "sources/upstream/apps/backend/src/services/auth/public.auth.middleware.ts",
+    "line_start": 14,
+    "line_end": 62,
+    "quote": "    const auth = (req.headers.authorization ||\n      req.headers.Authorization) as string;\n    if (!auth) {\n      res.status(HttpStatus.UNAUTHORIZED).json({ msg: 'No API Key found' });\n      return;\n    }\n    try {\n      if (auth.startsWith('pos_')) {\n        const authorization = await this._oauthService.getOrgByOAuthToken(auth);\n        if (!authorization) {\n          res\n            .status(HttpStatus.UNAUTHORIZED)\n            .json({ msg: 'Invalid OAuth token' });\n          return;\n        }\n\n        const org = authorization.organization;\n        if (!!process.env.STRIPE_SECRET_KEY && !org.subscription) {\n          res\n            .status(HttpStatus.UNAUTHORIZED)\n            .json({ msg: 'No subscription found' });\n          return;\n        }\n\n        // @ts-ignore\n        req.org = { ...org, users: [{ users: { role: 'SUPERADMIN' } }] };\n      } else {\n        const org = await this._organizationService.getOrgByApiKey(auth);\n        if (!org) {\n          res\n            .status(HttpStatus.UNAUTHORIZED)\n            .json({ msg: 'Invalid API key' });\n          return;\n        }\n\n        if (!!process.env.STRIPE_SECRET_KEY && !org.subscription) {\n          res\n            .status(HttpStatus.UNAUTHORIZED)\n            .json({ msg: 'No subscription found' });\n          return;\n        }\n\n        // @ts-ignore\n        req.org = { ...org, users: [{ users: { role: 'SUPERADMIN' } }] };\n      }\n    } catch (err) {\n      throw new HttpForbiddenException();\n    }\n    next();"
+  },
+  {
+    "source_id": 15,
+    "url": "https://raw.githubusercontent.com/gitroomhq/postiz-app/1e4c8dd5c4f70c4d0abd01e23cc42d5b533d1ab9/libraries/nestjs-libraries/src/database/prisma/integrations/integration.repository.ts",
+    "path": "sources/upstream/libraries/nestjs-libraries/src/database/prisma/integrations/integration.repository.ts",
+    "line_start": 486,
+    "line_end": 498,
+    "quote": "  getIntegrationsList(org: string) {\n    return this._integration.model.integration.findMany({\n      where: {\n        organizationId: org,\n        deletedAt: null,\n      },\n      include: {\n        customer: true,\n      },\n    });\n  }\n\n  async disableChannel"
+  },
+  {
+    "source_id": 16,
+    "url": "https://raw.githubusercontent.com/gitroomhq/postiz-app/1e4c8dd5c4f70c4d0abd01e23cc42d5b533d1ab9/libraries/nestjs-libraries/src/database/prisma/posts/posts.repository.ts",
+    "path": "sources/upstream/libraries/nestjs-libraries/src/database/prisma/posts/posts.repository.ts",
+    "line_start": 129,
+    "line_end": 223,
+    "quote": "  async getPosts(orgId: string, query: GetPostsDto) {\n    // Use the provided start and end dates directly\n    const startDate = dayjs.utc(query.startDate).toDate();\n    const endDate = dayjs.utc(query.endDate).toDate();\n\n    const list = await this._post.model.post.findMany({\n      where: {\n        AND: [\n          {\n            OR: [\n              {\n                organizationId: orgId,\n              },\n            ],\n          },\n          {\n            OR: [\n              {\n                publishDate: {\n                  gte: startDate,\n                  lte: endDate,\n                },\n              },\n              {\n                intervalInDays: {\n                  not: null,\n                },\n              },\n            ],\n          },\n        ],\n        integration: {\n          deletedAt: null,\n          organizationId: orgId,\n        },\n        deletedAt: null,\n        parentPostId: null,\n        ...(query.customer\n          ? {\n              integration: {\n                customerId: query.customer,\n              },\n            }\n          : {}),\n      },\n      select: {\n        id: true,\n        content: true,\n        publishDate: true,\n        releaseURL: true,\n        releaseId: true,\n        state: true,\n        intervalInDays: true,\n        group: true,\n        creationMethod: true,\n        tags: {\n          select: {\n            tag: true,\n          },\n        },\n        integration: {\n          select: {\n            id: true,\n            providerIdentifier: true,\n            name: true,\n            picture: true,\n          },\n        },\n      },\n    });\n\n    return list.reduce((all, post) => {\n      if (!post.intervalInDays) {\n        return [...all, post];\n      }\n\n      const addMorePosts = [];\n      let startingDate = dayjs.utc(post.publishDate);\n      while (dayjs.utc(endDate).isSameOrAfter(startingDate)) {\n        if (dayjs(startingDate).isSameOrAfter(dayjs.utc(post.publishDate))) {\n          addMorePosts.push({\n            ...post,\n            publishDate: startingDate.toDate(),\n            actualDate: post.publishDate,\n          });\n        }\n\n        startingDate = startingDate.add(post.intervalInDays, 'days');\n      }\n\n      return [...all, ...addMorePosts];\n    }, [] as any[]);\n  }\n\n  async getPostsList"
+  },
+  {
+    "source_id": 17,
+    "url": "https://raw.githubusercontent.com/gitroomhq/postiz-app/1e4c8dd5c4f70c4d0abd01e23cc42d5b533d1ab9/libraries/nestjs-libraries/src/database/prisma/posts/posts.service.ts",
+    "path": "sources/upstream/libraries/nestjs-libraries/src/database/prisma/posts/posts.service.ts",
+    "line_start": 328,
+    "line_end": 332,
+    "quote": "  async getPosts(orgId: string, query: GetPostsDto) {\n    return this._postRepository.getPosts(orgId, query);\n  }\n\n  async getPostsMinified"
+  },
+  {
+    "source_id": 18,
+    "url": "https://raw.githubusercontent.com/gitroomhq/postiz-app/1e4c8dd5c4f70c4d0abd01e23cc42d5b533d1ab9/libraries/nestjs-libraries/src/dtos/posts/get.posts.dto.ts",
+    "path": "sources/upstream/libraries/nestjs-libraries/src/dtos/posts/get.posts.dto.ts",
+    "line_start": 7,
+    "line_end": 16,
+    "quote": "export class GetPostsDto {\n  @IsDateString()\n  startDate: string;\n\n  @IsDateString()\n  endDate: string;\n\n  @IsOptional()\n  @IsString()\n  customer: string;"
+  },
+  {
+    "source_id": 19,
+    "url": "https://raw.githubusercontent.com/gitroomhq/postiz-app/1e4c8dd5c4f70c4d0abd01e23cc42d5b533d1ab9/libraries/nestjs-libraries/src/throttler/throttler.provider.ts",
+    "path": "sources/upstream/libraries/nestjs-libraries/src/throttler/throttler.provider.ts",
+    "line_start": 11,
+    "line_end": 15,
+    "quote": "    if (method === 'POST' && url.includes('/public/v1/posts')) {\n      return super.canActivate(context);\n    }\n\n    return true;"
+  },
+  {
+    "source_id": 21,
+    "url": "https://raw.githubusercontent.com/gitroomhq/postiz-docker-compose/dd4969e5e694cd009619a0d53cff14c21104580b/docker-compose.yaml",
+    "path": "sources/deployment/docker-compose.yaml",
+    "line_start": 3,
+    "line_end": 4,
+    "quote": "    image: ghcr.io/gitroomhq/postiz-app:latest\n    container_name: postiz"
+  },
+  {
+    "source_id": 25,
+    "url": "https://raw.githubusercontent.com/gitroomhq/postiz-app/1e4c8dd5c4f70c4d0abd01e23cc42d5b533d1ab9/libraries/nestjs-libraries/src/database/prisma/integrations/integration.service.ts",
+    "path": "sources/upstream/libraries/nestjs-libraries/src/database/prisma/integrations/integration.service.ts",
+    "line_start": 150,
+    "line_end": 154,
+    "quote": "  getIntegrationsList(org: string) {\n    return this._integrationRepository.getIntegrationsList(org);\n  }\n\n  getIntegrationForOrder"
+  },
+  {
+    "source_id": 28,
+    "url": "https://raw.githubusercontent.com/gitroomhq/postiz-app/1e4c8dd5c4f70c4d0abd01e23cc42d5b533d1ab9/var/docker/nginx.conf",
+    "path": "sources/upstream/var/docker/nginx.conf",
+    "line_start": 20,
+    "line_end": 22,
+    "quote": "        location /api/ {\n            proxy_pass http://localhost:3000/;\n            proxy_http_version 1.1;"
+  }
+]

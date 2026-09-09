@@ -1,0 +1,612 @@
+{
+  "status": "SELECTED_BYTES_REVIEWED_NO_HIGH_CONFIDENCE_SECRET_FINDINGS",
+  "scope": "42 explicit selected source files; no private/tools traversal; selected public bytes only",
+  "file_count": 42,
+  "pattern_hits": 0,
+  "known_fixture_classifications": {
+    "synthetic-local-token": "EXPLICIT_SYNTHETIC_TEST_VALUE_NOT_CREDENTIAL",
+    "synthetic-upstream-key": "EXPLICIT_SYNTHETIC_TEST_VALUE_NOT_CREDENTIAL",
+    "PRIVATE_COPY/PRIVATE_OTHER/PRIVATE_ERROR": "TEST_REDACTION_SENTINELS_NOT_PRIVATE_CONTENT",
+    "https://private.invalid/secret": "RESERVED_INVALID_FIXTURE_NOT_REAL_PRIVATE_ENDPOINT",
+    "127.0.0.1 and localhost": "ISOLATED_LOOPBACK_OR_PUBLIC_DOCUMENTATION_EXAMPLE_NOT_APPROVED_REAL_INSTANCE",
+    "compose service names": "TASK_ISOLATED_SERVICE_IDENTITIES_NOT_PRIVATE_ACCOUNT_DETAILS",
+    "${V11_*}": "ENV_REFERENCE_ONLY_NO_VALUE",
+    "[REDACTED]": "PRIOR_DEPLOYMENT_REDACTION",
+    "source-excerpts official sample/default values": "PUBLIC_UPSTREAM_EXAMPLES_NEVER_USE_AS_CREDENTIALS",
+    "private/local.env path literals": "NECESSARY_RETENTION_REFERENCE_ONLY_NOT_READ_OR_PACKAGED"
+  },
+  "transformation": "local absolute paths replaced with TASKROOT/WORKSPACE/LOCAL_HOME; nonloopback private IPv4 replaced with TASK_PRIVATE_IP",
+  "limitations": [
+    "Pattern scan is not proof of universal absence",
+    "No actual secret bytes were read for comparison",
+    "Original retrieval sources are not all archived; this is selected evidence, not a full research mirror",
+    "Original deployment secret-exclusion assertion is prior lane evidence, not a new scan of secrets"
+  ],
+  "files": [
+    {
+      "path": "deployment/.gitignore",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "deployment/DEPLOYMENT_HANDOFF.md",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        23,
+        31,
+        32,
+        68,
+        76,
+        83,
+        88
+      ]
+    },
+    {
+      "path": "deployment/compose-validation.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        20
+      ]
+    },
+    {
+      "path": "deployment/compose.config.redacted.yaml",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        37,
+        39,
+        42,
+        44,
+        48,
+        50,
+        52,
+        55,
+        65,
+        67,
+        71,
+        72,
+        75,
+        80,
+        82,
+        85,
+        87,
+        124,
+        272
+      ]
+    },
+    {
+      "path": "deployment/compose.yaml",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        10,
+        11,
+        23,
+        25,
+        27,
+        29,
+        33,
+        35,
+        37,
+        39,
+        41,
+        43,
+        45,
+        46,
+        48,
+        49,
+        52,
+        59,
+        107,
+        230,
+        271
+      ]
+    },
+    {
+      "path": "deployment/dynamicconfig/development-cass.yaml",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "deployment/dynamicconfig/development-sql.yaml",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "deployment/engine-preflight.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "deployment/exercise-prerequisites.py",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "deployment/final-runtime-state.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        71
+      ]
+    },
+    {
+      "path": "deployment/finalize-evidence.py",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        2,
+        23,
+        25,
+        27,
+        32,
+        34,
+        36
+      ]
+    },
+    {
+      "path": "deployment/identity.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        34,
+        35
+      ]
+    },
+    {
+      "path": "deployment/image-pull-results.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "deployment/podman-isolated",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "deployment/prepare.py",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        2,
+        3,
+        11,
+        12,
+        64,
+        65,
+        66,
+        67,
+        74,
+        75,
+        77,
+        78,
+        80,
+        82
+      ]
+    },
+    {
+      "path": "deployment/pull-images.py",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "deployment/runtime-exercise.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        22
+      ]
+    },
+    {
+      "path": "deployment/source-and-image-validation.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "deployment/validate.py",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        18,
+        41
+      ]
+    },
+    {
+      "path": "INITIAL_BOUNDARIES.md",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        4,
+        6
+      ]
+    },
+    {
+      "path": "WRITER_BRIEF.md",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        8,
+        10,
+        12,
+        16
+      ]
+    },
+    {
+      "path": "writer/WRITER_HANDOFF.md",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        11,
+        20
+      ]
+    },
+    {
+      "path": "writer/BLOCKER.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "writer/partial-source-manifest.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "writer/adapter-red.log",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "writer/SCOPE_AND_CONTRACT.md",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        7
+      ]
+    },
+    {
+      "path": "writer/PROGRESS.md",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "writer/baseline-check.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "adapter/pilot.py",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        32,
+        33,
+        60,
+        74,
+        76,
+        77,
+        99,
+        147,
+        148,
+        166,
+        168,
+        174,
+        183,
+        236
+      ]
+    },
+    {
+      "path": "adapter/test_pilot.py",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        1,
+        17,
+        22,
+        27,
+        38,
+        46,
+        48,
+        66
+      ]
+    },
+    {
+      "path": "research/OFFICIAL_CONTRACT_REVIEW.md",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        3,
+        39,
+        41,
+        43,
+        45,
+        49,
+        55,
+        57,
+        65,
+        105,
+        124
+      ]
+    },
+    {
+      "path": "research/IMPLEMENTATION_CONTRACT.md",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        15,
+        21,
+        27
+      ]
+    },
+    {
+      "path": "research/endpoint-allowlist.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        22,
+        24,
+        25,
+        26,
+        51,
+        90,
+        231,
+        232,
+        275,
+        287,
+        314,
+        316
+      ]
+    },
+    {
+      "path": "research/v10-field-mapping.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        100,
+        115,
+        120,
+        125
+      ]
+    },
+    {
+      "path": "research/deployment-pin.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        609,
+        610
+      ]
+    },
+    {
+      "path": "research/deployment-images.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "research/source-manifest.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "research/source-excerpts.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        16,
+        56
+      ]
+    },
+    {
+      "path": "research/citations.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": [
+        23,
+        125
+      ]
+    },
+    {
+      "path": "research/citation-verification.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "research/verification.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    },
+    {
+      "path": "research/v10-source-manifest.json",
+      "high_confidence_secret_patterns": {
+        "private_key": 0,
+        "github_token": 0,
+        "aws_key": 0,
+        "jwt_value": 0
+      },
+      "sensitive_keyword_line_numbers": []
+    }
+  ]
+}

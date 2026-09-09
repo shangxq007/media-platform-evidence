@@ -1,0 +1,337 @@
+{
+  "classification": "STATIC_CONTRACT_REVIEW",
+  "contract_version": "postiz-v11-read-contract-1",
+  "reviewed_at": "2026-09-09T06:14:14.343478+00:00",
+  "live_instance_verified": false,
+  "upstream_candidate": {
+    "release": "v2.23.0",
+    "commit": "1e4c8dd5c4f70c4d0abd01e23cc42d5b533d1ab9",
+    "release_published_at": "2026-08-04T06:53:15Z",
+    "source_ids": [
+      6,
+      8,
+      13,
+      16
+    ]
+  },
+  "transport": {
+    "default": "deny",
+    "allowed_methods": [
+      "GET"
+    ],
+    "redirects": "error; never forward authorization on redirect",
+    "credentials": "server-only existing approved key; no credential discovery or OAuth start",
+    "authorization_header": {
+      "name": "Authorization",
+      "value": "raw existing API key or existing pos_ token",
+      "prefix": "",
+      "source_ids": [
+        1,
+        2,
+        14
+      ]
+    },
+    "base_urls": {
+      "cloud": "https://api.postiz.com/public/v1",
+      "self_host_reverse_proxy": "https://<approved-domain>/api/public/v1",
+      "official_compose_local_example": "http://localhost:4007/api/public/v1",
+      "direct_backend_path": "/public/v1",
+      "policy": "Explicit approved base; exact origin/path allowlist. No base guessing, probing, user-info, query, fragment, path traversal or arbitrary URLs. Local HTTP requires isolated loopback approval.",
+      "source_ids": [
+        4,
+        5,
+        13,
+        21,
+        28
+      ]
+    },
+    "request_body": false,
+    "cookies": false,
+    "unknown_query_parameters": "deny",
+    "private_api": "deny",
+    "database_access": "deny"
+  },
+  "endpoints": [
+    {
+      "operation_id": "listIntegrations",
+      "semantic": "list connected organization accounts; no provider connection/refresh",
+      "method": "GET",
+      "path": "/integrations",
+      "query": {
+        "group": {
+          "type": "string",
+          "required": false,
+          "meaning": "customer/group ID, not account ID",
+          "pilot_enabled": false
+        }
+      },
+      "pilot_query_keys": [],
+      "response": {
+        "status": 200,
+        "root": "array",
+        "documented_fields": {
+          "id": "string",
+          "name": "string",
+          "identifier": "provider string",
+          "picture": "string URL",
+          "disabled": "boolean",
+          "profile": "string handle",
+          "customer": "optional object {id:string,name:string}"
+        },
+        "nullable_caution": "Docs do not declare required fields or nullable properties comprehensively. Pinned model allows nullable profile/picture; only selected projection required fields must be strictly validated."
+      },
+      "pagination": {
+        "supported": false,
+        "parameters": [],
+        "cursor": null,
+        "total": null,
+        "has_more": null
+      },
+      "completeness": "Pinned findMany returns all nondeleted organization integrations including disabled ones; no cap/order specified. Local pilot projects exactly approved ID. This is not all historical/deleted accounts or proof token is channel scoped.",
+      "source_ids": [
+        4,
+        13,
+        15,
+        25
+      ]
+    },
+    {
+      "operation_id": "listPosts",
+      "semantic": "list organization root posts with date selection and recurrence expansion; read only",
+      "method": "GET",
+      "path": "/posts",
+      "query": {
+        "startDate": {
+          "type": "string",
+          "format": "UTC ISO date-time",
+          "required": true
+        },
+        "endDate": {
+          "type": "string",
+          "format": "UTC ISO date-time",
+          "required": true
+        },
+        "customer": {
+          "type": "string",
+          "required": false,
+          "meaning": "customer ID, not account ID",
+          "pilot_enabled": false,
+          "reason": "Not needed for exact channel projection; pinned spread overrides integration deletedAt/org filters."
+        }
+      },
+      "pilot_query_keys": [
+        "startDate",
+        "endDate"
+      ],
+      "unsupported_query_keys": [
+        "limit",
+        "page",
+        "cursor",
+        "offset",
+        "integrationId",
+        "accountId",
+        "status",
+        "state",
+        "order",
+        "projectId"
+      ],
+      "response": {
+        "status": 200,
+        "root": "object",
+        "rows": "posts",
+        "documented_fields": {
+          "id": "string",
+          "content": "string",
+          "settings": "object (DOCS ONLY; absent pinned selector)",
+          "publishDate": "ISO date-time",
+          "releaseURL": "string (nullable in pinned model)",
+          "state": [
+            "QUEUE",
+            "PUBLISHED",
+            "ERROR",
+            "DRAFT"
+          ],
+          "integration": {
+            "id": "string",
+            "providerIdentifier": "string",
+            "name": "string",
+            "picture": "string"
+          }
+        },
+        "pinned_extra_fields": {
+          "releaseId": "nullable string external provider release identifier; may be missing sentinel; not attempt ID",
+          "intervalInDays": "nullable integer recurrence",
+          "group": "Postiz post grouping, not project/content version/attempt",
+          "creationMethod": "source creation enum; not provenance attestation",
+          "tags": "array with tag relation",
+          "actualDate": "recurring rows only: original post publishDate"
+        },
+        "absent": [
+          "settings at pinned release",
+          "image",
+          "title",
+          "description",
+          "error",
+          "createdAt",
+          "updatedAt",
+          "attemptId",
+          "attemptedAt",
+          "artifactIds",
+          "contentVersion",
+          "actual publishedAt"
+        ]
+      },
+      "pagination": {
+        "supported": false,
+        "parameters": [],
+        "cursor": null,
+        "total": null,
+        "has_more": null,
+        "warning": "getPostsList page/limit code is a different method NOT used by this public route."
+      },
+      "query_semantics": {
+        "normal_posts": "inclusive publishDate >= startDate AND <= endDate",
+        "deleted_posts": "excluded",
+        "thread_children": "excluded via parentPostId:null",
+        "recurrence": "OR intervalInDays not null bypasses date predicate; expansion starts at original publishDate through endDate inclusive and ignores requested startDate; repeated original id with different publishDate; actualDate original",
+        "ordering": "none declared in findMany",
+        "snapshot_atomicity": "not guaranteed across accounts/posts calls"
+      },
+      "pilot_response_policy": {
+        "date_bounds": "validate absolute UTC start <= end; bounded explicit range",
+        "channel_filter": "server-side exact equality post.integration.id == preauthorized integration ID before browser projection/logging",
+        "recurrence": "exclude every non-null intervalInDays row and any actualDate row; mark partial and report excluded count. Never invent occurrence/attempt IDs. Alternative block entire response if schema cannot express omission.",
+        "duplicates": "reject duplicate remaining post IDs; no silent first/last wins",
+        "missing_optional_recurrence_metadata": "Do not assume absence proves nonrecurrence in unqualified deployments; duplicates still fail closed. Live source version remains unverified.",
+        "date_recheck": "validate every selected date and apply inclusive requested range locally; do not silently convert bad dates into valid dates",
+        "local_cap": 200,
+        "overflow": "deterministically sort selected nonrecurring rows by publishDate then id, retain at most 200, mark partial with counts; alternatively reject; never claim complete",
+        "completeness": "bounded for full successful local selection within window; partial when excluded/truncated; never complete global project snapshot"
+      },
+      "source_ids": [
+        5,
+        13,
+        16,
+        17,
+        18
+      ]
+    }
+  ],
+  "single_channel": {
+    "server_account_filter_supported": false,
+    "server_posts_account_filter_supported": false,
+    "binding_required": [
+      "approved base URL",
+      "approved existing credential reference",
+      "approved organization boundary",
+      "one integration ID",
+      "explicit local projectId binding",
+      "date window"
+    ],
+    "warning": "Upstream requests read organization-wide data. UI/server projection does not narrow token permissions. If org-wide data access exceeds approval, BLOCK; require existing isolated org containing only the approved channel or separate explicit authorization.",
+    "disabled_account": "recommend restricted; disabled=false is not health/token validity proof"
+  },
+  "status_mapping": {
+    "QUEUE": {
+      "v10": "scheduled",
+      "timeField": "scheduledAt",
+      "scheduledAt": "validated publishDate"
+    },
+    "PUBLISHED": {
+      "v10": "published",
+      "timeField": "unknown",
+      "publishedAt": null,
+      "reason": "No independently established actual release timestamp in public list"
+    },
+    "ERROR": {
+      "v10": "failed",
+      "timeField": "unknown",
+      "attempts": [],
+      "reason": "post state only; no failure/attempt history"
+    },
+    "DRAFT": {
+      "v10": "draft",
+      "timeField": "unscheduled"
+    },
+    "unknown_state": "reject invalid or explicitly surface unknown in separately approved model; never coerce to published/scheduled"
+  },
+  "external_identifiers": {
+    "id": "Postiz post ID (local plan id), not social network publication id",
+    "integration.id": "Postiz integration ID, not remote social account id",
+    "releaseId": "pinned extra field; preserve only in separate explicitly approved provenance extension; null/empty/missing sentinel is unavailable; never parse URL to supply it",
+    "releaseURL": "remote URL text; not authoritative id or fetched proof. Do not auto-fetch, render HTML, embed previews, or create externalPublications without genuine attempt relationship.",
+    "group": "not attempt/artifact/content-version/project relationship",
+    "forbidden_inferences": [
+      "attempt from post state",
+      "artifact from content or URL",
+      "copyVersion from group or hash",
+      "actual publishedAt from publishDate",
+      "externalPublication attemptId from post id"
+    ]
+  },
+  "errors": {
+    "200": "strict JSON root and field validation; malformed -> invalid, never empty success",
+    "400": "invalid request/contract; no blind retry",
+    "401": "restricted; missing/invalid key, invalid OAuth token OR subscription missing in pinned middleware; no auto login/connect",
+    "403": "restricted; middleware exceptions can become forbidden",
+    "404": "unavailable/contract mismatch for list route, NOT empty data",
+    "413": "unexpected for no-body GET; report error",
+    "429": "bounded backoff, honor valid Retry-After if present; not guaranteed by docs",
+    "5xx": "bounded exponential backoff; retain failure state, never suppress as empty",
+    "network_timeout": "error/unavailable, bounded retry only while authorized and not aborted",
+    "abort": "cancel fetch/retries and never publish stale scope result",
+    "redirect": "blocked",
+    "response_bodies": "sanitize; no raw auth headers/content to diagnostics",
+    "pinned_401_messages": [
+      "No API Key found",
+      "Invalid OAuth token",
+      "Invalid API key",
+      "No subscription found"
+    ],
+    "source_ids": [
+      1,
+      14
+    ]
+  },
+  "rate_limits": {
+    "overview": "90 requests/hour (100 cloud), create-post only",
+    "embedded_openapi": "30 requests/hour generic description; conflict retained",
+    "pinned_guard": "only POST where url includes /public/v1/posts calls throttler; reads bypass this guard",
+    "official_compose_API_LIMIT": 30,
+    "read_quota": null,
+    "retry_after_contract": null,
+    "policy": "No claim unlimited reads or fixed 30/90 read allowance; reverse proxies/deployments may limit. Conservative configurable read budget, sequential calls, bounded retries.",
+    "source_ids": [
+      1,
+      4,
+      5,
+      19,
+      21
+    ]
+  },
+  "live_validation_required": [
+    "actual deployed version/digest",
+    "existing credential authorization without creating one",
+    "exact approved integration ID and local binding",
+    "organization-wide read authorization",
+    "live response schema incl recurrence extras",
+    "proxy/base path",
+    "rate limits and errors",
+    "accounts/posts non-atomic consistency"
+  ],
+  "explicitly_not_authorized": [
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OAuth initiate or exchange",
+    "GET /social/:integration",
+    "uploads",
+    "provider tools",
+    "analytics",
+    "notifications",
+    "private getPostsList",
+    "DB access",
+    "Docker deploy"
+  ]
+}

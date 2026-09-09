@@ -1,0 +1,22 @@
+{
+  "compose_config_exit": 0,
+  "compose_config_stderr": "",
+  "provider": "podman-compose 1.5.0",
+  "local_tool_dependencies": {
+    "PyYAML": "6.0.3",
+    "python-dotenv": "1.2.3"
+  },
+  "checks": [
+    "digest pins",
+    "unique project resource names",
+    "loopback-only published ports",
+    "no host networking/privilege",
+    "internal-only networks",
+    "fresh nonexternal volumes",
+    "dependency references",
+    "readonly task dynamicconfig bind",
+    "registration disabled",
+    "cron disabled",
+    "secret mode 0600 and parent 0700"
+  ]
+}

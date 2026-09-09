@@ -1,0 +1,293 @@
+{
+  "classification": "FIELD_MAPPING_RECOMMENDATION_NOT_LIVE_BACKEND_CONTRACT",
+  "local_sources": [
+    {
+      "path": "WORKSPACE/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/validation-02/snapshot/frontend/src/product/publication/types.ts",
+      "snapshot_copy": "sources/v10/types.ts",
+      "sha256": "3b00499499a507e832d13f99e35a9b71a3806d70a1a445883f06e5c26bc2465c"
+    },
+    {
+      "path": "WORKSPACE/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/validation-02/snapshot/frontend/src/product/publication/model.ts",
+      "snapshot_copy": "sources/v10/model.ts",
+      "sha256": "0aec24d8d6f890c17eead4d3e88d7406790c5ca2309e2c12dee51222b2252d63"
+    }
+  ],
+  "upstream_source_ids": [
+    4,
+    5,
+    13,
+    16
+  ],
+  "fields": [
+    {
+      "target": "scope.principalId",
+      "source": null,
+      "recommendation": "Existing authenticated local request scope only; not derivable from these Postiz lists. Project/source binding requires explicit server configuration, not matching names."
+    },
+    {
+      "target": "scope.tenantId",
+      "source": null,
+      "recommendation": "Existing authenticated local request scope only; not derivable from these Postiz lists. Project/source binding requires explicit server configuration, not matching names."
+    },
+    {
+      "target": "scope.sessionId",
+      "source": null,
+      "recommendation": "Existing authenticated local request scope only; not derivable from these Postiz lists. Project/source binding requires explicit server configuration, not matching names."
+    },
+    {
+      "target": "scope.workspaceId",
+      "source": null,
+      "recommendation": "Existing authenticated local request scope only; not derivable from these Postiz lists. Project/source binding requires explicit server configuration, not matching names."
+    },
+    {
+      "target": "scope.projectId",
+      "source": null,
+      "recommendation": "Existing authenticated local request scope only; not derivable from these Postiz lists. Project/source binding requires explicit server configuration, not matching names."
+    },
+    {
+      "target": "scope.sourceId",
+      "source": null,
+      "recommendation": "Existing authenticated local request scope only; not derivable from these Postiz lists. Project/source binding requires explicit server configuration, not matching names."
+    },
+    {
+      "target": "requestId",
+      "source": null,
+      "recommendation": "Echo bound current request ID, reject stale scope/response."
+    },
+    {
+      "target": "query.kind",
+      "source": null,
+      "recommendation": "Local literal project-publication-snapshot"
+    },
+    {
+      "target": "query.limit",
+      "source": null,
+      "recommendation": "Local literal 200; not sent upstream."
+    },
+    {
+      "target": "PublicationSource.scope",
+      "source": null,
+      "recommendation": "Local trusted authority; Postiz successful read cannot synthesize SERVER AVAILABLE effective access."
+    },
+    {
+      "target": "PublicationSource.owner",
+      "source": null,
+      "recommendation": "Local trusted authority; Postiz successful read cannot synthesize SERVER AVAILABLE effective access."
+    },
+    {
+      "target": "PublicationSource.access",
+      "source": null,
+      "recommendation": "Local trusted authority; Postiz successful read cannot synthesize SERVER AVAILABLE effective access."
+    },
+    {
+      "target": "PublicationSource.adapter.origin",
+      "source": null,
+      "recommendation": "V10 isolated-verification is test-only; do not label production Postiz as isolated-verification to bypass gate. Explicit V11 authority required."
+    },
+    {
+      "target": "PublicationSource.adapter.read",
+      "source": null,
+      "recommendation": "New server-side allowlisted HTTP adapter proposal; exact V10 envelope contract remains local."
+    },
+    {
+      "target": "status",
+      "source": null,
+      "recommendation": "ok only after successful validated scoped projection; other failures unavailable/restricted/error/invalid per local parser."
+    },
+    {
+      "target": "version",
+      "source": null,
+      "recommendation": "Locally minted schema-valid opaque observation/snapshot token, explicitly not upstream version/content version; no server revision/ETag contract established."
+    },
+    {
+      "target": "completeness",
+      "source": null,
+      "recommendation": "bounded for successful supported bounded query; partial for skipped recurrence/overflow; never globally complete."
+    },
+    {
+      "target": "fetchedAt",
+      "source": null,
+      "recommendation": "Local adapter observation time in UTC, not provider event time."
+    },
+    {
+      "target": "accounts[].id",
+      "source": "integration.id",
+      "recommendation": "Exact validated projection of only preauthorized integration; reject malformed identifiers, no token repair."
+    },
+    {
+      "target": "accounts[].name",
+      "source": "integration.name",
+      "recommendation": "Exact validated projection of only preauthorized integration; reject malformed identifiers, no token repair."
+    },
+    {
+      "target": "accounts[].platform",
+      "source": "integration.identifier",
+      "recommendation": "Exact validated projection of only preauthorized integration; reject malformed identifiers, no token repair."
+    },
+    {
+      "target": "plans[].id",
+      "source": "post.id",
+      "recommendation": "Exact validated identifier; filter one channel; referential integrity with accounts; duplicate nonrecurring IDs invalid."
+    },
+    {
+      "target": "plans[].accountId",
+      "source": "post.integration.id",
+      "recommendation": "Exact validated identifier; filter one channel; referential integrity with accounts; duplicate nonrecurring IDs invalid."
+    },
+    {
+      "target": "plans[].projectId",
+      "source": null,
+      "recommendation": "Use request.scope.projectId only under explicit local channel-to-project binding; local projection, not upstream association proof."
+    },
+    {
+      "target": "plans[].status",
+      "source": "post.state",
+      "recommendation": "QUEUE\u2192scheduled; PUBLISHED\u2192published; ERROR\u2192failed; DRAFT\u2192draft. Store raw state in separate diagnostic metadata if authorized; no attempt inference."
+    },
+    {
+      "target": "plans[].title",
+      "source": null,
+      "recommendation": "Omit; list does not expose title. Do not derive from content/settings."
+    },
+    {
+      "target": "plans[].summary",
+      "source": "post.content",
+      "recommendation": "Default omit unless explicit per-plan content access. If allowed, plain text only max4000 per V10; omit/reject overlong with clear metadata, never silent truncation masquerading as full content."
+    },
+    {
+      "target": "plans[].copyVersion",
+      "source": null,
+      "recommendation": "Omit; no version relationship."
+    },
+    {
+      "target": "plans[].artifactIds",
+      "source": null,
+      "recommendation": "[] means relationships unavailable in this projection, not proven no media."
+    },
+    {
+      "target": "plans[].timeField",
+      "source": "post.state + publishDate",
+      "recommendation": "QUEUE scheduledAt if valid absolute date; DRAFT unscheduled; PUBLISHED/ERROR unknown. Exclude recurrence. Invalid selected dates -> invalid."
+    },
+    {
+      "target": "plans[].scheduledAt",
+      "source": "post.publishDate where state=QUEUE",
+      "recommendation": "Validated absolute instant only; omit for other states. Not a local-time inference."
+    },
+    {
+      "target": "plans[].publishedAt",
+      "source": null,
+      "recommendation": "Omit; actual publication instant unavailable; do not equate publishDate."
+    },
+    {
+      "target": "artifacts",
+      "source": null,
+      "recommendation": "[]; public list cannot establish these entities and relationships."
+    },
+    {
+      "target": "artifacts[].id",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "artifacts[].projectId",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "artifacts[].name",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "artifacts[].mediaType",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "artifacts[].version",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "attempts",
+      "source": null,
+      "recommendation": "[]; public list cannot establish these entities and relationships."
+    },
+    {
+      "target": "attempts[].id",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "attempts[].planId",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "attempts[].accountId",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "attempts[].status",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "attempts[].attemptedAt",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "attempts[].failureSummary",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "externalPublications",
+      "source": null,
+      "recommendation": "[]; public list cannot establish these entities and relationships."
+    },
+    {
+      "target": "externalPublications[].id",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "externalPublications[].attemptId",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "externalPublications[].planId",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "externalPublications[].accountId",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "externalPublications[].status",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    },
+    {
+      "target": "externalPublications[].publishedAt",
+      "source": null,
+      "recommendation": "Unavailable from allowed public read responses; do not infer or fabricate. No row emitted."
+    }
+  ],
+  "v10_constraints": {
+    "id": "1..180 /^[a-zA-Z0-9][a-zA-Z0-9_.:-]*$/",
+    "text_max": 4000,
+    "accounts_plans_artifacts_max": 200,
+    "attempts_external_max": 1000,
+    "scope_request_query_echo_required": true,
+    "unique_ids_required": true,
+    "project_and_account_references_required": true,
+    "external_requires_real_attempt": true
+  }
+}

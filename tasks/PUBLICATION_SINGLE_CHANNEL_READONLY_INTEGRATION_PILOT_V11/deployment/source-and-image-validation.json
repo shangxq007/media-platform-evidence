@@ -1,0 +1,68 @@
+{
+  "result": "PASS",
+  "source_files": [
+    {
+      "path": "sources/deployment/docker-compose.yaml",
+      "sha256": "6716c1d47054699ee0d6760f30986304659ff3167ea461493568dd21eedbc4fa",
+      "url": "https://raw.githubusercontent.com/gitroomhq/postiz-docker-compose/dd4969e5e694cd009619a0d53cff14c21104580b/docker-compose.yaml"
+    },
+    {
+      "path": "sources/deployment/dynamicconfig/development-sql.yaml",
+      "sha256": "7bf93f05a292f3fd12605fe0f7df2956ccd88ffedabc134109a75c154a173788",
+      "url": "https://raw.githubusercontent.com/gitroomhq/postiz-docker-compose/dd4969e5e694cd009619a0d53cff14c21104580b/dynamicconfig/development-sql.yaml"
+    },
+    {
+      "path": "sources/deployment/dynamicconfig/development-cass.yaml",
+      "sha256": "93974403e6c69537da3bcc35d31e507e4617df6bff71fc72bdb2e98cc177625f",
+      "url": "https://raw.githubusercontent.com/gitroomhq/postiz-docker-compose/dd4969e5e694cd009619a0d53cff14c21104580b/dynamicconfig/development-cass.yaml"
+    }
+  ],
+  "images": [
+    {
+      "service": "postiz",
+      "reference": "ghcr.io/gitroomhq/postiz-app@sha256:785f97312f66a347fb96cdccc4ded5a33ced69a672c89a9adc8054e7d6a21dc5",
+      "registry_manifest_sha256": "sha256:785f97312f66a347fb96cdccc4ded5a33ced69a672c89a9adc8054e7d6a21dc5"
+    },
+    {
+      "service": "postiz-postgres",
+      "reference": "docker.io/library/postgres@sha256:18cfe3ef5e6815560c98237d6216d1e5119702fb0f3894c8785dd58b8bbe5d73",
+      "registry_manifest_sha256": "sha256:18cfe3ef5e6815560c98237d6216d1e5119702fb0f3894c8785dd58b8bbe5d73"
+    },
+    {
+      "service": "postiz-redis",
+      "reference": "docker.io/library/redis@sha256:74566c6910d13ae61e7ce73ebd3127438a1fe805b309b097c323142719ec8a5b",
+      "registry_manifest_sha256": "sha256:74566c6910d13ae61e7ce73ebd3127438a1fe805b309b097c323142719ec8a5b"
+    },
+    {
+      "service": "spotlight",
+      "reference": "ghcr.io/getsentry/spotlight@sha256:daba2de5136fc8db0a0cde45280aa4d369b5ea0a394fe762c86aa42294a11d4d",
+      "registry_manifest_sha256": "sha256:daba2de5136fc8db0a0cde45280aa4d369b5ea0a394fe762c86aa42294a11d4d"
+    },
+    {
+      "service": "temporal-elasticsearch",
+      "reference": "docker.io/library/elasticsearch@sha256:9a6443f55243f6acbfeb4a112d15eb3b9aac74bf25e0e39fa19b3ddd3a6879d0",
+      "registry_manifest_sha256": "sha256:9a6443f55243f6acbfeb4a112d15eb3b9aac74bf25e0e39fa19b3ddd3a6879d0"
+    },
+    {
+      "service": "temporal-postgresql",
+      "reference": "docker.io/library/postgres@sha256:f1c3376c26f2609ab9f29f71f824103fe2fcd8ee0346485cb6122a4f93df6f94",
+      "registry_manifest_sha256": "sha256:f1c3376c26f2609ab9f29f71f824103fe2fcd8ee0346485cb6122a4f93df6f94"
+    },
+    {
+      "service": "temporal",
+      "reference": "docker.io/temporalio/auto-setup@sha256:607d68caa111338d754771efb876c92dfcdae06d056e4530bb31cd0f37406e6a",
+      "registry_manifest_sha256": "sha256:607d68caa111338d754771efb876c92dfcdae06d056e4530bb31cd0f37406e6a"
+    },
+    {
+      "service": "temporal-admin-tools",
+      "reference": "docker.io/temporalio/admin-tools@sha256:01537b62d995f27a0f0d33a01ac4caa6779622f454fb2eb36fed0dccd45c6244",
+      "registry_manifest_sha256": "sha256:01537b62d995f27a0f0d33a01ac4caa6779622f454fb2eb36fed0dccd45c6244"
+    },
+    {
+      "service": "temporal-ui",
+      "reference": "docker.io/temporalio/ui@sha256:cb17ea423d76a8a19a269d0bcd81fc12eee1f6365acd2a56b590dafb35696a95",
+      "registry_manifest_sha256": "sha256:cb17ea423d76a8a19a269d0bcd81fc12eee1f6365acd2a56b590dafb35696a95"
+    }
+  ],
+  "qualification": "Public tag resolves to manifest digest, and official workflow builds tag-named images. No signed source-to-image attestation or runtime version claim. Auxiliary images resolved as of review date, not guaranteed same as historical deployment."
+}

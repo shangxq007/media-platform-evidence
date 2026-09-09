@@ -1,0 +1,45 @@
+[
+  {
+    "args": [
+      "info",
+      "--format",
+      "{{.Host.Security.Rootless}} {{.Host.NetworkBackend}} {{.Store.GraphRoot}}"
+    ],
+    "exit": 0,
+    "stdout": "true netavark TASKROOT/deployment/private/engine\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "ps",
+      "-a",
+      "--format",
+      "{{.Names}}"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "volume",
+      "ls",
+      "--format",
+      "{{.Name}}"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "network",
+      "ls",
+      "--format",
+      "{{.Name}}"
+    ],
+    "exit": 0,
+    "stdout": "podman\n",
+    "stderr": ""
+  }
+]
