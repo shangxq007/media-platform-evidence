@@ -1,0 +1,62 @@
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+stdout | src/product/publication/PublicationWorkspace.test.tsx > Publication select values and options have readable contrast in dark theme
+Publication computed style evidence (happy-dom; inherited colors resolved) {"theme":"dark","colors":[{"element":"SELECT","value":"","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"a","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"b","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"SELECT","value":"","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"alien-state","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"queued","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"SELECT","value":"asc","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"asc","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"desc","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"SELECT","value":"UTC","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"UTC","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"America/Los_Angeles","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"America/New_York","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"Europe/London","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"Europe/Berlin","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"Asia/Shanghai","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"Asia/Kolkata","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622},{"element":"OPTION","value":"Pacific/Auckland","foreground":"#E8EAED","background":"white","contrast":1.2052913407823622}]}
+
+stdout | src/product/publication/PublicationWorkspace.test.tsx > Publication select values and options have readable contrast in light theme
+Publication computed style evidence (happy-dom; inherited colors resolved) {"theme":"light","colors":[{"element":"SELECT","value":"","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"a","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"b","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"SELECT","value":"","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"alien-state","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"queued","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"SELECT","value":"asc","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"asc","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"desc","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"SELECT","value":"UTC","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"UTC","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"America/Los_Angeles","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"America/New_York","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"Europe/London","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"Europe/Berlin","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"Asia/Shanghai","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"Asia/Kolkata","foreground":"#111827","background":"white","contrast":17.73971700407407},{"element":"OPTION","value":"Pacific/Auckland","foreground":"#111827","background":"white","contrast":17.73971700407407}]}
+
+ ❯ src/product/publication/PublicationWorkspace.test.tsx (17 tests | 2 failed) 2298ms
+   ✓ publication workspace discovery and lifecycle > ordinary entry is not connected, without fixtures or publish controls 72ms
+   ✓ publication workspace discovery and lifecycle > distinguishes loading, complete empty, partial empty, error, retry and restricted receipts 113ms
+   ✓ publication workspace discovery and lifecycle > shares content/account/status filters between list and calendar, with reset and same-platform accounts 207ms
+   ✓ publication workspace discovery and lifecycle > inspects explicit relationships and timestamps then closes to the focused row with context preserved 62ms
+   ✓ publication workspace discovery and lifecycle > keeps unscheduled and indeterminate separate, month overflow opens a complete selected-day agenda  425ms
+   ✓ publication workspace discovery and lifecycle > same-context refresh preserves filters, date and scroll but withdraws details without same-ID revival 108ms
+   ✓ publication workspace discovery and lifecycle > aborts old reads on source/session/owner replacement and rejects late success with reused IDs 85ms
+   ✓ publication workspace discovery and lifecycle > access revocation removes protected values from the entire DOM and no self-allowed source revives them 51ms
+   ✓ rejects actual old date/filter/view/open/refresh/dismiss callbacks after source or Selection ownership changes 223ms
+   ✓ a retained dismissal cannot close a later dialog occurrence with the same plan ID 78ms
+   ✓ equal access observation changes preserve browsing; real item grants, adapter and source owner changes retire it 148ms
+   ✓ refresh disappearance clears shared Selection and focuses a safe region; invalid/error data never revives it 101ms
+   ✓ display timezone crosses a month boundary without modifying source schedule; view/refresh preserve date and filters 254ms
+   ✓ all native form controls are non-submitting, details contain focus and long permitted titles remain readable 29ms
+   × Publication select values and options have readable contrast in dark theme 169ms
+     → expected 1.2052913407823622 to be greater than or equal to 4.5
+   ✓ Publication select values and options have readable contrast in light theme 147ms
+   × uses the supplied Chinese Publication search translation for its visible placeholder 23ms
+     → expected 'Search' to be '搜索已提供的发布内容' // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/product/publication/PublicationWorkspace.test.tsx > Publication select values and options have readable contrast in dark theme
+AssertionError: expected 1.2052913407823622 to be greater than or equal to 4.5
+ ❯ src/product/publication/PublicationWorkspace.test.tsx:256:56
+    254|     })
+    255|     console.info('Publication computed style evidence (happy-dom; inhe…
+    256|     for (const color of colors) expect(color.contrast).toBeGreaterThan…
+       |                                                        ^
+    257|   } finally {
+    258|     style.remove()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/product/publication/PublicationWorkspace.test.tsx > uses the supplied Chinese Publication search translation for its visible placeholder
+AssertionError: expected 'Search' to be '搜索已提供的发布内容' // Object.is equality
+
+Expected: "搜索已提供的发布内容"
+Received: "Search"
+
+ ❯ src/product/publication/PublicationWorkspace.test.tsx:266:93
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 15 passed (17)
+   Start at  13:08:19
+   Duration  4.30s (transform 713ms, setup 0ms, collect 1.12s, tests 2.30s, environment 259ms, prepare 90ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/correction-01/red-contrast/results.json

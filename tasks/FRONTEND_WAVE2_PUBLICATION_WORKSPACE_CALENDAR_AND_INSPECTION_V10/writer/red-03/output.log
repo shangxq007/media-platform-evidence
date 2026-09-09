@@ -1,0 +1,53 @@
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/product/publication/PublicationWorkspace.test.tsx [ src/product/publication/PublicationWorkspace.test.tsx ]
+Error: Failed to resolve import "./PublicationWorkspace" from "src/product/publication/PublicationWorkspace.test.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/src/product/publication/PublicationWorkspace.test.tsx:6:37
+  5  |  import { SelectionProvider } from "../../interaction/SelectionContext";
+  6  |  import { LocalizationProvider } from "../../localization";
+  7  |  import { PublicationWorkspace } from "./PublicationWorkspace";
+     |                                        ^
+  8  |  import { receipt, source } from "./model.test";
+  9  |  function host(value, owner = "owner") {
+ ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41
+ ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42655:16
+ ❯ normalizeUrl node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:40634:23
+ ❯ node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:40753:37
+ ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:40680:7
+ ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42453:18
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:35845:27
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/product/publication/model.test.ts [ src/product/publication/model.test.ts ]
+Error: Failed to resolve import "./model" from "src/product/publication/model.test.ts". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/src/product/publication/model.test.ts:3:137
+  1  |  import { describe, expect, it } from "vitest";
+  2  |  import { unknownAccess } from "../../foundation/effectiveAccess";
+  3  |  import { absoluteInstant, calendarDay, monthDays, shiftMonth, parsePublication, filterPlans, publicationAccess, accessFingerprint } from "./model";
+     |                                                                                                                                            ^
+  4  |  import { LIST_KEY, contentKey, artifactKey } from "./types";
+  5  |  export function grant(key) {
+ ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42658:41
+ ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42655:16
+ ❯ normalizeUrl node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:40634:23
+ ❯ node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:40753:37
+ ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:40680:7
+ ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:42453:18
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/dep-Dm0c1Wj2.js:35845:27
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  no tests
+   Start at  12:22:03
+   Duration  896ms (transform 13ms, setup 0ms, collect 0ms, tests 0ms, environment 524ms, prepare 230ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/red-03/results.json

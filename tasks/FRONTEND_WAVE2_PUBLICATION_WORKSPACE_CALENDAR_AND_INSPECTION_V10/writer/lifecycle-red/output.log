@@ -1,0 +1,1734 @@
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ✓ src/product/publication/model.test.ts (8 tests) 52ms
+ ❯ src/product/publication/PublicationWorkspace.test.tsx (14 tests | 1 failed) 2057ms
+   ✓ publication workspace discovery and lifecycle > ordinary entry is not connected, without fixtures or publish controls 74ms
+   ✓ publication workspace discovery and lifecycle > distinguishes loading, complete empty, partial empty, error, retry and restricted receipts 125ms
+   ✓ publication workspace discovery and lifecycle > shares content/account/status filters between list and calendar, with reset and same-platform accounts 210ms
+   ✓ publication workspace discovery and lifecycle > inspects explicit relationships and timestamps then closes to the focused row with context preserved 65ms
+   ✓ publication workspace discovery and lifecycle > keeps unscheduled and indeterminate separate, month overflow opens a complete selected-day agenda  432ms
+   ✓ publication workspace discovery and lifecycle > same-context refresh preserves filters, date and scroll but withdraws details without same-ID revival 102ms
+   ✓ publication workspace discovery and lifecycle > aborts old reads on source/session/owner replacement and rejects late success with reused IDs 86ms
+   ✓ publication workspace discovery and lifecycle > access revocation removes protected values from the entire DOM and no self-allowed source revives them 60ms
+   ✓ rejects actual old date/filter/view/open/refresh/dismiss callbacks after source or Selection ownership changes 213ms
+   ✓ a retained dismissal cannot close a later dialog occurrence with the same plan ID 82ms
+   ✓ equal access observation changes preserve browsing; real item grants, adapter and source owner changes retire it 161ms
+   ✓ refresh disappearance clears shared Selection and focuses a safe region; invalid/error data never revives it 100ms
+   × display timezone crosses a month boundary without modifying source schedule; view/refresh preserve date and filters 293ms
+     → Unable to find an accessible element with the role "dialog"
+
+Here are the accessible roles:
+
+  region:
+
+  Name "Publication workspace":
+  [36m<section[39m
+    [33maria-label[39m=[32m"Publication workspace"[39m
+    [33mclass[39m=[32m"ff-publication"[39m
+    [33mtabindex[39m=[32m"-1"[39m
+  [36m/>[39m
+
+  Name "Publication results":
+  [36m<div[39m
+    [33maria-label[39m=[32m"Publication results"[39m
+    [33mclass[39m=[32m"ff-publication-results"[39m
+    [33mrole[39m=[32m"region"[39m
+  [36m/>[39m
+
+  Name "Selected day agenda":
+  [36m<section[39m
+    [33maria-label[39m=[32m"Selected day agenda"[39m
+    [33mclass[39m=[32m"ff-publication-agenda"[39m
+    [33mrole[39m=[32m"region"[39m
+  [36m/>[39m
+
+  Name "Unscheduled":
+  [36m<section[39m
+    [33maria-label[39m=[32m"Unscheduled"[39m
+    [33mrole[39m=[32m"region"[39m
+  [36m/>[39m
+
+  Name "Indeterminate date":
+  [36m<section[39m
+    [33maria-label[39m=[32m"Indeterminate date"[39m
+    [33mrole[39m=[32m"region"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  [36m<header[39m
+    [33mclass[39m=[32m"ff-page-heading"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  heading:
+
+  Name "Publication workspace":
+  [36m<h1 />[39m
+
+  Name "2024-02":
+  [36m<h2 />[39m
+
+  Name "Selected day agenda · 2024-02-29":
+  [36m<h3 />[39m
+
+  Name "Unscheduled":
+  [36m<h3 />[39m
+
+  Name "Indeterminate date":
+  [36m<h3 />[39m
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"ff-publication-note"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  [36m<p[39m
+    [33mrole[39m=[32m"status"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  searchbox:
+
+  Name "Search supplied publications":
+  [36m<input[39m
+    [33maria-label[39m=[32m"Search supplied publications"[39m
+    [33mclass[39m=[32m"ff-input "[39m
+    [33mplaceholder[39m=[32m"Search"[39m
+    [33mtype[39m=[32m"search"[39m
+    [33mvalue[39m=[32m""[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Account":
+  [36m<select />[39m
+
+  Name "Source status":
+  [36m<select />[39m
+
+  Name "Sort by chosen source time":
+  [36m<select />[39m
+
+  Name "Display timezone":
+  [36m<select />[39m
+
+  --------------------------------------------------
+  option:
+
+  Name "All supplied accounts":
+  [36m<option[39m
+    [33mvalue[39m=[32m""[39m
+  [36m/>[39m
+
+  Name "Studio North · Example · a":
+  [36m<option[39m
+    [33mvalue[39m=[32m"a"[39m
+  [36m/>[39m
+
+  Name "Studio South · Example · b":
+  [36m<option[39m
+    [33mvalue[39m=[32m"b"[39m
+  [36m/>[39m
+
+  Name "All source statuses":
+  [36m<option[39m
+    [33mvalue[39m=[32m""[39m
+  [36m/>[39m
+
+  Name "alien-state":
+  [36m<option />[39m
+
+  Name "queued":
+  [36m<option />[39m
+
+  Name "Earliest first":
+  [36m<option[39m
+    [33mvalue[39m=[32m"asc"[39m
+  [36m/>[39m
+
+  Name "Latest first":
+  [36m<option[39m
+    [33mvalue[39m=[32m"desc"[39m
+  [36m/>[39m
+
+  Name "UTC":
+  [36m<option />[39m
+
+  Name "America/Los_Angeles":
+  [36m<option />[39m
+
+  Name "America/New_York":
+  [36m<option />[39m
+
+  Name "Europe/London":
+  [36m<option />[39m
+
+  Name "Europe/Berlin":
+  [36m<option />[39m
+
+  Name "Asia/Shanghai":
+  [36m<option />[39m
+
+  Name "Asia/Kolkata":
+  [36m<option />[39m
+
+  Name "Pacific/Auckland":
+  [36m<option />[39m
+
+  --------------------------------------------------
+  button:
+
+  Name "Reset filters":
+  [36m<button[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Refresh publications":
+  [36m<button[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "List":
+  [36m<button[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Calendar":
+  [36m<button[39m
+    [33maria-pressed[39m=[32m"true"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Previous month":
+  [36m<button[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Next month":
+  [36m<button[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Today":
+  [36m<button[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-01":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-01"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-02":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-02"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-03":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-03"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-04":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-04"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-05":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-05"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-06":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-06"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-07":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-07"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-08":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-08"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-09":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-09"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-10":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-10"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-11":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-11"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-12":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-12"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-13":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-13"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-14":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-14"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-15":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-15"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-16":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-16"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-17":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-17"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-18":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-18"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-19":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-19"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-20":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-20"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-21":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-21"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-22":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-22"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-23":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-23"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-24":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-24"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-25":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-25"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-26":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-26"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-27":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-27"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-28":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-28"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-29":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-29"[39m
+    [33maria-pressed[39m=[32m"true"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Opening story":
+  [36m<button[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  group:
+
+  Name "Publication view":
+  [36m<div[39m
+    [33maria-label[39m=[32m"Publication view"[39m
+    [33mrole[39m=[32m"group"[39m
+  [36m/>[39m
+
+  Name "Publication month":
+  [36m<div[39m
+    [33maria-label[39m=[32m"Publication month"[39m
+    [33mclass[39m=[32m"ff-publication-calendar"[39m
+    [33mrole[39m=[32m"group"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  [36m<li />[39m
+
+  Name "":
+  [36m<li[39m
+    [33mclass[39m=[32m"ff-publication-row"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"Publication workspace"[39m
+      [33mclass[39m=[32m"ff-publication"[39m
+      [33mtabindex[39m=[32m"-1"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-page-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0mProject · Publication[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0mPublication workspace[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0mFind supplied publication plans, inspect account outcomes, and browse their dates.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<p[39m
+        [33mrole[39m=[32m"status"[39m
+      [36m>[39m
+        [0mSupplied publications[0m
+      [36m</p>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-publication-note"[39m
+      [36m>[39m
+        [0mIsolated verification source · read-only supplied data; no connected publishing account.[0m
+      [36m</p>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-publication-toolbar"[39m
+      [36m>[39m
+        [36m<input[39m
+          [33maria-label[39m=[32m"Search supplied publications"[39m
+          [33mclass[39m=[32m"ff-input "[39m
+          [33mplaceholder[39m=[32m"Search"[39m
+          [33mtype[39m=[32m"search"[39m
+          [33mvalue[39m=[32m""[39m
+        [36m/>[39m
+        [36m<label>[39m
+          [0mAccount[0m
+          [36m<select>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m""[39m
+            [36m>[39m
+              [0mAll supplied accounts[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"a"[39m
+            [36m>[39m
+              [0mStudio North[0m
+              [0m · [0m
+              [0mExample[0m
+              [0m · [0m
+              [0ma[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"b"[39m
+            [36m>[39m
+              [0mStudio South[0m
+              [0m · [0m
+              [0mExample[0m
+              [0m · [0m
+              [0mb[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+        [36m<label>[39m
+          [0mSource status[0m
+          [36m<select>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m""[39m
+            [36m>[39m
+              [0mAll source statuses[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0malien-state[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mqueued[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+        [36m<label>[39m
+          [0mSort by chosen source time[0m
+          [36m<select>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"asc"[39m
+            [36m>[39m
+              [0mEarliest first[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"desc"[39m
+            [36m>[39m
+              [0mLatest first[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0mReset filters[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0mRefresh publications[0m
+        [36m</button>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-publication-toolbar"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33maria-label[39m=[32m"Publication view"[39m
+          [33mrole[39m=[32m"group"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33maria-pressed[39m=[32m"false"[39m
+            [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mList[0m
+          [36m</button>[39m
+          [36m<button[39m
+            [33maria-pressed[39m=[32m"true"[39m
+            [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mCalendar[0m
+          [36m</button>[39m
+        [36m</div>[39m
+        [36m<label>[39m
+          [0mDisplay timezone[0m
+          [36m<select>[39m
+            [36m<option>[39m
+              [0mUTC[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mAmerica/Los_Angeles[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mAmerica/New_York[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mEurope/London[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mEurope/Berlin[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mAsia/Shanghai[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mAsia/Kolkata[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mPacific/Auckland[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+        [36m<small>[39m
+          [0mDisplay timezone changes presentation only.[0m
+        [36m</small>[39m
+      [36m</div>[39m
+      [36m<p>[39m
+        [0mComplete supplied Project snapshot[0m
+        [0m · [0m
+        [0mProject[0m
+        [0m: [0m
+        [0mp[0m
+        [0m · [0m
+        [0mSnapshot version[0m
+        [0m: [0m
+        [0mv1[0m
+      [36m</p>[39m
+      [36m<p>[39m
+        [0mFetched at[0m
+        [0m: [0m
+        [0mMar 10, 2024, 12:00:00 AM PST · 2024-03-10T08:00:00Z[0m
+      [36m</p>[39m
+      [36m<p>[39m
+        [0mCalendar uses each plan’s explicit chosen source field. A due schedule is not proof of publication. Unscheduled and indeterminate dates stay separate.[0m
+      [36m</p>[39m
+      [36m<div[39m
+        [33maria-label[39m=[32m"Publication results"[39m
+        [33mclass[39m=[32m"ff-publication-results"[39m
+        [33mrole[39m=[32m"region"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"ff-publication-toolbar"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mPrevious month[0m
+          [36m</button>[39m
+          [36m<h2>[39m
+            [0m2024-02[0m
+          [36m</h2>[39m
+          [36m<button[39m
+            [...
+   ✓ all native form controls are non-submitting, details contain focus and long permitted titles remain readable 51ms
+ ❯ src/app/routeTree.test.tsx (44 tests | 1 failed) 8095ms
+   ✓ runtime route registration and deep-link restoration > registers every implemented page and preserved legacy link exactly once 16ms
+   ✓ runtime route registration and deep-link restoration > restores Workspace, Project, and surface identity from a creative deep link and fails unauthorized commands closed  475ms
+   ✓ runtime route registration and deep-link restoration > remounts the ProjectFrame subtree when same-route Workspace or Project parameters change 141ms
+   ✓ runtime route registration and deep-link restoration > integrates the disposable sketch on the Workflow route while invoke remains unavailable  376ms
+   ✓ runtime route registration and deep-link restoration > retires Workflow drafts and confirmations when host tenant or effective access changes without granting invocation  332ms
+   ✓ runtime route registration and deep-link restoration > presents bilingual Workflow page guidance and category explanations on the existing route 65ms
+   ✓ runtime route registration and deep-link restoration > reaches the post-H7 edit route and loads explicit canonical HEAD authority  377ms
+   ✓ runtime route registration and deep-link restoration > renders the Workspace to Projects entry without synthesizing a Project selection  350ms
+   ✓ runtime route registration and deep-link restoration > routes the existing Projects destination to the fail-closed recent-project browser without using Workspace home as its source  326ms
+   ✓ runtime route registration and deep-link restoration > routes Operations renders to the fail-closed source browser and leaves Storage behavior unchanged  348ms
+   ✓ runtime route registration and deep-link restoration > registers the Project Production consumer with exact route scope and no implicit fixture or request  346ms
+   ✓ runtime route registration and deep-link restoration > handles Workspace API errors without inventing an empty state 21ms
+   ✓ runtime route registration and deep-link restoration > preserves the historical default API export alongside the additive platform client 0ms
+   ✓ Workflow native OIDC identity/session retirement > preserves the complete draft and unfinished inspector input through two ordinary SDK renewals and a render 138ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual principal change and rejects old title, arrange and delete callbacks 170ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual tenant change and rejects old title, arrange and delete callbacks 183ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual session change and rejects old title, arrange and delete callbacks 106ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual scope change and rejects old title, arrange and delete callbacks 97ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual expired change and rejects old title, arrange and delete callbacks 101ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual unknown expiry change and rejects old title, arrange and delete callbacks 99ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual invalid expiry change and rejects old title, arrange and delete callbacks 120ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual missing sid change and rejects old title, arrange and delete callbacks 155ms
+   ✓ Workflow native OIDC identity/session retirement > retires on actual ambiguous tenant change and rejects old title, arrange and delete callbacks 154ms
+   ✓ Workflow native OIDC identity/session retirement > preserves edits for a fresh observation of equal access but retires a changed factor or access error 128ms
+   ✓ Workflow native OIDC identity/session retirement > establishes trustworthy delayed initial hydration without a fake identity switch 70ms
+   ✓ Workflow native OIDC identity/session retirement > lets UserLoaded supersede initial hydration and ignores a late different initial user 68ms
+   ✓ Workflow native OIDC identity/session retirement > rejects an older loaded read after a newer stored context, including an old event delivered afterwards 88ms
+   ✓ Workflow native OIDC identity/session retirement > does not let an old loaded notification hide a pending genuine identity change 100ms
+   ✓ Workflow native OIDC identity/session retirement > retires on SDK read failure and missing current user instead of preserving uncertain access 105ms
+   ✓ Workflow native OIDC identity/session retirement > ignores pending SDK reads after signout initiation and StrictMode unmount 107ms
+   ✓ Workflow native OIDC identity/session retirement > retires the Workflow owner on a workspace route change 165ms
+   ✓ Workflow native OIDC identity/session retirement > retires the Workflow owner on a project route change 188ms
+   ✓ Workflow native OIDC identity/session retirement > provides an unconfigured no-op subscription without constructing a manager 1ms
+   ✓ Workflow native OIDC identity/session retirement > subscribes through the real export and symmetrically removes native and signout listeners 1ms
+   ✓ Workflow native OIDC identity/session retirement > withdraws old Workflow content synchronously on SDK UserUnloaded and rejects retained editor/confirmation callbacks 148ms
+   ✓ Workflow native OIDC identity/session retirement > withdraws old Workflow content synchronously on SDK AccessTokenExpired and rejects retained editor/confirmation callbacks 111ms
+   ✓ Workflow native OIDC identity/session retirement > withdraws old Workflow content synchronously on SDK UserSignedIn and rejects retained editor/confirmation callbacks 108ms
+   ✓ Workflow native OIDC identity/session retirement > withdraws old Workflow content synchronously on SDK UserSignedOut and rejects retained editor/confirmation callbacks 111ms
+   ✓ Workflow native OIDC identity/session retirement > withdraws old Workflow content synchronously on SDK UserSessionChanged and rejects retained editor/confirmation callbacks 112ms
+   ✓ Workflow native OIDC identity/session retirement > retires at signout initiation before redirect settles (resolve), with no draft restoration 168ms
+   ✓ Workflow native OIDC identity/session retirement > retires at signout initiation before redirect settles (reject), with no draft restoration 193ms
+   ✓ Workflow native OIDC identity/session retirement > ignores hydration after unload and ignores an old loaded event after a new stored session 150ms
+   ✓ V9 NLE route preserves navigation through native renewal and equal access, then retires on true session or access change 211ms
+   × V10 publication route has an ordinary unavailable entry and an explicit host with native renewal continuity and retirement 524ms
+     → expected <button …(2)></button> to be null
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/app/routeTree.test.tsx > V10 publication route has an ordinary unavailable entry and an explicit host with native renewal continuity and retirement
+AssertionError: expected <button …(2)></button> to be null
+
+- Expected: 
+null
+
++ Received: 
+<button
+  class="ff-button ff-button--secondary "
+  type="button"
+>
+  Opening story
+</button>
+
+ ❯ src/app/routeTree.test.tsx:681:69
+    679|     await emitLoaded(sdkUser({ profile: { ...sdkUser().profile, sid: '…
+    680|     expect(screen.queryByRole('dialog')).toBeNull()
+    681|     expect(screen.queryByRole('button', { name: 'Opening story' })).to…
+       |                                                                     ^
+    682|     expect(read.mock.calls.length).toBe(readsBeforeRetirement)
+    683|     act(dismiss); expect(screen.queryByRole('dialog')).toBeNull()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/product/publication/PublicationWorkspace.test.tsx > display timezone crosses a month boundary without modifying source schedule; view/refresh preserve date and filters
+TestingLibraryElementError: Unable to find an accessible element with the role "dialog"
+
+Here are the accessible roles:
+
+  region:
+
+  Name "Publication workspace":
+  [36m<section[39m
+    [33maria-label[39m=[32m"Publication workspace"[39m
+    [33mclass[39m=[32m"ff-publication"[39m
+    [33mtabindex[39m=[32m"-1"[39m
+  [36m/>[39m
+
+  Name "Publication results":
+  [36m<div[39m
+    [33maria-label[39m=[32m"Publication results"[39m
+    [33mclass[39m=[32m"ff-publication-results"[39m
+    [33mrole[39m=[32m"region"[39m
+  [36m/>[39m
+
+  Name "Selected day agenda":
+  [36m<section[39m
+    [33maria-label[39m=[32m"Selected day agenda"[39m
+    [33mclass[39m=[32m"ff-publication-agenda"[39m
+    [33mrole[39m=[32m"region"[39m
+  [36m/>[39m
+
+  Name "Unscheduled":
+  [36m<section[39m
+    [33maria-label[39m=[32m"Unscheduled"[39m
+    [33mrole[39m=[32m"region"[39m
+  [36m/>[39m
+
+  Name "Indeterminate date":
+  [36m<section[39m
+    [33maria-label[39m=[32m"Indeterminate date"[39m
+    [33mrole[39m=[32m"region"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  [36m<header[39m
+    [33mclass[39m=[32m"ff-page-heading"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  heading:
+
+  Name "Publication workspace":
+  [36m<h1 />[39m
+
+  Name "2024-02":
+  [36m<h2 />[39m
+
+  Name "Selected day agenda · 2024-02-29":
+  [36m<h3 />[39m
+
+  Name "Unscheduled":
+  [36m<h3 />[39m
+
+  Name "Indeterminate date":
+  [36m<h3 />[39m
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"ff-publication-note"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  [36m<p[39m
+    [33mrole[39m=[32m"status"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  searchbox:
+
+  Name "Search supplied publications":
+  [36m<input[39m
+    [33maria-label[39m=[32m"Search supplied publications"[39m
+    [33mclass[39m=[32m"ff-input "[39m
+    [33mplaceholder[39m=[32m"Search"[39m
+    [33mtype[39m=[32m"search"[39m
+    [33mvalue[39m=[32m""[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Account":
+  [36m<select />[39m
+
+  Name "Source status":
+  [36m<select />[39m
+
+  Name "Sort by chosen source time":
+  [36m<select />[39m
+
+  Name "Display timezone":
+  [36m<select />[39m
+
+  --------------------------------------------------
+  option:
+
+  Name "All supplied accounts":
+  [36m<option[39m
+    [33mvalue[39m=[32m""[39m
+  [36m/>[39m
+
+  Name "Studio North · Example · a":
+  [36m<option[39m
+    [33mvalue[39m=[32m"a"[39m
+  [36m/>[39m
+
+  Name "Studio South · Example · b":
+  [36m<option[39m
+    [33mvalue[39m=[32m"b"[39m
+  [36m/>[39m
+
+  Name "All source statuses":
+  [36m<option[39m
+    [33mvalue[39m=[32m""[39m
+  [36m/>[39m
+
+  Name "alien-state":
+  [36m<option />[39m
+
+  Name "queued":
+  [36m<option />[39m
+
+  Name "Earliest first":
+  [36m<option[39m
+    [33mvalue[39m=[32m"asc"[39m
+  [36m/>[39m
+
+  Name "Latest first":
+  [36m<option[39m
+    [33mvalue[39m=[32m"desc"[39m
+  [36m/>[39m
+
+  Name "UTC":
+  [36m<option />[39m
+
+  Name "America/Los_Angeles":
+  [36m<option />[39m
+
+  Name "America/New_York":
+  [36m<option />[39m
+
+  Name "Europe/London":
+  [36m<option />[39m
+
+  Name "Europe/Berlin":
+  [36m<option />[39m
+
+  Name "Asia/Shanghai":
+  [36m<option />[39m
+
+  Name "Asia/Kolkata":
+  [36m<option />[39m
+
+  Name "Pacific/Auckland":
+  [36m<option />[39m
+
+  --------------------------------------------------
+  button:
+
+  Name "Reset filters":
+  [36m<button[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Refresh publications":
+  [36m<button[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "List":
+  [36m<button[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Calendar":
+  [36m<button[39m
+    [33maria-pressed[39m=[32m"true"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Previous month":
+  [36m<button[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Next month":
+  [36m<button[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Today":
+  [36m<button[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-01":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-01"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-02":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-02"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-03":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-03"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-04":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-04"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-05":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-05"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-06":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-06"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-07":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-07"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-08":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-08"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-09":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-09"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-10":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-10"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-11":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-11"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-12":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-12"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-13":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-13"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-14":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-14"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-15":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-15"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-16":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-16"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-17":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-17"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-18":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-18"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-19":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-19"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-20":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-20"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-21":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-21"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-22":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-22"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-23":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-23"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-24":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-24"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-25":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-25"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-26":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-26"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-27":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-27"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-28":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-28"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "2024-02-29":
+  [36m<button[39m
+    [33maria-label[39m=[32m"2024-02-29"[39m
+    [33maria-pressed[39m=[32m"true"[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Opening story":
+  [36m<button[39m
+    [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  group:
+
+  Name "Publication view":
+  [36m<div[39m
+    [33maria-label[39m=[32m"Publication view"[39m
+    [33mrole[39m=[32m"group"[39m
+  [36m/>[39m
+
+  Name "Publication month":
+  [36m<div[39m
+    [33maria-label[39m=[32m"Publication month"[39m
+    [33mclass[39m=[32m"ff-publication-calendar"[39m
+    [33mrole[39m=[32m"group"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  Name "":
+  [36m<ul />[39m
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  [36m<li />[39m
+
+  Name "":
+  [36m<li[39m
+    [33mclass[39m=[32m"ff-publication-row"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"Publication workspace"[39m
+      [33mclass[39m=[32m"ff-publication"[39m
+      [33mtabindex[39m=[32m"-1"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"ff-page-heading"[39m
+      [36m>[39m
+        [36m<div>[39m
+          [36m<span>[39m
+            [0mProject · Publication[0m
+          [36m</span>[39m
+          [36m<h1>[39m
+            [0mPublication workspace[0m
+          [36m</h1>[39m
+          [36m<p>[39m
+            [0mFind supplied publication plans, inspect account outcomes, and browse their dates.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<p[39m
+        [33mrole[39m=[32m"status"[39m
+      [36m>[39m
+        [0mSupplied publications[0m
+      [36m</p>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"ff-publication-note"[39m
+      [36m>[39m
+        [0mIsolated verification source · read-only supplied data; no connected publishing account.[0m
+      [36m</p>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-publication-toolbar"[39m
+      [36m>[39m
+        [36m<input[39m
+          [33maria-label[39m=[32m"Search supplied publications"[39m
+          [33mclass[39m=[32m"ff-input "[39m
+          [33mplaceholder[39m=[32m"Search"[39m
+          [33mtype[39m=[32m"search"[39m
+          [33mvalue[39m=[32m""[39m
+        [36m/>[39m
+        [36m<label>[39m
+          [0mAccount[0m
+          [36m<select>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m""[39m
+            [36m>[39m
+              [0mAll supplied accounts[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"a"[39m
+            [36m>[39m
+              [0mStudio North[0m
+              [0m · [0m
+              [0mExample[0m
+              [0m · [0m
+              [0ma[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"b"[39m
+            [36m>[39m
+              [0mStudio South[0m
+              [0m · [0m
+              [0mExample[0m
+              [0m · [0m
+              [0mb[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+        [36m<label>[39m
+          [0mSource status[0m
+          [36m<select>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m""[39m
+            [36m>[39m
+              [0mAll source statuses[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0malien-state[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mqueued[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+        [36m<label>[39m
+          [0mSort by chosen source time[0m
+          [36m<select>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"asc"[39m
+            [36m>[39m
+              [0mEarliest first[0m
+            [36m</option>[39m
+            [36m<option[39m
+              [33mvalue[39m=[32m"desc"[39m
+            [36m>[39m
+              [0mLatest first[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0mReset filters[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0mRefresh publications[0m
+        [36m</button>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"ff-publication-toolbar"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33maria-label[39m=[32m"Publication view"[39m
+          [33mrole[39m=[32m"group"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33maria-pressed[39m=[32m"false"[39m
+            [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mList[0m
+          [36m</button>[39m
+          [36m<button[39m
+            [33maria-pressed[39m=[32m"true"[39m
+            [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mCalendar[0m
+          [36m</button>[39m
+        [36m</div>[39m
+        [36m<label>[39m
+          [0mDisplay timezone[0m
+          [36m<select>[39m
+            [36m<option>[39m
+              [0mUTC[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mAmerica/Los_Angeles[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mAmerica/New_York[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mEurope/London[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mEurope/Berlin[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mAsia/Shanghai[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mAsia/Kolkata[0m
+            [36m</option>[39m
+            [36m<option>[39m
+              [0mPacific/Auckland[0m
+            [36m</option>[39m
+          [36m</select>[39m
+        [36m</label>[39m
+        [36m<small>[39m
+          [0mDisplay timezone changes presentation only.[0m
+        [36m</small>[39m
+      [36m</div>[39m
+      [36m<p>[39m
+        [0mComplete supplied Project snapshot[0m
+        [0m · [0m
+        [0mProject[0m
+        [0m: [0m
+        [0mp[0m
+        [0m · [0m
+        [0mSnapshot version[0m
+        [0m: [0m
+        [0mv1[0m
+      [36m</p>[39m
+      [36m<p>[39m
+        [0mFetched at[0m
+        [0m: [0m
+        [0mMar 10, 2024, 12:00:00 AM PST · 2024-03-10T08:00:00Z[0m
+      [36m</p>[39m
+      [36m<p>[39m
+        [0mCalendar uses each plan’s explicit chosen source field. A due schedule is not proof of publication. Unscheduled and indeterminate dates stay separate.[0m
+      [36m</p>[39m
+      [36m<div[39m
+        [33maria-label[39m=[32m"Publication results"[39m
+        [33mclass[39m=[32m"ff-publication-results"[39m
+        [33mrole[39m=[32m"region"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"ff-publication-toolbar"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"ff-button ff-button--secondary "[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mPrevious month[0m
+          [36m</button>[39m
+          [36m<h2>[39m
+            [0m2024-02[0m
+          [36m</h2>[39m
+          [36m<button[39m
+            [...
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/product/publication/PublicationWorkspace.test.tsx:207:17
+    205|   for (const [r] of read.mock.calls) expect(r.query).toEqual({ kind: '…
+    206|   fireEvent.click(within(agenda).getByRole('button', { name: 'Opening …
+    207|   expect(screen.getByRole('dialog').textContent).toContain('2024-03-01…
+       |                 ^
+    208| })
+    209| it('all native form controls are non-submitting, details contain focus…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 1 passed (3)
+      Tests  2 failed | 64 passed (66)
+   Start at  12:31:40
+   Duration  11.15s (transform 2.46s, setup 0ms, collect 3.49s, tests 10.20s, environment 824ms, prepare 328ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/lifecycle-red/results.json

@@ -1,0 +1,392 @@
+[
+  {
+    "run": "affected-green",
+    "command": [
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "src/product/publication",
+      "src/app/routeTree.test.tsx",
+      "src/foundation/surfaceRegistry.test.ts",
+      "src/interaction",
+      "src/components/app-shell/AppShell.test.tsx",
+      "src/localization",
+      "--configLoader",
+      "runner",
+      "--no-cache",
+      "--reporter=default",
+      "--reporter=json",
+      "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/affected-green/results.json"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:35:04.284973+00:00",
+    "end": "2026-09-09T04:35:16.385922+00:00",
+    "exit": 0,
+    "test_counts": {
+      "total": 194,
+      "passed": 194,
+      "failed": 0,
+      "pending": 0,
+      "assertion_statuses": {
+        "passed": 194
+      }
+    }
+  },
+  {
+    "run": "architecture-01",
+    "command": [
+      "npm",
+      "run",
+      "architecture:guard"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:34:15.930770+00:00",
+    "end": "2026-09-09T04:34:18.001111+00:00",
+    "exit": 1
+  },
+  {
+    "run": "architecture-controls",
+    "command": [
+      "npm",
+      "run",
+      "architecture:guard:test"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:35:04.221683+00:00",
+    "end": "2026-09-09T04:35:07.167721+00:00",
+    "exit": 0
+  },
+  {
+    "run": "architecture-green",
+    "command": [
+      "npm",
+      "run",
+      "architecture:guard"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:35:04.235241+00:00",
+    "end": "2026-09-09T04:35:06.423842+00:00",
+    "exit": 0
+  },
+  {
+    "run": "final-architecture",
+    "command": [
+      "npm",
+      "run",
+      "architecture:guard"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:38:19.823563+00:00",
+    "end": "2026-09-09T04:38:21.887449+00:00",
+    "exit": 0
+  },
+  {
+    "run": "final-lint",
+    "command": [
+      "node",
+      "node_modules/eslint/bin/eslint.js",
+      "src",
+      "--format",
+      "json",
+      "--output-file",
+      "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/final-lint/results.json"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:38:19.772171+00:00",
+    "end": "2026-09-09T04:38:25.990539+00:00",
+    "exit": 0
+  },
+  {
+    "run": "final-targeted",
+    "command": [
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "src/product/publication",
+      "src/app/routeTree.test.tsx",
+      "src/foundation/surfaceRegistry.test.ts",
+      "src/interaction",
+      "src/components/app-shell/AppShell.test.tsx",
+      "src/localization",
+      "--configLoader",
+      "runner",
+      "--no-cache",
+      "--reporter=default",
+      "--reporter=json",
+      "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/final-targeted/results.json"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:38:19.788602+00:00",
+    "end": "2026-09-09T04:38:31.827290+00:00",
+    "exit": 0,
+    "test_counts": {
+      "total": 194,
+      "passed": 194,
+      "failed": 0,
+      "pending": 0,
+      "assertion_statuses": {
+        "passed": 194
+      }
+    }
+  },
+  {
+    "run": "final-typecheck",
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:38:19.803610+00:00",
+    "end": "2026-09-09T04:38:32.627993+00:00",
+    "exit": 0
+  },
+  {
+    "run": "green-01",
+    "command": [
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "src/product/publication",
+      "src/foundation/surfaceRegistry.test.ts",
+      "--configLoader",
+      "runner",
+      "--no-cache",
+      "--reporter=default",
+      "--reporter=json",
+      "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/green-01/results.json"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:28:36.802891+00:00",
+    "end": "2026-09-09T04:28:40.838823+00:00",
+    "exit": 0,
+    "test_counts": {
+      "total": 19,
+      "passed": 19,
+      "failed": 0,
+      "pending": 0,
+      "assertion_statuses": {
+        "passed": 19
+      }
+    }
+  },
+  {
+    "run": "lifecycle-green",
+    "command": [
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "src/product/publication",
+      "src/app/routeTree.test.tsx",
+      "--configLoader",
+      "runner",
+      "--no-cache",
+      "--reporter=default",
+      "--reporter=json",
+      "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/lifecycle-green/results.json"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:34:15.953996+00:00",
+    "end": "2026-09-09T04:34:28.353823+00:00",
+    "exit": 0,
+    "test_counts": {
+      "total": 66,
+      "passed": 66,
+      "failed": 0,
+      "pending": 0,
+      "assertion_statuses": {
+        "passed": 66
+      }
+    }
+  },
+  {
+    "run": "lifecycle-red",
+    "command": [
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "src/product/publication",
+      "src/app/routeTree.test.tsx",
+      "--configLoader",
+      "runner",
+      "--no-cache",
+      "--reporter=default",
+      "--reporter=json",
+      "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/lifecycle-red/results.json"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:31:39.966325+00:00",
+    "end": "2026-09-09T04:31:52.214152+00:00",
+    "exit": 1,
+    "test_counts": {
+      "total": 66,
+      "passed": 64,
+      "failed": 2,
+      "pending": 0,
+      "assertion_statuses": {
+        "passed": 64,
+        "failed": 2
+      }
+    }
+  },
+  {
+    "run": "lint-01",
+    "command": [
+      "node",
+      "node_modules/eslint/bin/eslint.js",
+      "src",
+      "--format",
+      "json",
+      "--output-file",
+      "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/lint-01/results.json"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:28:56.619239+00:00",
+    "end": "2026-09-09T04:29:02.644312+00:00",
+    "exit": 0
+  },
+  {
+    "run": "lint-green",
+    "command": [
+      "node",
+      "node_modules/eslint/bin/eslint.js",
+      "src",
+      "--format",
+      "json",
+      "--output-file",
+      "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/lint-green/results.json"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:35:04.251587+00:00",
+    "end": "2026-09-09T04:35:10.224526+00:00",
+    "exit": 0
+  },
+  {
+    "run": "red-01",
+    "command": [
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "src/product/publication",
+      "--configLoader",
+      "runner",
+      "--no-cache",
+      "--reporter=default",
+      "--reporter=json",
+      "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/red-01/results.json"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:21:41.668580+00:00",
+    "end": "2026-09-09T04:21:42.437768+00:00",
+    "exit": 1,
+    "test_counts": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "pending": 0,
+      "assertion_statuses": {}
+    }
+  },
+  {
+    "run": "red-02",
+    "command": [
+      "node",
+      "frontend/node_modules/vitest/vitest.mjs",
+      "run",
+      "--root",
+      "frontend",
+      "src/product/publication",
+      "--config",
+      "frontend/vitest.config.ts",
+      "--configLoader",
+      "runner",
+      "--no-cache",
+      "--reporter=default",
+      "--reporter=json",
+      "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/red-02/results.json"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1",
+    "start": "2026-09-09T04:21:51.667880+00:00",
+    "end": "2026-09-09T04:21:52.086250+00:00",
+    "exit": 1
+  },
+  {
+    "run": "red-03",
+    "command": [
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "src/product/publication",
+      "--configLoader",
+      "runner",
+      "--no-cache",
+      "--reporter=default",
+      "--reporter=json",
+      "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/red-03/results.json"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:22:02.354567+00:00",
+    "end": "2026-09-09T04:22:04.260021+00:00",
+    "exit": 1,
+    "test_counts": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "pending": 0,
+      "assertion_statuses": {}
+    }
+  },
+  {
+    "run": "red-behavior",
+    "command": [
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "src/product/publication",
+      "--configLoader",
+      "runner",
+      "--no-cache",
+      "--reporter=default",
+      "--reporter=json",
+      "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/red-behavior/results.json"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:22:57.792620+00:00",
+    "end": "2026-09-09T04:23:05.452727+00:00",
+    "exit": 1,
+    "test_counts": {
+      "total": 16,
+      "passed": 1,
+      "failed": 15,
+      "pending": 0,
+      "assertion_statuses": {
+        "passed": 1,
+        "failed": 15
+      }
+    }
+  },
+  {
+    "run": "typecheck-01",
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:28:56.590931+00:00",
+    "end": "2026-09-09T04:29:07.858198+00:00",
+    "exit": 2
+  },
+  {
+    "run": "typecheck-02",
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+    "start": "2026-09-09T04:34:15.967218+00:00",
+    "end": "2026-09-09T04:34:27.896601+00:00",
+    "exit": 0
+  }
+]

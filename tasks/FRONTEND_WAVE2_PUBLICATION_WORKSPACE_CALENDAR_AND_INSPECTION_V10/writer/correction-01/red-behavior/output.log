@@ -1,0 +1,66 @@
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ❯ src/product/publication/PublicationWorkspace.test.tsx (17 tests | 3 failed) 2030ms
+   ✓ publication workspace discovery and lifecycle > ordinary entry is not connected, without fixtures or publish controls 70ms
+   ✓ publication workspace discovery and lifecycle > distinguishes loading, complete empty, partial empty, error, retry and restricted receipts 110ms
+   ✓ publication workspace discovery and lifecycle > shares content/account/status filters between list and calendar, with reset and same-platform accounts 204ms
+   ✓ publication workspace discovery and lifecycle > inspects explicit relationships and timestamps then closes to the focused row with context preserved 62ms
+   ✓ publication workspace discovery and lifecycle > keeps unscheduled and indeterminate separate, month overflow opens a complete selected-day agenda  424ms
+   ✓ publication workspace discovery and lifecycle > same-context refresh preserves filters, date and scroll but withdraws details without same-ID revival 101ms
+   ✓ publication workspace discovery and lifecycle > aborts old reads on source/session/owner replacement and rejects late success with reused IDs 83ms
+   ✓ publication workspace discovery and lifecycle > access revocation removes protected values from the entire DOM and no self-allowed source revives them 47ms
+   ✓ rejects actual old date/filter/view/open/refresh/dismiss callbacks after source or Selection ownership changes 221ms
+   ✓ a retained dismissal cannot close a later dialog occurrence with the same plan ID 71ms
+   ✓ equal access observation changes preserve browsing; real item grants, adapter and source owner changes retire it 148ms
+   ✓ refresh disappearance clears shared Selection and focuses a safe region; invalid/error data never revives it 103ms
+   ✓ display timezone crosses a month boundary without modifying source schedule; view/refresh preserve date and filters 263ms
+   ✓ all native form controls are non-submitting, details contain focus and long permitted titles remain readable 28ms
+   × Publication select values and options have readable contrast in dark theme 30ms
+     → No effective color
+   × Publication select values and options have readable contrast in light theme 16ms
+     → No effective color
+   × uses the supplied Chinese Publication search translation for its visible placeholder 45ms
+     → expected 'Search' to be '搜索已提供的发布内容' // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/product/publication/PublicationWorkspace.test.tsx > Publication select values and options have readable contrast in dark theme
+ FAIL  src/product/publication/PublicationWorkspace.test.tsx > Publication select values and options have readable contrast in light theme
+Error: No effective color
+ ❯ effectiveColor src/product/publication/PublicationWorkspace.test.tsx:231:9
+    229|   if (value && !['inherit', 'transparent', 'rgba(0, 0, 0, 0)'].include…
+    230|   if (element.parentElement) return effectiveColor(element.parentEleme…
+    231|   throw new Error(`No effective ${property}`)
+       |         ^
+    232| }
+    233| function luminance(color: string): number {
+ ❯ effectiveColor src/product/publication/PublicationWorkspace.test.tsx:230:37
+ ❯ effectiveColor src/product/publication/PublicationWorkspace.test.tsx:230:37
+ ❯ effectiveColor src/product/publication/PublicationWorkspace.test.tsx:230:37
+ ❯ effectiveColor src/product/publication/PublicationWorkspace.test.tsx:230:37
+ ❯ effectiveColor src/product/publication/PublicationWorkspace.test.tsx:230:37
+ ❯ effectiveColor src/product/publication/PublicationWorkspace.test.tsx:230:37
+ ❯ effectiveColor src/product/publication/PublicationWorkspace.test.tsx:230:37
+ ❯ src/product/publication/PublicationWorkspace.test.tsx:253:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/product/publication/PublicationWorkspace.test.tsx > uses the supplied Chinese Publication search translation for its visible placeholder
+AssertionError: expected 'Search' to be '搜索已提供的发布内容' // Object.is equality
+
+Expected: "搜索已提供的发布内容"
+Received: "Search"
+
+ ❯ src/product/publication/PublicationWorkspace.test.tsx:268:93
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 14 passed (17)
+   Start at  13:07:50
+   Duration  4.22s (transform 789ms, setup 0ms, collect 1.23s, tests 2.03s, environment 287ms, prepare 110ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/correction-01/red-behavior/results.json
