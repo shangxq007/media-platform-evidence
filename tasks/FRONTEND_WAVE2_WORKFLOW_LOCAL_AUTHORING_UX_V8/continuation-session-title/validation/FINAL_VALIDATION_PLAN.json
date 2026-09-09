@@ -1,0 +1,56 @@
+{
+  "targeted-final": [
+    "./node_modules/.bin/vitest",
+    "run",
+    "src/product/workflow-sketch",
+    "src/components/app-shell/AppShell.test.tsx",
+    "src/interaction",
+    "src/localization/localization.test.tsx",
+    "src/app/routeTree.test.tsx",
+    "--configLoader",
+    "runner",
+    "--no-cache",
+    "--reporter=json",
+    "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_WORKFLOW_LOCAL_AUTHORING_UX_V8/continuation-session-title/validation-01/TARGETED_FINAL.json"
+  ],
+  "type-policy": [
+    "npm",
+    "run",
+    "typecheck"
+  ],
+  "lint": [
+    "./node_modules/.bin/eslint",
+    "src/**/*.{ts,tsx}",
+    "--format",
+    "json",
+    "--output-file",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_WORKFLOW_LOCAL_AUTHORING_UX_V8/continuation-session-title/validation-01/LINT.json"
+  ],
+  "architecture": [
+    "node",
+    "scripts/frontend-architecture-guard.mjs"
+  ],
+  "architecture-controls": [
+    "node",
+    "scripts/frontend-architecture-guard.test.mjs"
+  ],
+  "full-frontend-final": [
+    "./node_modules/.bin/vitest",
+    "run",
+    "--configLoader",
+    "runner",
+    "--no-cache",
+    "--reporter=json",
+    "--outputFile=/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_WORKFLOW_LOCAL_AUTHORING_UX_V8/continuation-session-title/validation-01/FULL_UNIT.json"
+  ],
+  "build-final": [
+    "./node_modules/.bin/vite",
+    "build",
+    "--configLoader",
+    "runner",
+    "--outDir",
+    "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_WORKFLOW_LOCAL_AUTHORING_UX_V8/continuation-session-title/validation-01/build",
+    "--manifest",
+    "--emptyOutDir"
+  ]
+}

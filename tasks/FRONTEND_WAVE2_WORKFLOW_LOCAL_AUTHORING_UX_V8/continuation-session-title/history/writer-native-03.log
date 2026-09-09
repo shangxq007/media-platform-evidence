@@ -1,0 +1,15 @@
+I’ll read the writer brief and repository instructions, then reproduce the failure before making the repair and running targeted verification. I’ll keep the work uncommitted.
+The installed SDK is 3.5.0, and its renewal path raises `UserLoaded` with a fresh `User`; the current wrapper therefore clears the draft on normal renewal. I’m checking which SDK claims can establish session continuity and recording the contract limits before adding the RED regression.
+The RED regression failed as expected: the first ordinary renewal removed the cards and unfinished inspector input. The raw report is saved in the authorized evidence directory.
+
+I’ll use the SDK’s optional `sid` claim to distinguish sessions, with issuer, principal and tenant checks. Missing session identity will still retire drafts. Since SDK events carry no operation generation, I’ll also check the current SDK user and reject obsolete reads; the contract notes will explain what stale events cannot distinguish.
+The renewal regression now passes, preserving both cards, title, position, selection, focus and unfinished input through two renewals and a rerender. I’ve also bounded cards to 120px with a two-line title area, while keeping the full title in the accessible name and inspector. Next I’m checking identity changes, stale callbacks, hydration races and maximum-length titles; browser layout validation remains with Hermes.
+The expanded tests and typecheck pass so far. During review, I found another race worth testing: an old notification could supersede a pending read for a genuine new session and hide that change. I’ve added a focused RED case before correcting it. The latest current-user read needs to govern the result, even when the notification itself is old.
+The final targeted run passed all 178 tests. Typecheck passed, and lint reported zero errors and warnings for the changed TypeScript files. Both RED reports are retained.
+
+Preservation checks also passed: HEAD, the branch ref, real index hash, stash and all inventoried paths outside the eight-file continuation scope are unchanged. I’m finishing the handoff with the SDK/IdP limits and Hermes’s remaining browser and final-gate work.
+Completed the bounded renewal-continuity and title-layout repairs. Both RED reports are preserved; 178 targeted tests, typecheck and focused lint pass.
+
+No commits; HEAD/index unchanged. Missing trusted session identity remains fail-closed. Browser and real-IdP verification remain with Hermes.
+
+[Writer handoff](/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_WORKFLOW_LOCAL_AUTHORING_UX_V8/continuation-session-title/writer/WRITER_HANDOFF.md)

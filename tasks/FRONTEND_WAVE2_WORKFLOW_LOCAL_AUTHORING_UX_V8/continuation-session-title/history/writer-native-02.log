@@ -1,0 +1,12 @@
+ROUTE_OK
+
+I’ll read the writer brief and inspect the contract before making changes. I won’t create commits.
+The installed SDK is `oidc-client-ts` 3.5.0. Its `UserLoaded` event fires during renewal as well as sign-in; the current wrapper retires the draft on every event. I’m checking the available session claims and server access context before writing the failing regression.
+The evidence write failed with `Read-only file system`. The brief authorizes that directory, but the active filesystem policy permits writes only in this worktree and `/tmp`. The brief also requires evidence to go only to its designated directory, so the required RED report cannot yet be saved.
+
+Contract inspection also found that `sid` is optional, while `auth_time` is filtered from the SDK profile by default. Renewal continuity will therefore need an available, trustworthy session identifier; I cannot claim it works for every IdP configuration.
+Read the brief and inspected the SDK contract: `oidc-client-ts` 3.5.0 emits `UserLoaded` during renewal, explaining the draft clearing.
+
+Implementation is blocked because the designated evidence directory is read-only. The brief requires saving RED evidence before production edits. No files changed or commits created; HEAD and index hash remain unchanged.
+
+Can you make `continuation-session-title/writer/` writable in this session’s filesystem policy?
