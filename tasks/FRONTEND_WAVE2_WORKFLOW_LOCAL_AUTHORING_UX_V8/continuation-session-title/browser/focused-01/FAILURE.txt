@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_WORKFLOW_LOCAL_AUTHORING_UX_V8/continuation-session-title/browser-continuation/focused-01/focused_smoke.py", line 90, in <module>
+    begin(sid);fresh();persist=storage();netstart=len(b.network)
+               ~~~~~^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_WORKFLOW_LOCAL_AUTHORING_UX_V8/continuation-session-title/browser-continuation/focused-01/focused_smoke.py", line 51, in fresh
+    b.wait('!window.__leavingDocument && !!document.querySelector(".ff-workflow-sketch")'); b.locale(locale)
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_WORKFLOW_LOCAL_AUTHORING_UX_V8/continuation-session-title/browser-continuation/focused-01/browser_helpers.py", line 36, in wait
+    raise AssertionError('precondition timeout: '+expression)
+AssertionError: precondition timeout: !window.__leavingDocument && !!document.querySelector(".ff-workflow-sketch")
