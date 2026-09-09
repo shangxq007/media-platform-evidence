@@ -1,0 +1,62 @@
+{
+  "disposition": "INTERMEDIATE_NON_SOCKET_ENGINEERING",
+  "commands": [
+    {
+      "name": "adapter-pure",
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_model",
+        "test_second_synthetic"
+      ],
+      "cwd": "/home/user/Documents/workspace/audit-runs/PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11/continuation-implementation/adapter-v2",
+      "start": "2026-09-09T10:45:16.712766+00:00",
+      "exit": 0
+    },
+    {
+      "name": "frontend-pure",
+      "argv": [
+        "node",
+        "/home/user/Documents/workspace/audit-runs/PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11/continuation-implementation/review-correction/frontend-pure-model-runner.cjs",
+        "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend"
+      ],
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "start": "2026-09-09T10:45:16.838068+00:00",
+      "exit": 0
+    }
+  ],
+  "preservation": {
+    "headUnchanged": true,
+    "indexUnchanged": true,
+    "stashUnchanged": true,
+    "changedPaths": [
+      "docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md",
+      "docs/architecture/governance/frontend-product-information-architecture-v1.md",
+      "frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv",
+      "frontend/governance/UX_WAVE_1_REVIEW.md",
+      "frontend/src/localization/catalogs.ts",
+      "frontend/src/localization/source-manifest.json",
+      "frontend/src/product/publication/PublicationWorkspace.test.tsx",
+      "frontend/src/product/publication/PublicationWorkspace.tsx",
+      "frontend/src/product/publication/model.test.ts",
+      "frontend/src/product/publication/model.ts",
+      "frontend/src/product/publication/testing.ts",
+      "frontend/src/product/publication/types.ts"
+    ],
+    "changedCount": 12,
+    "unchangedHistoricalDirtyCount": 65,
+    "onlyExpectedPaths": true,
+    "oldAdapterPreserved": true
+  },
+  "notEvidenceFor": [
+    "HTTP",
+    "browser",
+    "DOM/lifecycle",
+    "real provider",
+    "Outcome B",
+    "final acceptance"
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "schema": "v11-bounded-review-correction-v1",
+  "capturedAt": "2026-09-09T10:37:29Z",
+  "disposition": "BOUNDED_REVIEW_CORRECTION_COMPLETE_INTERMEDIATE_ONLY",
+  "authorization": "REVIEW_CORRECTION_BRIEF.md",
+  "worktree": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1",
+  "branch": "agent/frontend-wave2-product-ux-v1",
+  "head": "f5e19cf53fd010eea2935dd29557e82a879e042c",
+  "parent": "01cf2a509d687b8bf8b39eff69688b2a3f5f2f4a",
+  "governance": {
+    "applicableInstructions": [
+      "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/AGENTS.md",
+      "/home/user/Documents/workspace/audit-runs/PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11/continuation-implementation/REVIEW_CORRECTION_BRIEF.md"
+    ],
+    "conflicts": [],
+    "precedence": "Owner review-correction authorization applied within repository governance",
+    "gitOperationsNotPerformed": ["add", "commit", "stash", "reset", "clean", "merge", "fetch", "pull", "push", "ref mutation"],
+    "headParentStashUnchanged": true,
+    "indexFileSha256": "675115408e86deb10531d0a973cd0372d48458cf17ddb0bb9e6c52858c2fa18e",
+    "stagedPathCount": 0
+  },
+  "corrections": [
+    {
+      "path": "adapter-v2/transport.py",
+      "classification": "AUTHORIZED_ADAPTER_SOURCE",
+      "result": "build_request now validates config, semantic route, and credential before endpoint access; execute_prepared completes request construction before TLS context creation, open_connection construction, or any await",
+      "diff": "adapter-transport-correction.diff"
+    },
+    {
+      "path": "adapter-v2/test_model.py",
+      "classification": "AUTHORIZED_PURE_TEST_SOURCE",
+      "result": "three no-event-loop coroutine first-step tests prove invalid config, route, and credential close with safe Failure values before the first await",
+      "diff": "adapter-test-correction.diff"
+    },
+    {
+      "path": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/src/product/publication/model.ts",
+      "classification": "AUTHORIZED_FRONTEND_MODEL_SOURCE",
+      "result": "generic normalizePublicationStatus no longer interprets provider queue/queued aliases",
+      "diff": "frontend-model-correction.diff"
+    },
+    {
+      "path": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/src/product/publication/testing.ts",
+      "classification": "AUTHORIZED_NEUTRAL_FIXTURE_SOURCE",
+      "result": "generic fixture uses scheduled; provider QUEUE mapping remains only in adapter-v2/model.py",
+      "diff": "frontend-testing-correction.diff"
+    },
+    {
+      "path": "review-correction/frontend-pure-model-runner.cjs",
+      "classification": "TASK_LOCAL_PURE_EVIDENCE_RUNNER",
+      "result": "synchronous bounded CommonJS loader transpiles the actual model.ts and types.ts with installed TypeScript transpileModule and loads the actual installed zod dependency"
+    }
+  ],
+  "sourceEvidence": {
+    "beforeAfter": "source-before-after.tsv",
+    "currentFrontendAuthorizedHashes": "frontend-authorized-post-gates.sha256",
+    "currentAdapterHashes": "adapter-source-post-gate.sha256",
+    "frontendFullIncrementalDiffFromPreservedBaseline": {
+      "baselineArchive": "../baseline/current-dirty-files-before.tar",
+      "baselineArchiveSha256": "88b54c2aee101bbbf65f2b07e3e6c7915fcfd55aef5fc1b22d9bfee5048b02f2",
+      "diff": "frontend-full-incremental.diff",
+      "diffSha256": "deb04908210db7a2f363bf83fca75889f427250217c30cceab32618692bfda61",
+      "replay": "frontend-full-diff-replay.tsv",
+      "replayMatches": 12,
+      "replayMismatches": 0
+    },
+    "sourceBytesStableDuringFrontendGates": true,
+    "frontendPreGateManifestSha256": "eb03ff71884d46a716d3b1457feed12f50892efcd031d694e90831c4461e6514",
+    "frontendPostGateManifestSha256": "eb03ff71884d46a716d3b1457feed12f50892efcd031d694e90831c4461e6514"
+  },
+  "gates": [
+    {
+      "name": "adapter-pure-model-stable",
+      "cwd": "/home/user/Documents/workspace/audit-runs/PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11/continuation-implementation/adapter-v2",
+      "argv": ["python3", "-m", "unittest", "-v", "test_model.py", "test_second_synthetic.py"],
+      "environment": {"PYTHONDONTWRITEBYTECODE": "1"},
+      "nativeExit": 0,
+      "counts": {"total": 15, "passed": 15, "failures": 0, "errors": 0, "skipped": 0},
+      "testIdentities": "adapter-pure-test-identities.txt",
+      "log": "adapter-pure-model-stable.log",
+      "sourceHashBefore": "adapter-pure-source-pre-stable.sha256",
+      "sourceHashAfter": "adapter-pure-source-post-stable.sha256",
+      "sourceUnchangedDuringGate": true,
+      "transportBoundary": "Only invalid-input synchronous coroutine prefixes were stepped once; no event loop, await, acquisition, valid transport, socket, or HTTP path ran"
+    },
+    {
+      "name": "frontend-pure-model-stable",
+      "cwd": "/home/user/Documents/workspace/audit-runs/PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11/continuation-implementation",
+      "argv": ["node", "review-correction/frontend-pure-model-runner.cjs", "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend"],
+      "nativeExit": 0,
+      "counts": {"total": 6, "passed": 6, "failures": 0, "errors": 0, "skipped": 0},
+      "testIdentities": "frontend-pure-test-identities.txt",
+      "machineReport": "frontend-pure-model-stable.json",
+      "stderr": "frontend-pure-model-stable.stderr.log",
+      "sourceHashBefore": "frontend-pure-source-pre-stable.sha256",
+      "sourceHashAfter": "frontend-pure-source-post-stable.sha256",
+      "sourceUnchangedDuringGate": true,
+      "boundary": "No Vite, Vitest, server, DOM, browser, app runtime substitution, network, socket, or live-provider input"
+    },
+    {
+      "name": "frontend-typecheck",
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1",
+      "argv": ["npm", "--prefix", "frontend", "run", "typecheck"],
+      "nativeExit": 0,
+      "log": "frontend-typecheck.log"
+    },
+    {
+      "name": "frontend-architecture",
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1",
+      "argv": ["npm", "--prefix", "frontend", "run", "architecture:guard"],
+      "nativeExit": 0,
+      "result": "PASS",
+      "governedSourceFiles": 206,
+      "localizationManifestInvalid": 0,
+      "localizationRequiredKeysMissing": 0,
+      "log": "frontend-architecture.log"
+    },
+    {
+      "name": "frontend-architecture-controls",
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "argv": ["npm", "run", "architecture:guard:test"],
+      "nativeExit": 0,
+      "counts": {"total": 131, "passed": 131, "failures": 0, "errors": 0, "skipped": 0},
+      "log": "frontend-architecture-controls.log"
+    },
+    {
+      "name": "frontend-lint",
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "argv": ["npm", "run", "lint"],
+      "nativeExit": 0,
+      "counts": {"errors": 0, "warnings": 46},
+      "note": "Preserved repository warning baseline; corrected task sources add no warning",
+      "log": "frontend-lint.log"
+    },
+    {
+      "name": "frontend-build-external",
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "argv": ["npm", "run", "build", "--", "--outDir", "/home/user/Documents/workspace/audit-runs/PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11/continuation-implementation/review-correction/build/frontend", "--emptyOutDir"],
+      "nativeExit": 0,
+      "modulesTransformed": 403,
+      "outputFileCount": 10,
+      "outputManifest": "BUILD_MANIFEST.sha256",
+      "trackedDistOrStaticWritten": false,
+      "log": "frontend-build-external.log"
+    }
+  ],
+  "preservation": {
+    "historicalReceiptsModified": false,
+    "historicalArtifactCheck": {
+      "manifest": "preserved-artifacts-before.sha256",
+      "checked": 102,
+      "unchanged": 100,
+      "authorizedChangedSources": ["adapter-v2/transport.py", "adapter-v2/test_model.py"],
+      "unexpectedMismatches": 0,
+      "checkNativeExit": 1,
+      "checkExitMeaning": "Expected because sha256sum -c sees the two authorized adapter source corrections"
+    },
+    "historicalHandoffSha256": "78dd94f2a3fcda09cc2f30ec1a38c36d41cff4f2f3d20b8498679256d97dbb03",
+    "historicalImplementationReceiptSha256": "9f7d2cd08b5967d13133fd4536c1ef303fb992f9f31a1696c7373614e04d9d5f",
+    "historicalVerificationReceiptSha256": "db3ed5e8a7bc982c0cbb235009f0b88a9aa00910ccdc9fc07aedbaa9d8cdce93",
+    "blockedVitestIdentityArtifactSha256": "cf071f53ba97757991e2be029514d90b17d8bf2927b3906053bdea6aca790093",
+    "blockedVitestIdentityCount": 26,
+    "originalAdapter": {
+      "pilotPySha256": "8541bd38f906c167bc309f31463de3e0c5cfbc8df932bf61b690b62a198c70b9",
+      "testPilotPySha256": "d9387c09071bb8d8edeb7e246b9ba0dd9b4ade194c8030c6195221df5e0d31fa",
+      "preserved": true
+    }
+  },
+  "notRun": {
+    "socketOperations": "PROHIBITED_ZERO",
+    "validPreparedTransport": "NOT_RUN_PROHIBITED",
+    "http": "NOT_RUN_PENDING_SEPARATE_GATE",
+    "vitest26": "NOT_RUN_BLOCKED_UNCHANGED",
+    "browserDomLifecycle": "NOT_RUN_BLOCKED",
+    "realProviderAccountCredential": "NOT_RUN_NOT_AUTHORIZED"
+  },
+  "preparedTransportPlaceholders": "adapter-v2/prepared_transport_test.py remains skipped and unchanged. Its three placeholders neither replace the retained original adapter/test_pilot.py actual HTTP tests nor demonstrate a runnable full local authenticated pilot. The HTTP gate remains pending.",
+  "claimsNotMade": [
+    "HTTP behavior",
+    "socket transport behavior",
+    "Vitest or DOM lifecycle equivalence",
+    "browser behavior",
+    "real provider/account/credential data",
+    "runnable full local authenticated pilot",
+    "Project publication core binding",
+    "actual publication attempt or result",
+    "Outcome A",
+    "original Outcome B",
+    "final acceptance"
+  ]
+}

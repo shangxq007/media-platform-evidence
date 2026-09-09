@@ -1,0 +1,1141 @@
+--- adapter-v3/README.md
++++ adapter-v4/README.md
+@@ -1,4 +1,4 @@
+-# Owner-local external observation adapter v3
++# Owner-local external observation adapter v4
+ 
+ Runnable source definitions, authored offline. This is not an accepted media-platform Project, graph, publication-plan or EffectiveAccess API. Ordinary product frontend remains unavailable and untouched. External provider/instance/account/post references and all core relationships stay `PENDING_CORE_CONTRACT`.
+ 
+@@ -8,18 +8,21 @@
+ - `wire.py`: socket-free exact HTTP framing, strict JSON and fixed raw-Authorization GET builders.
+ - `boundary.py`: closed source configuration, exact identity/query binding, receipt/revision, read reservation, retirement and client projection validation.
+ - `transport.py`: actual nonblocking socket/TLS IO with one absolute operation deadline and byte budget.
+-- `server.py`: one serial bounded handler, fixed listener `127.0.0.1:43119`; server-side upstream credential only.
+-- `client.py`: actual authenticated access→snapshot request path, envelope checks and retirement. Task-local; no product wiring.
++- `server.py`: one serial bounded handler, listener binds only `('127.0.0.1', 0)` and exposes its actual OS-assigned port through a trusted immutable `RuntimeHandle`; server-side upstream credential only.
++- `runtime_handle.py`: pure owner-only bound-address metadata; no network deserializer or caller destination.
++- `client_state.py`: immutable detached owner configuration, complete preflight, strict receipt/envelope validation and generation ordering.
++- `client.py`: authenticated access→snapshot path; every IO operation checks its generation and deadline, and publication is atomic with newer-read/retirement state changes.
++- `owner_runner.py`: actual combined bounded server/client lifecycle, passing the server handle directly to the client.
+ - `transport_tests.py`: unconditional actual synthetic HTTP unittest definitions. No skips/placeholders; never imported or collected in this packet.
+-- `test_model.py`, `test_second_synthetic.py`, `test_pure.py`, `run_pure.py`: explicit socket-free suite. Twelve v2 pure identities retained; the three v2 coroutine-prefix identities remain preserved only in v2, since v3 has no async executor.
++- `test_correction_pure.py`, `run_pure.py`: only new v4 pure identities are selected in this packet. Historical pure sources are copied and preserved but their suites are not rerun. No fake IO is used for generation proofs.
+ 
+-The only execution allowed in this packet is `python3 -B ../verify_offline.py` from this directory. It compiles source in memory, inventories transport identities by AST and invokes only `run_pure.py`. The runner blocks socket audit events and imports of socket, asyncio and all transport/server/client modules. It never constructs an event loop or steps a coroutine. Pure HTTP grammar assertions are byte parsing, not HTTP execution.
++The only execution allowed in this packet is `python3 -B ../correction-v4/verify_offline.py` from this directory. It compiles source in memory, inventories transport identities by AST and invokes only `run_pure.py`. The runner blocks socket audit events and imports of socket, asyncio and all transport/server/client modules. It never constructs an event loop or steps a coroutine. Pure HTTP grammar assertions are byte parsing, not HTTP execution.
+ 
+ ## Future commands — NOT executed here
+ 
+-Prerequisites: Python 3.11+ standard library; independently qualified socket capability; available loopback TCP port 43119 and ephemeral upstream test ports; serial test run with no concurrent adapter listener. Owner HTTP functionality authorization already exists. Current environment capability is `UNQUALIFIED`; do not probe, retry, change sandbox/network policy or ask renewed functionality approval in this packet.
++Prerequisites: Python 3.11+ standard library; independently qualified socket capability; OS-assigned ephemeral loopback listener capability for both adapter and synthetic peers; bounded serial test execution. Owner HTTP functionality authorization already exists. Current environment capability is `UNQUALIFIED`; do not probe, retry, change sandbox/network policy or ask renewed functionality approval in this packet.
+ 
+-From `adapter-v3/`, in a future capability-qualified gate:
++From `adapter-v4/`, in a future capability-qualified gate:
+ 
+ ```sh
+ python3 -B -m unittest -v transport_tests
+@@ -27,14 +30,13 @@
+ 
+ This is synthetic transport evidence only, even if it later passes. Use a fresh future evidence directory and capture native exit, exact source hashes and per-test results. Definitions bind only loopback; no real provider or credentials needed. The fixture starts one synthetic upstream thread and one adapter thread, enforces bounded waits/joins, and closes every accepted socket. Test failure is a failure, not a skip.
+ 
+-For a separate later explicitly configured owner-local read, the owner supplies a JSON source config and server environment. No credentials are in JSON or CLI arguments. Fixed server environment names are `OBSERVATION_LOCAL_TOKEN` and `OBSERVATION_UPSTREAM_KEY`; they must differ and each be 16–4096 printable ASCII non-space characters. The client receives only `OBSERVATION_LOCAL_TOKEN` in its environment. No credential discovery or retrieval occurs.
++For a separate later explicitly configured owner-local read, the owner supplies a JSON source config and server environment. No credentials are in JSON or CLI arguments. Fixed server environment names are `OBSERVATION_LOCAL_TOKEN` and `OBSERVATION_UPSTREAM_KEY`; they must differ and each be 16–4096 printable ASCII non-space characters. The combined owner process receives both; only the local token is passed to the Client object. The upstream key stays in Authority/server state. No credential discovery or retrieval occurs.
+ 
+ ```sh
+-python3 -B server.py --config /OWNER_SUPPLIED/source.json
+-python3 -B client.py --config /OWNER_SUPPLIED/source.json --request-id owner-read-1
++python3 -B owner_runner.py --config /OWNER_SUPPLIED/source.json --request-id owner-read-1
+ ```
+ 
+-Run these in separate owner-controlled processes. These commands are documentation, not instructions to execute during this offline task. Real reads additionally require exact approved provider version, host and literal IP, principal/tenant/session/workspace/project/source/owner binding, instance/account, half-open dates, organization-wide read consent and explicitly provided credentials. Core integration remains unresolved regardless of a successful local read.
++The combined runner validates inputs, starts the ephemeral server, waits at most two seconds for readiness, passes the in-memory non-secret handle directly to the client, performs one bounded read, retires the client/server, and joins the server thread within the configured bound. There is no persisted discovery, arbitrary URL/port option or application configuration mutation. Only a value-safe status/count is printed. `server.py` and `client.py` are library modules; no unimplemented separate-process launch recipe is offered. These commands are documentation, not instructions to execute during this offline task. Real reads additionally require exact approved provider version, host and literal IP, principal/tenant/session/workspace/project/source/owner binding, instance/account, half-open dates, organization-wide read consent and explicitly provided credentials. Core integration remains unresolved regardless of a successful local read.
+ 
+ ## Closed configuration and protocol
+ 
+@@ -42,10 +44,18 @@
+ 
+ Optional typed keys: `synthetic` and `content_allowed` booleans; integer `max_bytes` 1024–1048576, `timeout_seconds` 1–10, `max_reads` 1–60, `max_records` 1–200. Unknown/duplicate fields, coercions and JSON nonfinite constants fail. Config loading is capped at 16384 bytes. Source config is owner-controlled, never accepted from HTTP callers. Synthetic base must be HTTP at literal 127.0.0.1 with the same approved IP. Real base must be HTTPS; path is `/public/v1` or `/api/public/v1`, without userinfo/query/fragment/escapes. Connect uses only the approved literal IP, TLS checks the configured host, and proxies/DNS/caller destinations are not used.
+ 
+-Local methods are GET only: `/observations/access` and a canonical `/observations/snapshot?requestId=...&startInclusive=...&endExclusive=...`. Required headers bind raw local Authorization and exact `X-Observation-Identity` JSON (binding/provider/instance/account/startInclusive/endExclusive). Snapshot additionally binds server-issued `X-Observation-Revision`. The actual client obtains and validates the receipt first, then checks its exact echo and the closed snapshot projection. Local access is a 30-minute, nonrenewing owner-local receipt, narrower than platform authorization. Server restart issues a new opaque access revision. Retirement never revives a client snapshot.
++Local methods are GET only: `/observations/access` and a canonical `/observations/snapshot?requestId=...&startInclusive=...&endExclusive=...`. Required headers bind raw local Authorization and exact `X-Observation-Identity` JSON (binding/provider/instance/account/startInclusive/endExclusive). Snapshot additionally binds server-issued `X-Observation-Revision`. The actual client obtains and validates the receipt first, then checks its exact echo and the closed snapshot projection. Local access is a 30-minute, nonrenewing owner-local receipt, narrower than platform authorization. Server restart issues a new opaque access revision, pinned in the runtime handle. Exact Host must match the actual bound port; localhost aliases and other ports fail. The internal handle issuer accepts only the owner runtime getsockname tuple; it is not an HTTP input or protection against hostile Python code already inside that owner process. Retirement never revives a client snapshot.
+ 
+ Upstream only GET integrations and posts, raw Authorization (no Bearer), exact configured dates; end translates to endExclusive minus one millisecond. Both endpoints read organization-wide; filtering an account does not reduce credential authority, so explicit organization-wide consent is mandatory. No limit/cursor/paging/retry/write request is generated. Two read slots are conservatively reserved before each snapshot; a failed request does not refund slots. An odd remaining slot cannot start a snapshot.
+ 
+ Headers cap at 16384 bytes. Only unambiguous Content-Length response framing is supported; transfer encoding, duplicate headers, folded/control headers, missing length, oversized body, trailing data and redirects fail closed. Each operation bounds all waits and response volume. Server volume cap is `2*(max_bytes+16384+1)+16384`; client cap is `2*(max_bytes+16384+1)` across access plus snapshot. Both upstream requests share the server's original deadline; the client uses one deadline across its complete roundtrip. Expiry/retirement/disconnect/extra body bytes are checked throughout IO. Cancellation drops outstanding results; already-delivered bytes cannot be recalled. Deadline exhaustion closes without a late error body. Descriptor close does not wait for peer/TLS teardown. Handler failures use fixed value-free classes and safe statuses; request, credentials, URLs, upstream messages and content are not logged.
+ 
+ Projection distinguishes absent required upstream identity/date (safe invalid read) from missing optional state (unknown), content not granted (omitted), and unavailable relations (`PENDING_CORE_CONTRACT`, never empty arrays). Recurrence and out-of-window records count as omissions; record caps mark partial. Unknown provider states and ERROR never invent attempts, outcomes or actual publication times. Credential checks include nested keys/values and encoded/escaped representations; this is bounded rejection of specified representations, not a claim to decode arbitrary transformations.
++
++## V4 reconciliation and execution limits
++
++Final v3 already had strict access-receipt boolean/lifetime checks and closed snapshot validation; v4 retains those and additionally validates the echoed receipt with exact types and the runtime revision. Snapshot provider/instance/account/window/access/contract must match the frozen configuration already matched to the access receipt. Starting a valid newer read invalidates an older generation even if the newer read later fails. The last accepted snapshot stays until replaced or retired; retirement clears it. Invalid request IDs fail before access acquisition and do not advance the generation.
++
++Pre-read wrong revision returns safe 403 ACCESS_RETIRED without upstream reads. Active retirement, cancellation and deadline expiry close without a late response; already-sent bytes cannot be recalled. The corresponding authored real HTTP tests assert EOF/no publication, and two new concurrent-read definitions cover supersession during IO and a completed older HTTP response released after newer publication. The latter uses a bounded barrier at pure envelope acceptance after real HTTP, not simulated transport. Neither test is executed here.
++
++All transport identities remain `NOT_RUN_CAPABILITY_UNQUALIFIED`. Syntax and pure evidence are not runtime verification or independent acceptance. No Outcome B; real/core binding remains unresolved.
+--- adapter-v3/boundary.py
++++ adapter-v4/boundary.py
+@@ -8,9 +8,8 @@
+ from model import Config, Failure, PENDING, identifier, ensure_redacted, _safe_header_credential
+ from wire import strict_json, MAX_HEADERS
+ 
+-LOCAL_HOST = '127.0.0.1'
+-LOCAL_PORT = 43119
+-CONTRACT = 'owner-local-external-observations-v3'
++from runtime_handle import LOCAL_HOST, require_handle
++CONTRACT = 'owner-local-external-observations-v4'
+ 
+ def identity(config):
+     return {'binding':copy.deepcopy(config.binding), 'provider':config.provider, 'instance':config.instance_id,
+@@ -48,6 +47,7 @@
+         self.bytes_read = 0
+         self.published = 0
+         self.lock = threading.Lock()
++        self._handle = None
+         ensure_redacted(self.receipt(), (token,upstream_key), self.config.max_bytes)
+ 
+     def check(self):
+@@ -63,6 +63,12 @@
+                 'revision':self.revision, 'authority':'owner-local-single-user', 'coreContract':PENDING,
+                 'list':True, 'content':self.config.content_allowed, 'lifetimeSeconds':1800}
+ 
++    def attach(self, handle):
++        require_handle(handle)
++        if self._handle is not None or handle.revision != self.revision:
++            raise Failure('INVALID_RUNTIME_HANDLE',403)
++        self._handle = handle
++
+     def authorize(self, method, target, headers):
+         if method != 'GET':
+             raise Failure('METHOD_DENIED',405)
+@@ -73,7 +79,7 @@
+             raise Failure('HEADER_DENIED',400)
+         if headers.get('content-length','0') != '0':
+             raise Failure('BODY_DENIED',400)
+-        if headers.get('host') != f'{LOCAL_HOST}:{LOCAL_PORT}':
++        if self._handle is None or headers.get('host') != self._handle.host_header:
+             raise Failure('HOST_DENIED',403)
+         value = headers.get('authorization','')
+         if not value.isascii() or not hmac.compare_digest(value,self.token):
+--- adapter-v3/client.py
++++ adapter-v4/client.py
+@@ -1,94 +1,56 @@
+-"""Task-local authenticated client. No product frontend binding or caller URL."""
+-import argparse
+-import json
+-import os
+-import threading
+-from boundary import CONTRACT, LOCAL_HOST, LOCAL_PORT, identity, load_config, snapshot_target, validate_snapshot
+-from model import Failure, PENDING, _safe_header_credential, ensure_redacted
++"""Task-local client; destination comes only from the owner runtime handle."""
++from boundary import snapshot_target
++from client_state import ClientState, validate_receipt, validate_envelope
++from model import Failure
++from runtime_handle import LOCAL_HOST
+ from transport import Operation, connect, read_response, send
+ from wire import MAX_HEADERS, parse_response
+ 
+ class Client:
+-    def __init__(self, config, token):
+-        self.config = config.validate()
+-        self.token = _safe_header_credential(token)
+-        self.retired = threading.Event()
+-        self.lock = threading.Lock()
+-        self.snapshot = None
++    def __init__(self, config, token, handle):
++        self._state = ClientState(config,token,handle)
++
++    @property
++    def config(self):
++        return self._state.config
++
++    @property
++    def snapshot(self):
++        return self._state.snapshot
+ 
+     def retire(self):
+-        self.retired.set()
+-        with self.lock:
+-            self.snapshot = None
++        self._state.retire()
+ 
+-    def check(self):
+-        if self.retired.is_set():
+-            raise Failure('CLIENT_RETIRED',403)
+-
+-    def request(self,target,op,revision=None):
+-        self.check()
+-        head = (f'GET {target} HTTP/1.1\r\nHost: {LOCAL_HOST}:{LOCAL_PORT}\r\nAuthorization: {self.token}\r\n'
+-                'X-Observation-Identity: '+json.dumps(identity(self.config),separators=(',',':'))+'\r\n')
+-        if revision is not None:
+-            from model import identifier
+-            head += 'X-Observation-Revision: '+identifier(revision)+'\r\n'
+-        data = (head+'Connection: close\r\n\r\n').encode('ascii')
+-        if len(data) > MAX_HEADERS:
+-            raise Failure('HEADERS_TOO_LARGE',431)
++    def request(self, method, target, op, generation, revision=None):
++        # Pure default-deny validation precedes every socket acquisition.
++        data = self._state.prepare(method,target,generation,revision)
++        op.check()
+         sock = None
+         try:
+-            sock = connect(LOCAL_HOST,LOCAL_PORT,op)
++            sock = connect(LOCAL_HOST,self._state.handle.port,op)
+             send(sock,data,op)
+             status,headers,body = read_response(sock,op,self.config.max_bytes)
++            op.check()
+             if status != 200:
+-                # Never trust/reflect arbitrary server error strings.
+                 raise Failure('LOCAL_READ_DENIED',403 if status in (401,403) else 429 if status == 429 else 502)
+-            return parse_response(status,headers,body,self.config.max_bytes)
++            value = parse_response(status,headers,body,self.config.max_bytes)
++            op.check()
++            return value
+         except (OSError,ValueError):
++            op.check()
+             raise Failure('LOCAL_TRANSPORT',502) from None
+         finally:
+             if sock is not None:
+                 sock.close()
+ 
+-    def validate_receipt(self,receipt):
+-        from model import identifier
+-        expected = {'contract':CONTRACT,'kind':'owner-local-access-receipt','identity':identity(self.config),
+-                    'revision':receipt.get('revision') if type(receipt) is dict else None,
+-                    'authority':'owner-local-single-user','coreContract':PENDING,'list':True,
+-                    'content':self.config.content_allowed,'lifetimeSeconds':1800}
+-        if type(receipt) is not dict or receipt != expected:
+-            raise Failure('INVALID_LOCAL_RECEIPT',502)
+-        if type(receipt['list']) is not bool or type(receipt['content']) is not bool or type(receipt['lifetimeSeconds']) is not int:
+-            raise Failure('INVALID_LOCAL_RECEIPT',502)
+-        identifier(receipt['revision'])
+-        return receipt
+-
+-    def read(self,request_id):
+-        op = Operation(self.config.timeout_seconds,2*(self.config.max_bytes+MAX_HEADERS+1),self.check)
+-        receipt = self.validate_receipt(self.request('/observations/access',op))
+-        value = self.request(snapshot_target(self.config,request_id),op,receipt['revision'])
+-        if type(value) is not dict or set(value) != {'contract','kind','coreContract','receipt','requestId','snapshot'} or value['contract'] != CONTRACT or value['kind'] != 'owner-local-snapshot-envelope' or value['coreContract'] != PENDING or value['receipt'] != receipt or value['requestId'] != request_id:
+-            raise Failure('INVALID_LOCAL_ENVELOPE',502)
+-        snapshot = value['snapshot']
+-        validate_snapshot(snapshot,self.config,request_id)
+-        ensure_redacted(value,(self.token,),self.config.max_bytes)
+-        with self.lock:
+-            op.check()
+-            self.snapshot = value
++    def read(self, request_id):
++        state = self._state
++        generation = state.begin(request_id)
++        config = state.config
++        op = Operation(config.timeout_seconds,2*(config.max_bytes+MAX_HEADERS+1),lambda:state.check(generation))
++        receipt = validate_receipt(self.request('GET','/observations/access',op,generation),config,state.handle)
++        op.check()
++        value = self.request('GET',snapshot_target(config,request_id),op,generation,receipt['revision'])
++        validate_envelope(value,receipt,config,state.handle,request_id,state.token)
++        state.publish(generation,value,op.check)
+         return value
+-
+-def main():
+-    parser = argparse.ArgumentParser()
+-    parser.add_argument('--config',required=True)
+-    parser.add_argument('--request-id',required=True)
+-    args = parser.parse_args()
+-    try:
+-        client = Client(load_config(args.config),os.environ.get('OBSERVATION_LOCAL_TOKEN',''))
+-        result = client.read(args.request_id)
+-        # No content, identities, credentials or URLs in CLI output.
+-        print(json.dumps({'status':'ok','coreContract':result['coreContract'],'count':len(result['snapshot']['observations'])}))
+-    except Failure as error:
+-        raise SystemExit(error.code) from None
+-
+-if __name__ == '__main__':
+-    main()
+--- /dev/null
++++ adapter-v4/client_state.py
+@@ -0,0 +1,136 @@
++"""Socket-free client input validation, immutable owner config and generations."""
++import copy
++import json
++import threading
++from dataclasses import dataclass
++from boundary import CONTRACT, identity, snapshot_target, validate_snapshot
++from model import Config, Failure, PENDING, identifier, _safe_header_credential, ensure_redacted
++from runtime_handle import require_handle
++from wire import MAX_HEADERS
++
++@dataclass(frozen=True)
++class OwnerConfig:
++    encoded: str
++
++    @classmethod
++    def capture(cls, config):
++        if type(config) is not Config:
++            raise Failure('INVALID_CONFIGURATION',403)
++        detached = Config.from_mapping(copy.deepcopy(config.__dict__))
++        return cls(json.dumps(detached.__dict__,sort_keys=True,separators=(',',':')))
++
++    def view(self):
++        # Config itself is frozen; its nested mappings are disposable copies.
++        return Config.from_mapping(json.loads(self.encoded))
++
++@dataclass(frozen=True)
++class ReadGeneration:
++    owner: object
++    number: int
++    request_id: str
++
++class ClientState:
++    def __init__(self, config, token, handle):
++        self._owner_config = OwnerConfig.capture(config)
++        self.token = _safe_header_credential(token)
++        self.handle = require_handle(handle)
++        self.lock = threading.RLock()
++        self._owner = object()
++        self._generation = 0
++        self._retired = False
++        self._snapshot = None
++
++    @property
++    def config(self):
++        return self._owner_config.view()
++
++    @property
++    def snapshot(self):
++        with self.lock:
++            return copy.deepcopy(self._snapshot)
++
++    def begin(self, request_id):
++        # Validate complete read intent before even constructing an IO operation.
++        identifier(request_id)
++        snapshot_target(self.config,request_id)
++        with self.lock:
++            if self._retired:
++                raise Failure('CLIENT_RETIRED',403)
++            self._generation += 1
++            generation = ReadGeneration(self._owner,self._generation,request_id)
++            # Both HTTP requests are validated before access acquisition.
++            self.prepare('GET','/observations/access',generation)
++            self.prepare('GET',snapshot_target(self.config,request_id),generation,self.handle.revision)
++            return generation
++
++    def check(self, generation):
++        with self.lock:
++            if self._retired:
++                raise Failure('CLIENT_RETIRED',403)
++            if type(generation) is not ReadGeneration or generation.owner is not self._owner or type(generation.number) is not int or generation.number != self._generation:
++                raise Failure('READ_SUPERSEDED',409)
++            identifier(generation.request_id)
++
++    def retire(self):
++        with self.lock:
++            self._retired = True
++            self._generation += 1
++            self._snapshot = None
++
++    def prepare(self, method, target, generation, revision=None):
++        self.check(generation)
++        if method != 'GET':
++            raise Failure('METHOD_DENIED',405)
++        if type(target) is not str:
++            raise Failure('ROUTE_DENIED',404)
++        if target == '/observations/access':
++            if revision is not None:
++                raise Failure('QUERY_DENIED',403)
++        elif target == snapshot_target(self.config,generation.request_id):
++            identifier(revision)
++            if revision != self.handle.revision:
++                raise Failure('ACCESS_RETIRED',403)
++        else:
++            raise Failure('ROUTE_DENIED',404)
++        head = (f'GET {target} HTTP/1.1\r\nHost: {self.handle.host_header}\r\nAuthorization: {self.token}\r\n'
++                'X-Observation-Identity: '+json.dumps(identity(self.config),separators=(',',':'))+'\r\n')
++        if revision is not None:
++            head += 'X-Observation-Revision: '+revision+'\r\n'
++        data = (head+'Connection: close\r\n\r\n').encode('ascii')
++        if len(data) > MAX_HEADERS:
++            raise Failure('HEADERS_TOO_LARGE',431)
++        self.check(generation)
++        return data
++
++    def publish(self, generation, value, deadline_check):
++        # The generation check and assignment are atomic with begin/retire.
++        with self.lock:
++            self.check(generation)
++            detached = copy.deepcopy(value)
++            deadline_check()
++            self.check(generation)
++            self._snapshot = detached
++
++
++def validate_receipt(receipt, config, handle):
++    require_handle(handle)
++    expected = {'contract':CONTRACT,'kind':'owner-local-access-receipt','identity':identity(config),
++                'revision':handle.revision,'authority':'owner-local-single-user','coreContract':PENDING,
++                'list':True,'content':config.content_allowed,'lifetimeSeconds':1800}
++    if type(receipt) is not dict or receipt != expected:
++        raise Failure('INVALID_LOCAL_RECEIPT',502)
++    if type(receipt['list']) is not bool or type(receipt['content']) is not bool or type(receipt['lifetimeSeconds']) is not int:
++        raise Failure('INVALID_LOCAL_RECEIPT',502)
++    identifier(receipt['revision'])
++    return copy.deepcopy(receipt)
++
++
++def validate_envelope(value, receipt, config, handle, request_id, token):
++    validate_receipt(receipt,config,handle)
++    if type(value) is not dict or set(value) != {'contract','kind','coreContract','receipt','requestId','snapshot'} or value['contract'] != CONTRACT or value['kind'] != 'owner-local-snapshot-envelope' or value['coreContract'] != PENDING or value['receipt'] != receipt or value['requestId'] != request_id:
++        raise Failure('INVALID_LOCAL_ENVELOPE',502)
++    # Echoed receipt also needs exact types: Python True == 1 is insufficient.
++    validate_receipt(value['receipt'],config,handle)
++    validate_snapshot(value['snapshot'],config,request_id)
++    ensure_redacted(value,(token,),config.max_bytes)
++    return value
+--- /dev/null
++++ adapter-v4/owner_runner.py
+@@ -0,0 +1,51 @@
++"""Combined bounded owner-local CLI. Authored only; never run by offline gates."""
++import argparse
++import json
++import os
++import threading
++import uuid
++from boundary import Authority, load_config
++from client import Client
++from client_state import OwnerConfig
++from model import Failure, identifier
++from server import Server
++
++
++def run_once(config, local_token, upstream_key, request_id):
++    # Reject invalid input before server thread/listener or TLS startup.
++    identifier(request_id)
++    config = OwnerConfig.capture(config).view()
++    authority = Authority(config,local_token,upstream_key,'access-'+uuid.uuid4().hex)
++    server = Server(authority)
++    thread = threading.Thread(target=server.serve,daemon=True)
++    client = None
++    thread.start()
++    try:
++        if not server.ready.wait(2) or server.start_error or server.handle is None:
++            raise Failure('LOCAL_LISTENER_UNAVAILABLE',502)
++        # Non-secret handle remains inside this trusted owner process.
++        client = Client(config,local_token,server.handle)
++        return client.read(request_id)
++    finally:
++        if client is not None:
++            client.retire()
++        server.close()
++        thread.join(config.timeout_seconds+1)
++        if thread.is_alive():
++            raise Failure('LOCAL_TEARDOWN_FAILED',502)
++
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument('--config',required=True)
++    parser.add_argument('--request-id',required=True)
++    args = parser.parse_args()
++    try:
++        result = run_once(load_config(args.config),os.environ.get('OBSERVATION_LOCAL_TOKEN',''),
++                          os.environ.get('OBSERVATION_UPSTREAM_KEY',''),args.request_id)
++        print(json.dumps({'status':'ok','coreContract':result['coreContract'],'count':len(result['snapshot']['observations'])}))
++    except Failure as error:
++        raise SystemExit(error.code) from None
++
++if __name__ == '__main__':
++    main()
+--- adapter-v3/run_pure.py
++++ adapter-v4/run_pure.py
+@@ -9,11 +9,12 @@
+ import builtins
+ original_import = builtins.__import__
+ def pure_import(name,*args,**kwargs):
+-    if name.split('.')[0] in {'socket','_socket','asyncio','transport','server','client','transport_tests'}:
++    if name.split('.')[0] in {'socket','_socket','asyncio','transport','server','client','transport_tests','owner_runner','http','ssl','select','selectors','multiprocessing','concurrent'}:
+         raise RuntimeError('PURE_RUNNER_FORBIDDEN_IMPORT')
+     return original_import(name,*args,**kwargs)
+ builtins.__import__ = pure_import
+ import json
++SELECTED_MODULES = ['test_correction_pure']
+ import unittest
+ from pathlib import Path
+ 
+@@ -41,12 +42,14 @@
+         self.identities.append(test.id())
+         super().startTest(test)
+ 
+-suite = unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromName(name) for name in ('test_model','test_second_synthetic','test_pure'))
++suite = unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromName(name) for name in ('test_correction_pure',))
+ result = unittest.TextTestRunner(verbosity=2,resultclass=Result).run(suite)
+ error_ids = result.error_ids
+ failed_ids = result.failed_ids-error_ids
+ skipped_ids = result.skipped_ids-error_ids-failed_ids
+ counts = {'total':result.testsRun,'passed':result.testsRun-len(failed_ids|error_ids|skipped_ids),'failures':len(failed_ids),'errors':len(error_ids),'skipped':len(skipped_ids)}
+-report = {'counts':counts,'identities':result.identities,'socket_audit_hook':True,'forbidden_imports':['socket','_socket','asyncio','transport','server','client','transport_tests'],'transport_collected':False,'failed_identities':sorted(failed_ids),'error_identities':sorted(error_ids),'native_failure_entries':len(result.failures),'native_error_entries':len(result.errors)}
++report = {'counts':counts,'identities':result.identities,'socket_audit_hook':True,'forbidden_imports':['socket','_socket','asyncio','transport','server','client','transport_tests','owner_runner','http','ssl','select','selectors','multiprocessing','concurrent'],'selected_modules':SELECTED_MODULES,'transport_collected':False,'forbidden_modules_loaded':sorted(set(sys.modules) & {'socket','_socket','asyncio','transport','server','client','transport_tests','owner_runner','http','ssl','select','selectors','multiprocessing','concurrent'}),'failed_identities':sorted(failed_ids),'error_identities':sorted(error_ids),'native_failure_entries':len(result.failures),'native_error_entries':len(result.errors)}
++assert not report['forbidden_modules_loaded']
++assert counts['total'] == sum(counts[k] for k in ('passed','failures','errors','skipped'))
+ Path(sys.argv[1]).write_text(json.dumps(report,indent=2)+'\n')
+ sys.exit(0 if result.wasSuccessful() else 1)
+--- /dev/null
++++ adapter-v4/runtime_handle.py
+@@ -0,0 +1,40 @@
++"""Pure metadata for a trusted owner-local runtime; no discovery or IO.
++
++Only owner runtime glue calls _bound_handle after getsockname(). This is a local
++object capability, not a network deserializer or protection from hostile Python
++code in the owner process. No token/key is stored in metadata.
++"""
++from dataclasses import dataclass, field
++from model import Failure, identifier
++
++LOCAL_HOST = '127.0.0.1'
++_ISSUER = object()
++
++@dataclass(frozen=True)
++class RuntimeHandle:
++    port: int
++    revision: str
++    _issuer: object = field(default=None, repr=False, compare=False)
++
++    def __post_init__(self):
++        if self._issuer is not _ISSUER or type(self.port) is not int or not 1 <= self.port <= 65535:
++            raise Failure('INVALID_RUNTIME_HANDLE',403)
++        identifier(self.revision)
++
++    @property
++    def host_header(self):
++        return f'{LOCAL_HOST}:{self.port}'
++
++
++def require_handle(handle):
++    if type(handle) is not RuntimeHandle:
++        raise Failure('INVALID_RUNTIME_HANDLE',403)
++    handle.__post_init__()
++    return handle
++
++
++def _bound_handle(address, revision):
++    """Owner-only issuance from the bound listener's actual getsockname tuple."""
++    if type(address) is not tuple or len(address) != 2 or address[0] != LOCAL_HOST:
++        raise Failure('INVALID_RUNTIME_HANDLE',403)
++    return RuntimeHandle(address[1], revision, _ISSUER)
+--- adapter-v3/server.py
++++ adapter-v4/server.py
+@@ -1,17 +1,14 @@
+ """Owner-configured loopback-only read server; never launched by offline gates."""
+-import argparse
+-import json
+-import os
+ import select
+ import socket
+ import ssl
+ import threading
+-import uuid
+ from datetime import datetime, timezone
+-from boundary import Authority, CONTRACT, LOCAL_HOST, LOCAL_PORT, load_config
++from boundary import Authority, CONTRACT
++from runtime_handle import _bound_handle
+ from model import Failure, PENDING, PostizProjector, ensure_redacted
+ from transport import Operation, read_head, send, upstream
+-from wire import MAX_HEADERS, parse_head, encode_response
++from wire import MAX_HEADERS, parse_head, encode_response, build_request
+ 
+ def error_payload(error):
+     return {'status':'restricted' if error.status in (401,403) else 'error', 'errorClass':error.code,
+@@ -24,6 +21,7 @@
+         self.ready = threading.Event()
+         self.start_error = None
+         self.active = 0
++        self.handle = None
+         # Certificate setup belongs to startup, before bounded requests.
+         self.tls = ssl.create_default_context() if authority.config.endpoint[0] == 'https' else None
+ 
+@@ -35,7 +33,9 @@
+         listener = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+         try:
+             listener.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
+-            listener.bind((LOCAL_HOST,LOCAL_PORT))
++            listener.bind(('127.0.0.1',0))
++            self.handle = _bound_handle(listener.getsockname(),self.authority.revision)
++            self.authority.attach(self.handle)
+             listener.listen(4)
+             listener.setblocking(False)
+             self.ready.set()
+@@ -46,7 +46,7 @@
+                 connection.setblocking(False)
+                 self.active += 1
+                 try:
+-                    self.handle(connection)
++                    self.handle_request(connection)
+                 finally:
+                     connection.close()
+                     self.active -= 1
+@@ -56,10 +56,11 @@
+         finally:
+             listener.close()
+ 
+-    def handle(self, caller):
++    def handle_request(self, caller):
+         a = self.authority
+         c = a.config
+         op = Operation(c.timeout_seconds, 2*(c.max_bytes+MAX_HEADERS+1)+MAX_HEADERS)
++        authorized = False
+         def watch():
+             a.check()
+             if self.stop.is_set():
+@@ -67,14 +68,25 @@
+             if select.select([caller],[],[],0)[0]:
+                 data = caller.recv(1,socket.MSG_PEEK)
+                 raise Failure('BODY_DENIED',400) if data else Failure('CALLER_CANCELLED',499)
++        def error_watch():
++            if authorized:
++                a.check()
++                if self.stop.is_set():
++                    raise Failure('ACCESS_RETIRED',403)
++                if select.select([caller],[],[],0)[0] and not caller.recv(1,socket.MSG_PEEK):
++                    raise Failure('CALLER_CANCELLED',499)
+         try:
+             method_target,headers = parse_head(read_head(caller,op))
+             request_id = a.authorize(*method_target,headers)
++            authorized = True
+             op.cancel = watch
+             op.check()
+             if request_id is None:
+                 payload = a.receipt()
+             else:
++                # Both exact destinations/headers validated before any upstream acquisition.
++                build_request(c,'integrations',a.upstream_key)
++                build_request(c,'posts',a.upstream_key)
+                 a.reserve_snapshot()
+                 accounts = upstream(c,'integrations',a.upstream_key,op,self.tls)
+                 # Fail before consuming posts on a missing/ambiguous/disabled account.
+@@ -90,44 +102,24 @@
+             ensure_redacted(payload,(a.token,a.upstream_key),c.max_bytes)
+             data = encode_response(200,payload)
+             op.check()
+-            # Retirement is serialized with final publication; IO itself checks expiry,
+-            # disconnect, extra request bytes and the original operation deadline.
++            # Every send checks retirement, expiry, disconnect, extra request bytes
++            # and the original operation deadline; already-sent bytes cannot be recalled.
+             a.publish(lambda: send(caller,data,op))
+         except Failure as error:
+-            if error.code in ('CALLER_CANCELLED','DEADLINE_EXCEEDED'):
++            if error.code in ('CALLER_CANCELLED','DEADLINE_EXCEEDED') or authorized and error.code == 'ACCESS_RETIRED':
+                 # Do not start a new error-response deadline or publish a late result.
+                 return
+             try:
+-                op.cancel = lambda: None
++                op.cancel = error_watch
+                 send(caller,encode_response(error.status,error_payload(error)),op)
+             except (Failure,OSError):
+                 pass
+         except (OSError,ValueError,TypeError,RecursionError):
+             try:
+-                op.cancel = lambda: None
++                op.cancel = error_watch
+                 send(caller,encode_response(502,error_payload(Failure('TRANSPORT_FAILURE',502))),op)
+             except (Failure,OSError):
+                 pass
+         finally:
+             a.bytes_read += op.volume
+ 
+-def main():
+-    parser = argparse.ArgumentParser()
+-    parser.add_argument('--config',required=True)
+-    args = parser.parse_args()
+-    try:
+-        config = load_config(args.config)
+-        # Explicit names only. No credential discovery, config-file secrets or logs.
+-        authority = Authority(config,os.environ.get('OBSERVATION_LOCAL_TOKEN',''),
+-                              os.environ.get('OBSERVATION_UPSTREAM_KEY',''),'access-'+uuid.uuid4().hex)
+-        server = Server(authority)
+-        server.serve()
+-        if server.start_error:
+-            raise Failure(server.start_error)
+-    except Failure as error:
+-        raise SystemExit(error.code) from None
+-    except KeyboardInterrupt:
+-        pass
+-
+-if __name__ == '__main__':
+-    main()
+--- /dev/null
++++ adapter-v4/test_correction_pure.py
+@@ -0,0 +1,164 @@
++"""New v4 pure proofs only: no transport imports, fake IO, or loop construction."""
++import copy
++import json
++import unittest
++from dataclasses import FrozenInstanceError, replace
++from boundary import Authority, CONTRACT, identity, snapshot_target
++from client_state import ClientState, OwnerConfig, validate_receipt, validate_envelope
++from model import Config, Failure, PENDING, PostizProjector
++from runtime_handle import RuntimeHandle, _bound_handle, require_handle
++from test_model import raw_config, post, LOCAL, UPSTREAM, START, END
++
++class CorrectionPureTests(unittest.TestCase):
++    def setUp(self):
++        self.config = Config.from_mapping(raw_config())
++        # Pure metadata fixture: this does not bind, claim OS assignment or emulate IO.
++        self.handle = _bound_handle(('127.0.0.1',49152),'rev-v4')
++        self.state = ClientState(self.config,LOCAL,self.handle)
++        self.authority = Authority(self.config,LOCAL,UPSTREAM,'rev-v4')
++        self.authority.attach(self.handle)
++
++    def test_handle_closed_typed_nonsecret_and_frozen(self):
++        for value in ('http://127.0.0.1:49152',{'port':49152},49152,None):
++            with self.subTest(kind=type(value).__name__),self.assertRaises(Failure): require_handle(value)
++        for address in (('localhost',49152),('0.0.0.0',49152),('127.0.0.1',0),('127.0.0.1',True),('127.0.0.1',65536)):
++            with self.subTest(address=address),self.assertRaises(Failure): _bound_handle(address,'rev-v4')
++        with self.assertRaises(Failure): RuntimeHandle(49152,'rev-v4')
++        with self.assertRaises(FrozenInstanceError): self.handle.port = 1
++        self.assertEqual(self.handle.host_header,'127.0.0.1:49152')
++        self.assertNotIn(LOCAL,repr(self.handle))
++        self.assertNotIn(UPSTREAM,repr(self.handle))
++
++    def test_authority_requires_attached_exact_host_and_revision(self):
++        headers = {'host':self.handle.host_header,'authorization':LOCAL,'x-observation-identity':json.dumps(identity(self.config))}
++        self.assertIsNone(self.authority.authorize('GET','/observations/access',headers))
++        for host in ('127.0.0.1:0','127.0.0.1:49153','localhost:49152'):
++            with self.subTest(host=host),self.assertRaises(Failure) as caught:
++                self.authority.authorize('GET','/observations/access',dict(headers,host=host))
++            self.assertEqual((caught.exception.code,caught.exception.status),('HOST_DENIED',403))
++        a = Authority(self.config,LOCAL,UPSTREAM,'rev-v4')
++        with self.assertRaises(Failure): a.authorize('GET','/observations/access',headers)
++        with self.assertRaises(Failure): a.attach(_bound_handle(('127.0.0.1',49153),'wrong'))
++        with self.assertRaises(Failure): self.authority.attach(self.handle)
++        headers['x-observation-revision'] = 'stale'
++        with self.assertRaises(Failure) as caught:
++            self.authority.authorize('GET',snapshot_target(self.config,'r1'),headers)
++        self.assertEqual((caught.exception.code,caught.exception.status),('ACCESS_RETIRED',403))
++        self.assertEqual(self.authority.reads,0)
++
++    def test_owner_config_is_detached_and_stored_frozen(self):
++        expected = identity(self.config)
++        captured = OwnerConfig.capture(self.config)
++        self.config.binding['scope']['projectId'] = 'mutated'
++        self.state.config.binding['ownerId'] = 'mutated'
++        captured.view().binding['scope']['sourceId'] = 'mutated'
++        self.assertEqual(identity(self.state.config),expected)
++        self.assertEqual(identity(captured.view()),expected)
++        with self.assertRaises(FrozenInstanceError): captured.encoded = '{}'
++        with self.assertRaises(FrozenInstanceError): self.state.config.base = 'http://foreign.invalid'
++
++    def test_invalid_request_ids_rejected_before_generation_or_acquisition(self):
++        generation = self.state.begin('valid')
++        for value in (None,True,1,'','x'*181,'a\r\nX: y','http://arbitrary.invalid'):
++            with self.subTest(kind=type(value).__name__),self.assertRaises(Failure): self.state.begin(value)
++            self.state.check(generation)
++        self.assertIsNone(self.state.snapshot)
++
++    def test_complete_method_target_revision_and_generation_preflight(self):
++        generation = self.state.begin('r1')
++        target = snapshot_target(self.config,'r1')
++        request = self.state.prepare('GET',target,generation,'rev-v4')
++        self.assertIn(('Host: '+self.handle.host_header+'\r\n').encode(),request)
++        self.assertTrue(request.startswith(('GET '+target+' HTTP/1.1\r\n').encode()))
++        self.assertIn(b'X-Observation-Revision: rev-v4\r\n',request)
++        for method in ('POST','PUT','PATCH','DELETE','CONNECT','OPTIONS','HEAD','TRACE'):
++            with self.subTest(method=method),self.assertRaises(Failure): self.state.prepare(method,target,generation,'rev-v4')
++        for altered in (None,'https://foreign.invalid','/observations/access?x=1',target+'&requestId=r2',snapshot_target(self.config,'r2'),target+'\r\nX: y'):
++            with self.subTest(target=altered),self.assertRaises(Failure): self.state.prepare('GET',altered,generation,'rev-v4')
++        for revision in (None,True,'','wrong','rev\r\nX: y'):
++            with self.subTest(revision=revision),self.assertRaises(Failure): self.state.prepare('GET',target,generation,revision)
++        with self.assertRaises(Failure): self.state.prepare('GET','/observations/access',generation,'rev-v4')
++        newer = self.state.begin('r2')
++        with self.assertRaises(Failure): self.state.prepare('GET','/observations/access',generation)
++        self.state.check(newer)
++
++    def test_newer_generation_invalidates_older_through_checks_and_publication(self):
++        older = self.state.begin('old')
++        newer = self.state.begin('new')
++        with self.assertRaises(Failure) as caught: self.state.check(older)
++        self.assertEqual(caught.exception.code,'READ_SUPERSEDED')
++        self.state.publish(newer,{'requestId':'new'},lambda:None)
++        with self.assertRaises(Failure): self.state.publish(older,{'requestId':'old'},lambda:None)
++        self.assertEqual(self.state.snapshot,{'requestId':'new'})
++
++    def test_foreign_generation_is_not_current_even_with_same_number(self):
++        own = self.state.begin('r1')
++        other = ClientState(self.config,LOCAL,self.handle).begin('r1')
++        self.assertEqual(own.number,other.number)
++        with self.assertRaises(Failure): self.state.check(other)
++        self.state.check(own)
++
++    def test_retirement_clears_snapshot_and_all_outstanding_generations(self):
++        generation = self.state.begin('r1')
++        self.state.publish(generation,{'requestId':'r1'},lambda:None)
++        self.state.retire()
++        self.assertIsNone(self.state.snapshot)
++        for action in (lambda:self.state.check(generation),lambda:self.state.begin('r2'),lambda:self.state.publish(generation,{},lambda:None)):
++            with self.assertRaises(Failure) as caught: action()
++            self.assertEqual(caught.exception.code,'CLIENT_RETIRED')
++
++    def test_deadline_failure_does_not_publish_and_snapshots_are_detached(self):
++        first = self.state.begin('r1')
++        supplied = {'requestId':'r1','nested':{'x':1}}
++        self.state.publish(first,supplied,lambda:None)
++        supplied['nested']['x'] = 2
++        self.state.snapshot['nested']['x'] = 3
++        second = self.state.begin('r2')
++        def deadline(): raise Failure('DEADLINE_EXCEEDED',504)
++        with self.assertRaises(Failure): self.state.publish(second,{'requestId':'r2'},deadline)
++        self.assertEqual(self.state.snapshot,{'requestId':'r1','nested':{'x':1}})
++
++    def test_receipt_preserves_strict_bool_lifetime_closed_identity_and_revision(self):
++        receipt = self.authority.receipt()
++        self.assertEqual(validate_receipt(receipt,self.config,self.handle),receipt)
++        for key,value in (('list',1),('content',0),('lifetimeSeconds',1800.0),('revision','stale'),('contract','invented'),('unknown',True)):
++            changed = copy.deepcopy(receipt); changed[key] = value
++            with self.subTest(key=key),self.assertRaises(Failure): validate_receipt(changed,self.config,self.handle)
++        for key in receipt:
++            changed = copy.deepcopy(receipt); changed.pop(key)
++            with self.subTest(missing=key),self.assertRaises(Failure): validate_receipt(changed,self.config,self.handle)
++        for field in ('provider','instance','account','startInclusive','endExclusive'):
++            changed = copy.deepcopy(receipt); changed['identity'][field] = 'foreign'
++            with self.subTest(field=field),self.assertRaises(Failure): validate_receipt(changed,self.config,self.handle)
++
++    def envelope(self):
++        accounts = [{'id':'account1','name':'channel','identifier':'synthetic','disabled':False}]
++        snapshot = PostizProjector(self.config,LOCAL,UPSTREAM).project(accounts,{'posts':[post()]},'r1','2026-09-09T13:00:00Z')
++        snapshot['evidence'] = 'synthetic-http-observation'
++        receipt = self.authority.receipt()
++        return {'contract':CONTRACT,'kind':'owner-local-snapshot-envelope','coreContract':PENDING,'receipt':receipt,'requestId':'r1','snapshot':snapshot}
++
++    def test_envelope_snapshot_exact_provider_instance_account_window_access_contract(self):
++        value = self.envelope()
++        def validate(value): return validate_envelope(value,self.authority.receipt(),self.config,self.handle,'r1',LOCAL)
++        self.assertEqual(validate(value),value)
++        paths = [('snapshot','externalAccount','externalReferences',k) for k in ('provider','instance','account')]
++        paths += [('snapshot','observations',0,'externalReferences',k) for k in ('provider','instance','account')]
++        paths += [('snapshot','window',k) for k in ('startInclusive','endExclusive','semantics','upstreamEndInclusive')]
++        paths += [('snapshot','access','authority'),('snapshot','contract'),('snapshot','binding','scope','projectId'),('coreContract',)]
++        for path in paths:
++            altered = copy.deepcopy(value); parent = altered
++            for k in path[:-1]: parent = parent[k]
++            parent[path[-1]] = 'foreign'
++            with self.subTest(path=path),self.assertRaises(Failure): validate(altered)
++        for parent,key,number in (('receipt','list',1),('receipt','content',0),('receipt','lifetimeSeconds',1800.0),('snapshot','access',None)):
++            altered = copy.deepcopy(value)
++            if parent == 'snapshot': altered[parent][key]['list'] = 1
++            else: altered[parent][key] = number
++            with self.subTest(parent=parent,key=key),self.assertRaises(Failure): validate(altered)
++        altered = copy.deepcopy(value)
++        altered['snapshot']['observations'] *= 2
++        with self.assertRaises(Failure): validate(altered)
++        altered = copy.deepcopy(value)
++        altered['snapshot']['window']['extra'] = True
++        with self.assertRaises(Failure): validate(altered)
+--- adapter-v3/test_model.py
++++ adapter-v4/test_model.py
+@@ -18,8 +18,9 @@
+ 
+ 
+ def raw_config(**changes):
++    # Pure URL fixture only; transport tests always replace this with the OS-assigned upstream port.
+     value = {
+-        "provider": "postiz", "instance_id": "postiz-v11-synthetic", "base": "http://127.0.0.1:43119/public/v1",
++        "provider": "postiz", "instance_id": "postiz-v11-synthetic", "base": "http://127.0.0.1:49152/public/v1",
+         "approved_ip": "127.0.0.1", "version": "v2.23.0", "binding": copy.deepcopy(BINDING),
+         "external_account_id": "account1", "start_inclusive": START, "end_exclusive": END,
+         "organization_read_consent": True, "synthetic": True, "content_allowed": False,
+@@ -45,11 +46,11 @@
+ 
+     def test_destination_and_header_injection_are_rejected(self):
+         unsafe = (
+-            "http://127.0.0.1:43119/public/v1%0d%0aX-Evil:yes",
+-            "http://user:pass@127.0.0.1:43119/public/v1",
+-            "http://127.0.0.1:43119/public/v1?next=https://evil.invalid",
+-            "https://127.0.0.1:43119/public/v1",
+-            "http://127.0.0.1:43119/other",
++            "http://127.0.0.1:49152/public/v1%0d%0aX-Evil:yes",
++            "http://user:pass@127.0.0.1:49152/public/v1",
++            "http://127.0.0.1:49152/public/v1?next=https://evil.invalid",
++            "https://127.0.0.1:49152/public/v1",
++            "http://127.0.0.1:49152/other",
+         )
+         for base in unsafe:
+             with self.subTest(base=base), self.assertRaises(Failure):
+--- adapter-v3/test_pure.py
++++ adapter-v4/test_pure.py
+@@ -3,6 +3,7 @@
+ import json
+ import unittest
+ from dataclasses import replace
++from runtime_handle import _bound_handle
+ from boundary import Authority, identity, snapshot_target, parse_config
+ from model import Config, Failure, PENDING, PostizProjector, secret_variants, ensure_redacted
+ from wire import parse_head, strict_json, parse_response, MAX_HEADERS
+@@ -12,7 +13,9 @@
+     def setUp(self):
+         self.config = Config.from_mapping(raw_config())
+         self.a = Authority(self.config,LOCAL,UPSTREAM,'rev1')
+-        self.headers = {'host':'127.0.0.1:43119','authorization':LOCAL,
++        self.handle = _bound_handle(('127.0.0.1',49152),'rev1')  # pure metadata, no listener
++        self.a.attach(self.handle)
++        self.headers = {'host':self.handle.host_header,'authorization':LOCAL,
+                         'x-observation-identity':json.dumps(identity(self.config))}
+ 
+     def denied(self,headers=None,target='/observations/access',method='GET'):
+--- adapter-v3/transport.py
++++ adapter-v4/transport.py
+@@ -40,6 +40,7 @@
+         return bool(ready[1] if writing else ready[0])
+ 
+ def connect(ip, port, op, tls_context=None, hostname=None):
++    op.check()  # generation/deadline checked before descriptor acquisition
+     address = ipaddress.ip_address(ip)  # literal only, no DNS
+     sock = socket.socket(socket.AF_INET6 if address.version == 6 else socket.AF_INET, socket.SOCK_STREAM)
+     sock.setblocking(False)
+--- adapter-v3/transport_tests.py
++++ adapter-v4/transport_tests.py
+@@ -1,7 +1,7 @@
+ """Actual loopback HTTP unittests. NOT RUN or collected by offline authoring.
+ 
+ Python 3.11+ stdlib; unconditional tests, synthetic credentials, bounded threads,
+-socket resources and joins. Fixed adapter port 43119 must be available. No skips.
++socket resources and joins. All listeners use OS-assigned ephemeral loopback ports. No skips.
+ """
+ import base64
+ import copy
+@@ -13,8 +13,9 @@
+ import unittest
+ from dataclasses import replace
+ from urllib.parse import urlencode
+-from boundary import Authority, LOCAL_HOST, LOCAL_PORT, identity, snapshot_target
++from boundary import Authority, LOCAL_HOST, identity, snapshot_target
+ from client import Client
++from runtime_handle import _bound_handle
+ from model import Config, Failure, PENDING
+ from server import Server
+ from transport import Operation, connect, read_response, send
+@@ -118,14 +119,14 @@
+     def request_bytes(self,method='GET',target=None,token=LOCAL,ident=None,revision='rev-http-1',extra=b'',body=b''):
+         if target is None: target = snapshot_target(self.config,'r1')
+         if ident is None: ident = identity(self.config)
+-        raw = (f'{method} {target} HTTP/1.1\r\nHost: {LOCAL_HOST}:{LOCAL_PORT}\r\n'
++        raw = (f'{method} {target} HTTP/1.1\r\nHost: {self.server.handle.host_header}\r\n'
+                f'Authorization: {token}\r\nX-Observation-Identity: '+json.dumps(ident,separators=(',',':'))+'\r\n').encode()
+         if revision is not None: raw += f'X-Observation-Revision: {revision}\r\n'.encode()
+         return raw+extra+b'\r\n'+body
+ 
+     def exchange(self,raw):
+         op = Operation(3,2*1048576)
+-        sock = connect(LOCAL_HOST,LOCAL_PORT,op)
++        sock = connect(LOCAL_HOST,self.server.handle.port,op)
+         try:
+             send(sock,raw,op)
+             status,_,body = read_response(sock,op,1048576)
+@@ -147,7 +148,7 @@
+         self.assertNotIn('PRIVATE',json.dumps(value))
+ 
+     def test_normal_authenticated_client_roundtrip(self):
+-        client = Client(self.config,LOCAL)
++        client = Client(self.config,LOCAL,self.server.handle)
+         result = client.read('r-normal')
+         self.assertEqual(result,client.snapshot)
+         self.assertEqual(result['receipt']['identity'],identity(self.config))
+@@ -318,7 +319,7 @@
+     def test_caller_disconnect_cancels_and_late_result_cannot_publish(self):
+         self.up.delay = 0.4
+         op = Operation(2,1048576)
+-        sock = connect(LOCAL_HOST,LOCAL_PORT,op)
++        sock = connect(LOCAL_HOST,self.server.handle.port,op)
+         try:
+             send(sock,self.request_bytes(),op)
+             self.assertTrue(self.up.received.wait(1))
+@@ -332,14 +333,14 @@
+     def test_server_retirement_rejects_late_result(self):
+         self.up.delay = 0.4
+         op = Operation(2,1048576)
+-        sock = connect(LOCAL_HOST,LOCAL_PORT,op)
++        sock = connect(LOCAL_HOST,self.server.handle.port,op)
+         try:
+             send(sock,self.request_bytes(),op)
+             self.assertTrue(self.up.received.wait(1))
+             self.authority.retire()
+-            status,_,body = read_response(sock,op,1048576)
+-            self.assertEqual(status,403)
+-            self.assertNotIn('snapshot',json.loads(body))
++            with self.assertRaises(Failure) as caught:
++                read_response(sock,op,1048576)
++            self.assertEqual(caught.exception.code,'INCOMPLETE_HTTP')  # active retirement closes without late publication
+         finally:
+             sock.close()
+         self.wait_idle()
+@@ -347,7 +348,7 @@
+ 
+     def test_client_retirement_closes_request_and_drops_late_result(self):
+         self.up.delay = 0.4
+-        client = Client(self.config,LOCAL)
++        client = Client(self.config,LOCAL,self.server.handle)
+         outcomes = []
+         def run():
+             try: outcomes.append(client.read('r-retire'))
+@@ -377,7 +378,7 @@
+         self.assertEqual(self.authority.reads,0)
+ 
+     def test_local_ambiguous_headers_and_size(self):
+-        for extra in (b'Host: 127.0.0.1:43119\r\n',b'Transfer-Encoding: chunked\r\n',b'Content-Length: +1\r\n',b'X: bad\nInjected: yes\r\n'):
++        for extra in (f'Host: {self.server.handle.host_header}\r\n'.encode(),b'Transfer-Encoding: chunked\r\n',b'Content-Length: +1\r\n',b'X: bad\nInjected: yes\r\n'):
+             status,result = self.snapshot(extra=extra)
+             self.assertEqual(status,400)
+             self.assertNotIn('snapshot',result)
+@@ -415,7 +416,7 @@
+ 
+     def test_read_volume_cap_on_real_http(self):
+         op = Operation(2,32)
+-        sock = connect(LOCAL_HOST,LOCAL_PORT,op)
++        sock = connect(LOCAL_HOST,self.server.handle.port,op)
+         try:
+             send(sock,self.request_bytes(target='/observations/access',revision=None),op)
+             with self.assertRaises(Failure) as caught: read_response(sock,op,1048576)
+@@ -434,23 +435,29 @@
+         receipt = Authority(self.config,LOCAL,UPSTREAM,'other-rev').receipt()
+         snapshot = PostizProjector(self.config,LOCAL,UPSTREAM).project(self.up.accounts,{'posts':[post()]},'r1','2026-09-09T13:00:00Z')
+         snapshot['evidence'] = 'synthetic-http-observation'
+-        for attack in ('identity','revision','provider','account','request'):
++        for attack in ('identity','revision','provider','instance','account','request','window','access','contract','receipt-bool','echo-bool','receipt-lifetime'):
+             with self.subTest(attack=attack):
+                 mutated = copy.deepcopy(receipt)
+                 projected = copy.deepcopy(snapshot)
+                 if attack == 'identity': mutated['identity']['binding']['scope']['projectId'] = 'foreign'
+                 if attack == 'revision': mutated['revision'] = 'stale'
+-                if attack in ('provider','account'): projected['observations'][0]['externalReferences'][attack] = 'foreign'
++                if attack in ('provider','instance','account'): projected['observations'][0]['externalReferences'][attack] = 'foreign'
++                if attack == 'window': projected['window']['endExclusive'] = START
++                if attack == 'access': projected['access']['list'] = 1
++                if attack == 'contract': projected['contract'] = 'invented-core'
++                if attack in ('receipt-bool','echo-bool'): mutated['list'] = 1
++                if attack == 'receipt-lifetime': mutated['lifetimeSeconds'] = 1800.0
+                 envelope = {'contract':receipt['contract'],'kind':'owner-local-snapshot-envelope','coreContract':PENDING,
+                             'receipt':mutated,'requestId':'foreign' if attack=='request' else 'r1','snapshot':projected}
+                 listener = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+                 listener.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
+-                listener.bind((LOCAL_HOST,LOCAL_PORT)); listener.listen(2); listener.settimeout(0.5)
++                listener.bind(('127.0.0.1',0)); listener.listen(2); listener.settimeout(0.5)
++                peer_handle = _bound_handle(listener.getsockname(),receipt['revision'])
+                 stop = threading.Event()
+                 errors = []
+                 def peer():
+                     try:
+-                        for payload in (mutated if attack=='identity' else receipt,envelope):
++                        for payload in (mutated if attack in ('identity','receipt-bool','receipt-lifetime') else receipt,envelope):
+                             if stop.is_set(): break
+                             connection,_ = listener.accept()
+                             with connection:
+@@ -466,7 +473,7 @@
+                         errors.append('bounded peer closed')
+                 thread = threading.Thread(target=peer,daemon=True)
+                 thread.start()
+-                client = Client(self.config,LOCAL)
++                client = Client(self.config,LOCAL,peer_handle)
+                 try:
+                     with self.assertRaises(Failure) as caught: client.read('r1')
+                     self.assertIn(caught.exception.code,('INVALID_LOCAL_RECEIPT','INVALID_LOCAL_ENVELOPE','INVALID_LOCAL_SNAPSHOT'))
+@@ -475,5 +482,106 @@
+                     stop.set(); listener.close(); thread.join(2)
+                 self.assertFalse(thread.is_alive())
+ 
++
++    def test_ephemeral_handle_and_exact_actual_host(self):
++        self.assertGreater(self.server.handle.port,0)
++        self.assertGreater(self.up.port,0)
++        self.assertNotEqual(self.server.handle.port,self.up.port)
++        self.assertEqual(self.authority._handle,self.server.handle)
++        raw = self.request_bytes()
++        for host in ('localhost:'+str(self.server.handle.port),'127.0.0.1:0',
++                     '127.0.0.1:'+str(self.up.port),self.server.handle.host_header+'.'):
++            with self.subTest(host_kind='mismatch'):
++                status,result = self.exchange(raw.replace(self.server.handle.host_header.encode(),host.encode(),1))
++                self.assertEqual((status,result['errorClass']),(403,'HOST_DENIED'))
++        self.assertEqual(self.up.calls,[])
++        self.assertEqual(self.authority.reads,0)
++
++    def test_client_invalid_request_id_has_zero_acquisitions(self):
++        client = Client(self.config,LOCAL,self.server.handle)
++        for request_id in (None,True,'','bad\r\nInjected: yes','x'*181):
++            with self.subTest(kind=type(request_id).__name__),self.assertRaises(Failure):
++                client.read(request_id)
++        self.assertEqual(self.authority.published,0)
++        self.assertEqual(self.authority.bytes_read,0)
++        self.assertEqual(self.authority.reads,0)
++        self.assertEqual(self.up.calls,[])
++        self.assertIsNone(client.snapshot)
++
++    def test_client_binding_is_detached_during_actual_roundtrip(self):
++        client = Client(self.config,LOCAL,self.server.handle)
++        original = identity(self.config)
++        self.config.binding['scope']['projectId'] = 'mutated-owner-input'
++        client.config.binding['ownerId'] = 'mutated-returned-view'
++        result = client.read('r-detached')
++        self.assertEqual(result['receipt']['identity'],original)
++        self.assertEqual(len(self.up.calls),2)
++
++    def test_newer_read_supersedes_inflight_http_and_discards_late_response(self):
++        self.up.delay = 0.3
++        client = Client(self.config,LOCAL,self.server.handle)
++        outcomes = []
++        def older():
++            try: outcomes.append(client.read('r-old'))
++            except Failure as error: outcomes.append(error.code)
++        old_thread = threading.Thread(target=older,daemon=True)
++        old_thread.start()
++        try:
++            self.assertTrue(self.up.received.wait(1))
++            newer = client.read('r-new')
++        finally:
++            old_thread.join(3)
++        self.assertFalse(old_thread.is_alive())
++        self.assertEqual(outcomes,['READ_SUPERSEDED'])
++        self.assertEqual(newer['requestId'],'r-new')
++        self.assertEqual(client.snapshot,newer)
++        self.assertEqual(len(self.up.calls),3)  # old integrations, new integrations + posts
++        self.assertTrue(all(call['method']=='GET' for call in self.up.calls))
++
++    def test_older_completed_http_cannot_overwrite_newer_publication(self):
++        # Both reads use real HTTP. Only the pure acceptance boundary is paused
++        # after the older response has arrived, making the late publication deterministic.
++        from unittest.mock import patch
++        import client as client_module
++        original = client_module.validate_envelope
++        arrived,release = threading.Event(),threading.Event()
++        outcomes = []
++        client = Client(self.config,LOCAL,self.server.handle)
++        def pause_old(value,*args):
++            result = original(value,*args)
++            if value['requestId'] == 'r-old':
++                arrived.set()
++                if not release.wait(1.5): raise AssertionError('bounded publication barrier')
++            return result
++        def older():
++            try: outcomes.append(client.read('r-old'))
++            except Failure as error: outcomes.append(error.code)
++        with patch.object(client_module,'validate_envelope',pause_old):
++            old_thread = threading.Thread(target=older,daemon=True)
++            old_thread.start()
++            try:
++                self.assertTrue(arrived.wait(1))
++                newer = client.read('r-new')
++                self.assertEqual(client.snapshot,newer)
++            finally:
++                release.set()
++                old_thread.join(3)
++        self.assertFalse(old_thread.is_alive())
++        self.assertEqual(outcomes,['READ_SUPERSEDED'])
++        self.assertEqual(client.snapshot['requestId'],'r-new')
++        self.assertEqual(len(self.up.calls),4)
++        self.assertTrue(all(call['method']=='GET' for call in self.up.calls))
++        client.retire()
++        self.assertIsNone(client.snapshot)
++
++    def test_combined_owner_runner_passes_runtime_handle_and_closes(self):
++        from owner_runner import run_once
++        result = run_once(self.config,LOCAL,UPSTREAM,'r-combined')
++        self.assertEqual(result['requestId'],'r-combined')
++        self.assertEqual(result['coreContract'],PENDING)
++        self.assertEqual(len(self.up.calls),2)
++        self.assertEqual(self.authority.published,0)  # separate fixture listener unused
++        self.assertTrue(all(call['method']=='GET' for call in self.up.calls))
++
+ if __name__ == '__main__':
+     unittest.main()

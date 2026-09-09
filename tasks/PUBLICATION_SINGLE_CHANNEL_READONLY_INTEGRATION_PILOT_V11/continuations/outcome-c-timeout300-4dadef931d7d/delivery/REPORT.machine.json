@@ -1,0 +1,1224 @@
+{
+  "TASK": "PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11",
+  "LANE": "BOUNDED_INTEGRATION",
+  "OUTCOME": "C",
+  "PRIOR_V10_ADOPTION_RECORDED": "EXISTING_REQUIREMENTS_AND_REVIEW_LEDGER_UPDATED_BOUNDED; NOT_CORE_CONTRACT_ACCEPTANCE",
+  "FRONTEND_BASELINE_TREE": "afc966ad4872e6dd65997281c75fe49e7aaed376",
+  "FINAL_IMPLEMENTATION_TREE": null,
+  "ADAPTER_SOURCE_IDENTITY": {
+    "kind": "UNCOMMITTED_TASK_LOCAL_SOURCE_MANIFEST",
+    "version": "adapter-v4",
+    "manifest": {
+      "adapter-v4/README.md": "3ca44fa1188534a7f7d17f32f22f89c330a09a67cfc022be70e82dce440e14ce",
+      "adapter-v4/boundary.py": "6084ed9e7da6568031da2891644f23871e321ace5418e50843ac5713b22d19ee",
+      "adapter-v4/client.py": "433fc01b07a9283fbab59025bb09c6ba3875e826ded85cd323916c967c16a48a",
+      "adapter-v4/client_state.py": "2f3c40b72c77213b9edf0268b7848c3c906ec2b766255a7dce566ffb1638fb25",
+      "adapter-v4/model.py": "4c6d60cffca96bb92904d5658be60069d4b7f7b0eb342a660ea02a6411924e38",
+      "adapter-v4/owner_runner.py": "68b55c652d22a4f7d9d8c209fa48ea5d5b21a75f24d4013f410ec2ad14cf480d",
+      "adapter-v4/run_pure.py": "df35a664121be8fa94878cd08c0fda15149504288aa4d801dd012c67ea47e8b4",
+      "adapter-v4/runtime_handle.py": "acd548194c0a8cd9925de12d6bfa863815469da96fa53a6315d277d84fc523b4",
+      "adapter-v4/second_synthetic.py": "2c86466d47eb6239ebecef59881ccd69b949d2b8406585db25c01c95daa49f42",
+      "adapter-v4/server.py": "7a101ae461c4e68d7ae537a239cc0a33ca08b77811b71e618d11d1732f5a2f38",
+      "adapter-v4/test_correction_pure.py": "4a80d84b6f77eddbf961d497dcc3288a90d0f4d1b958854b2761647953f64ae7",
+      "adapter-v4/test_model.py": "dc1b51d0dfbb14544d346bd3587be3ce9cbcf53493a1b90616e98adbe4050732",
+      "adapter-v4/test_pure.py": "bb7bf940f9e956cf98e8ef9dc212c2e9ae013a9634448dd506abfa9f44d964b5",
+      "adapter-v4/test_second_synthetic.py": "0d0e45a401be2e7a2df96d622bf9b5cc169ef3e391469148c5d2ba824479f89c",
+      "adapter-v4/transport.py": "28686f734fd0f8a6c23b2943b62dc6838a56ec16b462d4fa9980b4da45dd0429",
+      "adapter-v4/transport_tests.py": "5b95abfdbfefca9fd554358c5e0d5b2afdf56605ed2bcaabef0862ac1162b3cd",
+      "adapter-v4/wire.py": "930015aebe6b555a4a3f6511a3e8c4081c4f73def7a499d535737dce66f52555"
+    },
+    "pinned_upstream_static": {
+      "kind": "LOCAL_DRAFT_SOURCE_SHA256_NOT_PRODUCT_COMMIT",
+      "drafts": {
+        "adapter/pilot.py": "8541bd38f906c167bc309f31463de3e0c5cfbc8df932bf61b690b62a198c70b9",
+        "adapter/test_pilot.py": "d9387c09071bb8d8edeb7e246b9ba0dd9b4ade194c8030c6195221df5e0d31fa"
+      },
+      "upstream_candidate_release": "v2.23.0",
+      "upstream_reviewed_commit": "1e4c8dd5c4f70c4d0abd01e23cc42d5b533d1ab9",
+      "compose_commit": "dd4969e5e694cd009619a0d53cff14c21104580b",
+      "candidate_app_image": "ghcr.io/gitroomhq/postiz-app@sha256:785f97312f66a347fb96cdccc4ded5a33ced69a672c89a9adc8054e7d6a21dc5",
+      "actual_upstream_version": "NOT_RUN",
+      "actual_instance": "NOT_ESTABLISHED",
+      "runtime_image_version_verified": false,
+      "signed_source_image_attestation": "NOT_VERIFIED"
+    },
+    "current_runtime_version": null
+  },
+  "UPSTREAM_INSTANCE_VERSION": "NOT_RUN",
+  "PROJECT_ACCOUNT_MAPPING_STATUS": "PENDING_CORE_CONTRACT",
+  "AUTHORIZATION_SCOPE": "BOUNDED_ENGINEERING_AND_LOCAL_EVIDENCE; HTTP_FUNCTIONAL_AUTHORIZATION_EXISTS_CAPABILITY_UNQUALIFIED; REAL_ORGANIZATION_READ_NOT_ESTABLISHED",
+  "CREDENTIAL_HANDLING_RESULT": "本打包未读取任何凭据/私有部署/内部账户配置；仅选择证据和源码，敏感扫描结果在包外。历史临时凭据及发布凭据不是本次行为。",
+  "READONLY_ENDPOINT_ALLOWLIST": [
+    "GET /integrations",
+    "GET /posts startDate/endDate"
+  ],
+  "CONTRACT_MAPPING_RESULT": "CHECKED_COMPLIANT_AND_BOUNDED_REPAIRED_SEPARATE_FROM_PENDING_CORE_AND_UNVERIFIED_RUNTIME",
+  "REAL_ACCOUNT_READ": "NOT_RUN",
+  "REAL_PUBLICATION_RECORD_READ": "NOT_RUN",
+  "REAL_ARTIFACT_LINK_VERIFICATION": "NOT_ESTABLISHED",
+  "ATTEMPT_HISTORY_SUPPORT": "NOT_PROVIDED_BY_REVIEWED_ENDPOINTS; NO_SYNTHESIZED_ATTEMPTS",
+  "PAGINATION_AND_COMPLETENESS": "organization-wide/no public pagination; bounded partial; duplicate refs rejected; half-open local window; live completeness unverified",
+  "TIMEZONE_AND_STATUS_MAPPING": {
+    "provider_QUEUE": "adapter-only scheduled display; validated scheduledAt",
+    "provider_PUBLISHED": "published display only; actual publishedAt absent",
+    "provider_ERROR": "unknown/unmapped, not generic failed",
+    "unknown": "unknown/unmapped, safe diagnostic only",
+    "frontend_queue_queued": "unknown, no provider aliases",
+    "time": "[startInclusive,endExclusive); provider inclusive-end translation; display-only timezone"
+  },
+  "METADATA_ACCESS_RESULT": "PURE_BOUNDARIES_VALIDATED; REAL_ACCESS_AND_EFFECTIVEACCESS_UNVERIFIED",
+  "CONTEXT_RETIREMENT_RESULT": "V4_PURE_GENERATION_RETIREMENT_VALIDATED; HTTP_CONCURRENCY_AND_BROWSER_NOT_RUN",
+  "SYNTHETIC_VALIDATION_RESULTS": {
+    "seven_frontend_gates": [
+      {
+        "name": "frontend-typecheck",
+        "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1",
+        "argv": [
+          "npm",
+          "--prefix",
+          "frontend",
+          "run",
+          "typecheck"
+        ],
+        "nativeExit": 0,
+        "log": "frontend-typecheck.log",
+        "status": "PASS_RECORDED_EXACT_BYTES",
+        "evidence": "evidence/continuation-implementation/review-correction/frontend-typecheck.log"
+      },
+      {
+        "name": "frontend-architecture",
+        "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1",
+        "argv": [
+          "npm",
+          "--prefix",
+          "frontend",
+          "run",
+          "architecture:guard"
+        ],
+        "nativeExit": 0,
+        "result": "PASS",
+        "governedSourceFiles": 206,
+        "localizationManifestInvalid": 0,
+        "localizationRequiredKeysMissing": 0,
+        "log": "frontend-architecture.log",
+        "status": "PASS_RECORDED_EXACT_BYTES",
+        "evidence": "evidence/continuation-implementation/review-correction/frontend-architecture.log"
+      },
+      {
+        "name": "frontend-architecture-controls",
+        "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+        "argv": [
+          "npm",
+          "run",
+          "architecture:guard:test"
+        ],
+        "nativeExit": 0,
+        "counts": {
+          "total": 131,
+          "passed": 131,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "log": "frontend-architecture-controls.log",
+        "status": "PASS_RECORDED_EXACT_BYTES",
+        "evidence": "evidence/continuation-implementation/review-correction/frontend-architecture-controls.log"
+      },
+      {
+        "name": "frontend-lint",
+        "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+        "argv": [
+          "npm",
+          "run",
+          "lint"
+        ],
+        "nativeExit": 0,
+        "counts": {
+          "errors": 0,
+          "warnings": 46
+        },
+        "note": "Preserved repository warning baseline; corrected task sources add no warning",
+        "log": "frontend-lint.log",
+        "status": "PASS_RECORDED_EXACT_BYTES",
+        "evidence": "evidence/continuation-implementation/review-correction/frontend-lint.log"
+      },
+      {
+        "name": "frontend-build-external",
+        "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+        "argv": [
+          "npm",
+          "run",
+          "build",
+          "--",
+          "--outDir",
+          "/home/user/Documents/workspace/audit-runs/PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11/continuation-implementation/review-correction/build/frontend",
+          "--emptyOutDir"
+        ],
+        "nativeExit": 0,
+        "modulesTransformed": 403,
+        "outputFileCount": 10,
+        "outputManifest": "BUILD_MANIFEST.sha256",
+        "trackedDistOrStaticWritten": false,
+        "log": "frontend-build-external.log",
+        "status": "PASS_RECORDED_EXACT_BYTES",
+        "evidence": "evidence/continuation-implementation/review-correction/frontend-build-external.log"
+      },
+      {
+        "name": "frontend-focused-vitest",
+        "status": "NOT_RUN_BLOCKED",
+        "defined_identities": 26,
+        "executed": null,
+        "reason": "禁止socket；未重跑，纯6不是替代",
+        "evidence": "evidence/continuation-implementation/verification/frontend-focused-test-identities.NOT_RUN.txt"
+      },
+      {
+        "name": "frontend-full-suite",
+        "status": "NOT_RUN_BLOCKED",
+        "executed": null,
+        "baseline_reported_total": 945,
+        "reason": "完整945基线身份集合及逐项保留/新增/删除/改名对照未取得；12路径源码核对不等于945身份核算，不以36/6/131推算全量。"
+      }
+    ],
+    "seven_all_pass": false,
+    "adapter_current_pure": {
+      "status": "PASS_RECORDED_EXACT_BYTES",
+      "counts": {
+        "total": 36,
+        "passed": 36,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "execution": "evidence/continuation-transport-preparation/control-plane-readback/pure-all-execution.json"
+    },
+    "frontend_pure_separate": {
+      "status": "PASS_RECORDED_EXACT_BYTES",
+      "counts": {
+        "total": 6,
+        "passed": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "syntax_separate": {
+      "status": "PASS_RECORDED",
+      "files": 17,
+      "adapter_python_files": 16,
+      "evidence_helper_files": 1,
+      "evidence": "evidence/continuation-transport-preparation/correction-v4/offline-attempt-03/verification.json"
+    },
+    "transport": {
+      "status": "NOT_RUN_CAPABILITY_UNQUALIFIED",
+      "definitions": [
+        {
+          "id": "transport_tests.HttpTests.test_normal_authenticated_client_roundtrip",
+          "line": 150,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_unauthenticated",
+          "line": 163,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_principal_binding",
+          "line": 175,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_tenant_binding",
+          "line": 176,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_session_binding",
+          "line": 177,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_workspace_binding",
+          "line": 178,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_project_binding",
+          "line": 179,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_source_binding",
+          "line": 180,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_owner_binding",
+          "line": 181,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_provider_binding",
+          "line": 182,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_instance_binding",
+          "line": 183,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_account_binding",
+          "line": 184,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_start_binding",
+          "line": 185,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_end_binding",
+          "line": 186,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_revision_binding",
+          "line": 188,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_date_query_duplicates_and_arbitrary_url",
+          "line": 192,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_half_open_boundaries",
+          "line": 198,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_duplicate_post_ids",
+          "line": 206,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_account_missing_duplicate_disabled_and_foreign_posts",
+          "line": 210,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_partial_recurrence_and_record_cap",
+          "line": 222,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_unknown_state_missing_values_and_unavailable_relations",
+          "line": 230,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_400",
+          "line": 248,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_401",
+          "line": 249,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_403",
+          "line": 250,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_404",
+          "line": 251,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_429",
+          "line": 252,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_500",
+          "line": 253,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_503",
+          "line": 254,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_redirect_is_not_followed",
+          "line": 256,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_malformed_json",
+          "line": 260,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_headers_size",
+          "line": 265,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_body_size",
+          "line": 269,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_ambiguous_framing_and_header_injection",
+          "line": 273,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_trailing_body_is_rejected",
+          "line": 281,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_slowdrip_headers_absolute_deadline",
+          "line": 297,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_slowdrip_body_absolute_deadline",
+          "line": 301,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_deadline_spans_both_upstream_reads",
+          "line": 305,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_peer_teardown_cannot_extend_deadline",
+          "line": 310,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_caller_disconnect_cancels_and_late_result_cannot_publish",
+          "line": 319,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_server_retirement_rejects_late_result",
+          "line": 333,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_client_retirement_closes_request_and_drops_late_result",
+          "line": 349,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_forbidden_write_verbs_routes_bodies_and_headers",
+          "line": 369,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_local_ambiguous_headers_and_size",
+          "line": 380,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_repeat_reads_zero_writes_and_budget_no_retry",
+          "line": 389,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_keys_never_enter_projection_errors_or_request_urls",
+          "line": 401,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_local_missing_auth_and_duplicate_authorization",
+          "line": 409,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_read_volume_cap_on_real_http",
+          "line": 417,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_client_rejects_altered_wire_receipt_and_projection",
+          "line": 429,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_ephemeral_handle_and_exact_actual_host",
+          "line": 486,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_client_invalid_request_id_has_zero_acquisitions",
+          "line": 500,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_client_binding_is_detached_during_actual_roundtrip",
+          "line": 511,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_newer_read_supersedes_inflight_http_and_discards_late_response",
+          "line": 520,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_older_completed_http_cannot_overwrite_newer_publication",
+          "line": 541,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_combined_owner_runner_passes_runtime_handle_and_closes",
+          "line": 577,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        }
+      ],
+      "owner_coverage_map": "evidence/continuation-transport-preparation/correction-v4/COVERAGE_MAP.json"
+    },
+    "browser_dom_lifecycle": "NOT_RUN",
+    "real_http_provider_core": "NOT_RUN",
+    "independent_acceptance": "NOT_PERFORMED_OWNER_STOP",
+    "fresh_test_execution_by_packager": false
+  },
+  "REAL_INTEGRATION_RESULTS": "NOT_RUN",
+  "FRONTEND_GATE_RESULTS": [
+    {
+      "name": "frontend-typecheck",
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1",
+      "argv": [
+        "npm",
+        "--prefix",
+        "frontend",
+        "run",
+        "typecheck"
+      ],
+      "nativeExit": 0,
+      "log": "frontend-typecheck.log",
+      "status": "PASS_RECORDED_EXACT_BYTES",
+      "evidence": "evidence/continuation-implementation/review-correction/frontend-typecheck.log"
+    },
+    {
+      "name": "frontend-architecture",
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1",
+      "argv": [
+        "npm",
+        "--prefix",
+        "frontend",
+        "run",
+        "architecture:guard"
+      ],
+      "nativeExit": 0,
+      "result": "PASS",
+      "governedSourceFiles": 206,
+      "localizationManifestInvalid": 0,
+      "localizationRequiredKeysMissing": 0,
+      "log": "frontend-architecture.log",
+      "status": "PASS_RECORDED_EXACT_BYTES",
+      "evidence": "evidence/continuation-implementation/review-correction/frontend-architecture.log"
+    },
+    {
+      "name": "frontend-architecture-controls",
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "argv": [
+        "npm",
+        "run",
+        "architecture:guard:test"
+      ],
+      "nativeExit": 0,
+      "counts": {
+        "total": 131,
+        "passed": 131,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "log": "frontend-architecture-controls.log",
+      "status": "PASS_RECORDED_EXACT_BYTES",
+      "evidence": "evidence/continuation-implementation/review-correction/frontend-architecture-controls.log"
+    },
+    {
+      "name": "frontend-lint",
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "argv": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "nativeExit": 0,
+      "counts": {
+        "errors": 0,
+        "warnings": 46
+      },
+      "note": "Preserved repository warning baseline; corrected task sources add no warning",
+      "log": "frontend-lint.log",
+      "status": "PASS_RECORDED_EXACT_BYTES",
+      "evidence": "evidence/continuation-implementation/review-correction/frontend-lint.log"
+    },
+    {
+      "name": "frontend-build-external",
+      "cwd": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend",
+      "argv": [
+        "npm",
+        "run",
+        "build",
+        "--",
+        "--outDir",
+        "/home/user/Documents/workspace/audit-runs/PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11/continuation-implementation/review-correction/build/frontend",
+        "--emptyOutDir"
+      ],
+      "nativeExit": 0,
+      "modulesTransformed": 403,
+      "outputFileCount": 10,
+      "outputManifest": "BUILD_MANIFEST.sha256",
+      "trackedDistOrStaticWritten": false,
+      "log": "frontend-build-external.log",
+      "status": "PASS_RECORDED_EXACT_BYTES",
+      "evidence": "evidence/continuation-implementation/review-correction/frontend-build-external.log"
+    },
+    {
+      "name": "frontend-focused-vitest",
+      "status": "NOT_RUN_BLOCKED",
+      "defined_identities": 26,
+      "executed": null,
+      "reason": "禁止socket；未重跑，纯6不是替代",
+      "evidence": "evidence/continuation-implementation/verification/frontend-focused-test-identities.NOT_RUN.txt"
+    },
+    {
+      "name": "frontend-full-suite",
+      "status": "NOT_RUN_BLOCKED",
+      "executed": null,
+      "baseline_reported_total": 945,
+      "reason": "完整945基线身份集合及逐项保留/新增/删除/改名对照未取得；12路径源码核对不等于945身份核算，不以36/6/131推算全量。"
+    }
+  ],
+  "TEST_IDENTITY_ACCOUNTING": {
+    "status": "INCOMPLETE_FULL_BASELINE_IDENTITY_ACCOUNTING",
+    "baseline_reported_total": 945,
+    "baseline_identity_set": null,
+    "retained": null,
+    "added": null,
+    "removed": null,
+    "renamed": null,
+    "new_expected_full_total": null,
+    "reason": "完整945基线身份集合及逐项保留/新增/删除/改名对照未取得；12路径源码核对不等于945身份核算，不以36/6/131推算全量。",
+    "current_adapter_pure": {
+      "counts": {
+        "total": 36,
+        "passed": 36,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "identities": [
+        "test_model.ConfigurationAndRequestTests.test_configuration_is_exactly_typed_and_fail_closed",
+        "test_model.ConfigurationAndRequestTests.test_destination_and_header_injection_are_rejected",
+        "test_model.ConfigurationAndRequestTests.test_fixed_requests_use_raw_authorization_and_half_open_translation",
+        "test_model.ConfigurationAndRequestTests.test_response_parser_never_includes_upstream_body_in_failure",
+        "test_model.ProjectionTests.test_content_projection_rejects_encoded_secret_and_duplicate_post_refs",
+        "test_model.ProjectionTests.test_end_is_exclusive_and_omissions_make_partial_without_query_failure",
+        "test_model.ProjectionTests.test_no_actual_time_attempt_result_or_known_empty_relation_is_invented",
+        "test_model.ProjectionTests.test_raw_encoded_and_escaped_credentials_are_rejected_from_output",
+        "test_model.ProjectionTests.test_scoped_external_references_remain_unbound_without_synthetic_graph",
+        "test_model.ProjectionTests.test_unknown_and_error_provider_states_are_safe_observations",
+        "test_second_synthetic.SecondSyntheticMappingTests.test_distinct_layout_stays_unresolved_and_scopes_colliding_external_refs",
+        "test_second_synthetic.SecondSyntheticMappingTests.test_unrecognized_phase_is_unknown_not_a_failure_or_result",
+        "test_pure.PureBoundaryTests.test_access_expiry_retirement_and_read_reservation",
+        "test_pure.PureBoundaryTests.test_credentials_config_closed_and_no_encoded_leaks",
+        "test_pure.PureBoundaryTests.test_each_identity_field_exact_and_null_tenant",
+        "test_pure.PureBoundaryTests.test_method_route_body_and_header_default_deny",
+        "test_pure.PureBoundaryTests.test_owner_config_mutation_does_not_change_access_receipt",
+        "test_pure.PureBoundaryTests.test_revision_query_duplicates_and_no_caller_destination",
+        "test_pure.PureClientProjectionTests.test_client_rejects_cross_scope_invented_graph_and_wrong_date",
+        "test_pure.PureMissingProjectionTests.test_dates_start_end_cap_recurrence_and_foreign_account",
+        "test_pure.PureMissingProjectionTests.test_duplicate_recurring_ids_and_account_rows_fail",
+        "test_pure.PureMissingProjectionTests.test_missing_optional_values_unknown_relations_required_values_fail",
+        "test_pure.PureWireTests.test_all_upstream_failure_classes_are_value_free",
+        "test_pure.PureWireTests.test_http_framing_rejects_ambiguity_injection_and_sizes",
+        "test_pure.PureWireTests.test_json_duplicate_nonfinite_malformed_and_content_types",
+        "test_correction_pure.CorrectionPureTests.test_authority_requires_attached_exact_host_and_revision",
+        "test_correction_pure.CorrectionPureTests.test_complete_method_target_revision_and_generation_preflight",
+        "test_correction_pure.CorrectionPureTests.test_deadline_failure_does_not_publish_and_snapshots_are_detached",
+        "test_correction_pure.CorrectionPureTests.test_envelope_snapshot_exact_provider_instance_account_window_access_contract",
+        "test_correction_pure.CorrectionPureTests.test_foreign_generation_is_not_current_even_with_same_number",
+        "test_correction_pure.CorrectionPureTests.test_handle_closed_typed_nonsecret_and_frozen",
+        "test_correction_pure.CorrectionPureTests.test_invalid_request_ids_rejected_before_generation_or_acquisition",
+        "test_correction_pure.CorrectionPureTests.test_newer_generation_invalidates_older_through_checks_and_publication",
+        "test_correction_pure.CorrectionPureTests.test_owner_config_is_detached_and_stored_frozen",
+        "test_correction_pure.CorrectionPureTests.test_receipt_preserves_strict_bool_lifetime_closed_identity_and_revision",
+        "test_correction_pure.CorrectionPureTests.test_retirement_clears_snapshot_and_all_outstanding_generations"
+      ],
+      "unique_count": 36,
+      "source_ast_identity_set_equal": true,
+      "source_manifest_current_matches": true,
+      "native_log_count_matches": true,
+      "fresh_tests_this_packaging": false
+    },
+    "frontend_pure": {
+      "schema": "v11-review-correction-frontend-pure-model-v1",
+      "execution": "synchronous-node-no-vite-no-vitest-no-server-no-event-loop-socket",
+      "loader": {
+        "typescript": "5.7.3",
+        "transpileModule": true,
+        "format": "CommonJS",
+        "boundedSources": [
+          "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/src/product/publication/model.ts",
+          "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/src/product/publication/types.ts"
+        ],
+        "zod": "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/zod/index.cjs"
+      },
+      "testedSourceHashes": {
+        "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/src/product/publication/model.ts": "39369c83aabb0e5c196c51bd7ce685b35a5cc044d5811c74d020b25cf5b6871b",
+        "/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/src/product/publication/types.ts": "251237d65945cc9945aefd774ecd75b24be3d2019f0749da031aa251696be35d"
+      },
+      "counts": {
+        "total": 6,
+        "passed": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "tests": [
+        {
+          "id": "frontend-pure.actual-modules-and-generic-status-boundary",
+          "status": "passed"
+        },
+        {
+          "id": "frontend-pure.parse-publication-exact-request-scope-and-safe-envelope-status",
+          "status": "passed"
+        },
+        {
+          "id": "frontend-pure.relation-unavailable-known-empty-and-restricted-remain-distinct",
+          "status": "passed"
+        },
+        {
+          "id": "frontend-pure.parse-external-observations-retains-scoped-unbound-references",
+          "status": "passed"
+        },
+        {
+          "id": "frontend-pure.parse-external-observations-rejects-binding-and-account-mismatches",
+          "status": "passed"
+        },
+        {
+          "id": "frontend-pure.calendar-and-filter-behavior-is-retained",
+          "status": "passed"
+        }
+      ],
+      "claimsNotMade": [
+        "Vite/Vitest equivalence",
+        "DOM/lifecycle equivalence",
+        "HTTP behavior",
+        "live provider data"
+      ]
+    },
+    "transport": {
+      "count": 54,
+      "identities": [
+        {
+          "id": "transport_tests.HttpTests.test_normal_authenticated_client_roundtrip",
+          "line": 150,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_unauthenticated",
+          "line": 163,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_principal_binding",
+          "line": 175,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_tenant_binding",
+          "line": 176,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_session_binding",
+          "line": 177,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_workspace_binding",
+          "line": 178,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_project_binding",
+          "line": 179,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_source_binding",
+          "line": 180,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_owner_binding",
+          "line": 181,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_provider_binding",
+          "line": 182,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_instance_binding",
+          "line": 183,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_account_binding",
+          "line": 184,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_start_binding",
+          "line": 185,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_end_binding",
+          "line": 186,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_revision_binding",
+          "line": 188,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_date_query_duplicates_and_arbitrary_url",
+          "line": 192,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_half_open_boundaries",
+          "line": 198,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_duplicate_post_ids",
+          "line": 206,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_account_missing_duplicate_disabled_and_foreign_posts",
+          "line": 210,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_partial_recurrence_and_record_cap",
+          "line": 222,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_unknown_state_missing_values_and_unavailable_relations",
+          "line": 230,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_400",
+          "line": 248,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_401",
+          "line": 249,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_403",
+          "line": 250,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_404",
+          "line": 251,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_429",
+          "line": 252,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_500",
+          "line": 253,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_503",
+          "line": 254,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_redirect_is_not_followed",
+          "line": 256,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_malformed_json",
+          "line": 260,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_headers_size",
+          "line": 265,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_body_size",
+          "line": 269,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_ambiguous_framing_and_header_injection",
+          "line": 273,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_upstream_trailing_body_is_rejected",
+          "line": 281,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_slowdrip_headers_absolute_deadline",
+          "line": 297,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_slowdrip_body_absolute_deadline",
+          "line": 301,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_deadline_spans_both_upstream_reads",
+          "line": 305,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_peer_teardown_cannot_extend_deadline",
+          "line": 310,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_caller_disconnect_cancels_and_late_result_cannot_publish",
+          "line": 319,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_server_retirement_rejects_late_result",
+          "line": 333,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_client_retirement_closes_request_and_drops_late_result",
+          "line": 349,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_forbidden_write_verbs_routes_bodies_and_headers",
+          "line": 369,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_local_ambiguous_headers_and_size",
+          "line": 380,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_repeat_reads_zero_writes_and_budget_no_retry",
+          "line": 389,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_keys_never_enter_projection_errors_or_request_urls",
+          "line": 401,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_local_missing_auth_and_duplicate_authorization",
+          "line": 409,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_read_volume_cap_on_real_http",
+          "line": 417,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_client_rejects_altered_wire_receipt_and_projection",
+          "line": 429,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_ephemeral_handle_and_exact_actual_host",
+          "line": 486,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_client_invalid_request_id_has_zero_acquisitions",
+          "line": 500,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_client_binding_is_detached_during_actual_roundtrip",
+          "line": 511,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_newer_read_supersedes_inflight_http_and_discards_late_response",
+          "line": 520,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_older_completed_http_cannot_overwrite_newer_publication",
+          "line": 541,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        },
+        {
+          "id": "transport_tests.HttpTests.test_combined_owner_runner_passes_runtime_handle_and_closes",
+          "line": 577,
+          "status": "NOT_RUN_CAPABILITY_UNQUALIFIED"
+        }
+      ],
+      "execution": "NOT_RUN"
+    },
+    "aggregation": "NO_SUM_OF_REUSED_OR_SUBSET_RUNS; v4 new11 is contained in current36; v2 15 is historical different-version evidence; frontend6 separate; controls131 separate"
+  },
+  "REAL_MUTATION_REQUESTS": 0,
+  "REAL_PUBLICATIONS_CREATED": 0,
+  "EP19_CHANGES": 0,
+  "PRODUCT_PUBLICATION": "NOT_PERFORMED",
+  "EVIDENCE_COMMIT_SHA": null,
+  "REVIEW_INDEX_URL": null,
+  "PUBLIC_MANIFEST_SHA256": null,
+  "REMOTE_VERIFICATION": "NOT_PERFORMED_THIS_CONTINUATION",
+  "REMAINING_REQUIREMENTS": [
+    {
+      "id": "P1",
+      "owner": "管理员/执行环境负责人",
+      "workline": "受限本地HTTP能力",
+      "status": "UNQUALIFIED",
+      "required": "提供可审阅且由执行器强制执行的任务级能力与生命周期契约：仅隔离127.0.0.1动态端口、同一合成客户端、无外网/宿主服务暴露、所有测试及辅助监听器动态端口和清理、文件写范围保持不变；给出实际生效策略和独立能力资格回执。仅文档支持的managed-proxy并未证明满足该能力。若无法精确强制则继续阻断。禁止standalone network_access=true、sandbox-off、换无沙箱terminal绕过。",
+      "next_after_qualification": "新证据目录、精确源码hash、native exit和逐测试结果；再执行已授权的adapter-v4 54定义，不在本次执行。"
+    },
+    {
+      "id": "P2",
+      "owner": "平台契约负责人",
+      "workline": "核心契约",
+      "status": "PENDING_CORE_CONTRACT",
+      "required": "批准provider/instance/account/post到ConnectedPlatform/SocialPost的稳定平台绑定与替换语义；Project/account/post/Artifact关系；platform-owned application read envelope、EffectiveAccess、non-disclosing relation availability、generic lifecycle/read-error/attempt/result/actual-time语义。"
+    },
+    {
+      "id": "P3",
+      "owner": "前端实施负责人",
+      "workline": "消费者接入与七门",
+      "status": "INCOMPLETE",
+      "required": "在核心契约确定后实现受控真实读接入和receipt/access边界；普通route当前不可用；补26 focused Vitest、完整suite及945逐身份对照、浏览器/DOM/Selection/retirement/并发/焦点证据。纯6不替代这些。"
+    },
+    {
+      "id": "P4",
+      "owner": "Owner/实例管理员",
+      "workline": "真实只读资格",
+      "status": "NOT_ESTABLISHED",
+      "required": "提供批准的精确实例、运行版本/镜像、principal/session/tenant/Workspace/Project/一个integration、日期与content范围、organization-wide读取知情同意、已有凭据使用授权。不得为消除空实例阻断而建账号；不得发送/上传/OAuth/connect。"
+    },
+    {
+      "id": "P5",
+      "owner": "部署负责人（本轮未分派子任务）",
+      "workline": "独立镜像获取",
+      "status": "NOT_PERFORMED",
+      "required": "单独安排有界镜像获取任务和合规来源/网络/超时/清理范围；原300秒超时仅HISTORY。本轮未取得镜像、未重试、未恢复部署；与socket能力和core契约是独立未解决工作线。"
+    },
+    {
+      "id": "P6",
+      "owner": "父控制面/Owner",
+      "workline": "后续处置",
+      "status": "STOP_BEFORE_INDEPENDENT_ACCEPTANCE_AND_PUBLICATION",
+      "required": "先离线检查本包；独立验收本轮明确不进行。仅Owner后续明确授权才能做普通evidence-only发布；另写detached receipt，不改封存内容、不递归打包本次或旧回执。"
+    }
+  ],
+  "INDEPENDENT_REVIEW": "NOT_PERFORMED_OWNER_STOP_BEFORE_ACCEPTANCE",
+  "STOP_REASON": "OUTCOME_C_RUNTIME_CAPABILITY_CORE_INTEGRATION_FULL_VALIDATION_AND_DEPLOYMENT_UNRESOLVED",
+  "SKILL_MEMORY_WRITES": null,
+  "SCHEMA": "v11-continuation-local-outcome-c/1",
+  "FINAL_IMPLEMENTATION_IDENTITY": {
+    "head_from_existing_receipts": "f5e19cf53fd010eea2935dd29557e82a879e042c",
+    "parent_from_existing_receipts": "01cf2a509d687b8bf8b39eff69688b2a3f5f2f4a",
+    "branch": "agent/frontend-wave2-product-ux-v1",
+    "dirty_frontend_paths": [
+      {
+        "path": "docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md",
+        "sha256": "90718e07be11e711e2de3ffacd5efde0310063a5b9fbb604a255c64105f4e3c8",
+        "bytes": 64510,
+        "saved_replay": "MATCH",
+        "current_byte_match": true,
+        "payload": "source/frontend-current/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md"
+      },
+      {
+        "path": "docs/architecture/governance/frontend-product-information-architecture-v1.md",
+        "sha256": "2e11bb0ba5473d6e29be8242e41f20fec7439ba1017276e0e2d0ff4292d87b44",
+        "bytes": 35312,
+        "saved_replay": "MATCH",
+        "current_byte_match": true,
+        "payload": "source/frontend-current/docs/architecture/governance/frontend-product-information-architecture-v1.md"
+      },
+      {
+        "path": "frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv",
+        "sha256": "32cc6fcb561e5fe2969175dbe4c7b9230d3e03182cc1cb4064dc4da182b32d1f",
+        "bytes": 23786,
+        "saved_replay": "MATCH",
+        "current_byte_match": true,
+        "payload": "source/frontend-current/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv"
+      },
+      {
+        "path": "frontend/governance/UX_WAVE_1_REVIEW.md",
+        "sha256": "bea0077e994ce69921fa9a8d6d64cdee5a0f8fc85aaf9fc6cb13680549f6ab26",
+        "bytes": 55151,
+        "saved_replay": "MATCH",
+        "current_byte_match": true,
+        "payload": "source/frontend-current/frontend/governance/UX_WAVE_1_REVIEW.md"
+      },
+      {
+        "path": "frontend/src/localization/catalogs.ts",
+        "sha256": "158b6ff0415608d9d95d71b354ca3aeb147bf6e05b2ed4814df2422aa19c57e2",
+        "bytes": 115789,
+        "saved_replay": "MATCH",
+        "current_byte_match": true,
+        "payload": "source/frontend-current/frontend/src/localization/catalogs.ts"
+      },
+      {
+        "path": "frontend/src/localization/source-manifest.json",
+        "sha256": "4344ef8e3eb0c63242a57e8ed36ce3b6e9376020bfb9bac946302b86de97cdf2",
+        "bytes": 18958,
+        "saved_replay": "MATCH",
+        "current_byte_match": true,
+        "payload": "source/frontend-current/frontend/src/localization/source-manifest.json"
+      },
+      {
+        "path": "frontend/src/product/publication/PublicationWorkspace.test.tsx",
+        "sha256": "2892befa826376baeca3e54ce3bdb5464c44dd6d211de1feafadd99d10ce0612",
+        "bytes": 20072,
+        "saved_replay": "MATCH",
+        "current_byte_match": true,
+        "payload": "source/frontend-current/frontend/src/product/publication/PublicationWorkspace.test.tsx"
+      },
+      {
+        "path": "frontend/src/product/publication/PublicationWorkspace.tsx",
+        "sha256": "02cc0e0e05c32b7d112bd1a2f9894bfe347c290832f33f76704c44805aac436e",
+        "bytes": 18358,
+        "saved_replay": "MATCH",
+        "current_byte_match": true,
+        "payload": "source/frontend-current/frontend/src/product/publication/PublicationWorkspace.tsx"
+      },
+      {
+        "path": "frontend/src/product/publication/model.test.ts",
+        "sha256": "54094ea53afc8447836e61e4b28c54ec0732a09c7e98a25a9a6329828cff25e0",
+        "bytes": 9758,
+        "saved_replay": "MATCH",
+        "current_byte_match": true,
+        "payload": "source/frontend-current/frontend/src/product/publication/model.test.ts"
+      },
+      {
+        "path": "frontend/src/product/publication/model.ts",
+        "sha256": "39369c83aabb0e5c196c51bd7ce685b35a5cc044d5811c74d020b25cf5b6871b",
+        "bytes": 14672,
+        "saved_replay": "MATCH",
+        "current_byte_match": true,
+        "payload": "source/frontend-current/frontend/src/product/publication/model.ts"
+      },
+      {
+        "path": "frontend/src/product/publication/testing.ts",
+        "sha256": "d3cb27c093a2af2424b5c18433a154c58a66112d70e701f0aa515155fd00d7ee",
+        "bytes": 2614,
+        "saved_replay": "MATCH",
+        "current_byte_match": true,
+        "payload": "source/frontend-current/frontend/src/product/publication/testing.ts"
+      },
+      {
+        "path": "frontend/src/product/publication/types.ts",
+        "sha256": "251237d65945cc9945aefd774ecd75b24be3d2019f0749da031aa251696be35d",
+        "bytes": 4431,
+        "saved_replay": "MATCH",
+        "current_byte_match": true,
+        "payload": "source/frontend-current/frontend/src/product/publication/types.ts"
+      }
+    ],
+    "no_new_commit": true,
+    "tree_reason": "Owner baseline token preserved literally; not a verified Git object. Current delivery identified by exact file hashes, not a fabricated final implementation tree."
+  },
+  "HISTORY": {
+    "classification": "HISTORY_NOT_CURRENT_AUTHORITY",
+    "original_report": "FINAL_REPORT_ZH.md",
+    "original_report_sha256": "36ec00fc22551bff5f6cd23191e2a65fc30a53f1f662c7929cf0b0bba976bf7f",
+    "original_final_json": "FINAL_DELIVERY.json",
+    "original_final_json_sha256": "b0ff061fb807e7d6505382b7a04651199f48b5abd4acafc13a65ed6f3c842ee7",
+    "original_evidence_commit": "daed076a516eaa2a5c2819b623d4a2a8a63cb02c",
+    "original_review_index_url": "https://github.com/shangxq007/media-platform-evidence/blob/daed076a516eaa2a5c2819b623d4a2a8a63cb02c/tasks/PUBLICATION_SINGLE_CHANNEL_READONLY_INTEGRATION_PILOT_V11/REVIEW_INDEX.md",
+    "original_public_manifest_sha256": "ffbf7cdd92ba8adaca0206fdedbe74e28449bc6120c3701c3c72a58434bdfe42",
+    "original_remote_verification": {
+      "decision": "PASS_ANONYMOUS_REMOTE_BYTES_AND_CHUNK_RECONSTRUCTION",
+      "payloads": 53,
+      "mismatches": 0,
+      "anonymous_http200": 5,
+      "chunked_assets": 0
+    },
+    "original_local_zip": "evidence-prep/V11_OUTCOME_C_LOCAL_REVIEW.zip",
+    "original_skill_memory_writes_zero": "HISTORICAL_PRE_PATCH_FIELD_NOT_ABSOLUTE_CURRENT_GUARANTEE",
+    "original_local_artifacts": [
+      {
+        "path": "evidence-prep/V11_OUTCOME_C_LOCAL_REVIEW.zip",
+        "sha256": "7d96356368e8d85b1e9b22c1fd5b76236dc7ced11f9af85c853b7f34488c8ead",
+        "bytes": 132389
+      },
+      {
+        "path": "evidence-prep/MANIFEST.json",
+        "sha256": "a965064a0b9e5c2abcb0835ab398c2db3f50a165ce62a714c48c10a158e6f00e",
+        "bytes": 8507
+      },
+      {
+        "path": "evidence-prep/integrity-verification.json",
+        "sha256": "f53d3bfc0393d29c9ba40ab6610f846146d26d7fd8c9df05d1e38ecb895fc4d3",
+        "bytes": 1356
+      }
+    ]
+  },
+  "DEPLOYMENT_CONTINUATION": {
+    "image_acquisition": "NOT_PERFORMED",
+    "child_tasked": false,
+    "retry": "NOT_PERFORMED",
+    "historical_timeout_seconds": 300,
+    "independent_unresolved_workline": true
+  },
+  "NULL_REASONS": {
+    "FINAL_IMPLEMENTATION_TREE": "No new committed tree; literal baseline token not locally verified Git object",
+    "EVIDENCE_COMMIT_SHA": "No publication performed",
+    "REVIEW_INDEX_URL": "Local-only; no current remote URL",
+    "PUBLIC_MANIFEST_SHA256": "Local manifest is detached; no public manifest exists for this continuation",
+    "SKILL_MEMORY_WRITES": "One documented post-seal Skill patch; Memory not reviewed and future framework automated changes not measured. Do not collapse into zero."
+  },
+  "ACTION_COUNT_SCOPE": "0 real mutations/publications/EP19 changes means this packaging agent issued none; not absolute ecosystem monitoring",
+  "SKILL_FACTS": {
+    "post_seal_content_patch": true,
+    "session": "20260909_063817_8d228f",
+    "ledger_id": "84d46702c3ee",
+    "time_utc": "2026-09-09T06:46:19.216703+00:00",
+    "before_sha256": "783d2041b782bdf99edc971d32cd75bfe605fd012c1632b72a201f05bf934fce",
+    "after_sha256": "7e3e6038ef337e8fe2794b64387e8df895ba4c947322cfe6cc411b9a3728dc6e",
+    "memory": "NOT_REVIEWED",
+    "attribution": "recorded parent-session background self-improvement path; not established as timed daemon or business child",
+    "absolute_automated_zero_writes_claim": false
+  }
+}

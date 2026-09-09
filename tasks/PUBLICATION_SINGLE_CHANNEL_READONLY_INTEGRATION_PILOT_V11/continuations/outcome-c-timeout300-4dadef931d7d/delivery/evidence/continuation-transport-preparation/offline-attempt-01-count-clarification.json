@@ -1,0 +1,9 @@
+{
+  "scope": "Supplemental arithmetic clarification; original attempt-01 bytes retained",
+  "native_exit": 1,
+  "native_unittest": {"testsRun": 24, "failure_entries_including_subtests": 6, "errors": 0, "skipped": 0},
+  "identity_counts": {"total": 24, "passed": 23, "failures": 1, "errors": 0, "skipped": 0},
+  "failed_identity": "test_pure.PureBoundaryTests.test_credentials_config_closed_and_no_encoded_leaks",
+  "original_report_issue": "Original runner subtracted subtest failure entries as though each was a top-level identity; its 18 passed / 6 failures is not a top-level identity count. Corrected runner deduplicates parent identities in subsequent attempts.",
+  "classification": "ACTUAL_OFFLINE_PURE_TEST_FAILURE; not HTTP RED or launcher failure"
+}

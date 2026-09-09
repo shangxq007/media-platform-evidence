@@ -1,0 +1,28 @@
+{
+  "listeners": [
+    {
+      "path": "adapter-v4/server.py",
+      "line": 36,
+      "bind": "('127.0.0.1', 0)",
+      "inspection": "AST_NOT_EXECUTED"
+    },
+    {
+      "path": "adapter-v4/transport_tests.py",
+      "line": 42,
+      "bind": "(LOCAL_HOST, 0)",
+      "inspection": "AST_NOT_EXECUTED"
+    },
+    {
+      "path": "adapter-v4/transport_tests.py",
+      "line": 454,
+      "bind": "('127.0.0.1', 0)",
+      "inspection": "AST_NOT_EXECUTED"
+    }
+  ],
+  "all_authored_listener_binds_ephemeral_loopback": true,
+  "fixed_legacy_port_absent_v4": true,
+  "server_runtime_handle_attribute_does_not_shadow_handle_request_method": true,
+  "generation_publication_checks": "Client.read -> ClientState.begin; Operation cancel -> ClientState.check; ClientState.publish under RLock with deadline check",
+  "historical_test_identities_retained": true,
+  "not_runtime_verification": true
+}

@@ -1,0 +1,141 @@
+{
+  "observed_at_utc": "2026-09-09T09:20:28.128694+00:00",
+  "scope": "Exact provider-lifecycle-evaluation V11 notice only; no Memory audit",
+  "notification": "Self-improvement review: Skill 'provider-lifecycle-evaluation' patched",
+  "ledger_source": "/home/user/.hermes/skills/.curator_ledger.jsonl",
+  "ledger_line": 622,
+  "ledger_record_sha256": "ee1766b6266f0c6d485c58a0850d27396be981034abe5ddb7619fc784c38e642",
+  "ledger_identity": {
+    "id": "84d46702c3ee",
+    "ts": "2026-09-09T06:46:19.216703+00:00",
+    "actor": "curator",
+    "action": "patch",
+    "skill": "provider-lifecycle-evaluation",
+    "evidence": {
+      "session_id": "20260909_063817_8d228f"
+    }
+  },
+  "changed_paths": [
+    {
+      "path": "/home/user/.hermes/skills/software-development/provider-lifecycle-evaluation/SKILL.md",
+      "before_sha256": "783d2041b782bdf99edc971d32cd75bfe605fd012c1632b72a201f05bf934fce",
+      "after_sha256": "7e3e6038ef337e8fe2794b64387e8df895ba4c947322cfe6cc411b9a3728dc6e"
+    }
+  ],
+  "unchanged_reference_entries": 13,
+  "current": {
+    "path": "/home/user/.hermes/skills/software-development/provider-lifecycle-evaluation/SKILL.md",
+    "sha256": "7e3e6038ef337e8fe2794b64387e8df895ba4c947322cfe6cc411b9a3728dc6e",
+    "size": 19312,
+    "mtime_ns": 1788936379177346282,
+    "mtime_utc": "2026-09-09T06:46:19.177346+00:00",
+    "ctime_utc": "2026-09-09T06:46:19.200346+00:00"
+  },
+  "historical_view": {
+    "database": "/home/user/.hermes/state.db",
+    "message_id": 289565,
+    "content_sha256": "783d2041b782bdf99edc971d32cd75bfe605fd012c1632b72a201f05bf934fce",
+    "not_an_independent_sealed_disk_baseline": true
+  },
+  "historical_content_to_current_diff": "--- historical skill_view content (not sealed disk baseline)\n+++ /home/user/.hermes/skills/software-development/provider-lifecycle-evaluation/SKILL.md\n@@ -60,6 +60,15 @@\n 3. Check native library requirements\n 4. Check Docker/platform compatibility\n 5. Create capability matrix vs current requirements\n+\n+### Read-only service pilot contract gate\n+\n+1. Compare current official documentation with the selected release's public-route implementation before writing the adapter. Record documented fields, pinned-source fields and observed live fields separately; a resolved image digest does not establish a running version or signed source-to-image provenance.\n+2. Establish the upstream credential's actual read scope before any real request. Require explicit approval for organization-wide reads even when the adapter returns only one account; local filtering cannot narrow what the upstream credential reads. Review endpoint semantics, not merely GET verbs, and exclude account-connection and authorization-initiation routes.\n+3. Build a field mapping with source, conversion, missing-value behavior and access predicate. Do not fabricate attempts, content versions, artifact links or actual publication times to satisfy an existing fixture schema. Preserve missing relationships and raw unknown statuses; scheduled time and query failure are not evidence of publication time or a publishing attempt.\n+4. Inspect recurrence expansion and pagination in the pinned public handler. Repeated record IDs need an explicit omission/partial policy or rejection, not invented occurrence IDs; absence of a cursor is not proof that a returned projection is complete.\n+5. Keep fixture authorization distinct from a bounded real pilot contract. Do not promote test-only permission keys or source-declared grants into server authority. Validate the owner-local identity and stable Project/account mapping independently, and disclose the single-user boundary rather than claiming multi-tenant authorization.\n+6. Report static contract review, synthetic adapter tests, empty-instance readiness, real account reads, real record reads and real artifact-link verification as separate evidence classes. An incomplete adapter is blocked implementation, not merely missing real credentials. Finish authorized offline evidence delivery while leaving denied operations stopped; do not turn setup errors into behavioral test results.\n \n ### Phase 2: Dependency Assessment\n 1. Can dependency be added without impacting default startup?\n",
+  "logs": [
+    {
+      "line": 12005,
+      "text": "2026-09-09 14:45:46,005 INFO [20260909_063817_8d228f] agent.conversation_loop: Turn ended: reason=text_response(finish_reason=stop) model=gpt-6-astra api_calls=10/150 budget=5/150 tool_turns=95 last_msg_role=assistant response_len=1472 session=20260909_063817_8d228f"
+    },
+    {
+      "line": 12008,
+      "text": "2026-09-09 14:45:46,096 INFO [20260909_063817_8d228f] agent.turn_context: conversation turn: session=20260909_063817_8d228f model=gpt-6-astra provider=openai-codex platform=tui history=246 msg='Review the conversation above and update the skill library. Be ACTIVE — most ses...'"
+    },
+    {
+      "line": 12014,
+      "text": "2026-09-09 14:45:56,714 INFO [20260909_063817_8d228f] agent.tool_executor: tool skill_view completed (0.12s, 19450 chars)"
+    },
+    {
+      "line": 12018,
+      "text": "2026-09-09 14:46:19,229 INFO [20260909_063817_8d228f] agent.tool_executor: tool skill_manage completed (0.16s, 153 chars)"
+    },
+    {
+      "line": 12024,
+      "text": "2026-09-09 14:46:30,958 INFO [20260909_063817_8d228f] agent.conversation_loop: Turn ended: reason=text_response(finish_reason=stop) model=gpt-6-astra api_calls=3/16 budget=3/16 tool_turns=97 last_msg_role=assistant response_len=259 session=20260909_063817_8d228f"
+    },
+    {
+      "line": 12027,
+      "text": "2026-09-09 14:46:30,997 INFO [20260909_063817_8d228f] agent.background_review: Background review complete: thread=bg-review calls=3 in=168394 out=624 cache_read=375680 result=skill"
+    }
+  ],
+  "child_boundaries": [
+    {
+      "session": "20260909_140655_b3bc98",
+      "message_id": 289570,
+      "time_utc": "2026-09-09T06:06:55.617215+00:00",
+      "boundary_excerpts": [
+        "rce for later isolated preparation (do not deploy). No credentials/global files/product writes/Skill Memory. Use tools actual dated sources, preserve excerpts and URLs, unavailable docs honestly.",
+        "r later isolated preparation (do not deploy). No credentials/global files/product writes/Skill Memory. Use tools actual dated sources, preserve excerpts and URLs, unavailable docs honestly. Need I"
+      ]
+    },
+    {
+      "session": "20260909_142028_12c33a",
+      "message_id": 289671,
+      "time_utc": "2026-09-09T06:20:28.399800+00:00",
+      "boundary_excerpts": [
+        "n/deployment-images.json + official review in same taskroot. Load relevant deployment/provider skills. Pin exact image digests and compose source already verified; generate loopback-only ports, u",
+        "pared-only status, cleanup scoped processes/resources or retained state explicitly. No product/Skill/Memory changes, no remote publication. Need actual validation not just copied compose.",
+        "only status, cleanup scoped processes/resources or retained state explicitly. No product/Skill/Memory changes, no remote publication. Need actual validation not just copied compose."
+      ]
+    },
+    {
+      "session": "20260909_143358_8d693e",
+      "message_id": 289736,
+      "time_utc": "2026-09-09T06:33:59.988642+00:00",
+      "boundary_excerpts": [
+        "c timeout no app, prepared only. DO NOT execute adapter/test/container/pull or modify products/Skill/Memory, no credentials or remote. Need finish offline evidence despite blocker: manifest, zip ",
+        "out no app, prepared only. DO NOT execute adapter/test/container/pull or modify products/Skill/Memory, no credentials or remote. Need finish offline evidence despite blocker: manifest, zip and ind"
+      ]
+    }
+  ],
+  "persisted_mutation_call_message_ids_in_window": [],
+  "receipt_checks": [
+    {
+      "path": "FINAL_REPORT_ZH.md",
+      "sha256": "36ec00fc22551bff5f6cd23191e2a65fc30a53f1f662c7929cf0b0bba976bf7f",
+      "matches_detached_receipt": true,
+      "mtime_utc": "2026-09-09T06:45:09.086665+00:00"
+    },
+    {
+      "path": "FINAL_DELIVERY.json",
+      "sha256": "b0ff061fb807e7d6505382b7a04651199f48b5abd4acafc13a65ed6f3c842ee7",
+      "matches_detached_receipt": true,
+      "mtime_utc": "2026-09-09T06:45:09.085665+00:00"
+    },
+    {
+      "path": "evidence-prep/V11_OUTCOME_C_LOCAL_REVIEW.zip",
+      "sha256": "7d96356368e8d85b1e9b22c1fd5b76236dc7ced11f9af85c853b7f34488c8ead",
+      "matches_detached_receipt": true,
+      "mtime_utc": "2026-09-09T06:41:08.025323+00:00"
+    },
+    {
+      "path": "evidence-prep/MANIFEST.json",
+      "sha256": "a965064a0b9e5c2abcb0835ab398c2db3f50a165ce62a714c48c10a158e6f00e",
+      "matches_detached_receipt": true,
+      "mtime_utc": "2026-09-09T06:41:08.009323+00:00"
+    },
+    {
+      "path": "evidence-prep/integrity-verification.json",
+      "sha256": "f53d3bfc0393d29c9ba40ab6610f846146d26d7fd8c9df05d1e38ecb895fc4d3",
+      "matches_detached_receipt": true,
+      "mtime_utc": "2026-09-09T06:41:08.099324+00:00"
+    }
+  ],
+  "final_response": {
+    "message_id": 289860,
+    "timestamp_utc": "2026-09-09T06:45:45.993689+00:00"
+  },
+  "limitations": [
+    "Raw background-review old_string/new_string payload not found in scoped persisted parent/initial child messages.",
+    "Historical skill_view content is not independent on-disk old-hash measurement; ledger independently records before hash.",
+    "No independent prior Owner authorization found within examined V11 instructions; earlier unrelated sessions not searched.",
+    "No configuration/private credentials/Memory or unrelated Skill content inspected; no framework control switch tested or changed.",
+    "No global zero-mutation claim; snapshot cannot guarantee later automatic behavior."
+  ]
+}

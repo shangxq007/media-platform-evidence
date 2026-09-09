@@ -1,0 +1,541 @@
+--- baseline/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
++++ current/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+@@ -481,11 +481,13 @@
+ 
+ ### FB-GAP-014 — Publication workspace and separately authorized single-channel integration
+ 
+-**FRONTEND_CONSUMPTION_PROPOSAL · REAL_BACKEND_CONTRACT_NOT_ESTABLISHED.** No actual publication/social query or access contract was found in the inspected implementation. DOM-PUBLICATION-001 is recovered as PROPOSAL: OutputArtifact → PublicationAttempt → ExternalPublication, with separate stable plan/intent and account/content-version references. Historical ObservationSet metrics carry `observedAt` and raw platform semantics, deferred entirely. This publication gap is separate from Timeline FB-GAP-003, Render FB-GAP-005 and Production Scene/Shot FB-GAP-007.
++**FRONTEND_CONSUMPTION_PROPOSAL · PROJECT PUBLICATION CONTRACT NOT ESTABLISHED.** Legacy social reads do exist: `SocialPublishController` exposes platform, post-list and post-detail reads and `frontend/src/api/publish.ts` calls them. Their existence does not establish deployment readiness, user-to-Project authorization, a post-to-Project/account/Artifact binding, or the DOM-PUBLICATION-001 plan → attempt → external-outcome graph. Core `SocialPost`, `ConnectedPlatform` and `PostStatus` remain real authority; provider IDs remain separate external references rather than replacements for their core IDs. Historical ObservationSet metrics remain deferred. This gap is separate from Timeline FB-GAP-003, Render FB-GAP-005 and Production Scene/Shot FB-GAP-007.
+ 
+-V10 uses only an explicit isolated host. It binds principal/tenant/session/Workspace/Project/source/owner, a provider-neutral read adapter and independent EffectiveAccess entries for collection listing, each plan's permitted content, and each Artifact's permitted metadata. These `test-only.publication.*` keys and TypeScript projections are not server contract authority. A source self-allowed flag grants nothing. Listing does not grant copy/artifact/media/link access. Unknown access fails closed; restricted values are omitted before Selection/DOM, but backend response trimming is still required and browser omission is not a confidentiality boundary. All external URLs are omitted. Artifact refs remain inert because no supported destination plus access predicate is established.
++V10 uses only an explicit isolated fixture host. It binds principal/tenant/session/Workspace/Project/source/owner, a fixture-only graph adapter and independent EffectiveAccess entries for collection listing, each plan's permitted content, and each Artifact's permitted metadata. These `test-only.publication.*` keys and TypeScript projections are not server contract authority. A source self-allowed flag grants nothing. Listing does not grant copy/artifact/media/link access. Unknown access fails closed; restricted relationships omit values and do not disclose existence or counts. Backend response trimming is still required and browser omission is not a confidentiality boundary. All external URLs are omitted. Artifact refs remain inert because no supported destination plus access predicate is established.
+ 
+-The proposed read envelope echoes the exact identity scope/request and Project snapshot query (`kind=project-publication-snapshot`, `limit=200`), stable snapshot version and `complete|bounded|partial`. Required IDs must be unique per entity collection; plan→account/artifact, attempt→plan/account and external→attempt/plan/account links must exist explicitly. Supplied source statuses remain literal, including unknown values. No name/order/time matching. Search and filters operate on permitted supplied content only; no server totals, absent-object conclusions from omissions, or hidden paging are inferred. Read error/restricted/invalid clears data and detail; cancellation and generations reject old replies. Same-context refresh/view switch preserves local query/date/zone/scroll and valid selection, but closes details for revalidation without automatic revival. Native identity retirement blocks the old explicit binding until a new host scope/owner is supplied; equal trustworthy SDK renewal and semantic access observations preserve browsing. Simulated lifecycle evidence does not establish real backend/IdP/access integration.
++The fixture proposal echoes the exact identity scope/request and Project snapshot query (`kind=project-publication-snapshot`, `limit=200`), stable snapshot version and `complete|bounded|partial`. IDs must be unique per supplied fixture collection; plan→account/artifact, attempt→plan/account and external→attempt/plan/account links must exist explicitly when those relations are supplied. Each relation now distinguishes supplied, known-empty, unavailable, restricted and pending-core-contract; an unavailable relation cannot be represented as authoritative `[]`. Generic display/filter status is normalized to the bounded `draft|scheduled|publishing|published|failed|cancelled|unknown` vocabulary; raw or novel provider strings never create filter options or control semantics. No name/order/time matching. Search and filters operate on permitted supplied content only; no server totals, absent-object conclusions from omissions, or hidden paging are inferred. Read error/restricted/invalid clears data and detail; cancellation and generations reject old replies. Same-context refresh/view switch preserves local query/date/zone/scroll and valid selection, but closes details for revalidation without automatic revival. Native identity retirement blocks the old explicit binding until a new host scope/owner is supplied; equal trustworthy SDK renewal and semantic access observations preserve browsing. Simulated lifecycle evidence does not establish real backend/IdP/access integration.
++
++V11 NON-SOCKET preparation adds a separate `external-publication-observation-v2` parser and external adapter under task evidence, not the ordinary route. Every observation carries explicit provider/instance/account/post references and remains `PENDING_CORE_CONTRACT` until a platform-owned Project/account/post binding exists. It never becomes a plan, attempt, external outcome, actual publication time, Artifact relation or known-empty collection by prefixing/hashing external IDs. Owner-local single-user pilot access is explicitly narrower than platform EffectiveAccess. Unknown provider states, including provider `ERROR`, become safe `unknown` observations rather than rejecting the whole read or asserting generic publication failure. Adapter/frontend intervals are half-open `[startInclusive,endExclusive)`; the prepared pinned-provider request alone translates the exclusive end to an inclusive last millisecond. Pure synthetic mapping evidence is not HTTP, account, transport or publication evidence; all socket/browser/real-provider checks remain not run.
+ 
+ Time proposal: `timeField=scheduledAt|publishedAt|unscheduled|unknown` explicitly chooses the calendar bucket; required timestamp must be an absolute offset/Z instant. Current UI precision is milliseconds (1–3 fractional digits), offset `-00:00` is indeterminate, offsetless/date-only/missing/invalid timestamps are not scheduled days. No fallback clock/date inference. Explicit unscheduled stays outside calendar. Scheduled, actual published, attempted and fetched timestamps are distinct and omitted means not supplied. Gregorian date intervals are inclusive start/exclusive end in the chosen display zone; conversion uses Intl and enumerated civil dates across leap/year/month/midnight/DST boundaries, not 24-hour local-day arithmetic. Display timezone does not mutate source scheduling. Invalid time leaves the item inspectable but disables its calendar placement.
+ 
+--- baseline/docs/architecture/governance/frontend-product-information-architecture-v1.md
++++ current/docs/architecture/governance/frontend-product-information-architecture-v1.md
+@@ -533,3 +533,9 @@
+ `FRONTEND_CONSUMPTION_PROPOSAL` and `REAL_BACKEND_CONTRACT_NOT_ESTABLISHED`: actual platformClient has no publication query or access contract. The source interface and test-only EffectiveAccess keys are frontend verification contracts only, not backend DTO/enums/permissions. The host supplies principal/tenant/session/Workspace/Project/source identity, an owner lifetime, read adapter and independently keyed list/content/artifact grants. Source self-allowed flags are not authorization. Response scope/query/IDs/explicit relationships/completeness are validated; only separately permitted copy and artifact metadata reaches Selection or DOM. Backend trimming remains mandatory for future confidentiality. No supported Artifact destination/access predicate exists for publication, so permitted OutputArtifact logical refs are inert metadata with an explicit limitation. External URLs are omitted entirely.
+ 
+ Existing SelectionProvider/dispatcher and InteractionDialog own selection and focus. Same valid native SDK renewal and semantically equal access observations preserve browsing. True source/access/identity/Project/owner replacement retires content, requests and callbacks; details never revive from same-ID reuse. Native session retirement additionally requires a fresh explicit host binding before verification data may be read again. SDK detection limits from V8 remain; no real IdP or backend lifecycle integration is claimed. See FB-GAP-014 and the existing backend enablement requests. Formal Slice1C and historical H4 Proposal A decisions remain separate; no product/EP19/debt closure.
++
++### V11 NON-SOCKET clarification — external observations are not adopted Publication plans
++
++The repository contains legacy social post/platform reads and core `SocialPost`, `ConnectedPlatform` and `PostStatus` authority, while the Project publication binding, access projection, relation availability and plan/attempt/outcome semantics remain pending. V10 list/calendar/time/inspection/lifecycle behavior remains the adopted frontend preparation; its graph is now explicitly fixture-only and does not become a backend contract through reuse.
++
++The V11 offline adapter produces only scoped provider/instance/account/post observations with `PENDING_CORE_CONTRACT`. External references are not core IDs, owner-local pilot access is narrower than EffectiveAccess, unknown provider state is a safe bounded-display `unknown`, and unavailable/restricted relationships never become blank or authoritative empty arrays. The pure second mapping shape demonstrates only synthetic unresolved projection. The ordinary route stays unconfigured, and no legacy social endpoint, provider branch, socket, HTTP, browser, account, credential, send or real publication integration is connected or accepted. Formal Slice1C, H4 Proposal A, backend/EP19 and real publication remain separate gates.
+--- baseline/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
++++ current/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+@@ -12,4 +12,4 @@
+ UXW2-NTF-004	Receive a real email/SMS/webhook notification or verify/test/retry a bound channel	FB-GAP-013; reference 86d6aef94fd5e58da552e97c11473cff6eca734e; Email/SMS/Webhook providers return SENT without external transport; binding verify writes VERIFIED without challenge; test only checks/audits and Controller says TEST_SENT; retry only returns RETRY_QUEUED; Novu transport code exists but live integration unestablished	Truthful simulated/accepted/sent/delivered/failed boundaries and separately authorized real delivery/verification/retry integration	Authenticated scoped verified destination and explicit delivery/test authority; no browser/Agent escalation; real failures cannot become empty or success; no secret exposure	BLOCKS_REAL_NOTIFICATION_DELIVERY	NO	YES	Local provider SENT and persisted MOCK are simulation, not external delivery; this task sends nothing	Users must not mistake source stubs or admin receipts for delivery	Future backend-owned controlled integration validates actual transport/challenge/attempt and readback, authorization, failure/retry semantics, destination safety and simulated labeling; actual external tests require separate consent	PROPOSED_SOURCE_CONFIRMED_NONBLOCKING_FOR_REVIEW
+ FB-GAP-005	Discover/filter/sort/inspect Project-scoped Render observability, including explicit task/attempt/progress/failure/version/time/completeness relationships and separately governed Artifact metadata access	Existing RenderJobSummary/API supplies only a five-field summary; no accepted coherent frontend adapter/lifecycle envelope or task-attempt-artifact observability contract exists; Artifact visibility is not Artifact read permission; reuse FB-GAP-002/004/005/006	One separately agreed controlled Project read projection plus independent typed Artifact target access when an existing application route/type is actually supported; zero Render, task, Artifact, Timeline or canonical writes	FRONTEND UNAGREED only: echoed principal/tenant/session/Project/request; host binds its separately agreed read key to matching SERVER EffectiveAccess; bounded/complete projection version/freshness/status-filter support; stable Render/source/task/attempt/Artifact IDs, literal statuses, optional supplied times/progress/failures/versions, explicit parent/retry/task links and safe Artifact metadata states; no fixed endpoint, permission key, server DTO, URL or storage location invented; collection artifacts.state=available does not grant item metadata access: only explicit metadataAccess=inspectable allows supplied name/id/type/availability/version/taskId after outer access/identity/relationship checks; denied/unknown/unavailable/stale items are state-only; missing/invalid item access is rejected; restricted backends MUST trim protected response fields, DOM omission is NOT a confidentiality boundary; trimmed server response and adapter representation remain to be agreed	BLOCKS_REAL_OPERATIONS_RENDER_ADAPTER	NO	YES	Ordinary route is unavailable and sends no request. Tests/external fixture host explicitly inject a complete identity-scoped simulated read source; no URL switch, HTTP, polling, persistence, action, fallback or canonical write. Unknown source status remains literal; invalid progress is not clamped. Item permission transitions clear old metadata; refresh clears the old snapshot; unavailable/stale/error/cancelled or late old reads cannot restore it; only a new valid inspectable response restores metadata. Principal/account (principalId), tenant/session/Project, access/binding/adapter and Selection-owner changes clear details and abort reads; no separate accountId exists in this proposed scope	Complete the current Operations read workflow without global joins, fake totals/history/progress/ETA or task visibility being mistaken for Artifact access	Pin one frontend tree/build and one separately agreed backend Project-read adapter; controlled authorized/denied identities and current/bounded/stale/error data; validate exact access binding, receipt ownership, duplicate IDs, numeric/time/bounds, task-attempt-artifact relations, cancellation/Selection-owner retirement, unknown statuses and nondisclosure. Independently authorize any existing typed Artifact destination; read back zero writes. This bounded integration is not a full-platform prerequisite Include pinned mixed available collections with all five item access states, same-ID inspectable-to-restricted transitions, denied then late old success then new valid allow, refresh error/cancel/stale, scope/owner replacement, missing/invalid metadataAccess, invalid relationships, backend response trimming and full Artifact subtree nondisclosure while independently authorized task metadata remains visible.	FRONTEND_CONSUMER_IMPLEMENTED_REAL_INTEGRATION_NOT_ESTABLISHED
+ FB-GAP-007	Discover and inspect Project Scenes and explicitly related Shots	No accepted Production aggregate/query exists; reuse FB-GAP-001/002/004/008 for Project relationship, effective access, resource projections and safe references	One separately agreed controlled Project read projection; no Production writes	FRONTEND UNAGREED only: echoed principal/tenant/session/Workspace/Project/request; host explicitly binds its agreed read-projection key to the matching SERVER EffectiveAccess entry; stable Scene/Shot IDs, optional supplied name/description/status/version, explicit relations, scoped safe shared references, complete/bounded metadata and projection version; no fixed endpoint, permission key or server DTO invented	BLOCKS_REAL_PRODUCTION_SCENE_SHOT_INTEGRATION	NO	YES	Ordinary registered route is unavailable and sends no request. Tests/external host may explicitly inject an identity-supplied read-only fixture with a clearly test-only unagreed binding; no URL opt-in, HTTP, storage, persistence, fallback or canonical change	Creators can discover supplied production structure without client joins or fabricated production truth	Pin one frontend tree/build and separately agreed backend version/adapter; controlled authorized and denied identities; validate the exact host binding, all required identity fields before request, ownership/relations/bounds/version, nondisclosing denied/error/stale outcomes, InteractionStore/source cancellation/retirement and safe destination access; zero writes and read back no mutation	FRONTEND_CONSUMER_IMPLEMENTED_REAL_INTEGRATION_NOT_ESTABLISHED
+-FB-GAP-014	Discover Publication plans by Project, account and source status; browse month/day and inspect explicit attempts/outcomes	No publication query/access contract established; DOM-PUBLICATION-001 recovered as proposal, separate from NLE/Render/Scene-Shot	Provider-neutral Project publication read plus separately authorized one-account technical pilot	FRONTEND_CONSUMPTION_PROPOSAL; exact principal/tenant/session/Workspace/Project/source/request/query/owner, stable IDs/version, complete|bounded|partial/paging, independently trimmed copy/artifact metadata, strict chosen source times/display timezone, raw+mapped statuses and explicit plan/attempt/account/external relationships; future backend-owned intent/single scheduler/idempotency/errors/credential-expiry and pinned Postiz adapter dependency	BLOCKS_REAL_PUBLICATION_INTEGRATION	NO	YES	Ordinary not connected; explicit isolated host only, no fixture fallback or writes; EffectiveAccess test-only list/content/artifact grants, safe omission before Selection/DOM, unknown raw status, strict times, local list/calendar/shared filters/inspection/return and request/owner/callback retirement	Creators need reliable dates and account outcomes without mistaking due schedules, omitted items or simulated data for actual publication	See FB-GAP-014 and publication model/workspace plus V10 route tests; future pinned frontend/backend/adapter one Project publishable OutputArtifact + one account/content version → stable intent → single scheduler → PublicationAttempt/ExternalPublication actual success/failure/unknown, authorization/paging/timezones/idempotency/duplicate defense/failure/credential-expiry/readback; no frontend private Postiz API/database or secret exposure	FRONTEND_CONSUMER_IMPLEMENTED_REAL_BACKEND_CONTRACT_NOT_ESTABLISHED
++FB-GAP-014	Discover Publication plans by Project and bounded display status; browse month/day and inspect only explicitly available relationships	Legacy `/api/social/platforms`, `/api/social/posts` and detail reads plus core SocialPost/ConnectedPlatform/PostStatus exist; no approved user-to-Project publication binding, Project/account/Artifact relationship, platform read-access projection, plan/attempt/outcome graph, or relation-availability semantics	Platform-owned Project publication application read plus separately authorized one-account external-observation pilot behind that boundary; do not connect the ordinary route to legacy social APIs	FRONTEND_FIXTURE_PROPOSAL; exact principal/tenant/session/Workspace/Project/source/request/query/owner, stable core IDs/version, complete|bounded|partial, separately trimmed content/artifact metadata, strict selected source times/display timezone, bounded generic status vocabulary with unknown fallback, and explicit supplied|known-empty|unavailable|restricted|pending relation states. External observations require scoped provider/instance/account/post refs and remain PENDING_CORE_CONTRACT; owner-local access is narrower than EffectiveAccess. Future backend-owned binding/intent/single scheduler/idempotency/result/error/credential-expiry and pinned replaceable provider adapter remain pending	BLOCKS_REAL_PUBLICATION_INTEGRATION	NO	YES	Ordinary route remains unconfigured. V10 fixture graph is explicitly fixture-only; unknown raw statuses normalize to safe unknown and never become filter options. Restricted relations are non-disclosing; unavailable is not `[]`. V11 pure adapter-v2 and a distinctly shaped synthetic mapper create unresolved observations only, with no core-ID minting, Project plan, attempt, result, actual time, Artifact/copy relation, socket, HTTP, browser, credential, send or provider assertion	Creators need reliable dates and account outcomes without mistaking due schedules, omitted relationships, provider errors, unbound external IDs or simulated reads for actual publication	Pin frontend/backend/application-projection/provider versions and one controlled principal/session/Workspace/Project/core account binding. Approve stable provider/instance/account/post-to-core bindings, organization-wide provider read consent, half-open window/paging/completeness, generic status/error semantics, per-relation availability and non-disclosing access. Verify allowed/denied identities and actual trimmed readback before any route connection. Any future send separately requires explicit account/content/Artifact/immediate-or-scheduled/one-send/idempotency/result authority; no frontend private provider API/database or secret exposure	FRONTEND_FIXTURE_AND_NON_SOCKET_EXTERNAL_OBSERVATION_PREPARATION_ONLY_REAL_BACKEND_CONTRACT_NOT_ESTABLISHED
+--- baseline/frontend/governance/UX_WAVE_1_REVIEW.md
++++ current/frontend/governance/UX_WAVE_1_REVIEW.md
+@@ -317,3 +317,9 @@
+ The Owner newly prioritizes the read-only Publication workspace after that bounded V9 acceptance; the amendment is appended in the existing IA priority authority. The existing Project shell gains a Publication entry. Ordinary source is unavailable; only explicit isolated host injection supplies the local discovery/list/month/day/inspection flow. DOM-PUBLICATION-001 is recovered as a proposal, not an implemented backend domain: OutputArtifact, plans, attempts and ExternalPublication stay separately identified. Platform/account, schedule/actual publication, unscheduled/indeterminate and complete/partial scope stay distinct. No backend/social/Postiz adapter, writes or analytics are added.
+ 
+ Native writer RED/GREEN logs, commands, JSON reports, scope and preservation evidence are under the current V10 taskroot `writer/`. New behavioral tests cover actual retained callbacks, owner/request retirement, permitted metadata omission, explicit relationships, strict Gregorian/offset/timezone behavior, focus and browsing continuity. Previous work and real index/HEAD/stash are preserved; the Owner no-commit/no-freeze rule overrides the root candidate-freeze requirement. H4 Proposal A exact new paths append in current/classification ledgers only. Parent Hermes owns final seven gates, baseline identity/warning accounting, external build, native Chromium validation and delivery. Writer implementation is not independent review or acceptance.
++
++## V11 Publication NON-SOCKET continuation — bounded contract correction
++
++V10 calendar/list/timezone/inspection/Selection/lifecycle behavior is retained, but its graph and test-only EffectiveAccess keys are explicitly fixture-only proposals. Statuses are bounded display values; novel raw provider strings normalize to `unknown` and do not become filters. Artifact/attempt/external relationships carry explicit supplied, known-empty, unavailable, restricted or pending-core-contract availability. Restricted relations omit values without disclosing existence or count; unavailable relations are not rendered as authoritative empty data.
++
++The separate V11 adapter-v2 and frontend parser prepare only unresolved external observations with provider/instance/account/post references and `PENDING_CORE_CONTRACT`. No external identifier is minted into a core ID, no Project publication binding is inferred, and no attempt/result/actual time/Artifact/copy relation is synthesized. Owner-local pilot access remains narrower than platform EffectiveAccess. Ordinary entry remains unavailable and no legacy social API or provider-specific branch is connected. Adapter checks are pure synthetic mapping/request-construction tests only; all socket, HTTP, browser, real provider/account/credential/send and deployment checks remain not run. This is intermediate engineering evidence, not V11 Outcome A, real integration, independent review or acceptance.
+--- baseline/frontend/src/localization/catalogs.ts
++++ current/frontend/src/localization/catalogs.ts
+@@ -22,12 +22,12 @@
+     "publication.restricted": message("Publication access unavailable"),
+     "publication.error": message("Could not load publications"),
+     "publication.invalid": message("Publication response could not be verified"),
+-    "publication.verification": message("Isolated verification source · read-only supplied data; no connected publishing account."),
++    "publication.verification": message("Fixture-only Publication graph proposal · read-only supplied data; no connected publishing account or backend contract."),
+     "publication.search": message("Search supplied publications"),
+     "publication.account": message("Account"),
+     "publication.allAccounts": message("All supplied accounts"),
+-    "publication.status": message("Source status"),
+-    "publication.allStatuses": message("All source statuses"),
++    "publication.status": message("Bounded display status"),
++    "publication.allStatuses": message("All bounded display statuses"),
+     "publication.sort": message("Sort by chosen source time"),
+     "publication.earliest": message("Earliest first"),
+     "publication.latest": message("Latest first"),
+@@ -80,6 +80,11 @@
+     "publication.attemptedAt": message("Attempt time"),
+     "publication.attemptId": message("Attempt ID"),
+     "publication.external": message("External publication outcomes"),
++    "publication.relationSupplied": message("Relationship data was explicitly supplied by this fixture proposal."),
++    "publication.relationKnownEmpty": message("The fixture explicitly reports this relationship empty."),
++    "publication.relationUnavailable": message("Relationship data is unavailable; absence is not established."),
++    "publication.relationRestricted": message("Relationship data is restricted; no existence or count is disclosed."),
++    "publication.relationPending": message("PENDING_CORE_CONTRACT · this relationship is not established by the platform contract."),
+     'shortcut.title': message("Keyboard shortcut"),
+     'shortcut.close': message("Close keyboard shortcut"),
+     'shortcut.session': message("Changes apply only in this open workspace context and are not saved."),
+@@ -737,12 +742,12 @@
+     "publication.restricted": message("发布访问权限不可用"),
+     "publication.error": message("无法加载发布数据"),
+     "publication.invalid": message("无法验证发布数据响应"),
+-    "publication.verification": message("隔离验证数据源 · 仅查看提供的数据，未连接真实发布账号。"),
++    "publication.verification": message("仅限夹具的发布关系图提案 · 仅查看提供的数据，未连接真实发布账号或后端契约。"),
+     "publication.search": message("搜索已提供的发布内容"),
+     "publication.account": message("账号"),
+     "publication.allAccounts": message("所有已提供账号"),
+-    "publication.status": message("来源状态"),
+-    "publication.allStatuses": message("所有来源状态"),
++    "publication.status": message("有限展示状态"),
++    "publication.allStatuses": message("所有有限展示状态"),
+     "publication.sort": message("按选定来源时间排序"),
+     "publication.earliest": message("时间升序"),
+     "publication.latest": message("时间降序"),
+@@ -795,6 +800,11 @@
+     "publication.attemptedAt": message("尝试时间"),
+     "publication.attemptId": message("尝试 ID"),
+     "publication.external": message("外部发布结果"),
++    "publication.relationSupplied": message("此夹具提案明确提供了关系数据。"),
++    "publication.relationKnownEmpty": message("夹具明确报告此关系为空。"),
++    "publication.relationUnavailable": message("关系数据不可用，不能据此断言不存在。"),
++    "publication.relationRestricted": message("关系数据受限，不披露是否存在或数量。"),
++    "publication.relationPending": message("PENDING_CORE_CONTRACT · 平台契约尚未建立此关系。"),
+     'shortcut.title': message("键盘快捷键"),
+     'shortcut.close': message("关闭键盘快捷键"),
+     'shortcut.session': message("更改仅在当前打开的工作区上下文中生效，不会保存。"),
+--- baseline/frontend/src/localization/source-manifest.json
++++ current/frontend/src/localization/source-manifest.json
+@@ -72,6 +72,11 @@
+     "shell.publication.attemptedAt",
+     "shell.publication.attemptId",
+     "shell.publication.external",
++    "shell.publication.relationSupplied",
++    "shell.publication.relationKnownEmpty",
++    "shell.publication.relationUnavailable",
++    "shell.publication.relationRestricted",
++    "shell.publication.relationPending",
+     "agent.kindPUBLICATION",
+     "agent.kindLowerPUBLICATION",
+     "timeline.nav.region",
+--- baseline/frontend/src/product/publication/PublicationWorkspace.test.tsx
++++ current/frontend/src/product/publication/PublicationWorkspace.test.tsx
+@@ -47,6 +47,8 @@
+   })
+   it('shares content/account/status filters between list and calendar, with reset and same-platform accounts', async () => {
+     render(host(source())); await ready()
++    expect(screen.getByLabelText('Bounded display status').textContent).toContain('unknown')
++    expect(screen.getByLabelText('Bounded display status').textContent).not.toContain('alien-state')
+     fireEvent.change(screen.getByLabelText('Account'), { target: { value: 'b' } })
+     expect(screen.queryByRole('button', { name: 'Opening story' })).toBeNull()
+     expect(button('Second story')).toBeTruthy()
+@@ -67,6 +69,7 @@
+     expect(within(dialog).getByText('output')).toBeTruthy()
+     expect(within(dialog).getByText('try1')).toBeTruthy(); expect(within(dialog).getByText('try2')).toBeTruthy()
+     expect(within(dialog).getByText('external1')).toBeTruthy()
++    expect(within(dialog).getAllByText('Relationship data was explicitly supplied by this fixture proposal.')).toHaveLength(3)
+     expect(dialog.querySelector('a[href]')).toBeNull()
+     fireEvent.keyDown(dialog, { key: 'Escape' })
+     expect(screen.queryByRole('dialog')).toBeNull()
+--- baseline/frontend/src/product/publication/PublicationWorkspace.tsx
++++ current/frontend/src/product/publication/PublicationWorkspace.tsx
+@@ -6,7 +6,7 @@
+ import { useInteractionStore, useSelection, useSurfaceAdapter } from '../../interaction/SelectionContext'
+ import { useTranslation } from '../../localization'
+ import { absoluteInstant, accessFingerprint, calendarDay, filterPlans, monthDays, parsePublication, planDay, publicationAccess, scopeKey, shiftMonth } from './model'
+-import type { PublicationFilters, PublicationPlan, PublicationSnapshot, PublicationSource } from './types'
++import type { PublicationFilters, PublicationPlan, PublicationSnapshot, PublicationSource, RelationAvailability } from './types'
+ import './publication.css'
+ 
+ const SourceContext = createContext<PublicationSource | undefined>(undefined)
+@@ -125,6 +125,13 @@
+     if (instant === null) return text('indeterminate')
+     return `${new Intl.DateTimeFormat(locale, { timeZone: zone, dateStyle: 'medium', timeStyle: 'long' }).format(instant)} · ${value}`
+   }
++  const relationMessage = (availability: RelationAvailability) => {
++    if (availability === 'supplied') return text('relationSupplied')
++    if (availability === 'known-empty') return text('relationKnownEmpty')
++    if (availability === 'restricted') return text('relationRestricted')
++    if (availability === 'pending-core-contract') return text('relationPending')
++    return text('relationUnavailable')
++  }
+   const account = (id: string) => snapshot?.accounts.find(a => a.id === id)
+   const row = (p: PublicationPlan) => <li key={p.id} className="ff-publication-row"><Button type="button" aria-pressed={selection.primarySelectedObject?.id === p.id} onClick={event => open(p, event.currentTarget)}>{p.title || p.id}</Button><span>{account(p.accountId)?.name} · {account(p.accountId)?.platform}</span><Badge>{p.status}</Badge><small>{text(p.timeField)}{p.timeField === 'scheduledAt' || p.timeField === 'publishedAt' ? ` · ${timestamp(p[p.timeField])}` : ''}</small></li>
+   const unscheduled = rows.filter(p => p.timeField === 'unscheduled'), indeterminate = rows.filter(p => p.timeField !== 'unscheduled' && !planDay(p, zone))
+@@ -178,10 +185,10 @@
+       {selected.copyVersion !== undefined ? <PropertyRow label={text('copyVersion')}>{selected.copyVersion}</PropertyRow> : null}
+       <PropertyRow label={text('calendarField')}>{text(selected.timeField)}</PropertyRow>
+       <PropertyRow label={text('scheduledAt')}>{timestamp(selected.scheduledAt)}</PropertyRow><PropertyRow label={text('publishedAt')}>{timestamp(selected.publishedAt)}</PropertyRow><PropertyRow label={text('fetchedAt')}>{timestamp(snapshot.fetchedAt)}</PropertyRow>
+-      <h3>{text('artifacts')}</h3><p>{text('artifactLimit')}</p>
+-      {snapshot.artifacts.filter(a => selected.artifactIds.includes(a.id)).map(a => <div key={a.id}><code>{a.id}</code>{a.name !== undefined ? <p>{a.name}</p> : null}{a.mediaType !== undefined ? <p>{a.mediaType}</p> : null}{a.version !== undefined ? <p>{a.version}</p> : null}</div>)}
+-      <h3>{text('attempts')}</h3>{snapshot.attempts.filter(a => a.planId === selected.id).map(a => <section key={a.id}><code>{a.id}</code><p>{text('planId')}: {a.planId} · {text('account')}: {a.accountId}</p><Badge>{a.status}</Badge><p>{text('attemptedAt')}: {timestamp(a.attemptedAt)}</p>{a.failureSummary !== undefined ? <p>{a.failureSummary}</p> : null}</section>)}
+-      <h3>{text('external')}</h3>{snapshot.externalPublications.filter(e => e.planId === selected.id).map(e => <section key={e.id}><code>{e.id}</code><p>{text('attemptId')}: {e.attemptId} · {text('account')}: {e.accountId}</p><Badge>{e.status}</Badge><p>{text('publishedAt')}: {timestamp(e.publishedAt)}</p></section>)}
++      <h3>{text('artifacts')}</h3><p>{relationMessage(snapshot.relations.artifacts)}</p><p>{text('artifactLimit')}</p>
++      {(snapshot.artifacts ?? []).filter(a => (selected.artifactIds ?? []).includes(a.id)).map(a => <div key={a.id}><code>{a.id}</code>{a.name !== undefined ? <p>{a.name}</p> : null}{a.mediaType !== undefined ? <p>{a.mediaType}</p> : null}{a.version !== undefined ? <p>{a.version}</p> : null}</div>)}
++      <h3>{text('attempts')}</h3><p>{relationMessage(snapshot.relations.attempts)}</p>{(snapshot.attempts ?? []).filter(a => a.planId === selected.id).map(a => <section key={a.id}><code>{a.id}</code><p>{text('planId')}: {a.planId} · {text('account')}: {a.accountId}</p><Badge>{a.status}</Badge><p>{text('attemptedAt')}: {timestamp(a.attemptedAt)}</p>{a.failureSummary !== undefined ? <p>{a.failureSummary}</p> : null}</section>)}
++      <h3>{text('external')}</h3><p>{relationMessage(snapshot.relations.externalPublications)}</p>{(snapshot.externalPublications ?? []).filter(e => e.planId === selected.id).map(e => <section key={e.id}><code>{e.id}</code><p>{text('attemptId')}: {e.attemptId} · {text('account')}: {e.accountId}</p><Badge>{e.status}</Badge><p>{text('publishedAt')}: {timestamp(e.publishedAt)}</p></section>)}
+     </InteractionDialog> : null}
+   </section>
+ }
+--- baseline/frontend/src/product/publication/model.test.ts
++++ current/frontend/src/product/publication/model.test.ts
+@@ -1,6 +1,6 @@
+ import { describe, expect, it } from 'vitest'
+-import { absoluteInstant, calendarDay, monthDays, shiftMonth, parsePublication, filterPlans, publicationAccess, accessFingerprint } from './model'
+-import { LIST_KEY, type PublicationRequest, type PublicationSource } from './types'
++import { absoluteInstant, calendarDay, monthDays, shiftMonth, parsePublication, parseExternalObservations, filterPlans, publicationAccess, accessFingerprint } from './model'
++import { LIST_KEY, type ExternalObservationRequest, type PublicationRequest, type PublicationSource } from './types'
+ 
+ import { grant, scope, request, receipt, source } from './testing'
+ 
+@@ -32,15 +32,15 @@
+     expect(publicationAccess({ ...s, scope: { ...scope, sessionId: '' } })).toBe(false)
+     expect(accessFingerprint(s.access)).toBe(accessFingerprint({ ...s.access, [LIST_KEY]: { ...grant(LIST_KEY), observedAt: 'later', explanation: 'new text' } }))
+   })
+-  it('preserves distinct accounts, explicit attempts and external outcomes with raw unknown statuses', () => {
++  it('preserves distinct fixture relationships while normalizing unknown statuses for display', () => {
+     const parsed = parsePublication(receipt(), request, source().access)
+     expect(parsed.status).toBe('ok')
+     if (parsed.status !== 'ok') throw Error('missing snapshot')
+     expect(parsed.accounts.map(a => a.id)).toEqual(['a', 'b'])
+-    expect(parsed.attempts.map(a => a.id)).toEqual(['try1', 'try2'])
+-    expect(parsed.externalPublications[0]).toMatchObject({ id: 'external1', attemptId: 'try2' })
+-    expect(parsed.plans[1].status).toBe('alien-state')
+-    expect(JSON.stringify(parsed)).not.toContain('SECRET_URL')
++    expect(parsed.attempts?.map(a => a.id)).toEqual(['try1', 'try2'])
++    expect(parsed.externalPublications?.[0]).toMatchObject({ id: 'external1', attemptId: 'try2' })
++    expect(parsed.plans.map(plan => plan.status)).toEqual(['scheduled', 'unknown'])
++    expect(JSON.stringify(parsed)).not.toMatch(/SECRET_URL|alien-state/)
+   })
+   it('rejects mismatched receipts, duplicate identities and inferred or cross-account relationships', () => {
+     const bad = [receipt({ ...request, requestId: 'old' }), receipt({ ...request, scope: { ...scope, projectId: 'other' } }), receipt({ ...request, query: { ...request.query, limit: 100 } } as unknown as PublicationRequest), receipt(request, { completeness: 'unknown' }), receipt(request, { accounts: [{ id: 'a', name: 'A', platform: 'X' }, { id: 'a', name: 'B', platform: 'X' }] }), receipt(request, { attempts: [{ id: 't', planId: 'one', accountId: 'b', status: 'ok' }] }), receipt(request, { externalPublications: [{ id: 'e', attemptId: 'absent', planId: 'one', accountId: 'a', status: 'ok' }] })]
+@@ -51,12 +51,64 @@
+     const parsed = parsePublication(raw, request, { [LIST_KEY]: grant(LIST_KEY) })
+     expect(parsed.status).toBe('ok')
+     expect(JSON.stringify(parsed)).not.toMatch(/SECRET_|copy-v1|Permitted summary|Master/)
++    if (parsed.status !== 'ok') throw Error('missing snapshot')
++    expect(parsed.relations.artifacts).toBe('restricted')
++    expect(parsed.artifacts).toBeUndefined()
++    expect(parsed.plans.every(plan => plan.artifactIds === undefined)).toBe(true)
++  })
++  it('distinguishes unavailable relationships from authoritative empty fixture relations', () => {
++    const raw = receipt()
++    const plans = raw.plans.map(({ artifactIds: _artifactIds, ...plan }) => plan)
++    const pending = parsePublication(receipt(request, { relations: { artifacts: 'pending-core-contract', attempts: 'unavailable', externalPublications: 'restricted' }, artifacts: undefined, attempts: undefined, externalPublications: undefined, plans }), request, source().access)
++    expect(pending.status).toBe('ok')
++    if (pending.status !== 'ok') throw Error('missing snapshot')
++    expect(pending.relations).toEqual({ artifacts: 'pending-core-contract', attempts: 'unavailable', externalPublications: 'restricted' })
++    expect(pending.artifacts).toBeUndefined()
++    expect(parsePublication(receipt(request, { relations: { ...raw.relations, artifacts: 'unavailable' } }), request, source().access).status).toBe('invalid')
++    expect(parsePublication(receipt(request, { relations: { artifacts: 'known-empty', attempts: 'supplied', externalPublications: 'supplied' }, artifacts: [], plans }), request, source().access).status).toBe('ok')
+   })
+   it('filters supplied permitted content by stable account ID and sorts explicit time with ID ties', () => {
+     const parsed = parsePublication(receipt(), request, source().access)
+     if (parsed.status !== 'ok') throw Error('missing snapshot')
+     expect(filterPlans(parsed, { query: 'story', account: 'b', status: '', order: 'asc' }).map(p => p.id)).toEqual(['two'])
+     expect(filterPlans(parsed, { query: '', account: '', status: '', order: 'desc' }).map(p => p.id)).toEqual(['one', 'two'])
+-    expect(filterPlans(parsed, { query: '', account: '', status: 'alien-state', order: 'asc' }).map(p => p.id)).toEqual(['two'])
++    expect(filterPlans(parsed, { query: '', account: '', status: 'unknown', order: 'asc' }).map(p => p.id)).toEqual(['two'])
++  })
++})
++
++describe('unbound external observation preparation', () => {
++  const externalRequest: ExternalObservationRequest = {
++    requestId: 'request1', binding: { scope, ownerId: 'host1' },
++    window: { semantics: 'half-open', startInclusive: '2026-09-01T00:00:00Z', endExclusive: '2026-10-01T00:00:00Z' },
++  }
++  function externalReceipt(changes: Record<string, unknown> = {}) {
++    return {
++      contract: 'external-publication-observation-v2', status: 'ok', requestId: 'request1', binding: externalRequest.binding,
++      access: { authority: 'owner-local-single-user', scope: 'narrower-than-platform-effective-access', list: true, content: false },
++      providerVersion: 'v2.23.0', providerSourceCommit: '1e4c8dd5c4f70c4d0abd01e23cc42d5b533d1ab9', evidence: 'pure-synthetic-projection',
++      window: { ...externalRequest.window, upstreamEndInclusive: '2026-09-30T23:59:59.999Z' }, observedAt: '2026-09-09T13:00:00Z', completeness: 'bounded', omissions: {},
++      externalAccount: { externalReferences: { provider: 'postiz', instance: 'instance1', account: 'account1' }, label: 'Synthetic account', providerLabel: 'synthetic', coreBinding: { status: 'PENDING_CORE_CONTRACT' } },
++      observations: [{
++        kind: 'external-publication-observation', externalReferences: { provider: 'postiz', instance: 'instance1', account: 'account1', post: 'post1' },
++        coreBinding: { status: 'PENDING_CORE_CONTRACT' }, displayStatus: 'unknown', statusMapping: 'unmapped', timeField: 'unknown',
++        relationships: { project: { status: 'PENDING_CORE_CONTRACT' }, artifacts: { status: 'PENDING_CORE_CONTRACT' }, attempts: { status: 'PENDING_CORE_CONTRACT' }, externalOutcomes: { status: 'PENDING_CORE_CONTRACT' } },
++      }], ...changes,
++    }
++  }
++  it('keeps provider/instance/account/post refs scoped and never promotes observations to plans', () => {
++    const parsed = parseExternalObservations(externalReceipt(), externalRequest)
++    expect(parsed.status).toBe('ok')
++    if (parsed.status !== 'ok') throw Error('missing observations')
++    expect(parsed.access.scope).toBe('narrower-than-platform-effective-access')
++    expect(parsed.observations[0].externalReferences).toEqual({ provider: 'postiz', instance: 'instance1', account: 'account1', post: 'post1' })
++    expect(parsed.observations[0].coreBinding.status).toBe('PENDING_CORE_CONTRACT')
++    expect(JSON.stringify(parsed)).not.toMatch(/projectId|planId|attemptId|publishedAt|rawStatus/)
++  })
++  it('rejects unscoped, duplicated, injected raw-status or mismatched-window observations', () => {
++    const raw = externalReceipt()
++    const observations = raw.observations
++    expect(parseExternalObservations(externalReceipt({ observations: [...observations, observations[0]] }), externalRequest).status).toBe('invalid')
++    expect(parseExternalObservations(externalReceipt({ observations: [{ ...observations[0], rawStatus: 'PRIVATE_PROVIDER_VALUE' }] }), externalRequest).status).toBe('invalid')
++    expect(parseExternalObservations(externalReceipt({ window: { ...raw.window, endExclusive: '2026-10-02T00:00:00Z' } }), externalRequest).status).toBe('invalid')
+   })
+ })
+--- baseline/frontend/src/product/publication/model.ts
++++ current/frontend/src/product/publication/model.ts
+@@ -1,20 +1,27 @@
+ import { z } from 'zod'
+ import type { EffectiveAccessCatalog } from '../../foundation/effectiveAccess'
+-import { LIST_KEY, contentKey, artifactKey, type PublicationFilters, type PublicationPlan, type PublicationRequest, type PublicationResult, type PublicationSnapshot, type PublicationSource } from './types'
++import { LIST_KEY, contentKey, artifactKey, publicationDisplayStatuses, type ExternalObservationRequest, type ExternalObservationResult, type PublicationDisplayStatus, type PublicationFilters, type PublicationPlan, type PublicationRequest, type PublicationResult, type PublicationSnapshot, type PublicationSource, type RelationAvailability } from './types'
+ 
+ const id = z.string().min(1).max(180).regex(/^[a-zA-Z0-9][a-zA-Z0-9_.:-]*$/)
+ const text = z.string().max(4000)
+ const optionalTime = z.string().max(100).nullable().optional()
+-const scopeSchema = z.object({ principalId: id, tenantId: id.nullable(), sessionId: id, workspaceId: id, projectId: id, sourceId: id })
+-const envelope = z.object({ scope: scopeSchema, requestId: id, query: z.object({ kind: z.literal('project-publication-snapshot'), limit: z.literal(200) }), status: z.enum(['ok', 'unavailable', 'restricted', 'error']) })
+-const planSchema = z.object({ id, projectId: id, accountId: id, status: z.string().min(1).max(120), title: text.optional(), summary: text.optional(), copyVersion: text.optional(), artifactIds: z.array(id).max(200), timeField: z.enum(['scheduledAt', 'publishedAt', 'unscheduled', 'unknown']), scheduledAt: optionalTime, publishedAt: optionalTime })
+-const snapshotSchema = envelope.extend({ status: z.literal('ok'), version: id, completeness: z.enum(['complete', 'bounded', 'partial']), fetchedAt: optionalTime,
+-  accounts: z.array(z.object({ id, name: text, platform: text })).max(200),
+-  plans: z.array(planSchema).max(200),
+-  artifacts: z.array(z.object({ id, projectId: id, name: text.optional(), mediaType: text.optional(), version: text.optional() })).max(200),
+-  attempts: z.array(z.object({ id, planId: id, accountId: id, status: text, attemptedAt: optionalTime, failureSummary: text.optional() })).max(1000),
+-  externalPublications: z.array(z.object({ id, attemptId: id, planId: id, accountId: id, status: text, publishedAt: optionalTime })).max(1000),
++const scopeSchema = z.object({ principalId: id, tenantId: id.nullable(), sessionId: id, workspaceId: id, projectId: id, sourceId: id }).strict()
++const querySchema = z.object({ kind: z.literal('project-publication-snapshot'), limit: z.literal(200) }).strict()
++const envelope = z.object({ scope: scopeSchema, requestId: id, query: querySchema, status: z.enum(['ok', 'unavailable', 'restricted', 'error']) })
++const relationAvailability = z.enum(['supplied', 'known-empty', 'unavailable', 'restricted', 'pending-core-contract'])
++const relationsSchema = z.object({ artifacts: relationAvailability, attempts: relationAvailability, externalPublications: relationAvailability }).strict()
++const planSchema = z.object({ id, projectId: id, accountId: id, status: z.string().min(1).max(120), title: text.optional(), summary: text.optional(), copyVersion: text.optional(), artifactIds: z.array(id).max(200).optional(), timeField: z.enum(['scheduledAt', 'publishedAt', 'unscheduled', 'unknown']), scheduledAt: optionalTime, publishedAt: optionalTime })
++const artifactSchema = z.object({ id, projectId: id, name: text.optional(), mediaType: text.optional(), version: text.optional() })
++const attemptSchema = z.object({ id, planId: id, accountId: id, status: text, attemptedAt: optionalTime, failureSummary: text.optional() })
++const externalPublicationSchema = z.object({ id, attemptId: id, planId: id, accountId: id, status: text, publishedAt: optionalTime })
++const snapshotSchema = envelope.extend({
++  status: z.literal('ok'), contract: z.literal('fixture-only-publication-graph-v1'), version: id,
++  completeness: z.enum(['complete', 'bounded', 'partial']), fetchedAt: optionalTime, relations: relationsSchema,
++  accounts: z.array(z.object({ id, name: text, platform: text })).max(200), plans: z.array(planSchema).max(200),
++  artifacts: z.array(artifactSchema).max(200).optional(), attempts: z.array(attemptSchema).max(1000).optional(),
++  externalPublications: z.array(externalPublicationSchema).max(1000).optional(),
+ })
++
+ export const scopeKey = (scope: PublicationRequest['scope']) => JSON.stringify([scope.principalId, scope.tenantId, scope.sessionId, scope.workspaceId, scope.projectId, scope.sourceId])
+ export function accessFingerprint(access: EffectiveAccessCatalog): string {
+   return JSON.stringify(Object.keys(access).sort().map(key => { const e = access[key]; return [key, e.key, e.status, e.source, e.reasonCode, e.factors.capability, e.factors.runtime, e.factors.entitlement, e.factors.policy, e.factors.quota] }))
+@@ -24,7 +31,17 @@
+   return Boolean(e && e.key === key && e.source === 'SERVER' && e.status === 'AVAILABLE' && ['capability', 'runtime', 'entitlement', 'policy', 'quota'].every(f => ['SATISFIED', 'NOT_APPLICABLE'].includes(e.factors[f as keyof typeof e.factors])))
+ }
+ export function publicationAccess(source: PublicationSource): boolean {
+-  return scopeSchema.safeParse(source.scope).success && source.adapter.origin === 'isolated-verification' && Boolean(source.owner) && allowed(source.access, LIST_KEY)
++  return scopeSchema.safeParse(source.scope).success && source.adapter.origin === 'isolated-fixture' && Boolean(source.owner) && allowed(source.access, LIST_KEY)
++}
++export function normalizePublicationStatus(value: unknown): PublicationDisplayStatus {
++  if (typeof value !== 'string') return 'unknown'
++  const normalized = value.trim().toLowerCase()
++  return publicationDisplayStatuses.includes(normalized as PublicationDisplayStatus) ? normalized as PublicationDisplayStatus : 'unknown'
++}
++function collectionMatchesRelation(value: unknown[] | undefined, availability: RelationAvailability): boolean {
++  if (availability === 'supplied') return value !== undefined
++  if (availability === 'known-empty') return value !== undefined && value.length === 0
++  return value === undefined
+ }
+ export function parsePublication(input: unknown, request: PublicationRequest, access: EffectiveAccessCatalog): PublicationResult {
+   if (!allowed(access, LIST_KEY)) return { status: 'restricted' }
+@@ -34,23 +51,72 @@
+   const parsed = snapshotSchema.safeParse(input)
+   if (!parsed.success) return { status: 'invalid' }
+   const s = parsed.data
++  if (!collectionMatchesRelation(s.artifacts, s.relations.artifacts)
++    || !collectionMatchesRelation(s.attempts, s.relations.attempts)
++    || !collectionMatchesRelation(s.externalPublications, s.relations.externalPublications)) return { status: 'invalid' }
++  const artifacts = s.artifacts ?? [], attempts = s.attempts ?? [], externalPublications = s.externalPublications ?? []
+   const unique = (rows: { id: string }[]) => new Set(rows.map(row => row.id)).size === rows.length
+-  const accountIds = new Set(s.accounts.map(a => a.id)), artifactIds = new Set(s.artifacts.map(a => a.id))
+-  if (![s.accounts, s.plans, s.artifacts, s.attempts, s.externalPublications].every(unique)
+-    || s.artifacts.some(a => a.projectId !== request.scope.projectId)
+-    || s.plans.some(p => p.projectId !== request.scope.projectId || !accountIds.has(p.accountId) || new Set(p.artifactIds).size !== p.artifactIds.length || p.artifactIds.some(a => !artifactIds.has(a)))
+-    || s.attempts.some(a => !s.plans.some(p => p.id === a.planId && p.accountId === a.accountId))
+-    || s.externalPublications.some(e => !s.attempts.some(a => a.id === e.attemptId && a.planId === e.planId && a.accountId === e.accountId))) return { status: 'invalid' }
+-  // Explicit field projection occurs before rendering/Selection. The backend still must trim responses.
+-  const artifacts = s.artifacts.filter(a => allowed(access, artifactKey(a.id)))
+-  const permittedArtifacts = new Set(artifacts.map(a => a.id))
+-  const plans = s.plans.map(p => ({ id: p.id, projectId: p.projectId, accountId: p.accountId, status: p.status, timeField: p.timeField, scheduledAt: p.scheduledAt, publishedAt: p.publishedAt,
+-    artifactIds: p.artifactIds.filter(a => permittedArtifacts.has(a)),
++  const accountIds = new Set(s.accounts.map(a => a.id)), artifactIds = new Set(artifacts.map(a => a.id))
++  const artifactLinksSupplied = s.relations.artifacts === 'supplied' || s.relations.artifacts === 'known-empty'
++  if (![s.accounts, s.plans, artifacts, attempts, externalPublications].every(unique)
++    || artifacts.some(a => a.projectId !== request.scope.projectId)
++    || s.plans.some(p => p.projectId !== request.scope.projectId || !accountIds.has(p.accountId)
++      || artifactLinksSupplied !== Array.isArray(p.artifactIds)
++      || (p.artifactIds !== undefined && (new Set(p.artifactIds).size !== p.artifactIds.length || p.artifactIds.some(a => !artifactIds.has(a)))))
++    || attempts.some(a => !s.plans.some(p => p.id === a.planId && p.accountId === a.accountId))
++    || externalPublications.some(row => !attempts.some(a => a.id === row.attemptId && a.planId === row.planId && a.accountId === row.accountId))) return { status: 'invalid' }
++  const artifactRestricted = artifacts.some(a => !allowed(access, artifactKey(a.id)))
++  const outputRelations = { ...s.relations, ...(artifactRestricted ? { artifacts: 'restricted' as const } : {}) }
++  const outputArtifacts = artifactRestricted || s.artifacts === undefined ? undefined : artifacts
++  const plans = s.plans.map(p => ({
++    id: p.id, projectId: p.projectId, accountId: p.accountId, status: normalizePublicationStatus(p.status), timeField: p.timeField,
++    scheduledAt: p.scheduledAt, publishedAt: p.publishedAt,
++    ...(!artifactRestricted && p.artifactIds !== undefined ? { artifactIds: p.artifactIds } : {}),
+     ...(allowed(access, contentKey(p.id)) ? { title: p.title, summary: p.summary, copyVersion: p.copyVersion } : {}),
+   }))
+-  const attempts = s.attempts.map(a => ({ id: a.id, planId: a.planId, accountId: a.accountId, status: a.status, attemptedAt: a.attemptedAt, ...(allowed(access, contentKey(a.planId)) ? { failureSummary: a.failureSummary } : {}) }))
+-  return { status: 'ok', version: s.version, completeness: s.completeness, fetchedAt: s.fetchedAt, accounts: s.accounts, plans, artifacts, attempts, externalPublications: s.externalPublications }
++  const outputAttempts = s.attempts?.map(a => ({ id: a.id, planId: a.planId, accountId: a.accountId, status: normalizePublicationStatus(a.status), attemptedAt: a.attemptedAt, ...(allowed(access, contentKey(a.planId)) ? { failureSummary: a.failureSummary } : {}) }))
++  const outputExternal = s.externalPublications?.map(row => ({ ...row, status: normalizePublicationStatus(row.status) }))
++  return { status: 'ok', contract: s.contract, version: s.version, completeness: s.completeness, fetchedAt: s.fetchedAt, relations: outputRelations, accounts: s.accounts, plans, artifacts: outputArtifacts, attempts: outputAttempts, externalPublications: outputExternal }
+ }
++
++const pendingRelation = z.object({ status: z.literal('PENDING_CORE_CONTRACT') }).strict()
++const externalReferences = z.object({ provider: id, instance: id, account: id, post: id }).strict()
++const externalObservation = z.object({
++  kind: z.literal('external-publication-observation'), externalReferences,
++  coreBinding: pendingRelation, displayStatus: z.enum(publicationDisplayStatuses), statusMapping: z.enum(['bounded-display-only', 'unmapped']),
++  timeField: z.enum(['scheduledAt', 'unscheduled', 'unknown']), scheduledAt: z.string().max(100).optional(), summary: text.optional(),
++  relationships: z.object({ project: pendingRelation, artifacts: pendingRelation, attempts: pendingRelation, externalOutcomes: pendingRelation }).strict(),
++}).strict()
++const externalEnvelope = z.object({
++  contract: z.literal('external-publication-observation-v2'), status: z.literal('ok'), requestId: id,
++  binding: z.object({ scope: scopeSchema, ownerId: id }).strict(),
++  access: z.object({ authority: z.literal('owner-local-single-user'), scope: z.literal('narrower-than-platform-effective-access'), list: z.literal(true), content: z.boolean() }).strict(),
++  providerVersion: id, providerSourceCommit: id, evidence: z.enum(['pure-synthetic-projection', 'supplied-read-values']),
++  window: z.object({ semantics: z.literal('half-open'), startInclusive: z.string(), endExclusive: z.string(), upstreamEndInclusive: z.string() }).strict(),
++  observedAt: z.string(), completeness: z.enum(['bounded', 'partial']), omissions: z.record(z.string(), z.number().int().nonnegative()),
++  externalAccount: z.object({ externalReferences: z.object({ provider: id, instance: id, account: id }).strict(), label: text, providerLabel: text, coreBinding: pendingRelation }).strict(),
++  observations: z.array(externalObservation).max(200),
++}).strict()
++export function parseExternalObservations(input: unknown, request: ExternalObservationRequest): ExternalObservationResult {
++  const parsed = externalEnvelope.safeParse(input)
++  if (!parsed.success) return { status: 'invalid' }
++  const value = parsed.data
++  if (value.requestId !== request.requestId || scopeKey(value.binding.scope) !== scopeKey(request.binding.scope) || value.binding.ownerId !== request.binding.ownerId
++    || value.window.semantics !== request.window.semantics || value.window.startInclusive !== request.window.startInclusive || value.window.endExclusive !== request.window.endExclusive) return { status: 'invalid' }
++  const start = absoluteInstant(value.window.startInclusive), end = absoluteInstant(value.window.endExclusive)
++  const accountScope = value.externalAccount.externalReferences
++  if (absoluteInstant(value.observedAt) === null || start === null || end === null || start >= end
++    || value.observations.some(row => row.externalReferences.provider !== accountScope.provider || row.externalReferences.instance !== accountScope.instance || row.externalReferences.account !== accountScope.account
++      || (row.timeField === 'scheduledAt' ? absoluteInstant(row.scheduledAt) === null || absoluteInstant(row.scheduledAt)! < start || absoluteInstant(row.scheduledAt)! >= end : row.scheduledAt !== undefined))) return { status: 'invalid' }
++  const keys = value.observations.map(row => JSON.stringify(row.externalReferences))
++  if (new Set(keys).size !== keys.length) return { status: 'invalid' }
++  return {
++    status: 'ok', contract: value.contract, access: value.access,
++    window: { semantics: value.window.semantics, startInclusive: value.window.startInclusive, endExclusive: value.window.endExclusive },
++    completeness: value.completeness, observedAt: value.observedAt, observations: value.observations,
++  }
++}
++
+ const pad = (n: number) => String(n).padStart(2, '0')
+ const daysInMonth = (year: number, month: number) => [31, year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1] ?? 0
+ export function monthDays(month: string): string[] {
+--- baseline/frontend/src/product/publication/testing.ts
++++ current/frontend/src/product/publication/testing.ts
+@@ -7,16 +7,16 @@
+ export const scope = { principalId: 'person', tenantId: 'tenant', sessionId: 'session', workspaceId: 'w', projectId: 'p', sourceId: 'source' }
+ export const request: PublicationRequest = { scope, requestId: 'r', query: { kind: 'project-publication-snapshot', limit: 200 } }
+ export function receipt(r: PublicationRequest = request, changes: Record<string, unknown> = {}) {
+-  return { ...r, status: 'ok', version: 'v1', completeness: 'complete', fetchedAt: '2024-03-10T08:00:00Z',
++  return { ...r, status: 'ok', contract: 'fixture-only-publication-graph-v1', version: 'v1', completeness: 'complete', fetchedAt: '2024-03-10T08:00:00Z',
++    relations: { artifacts: 'supplied', attempts: 'supplied', externalPublications: 'supplied' },
+     accounts: [{ id: 'a', name: 'Studio North', platform: 'Example' }, { id: 'b', name: 'Studio South', platform: 'Example' }],
+     plans: [
+-      { id: 'one', projectId: 'p', accountId: 'a', status: 'queued', title: 'Opening story', summary: 'Permitted summary', copyVersion: 'copy-v1', artifactIds: ['output'], timeField: 'scheduledAt', scheduledAt: '2024-03-10T07:30:00Z' },
++      { id: 'one', projectId: 'p', accountId: 'a', status: 'scheduled', title: 'Opening story', summary: 'Permitted summary', copyVersion: 'copy-v1', artifactIds: ['output'], timeField: 'scheduledAt', scheduledAt: '2024-03-10T07:30:00Z' },
+       { id: 'two', projectId: 'p', accountId: 'b', status: 'alien-state', title: 'Second story', artifactIds: [], timeField: 'publishedAt', publishedAt: '2024-03-10T07:30:00Z' },
+     ], artifacts: [{ id: 'output', projectId: 'p', name: 'Master', mediaType: 'video', version: 'v2' }],
+     attempts: [{ id: 'try1', planId: 'one', accountId: 'a', status: 'failed', failureSummary: 'Delivery rejected', attemptedAt: '2024-03-09T23:00:00Z' }, { id: 'try2', planId: 'one', accountId: 'a', status: 'unknown' }],
+     externalPublications: [{ id: 'external1', attemptId: 'try2', planId: 'one', accountId: 'a', status: 'unknown', url: 'javascript:SECRET_URL' }], ...changes }
+ }
+ export function source(read: PublicationSource['adapter']['read'] = async r => receipt(r)): PublicationSource {
+-  return { scope, owner: {}, adapter: { origin: 'isolated-verification', read }, access: { [LIST_KEY]: grant(LIST_KEY), [contentKey('one')]: grant(contentKey('one')), [contentKey('two')]: grant(contentKey('two')), [artifactKey('output')]: grant(artifactKey('output')) } }
++  return { scope, owner: {}, adapter: { origin: 'isolated-fixture', read }, access: { [LIST_KEY]: grant(LIST_KEY), [contentKey('one')]: grant(contentKey('one')), [contentKey('two')]: grant(contentKey('two')), [artifactKey('output')]: grant(artifactKey('output')) } }
+ }
+-
+--- baseline/frontend/src/product/publication/types.ts
++++ current/frontend/src/product/publication/types.ts
+@@ -1,9 +1,10 @@
+ import type { EffectiveAccessCatalog } from '../../foundation/effectiveAccess'
+ 
+-/** FRONTEND_CONSUMPTION_PROPOSAL; REAL_BACKEND_CONTRACT_NOT_ESTABLISHED. */
++/** FRONTEND_FIXTURE_PROPOSAL; REAL_BACKEND_CONTRACT_NOT_ESTABLISHED. */
+ export const LIST_KEY = 'test-only.publication.list'
+ export const contentKey = (id: string) => `test-only.publication.content:${id}`
+ export const artifactKey = (id: string) => `test-only.publication.artifact:${id}`
++
+ export interface PublicationScope {
+   principalId: string
+   tenantId: string | null
+@@ -21,26 +22,70 @@
+   scope: PublicationScope
+   owner: object
+   access: EffectiveAccessCatalog
+-  adapter: { origin: 'isolated-verification'; read(request: PublicationRequest, signal: AbortSignal): Promise<unknown> }
++  adapter: { origin: 'isolated-fixture'; read(request: PublicationRequest, signal: AbortSignal): Promise<unknown> }
++}
++
++export const publicationDisplayStatuses = ['draft', 'scheduled', 'publishing', 'published', 'failed', 'cancelled', 'unknown'] as const
++export type PublicationDisplayStatus = typeof publicationDisplayStatuses[number]
++export type RelationAvailability = 'supplied' | 'known-empty' | 'unavailable' | 'restricted' | 'pending-core-contract'
++export interface PublicationRelations {
++  artifacts: RelationAvailability
++  attempts: RelationAvailability
++  externalPublications: RelationAvailability
+ }
+ export interface PublicationFilters { query: string; account: string; status: string; order: 'asc' | 'desc' }
+ export interface PublicationAccount { id: string; name: string; platform: string }
+ export interface PublicationPlan {
+-  id: string; projectId: string; accountId: string; status: string
+-  title?: string; summary?: string; copyVersion?: string; artifactIds: string[]
++  id: string; projectId: string; accountId: string; status: PublicationDisplayStatus
++  title?: string; summary?: string; copyVersion?: string; artifactIds?: string[]
+   timeField: 'scheduledAt' | 'publishedAt' | 'unscheduled' | 'unknown'
+   scheduledAt?: string | null; publishedAt?: string | null
+ }
+ export interface PublicationArtifact { id: string; projectId: string; name?: string; mediaType?: string; version?: string }
+ export interface PublicationAttempt {
+-  id: string; planId: string; accountId: string; status: string; attemptedAt?: string | null; failureSummary?: string
++  id: string; planId: string; accountId: string; status: PublicationDisplayStatus; attemptedAt?: string | null; failureSummary?: string
+ }
+ export interface ExternalPublication {
+-  id: string; attemptId: string; planId: string; accountId: string; status: string; publishedAt?: string | null
++  id: string; attemptId: string; planId: string; accountId: string; status: PublicationDisplayStatus; publishedAt?: string | null
+ }
+ export interface PublicationSnapshot {
+-  status: 'ok'; version: string; completeness: 'complete' | 'bounded' | 'partial'; fetchedAt?: string | null
+-  accounts: PublicationAccount[]; plans: PublicationPlan[]; artifacts: PublicationArtifact[]
+-  attempts: PublicationAttempt[]; externalPublications: ExternalPublication[]
++  status: 'ok'; contract: 'fixture-only-publication-graph-v1'; version: string; completeness: 'complete' | 'bounded' | 'partial'; fetchedAt?: string | null
++  relations: PublicationRelations
++  accounts: PublicationAccount[]; plans: PublicationPlan[]; artifacts?: PublicationArtifact[]
++  attempts?: PublicationAttempt[]; externalPublications?: ExternalPublication[]
+ }
+ export type PublicationResult = PublicationSnapshot | { status: 'unavailable' | 'restricted' | 'error' | 'invalid' }
++
++/** Owner-local external observations are deliberately not PublicationPlan records. */
++export interface ExternalObservationRequest {
++  requestId: string
++  binding: { scope: PublicationScope; ownerId: string }
++  window: { semantics: 'half-open'; startInclusive: string; endExclusive: string }
++}
++export interface ScopedExternalReferences { provider: string; instance: string; account: string; post: string }
++export interface ExternalObservation {
++  kind: 'external-publication-observation'
++  externalReferences: ScopedExternalReferences
++  coreBinding: { status: 'PENDING_CORE_CONTRACT' }
++  displayStatus: PublicationDisplayStatus
++  statusMapping: 'bounded-display-only' | 'unmapped'
++  timeField: 'scheduledAt' | 'unscheduled' | 'unknown'
++  scheduledAt?: string
++  summary?: string
++  relationships: {
++    project: { status: 'PENDING_CORE_CONTRACT' }
++    artifacts: { status: 'PENDING_CORE_CONTRACT' }
++    attempts: { status: 'PENDING_CORE_CONTRACT' }
++    externalOutcomes: { status: 'PENDING_CORE_CONTRACT' }
++  }
++}
++export interface ExternalObservationSnapshot {
++  status: 'ok'
++  contract: 'external-publication-observation-v2'
++  access: { authority: 'owner-local-single-user'; scope: 'narrower-than-platform-effective-access'; list: true; content: boolean }
++  window: ExternalObservationRequest['window']
++  completeness: 'bounded' | 'partial'
++  observedAt: string
++  observations: ExternalObservation[]
++}
++export type ExternalObservationResult = ExternalObservationSnapshot | { status: 'restricted' | 'invalid' }

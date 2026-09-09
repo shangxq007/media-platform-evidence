@@ -1,0 +1,60 @@
+{
+  "images": {
+    "args": [
+      "images",
+      "--format",
+      "{{.ID}} {{.Repository}} {{.Digest}}"
+    ],
+    "exit": 0,
+    "stdout": "82d6cb5ce521 docker.io/library/redis sha256:74566c6910d13ae61e7ce73ebd3127438a1fe805b309b097c323142719ec8a5b\n80f4c7a5e916 docker.io/library/postgres sha256:f1c3376c26f2609ab9f29f71f824103fe2fcd8ee0346485cb6122a4f93df6f94\n1bea307dfb3e docker.io/library/postgres sha256:18cfe3ef5e6815560c98237d6216d1e5119702fb0f3894c8785dd58b8bbe5d73\n2277dbccadde docker.io/temporalio/auto-setup sha256:607d68caa111338d754771efb876c92dfcdae06d056e4530bb31cd0f37406e6a\n59cf58dd31db docker.io/library/elasticsearch sha256:9a6443f55243f6acbfeb4a112d15eb3b9aac74bf25e0e39fa19b3ddd3a6879d0\n",
+    "stderr": "",
+    "elapsed_seconds": 0.11055543998372741
+  },
+  "containers": {
+    "args": [
+      "ps",
+      "-a",
+      "--format",
+      "{{.Names}} {{.Status}}"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "",
+    "elapsed_seconds": 0.0875095269875601
+  },
+  "volumes": {
+    "args": [
+      "volume",
+      "ls",
+      "--format",
+      "{{.Name}}"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "",
+    "elapsed_seconds": 0.08636770499288104
+  },
+  "networks": {
+    "args": [
+      "network",
+      "ls",
+      "--format",
+      "{{.Name}}"
+    ],
+    "exit": 0,
+    "stdout": "podman\n",
+    "stderr": "",
+    "elapsed_seconds": 0.09489010099787265
+  },
+  "exact_image": {
+    "args": [
+      "image",
+      "exists",
+      "ghcr.io/gitroomhq/postiz-app@sha256:785f97312f66a347fb96cdccc4ded5a33ced69a672c89a9adc8054e7d6a21dc5"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "",
+    "elapsed_seconds": 0.08789222000632435
+  }
+}

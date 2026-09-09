@@ -1,0 +1,42 @@
+{
+  "status": "PERFORMED_BOUNDED_IMAGE_ACQUISITION_TIMEOUT",
+  "supersedes_only": "Image workline NOT_PERFORMED in sealed continuation package; package and other statuses unchanged",
+  "acquisition": {
+    "started_utc": "2026-09-09T11:37:27.436364+00:00",
+    "finished_utc": "2026-09-09T11:42:27.502449+00:00",
+    "elapsed_seconds": 300.06611079198774,
+    "deadline_seconds": 300,
+    "timed_out": true,
+    "native_exit": -9,
+    "attempts": 1,
+    "args": [
+      "pull",
+      "--retry=0",
+      "--platform=linux/amd64",
+      "ghcr.io/gitroomhq/postiz-app@sha256:785f97312f66a347fb96cdccc4ded5a33ced69a672c89a9adc8054e7d6a21dc5"
+    ]
+  },
+  "exact_image_exists_exit": 1,
+  "dependency_image_count": 5,
+  "containers": 0,
+  "volumes": 0,
+  "networks": [
+    "podman"
+  ],
+  "temporary_bytes_before": 929439240,
+  "temporary_bytes_after_pull": 1777160928,
+  "temporary_bytes_final": 1777160928,
+  "LOCAL_EMPTY_INSTANCE_CHECK": "NOT_RUN_ENVIRONMENT_UNQUALIFIED",
+  "offline_config_and_public_manifest_verification": "PASS",
+  "old_allowlisted_deployment_evidence_and_selected_seal_files_unchanged": true,
+  "runtime_version": "NOT_VERIFIED",
+  "adapter_socket_tests": "NOT_RUN",
+  "account_or_upstream_api_operations": "NOT_RUN",
+  "public_publishing": "NOT_RUN",
+  "issues": [
+    "Initial offline checker KeyError: spotlight because redacted resolved config omits disabled auxiliary profiles. Corrected checker before any acquisition; initial snapshots preserved.",
+    "One authorized native pull reached 300-second deadline and was SIGKILLed; process return code -9. No acquisition retry.",
+    "Native image inventory automatically reported deleting an incomplete layer after termination. No manual prune or cleanup."
+  ],
+  "qualification": "Temporary byte growth demonstrates acquisition activity, not complete validated layers, resumability, registry outage, application defect, or integration acceptance."
+}
