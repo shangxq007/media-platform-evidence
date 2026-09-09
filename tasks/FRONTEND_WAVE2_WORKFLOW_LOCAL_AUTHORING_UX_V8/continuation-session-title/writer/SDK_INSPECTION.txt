@@ -1,0 +1,317 @@
+/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/oidc-client-ts/package.json
+SHA256 302e06acbad7e35f2844dfc29a5a708b0b06f3d8b45df4ac6a9a32c5ec826228
+1: {
+2:   "name": "oidc-client-ts",
+3:   "version": "3.5.0",
+4:   "description": "OpenID Connect (OIDC) & OAuth2 client library",
+5:   "repository": {
+/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/oidc-client-ts/dist/types/oidc-client-ts.d.ts
+SHA256 b5c829e1b870483e60f67cd4614f04c46e3a03b2f7092b8ed7360b40cdae3fba
+259:  *
+260:  * @public
+261:  * @see https://openid.net/specs/openid-connect-core-1_0.html#IDToken
+262:  */
+263: export declare interface IdTokenClaims extends Mandatory<OidcStandardClaims, "sub">, Mandatory<JwtClaims, "iss" | "sub" | "aud" | "exp" | "iat">, Pick<JwtClaims, "nbf" | "jti"> {
+264:     [claim: string]: unknown;
+265:     /** Time when the End-User authentication occurred. Its value is a JSON number representing the number of seconds from 1970-01-01T0:0:0Z as measured in UTC until the date/time. When a max_age request is made or when auth_time is requested as an Essential Claim, then this Claim is REQUIRED; otherwise, its inclusion is OPTIONAL. (The auth_time Claim semantically corresponds to the OpenID 2.0 PAPE [OpenID.PAPE] auth_time response parameter.) */
+266:     auth_time?: number;
+267:     /** String value used to associate a Client session with an ID Token, and to mitigate replay attacks. The value is passed through unmodified from the Authentication Request to the ID Token. If present in the ID Token, Clients MUST verify that the nonce Claim Value is equal to the value of the nonce parameter sent in the Authentication Request. If present in the Authentication Request, Authorization Servers MUST include a nonce Claim in the ID Token with the Claim Value being the nonce value sent in the Authentication Request. Authorization Servers SHOULD perform no other processing on nonce values used. The nonce value is a case sensitive string. */
+268:     nonce?: string;
+269:     /** Authentication Context Class Reference. String specifying an Authentication Context Class Reference value that identifies the Authentication Context Class that the authentication performed satisfied. The value "0" indicates the End-User authentication did not meet the requirements of ISO/IEC 29115 [ISO29115] level 1. Authentication using a long-lived browser cookie, for instance, is one example where the use of "level 0" is appropriate. Authentications with level 0 SHOULD NOT be used to authorize access to any resource of any monetary value. (This corresponds to the OpenID 2.0 PAPE [OpenID.PAPE] nist_auth_level 0.) An absolute URI or an RFC 6711 [RFC6711] registered name SHOULD be used as the acr value; registered names MUST NOT be used with a different meaning than that which is registered. Parties using this claim will need to agree upon the meanings of the values used, which may be context-specific. The acr value is a case sensitive string. */
+270:     acr?: string;
+271:     /** Authentication Methods References. JSON array of strings that are identifiers for authentication methods used in the authentication. For instance, values might indicate that both password and OTP authentication methods were used. The definition of particular values to be used in the amr Claim is beyond the scope of this specification. Parties using this claim will need to agree upon the meanings of the values used, which may be context-specific. The amr value is an array of case sensitive strings. */
+272:     amr?: unknown;
+273:     /** Authorized party - the party to which the ID Token was issued. If present, it MUST contain the OAuth 2.0 Client ID of this party. This Claim is only needed when the ID Token has a single audience value and that audience is different than the authorized party. It MAY be included even when the authorized party is the same as the sole audience. The azp value is a case sensitive string containing a StringOrURI value. */
+274:     azp?: string;
+275:     /**
+276:      * Session ID - String identifier for a Session. This represents a Session of a User Agent or device for a logged-in End-User at an RP. Different sid values are used to identify distinct sessions at an OP. The sid value need only be unique in the context of a particular issuer. Its contents are opaque to the RP. Its syntax is the same as an OAuth 2.0 Client Identifier.
+277:      * @see https://openid.net/specs/openid-connect-frontchannel-1_0.html#OPLogout
+278:      * */
+279:     sid?: string;
+280: }
+1480:  */
+1481: export declare class User {
+1482:     /**
+1483:      * A JSON Web Token (JWT). Only provided if `openid` scope was requested.
+1484:      * The application can access the data decoded by using the `profile` property.
+1485:      */
+1486:     id_token?: string;
+1487:     /** The session state value returned from the OIDC provider. */
+1488:     session_state: string | null;
+1489:     /**
+1490:      * The requested access token returned from the OIDC provider. The application can use this token to
+1491:      * authenticate itself to the secured resource.
+1492:      */
+1493:     access_token: string;
+1494:     /**
+1495:      * An OAuth 2.0 refresh token. The app can use this token to acquire additional access tokens after the
+1496:      * current access token expires. Refresh tokens are long-lived and can be used to maintain access to resources
+1497:      * for extended periods of time.
+1498:      */
+1499:     refresh_token?: string;
+1500:     /** Typically "Bearer" */
+1501:     token_type: string;
+1502:     /** The scopes that the requested access token is valid for. */
+1503:     scope?: string;
+1504:     /** The claims represented by a combination of the `id_token` and the user info endpoint. */
+1505:     profile: UserProfile;
+1506:     /** The expires at returned from the OIDC provider. */
+1507:     expires_at?: number;
+1508:     /** custom state data set during the initial signin request */
+1509:     readonly state: unknown;
+1510:     readonly url_state?: string;
+1511:     constructor(args: {
+1512:         id_token?: string;
+1513:         session_state?: string | null;
+1514:         access_token: string;
+1515:         refresh_token?: string;
+1516:         token_type: string;
+1517:         scope?: string;
+1518:         profile: UserProfile;
+1519:         expires_at?: number;
+1520:         userState?: unknown;
+1521:         url_state?: string;
+1522:     });
+1523:     /** Computed number of seconds the access token has remaining. */
+1524:     get expires_in(): number | undefined;
+1525:     set expires_in(value: number | undefined);
+1526:     /** Computed value indicating if the access token is expired. */
+1527:     get expired(): boolean | undefined;
+1528:     /** Array representing the parsed values from the `scope`. */
+1529:     get scopes(): string[];
+1530:     toStorageString(): string;
+1531:     static fromStorageString(storageString: string): User;
+1532: }
+1533: 
+1534: /**
+1535:  * @public
+1536:  */
+1537: export declare interface UseRefreshTokenArgs {
+1538:     redirect_uri?: string;
+1539:     resource?: string | string[];
+1540:     extraTokenParams?: Record<string, unknown>;
+1560:  * @public
+1561:  */
+1562: export declare type UserLoadedCallback = (user: User) => Promise<void> | void;
+1563: 
+1590:     /**
+1591:      * Load the `User` object for the currently authenticated user.
+1592:      *
+1593:      * @param raiseEvent - If `true`, the `UserLoaded` event will be raised. Defaults to false.
+1594:      * @returns A promise
+1595:      */
+1596:     getUser(raiseEvent?: boolean): Promise<User | null>;
+1597:     /**
+/home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend/node_modules/oidc-client-ts/dist/esm/oidc-client-ts.js
+SHA256 cefa3decaeb97fd78b123e7cd29c092ffb7713f62756eac038f1d976b67296c6
+1370:     }
+1371:     logger2.debug("tokens validated");
+1372:     await this._processClaims(response, skipUserInfo, shouldValidateSubClaim);
+1373:     logger2.debug("claims processed");
+1374:   }
+1375:   async validateRefreshResponse(response, state) {
+1376:     var _a, _b;
+1377:     const logger2 = this._logger.create("validateRefreshResponse");
+1378:     response.userState = state.data;
+1379:     (_a = response.session_state) != null ? _a : response.session_state = state.session_state;
+1380:     (_b = response.scope) != null ? _b : response.scope = state.scope;
+1381:     if (response.isOpenId && !!response.id_token) {
+1382:       this._validateIdTokenAttributes(response, state.id_token);
+1383:       logger2.debug("ID Token validated");
+1384:     }
+1385:     if (!response.id_token) {
+1386:       response.id_token = state.id_token;
+1387:       response.profile = state.profile;
+1388:     }
+1389:     const hasIdToken = response.isOpenId && !!response.id_token;
+1390:     await this._processClaims(response, false, hasIdToken);
+1391:     logger2.debug("claims processed");
+1392:   }
+1393:   validateSignoutResponse(response, state) {
+1394:     const logger2 = this._logger.create("validateSignoutResponse");
+1440:       return;
+1441:     }
+1442:     logger2.debug("loading user info");
+1443:     const claims = await this._userInfoService.getClaims(response.access_token);
+1444:     logger2.debug("user info claims received from user info endpoint");
+1445:     if (validateSub && claims.sub !== response.profile.sub) {
+1446:       logger2.throw(new Error("subject from UserInfo response does not match subject in ID Token"));
+1447:     }
+1448:     response.profile = this._claimsService.mergeClaims(response.profile, this._claimsService.filterProtocolClaims(claims));
+1449:     logger2.debug("user info claims received, updated profile:", response.profile);
+1450:   }
+1451:   async _processCode(response, state, extraHeaders) {
+1452:     const logger2 = this._logger.create("_processCode");
+1453:     if (response.code) {
+1454:       logger2.debug("Validating code");
+1455:       const tokenResponse = await this._tokenClient.exchangeCode({
+1456:         client_id: state.client_id,
+1457:         client_secret: state.client_secret,
+1477:     if (nonce && incoming.nonce !== nonce) {
+1478:       logger2.throw(new Error("nonce in id_token does not match nonce in client storage"));
+1479:     }
+1480:     if (existingToken) {
+1481:       const existing = JwtUtils.decode(existingToken);
+1482:       if (incoming.sub !== existing.sub) {
+1483:         logger2.throw(new Error("sub in id_token does not match current sub"));
+1484:       }
+1485:       if (incoming.auth_time && incoming.auth_time !== existing.auth_time) {
+1486:         logger2.throw(new Error("auth_time in id_token does not match original auth_time"));
+1487:       }
+1488:       if (incoming.azp && incoming.azp !== existing.azp) {
+1489:         logger2.throw(new Error("azp in id_token does not match original azp"));
+1490:       }
+1491:       if (!incoming.azp && existing.azp) {
+1492:         logger2.throw(new Error("azp not in id_token, but present in original id_token"));
+1493:       }
+1494:     }
+1495:     response.profile = incoming;
+1496:   }
+1497: };
+1498: 
+1499: // src/State.ts
+1500: var State = class _State {
+1501:   constructor(args) {
+1502:     this.id = args.id || CryptoUtils.generateUUIDv4();
+1503:     this.data = args.data;
+1504:     if (args.created && args.created > 0) {
+1505:       this.created = args.created;
+1506:     } else {
+1507:       this.created = Timer.getEpochTime();
+1821: 
+1822: // src/ClaimsService.ts
+1823: var DefaultProtocolClaims = [
+1824:   "nbf",
+1825:   "jti",
+1826:   "auth_time",
+1827:   "nonce",
+1828:   "acr",
+1829:   "amr",
+1830:   "azp",
+1831:   "at_hash"
+1832:   // https://openid.net/specs/openid-connect-core-1_0.html#CodeIDToken
+1833: ];
+1834: var InternalRequiredProtocolClaims = ["sub", "iss", "aud", "exp", "iat"];
+1835: var ClaimsService = class {
+1836:   constructor(_settings) {
+1837:     this._settings = _settings;
+1838:     this._logger = new Logger("ClaimsService");
+1839:   }
+1840:   filterProtocolClaims(claims) {
+1841:     const result = { ...claims };
+1842:     if (this._settings.filterProtocolClaims) {
+1843:       let protocolClaims;
+1844:       if (Array.isArray(this._settings.filterProtocolClaims)) {
+1845:         protocolClaims = this._settings.filterProtocolClaims;
+1846:       } else {
+1847:         protocolClaims = DefaultProtocolClaims;
+1848:       }
+1849:       for (const claim of protocolClaims) {
+1850:         if (!InternalRequiredProtocolClaims.includes(claim)) {
+1851:           delete result[claim];
+1852:         }
+1853:       }
+1854:     }
+1855:     return result;
+1856:   }
+1857:   mergeClaims(claims1, claims2) {
+1858:     const result = { ...claims1 };
+1859:     for (const [claim, values] of Object.entries(claims2)) {
+1860:       if (result[claim] !== values) {
+2729:     this._userSessionChanged = new Event("User session changed");
+2730:   }
+2731:   async load(user, raiseEvent = true) {
+2732:     await super.load(user);
+2733:     if (raiseEvent) {
+2734:       await this._userLoaded.raise(user);
+2735:     }
+2736:   }
+2737:   async unload() {
+2738:     await super.unload();
+2739:     await this._userUnloaded.raise();
+2740:   }
+2741:   /**
+2742:    * Add callback: Raised when a user session has been established (or re-established).
+2743:    */
+2744:   addUserLoaded(cb) {
+2745:     return this._userLoaded.addHandler(cb);
+2746:   }
+2747:   /**
+2950:    * Load the `User` object for the currently authenticated user.
+2951:    *
+2952:    * @param raiseEvent - If `true`, the `UserLoaded` event will be raised. Defaults to false.
+2953:    * @returns A promise
+2954:    */
+2955:   async getUser(raiseEvent = false) {
+2956:     const logger2 = this._logger.create("getUser");
+2957:     const user = await this._loadUser();
+2958:     if (user) {
+2959:       logger2.info("user loaded");
+2960:       await this._events.load(user, raiseEvent);
+2961:       return user;
+2962:     }
+2963:     logger2.info("user not found in storage");
+2964:     return null;
+2965:   }
+2966:   /**
+2967:    * Remove from any storage the currently authenticated user.
+2968:    *
+2969:    * @returns A promise
+2970:    */
+2971:   async removeUser() {
+2972:     const logger2 = this._logger.create("removeUser");
+2973:     await this.storeUser(null);
+2974:     logger2.info("user removed from storage");
+2975:     await this._events.unload();
+2976:   }
+2977:   /**
+3106:   async signinSilent(args = {}) {
+3107:     var _a, _b;
+3108:     const logger2 = this._logger.create("signinSilent");
+3109:     const {
+3110:       silentRequestTimeoutInSeconds,
+3111:       ...requestArgs
+3112:     } = args;
+3113:     let user = await this._loadUser();
+3114:     if (!args.forceIframeAuth && (user == null ? void 0 : user.refresh_token)) {
+3115:       logger2.debug("using refresh token");
+3116:       const state = new RefreshState(user);
+3117:       return await this._useRefreshToken({
+3118:         state,
+3119:         redirect_uri: requestArgs.redirect_uri,
+3120:         resource: requestArgs.resource,
+3121:         extraTokenParams: requestArgs.extraTokenParams,
+3122:         timeoutInSeconds: silentRequestTimeoutInSeconds
+3123:       });
+3124:     }
+3125:     let dpopJkt;
+3126:     if ((_a = this.settings.dpop) == null ? void 0 : _a.bind_authorization_code) {
+3127:       dpopJkt = await this.generateDPoPJkt(this.settings.dpop);
+3156:   async _useRefreshToken(args) {
+3157:     const response = await this._client.useRefreshToken({
+3158:       timeoutInSeconds: this.settings.silentRequestTimeoutInSeconds,
+3159:       ...args
+3160:     });
+3161:     const user = new User({ ...args.state, ...response });
+3162:     await this.storeUser(user);
+3163:     await this._events.load(user);
+3164:     return user;
+3165:   }
+3166:   /**
+3167:    *
+3320:     const logger2 = this._logger.create("_buildUser");
+3321:     const user = new User(signinResponse);
+3322:     if (verifySub) {
+3323:       if (verifySub !== user.profile.sub) {
+3324:         logger2.debug("current user does not match user returned from signin. sub from signin:", user.profile.sub);
+3325:         throw new ErrorResponse({ ...signinResponse, error: "login_required" });
+3326:       }
+3327:       logger2.debug("current user matches user returned from signin");
+3328:     }
+3329:     await this.storeUser(user);
+3330:     logger2.debug("user stored");
+3331:     await this._events.load(user);
+3332:     return user;
+3333:   }
+3334:   /**
+3335:    * Trigger a redirect of the current window to the end session endpoint.

@@ -1,0 +1,532 @@
+--- a/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
++++ b/docs/architecture/governance/frontend-backend-application-api-gap-ledger-v1.md
+@@ -457,3 +457,14 @@
+ The current implementation performs only local search/status filter/stable sort/reset and read-only detail/reference inspection. Reset remains a stable focus target whenever populated or empty filter results are shown. Missing, supplied-empty, empty snapshot, no-match, no-related-Shot, and bounded snapshot states remain distinct. It infers no duration, progress, ownership, order, assignment, count beyond the loaded snapshot, external URL, storage path, or permission. Source, identity, access, InteractionStore owner lifetime, context, generation, cancellation, unmount, and projection-version changes retire old content; only a fresh owner after `pageshow` rebinds. No request result can create a canonical or persistent write, and this is not physical bfcache qualification.
+ 
+ One proposed future integration only: pin one frontend tree/build and one separately agreed frontend/backend controlled Project-read adapter; use controlled authenticated authorized and denied identities, exact Project relationships, error and version-stale responses, and zero writes. Validate strict envelopes, access nondisclosure, cancellation/context retirement, and safe referenced-resource checks. This is not actual integration and does not authorize a backend lane or depend on whole-platform completion.
++
++
++## V8 continuation — Workflow session continuity contract remains conditional
++
++The local Workflow correction reuses UXW1-002 and FB-GAP-001/002. Installed oidc-client-ts 3.5.0 emits UserLoaded during normal refresh-token and iframe renewal; it is not itself an identity change. Continuity now compares the SDK issuer/audience/subject and optional issuer-scoped `sid`, optional consistent tenant claims, and normalized OAuth scope while the SDK user has a known valid access expiry. Tokens and token timestamps are not identities. A supplied stable `sid` enables preservation; absent/invalid session identity fails closed for draft preservation and is not a new mandatory login field. No fallback to subject-only identity, storage hints, navigation or test authorization exists.
++
++The existing server tenant/Workspace/Project context, semantic EffectiveAccess decision/factors and Selection owner remain separate retirement boundaries. An observation timestamp or explanation-only refresh of the same effective decision preserves the draft. Project status remains provisional BLOCKED on the ordinary route; canonical invocation remains disabled. This does not establish a session-bound server Project/access projection or fix the existing query cache identity gap.
++
++Subscribe-before-hydration and notification/lifecycle generations prevent late initial or loaded reads from affecting newer editing. UserLoaded checks the current SDK user before processing a change; event payload identity is not applied. An old notification preserves an already established current session but cannot hide a pending genuine change. Definitive notifications/signout initiation retire synchronously, including redirect failure. The SDK supplies no operation generation: an old operation that overwrites SDK storage before emitting is indistinguishable from a new sign-in, and payloadless invalidation cannot identify an old owner. Those cases fail closed; no universal stale-auth-operation protection is claimed.
++
++Real integration still needs verified IdP `sid` stability and tenant semantics plus reactive, session-bound Project/access invalidation under existing FB-GAP-001/002. Remote logout detection is limited to existing SDK configuration; automatic silent renew is preserved. No new endpoint, permission key, backend lane, persistence or authorization contract was added. Hermes owns final engineering/browser gates; simulated SDK tests are not real authentication acceptance.
+--- a/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
++++ b/frontend/governance/BACKEND_ENABLEMENT_REQUESTS.tsv
+@@ -1,6 +1,6 @@
+ REQUEST_ID	USER_FLOW	CURRENT_GAP	DESIRED_CAPABILITY	DESIRED_APPLICATION_CONTRACT	BLOCKING_LEVEL	WAVE1_FRONTEND_FREEZE_BLOCKING	FUTURE_PRODUCT_CAPABILITY_BLOCKING	MOCK_BEHAVIOR	UX_REASON	ACCEPTANCE_CRITERIA	STATUS
+ UXW1-001	Open a project from a workspace; find and inspect a bounded recent-project snapshot	Workspace-to-project relationship cannot be verified by the current context projection (FB-GAP-001); Projects discovery requires an explicitly authenticated principal/tenant/session/Workspace-bound source; existing dashboard wrapper is not proof of that complete lifecycle boundary	Authenticated workspace project membership projection	Typed application projection of scoped project identity and display name with non-disclosing denied/not-found responses; no client tenant override; clarified UNAGREED recent-query consumption proposal and selective-integration criteria in FB-GAP-001 recent-project clarification, linked FB-GAP-009; echoed request/scope and complete/limited snapshot; no invented endpoint or DTO	BLOCKS_VERIFIED_PROJECT_CONTEXT	NO	YES	Existing workspace getHome fake is used only in tests; production retains blocked context notice; new Projects consumer uses a separate explicitly injected read-only application source and localhost-only simulated fixture; ordinary unconfigured Projects path unavailable, no HTTP or mock fallback. Existing WorkspaceHome query unchanged; no Project opening/creation/persistence	Users need trustworthy scope and understandable access boundaries	Server validates authenticated membership; invalid scope fails closed without resource disclosure; route metadata alone never grants command access; additionally reject stale/malformed/duplicate or mismatched recent snapshots, preserve unknown/denied/unsupported/unavailable/failure distinctions, cancel across source/principal/tenant/session/Workspace changes; local search/sort/detail is not server search, canonical detail or authorization	PROPOSED_CLARIFIED_FRONTEND_RECENT_PROJECT_DISCOVERY_REAL_INTEGRATION_NOT_ESTABLISHED
+-UXW1-002	Return to a canvas arrangement; optionally revisit a local Workflow planning sketch	Local titles, selection and placement are discarded on navigation, including intentionally local creator presentation preferences; V3 Workflow sketch is also intentionally disposable, not a canonical definition; V8 implements session-local authoring UX, but scoped persistence and Workflow read/write/version contracts remain unestablished	Optional scoped presentation layout persistence	Versioned workspace/project presentation document containing local node placement, labels and approved non-semantic UI preferences separately from semantic references; authorization and concurrency checks; no canonical edges or identity writes; any future Workflow local layout persistence needs separately agreed reference/version binding and cannot write process definitions; reuse FB-GAP-001/002 for verified Project identity and effective access, not Timeline-specific FB-GAP-003; require reactive host principal/session retirement, exact version ownership, typed non-disclosing errors and stale-context rejection before any future integration	BLOCKS_PRESENTATION_PERSISTENCE	NO	YES	No persistence fake or endpoint; local in-memory state is visibly marked not saved; V3 adds only local authored category cards with no fixtures, API, storage or save; V8 adds bilingual guidance, shared title validation and inspection, pointer/keyboard placement and target/lifetime-bound single-card confirmation; tenant/Project/access/Selection retirement and native OIDC loaded/unloaded/token-expired/signed-in/signed-out/session-changed plus signout-initiation retirement are implemented; synchronous Workflow owner replacement rejects retained callbacks, late loads/renewal conservatively discard drafts, and no async hydration restores them; mocked SDK tests establish the frontend boundary only, not real auth or remote events absent from existing SDK configuration	V5 Canvas undo/redo recovers only current-session titles and positions (bounded 50 edits); no persisted history, save or canonical revision undo. Users may expect arrangements and local presentation preferences to survive navigation; V4 Commands shortcut remapping is session-local shell presentation only and does not consume this persistence proposal; account/global shortcut preference storage is out of scope, not an agreed extension of this project-layout contract	Reload restores only authorized project layout and approved presentation preferences; concurrent save conflicts are explicit; semantic identity and relationships remain unchanged; preserve nonexecuting local sketch distinction and clear stale layout on relevant owner/context retirement; minimum separate read-only scenario (NOT PERFORMED): pin one frontend tree/build and separately agreed backend version/Workflow read adapter for one controlled authorized Project/version, verify allowed and denied identities/access, version/ownership/error/retirement and late-result rejection, permit only the agreed read and verify zero writes; this does not establish persistence or require whole-platform readiness	PROPOSED
++UXW1-002	Return to a canvas arrangement; optionally revisit a local Workflow planning sketch	Local titles, selection and placement are discarded on navigation, including intentionally local creator presentation preferences; V3 Workflow sketch is also intentionally disposable, not a canonical definition; V8 implements session-local authoring UX, but scoped persistence and Workflow read/write/version contracts remain unestablished	Optional scoped presentation layout persistence	Versioned workspace/project presentation document containing local node placement, labels and approved non-semantic UI preferences separately from semantic references; authorization and concurrency checks; no canonical edges or identity writes; any future Workflow local layout persistence needs separately agreed reference/version binding and cannot write process definitions; reuse FB-GAP-001/002 for verified Project identity and effective access, not Timeline-specific FB-GAP-003; require reactive host principal/session retirement, exact version ownership, typed non-disclosing errors and stale-context rejection before any future integration	BLOCKS_PRESENTATION_PERSISTENCE	NO	YES	No persistence fake or endpoint; local in-memory state is visibly marked not saved; V3 adds only local authored category cards with no fixtures, API, storage or save; V8 adds bilingual guidance, shared title validation and inspection, pointer/keyboard placement and target/lifetime-bound single-card confirmation; tenant/Project/access/Selection retirement and native OIDC invalidation plus signout-initiation retirement are implemented; continuation corrects normal UserLoaded renewal: valid SDK issuer/audience/subject/sid and unchanged optional tenant claims plus OAuth scope retain the current draft, selection and unfinished inspector input; first trustworthy hydration establishes a baseline, notification generations suppress late reads, and a current SDK user read rejects obsolete loaded payloads; missing sid or invalid/unknown expiry fails closed for preservation without making sid mandatory for login; definitive signals and signout initiation synchronously replace the Workflow owner and reject retained title/arrange/delete callbacks; changed UserLoaded is processed after its current-user read and before its callback promise settles; no draft persistence/restoration. SDK 3.5.0 has no event operation generation: a stale SDK operation that overwrites storage or a payloadless old invalidation cannot be distinguished and fails closed. Real IdP sid stability/tenant semantics, remote invalidation and session-bound Project/effective-access contracts remain unestablished; reuse FB-GAP-001/002, no new mandatory IdP field or authorization grant. Mocked SDK tests prove only this bounded frontend behavior	V5 Canvas undo/redo recovers only current-session titles and positions (bounded 50 edits); no persisted history, save or canonical revision undo. Users may expect arrangements and local presentation preferences to survive navigation; V4 Commands shortcut remapping is session-local shell presentation only and does not consume this persistence proposal; account/global shortcut preference storage is out of scope, not an agreed extension of this project-layout contract	Reload restores only authorized project layout and approved presentation preferences; concurrent save conflicts are explicit; semantic identity and relationships remain unchanged; preserve nonexecuting local sketch distinction and clear stale layout on relevant owner/context retirement; minimum separate read-only scenario (NOT PERFORMED): pin one frontend tree/build and separately agreed backend version/Workflow read adapter for one controlled authorized Project/version, verify allowed and denied identities/access, version/ownership/error/retirement and late-result rejection, permit only the agreed read and verify zero writes; this does not establish persistence or require whole-platform readiness	PROPOSED
+ UXW1-003	Browse media before previewing Add Media Clip	Existing asset gateway cannot project complete canonical logical source pins	Safe source-pin browser projection	Application projection of logical media asset, stream and artifact IDs, content digest and exact media bounds required by the existing command; no physical locations	BLOCKS_GUIDED_MEDIA_SELECTION	NO	YES	Existing unavailable asset gateway reused; scripted operation gateways stay in tests; advanced manual pin form retained	Manual opaque IDs are difficult to discover and validate	Selected media supplies a complete server-validated pin; stale or unauthorized pins fail closed; preview-before-apply remains required	PROPOSED
+ UXW1-004	Watch and scrub an actual timeline	No decoded media access or authoritative track/clip geometry projection	Authorized timeline playback and geometry read model	Revision-scoped track/clip projection with exact time basis plus safe short-lived media access abstraction; timing and ownership supplied by server	BLOCKS_REAL_PLAYBACK_AND_CLIP_EDITING	NO	YES	Production explicitly offers only a bounded 0–20 local-step simulation with placeholder V1/A1 lanes and two explicitly synthetic clips (opening and closing); no mock media or invented clip edits	Users must distinguish layout exploration from a playable edit	Playback matches the selected projected revision and exact time basis; denied access is explicit; UI never derives canonical geometry from local simulation	PROPOSED
+ UXW1-005	Use overview, visual changes, conversation, checks or merge in Review	Only history and server semantic comparison are integrated	Scoped review projections and separately authorized merge command	Typed revision-pair review projections and capability/access reasons; any future merge follows a canonical server-owned preview/confirm contract	BLOCKS_EXTENDED_REVIEW	NO	YES	Unavailable section states and disabled merge action in production; existing scripted history/compare gateways in tests only	Unavailable review tabs should not imply fabricated discussion, checks or merge authority	Empty/loading/error states are defined per projection; revision-pair scope is validated; no client merge or inferred HEAD; authorization is enforced by server	PROPOSED
+--- a/frontend/governance/UX_WAVE_1_REVIEW.md
++++ b/frontend/governance/UX_WAVE_1_REVIEW.md
+@@ -276,3 +276,14 @@
+ Attempt-03 actual RED/GREEN and handoff are under `/tmp/FRONTEND_WAVE2_WORKFLOW_LOCAL_AUTHORING_UX_V8/attempt-03/`; attempt-02 evidence and original handoff remain unchanged. Native SDK mocks exercise the real subscription export and Workflow host under StrictMode, synchronous withdrawal, retained title/delete callback rejection with reused local IDs, signout success/failure, unconfigured behavior, symmetric cleanup and late getter/UserLoaded handling. These are simulated native-boundary tests, not real authentication or browser acceptance. The final affected-suite/typecheck/lint results are recorded in the attempt-03 handoff.
+ 
+ Final seven gates, build, browser execution, independent review, integration and publication remain pending Hermes work. No build, backend lane, credentials, Skill/Memory or Git mutations are authorized or performed by this implementation. No overall acceptance is claimed.
++
++
++## V8 continuation — session renewal and long card titles (writer correction)
++
++This continuation supersedes attempt-03's deliberate all-UserLoaded retirement expectation above; the historical report remains intact. Installed oidc-client-ts 3.5.0 stores a fresh User and raises UserLoaded on normal silent renewal. The real wrapper now hydrates after subscribing and compares valid SDK issuer/audience/subject/session `sid`, optional tenant claims and OAuth scope. Two same-session renewals preserve local nodes, title/positions, shared selection, inspector state, focus and unfinished invalid title input. The first trustworthy hydration establishes the comparison baseline without remounting the editor. Missing session identity or unknown/invalid expiry fails closed for preservation; `sid` is optional for login, and no subject-only or token-string identity is introduced.
++
++Each notification supersedes pending reads, and cleanup deactivates old callbacks under StrictMode/unmount. UserLoaded checks the current SDK user: the payload is not identity authority, so a late notification preserves an already established current session and cannot hide a pending genuine change; actual changes retire before the returned SDK callback promise settles. Signout initiation (redirect success or failure) and definitive native invalidations still retire synchronously. Existing lifetime checks reject actual retained title, placement and deletion callbacks, including reused local node IDs. The SDK lacks source-operation generations: a late operation overwriting its store, or a payloadless old invalidation, cannot be distinguished from current invalidation and fails closed. Automatic silent renewal and existing authentication settings remain unchanged. Real IdP session/tenant behavior and session-bound Project/access integration remain unverified, as recorded in UXW1-002 and FB-GAP-001/002.
++
++Workflow host retirement still uses the existing tenant/Workspace/Project and semantic EffectiveAccess state/factors. Equal access with a fresh observation time or explanation preserves edits. No canonical grant is inferred; provisional Project context and disabled invocation remain. Card CSS uses a fixed 120px border-box height below the existing 136px default row spacing and a two-line, 40px title overflow boundary. Full maximum 120-character Chinese, continuous and mixed titles remain in model data, accessible button names and keyboard-accessible editable inspector fields. Type and coordinates retain their own space. No hover-only detail, collision rules, autolayout or data truncation is added. Desktop/narrow browser geometry and final acceptance remain Hermes gates.
++
++Current RED/GREEN, command exits, exact continuation diff and preservation evidence are in the Owner-authorized continuation `writer/` directory, with final results in WRITER_HANDOFF.md. Historical full 869 / targeted 170 / 46 lint-warning figures are not results of this continuation. No build, backend/EP19 test, staging, commit, freeze, integration, remote operation, dist/static, Skill/Memory or browser-adapter change was performed. Owner no-commit actual-tree delivery overrides the durable candidate-freeze rule for this task.
+--- a/frontend/src/app/routeTree.test.tsx
++++ b/frontend/src/app/routeTree.test.tsx
+@@ -1,5 +1,5 @@
+ import { StrictMode } from 'react'
+-import type { User } from 'oidc-client-ts'
++import { User } from 'oidc-client-ts'
+ import * as oidcClient from '../auth/oidcClient'
+ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+ import { RouterProvider, createMemoryHistory, createRouter } from '@tanstack/react-router'
+@@ -243,18 +243,19 @@
+ // Real oidcClient export, mocked native SDK boundary: no real config, credentials or transport.
+ const oidcFixture = vi.hoisted(() => {
+   const names = ['UserLoaded', 'UserUnloaded', 'AccessTokenExpired', 'UserSignedIn', 'UserSignedOut', 'UserSessionChanged'] as const
+-  const listeners = Object.fromEntries(names.map(name => [name, new Set<() => void>()])) as Record<typeof names[number], Set<() => void>>
++  const listeners = Object.fromEntries(names.map(name => [name, new Set<(user?: User) => void | Promise<void>>()])) as Record<typeof names[number], Set<(user?: User) => void | Promise<void>>>
+   const events = Object.fromEntries(names.flatMap(name => [
+-    [`add${name}`, (callback: () => void) => { listeners[name].add(callback); return () => { listeners[name].delete(callback) } }],
+-    [`remove${name}`, (callback: () => void) => { listeners[name].delete(callback) }],
++    [`add${name}`, (callback: (user?: User) => void | Promise<void>) => { listeners[name].add(callback); return () => { listeners[name].delete(callback) } }],
++    [`remove${name}`, (callback: (user?: User) => void | Promise<void>) => { listeners[name].delete(callback) }],
+   ]))
+-  return { names, listeners, events, enabled: false, constructed: vi.fn(), getUser: vi.fn(), signoutRedirect: vi.fn() }
++  return { names, listeners, events, enabled: false, constructed: vi.fn(), getUser: vi.fn().mockResolvedValue(null), signoutRedirect: vi.fn() }
+ })
+ vi.mock('../auth/oidcConfig', () => ({
+   isOidcEnabled: () => oidcFixture.enabled,
+   getOidcSettings: () => ({ issuer: 'https://oidc.invalid', clientId: 'native-sdk-test', redirectUri: 'https://app.invalid/callback', scope: 'openid' }),
+ }))
+-vi.mock('oidc-client-ts', () => ({
++vi.mock('oidc-client-ts', async importOriginal => ({
++  ...await importOriginal<typeof import('oidc-client-ts')>(),
+   UserManager: class {
+     constructor() { oidcFixture.constructed() }
+     events = oidcFixture.events
+@@ -276,17 +277,18 @@
+   const router = createRouter({ routeTree, history: createMemoryHistory({ initialEntries: ['/w/workspace-1/projects/project-1/workflow'] }), context: { queryClient } })
+   const view = render(<StrictMode><QueryClientProvider client={queryClient}><RouterProvider router={router} /></QueryClientProvider></StrictMode>)
+   await screen.findByRole('heading', { name: 'Local arrangement sketch' })
+-  return view
++  return { ...view, queryClient, router }
+ }
+ 
+ function privateWorkflowDraft() {
+   fireEvent.click(screen.getByRole('button', { name: 'Add REVIEW card' }))
+   fireEvent.click(screen.getByTestId('workflow-sketch-node'))
+   fireEvent.change(screen.getByLabelText('Local title'), { target: { value: 'Private previous session' } })
++  const arrange = renderedHandler<() => void>(screen.getByRole('button', { name: 'Move right' }), 'onClick')
+   const edit = renderedHandler<(event: { target: { value: string } }) => void>(screen.getByLabelText('Local title'), 'onChange')
+   fireEvent.click(screen.getByRole('button', { name: 'Remove selected card' }))
+   const confirm = renderedHandler<() => void>(screen.getByRole('button', { name: 'Remove card' }), 'onClick')
+-  return { edit, confirm }
++  return { edit, confirm, arrange }
+ }
+ 
+ function expectRetiredImmediately() {
+@@ -300,18 +302,214 @@
+   fireEvent.click(screen.getByRole('button', { name: 'Add WAIT card' }))
+   fireEvent.click(screen.getByTestId('workflow-sketch-node'))
+   // IDs intentionally collide across remounts; old closures must reject ownership.
+-  act(() => { retained.edit({ target: { value: 'Retired edit' } }); retained.confirm() })
++  act(() => { retained.edit({ target: { value: 'Retired edit' } }); retained.confirm(); retained.arrange() })
+   expect(screen.getByTestId('workflow-sketch-node').getAttribute('aria-label')).toBe('WAIT')
+   expect((screen.getByLabelText('Local title') as HTMLInputElement).value).toBe('WAIT')
++  expect(screen.getByTestId('workflow-sketch-node').textContent).toContain('X 32 · Y 32')
+   expect((screen.getByRole('button', { name: 'Invoke workflow' }) as HTMLButtonElement).disabled).toBe(true)
+ }
+ 
++function sdkUser(overrides: Partial<ConstructorParameters<typeof User>[0]> = {}) {
++  return new User({
++    access_token: 'test-access-original', token_type: 'Bearer', scope: 'openid profile',
++    expires_at: Math.floor(Date.now() / 1000) + 3600,
++    profile: { iss: 'https://oidc.invalid', aud: 'native-sdk-test', sub: 'principal-1', sid: 'session-1', tenant_id: 'tenant-1', iat: 100, exp: 9999999999 },
++    ...overrides,
++  })
++}
++
++async function emitLoaded(user: User) {
++  oidcFixture.getUser.mockResolvedValue(user)
++  await act(async () => { for (const listener of oidcFixture.listeners.UserLoaded) await listener(user) })
++}
++
+ describe('Workflow native OIDC identity/session retirement', () => {
++  it('preserves the complete draft and unfinished inspector input through two ordinary SDK renewals and a render', async () => {
++    const initial = sdkUser()
++    oidcFixture.getUser.mockResolvedValue(initial)
++    const view = await workflowIdentityHost()
++    await act(async () => {})
++    fireEvent.click(screen.getByRole('button', { name: 'Add REVIEW card' }))
++    fireEvent.click(screen.getByRole('button', { name: 'Add WAIT card' }))
++    const cards = screen.getAllByTestId('workflow-sketch-node')
++    fireEvent.click(cards[0])
++    fireEvent.change(screen.getByLabelText('Local title'), { target: { value: 'Keep this title' } })
++    fireEvent.click(screen.getByRole('button', { name: 'Move right' }))
++    fireEvent.change(screen.getByLabelText('Local title'), { target: { value: '   ' } })
++    const input = screen.getByLabelText('Local title') as HTMLInputElement
++    act(() => input.focus())
++    for (let renewal = 1; renewal <= 2; renewal += 1) {
++      await emitLoaded(sdkUser({ access_token: `test-renewed-${renewal}`, expires_at: initial.expires_at! + renewal * 3600,
++        profile: { ...initial.profile, iat: 100 + renewal, exp: initial.profile.exp + renewal * 3600 } }))
++      expect(screen.getAllByTestId('workflow-sketch-node')).toEqual(cards)
++      expect(cards[0].getAttribute('aria-label')).toBe('Keep this title')
++      expect(cards[0].getAttribute('aria-pressed')).toBe('true')
++      expect(cards[0].textContent).toContain('X 56 · Y 32')
++      expect(screen.getByLabelText('Local title')).toBe(input)
++      expect(input.value).toBe('   ')
++      expect(document.activeElement).toBe(input)
++    }
++    act(() => view.queryClient.setQueryData(platformQueryKeys.workspaceHome('workspace-1'), { workspace: { id: 'workspace-1', name: 'Editorial rerender' }, tenantId: 'tenant-1', recentProjects: [] }))
++    await act(async () => {})
++    expect(screen.getAllByTestId('workflow-sketch-node')).toEqual(cards)
++    expect(input.value).toBe('   ')
++  })
++
++  it.each(['principal', 'tenant', 'session', 'scope', 'expired', 'unknown expiry', 'invalid expiry', 'missing sid', 'ambiguous tenant'] as const)('retires on actual %s change and rejects old title, arrange and delete callbacks', async change => {
++    const initial = sdkUser()
++    oidcFixture.getUser.mockResolvedValue(initial)
++    await workflowIdentityHost()
++    const retained = privateWorkflowDraft()
++    const next = sdkUser()
++    if (change === 'principal') next.profile.sub = 'principal-2'
++    if (change === 'tenant') next.profile.tenant_id = 'tenant-2'
++    if (change === 'session') next.profile.sid = 'session-2'
++    if (change === 'scope') next.scope = 'openid'
++    if (change === 'expired') next.expires_at = 0
++    if (change === 'unknown expiry') next.expires_at = undefined
++    if (change === 'invalid expiry') next.expires_at = Number.NaN
++    if (change === 'missing sid') delete next.profile.sid
++    if (change === 'ambiguous tenant') next.profile.tenantId = 'different-tenant'
++    await emitLoaded(next)
++    expectRetiredImmediately()
++    expectStaleHandlersRejected(retained)
++  })
++
++  it('preserves edits for a fresh observation of equal access but retires a changed factor or access error', async () => {
++    oidcFixture.getUser.mockResolvedValue(sdkUser())
++    const view = await workflowIdentityHost()
++    const key = platformQueryKeys.effectiveAccess(['workflow.invoke'])
++    const entry = { ...unknownAccess('workflow.invoke'), observedAt: '2026-09-09T01:00:00Z' }
++    act(() => view.queryClient.setQueryData(key, { 'workflow.invoke': entry }))
++    await act(async () => {})
++    privateWorkflowDraft()
++    const card = screen.getByTestId('workflow-sketch-node')
++    act(() => view.queryClient.setQueryData(key, { 'workflow.invoke': { ...entry, observedAt: '2026-09-09T01:01:00Z', explanation: 'Same effective decision, newer explanation.' } }))
++    await act(async () => {})
++    expect(screen.getByTestId('workflow-sketch-node')).toBe(card)
++    act(() => view.queryClient.setQueryData(key, { 'workflow.invoke': { ...entry, factors: { ...entry.factors, policy: 'UNSATISFIED' } } }))
++    await waitFor(() => expectRetiredImmediately())
++    fireEvent.click(screen.getByRole('button', { name: 'Add WAIT card' }))
++    act(() => view.queryClient.getQueryCache().find({ queryKey: key })!.setState({ status: 'error', error: new Error('Access expired') }))
++    await waitFor(() => expectRetiredImmediately())
++  })
++
++  it('establishes trustworthy delayed initial hydration without a fake identity switch', async () => {
++    let resolve!: (user: User) => void
++    oidcFixture.getUser.mockReturnValue(new Promise<User>(yes => { resolve = yes }))
++    await workflowIdentityHost()
++    privateWorkflowDraft()
++    const card = screen.getByTestId('workflow-sketch-node')
++    await act(async () => resolve(sdkUser()))
++    expect(screen.getByTestId('workflow-sketch-node')).toBe(card)
++    expect(screen.getByRole('dialog')).toBeTruthy()
++    await emitLoaded(sdkUser({ scope: 'profile openid openid' }))
++    expect(screen.getByTestId('workflow-sketch-node')).toBe(card)
++  })
++
++  it('lets UserLoaded supersede initial hydration and ignores a late different initial user', async () => {
++    let resolve!: (user: User) => void
++    oidcFixture.getUser.mockReturnValue(new Promise<User>(yes => { resolve = yes }))
++    await workflowIdentityHost()
++    privateWorkflowDraft()
++    await emitLoaded(sdkUser())
++    const card = screen.getByTestId('workflow-sketch-node')
++    await act(async () => resolve(sdkUser({ profile: { ...sdkUser().profile, sid: 'old-initial-session' } })))
++    expect(screen.getByTestId('workflow-sketch-node')).toBe(card)
++    await emitLoaded(sdkUser({ access_token: 'test-renewal' }))
++    expect(screen.getByTestId('workflow-sketch-node')).toBe(card)
++  })
++
++  it('rejects an older loaded read after a newer stored context, including an old event delivered afterwards', async () => {
++    oidcFixture.getUser.mockResolvedValue(sdkUser())
++    await workflowIdentityHost()
++    privateWorkflowDraft()
++    let resolve!: (user: User) => void
++    oidcFixture.getUser.mockReturnValue(new Promise<User>(yes => { resolve = yes }))
++    let pending!: Promise<void>
++    act(() => { pending = Promise.resolve([...oidcFixture.listeners.UserLoaded][0](sdkUser())) })
++    const next = sdkUser({ profile: { ...sdkUser().profile, sid: 'new-session' } })
++    await emitLoaded(next)
++    expectRetiredImmediately()
++    fireEvent.click(screen.getByRole('button', { name: 'Add WAIT card' }))
++    const card = screen.getByTestId('workflow-sketch-node')
++    await act(async () => { resolve(sdkUser()); await pending })
++    await act(async () => { for (const listener of oidcFixture.listeners.UserLoaded) await listener(sdkUser()) })
++    expect(screen.getByTestId('workflow-sketch-node')).toBe(card)
++    await emitLoaded(sdkUser({ ...next, access_token: 'test-next-renewal' }))
++    expect(screen.getByTestId('workflow-sketch-node')).toBe(card)
++  })
++
++  it('does not let an old loaded notification hide a pending genuine identity change', async () => {
++    const initial = sdkUser()
++    oidcFixture.getUser.mockResolvedValue(initial)
++    await workflowIdentityHost()
++    privateWorkflowDraft()
++    const next = sdkUser({ profile: { ...initial.profile, sid: 'new-session' } })
++    let resolve!: (user: User) => void
++    oidcFixture.getUser.mockReturnValue(new Promise<User>(yes => { resolve = yes }))
++    let pending!: Promise<void>
++    act(() => { pending = Promise.resolve([...oidcFixture.listeners.UserLoaded][0](next)) })
++    oidcFixture.getUser.mockResolvedValue(next)
++    await act(async () => { for (const listener of oidcFixture.listeners.UserLoaded) await listener(initial) })
++    expectRetiredImmediately()
++    fireEvent.click(screen.getByRole('button', { name: 'Add WAIT card' }))
++    await act(async () => { resolve(next); await pending })
++    expect(screen.getByTestId('workflow-sketch-node').getAttribute('aria-label')).toBe('WAIT')
++  })
++
++  it('retires on SDK read failure and missing current user instead of preserving uncertain access', async () => {
++    oidcFixture.getUser.mockResolvedValue(sdkUser())
++    await workflowIdentityHost()
++    privateWorkflowDraft()
++    oidcFixture.getUser.mockRejectedValue(new Error('SDK read failed'))
++    await act(async () => { for (const listener of oidcFixture.listeners.UserLoaded) await listener(sdkUser()) })
++    expectRetiredImmediately()
++    fireEvent.click(screen.getByRole('button', { name: 'Add WAIT card' }))
++    oidcFixture.getUser.mockResolvedValue(null)
++    await act(async () => { for (const listener of oidcFixture.listeners.UserLoaded) await listener(sdkUser()) })
++    expectRetiredImmediately()
++  })
++
++  it('ignores pending SDK reads after signout initiation and StrictMode unmount', async () => {
++    let resolve!: (user: User) => void
++    oidcFixture.getUser.mockReturnValue(new Promise<User>(yes => { resolve = yes }))
++    const view = await workflowIdentityHost()
++    privateWorkflowDraft()
++    await act(async () => oidcClient.signOutOidc())
++    expectRetiredImmediately()
++    fireEvent.click(screen.getByRole('button', { name: 'Add WAIT card' }))
++    await act(async () => resolve(sdkUser()))
++    const card = screen.getByTestId('workflow-sketch-node')
++    let finish!: (user: User) => void
++    oidcFixture.getUser.mockReturnValue(new Promise<User>(yes => { finish = yes }))
++    let pending!: Promise<void>
++    act(() => { pending = Promise.resolve([...oidcFixture.listeners.UserLoaded][0](sdkUser())) })
++    view.unmount()
++    for (const listeners of Object.values(oidcFixture.listeners)) expect(listeners.size).toBe(0)
++    await act(async () => { finish(sdkUser()); await pending })
++    expect(card.isConnected).toBe(false)
++    expect(screen.queryByTestId('workflow-sketch-node')).toBeNull()
++  })
++
++  it.each(['workspace', 'project'] as const)('retires the Workflow owner on a %s route change', async target => {
++    oidcFixture.getUser.mockResolvedValue(sdkUser())
++    const view = await workflowIdentityHost()
++    const retained = privateWorkflowDraft()
++    await act(async () => view.router.navigate({ to: '/w/$workspaceId/projects/$projectId/workflow', params: {
++      workspaceId: target === 'workspace' ? 'workspace-2' : 'workspace-1',
++      projectId: target === 'project' ? 'project-2' : 'project-1',
++    } }))
++    await screen.findByRole('heading', { name: 'Local arrangement sketch' })
++    expectRetiredImmediately()
++    expectStaleHandlersRejected(retained)
++  })
++
+   afterEach(() => {
+     cleanup()
+     oidcFixture.enabled = false
+     vi.restoreAllMocks()
+-    oidcFixture.getUser.mockReset()
++    oidcFixture.getUser.mockReset().mockResolvedValue(null)
+     oidcFixture.signoutRedirect.mockReset()
+   })
+ 
+@@ -330,23 +528,25 @@
+   it('subscribes through the real export and symmetrically removes native and signout listeners', async () => {
+     oidcFixture.enabled = true
+     const callback = vi.fn()
++    oidcFixture.getUser.mockResolvedValue(sdkUser())
+     const unsubscribe = oidcClient.subscribeOidcSessionRetirement(callback)
++    await Promise.resolve()
+     const retained = [...oidcFixture.listeners.UserLoaded][0]
+     for (const name of oidcFixture.names) {
+       expect(oidcFixture.listeners[name].size).toBe(1)
+-      for (const listener of oidcFixture.listeners[name]) listener()
++      for (const listener of oidcFixture.listeners[name]) await listener(name === 'UserLoaded' ? sdkUser({ expires_at: 0 }) : undefined)
+     }
+-    expect(callback).toHaveBeenCalledTimes(oidcFixture.names.length)
++    expect(callback).toHaveBeenCalledTimes(oidcFixture.names.length - 1)
+     unsubscribe()
+     unsubscribe()
+     for (const listeners of Object.values(oidcFixture.listeners)) expect(listeners.size).toBe(0)
+-    retained()
++    await retained(sdkUser())
+     await oidcClient.signOutOidc()
+-    expect(callback).toHaveBeenCalledTimes(oidcFixture.names.length)
+-    expect(oidcFixture.getUser).not.toHaveBeenCalled()
+-  })
+-
+-  it.each(oidcFixture.names)('withdraws old Workflow content synchronously on SDK %s and rejects retained editor/confirmation callbacks', async name => {
++    expect(callback).toHaveBeenCalledTimes(oidcFixture.names.length - 1)
++    expect(oidcFixture.getUser).toHaveBeenCalled()
++  })
++
++  it.each(oidcFixture.names.filter(name => name !== 'UserLoaded'))('withdraws old Workflow content synchronously on SDK %s and rejects retained editor/confirmation callbacks', async name => {
+     const view = await workflowIdentityHost()
+     const retained = privateWorkflowDraft()
+     act(() => {
+@@ -355,7 +555,7 @@
+       expectRetiredImmediately()
+     })
+     expectStaleHandlersRejected(retained)
+-    expect(oidcFixture.getUser).not.toHaveBeenCalled()
++    expect(oidcFixture.getUser).toHaveBeenCalled()
+     view.unmount()
+     for (const listeners of Object.values(oidcFixture.listeners)) expect(listeners.size).toBe(0)
+   })
+@@ -380,7 +580,7 @@
+     expect(screen.getByTestId('workflow-sketch-node').getAttribute('aria-label')).toBe('WAIT')
+   })
+ 
+-  it('does not hydrate from a late async getter, and treats late UserLoaded as retirement rather than restoration', async () => {
++  it('ignores hydration after unload and ignores an old loaded event after a new stored session', async () => {
+     let resolve!: (user: User | null) => void
+     oidcFixture.getUser.mockReturnValue(new Promise<User | null>(yes => { resolve = yes }))
+     await workflowIdentityHost()
+@@ -393,9 +593,11 @@
+     expectStaleHandlersRejected(retained)
+     await act(async () => { resolve(null); await late })
+     expect(screen.getByTestId('workflow-sketch-node').getAttribute('aria-label')).toBe('WAIT')
+-    act(() => {
+-      for (const listener of oidcFixture.listeners.UserLoaded) listener()
+-      expectRetiredImmediately()
+-    })
++    const current = sdkUser({ profile: { ...sdkUser().profile, sid: 'new-session' } })
++    await emitLoaded(current)
++    expectRetiredImmediately()
++    fireEvent.click(screen.getByRole('button', { name: 'Add WAIT card' }))
++    await act(async () => { for (const listener of oidcFixture.listeners.UserLoaded) await listener(sdkUser()) })
++    expect(screen.getByTestId('workflow-sketch-node').getAttribute('aria-label')).toBe('WAIT')
+   })
+ })
+--- a/frontend/src/auth/oidcClient.ts
++++ b/frontend/src/auth/oidcClient.ts
+@@ -25,23 +25,81 @@
+   return userManager
+ }
+ 
+-/** Invalidation only: no principal, token, stored hints or async user hydration. */
++// sid is optional at the IdP, but without it this consumer cannot prove continuity.
++// This is a draft-retirement comparison, never a permission or authentication grant.
++function sessionIdentity(user: User | null | undefined): string | null {
++  if (!user) return null
++  const { profile } = user
++  const text = (value: unknown): value is string => typeof value === 'string' && Boolean(value.trim())
++  if (!text(profile.iss) || !text(profile.sub) || !text(profile.sid)) return null
++  const audience = typeof profile.aud === 'string' ? [profile.aud] : profile.aud
++  if (!Array.isArray(audience) || !audience.every(text) || !audience.includes(getOidcSettings().clientId)) return null
++  const { tenantId, tenant_id } = profile
++  if ((tenantId !== undefined && !text(tenantId)) || (tenant_id !== undefined && !text(tenant_id))
++    || (tenantId !== undefined && tenant_id !== undefined && tenantId !== tenant_id)) return null
++  return JSON.stringify([getOidcSettings().issuer, profile.iss, [...new Set(audience)].sort(), profile.sub, profile.sid, tenantId ?? tenant_id ?? null])
++}
++
++function sessionContinuity(user: User | null | undefined): string | null {
++  const identity = sessionIdentity(user)
++  if (!identity || !user || user.expired !== false || !Number.isFinite(user.expires_at) || !user.access_token) return null
++  return JSON.stringify([identity, [...new Set(user.scopes)].sort()])
++}
++
++/** Observe SDK identity without treating a normal token renewal as signout. */
+ export function subscribeOidcSessionRetirement(onRetire: () => void): () => void {
+   if (!isOidcEnabled()) return () => {}
+-  const { events } = manager()
++  const sdk = manager(), { events } = sdk
+   let active = true
+-  const retire = () => { if (active) onRetire() }
+-  // A reload/renewal conservatively retires even when the principal is unchanged.
+-  events.addUserLoaded(retire)
++  let revision = 0
++  let initialized = false
++  let continuity: string | null = null
++  const retire = () => {
++    if (!active) return
++    revision += 1
++    initialized = true
++    continuity = null
++    onRetire()
++  }
++  const observe = (user: User | null) => {
++    const next = sessionContinuity(user)
++    const changed = !next || (initialized && next !== continuity)
++    initialized = true
++    continuity = next
++    if (changed) onRetire()
++  }
++  const loaded = async () => {
++    if (!active) return
++    const generation = ++revision
++    try {
++      // SDK stores before UserLoaded. Read current identity, not the possibly old
++      // payload: even an old notification can supersede a pending genuine change.
++      // getUser defaults to raiseEvent=false, so this cannot recurse into loaded.
++      const current = await sdk.getUser()
++      if (!active || revision !== generation) return
++      observe(current)
++    } catch {
++      if (active && revision === generation) retire()
++    }
++  }
++  events.addUserLoaded(loaded)
+   events.addUserUnloaded(retire)
+   events.addAccessTokenExpired(retire)
+   events.addUserSignedIn(retire)
+   events.addUserSignedOut(retire)
+   events.addUserSessionChanged(retire)
+   signoutListeners.add(retire)
++  // Subscribe first. Any intervening event supersedes this initial hydration.
++  const generation = revision
++  void sdk.getUser().then(user => {
++    if (active && revision === generation) observe(user)
++  }, () => {
++    if (active && revision === generation) retire()
++  })
+   return () => {
+     active = false
+-    events.removeUserLoaded(retire)
++    revision += 1
++    events.removeUserLoaded(loaded)
+     events.removeUserUnloaded(retire)
+     events.removeAccessTokenExpired(retire)
+     events.removeUserSignedIn(retire)
+--- a/frontend/src/product/workflow-sketch/WorkflowSketch.test.tsx
++++ b/frontend/src/product/workflow-sketch/WorkflowSketch.test.tsx
+@@ -386,3 +386,29 @@
+   expect(screen.getByTestId('workflow-sketch-node').getAttribute('aria-label')).toBe('WAIT')
+   expect((screen.getByLabelText('Local title') as HTMLInputElement).value).toBe('WAIT')
+ })
++
++// Layout bounds themselves are browser-verified by Hermes; DOM tests prove that
++// clamping never truncates the model, accessible button name or editable inspector.
++it.each(['中'.repeat(120), 'x'.repeat(120), '剪辑Workflow_'.repeat(12)])('retains a maximum-length title in the card and keyboard-accessible inspector: %s', title => {
++  const maxTitle = title.padEnd(120, '文').slice(0, 120)
++  setup()
++  for (let index = 0; index < 5; index += 1) fireEvent.click(screen.getByRole('button', { name: 'Add REVIEW card' }))
++  const cards = screen.getAllByTestId('workflow-sketch-node')
++  act(() => cards[0].focus())
++  fireEvent.keyDown(cards[0], { key: 'Enter' })
++  fireEvent.change(screen.getByLabelText('Local title'), { target: { value: maxTitle } })
++  expect(cards[0].querySelector('strong')?.textContent).toBe(maxTitle)
++  expect(screen.getByRole('button', { name: maxTitle })).toBe(cards[0])
++  expect(cards[0].getAttribute('aria-pressed')).toBe('true')
++  expect(cards[0].querySelector('.ff-badge')?.textContent).toBe('REVIEW')
++  expect(cards[0].textContent).toContain('X 32 · Y 32')
++  expect(cards[4].textContent).toContain('X 32 · Y 168')
++  expect((screen.getByLabelText('Local title') as HTMLInputElement).value).toBe(maxTitle)
++  fireEvent.click(cards[1])
++  act(() => cards[0].focus())
++  fireEvent.keyDown(cards[0], { key: 'Enter' })
++  expect(document.activeElement).toBe(cards[0])
++  expect((screen.getByLabelText('Local title') as HTMLInputElement).value).toBe(maxTitle)
++  fireEvent.change(screen.getByLabelText('Local title'), { target: { value: 'Edited full title' } })
++  expect(cards[0].getAttribute('aria-label')).toBe('Edited full title')
++})
+--- a/frontend/src/styles/foundation.css
++++ b/frontend/src/styles/foundation.css
+@@ -105,8 +105,9 @@
+ .ff-workflow-board:focus-visible { outline: 2px solid var(--accent-400); outline-offset: 2px; }
+ .ff-workflow-board > .ff-empty { min-height: 360px; border: 0; }
+ .ff-workflow-board-plane { position: relative; width: 1104px; min-height: 800px; background-image: radial-gradient(circle, var(--border-default) 1px, transparent 1px); background-size: 24px 24px; }
+-.ff-workflow-node { position: absolute; left: var(--workflow-node-x); top: var(--workflow-node-y); display: flex; flex-direction: column; align-items: flex-start; gap: 6px; width: 176px; min-height: 88px; padding: var(--space-3); color: var(--text-primary); text-align: left; background: var(--surface-1); border: 1px solid var(--border-strong); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
+-.ff-workflow-node strong { max-width: 100%; overflow-wrap: anywhere; }
++.ff-workflow-node { position: absolute; left: var(--workflow-node-x); top: var(--workflow-node-y); display: flex; flex-direction: column; align-items: flex-start; gap: 6px; box-sizing: border-box; width: 176px; height: 120px; overflow: hidden; padding: var(--space-3); color: var(--text-primary); text-align: left; background: var(--surface-1); border: 1px solid var(--border-strong); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
++.ff-workflow-node strong { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; flex: 0 0 auto; width: 100%; max-height: 40px; line-height: 20px; overflow: hidden; overflow-wrap: anywhere; }
++.ff-workflow-node > .ff-badge, .ff-workflow-node > span:last-child { flex-shrink: 0; }
+ .ff-workflow-node > span:last-child { color: var(--text-tertiary); font: var(--text-micro) var(--font-mono); }
+ .ff-workflow-node[aria-pressed='true'] { border-color: var(--accent-400); outline: 2px solid var(--accent-400); outline-offset: 2px; }
+ .ff-workflow-dialog-actions { justify-content: flex-end; margin-top: var(--space-4); }
+--- a/frontend/src/surfaces/FoundationPages.tsx
++++ b/frontend/src/surfaces/FoundationPages.tsx
+@@ -107,7 +107,8 @@
+   // Reuse the existing command key only as a retirement boundary. Local sketch editing
+   // requires no canonical grant, and invocation stays disabled for every projection.
+   const entry = getEffectiveAccess(access.data, 'workflow.invoke')
+-  const contextKey = JSON.stringify([project.workspaceId, project.projectId, project.tenantId, project.status, project.reason, access.isError, entry, sessionRetirement])
++  const accessBoundary = [entry.key, entry.source, entry.status, entry.reasonCode, entry.factors.capability, entry.factors.runtime, entry.factors.entitlement, entry.factors.policy, entry.factors.quota]
++  const contextKey = JSON.stringify([project.workspaceId, project.projectId, project.tenantId, project.status, project.reason, access.isError, accessBoundary, sessionRetirement])
+   return <ProductAppShell key={contextKey} surfaceId="workflow" workspaceId={workspaceId} project={project}>{children}</ProductAppShell>
+ }
+ 

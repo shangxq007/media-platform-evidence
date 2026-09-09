@@ -1,0 +1,26 @@
+npm error code EPERM
+npm error syscall connect
+npm error errno EPERM
+npm error FetchError: request to https://registry.npmjs.org/vitest failed, reason: connect EPERM 127.0.0.1:7890 - Local (undefined:undefined)
+npm error     at ClientRequest.<anonymous> (/usr/lib64/node_modules/npm22/node_modules/minipass-fetch/lib/index.js:130:14)
+npm error     at ClientRequest.emit (node:events:519:28)
+npm error     at emitErrorEvent (node:_http_client:108:11)
+npm error     at _destroy (node:_http_client:967:9)
+npm error     at onSocketNT (node:_http_client:987:5)
+npm error     at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+npm error   code: 'EPERM',
+npm error   errno: 'EPERM',
+npm error   syscall: 'connect',
+npm error   address: '127.0.0.1',
+npm error   port: 7890,
+npm error   type: 'system'
+npm error }
+npm error
+npm error The operation was rejected by your operating system.
+npm error It is likely you do not have the permissions to access this file as the current user
+npm error
+npm error If you believe this might be a permissions issue, please double-check the
+npm error permissions of the file and its containing directories, or try running
+npm error the command again as root/Administrator.
+npm error Log files were not written due to an error writing to the directory: /home/user/.npm/_logs
+npm error You can rerun the command with `--loglevel=verbose` to see the logs in your terminal
