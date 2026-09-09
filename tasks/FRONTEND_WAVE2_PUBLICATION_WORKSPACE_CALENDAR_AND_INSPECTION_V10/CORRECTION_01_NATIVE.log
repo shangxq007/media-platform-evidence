@@ -1,0 +1,9 @@
+I’ll read the correction brief and applicable repository instructions, implement the scoped changes, and write the handoff with new evidence while preserving the originals.
+The brief limits this correction to Publication’s select styling and search placeholder. I’ll use the existing form-control tokens and inspect the localization path. Browser capture and build verification remain with the parent, as requested.
+The source confirms both causes: the selects fall back to white because `--ff-panel` is undefined, while their text inherits the dark theme’s pale foreground. The shared search primitive defaults to “Search” when no placeholder is supplied; Publication already has the needed Chinese translation. I’ll reuse that translation and verify computed contrast in the DOM test environment, with native visual acceptance still pending the parent’s capture.
+The correction passes all 197 affected tests, typecheck, lint, and architecture checks. DOM-computed dark-theme contrast improved from 1.21:1 to 14.32:1; light-theme contrast is 16.12:1, and the Chinese placeholder regression passes. I’m checking preservation hashes and packaging the exact delta and receipts into the handoff.
+Implemented the bounded select styling and Chinese placeholder correction.
+
+All 197 affected tests, typecheck, lint, and architecture checks pass. Original evidence and Git state are preserved; no commits or browser/build reruns.
+
+[Handoff and evidence](</home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/writer/CORRECTION_01_HANDOFF.md>). Native visual acceptance remains with the parent.
