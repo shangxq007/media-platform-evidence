@@ -1,0 +1,41 @@
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ✓ src/product/workflow-sketch/model.test.ts (5 tests) 15ms
+ ✓ src/product/timeline/types.test.ts (11 tests) 13ms
+ ✓ src/product/timeline/editor-state.test.ts (50 tests) 14ms
+ ✓ src/interaction/model.test.ts (17 tests) 26ms
+ ✓ src/product/canvas/model.test.ts (37 tests) 295ms
+ ✓ src/localization/localization.test.tsx (13 tests) 203ms
+ ✓ src/product/timeline/SemanticDiff.test.tsx (8 tests) 147ms
+ ✓ src/api/app/timeline-query.gateway.test.ts (7 tests) 12ms
+ ✓ src/product/workflow-sketch/WorkflowSketch.test.tsx (22 tests) 1354ms
+ ✓ src/components/app-shell/AppShell.test.tsx (44 tests) 1743ms
+ ✓ src/product/timeline/TimelineNavigation.test.tsx (25 tests) 2057ms
+ ✓ src/product/timeline/NleWorkspace.test.tsx (15 tests) 2023ms
+stderr | src/interaction/InteractionShell.test.tsx > Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/p/unsupported expose no old owner
+Warning: A notFoundError was encountered on the route with ID "__root__", but a notFoundComponent option was not configured, nor was a router level defaultNotFoundComponent configured. Consider configuring at least one of these to avoid TanStack Router's overly generic defaultNotFoundComponent (<p>Not Found</p>)
+
+stderr | src/interaction/InteractionShell.test.tsx > Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/canvas expose no old owner
+Warning: A notFoundError was encountered on the route with ID "__root__", but a notFoundComponent option was not configured, nor was a router level defaultNotFoundComponent configured. Consider configuring at least one of these to avoid TanStack Router's overly generic defaultNotFoundComponent (<p>Not Found</p>)
+
+ ✓ src/product/review/ReviewWorkspace.test.tsx (43 tests) 3240ms
+ ✓ src/interaction/InteractionShell.test.tsx (50 tests) 3120ms
+   ✓ Slice1C actual route query and hash preserve the same live exact owner and proposal; focus is independent  414ms
+ ✓ src/product/canvas/WorkspaceCanvas.test.tsx (113 tests) 5290ms
+ ✓ src/app/routeTree.test.tsx (43 tests) 6825ms
+   ✓ runtime route registration and deep-link restoration > restores Workspace, Project, and surface identity from a creative deep link and fails unauthorized commands closed  481ms
+   ✓ runtime route registration and deep-link restoration > integrates the disposable sketch on the Workflow route while invoke remains unavailable  382ms
+   ✓ runtime route registration and deep-link restoration > retires Workflow drafts and confirmations when host tenant or effective access changes without granting invocation  344ms
+   ✓ runtime route registration and deep-link restoration > reaches the post-H7 edit route and loads explicit canonical HEAD authority  388ms
+   ✓ runtime route registration and deep-link restoration > renders the Workspace to Projects entry without synthesizing a Project selection  355ms
+   ✓ runtime route registration and deep-link restoration > routes the existing Projects destination to the fail-closed recent-project browser without using Workspace home as its source  321ms
+   ✓ runtime route registration and deep-link restoration > routes Operations renders to the fail-closed source browser and leaves Storage behavior unchanged  350ms
+   ✓ runtime route registration and deep-link restoration > registers the Project Production consumer with exact route scope and no implicit fixture or request  344ms
+
+ Test Files  16 passed (16)
+      Tests  503 passed (503)
+   Start at  10:03:47
+   Duration  10.12s (transform 6.45s, setup 0ms, collect 21.40s, tests 26.37s, environment 4.65s, prepare 2.42s)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/correction-02/focused.tests.json

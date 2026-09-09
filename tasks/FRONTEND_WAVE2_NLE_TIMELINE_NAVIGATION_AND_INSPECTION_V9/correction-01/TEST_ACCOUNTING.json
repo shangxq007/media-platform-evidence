@@ -1,0 +1,1356 @@
+{
+  "controls-red-direct": {
+    "source": "controls-red-direct.log",
+    "format": "native Node TAP",
+    "counts": {
+      "tests": 131,
+      "pass": 127,
+      "fail": 4,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "test_cases": [
+      {
+        "status": "not ok",
+        "number": 1,
+        "name": "governed frontend passes with all authority counts at zero"
+      },
+      {
+        "status": "not ok",
+        "number": 2,
+        "name": "NLE navigation runtime paths are explicitly governed, physically present, and classified"
+      },
+      {
+        "status": "not ok",
+        "number": 3,
+        "name": "governed inventory rejects replacing product/timeline/TimelineNavigation.tsx even when the total is unchanged"
+      },
+      {
+        "status": "ok",
+        "number": 4,
+        "name": "NLE governed path product/timeline/TimelineNavigation.tsx still rejects const route = '/timeline-git/products/p1/revisions/current'"
+      },
+      {
+        "status": "ok",
+        "number": 5,
+        "name": "NLE governed path product/timeline/TimelineNavigation.tsx still rejects alternateClient.get(endpoint)"
+      },
+      {
+        "status": "ok",
+        "number": 6,
+        "name": "NLE governed path product/timeline/TimelineNavigation.tsx still rejects import alternateClient from 'axios'"
+      },
+      {
+        "status": "ok",
+        "number": 7,
+        "name": "NLE governed path product/timeline/TimelineNavigation.tsx still rejects import { versionlessTransport } from '../../api/app/versionless-api'"
+      },
+      {
+        "status": "not ok",
+        "number": 8,
+        "name": "governed inventory rejects replacing product/timeline/navigation.ts even when the total is unchanged"
+      },
+      {
+        "status": "ok",
+        "number": 9,
+        "name": "NLE governed path product/timeline/navigation.ts still rejects const route = '/timeline-git/products/p1/revisions/current'"
+      },
+      {
+        "status": "ok",
+        "number": 10,
+        "name": "NLE governed path product/timeline/navigation.ts still rejects alternateClient.get(endpoint)"
+      },
+      {
+        "status": "ok",
+        "number": 11,
+        "name": "NLE governed path product/timeline/navigation.ts still rejects import alternateClient from 'axios'"
+      },
+      {
+        "status": "ok",
+        "number": 12,
+        "name": "NLE governed path product/timeline/navigation.ts still rejects import { versionlessTransport } from '../../api/app/versionless-api'"
+      },
+      {
+        "status": "ok",
+        "number": 13,
+        "name": "localization guard rejects direct vendor imports and migrated hardcoded chrome"
+      },
+      {
+        "status": "ok",
+        "number": 14,
+        "name": "localization boundary rejects product integration imports, dynamic imports, public re-exports, and JSX copy"
+      },
+      {
+        "status": "ok",
+        "number": 15,
+        "name": "localization boundary permits only main composition to config and bounded integration internals"
+      },
+      {
+        "status": "ok",
+        "number": 16,
+        "name": "localization source manifest is strict and detects a missing required English key"
+      },
+      {
+        "status": "ok",
+        "number": 17,
+        "name": "localization source-key validation is namespace-aware, English-only, comment-safe, and fail-closed"
+      },
+      {
+        "status": "ok",
+        "number": 18,
+        "name": "OLD_IMPORT_COUNT rejects reintroduced legacy usage"
+      },
+      {
+        "status": "ok",
+        "number": 19,
+        "name": "OLD_COMPONENT_USAGE_COUNT rejects reintroduced legacy usage"
+      },
+      {
+        "status": "ok",
+        "number": 20,
+        "name": "OLD_SCHEMA_USAGE_COUNT rejects reintroduced legacy usage"
+      },
+      {
+        "status": "ok",
+        "number": 21,
+        "name": "OLD_ROUTE_COUNT rejects an increase above the preserved compatibility ceiling"
+      },
+      {
+        "status": "ok",
+        "number": 22,
+        "name": "path ledger reconciliation detects unclassified, stale, and duplicate paths"
+      },
+      {
+        "status": "ok",
+        "number": 23,
+        "name": "ignored physical log is not ledger-required"
+      },
+      {
+        "status": "ok",
+        "number": 24,
+        "name": "absent ignored log with a correct ledger does not create a stale row"
+      },
+      {
+        "status": "ok",
+        "number": 25,
+        "name": "nonignored unclassified path still fails reconciliation"
+      },
+      {
+        "status": "ok",
+        "number": 26,
+        "name": "tracked path missing from the ledger still fails reconciliation"
+      },
+      {
+        "status": "ok",
+        "number": 27,
+        "name": "ledger row for a tracked but physically missing path stays stale"
+      },
+      {
+        "status": "ok",
+        "number": 28,
+        "name": "duplicate ledger path still fails reconciliation"
+      },
+      {
+        "status": "ok",
+        "number": 29,
+        "name": "explicitly tracked ignored-name file remains governed"
+      },
+      {
+        "status": "ok",
+        "number": 30,
+        "name": "PRODUCT_CURRENT_REVISION_ID_FRONTEND_USAGE_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 31,
+        "name": "CLIENT_LATEST_HEAD_INFERENCE_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 32,
+        "name": "CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 33,
+        "name": "CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 34,
+        "name": "NEW_FRONTEND_GENERIC_PATCH_USAGE_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 35,
+        "name": "PHYSICAL_STORAGE_URI_AS_ENTITY_ID_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 36,
+        "name": "PROVIDER_KEY_AS_ARTIFACT_ID_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 37,
+        "name": "CLIENT_CANONICAL_MERGE_AUTHORITY_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 38,
+        "name": "H8_INTERNAL_IMPLEMENTATION_FRONTEND_DEPENDENCY_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 39,
+        "name": "UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 40,
+        "name": "post-H7 rules allow authenticated tenant path scope and read-only server compare"
+      },
+      {
+        "status": "ok",
+        "number": 41,
+        "name": "CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects actor shorthand on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 42,
+        "name": "CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects quoted actor key on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 43,
+        "name": "CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects computed actor key on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 44,
+        "name": "CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects actor alias on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 45,
+        "name": "CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects tenant shorthand request body on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 46,
+        "name": "CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects computed tenant override on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 47,
+        "name": "CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects quoted tenant header on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 48,
+        "name": "CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects tenant alias on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 49,
+        "name": "CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects split tenant payload declaration on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 50,
+        "name": "POST_H7_AXIOS_IMPORT_BYPASS_COUNT rejects aliased Axios import on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 51,
+        "name": "POST_H7_VERSIONLESS_TRANSPORT_IMPORT_BYPASS_COUNT rejects aliased versionless transport import on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 52,
+        "name": "UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects raw unstable route on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 53,
+        "name": "UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects composed unstable route on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 54,
+        "name": "UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects alternate transport client call on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 55,
+        "name": "UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects dynamic transport method on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 56,
+        "name": "UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects transport method alias on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 57,
+        "name": "UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects destructured transport alias on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 58,
+        "name": "tenant authority guard allows authenticated ProjectContext projection and gateway path scope"
+      },
+      {
+        "status": "ok",
+        "number": 59,
+        "name": "api/app runtime allowlist rejects an unexpected non-test TypeScript module"
+      },
+      {
+        "status": "ok",
+        "number": 60,
+        "name": "hostile A: an unallowlisted nested api/app .ts runtime fails closed"
+      },
+      {
+        "status": "ok",
+        "number": 61,
+        "name": "hostile B: an unallowlisted nested api/app .tsx runtime fails closed"
+      },
+      {
+        "status": "ok",
+        "number": 62,
+        "name": "hostile C: post-H7 authority rules scan forbidden patterns in nested api/app runtime"
+      },
+      {
+        "status": "ok",
+        "number": 63,
+        "name": "hostile D: nested api/app test modules are excluded from runtime inventory"
+      },
+      {
+        "status": "ok",
+        "number": 64,
+        "name": "hostile E: nested api/app declaration modules are excluded from runtime inventory"
+      },
+      {
+        "status": "ok",
+        "number": 65,
+        "name": "hostile F: an unseen arbitrarily deep api/app directory cannot escape classification"
+      },
+      {
+        "status": "ok",
+        "number": 66,
+        "name": "post-H7 governed path manifest fails closed when one expected runtime path is omitted"
+      },
+      {
+        "status": "ok",
+        "number": 67,
+        "name": "FRONTEND_CONCRETE_FFMPEG_AUTHORITY_COUNT rejects FRONTEND_CONCRETE_FFMPEG_AUTHORITY_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 68,
+        "name": "FRONTEND_PLAN_NAME_FEATURE_AUTHORITY_COUNT rejects FRONTEND_PLAN_NAME_FEATURE_AUTHORITY_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 69,
+        "name": "FRONTEND_LOCAL_CAN_RUN_DECISION_COUNT rejects FRONTEND_LOCAL_CAN_RUN_DECISION_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 70,
+        "name": "FRONTEND_DUPLICATE_CANONICAL_TIMELINE_AUTHORITY_COUNT rejects FRONTEND_DUPLICATE_CANONICAL_TIMELINE_AUTHORITY_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 71,
+        "name": "FRONTEND_CANONICAL_DOMAIN_SHADOW_COUNT rejects FRONTEND_CANONICAL_DOMAIN_SHADOW_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 72,
+        "name": "FRONTEND_PROVIDER_SELECTION_AUTHORITY_COUNT rejects FRONTEND_PROVIDER_SELECTION_AUTHORITY_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 73,
+        "name": "FRONTEND_DIRECT_CANONICAL_MUTATION_BYPASS_COUNT rejects FRONTEND_DIRECT_CANONICAL_MUTATION_BYPASS_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 74,
+        "name": "FRONTEND_PROVIDER_INTERNAL_GRAPH_AUTHORITY_COUNT rejects FRONTEND_PROVIDER_INTERNAL_GRAPH_AUTHORITY_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 75,
+        "name": "FRONTEND_SYNTHETIC_WORKSPACE_SCOPE_COUNT rejects tenant synthetic default and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 76,
+        "name": "FRONTEND_SYNTHETIC_WORKSPACE_SCOPE_COUNT rejects project synthetic default and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 77,
+        "name": "FRONTEND_ACTIVE_UNSCOPED_RENDER_API_COUNT rejects nested unscoped artifact endpoint and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 78,
+        "name": "FRONTEND_ACTIVE_UNSCOPED_RENDER_API_COUNT rejects nested unscoped artifact mutation and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 79,
+        "name": "FRONTEND_STALE_RENDER_STATUS_SHADOW_COUNT rejects stale render status shadow and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 80,
+        "name": "FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects sourceUrl and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 81,
+        "name": "FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects storageUri and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 82,
+        "name": "FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects storageKey and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 83,
+        "name": "FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects objectKey and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 84,
+        "name": "FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects bucket and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 85,
+        "name": "FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects assetUri and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 86,
+        "name": "FRONTEND_DIRECT_STORAGE_URI_USE_COUNT rejects a baseline increase"
+      },
+      {
+        "status": "ok",
+        "number": 87,
+        "name": "FRONTEND_SCATTERED_NATIVE_FETCH_COUNT rejects a baseline increase"
+      },
+      {
+        "status": "ok",
+        "number": 88,
+        "name": "FRONTEND_DUPLICATE_CANONICAL_DTO_AUTHORITY_COUNT rejects a baseline increase"
+      },
+      {
+        "status": "ok",
+        "number": 89,
+        "name": "FRONTEND_UNCLASSIFIED_DOMAIN_MODEL_COUNT rejects a baseline increase"
+      },
+      {
+        "status": "ok",
+        "number": 90,
+        "name": "FRONTEND_COMMERCIAL_AUTHORITY_COUNT rejects a baseline increase"
+      },
+      {
+        "status": "ok",
+        "number": 91,
+        "name": "FRONTEND_RUNTIME_ELIGIBILITY_AUTHORITY_COUNT rejects a baseline increase"
+      },
+      {
+        "status": "ok",
+        "number": 92,
+        "name": "active product rules exclude explicit admin, developer, and operator surfaces"
+      },
+      {
+        "status": "ok",
+        "number": 93,
+        "name": "guard fails closed on an empty scan universe"
+      },
+      {
+        "status": "ok",
+        "number": 94,
+        "name": "selection structural boundary rejects product/another/Untyped.tsx: import { useState as state } from 'react'; const [selectedIds, setSelectedIds] = state([])"
+      },
+      {
+        "status": "ok",
+        "number": 95,
+        "name": "selection structural boundary rejects product/canvas/Other.ts: function relabel(reference) { reference.label = 'Canonical' }"
+      },
+      {
+        "status": "ok",
+        "number": 96,
+        "name": "selection structural boundary rejects product/canvas/Other.ts: const edge = { meaning: 'DEPENDENCY' }"
+      },
+      {
+        "status": "ok",
+        "number": 97,
+        "name": "selection structural boundary rejects product/another/Panel.tsx: import { createInteractionStore as make } from '../../interaction/model'; const privateStore = make({ surfaceId: 'canvas' })"
+      },
+      {
+        "status": "ok",
+        "number": 98,
+        "name": "selection structural boundary rejects interaction/Other.tsx: import { createContext } from 'react'; import type { InteractionStore } from './model'; const another = createContext<InteractionStore | null>(null)"
+      },
+      {
+        "status": "ok",
+        "number": 99,
+        "name": "selection structural boundary rejects product/another/Panel.tsx: import { useState } from 'react'; import type { SelectionState } from '../../interaction/model'; const [privateSelection] = useState<SelectionState>()"
+      },
+      {
+        "status": "ok",
+        "number": 100,
+        "name": "selection structural boundary rejects product/canvas/Model.ts: interface ExtraState { selectedPresentationId: string | null }"
+      },
+      {
+        "status": "ok",
+        "number": 101,
+        "name": "selection structural boundary rejects product/canvas/Model.ts: function rename(state, title) { return { ...state, references: state.references.map(ref => ({ ...ref, label: title })) } }"
+      },
+      {
+        "status": "ok",
+        "number": 102,
+        "name": "selection structural boundary rejects product/canvas/Other.ts: import { apply } from '../../api/app/operation.gateway'"
+      },
+      {
+        "status": "ok",
+        "number": 103,
+        "name": "selection structural boundary rejects interaction/Other.ts: export { ApplyContext } from '../../workflow-module/internal'"
+      },
+      {
+        "status": "ok",
+        "number": 104,
+        "name": "selection structural boundary rejects interaction/Other.ts: const result = { status: 'APPLIED', planDigest: 'fake' }"
+      },
+      {
+        "status": "ok",
+        "number": 105,
+        "name": "selection structural boundary rejects interaction/Other.tsx: const control = <Button>{t('agent.apply')}</Button>"
+      },
+      {
+        "status": "ok",
+        "number": 106,
+        "name": "selection structural boundary rejects product/canvas/Other.ts: const entity = { kind: 'EDGE', id: 'visual' }"
+      },
+      {
+        "status": "ok",
+        "number": 107,
+        "name": "Slice1B structural control rejects DOM collection authority"
+      },
+      {
+        "status": "ok",
+        "number": 108,
+        "name": "Slice1B structural control rejects DOM mount authority"
+      },
+      {
+        "status": "ok",
+        "number": 109,
+        "name": "Slice1B structural control rejects semantic ID sorting"
+      },
+      {
+        "status": "ok",
+        "number": 110,
+        "name": "Slice1B structural control rejects route persistence"
+      },
+      {
+        "status": "ok",
+        "number": 111,
+        "name": "Slice1B structural control rejects storage persistence"
+      },
+      {
+        "status": "ok",
+        "number": 112,
+        "name": "Slice1B structural control rejects route parsing"
+      },
+      {
+        "status": "ok",
+        "number": 113,
+        "name": "Slice1B structural control rejects direct backend"
+      },
+      {
+        "status": "ok",
+        "number": 114,
+        "name": "Slice1B structural control rejects second store"
+      },
+      {
+        "status": "ok",
+        "number": 115,
+        "name": "Slice1B structural control permits model filtering, captured context and viewport/focus measurement"
+      },
+      {
+        "status": "ok",
+        "number": 116,
+        "name": "Slice1C G01 rejects app/routeTree.tsx: const routeState = { selectedRefs: [], primaryRef: null, lifetime: {} }"
+      },
+      {
+        "status": "ok",
+        "number": 117,
+        "name": "Slice1C G01 rejects app/routes/Nested.tsx: import { useSelection as own } from '../../interaction/SelectionContext'; const state = own()"
+      },
+      {
+        "status": "ok",
+        "number": 118,
+        "name": "Slice1C G02 rejects app/routes/Nested.tsx: import { createInteractionStore as make } from '../../interaction/model'; const store = make(scope)"
+      },
+      {
+        "status": "ok",
+        "number": 119,
+        "name": "Slice1C G03 rejects app/routeTree.tsx: const id = new URLSearchParams(location.search).get('selectedPresentationId')"
+      },
+      {
+        "status": "ok",
+        "number": 120,
+        "name": "Slice1C G03 rejects app/routeTree.tsx: navigate({ search: { selectedIds: refs } })"
+      },
+      {
+        "status": "ok",
+        "number": 121,
+        "name": "Slice1C G04 rejects surfaces/Panel.tsx: localStorage.setItem('selection', JSON.stringify(store.getSnapshot()))"
+      },
+      {
+        "status": "ok",
+        "number": 122,
+        "name": "Slice1C G04 rejects surfaces/Panel.tsx: sessionStorage.setItem('selectedRefs', JSON.stringify(selectedRefs))"
+      },
+      {
+        "status": "ok",
+        "number": 123,
+        "name": "Slice1C G04 rejects app/routeTree.tsx: new BroadcastChannel('selection')"
+      },
+      {
+        "status": "ok",
+        "number": 124,
+        "name": "Slice1C G05 rejects app/routeTree.tsx: history.pushState({ selectionSnapshot: store.getSnapshot() }, '', target)"
+      },
+      {
+        "status": "ok",
+        "number": 125,
+        "name": "Slice1C G05 rejects app/routeTree.tsx: const selectedRefs = history.state.selectedRefs"
+      },
+      {
+        "status": "ok",
+        "number": 126,
+        "name": "Slice1C G06 rejects surfaces/Panel.tsx: const next = { ...selectedRef, surfaceId: 'nle' }"
+      },
+      {
+        "status": "ok",
+        "number": 127,
+        "name": "Slice1C G07 rejects components/app-shell/DocumentLifecycleBridge.tsx: interface BridgeState { membership: string[]; revision: number; lifetime: object }"
+      },
+      {
+        "status": "ok",
+        "number": 128,
+        "name": "Slice1C G07 rejects components/app-shell/AppShell.tsx: function LifecycleBridge() { const state = { primaryRef: ref, revision: 4 } }"
+      },
+      {
+        "status": "ok",
+        "number": 129,
+        "name": "Slice1C G08 rejects surfaces/Panel.tsx: useEffect(() => { store.select({ mode: 'clear', refs: [] }) }, [projectId])"
+      },
+      {
+        "status": "ok",
+        "number": 130,
+        "name": "Slice1C G08 rejects components/app-shell/AppShell.tsx: <SelectionProvider key={location.pathname} scope={scope}>{children}</SelectionProvider>"
+      },
+      {
+        "status": "ok",
+        "number": 131,
+        "name": "Slice1C allows navigation identity, ordinary auth storage, comments and Selection-owned retirement"
+      }
+    ]
+  },
+  "architecture-controls": {
+    "source": "architecture-controls.log",
+    "format": "native Node TAP",
+    "counts": {
+      "tests": 131,
+      "pass": 131,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "test_cases": [
+      {
+        "status": "ok",
+        "number": 1,
+        "name": "governed frontend passes with all authority counts at zero"
+      },
+      {
+        "status": "ok",
+        "number": 2,
+        "name": "NLE navigation runtime paths are explicitly governed, physically present, and classified"
+      },
+      {
+        "status": "ok",
+        "number": 3,
+        "name": "governed inventory rejects replacing product/timeline/TimelineNavigation.tsx even when the total is unchanged"
+      },
+      {
+        "status": "ok",
+        "number": 4,
+        "name": "NLE governed path product/timeline/TimelineNavigation.tsx still rejects const route = '/timeline-git/products/p1/revisions/current'"
+      },
+      {
+        "status": "ok",
+        "number": 5,
+        "name": "NLE governed path product/timeline/TimelineNavigation.tsx still rejects alternateClient.get(endpoint)"
+      },
+      {
+        "status": "ok",
+        "number": 6,
+        "name": "NLE governed path product/timeline/TimelineNavigation.tsx still rejects import alternateClient from 'axios'"
+      },
+      {
+        "status": "ok",
+        "number": 7,
+        "name": "NLE governed path product/timeline/TimelineNavigation.tsx still rejects import { versionlessTransport } from '../../api/app/versionless-api'"
+      },
+      {
+        "status": "ok",
+        "number": 8,
+        "name": "governed inventory rejects replacing product/timeline/navigation.ts even when the total is unchanged"
+      },
+      {
+        "status": "ok",
+        "number": 9,
+        "name": "NLE governed path product/timeline/navigation.ts still rejects const route = '/timeline-git/products/p1/revisions/current'"
+      },
+      {
+        "status": "ok",
+        "number": 10,
+        "name": "NLE governed path product/timeline/navigation.ts still rejects alternateClient.get(endpoint)"
+      },
+      {
+        "status": "ok",
+        "number": 11,
+        "name": "NLE governed path product/timeline/navigation.ts still rejects import alternateClient from 'axios'"
+      },
+      {
+        "status": "ok",
+        "number": 12,
+        "name": "NLE governed path product/timeline/navigation.ts still rejects import { versionlessTransport } from '../../api/app/versionless-api'"
+      },
+      {
+        "status": "ok",
+        "number": 13,
+        "name": "localization guard rejects direct vendor imports and migrated hardcoded chrome"
+      },
+      {
+        "status": "ok",
+        "number": 14,
+        "name": "localization boundary rejects product integration imports, dynamic imports, public re-exports, and JSX copy"
+      },
+      {
+        "status": "ok",
+        "number": 15,
+        "name": "localization boundary permits only main composition to config and bounded integration internals"
+      },
+      {
+        "status": "ok",
+        "number": 16,
+        "name": "localization source manifest is strict and detects a missing required English key"
+      },
+      {
+        "status": "ok",
+        "number": 17,
+        "name": "localization source-key validation is namespace-aware, English-only, comment-safe, and fail-closed"
+      },
+      {
+        "status": "ok",
+        "number": 18,
+        "name": "OLD_IMPORT_COUNT rejects reintroduced legacy usage"
+      },
+      {
+        "status": "ok",
+        "number": 19,
+        "name": "OLD_COMPONENT_USAGE_COUNT rejects reintroduced legacy usage"
+      },
+      {
+        "status": "ok",
+        "number": 20,
+        "name": "OLD_SCHEMA_USAGE_COUNT rejects reintroduced legacy usage"
+      },
+      {
+        "status": "ok",
+        "number": 21,
+        "name": "OLD_ROUTE_COUNT rejects an increase above the preserved compatibility ceiling"
+      },
+      {
+        "status": "ok",
+        "number": 22,
+        "name": "path ledger reconciliation detects unclassified, stale, and duplicate paths"
+      },
+      {
+        "status": "ok",
+        "number": 23,
+        "name": "ignored physical log is not ledger-required"
+      },
+      {
+        "status": "ok",
+        "number": 24,
+        "name": "absent ignored log with a correct ledger does not create a stale row"
+      },
+      {
+        "status": "ok",
+        "number": 25,
+        "name": "nonignored unclassified path still fails reconciliation"
+      },
+      {
+        "status": "ok",
+        "number": 26,
+        "name": "tracked path missing from the ledger still fails reconciliation"
+      },
+      {
+        "status": "ok",
+        "number": 27,
+        "name": "ledger row for a tracked but physically missing path stays stale"
+      },
+      {
+        "status": "ok",
+        "number": 28,
+        "name": "duplicate ledger path still fails reconciliation"
+      },
+      {
+        "status": "ok",
+        "number": 29,
+        "name": "explicitly tracked ignored-name file remains governed"
+      },
+      {
+        "status": "ok",
+        "number": 30,
+        "name": "PRODUCT_CURRENT_REVISION_ID_FRONTEND_USAGE_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 31,
+        "name": "CLIENT_LATEST_HEAD_INFERENCE_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 32,
+        "name": "CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 33,
+        "name": "CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 34,
+        "name": "NEW_FRONTEND_GENERIC_PATCH_USAGE_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 35,
+        "name": "PHYSICAL_STORAGE_URI_AS_ENTITY_ID_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 36,
+        "name": "PROVIDER_KEY_AS_ARTIFACT_ID_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 37,
+        "name": "CLIENT_CANONICAL_MERGE_AUTHORITY_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 38,
+        "name": "H8_INTERNAL_IMPLEMENTATION_FRONTEND_DEPENDENCY_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 39,
+        "name": "UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects its post-H7 negative control and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 40,
+        "name": "post-H7 rules allow authenticated tenant path scope and read-only server compare"
+      },
+      {
+        "status": "ok",
+        "number": 41,
+        "name": "CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects actor shorthand on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 42,
+        "name": "CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects quoted actor key on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 43,
+        "name": "CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects computed actor key on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 44,
+        "name": "CLIENT_CANONICAL_ACTOR_AUTHORITY_COUNT rejects actor alias on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 45,
+        "name": "CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects tenant shorthand request body on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 46,
+        "name": "CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects computed tenant override on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 47,
+        "name": "CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects quoted tenant header on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 48,
+        "name": "CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects tenant alias on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 49,
+        "name": "CLIENT_CANONICAL_TENANT_OVERRIDE_COUNT rejects split tenant payload declaration on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 50,
+        "name": "POST_H7_AXIOS_IMPORT_BYPASS_COUNT rejects aliased Axios import on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 51,
+        "name": "POST_H7_VERSIONLESS_TRANSPORT_IMPORT_BYPASS_COUNT rejects aliased versionless transport import on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 52,
+        "name": "UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects raw unstable route on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 53,
+        "name": "UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects composed unstable route on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 54,
+        "name": "UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects alternate transport client call on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 55,
+        "name": "UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects dynamic transport method on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 56,
+        "name": "UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects transport method alias on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 57,
+        "name": "UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT rejects destructured transport alias on a governed runtime bridge"
+      },
+      {
+        "status": "ok",
+        "number": 58,
+        "name": "tenant authority guard allows authenticated ProjectContext projection and gateway path scope"
+      },
+      {
+        "status": "ok",
+        "number": 59,
+        "name": "api/app runtime allowlist rejects an unexpected non-test TypeScript module"
+      },
+      {
+        "status": "ok",
+        "number": 60,
+        "name": "hostile A: an unallowlisted nested api/app .ts runtime fails closed"
+      },
+      {
+        "status": "ok",
+        "number": 61,
+        "name": "hostile B: an unallowlisted nested api/app .tsx runtime fails closed"
+      },
+      {
+        "status": "ok",
+        "number": 62,
+        "name": "hostile C: post-H7 authority rules scan forbidden patterns in nested api/app runtime"
+      },
+      {
+        "status": "ok",
+        "number": 63,
+        "name": "hostile D: nested api/app test modules are excluded from runtime inventory"
+      },
+      {
+        "status": "ok",
+        "number": 64,
+        "name": "hostile E: nested api/app declaration modules are excluded from runtime inventory"
+      },
+      {
+        "status": "ok",
+        "number": 65,
+        "name": "hostile F: an unseen arbitrarily deep api/app directory cannot escape classification"
+      },
+      {
+        "status": "ok",
+        "number": 66,
+        "name": "post-H7 governed path manifest fails closed when one expected runtime path is omitted"
+      },
+      {
+        "status": "ok",
+        "number": 67,
+        "name": "FRONTEND_CONCRETE_FFMPEG_AUTHORITY_COUNT rejects FRONTEND_CONCRETE_FFMPEG_AUTHORITY_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 68,
+        "name": "FRONTEND_PLAN_NAME_FEATURE_AUTHORITY_COUNT rejects FRONTEND_PLAN_NAME_FEATURE_AUTHORITY_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 69,
+        "name": "FRONTEND_LOCAL_CAN_RUN_DECISION_COUNT rejects FRONTEND_LOCAL_CAN_RUN_DECISION_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 70,
+        "name": "FRONTEND_DUPLICATE_CANONICAL_TIMELINE_AUTHORITY_COUNT rejects FRONTEND_DUPLICATE_CANONICAL_TIMELINE_AUTHORITY_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 71,
+        "name": "FRONTEND_CANONICAL_DOMAIN_SHADOW_COUNT rejects FRONTEND_CANONICAL_DOMAIN_SHADOW_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 72,
+        "name": "FRONTEND_PROVIDER_SELECTION_AUTHORITY_COUNT rejects FRONTEND_PROVIDER_SELECTION_AUTHORITY_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 73,
+        "name": "FRONTEND_DIRECT_CANONICAL_MUTATION_BYPASS_COUNT rejects FRONTEND_DIRECT_CANONICAL_MUTATION_BYPASS_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 74,
+        "name": "FRONTEND_PROVIDER_INTERNAL_GRAPH_AUTHORITY_COUNT rejects FRONTEND_PROVIDER_INTERNAL_GRAPH_AUTHORITY_COUNT and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 75,
+        "name": "FRONTEND_SYNTHETIC_WORKSPACE_SCOPE_COUNT rejects tenant synthetic default and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 76,
+        "name": "FRONTEND_SYNTHETIC_WORKSPACE_SCOPE_COUNT rejects project synthetic default and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 77,
+        "name": "FRONTEND_ACTIVE_UNSCOPED_RENDER_API_COUNT rejects nested unscoped artifact endpoint and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 78,
+        "name": "FRONTEND_ACTIVE_UNSCOPED_RENDER_API_COUNT rejects nested unscoped artifact mutation and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 79,
+        "name": "FRONTEND_STALE_RENDER_STATUS_SHADOW_COUNT rejects stale render status shadow and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 80,
+        "name": "FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects sourceUrl and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 81,
+        "name": "FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects storageUri and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 82,
+        "name": "FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects storageKey and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 83,
+        "name": "FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects objectKey and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 84,
+        "name": "FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects bucket and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 85,
+        "name": "FRONTEND_RAW_STORAGE_PRODUCT_FIELD_COUNT rejects assetUri and leaves zero residue"
+      },
+      {
+        "status": "ok",
+        "number": 86,
+        "name": "FRONTEND_DIRECT_STORAGE_URI_USE_COUNT rejects a baseline increase"
+      },
+      {
+        "status": "ok",
+        "number": 87,
+        "name": "FRONTEND_SCATTERED_NATIVE_FETCH_COUNT rejects a baseline increase"
+      },
+      {
+        "status": "ok",
+        "number": 88,
+        "name": "FRONTEND_DUPLICATE_CANONICAL_DTO_AUTHORITY_COUNT rejects a baseline increase"
+      },
+      {
+        "status": "ok",
+        "number": 89,
+        "name": "FRONTEND_UNCLASSIFIED_DOMAIN_MODEL_COUNT rejects a baseline increase"
+      },
+      {
+        "status": "ok",
+        "number": 90,
+        "name": "FRONTEND_COMMERCIAL_AUTHORITY_COUNT rejects a baseline increase"
+      },
+      {
+        "status": "ok",
+        "number": 91,
+        "name": "FRONTEND_RUNTIME_ELIGIBILITY_AUTHORITY_COUNT rejects a baseline increase"
+      },
+      {
+        "status": "ok",
+        "number": 92,
+        "name": "active product rules exclude explicit admin, developer, and operator surfaces"
+      },
+      {
+        "status": "ok",
+        "number": 93,
+        "name": "guard fails closed on an empty scan universe"
+      },
+      {
+        "status": "ok",
+        "number": 94,
+        "name": "selection structural boundary rejects product/another/Untyped.tsx: import { useState as state } from 'react'; const [selectedIds, setSelectedIds] = state([])"
+      },
+      {
+        "status": "ok",
+        "number": 95,
+        "name": "selection structural boundary rejects product/canvas/Other.ts: function relabel(reference) { reference.label = 'Canonical' }"
+      },
+      {
+        "status": "ok",
+        "number": 96,
+        "name": "selection structural boundary rejects product/canvas/Other.ts: const edge = { meaning: 'DEPENDENCY' }"
+      },
+      {
+        "status": "ok",
+        "number": 97,
+        "name": "selection structural boundary rejects product/another/Panel.tsx: import { createInteractionStore as make } from '../../interaction/model'; const privateStore = make({ surfaceId: 'canvas' })"
+      },
+      {
+        "status": "ok",
+        "number": 98,
+        "name": "selection structural boundary rejects interaction/Other.tsx: import { createContext } from 'react'; import type { InteractionStore } from './model'; const another = createContext<InteractionStore | null>(null)"
+      },
+      {
+        "status": "ok",
+        "number": 99,
+        "name": "selection structural boundary rejects product/another/Panel.tsx: import { useState } from 'react'; import type { SelectionState } from '../../interaction/model'; const [privateSelection] = useState<SelectionState>()"
+      },
+      {
+        "status": "ok",
+        "number": 100,
+        "name": "selection structural boundary rejects product/canvas/Model.ts: interface ExtraState { selectedPresentationId: string | null }"
+      },
+      {
+        "status": "ok",
+        "number": 101,
+        "name": "selection structural boundary rejects product/canvas/Model.ts: function rename(state, title) { return { ...state, references: state.references.map(ref => ({ ...ref, label: title })) } }"
+      },
+      {
+        "status": "ok",
+        "number": 102,
+        "name": "selection structural boundary rejects product/canvas/Other.ts: import { apply } from '../../api/app/operation.gateway'"
+      },
+      {
+        "status": "ok",
+        "number": 103,
+        "name": "selection structural boundary rejects interaction/Other.ts: export { ApplyContext } from '../../workflow-module/internal'"
+      },
+      {
+        "status": "ok",
+        "number": 104,
+        "name": "selection structural boundary rejects interaction/Other.ts: const result = { status: 'APPLIED', planDigest: 'fake' }"
+      },
+      {
+        "status": "ok",
+        "number": 105,
+        "name": "selection structural boundary rejects interaction/Other.tsx: const control = <Button>{t('agent.apply')}</Button>"
+      },
+      {
+        "status": "ok",
+        "number": 106,
+        "name": "selection structural boundary rejects product/canvas/Other.ts: const entity = { kind: 'EDGE', id: 'visual' }"
+      },
+      {
+        "status": "ok",
+        "number": 107,
+        "name": "Slice1B structural control rejects DOM collection authority"
+      },
+      {
+        "status": "ok",
+        "number": 108,
+        "name": "Slice1B structural control rejects DOM mount authority"
+      },
+      {
+        "status": "ok",
+        "number": 109,
+        "name": "Slice1B structural control rejects semantic ID sorting"
+      },
+      {
+        "status": "ok",
+        "number": 110,
+        "name": "Slice1B structural control rejects route persistence"
+      },
+      {
+        "status": "ok",
+        "number": 111,
+        "name": "Slice1B structural control rejects storage persistence"
+      },
+      {
+        "status": "ok",
+        "number": 112,
+        "name": "Slice1B structural control rejects route parsing"
+      },
+      {
+        "status": "ok",
+        "number": 113,
+        "name": "Slice1B structural control rejects direct backend"
+      },
+      {
+        "status": "ok",
+        "number": 114,
+        "name": "Slice1B structural control rejects second store"
+      },
+      {
+        "status": "ok",
+        "number": 115,
+        "name": "Slice1B structural control permits model filtering, captured context and viewport/focus measurement"
+      },
+      {
+        "status": "ok",
+        "number": 116,
+        "name": "Slice1C G01 rejects app/routeTree.tsx: const routeState = { selectedRefs: [], primaryRef: null, lifetime: {} }"
+      },
+      {
+        "status": "ok",
+        "number": 117,
+        "name": "Slice1C G01 rejects app/routes/Nested.tsx: import { useSelection as own } from '../../interaction/SelectionContext'; const state = own()"
+      },
+      {
+        "status": "ok",
+        "number": 118,
+        "name": "Slice1C G02 rejects app/routes/Nested.tsx: import { createInteractionStore as make } from '../../interaction/model'; const store = make(scope)"
+      },
+      {
+        "status": "ok",
+        "number": 119,
+        "name": "Slice1C G03 rejects app/routeTree.tsx: const id = new URLSearchParams(location.search).get('selectedPresentationId')"
+      },
+      {
+        "status": "ok",
+        "number": 120,
+        "name": "Slice1C G03 rejects app/routeTree.tsx: navigate({ search: { selectedIds: refs } })"
+      },
+      {
+        "status": "ok",
+        "number": 121,
+        "name": "Slice1C G04 rejects surfaces/Panel.tsx: localStorage.setItem('selection', JSON.stringify(store.getSnapshot()))"
+      },
+      {
+        "status": "ok",
+        "number": 122,
+        "name": "Slice1C G04 rejects surfaces/Panel.tsx: sessionStorage.setItem('selectedRefs', JSON.stringify(selectedRefs))"
+      },
+      {
+        "status": "ok",
+        "number": 123,
+        "name": "Slice1C G04 rejects app/routeTree.tsx: new BroadcastChannel('selection')"
+      },
+      {
+        "status": "ok",
+        "number": 124,
+        "name": "Slice1C G05 rejects app/routeTree.tsx: history.pushState({ selectionSnapshot: store.getSnapshot() }, '', target)"
+      },
+      {
+        "status": "ok",
+        "number": 125,
+        "name": "Slice1C G05 rejects app/routeTree.tsx: const selectedRefs = history.state.selectedRefs"
+      },
+      {
+        "status": "ok",
+        "number": 126,
+        "name": "Slice1C G06 rejects surfaces/Panel.tsx: const next = { ...selectedRef, surfaceId: 'nle' }"
+      },
+      {
+        "status": "ok",
+        "number": 127,
+        "name": "Slice1C G07 rejects components/app-shell/DocumentLifecycleBridge.tsx: interface BridgeState { membership: string[]; revision: number; lifetime: object }"
+      },
+      {
+        "status": "ok",
+        "number": 128,
+        "name": "Slice1C G07 rejects components/app-shell/AppShell.tsx: function LifecycleBridge() { const state = { primaryRef: ref, revision: 4 } }"
+      },
+      {
+        "status": "ok",
+        "number": 129,
+        "name": "Slice1C G08 rejects surfaces/Panel.tsx: useEffect(() => { store.select({ mode: 'clear', refs: [] }) }, [projectId])"
+      },
+      {
+        "status": "ok",
+        "number": 130,
+        "name": "Slice1C G08 rejects components/app-shell/AppShell.tsx: <SelectionProvider key={location.pathname} scope={scope}>{children}</SelectionProvider>"
+      },
+      {
+        "status": "ok",
+        "number": 131,
+        "name": "Slice1C allows navigation identity, ordinary auth storage, comments and Selection-owned retirement"
+      }
+    ]
+  },
+  "focused": {
+    "source": "focused.tests.json",
+    "counts": {
+      "numTotalTests": 209,
+      "numPassedTests": 209,
+      "numFailedTests": 0,
+      "numPendingTests": 0,
+      "numTodoTests": 0
+    },
+    "test_files": 9
+  },
+  "lint": {
+    "source": "lint.report.json",
+    "errors": 0,
+    "warnings": 46
+  }
+}

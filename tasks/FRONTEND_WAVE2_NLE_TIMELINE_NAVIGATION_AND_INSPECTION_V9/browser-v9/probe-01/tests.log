@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/browser-v9/probe.py", line 3, in <module>
+    b=Browser();b.viewport(1440,1000);b.nav('/w/workspace-1/projects/project-1/edit?nleFixture=1');b.wait('!!document.querySelector("[data-navigation-object]")');b.shot('initial');(ROOT/'DOM.json').write_text(json.dumps(b.ev('({text:document.body.innerText,selects:[...document.querySelectorAll("select")].map(e=>({html:e.outerHTML})),buttons:[...document.querySelectorAll("button")].map(e=>({text:e.innerText,label:e.getAttribute("aria-label")}))})'),ensure_ascii=False,indent=2));b.raw('Browser.close',{})
+                                                                                                   ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/browser-v9/browser_helpers.py", line 37, in wait
+    raise AssertionError('precondition timeout: '+expression)
+AssertionError: precondition timeout: !!document.querySelector("[data-navigation-object]")

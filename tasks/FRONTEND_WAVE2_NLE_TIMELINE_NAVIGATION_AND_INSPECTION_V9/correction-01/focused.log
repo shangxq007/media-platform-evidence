@@ -1,0 +1,34 @@
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ✓ src/product/timeline/types.test.ts (11 tests) 7ms
+ ✓ src/product/timeline/editor-state.test.ts (50 tests) 24ms
+ ✓ src/api/app/timeline-query.gateway.test.ts (7 tests) 11ms
+ ✓ src/localization/localization.test.tsx (13 tests) 233ms
+ ✓ src/product/timeline/SemanticDiff.test.tsx (8 tests) 146ms
+ ✓ src/product/timeline/TimelineNavigation.test.tsx (14 tests) 1288ms
+ ✓ src/product/timeline/NleWorkspace.test.tsx (15 tests) 1947ms
+stderr | src/interaction/InteractionShell.test.tsx > Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/p/unsupported expose no old owner
+Warning: A notFoundError was encountered on the route with ID "__root__", but a notFoundComponent option was not configured, nor was a router level defaultNotFoundComponent configured. Consider configuring at least one of these to avoid TanStack Router's overly generic defaultNotFoundComponent (<p>Not Found</p>)
+
+stderr | src/interaction/InteractionShell.test.tsx > Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/canvas expose no old owner
+Warning: A notFoundError was encountered on the route with ID "__root__", but a notFoundComponent option was not configured, nor was a router level defaultNotFoundComponent configured. Consider configuring at least one of these to avoid TanStack Router's overly generic defaultNotFoundComponent (<p>Not Found</p>)
+
+ ✓ src/interaction/InteractionShell.test.tsx (48 tests) 3165ms
+   ✓ Slice1C actual route query and hash preserve the same live exact owner and proposal; focus is independent  412ms
+ ✓ src/app/routeTree.test.tsx (43 tests) 6988ms
+   ✓ runtime route registration and deep-link restoration > restores Workspace, Project, and surface identity from a creative deep link and fails unauthorized commands closed  474ms
+   ✓ runtime route registration and deep-link restoration > integrates the disposable sketch on the Workflow route while invoke remains unavailable  377ms
+   ✓ runtime route registration and deep-link restoration > retires Workflow drafts and confirmations when host tenant or effective access changes without granting invocation  332ms
+   ✓ runtime route registration and deep-link restoration > reaches the post-H7 edit route and loads explicit canonical HEAD authority  387ms
+   ✓ runtime route registration and deep-link restoration > renders the Workspace to Projects entry without synthesizing a Project selection  345ms
+   ✓ runtime route registration and deep-link restoration > routes the existing Projects destination to the fail-closed recent-project browser without using Workspace home as its source  333ms
+   ✓ runtime route registration and deep-link restoration > routes Operations renders to the fail-closed source browser and leaves Storage behavior unchanged  348ms
+   ✓ runtime route registration and deep-link restoration > registers the Project Production consumer with exact route scope and no implicit fixture or request  342ms
+
+ Test Files  9 passed (9)
+      Tests  209 passed (209)
+   Start at  09:52:38
+   Duration  10.08s (transform 4.18s, setup 0ms, collect 11.12s, tests 13.81s, environment 2.57s, prepare 1.28s)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/correction-01/focused.tests.json

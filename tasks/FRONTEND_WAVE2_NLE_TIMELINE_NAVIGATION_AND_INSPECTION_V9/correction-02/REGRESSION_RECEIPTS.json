@@ -1,0 +1,106 @@
+{
+  "primary_red": "red-lifecycle-02.tests.json (production unchanged at execution)",
+  "supplemental_red": "red-final-baseline.tests.json (final regression tests, saved pre-correction runtime mounted read-only; 13 failed + 62 filtered/skipped)",
+  "green": "focused-final.tests.json",
+  "regressions": [
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "IR01-1 shared toolbar rejects retained selection revisions and still dispatches current local actions",
+      "final_status": "passed",
+      "before_implementation_red_status": "failed",
+      "risk": "IR01-1 toolbar ownership"
+    },
+    {
+      "path": "frontend/src/interaction/InteractionShell.test.tsx",
+      "name": "IR01-2 current Canvas mobile properties keep title editing live and require a new opening for a new primary",
+      "final_status": "passed",
+      "before_implementation_red_status": "added regression; supplemental baseline RED",
+      "risk": "IR01-2 inspector opening occurrence"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "IR01-1 rejects actual shared toolbar callbacks after revision replacement in the same store",
+      "final_status": "passed",
+      "before_implementation_red_status": "failed",
+      "risk": "IR01-1 toolbar ownership"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "IR01-1 rejects actual shared toolbar callbacks after source replacement in the same store",
+      "final_status": "passed",
+      "before_implementation_red_status": "failed",
+      "risk": "IR01-1 toolbar ownership"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "IR01-2 discards shared mobile track inspection after clear before selecting a clip",
+      "final_status": "passed",
+      "before_implementation_red_status": "failed",
+      "risk": "IR01-2 inspector opening occurrence"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "IR01-2 discards metadata opening intent after clear instead of reviving it on selection",
+      "final_status": "passed",
+      "before_implementation_red_status": "failed",
+      "risk": "IR01-2 inspector opening occurrence"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "IR01-2 discards metadata opening intent after hide instead of reviving it on selection",
+      "final_status": "passed",
+      "before_implementation_red_status": "failed",
+      "risk": "IR01-2 inspector opening occurrence"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "IR01-2 discards metadata opening intent after primary instead of reviving it on selection",
+      "final_status": "passed",
+      "before_implementation_red_status": "failed",
+      "risk": "IR01-2 inspector opening occurrence"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "IR01-2 retires open shared/mobile and metadata inspectors across revision replacement",
+      "final_status": "passed",
+      "before_implementation_red_status": "failed",
+      "risk": "IR01-2 inspector opening occurrence"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "IR01-2 retires open shared/mobile and metadata inspectors across source replacement",
+      "final_status": "passed",
+      "before_implementation_red_status": "failed",
+      "risk": "IR01-2 inspector opening occurrence"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "IR01-2 isolates retained mobile launch and dismissal callbacks from replacement lifetimes and dialog occurrences",
+      "final_status": "passed",
+      "before_implementation_red_status": "added regression; supplemental baseline RED",
+      "risk": "IR01-2 inspector opening occurrence"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "IR01-2 discards mobile intent through batched clear or hide even when the same target returns",
+      "final_status": "passed",
+      "before_implementation_red_status": "added regression; supplemental baseline RED",
+      "risk": "IR01-2 inspector opening occurrence"
+    },
+    {
+      "path": "frontend/src/product/timeline/TimelineNavigation.test.tsx",
+      "name": "IR01-2 discards metadata intent through batched clear or hide even when the same target returns",
+      "final_status": "passed",
+      "before_implementation_red_status": "added regression; supplemental baseline RED",
+      "risk": "IR01-2 inspector opening occurrence"
+    }
+  ],
+  "retained_coverage": [
+    "NleWorkspace Operation preview/confirm/apply and no extra Operation/media calls",
+    "Selection dispatcher global canonical rejection",
+    "Canvas direct/keyboard/toolbar/Inspector/palette/Agent and title editing",
+    "Workflow inspector/title/placement and local draft lifecycle",
+    "Review revision pairs and route/shell owner lifetime",
+    "exact time/interval boundaries, unconfigured entry, late reads, equal rerender/refresh, focus fallback and viewport preservation"
+  ]
+}

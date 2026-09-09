@@ -1,0 +1,353 @@
+--- a/frontend/src/interaction/InteractionShell.test.tsx
++++ b/frontend/src/interaction/InteractionShell.test.tsx
+@@ -900,3 +900,61 @@
+   fireEvent.click(screen.getByRole('button', { name: 'Apply local presentation' }))
+   expect(screen.getByTestId('workflow-sketch-node').getAttribute('aria-label')).toBe('Repaired')
+ })
++
++
++it('IR01-1 shared toolbar rejects retained selection revisions and still dispatches current local actions', () => {
++  let store!: InteractionStore
++  const handle = vi.fn(() => true)
++  function Probe() {
++    store = useInteractionStore()
++    useSurfaceAdapter({ objects: () => [{ id: 'one', title: 'One', kind: 'NODE' }, { id: 'two', title: 'Two', kind: 'NODE' }], supports: ['reveal'], handle })
++    return <SelectionActionBar />
++  }
++  render(<SelectionProvider scope={{ projectId: 'p', surfaceId: 'canvas' }}><Probe /></SelectionProvider>)
++  act(() => store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: ['one', 'two'], primaryId: 'one' }))
++  fireEvent.click(screen.getByText('More'))
++  const callbacks = screen.getAllByRole('button').filter(button => !(button as HTMLButtonElement).disabled).map(element => {
++    const key = Object.keys(element).find(key => key.startsWith('__reactProps$'))!
++    return (element as unknown as Record<string, { onClick: () => void }>)[key].onClick
++  })
++  const dispatch = vi.spyOn(store, 'dispatch')
++  act(() => {
++    store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: ['one', 'two'], primaryId: 'two' })
++    dispatch.mockClear()
++    callbacks.forEach(invoke => invoke()) // Invoke before React renders the new primary.
++  })
++  expect(dispatch).not.toHaveBeenCalled()
++  expect(handle).not.toHaveBeenCalled()
++  fireEvent.click(screen.getByRole('button', { name: 'Reveal primary node' }))
++  expect(handle).toHaveBeenCalledWith({ category: 'WORKSPACE_PRESENTATION', type: 'reveal', targetId: 'two' })
++  fireEvent.click(screen.getByRole('button', { name: 'Hide inspector' }))
++  expect(store.getSnapshot().inspectorOpen).toBe(false)
++  fireEvent.click(screen.getByRole('button', { name: 'Show inspector' }))
++  expect(store.getSnapshot().inspectorOpen).toBe(true)
++  fireEvent.click(screen.getByRole('button', { name: 'Hide inspector' }))
++  fireEvent.click(screen.getByRole('button', { name: 'Edit local properties' }))
++  expect(store.getSnapshot().inspectorOpen).toBe(true)
++  fireEvent.click(screen.getByRole('button', { name: 'Ask Agent' }))
++  expect(store.getSnapshot().agentOpen).toBe(true)
++  expect(store.dispatch({ category: 'CANONICAL_SEMANTIC', type: 'semantic', commandId: 'apply' }).ok).toBe(false)
++  fireEvent.click(screen.getByRole('button', { name: 'Clear selection' }))
++  expect(store.getSnapshot().selectedObjects).toHaveLength(0)
++})
++
++
++it('IR01-2 current Canvas mobile properties keep title editing live and require a new opening for a new primary', async () => {
++  setup()
++  fireEvent.click(await screen.findByRole('button', { name: 'Local composition note' }))
++  const launcher = screen.getByRole('button', { name: 'Open selection properties' })
++  launcher.focus(); fireEvent.click(launcher)
++  const dialog = screen.getByRole('dialog', { name: 'Selection properties' })
++  fireEvent.change(within(dialog).getByLabelText('Local title'), { target: { value: 'Still editing' } })
++  expect(screen.getByRole('dialog')).toBe(dialog)
++  expect((within(dialog).getByLabelText('Local title') as HTMLInputElement).value).toBe('Still editing')
++  fireEvent.keyDown(dialog, { key: 'Escape' })
++  expect(document.activeElement).toBe(launcher)
++  fireEvent.click(launcher)
++  fireEvent.click(screen.getByRole('button', { name: 'Project reference' }))
++  expect(screen.queryByRole('dialog')).toBeNull()
++  expect(screen.getByRole('complementary', { name: 'Selection inspector' }).textContent).toContain('Project reference')
++})
+--- a/frontend/src/interaction/InteractionShell.tsx
++++ b/frontend/src/interaction/InteractionShell.tsx
+@@ -1,4 +1,4 @@
+-import { useRef, useState } from 'react'
++import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+ import { Button, Input, PropertyRow } from '../components/design-system'
+ import type { PaletteAction } from '../components/design-system'
+ import { InteractionDialog } from './InteractionDialog'
+@@ -14,7 +14,11 @@
+   const selected = selection.primarySelectedObject
+   if (!selected) return null
+   const selectedCount = selection.selectedObjects.length
+-  const dispatch = (action: ProductAction) => store.dispatch(action, 'TOOLBAR')
++  const dispatch = (action: ProductAction) => {
++    const current = store.getSnapshot()
++    if (current.lifetime !== selection.lifetime || current.revision !== selection.revision || current.primarySelectedObject?.id !== selected.id) return
++    store.dispatch(action, 'TOOLBAR')
++  }
+   const title = selected.title || t('common.untitled')
+   return <div className="ff-selection-bar" role="toolbar" aria-label={t('agent.selectionActions')} data-testid="selection-actions">
+     <span className="ff-selection-title">{selectedCount > 1 ? t('agent.selectedPrimary', { count: selectedCount, kind: t(`agent.kind${selected.kind}`), title }) : t('agent.singleSelection', { kind: t(`agent.kind${selected.kind}`), title })}</span>
+@@ -54,13 +58,47 @@
+ export function SelectionInspector() {
+   const store = useInteractionStore(), selection = useSelection()
+   const { t } = useTranslation()
+-  const [mobileOpen, setMobileOpen] = useState(false)
++  const id = selection.primarySelectedObject?.id
++  const [mobileOpen, setMobileOpen] = useState<{ store: typeof store; lifetime: object; id: string } | null>(null)
++  const currentMobile = mobileOpen && mobileOpen.store === store && mobileOpen.lifetime === selection.lifetime && mobileOpen.id === id && selection.inspectorOpen ? mobileOpen : null
++  // Discard the occurrence, including while this component renders no inspector.
++  if (mobileOpen && !currentMobile) setMobileOpen(null)
++  const committedMobile = useRef(currentMobile), hadMobile = useRef(false)
++  useLayoutEffect(() => {
++    committedMobile.current = currentMobile
++    return () => { committedMobile.current = null }
++  }, [currentMobile])
++  useLayoutEffect(() => {
++    if (!currentMobile) return
++    return store.subscribe(() => {
++      const current = store.getSnapshot()
++      // Observe intermediate clear/hide states even when React batches a reselect.
++      if (current.lifetime !== currentMobile.lifetime || current.primarySelectedObject?.id !== currentMobile.id || !current.inspectorOpen) {
++        committedMobile.current = null
++        setMobileOpen(null)
++      }
++    })
++  }, [store, currentMobile])
++  useEffect(() => {
++    if (hadMobile.current && !currentMobile && document.activeElement === document.body) document.getElementById('main-content')?.focus()
++    hadMobile.current = Boolean(currentMobile)
++  }, [currentMobile])
++  const ownsSelection = () => {
++    const current = store.getSnapshot()
++    return current.lifetime === selection.lifetime && current.revision === selection.revision && current.primarySelectedObject?.id === id && current.inspectorOpen
++  }
++  const closeMobile = (hide = false) => {
++    if (!ownsSelection() || !currentMobile || committedMobile.current !== currentMobile) return
++    committedMobile.current = null
++    setMobileOpen(null)
++    if (hide) store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'inspect', open: false }, 'INSPECTOR')
++  }
+   if (!selection.primarySelectedObject || !selection.inspectorOpen) return null
+   if (selection.surfaceId === 'workflow') return <WorkflowSelectionInspector />
+   return <aside id="selection-inspector" className="ff-selection-inspector" aria-label={t('agent.selectionInspector')}>
+     <div className="ff-desktop-inspector"><InspectorProperties /></div>
+-    <Button className="ff-mobile-inspector-launcher" onClick={() => setMobileOpen(true)}>{t('agent.openSelectionProperties')}</Button>
+-    {mobileOpen ? <InteractionDialog title={t('agent.selectionProperties')} onClose={() => setMobileOpen(false)}><InspectorProperties /><Button onClick={() => { setMobileOpen(false); store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'inspect', open: false }, 'INSPECTOR') }}>{t('agent.hideInspector')}</Button></InteractionDialog> : null}
++    <Button className="ff-mobile-inspector-launcher" onClick={() => { if (ownsSelection() && id) setMobileOpen({ store, lifetime: selection.lifetime, id }) }}>{t('agent.openSelectionProperties')}</Button>
++    {currentMobile ? <InteractionDialog title={t('agent.selectionProperties')} onClose={() => closeMobile()}><InspectorProperties /><Button onClick={() => closeMobile(true)}>{t('agent.hideInspector')}</Button></InteractionDialog> : null}
+   </aside>
+ }
+ function WorkflowSelectionInspector() {
+--- a/frontend/src/product/timeline/TimelineNavigation.test.tsx
++++ b/frontend/src/product/timeline/TimelineNavigation.test.tsx
+@@ -2,6 +2,7 @@
+ import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
+ import { describe, expect, it, vi } from 'vitest'
+ import { SelectionProvider, useInteractionStore } from '../../interaction/SelectionContext'
++import { SelectionInspector } from '../../interaction/InteractionShell'
+ import type { InteractionStore } from '../../interaction/model'
+ import { LocalizationProvider } from '../../localization'
+ import { unknownAccess } from '../../foundation/effectiveAccess'
+@@ -29,8 +30,8 @@
+   useLayoutEffect(() => { onStore?.(store) }, [store, onStore])
+   return null
+ }
+-function host(value?: TimelineNavigationSource, options: { target?: NavigationTarget | null; loading?: boolean; owner?: string; zh?: boolean; onStore?: (store: InteractionStore) => void } = {}) {
+-  return <StrictMode><LocalizationProvider initialLocale={options.zh ? 'zh-CN' : 'en'}><SelectionProvider scope={{ surfaceId: 'nle', workspaceId: 'w', projectId: options.owner ?? 'p' }}><Probe onStore={options.onStore} /><TimelineNavigation workspaceId="w" projectId="p" tenantId="tenant" source={value} target={options.target === undefined ? target : options.target} loading={options.loading} /></SelectionProvider></LocalizationProvider></StrictMode>
++function host(value?: TimelineNavigationSource, options: { target?: NavigationTarget | null; loading?: boolean; owner?: string; zh?: boolean; onStore?: (store: InteractionStore) => void; inspector?: boolean } = {}) {
++  return <StrictMode><LocalizationProvider initialLocale={options.zh ? 'zh-CN' : 'en'}><SelectionProvider scope={{ surfaceId: 'nle', workspaceId: 'w', projectId: options.owner ?? 'p' }}><Probe onStore={options.onStore} /><main id="main-content" tabIndex={-1}><TimelineNavigation workspaceId="w" projectId="p" tenantId="tenant" source={value} target={options.target === undefined ? target : options.target} loading={options.loading} /></main>{options.inspector ? <SelectionInspector /> : null}</SelectionProvider></LocalizationProvider></StrictMode>
+ }
+ function button(name: string) { return screen.getByRole('button', { name: new RegExp(name) }) }
+ function inputTime(value: string) {
+@@ -266,3 +267,143 @@
+   await act(async () => view.rerender(host(value, { target: { ...target, timelineId: timelineId('other') } })))
+   act(inspectOldOwner); expect(screen.queryByRole('dialog')).toBeNull()
+ })
++
++function retainedClick(element: HTMLElement): () => void {
++  const key = Object.keys(element).find(key => key.startsWith('__reactProps$'))!
++  return (element as unknown as Record<string, { onClick: () => void }>)[key].onClick
++}
++
++it.each(['revision', 'source'] as const)('IR01-1 rejects actual shared toolbar callbacks after %s replacement in the same store', async change => {
++  let store!: InteractionStore
++  const value = source(), options = { onStore: (next: InteractionStore) => { store = next } }
++  const view = render(host(value, options))
++  await screen.findByText('Opening shot'); fireEvent.click(button('Opening shot'))
++  const originalStore = store, lifetime = store.getSnapshot().lifetime
++  const toolbar = () => within(screen.getByRole('toolbar', { name: 'Selection actions' }))
++  fireEvent.click(toolbar().getByText('More'))
++  const callbacks = ['Clear selection', 'Hide inspector', 'Reveal primary clip', 'Edit local properties', 'Ask Agent'].map(name => ({ name, invoke: retainedClick(toolbar().getByRole('button', { name })), inspectorOpen: !['Edit local properties'].includes(name) }))
++  fireEvent.click(toolbar().getByRole('button', { name: 'Hide inspector' }))
++  callbacks.push({ name: 'Show inspector', invoke: retainedClick(toolbar().getByRole('button', { name: 'Show inspector' })), inspectorOpen: false })
++  view.rerender(host(change === 'source' ? source() : value, { ...options, target: change === 'revision' ? { ...target, revisionId: revisionId('r2') } : target }))
++  await screen.findByText('Opening shot'); fireEvent.click(button('Opening shot'))
++  expect(store).toBe(originalStore)
++  expect(store.getSnapshot().lifetime).not.toBe(lifetime)
++  const dispatch = vi.spyOn(store, 'dispatch')
++  for (const callback of callbacks) {
++    act(() => {
++      store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: ['clip:opening'] })
++      store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'agent', open: false })
++    })
++    act(() => store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'inspect', open: callback.inspectorOpen }))
++    const before = store.getSnapshot(); dispatch.mockClear()
++    act(callback.invoke)
++    expect.soft(dispatch, callback.name).not.toHaveBeenCalled()
++    expect.soft(store.getSnapshot(), callback.name).toBe(before)
++  }
++})
++
++it('IR01-2 discards shared mobile track inspection after clear before selecting a clip', async () => {
++  render(host(source(), { inspector: true }))
++  await screen.findByText('Opening shot'); fireEvent.click(button('Picture'))
++  const launcher = button('Open selection properties'); launcher.focus(); fireEvent.click(launcher)
++  const dialog = screen.getByRole('dialog', { name: 'Selection properties' })
++  fireEvent.click(within(dialog).getByRole('button', { name: 'Clear track selection' }))
++  expect(screen.queryByRole('dialog')).toBeNull()
++  expect(document.activeElement).toBe(screen.getByRole('main'))
++  fireEvent.click(button('Ending shot'))
++  expect(screen.queryByRole('dialog')).toBeNull()
++  const nextLauncher = button('Open selection properties'); nextLauncher.focus(); fireEvent.click(nextLauncher)
++  fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' })
++  expect(document.activeElement).toBe(nextLauncher)
++})
++
++it.each(['clear', 'hide', 'primary'] as const)('IR01-2 discards metadata opening intent after %s instead of reviving it on selection', async change => {
++  let store!: InteractionStore
++  render(host(source(), { onStore: next => { store = next } }))
++  await screen.findByText('Opening shot'); fireEvent.click(button('Opening shot'))
++  fireEvent.click(button('Inspect selected metadata'))
++  if (change === 'clear') act(() => store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: [] }))
++  if (change === 'hide') {
++    fireEvent.click(button('Hide inspector'))
++    expect(screen.queryByRole('dialog')).toBeNull()
++    fireEvent.click(button('Show inspector'))
++  }
++  fireEvent.click(button('Ending shot'))
++  expect(screen.queryByRole('dialog')).toBeNull()
++  fireEvent.click(button('Opening shot'))
++  expect(screen.queryByRole('dialog')).toBeNull()
++  const launcher = button('Inspect selected metadata'); launcher.focus(); fireEvent.click(launcher)
++  expect(screen.getByRole('dialog', { name: 'Timeline object metadata' })).toBeTruthy()
++  fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' })
++  expect(document.activeElement).toBe(launcher)
++})
++
++it.each(['revision', 'source'] as const)('IR01-2 retires open shared/mobile and metadata inspectors across %s replacement', async change => {
++  let store!: InteractionStore
++  let value = source(), currentTarget = target
++  const options = { inspector: true, onStore: (next: InteractionStore) => { store = next } }
++  const view = render(host(value, options))
++  // Exercise each actual modal separately; no background click through an open dialog.
++  for (const kind of ['metadata', 'mobile'] as const) {
++    await screen.findByRole('button', { name: /Opening shot/ }); fireEvent.click(button('Opening shot'))
++    const originalStore = store
++    const launch = () => fireEvent.click(button(kind === 'mobile' ? 'Open selection properties' : 'Inspect selected metadata'))
++    launch(); expect(screen.getAllByRole('dialog')).toHaveLength(1)
++    if (change === 'source') value = source()
++    else currentTarget = { ...target, revisionId: revisionId(`r-${kind}`) }
++    view.rerender(host(value, { ...options, target: currentTarget }))
++    await screen.findByRole('button', { name: /Opening shot/ })
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(store).toBe(originalStore)
++    fireEvent.click(button('Opening shot'))
++    expect(screen.queryByRole('dialog')).toBeNull()
++    launch(); expect(screen.getByRole('dialog')).toBeTruthy()
++    fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' })
++  }
++})
++
++
++it('IR01-2 isolates retained mobile launch and dismissal callbacks from replacement lifetimes and dialog occurrences', async () => {
++  const value = source(), view = render(host(value, { inspector: true }))
++  await screen.findByText('Opening shot'); fireEvent.click(button('Opening shot'))
++  const oldLaunch = retainedClick(button('Open selection properties'))
++  fireEvent.click(button('Open selection properties'))
++  const oldDialog = screen.getByRole('dialog')
++  const oldClose = retainedClick(within(oldDialog).getByRole('button', { name: 'Close Selection properties' }))
++  const oldHide = retainedClick(within(oldDialog).getByRole('button', { name: 'Hide inspector' }))
++  view.rerender(host(source(), { inspector: true }))
++  await screen.findByText('Opening shot'); fireEvent.click(button('Opening shot'))
++  act(oldLaunch); expect(screen.queryByRole('dialog')).toBeNull()
++  fireEvent.click(button('Open selection properties'))
++  const currentDialog = screen.getByRole('dialog')
++  act(() => { oldClose(); oldHide() })
++  expect(screen.getByRole('dialog')).toBe(currentDialog)
++  const closeOccurrence = retainedClick(within(currentDialog).getByRole('button', { name: 'Close Selection properties' }))
++  const hideOccurrence = retainedClick(within(currentDialog).getByRole('button', { name: 'Hide inspector' }))
++  fireEvent.keyDown(currentDialog, { key: 'Escape' })
++  fireEvent.click(button('Open selection properties'))
++  const reopened = screen.getByRole('dialog')
++  act(() => { closeOccurrence(); hideOccurrence() })
++  expect(screen.getByRole('dialog')).toBe(reopened)
++})
++
++it.each(['mobile', 'metadata'] as const)('IR01-2 discards %s intent through batched clear or hide even when the same target returns', async kind => {
++  let store!: InteractionStore
++  render(host(source(), { inspector: true, onStore: next => { store = next } }))
++  await screen.findByText('Opening shot'); fireEvent.click(button('Opening shot'))
++  const launch = () => fireEvent.click(button(kind === 'mobile' ? 'Open selection properties' : 'Inspect selected metadata'))
++  for (const change of ['clear', 'hide'] as const) {
++    launch(); expect(screen.getByRole('dialog')).toBeTruthy()
++    act(() => {
++      if (change === 'clear') {
++        store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: [] })
++        store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: ['clip:opening'] })
++      } else {
++        store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'inspect', open: false })
++        store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'inspect', open: true })
++      }
++    })
++    expect(screen.queryByRole('dialog')).toBeNull()
++    expect(store.getSnapshot().primarySelectedObject?.id).toBe('clip:opening')
++  }
++})
+--- a/frontend/src/product/timeline/TimelineNavigation.tsx
++++ b/frontend/src/product/timeline/TimelineNavigation.tsx
+@@ -43,7 +43,7 @@
+   const [snapshot, setSnapshot] = useState<NavigationSnapshot | null>(null)
+   const [query, setQuery] = useState(''), [position, setPosition] = useState<string | null>(null), [input, setInput] = useState('')
+   const [timeError, setTimeError] = useState(false), [locationResult, setLocationResult] = useState<number | null>(null)
+-  const [detailOpen, setDetailOpen] = useState<object | null>(null)
++  const [detailOpen, setDetailOpen] = useState<{ lifetime: object; id: string } | null>(null)
+   const committedDetail = useRef<object | null>(null)
+   const live = useRef(false), generation = useRef(0), controller = useRef<AbortController | null>(null)
+   const lifetime = useRef(selection.lifetime)
+@@ -111,8 +111,20 @@
+   const selectedClip = snapshot?.tracks.flatMap(track => track.clips).find(clip => selectionId('clip', clip.id) === selectedId)
+   const selected = selectedClip ?? selectedTrack
+   const ownsSelection = () => owns() && currentSnapshot.current === snapshot && store.getSnapshot().revision === selection.revision && store.getSnapshot().primarySelectedObject?.id === selectedId
+-  useLayoutEffect(() => { committedDetail.current = detailOpen; return () => { committedDetail.current = null } }, [detailOpen])
+-  const detail = detailOpen && selection.inspectorOpen && selected && !headLoading && !retired
++  const currentDetail = detailOpen && detailOpen.lifetime === selection.lifetime && detailOpen.id === selectedId && selection.inspectorOpen && selected && !headLoading && !retired ? detailOpen : null
++  if (detailOpen && !currentDetail) setDetailOpen(null)
++  useLayoutEffect(() => { committedDetail.current = currentDetail; return () => { committedDetail.current = null } }, [currentDetail])
++  useLayoutEffect(() => {
++    if (!currentDetail) return
++    return store.subscribe(() => {
++      const current = store.getSnapshot()
++      if (current.lifetime !== currentDetail.lifetime || current.primarySelectedObject?.id !== currentDetail.id || !current.inspectorOpen) {
++        committedDetail.current = null
++        setDetailOpen(null)
++      }
++    })
++  }, [store, currentDetail])
++  const detail = currentDetail && selected
+   const hadDetail = useRef(false)
+   useEffect(() => {
+     if (hadDetail.current && !detail && !selected) region.current?.focus()
+@@ -124,7 +136,7 @@
+   }
+   function inspect() {
+     if (!ownsSelection() || !selected) return
+-    store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'inspect', open: true }); setDetailOpen({})
++    store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'inspect', open: true }); setDetailOpen({ lifetime: selection.lifetime, id: selectedId! })
+   }
+   function locate(value: string) {
+     if (!owns() || !snapshot || currentSnapshot.current !== snapshot || snapshot.timeBasis !== 'exact-seconds') return
+@@ -151,7 +163,7 @@
+     const button = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-navigation-object]')
+     if (!button) return
+     if (event.key === 'Escape') { event.preventDefault(); store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'select', ids: [] }); return }
+-    if (event.key === 'i') { event.preventDefault(); select(button.dataset.navigationObject!); store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'inspect', open: true }); setDetailOpen({}); return }
++    if (event.key === 'i') { event.preventDefault(); select(button.dataset.navigationObject!); store.dispatch({ category: 'LOCAL_EPHEMERAL', type: 'inspect', open: true }); setDetailOpen({ lifetime: lifetime.current, id: button.dataset.navigationObject! }); return }
+     if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return
+     event.preventDefault()
+     const items = Array.from(event.currentTarget.querySelectorAll<HTMLButtonElement>('[data-navigation-object]'))

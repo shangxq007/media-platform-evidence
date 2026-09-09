@@ -1,0 +1,165 @@
+--- a/frontend/src/product/timeline/TimelineNavigation.tsx
++++ b/frontend/src/product/timeline/TimelineNavigation.tsx
+@@ -12,11 +12,12 @@
+ export function TimelineNavigationProvider({ source, children }: { source: TimelineNavigationSource; children: ReactNode }) {
+   return <SourceContext.Provider value={source}>{children}</SourceContext.Provider>
+ }
+-const identities = new WeakMap<object, number>()
++// Explicit collection access keeps local bookkeeping distinct from transport calls.
++const objectIdentityNumbers = new WeakMap<object, number>()
+ let identitySequence = 0
+ function identity(value: object): number {
+-  if (!identities.has(value)) identities.set(value, ++identitySequence)
+-  return identities.get(value)!
++  if (!objectIdentityNumbers.has(value)) objectIdentityNumbers.set(value, ++identitySequence)
++  return objectIdentityNumbers['get'](value)!
+ }
+ interface Props {
+   target: NavigationTarget | null
+@@ -47,7 +48,7 @@
+   const live = useRef(false), generation = useRef(0), controller = useRef<AbortController | null>(null)
+   const lifetime = useRef(selection.lifetime)
+   const region = useRef<HTMLElement>(null), list = useRef<HTMLDivElement>(null)
+-  const buttons = useRef(new Map<string, HTMLButtonElement>())
++  const objectButtons = useRef(new Map<string, HTMLButtonElement>())
+   const savedScroll = useRef(0), restoreSelection = useRef<readonly string[]>([])
+   const currentSnapshot = useRef(snapshot)
+   const owns = () => live.current && lifetime.current === store.getSnapshot().lifetime
+@@ -57,7 +58,7 @@
+   ]) ?? []
+   useSurfaceAdapter({ objects: () => allObjects, supports: ['reveal'], handle: action => {
+     if (!owns() || action.type !== 'reveal') return false
+-    const button = buttons.current.get(action.targetId)
++    const button = objectButtons.current['get'](action.targetId)
+     if (!button) return false
+     button.scrollIntoView?.({ block: 'nearest' }); button.focus(); return true
+   } })
+@@ -143,7 +144,7 @@
+     setQuery(''); select(selectionId('clip', clip.id))
+   }
+   useLayoutEffect(() => {
+-    if (locationResult !== null && selectedId && !query) buttons.current.get(selectedId)?.scrollIntoView?.({ block: 'nearest' })
++    if (locationResult !== null && selectedId && !query) objectButtons.current['get'](selectedId)?.scrollIntoView?.({ block: 'nearest' })
+   }, [locationResult, selectedId, query])
+   function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+     if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.nativeEvent.isComposing || !owns() || currentSnapshot.current !== snapshot) return
+@@ -162,7 +163,7 @@
+     .filter(track => track.clips.length || `${track.name ?? ''} ${track.id} ${track.type ?? ''}`.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase())) ?? []
+   const objectButton = (kind: 'track' | 'clip', object: { id: string; name?: string; type?: string }) => {
+     const id = selectionId(kind, object.id)
+-    return <button type="button" data-navigation-object={id} ref={element => { if (element) buttons.current.set(id, element); else buttons.current.delete(id) }} aria-pressed={selectedId === id} title={object.name || object.id} onClick={() => select(id)}><span>{object.name || object.id}</span><small>{object.type || text('unknownType')}</small></button>
++    return <button type="button" data-navigation-object={id} ref={element => { if (element) objectButtons.current.set(id, element); else objectButtons.current['delete'](id) }} aria-pressed={selectedId === id} title={object.name || object.id} onClick={() => select(id)}><span>{object.name || object.id}</span><small>{object.type || text('unknownType')}</small></button>
+   }
+   const displayStatus = retired ? 'restricted' : headLoading ? 'loading' : status
+   return <section ref={region} tabIndex={-1} className="ff-timeline-navigation" aria-label={text('region')}>
+--- a/frontend/scripts/frontend-architecture-guard.mjs
++++ b/frontend/scripts/frontend-architecture-guard.mjs
+@@ -50,8 +50,10 @@
+   'product/review/ReviewWorkspace.tsx',
+   'product/timeline/NleWorkspace.tsx',
+   'product/timeline/SemanticDiff.tsx',
++  'product/timeline/TimelineNavigation.tsx',
+   'product/timeline/editor-state.ts',
+   'product/timeline/gateways.ts',
++  'product/timeline/navigation.ts',
+   'product/timeline/testing/mocks.ts',
+   'product/timeline/types.ts',
+ ].sort()
+--- a/frontend/scripts/frontend-architecture-guard.test.mjs
++++ b/frontend/scripts/frontend-architecture-guard.test.mjs
+@@ -1,6 +1,6 @@
+ import assert from 'node:assert/strict'
+ import { spawnSync } from 'node:child_process'
+-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
++import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+ import { tmpdir } from 'node:os'
+ import { join, relative } from 'node:path'
+ import test from 'node:test'
+@@ -35,7 +35,7 @@
+   assert.equal(result.cleanForwardCounts.PATH_LEDGER_STALE_PATH_COUNT, 0)
+   assert.equal(result.cleanForwardCounts.PATH_LEDGER_DUPLICATE_PATH_COUNT, 0)
+   assert.equal(result.cleanForwardCounts.POST_H7_GOVERNED_PATH_COUNT, POST_H7_GOVERNED_PATHS.length)
+-  assert.equal(result.cleanForwardCounts.POST_H7_GOVERNED_PATH_EXPECTED_COUNT, 21)
++  assert.equal(result.cleanForwardCounts.POST_H7_GOVERNED_PATH_EXPECTED_COUNT, 23)
+   assert.equal(result.cleanForwardCounts.POST_H7_GOVERNED_PATH_MISSING_COUNT, 0)
+   assert.equal(result.cleanForwardCounts.POST_H7_GOVERNED_PATH_UNEXPECTED_COUNT, 0)
+   assert.equal(result.cleanForwardCounts.API_APP_RUNTIME_PATH_COUNT, API_APP_RUNTIME_ALLOWLIST.length)
+@@ -46,6 +46,78 @@
+   assert.equal(result.cleanForwardCounts.LOCALIZATION_REQUIRED_SOURCE_KEY_MISSING_COUNT, 0)
+   console.log(`FRONTEND_ARCHITECTURE_POSITIVE_CONTROL=PASS files=${result.scannedFileCount}`)
+ })
++
++const navigationRuntimePaths = [
++  'product/timeline/TimelineNavigation.tsx',
++  'product/timeline/navigation.ts',
++]
++
++test('NLE navigation runtime paths are explicitly governed, physically present, and classified', () => {
++  const reconciliation = reconcileFrontendPathLedger()
++  const ledgerRows = readFileSync(join(repositoryRoot, 'docs/architecture/governance/frontend-product-path-classification-v1.tsv'), 'utf8')
++    .trimEnd().split('\n').slice(1).map(line => line.split('\t'))
++  for (const path of navigationRuntimePaths) {
++    assert.equal(POST_H7_GOVERNED_PATHS.filter(entry => entry === path).length, 1, path)
++    assert.equal(existsSync(join(defaultSourceRoot, path)), true, path)
++    const repositoryPath = `frontend/src/${path}`
++    assert.ok(reconciliation.actualPaths.includes(repositoryPath), repositoryPath)
++    const rows = ledgerRows.filter(row => row[0] === repositoryPath)
++    assert.equal(rows.length, 1, repositoryPath)
++    assert.equal(rows[0][1], 'REUSE', repositoryPath)
++    assert.ok(rows[0][2], repositoryPath)
++  }
++})
++
++for (const path of navigationRuntimePaths) {
++  test(`governed inventory rejects replacing ${path} even when the total is unchanged`, () => {
++    const root = mkdtempSync(join(tmpdir(), 'nle-navigation-inventory-'))
++    try {
++      for (const entry of POST_H7_GOVERNED_PATHS) {
++        const file = join(root, entry)
++        mkdirSync(join(file, '..'), { recursive: true })
++        writeFileSync(file, 'export {}')
++      }
++      const initial = scanFrontendArchitecture(root)
++      assert.equal(initial.cleanForwardCounts.POST_H7_GOVERNED_PATH_COUNT, 23)
++      assert.equal(initial.cleanForwardCounts.POST_H7_GOVERNED_PATH_MISSING_COUNT, 0)
++      assert.equal(initial.cleanForwardCounts.POST_H7_GOVERNED_PATH_UNEXPECTED_COUNT, 0)
++      rmSync(join(root, path))
++      const missing = scanFrontendArchitecture(root)
++      assert.equal(missing.cleanForwardCounts.POST_H7_GOVERNED_PATH_MISSING_COUNT, 1)
++      assert.equal(architectureGuardPassed(missing), false)
++      writeFileSync(join(root, 'product/timeline/UnapprovedNavigation.tsx'), 'export {}')
++      const replaced = scanFrontendArchitecture(root)
++      assert.equal(replaced.cleanForwardCounts.POST_H7_GOVERNED_PATH_COUNT, 23)
++      assert.equal(replaced.cleanForwardCounts.POST_H7_GOVERNED_PATH_MISSING_COUNT, 1)
++      assert.equal(replaced.cleanForwardCounts.POST_H7_GOVERNED_PATH_UNEXPECTED_COUNT, 1)
++      assert.equal(architectureGuardPassed(replaced), false)
++    } finally {
++      rmSync(root, { recursive: true, force: true })
++    }
++  })
++
++  for (const [ruleName, source] of [
++    ['UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT', "const route = '/timeline-git/products/p1/revisions/current'"],
++    ['UNSTABLE_ROUTE_DIRECT_COMPONENT_CALL_COUNT', 'alternateClient.get(endpoint)'],
++    ['POST_H7_AXIOS_IMPORT_BYPASS_COUNT', "import alternateClient from 'axios'"],
++    ['POST_H7_VERSIONLESS_TRANSPORT_IMPORT_BYPASS_COUNT', "import { versionlessTransport } from '../../api/app/versionless-api'"],
++  ]) {
++    test(`NLE governed path ${path} still rejects ${source}`, () => {
++      const root = mkdtempSync(join(tmpdir(), 'nle-navigation-authority-'))
++      try {
++        const file = join(root, path)
++        mkdirSync(join(file, '..'), { recursive: true })
++        writeFileSync(file, source)
++        const result = scanFrontendArchitecture(root)
++        assert.ok(result.counts[ruleName] > 0, ruleName)
++        assert.ok(result.violations[ruleName].some(violation => violation.path === path), path)
++        assert.equal(architectureGuardPassed(result), false)
++      } finally {
++        rmSync(root, { recursive: true, force: true })
++      }
++    })
++  }
++}
+ 
+ test('localization guard rejects direct vendor imports and migrated hardcoded chrome', () => {
+   const root = mkdtempSync(join(tmpdir(), 'frontend-localization-boundary-'))
