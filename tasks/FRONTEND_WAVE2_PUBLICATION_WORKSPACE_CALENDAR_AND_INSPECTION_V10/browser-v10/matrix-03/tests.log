@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/tests.py", line 56, in <module>
+    for i,f in enumerate([ordinary,native,locales,calendar,filters,privacy,refresh,session,callbacks,network]):run('V10-'+str(i+1).zfill(2),f)
+                                                                                                               ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/tests.py", line 20, in run
+    try:fn();row['status']='PASS'
+        ~~^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/tests.py", line 52, in callbacks
+    fresh();ev('window.__old=[...document.querySelectorAll(".ff-publication button")].map(e=>({e,p:e[Object.keys(e).find(k=>k.startsWith("__reactProps$"))]})).filter(x=>x.p.onClick)');ev('__V10.mode("loading")');button('Refresh publications');b.wait('__V10.pending.length===1');ev('__V10.scope()');ev('__V10.mode("ready");__V10.replace()');b.wait('document.querySelectorAll(".ff-publication-row").length===12');ev('__old.forEach(x=>x.p.onClick({currentTarget:x.e}));__V10.settle()');ck('retained old callbacks and late read inert','!document.querySelector("[role=dialog]") && document.querySelectorAll(".ff-publication-row").length===12 && document.querySelector(".ff-publication input").value===""');snap('late-nonrevival')
+            ~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/tests.py", line 5, in ev
+    def ev(e):return b.ev(e)
+                     ~~~~^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/chromium_helpers.py", line 55, in ev
+    r=self.raw('Runtime.evaluate',{'expression':expression,'returnByValue':True,'awaitPromise':True})
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/chromium_helpers.py", line 31, in raw
+    if 'error' in r:raise RuntimeError(r)
+                    ^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: {'id': 560, 'error': {'code': -32000, 'message': 'Object reference chain is too long'}}

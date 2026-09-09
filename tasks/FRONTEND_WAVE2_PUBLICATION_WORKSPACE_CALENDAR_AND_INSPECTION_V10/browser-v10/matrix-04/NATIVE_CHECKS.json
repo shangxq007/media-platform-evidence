@@ -1,0 +1,298 @@
+[
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:42.990627+00:00",
+    "name": "ordinary no injected provider",
+    "expression": "!window.__V10 && !document.querySelector(\".ff-publication-row\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:44.169323+00:00",
+    "name": "actual AppShell publication route",
+    "expression": "!!document.querySelector(\"[data-surface=publication]\") && __V10.reads.length===1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:44.175192+00:00",
+    "name": "all publication actions explicit non-submit",
+    "expression": "[...document.querySelectorAll(\".ff-publication button\")].every(e=>e.getAttribute(\"type\")===\"button\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:44.726969+00:00",
+    "name": "native Enter no spurious submission",
+    "expression": "__submits.length===0 && document.querySelectorAll(\".ff-publication-row\").length===1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:44.937695+00:00",
+    "name": "native dialog initial focus",
+    "expression": "document.querySelector(\"[role=dialog]\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:45.098927+00:00",
+    "name": "native Tab contained",
+    "expression": "document.querySelector(\"[role=dialog]\").contains(document.activeElement)",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:45.443453+00:00",
+    "name": "Escape restores launcher",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.matches(\".ff-publication-row button\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:46.129246+00:00",
+    "name": "en1440 viewport bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:46.336445+00:00",
+    "name": "en390 viewport bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:46.569248+00:00",
+    "name": "zh-CN1440 viewport bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:46.775262+00:00",
+    "name": "zh-CN390 viewport bounded",
+    "expression": "document.documentElement.scrollWidth<=innerWidth",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:55.802474+00:00",
+    "name": "DST day seven supplied rows",
+    "expression": "document.querySelectorAll(\".ff-publication-agenda .ff-publication-row\").length===7",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:56.026289+00:00",
+    "name": "NY cross-midnight excludes midnight from March10",
+    "expression": "document.querySelectorAll(\".ff-publication-agenda .ff-publication-row\").length===6",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:56.286155+00:00",
+    "name": "cross midnight assigned prior civil day",
+    "expression": "document.querySelector(\".ff-publication-agenda\").innerText.includes(\"midnight\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:56.297548+00:00",
+    "name": "unscheduled and invalid separate",
+    "expression": "document.querySelector(\"[aria-label=Unscheduled]\").innerText.includes(\"unscheduled\") && document.querySelector(\"[aria-label=\\\"Indeterminate date\\\"]\").innerText.includes(\"invalid\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:56.580031+00:00",
+    "name": "leap29 exists no30",
+    "expression": "!!document.querySelector(\"[aria-label=\\\"2024-02-29\\\"]\") && !document.querySelector(\"[aria-label=\\\"2024-02-30\\\"]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:57.126342+00:00",
+    "name": "year boundary December2023",
+    "expression": "document.querySelector(\".ff-publication-results h2\").textContent===\"2023-12\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:57.398937+00:00",
+    "name": "year rollover January2024",
+    "expression": "document.querySelector(\".ff-publication-results h2\").textContent===\"2024-01\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:57.835464+00:00",
+    "name": "today explicitly current",
+    "expression": "!!document.querySelector(\"[aria-current=date][aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:58.885653+00:00",
+    "name": "stable second account only",
+    "expression": "document.querySelectorAll(\".ff-publication-row\").length===1 && document.querySelector(\".ff-publication-row\").innerText.includes(\"Second story\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:59.139307+00:00",
+    "name": "account retained calendar",
+    "expression": "document.querySelectorAll(\".ff-publication select\")[0].value===\"b\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:54:59.719855+00:00",
+    "name": "unknown raw filter",
+    "expression": "document.querySelectorAll(\".ff-publication-row\").length===1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:55:00.413958+00:00",
+    "name": "tie asc stable",
+    "expression": "[...document.querySelectorAll(\".ff-publication-row button\")].map(e=>e.textContent).join(\",\")===\"tie-a,tie-z\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:55:00.595850+00:00",
+    "name": "tie desc stable",
+    "expression": "[...document.querySelectorAll(\".ff-publication-row button\")].map(e=>e.textContent).join(\",\")===\"tie-a,tie-z\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:55:01.314838+00:00",
+    "name": "restricted full DOM omission",
+    "expression": "!document.documentElement.outerHTML.includes(\"RESTRICTED_COPY_SENTINEL\") && !document.documentElement.outerHTML.includes(\"RESTRICTED_SUMMARY_SENTINEL\") && !document.documentElement.outerHTML.includes(\"SECRET_URL\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:55:01.567003+00:00",
+    "name": "independent attempt/external identities",
+    "expression": "[\"try1\",\"try2\",\"external1\",\"unknown\",\"Delivery rejected\"].every(t=>document.querySelector(\"[role=dialog]\").innerText.includes(t))",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:55:01.575626+00:00",
+    "name": "no URL in detail attributes",
+    "expression": "!document.querySelector(\"[role=dialog]\").outerHTML.includes(\"SECRET_URL\") && !document.querySelector(\"[role=dialog] a\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:55:02.994936+00:00",
+    "name": "close preserves result scroll",
+    "expression": "document.querySelector(\".ff-publication-results\").scrollTop===__returnScroll",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:55:03.262364+00:00",
+    "name": "removed selection no dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !document.querySelector(\".ff-publication-row button[aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:55:04.066472+00:00",
+    "name": "partial not complete claim",
+    "expression": "document.querySelector(\".ff-publication\").innerText.includes(\"partial\") || document.querySelector(\".ff-publication\").innerText.includes(\"Partial\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:55:04.323084+00:00",
+    "name": "same ID does not reopen",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:55:05.154464+00:00",
+    "name": "same SDK renewal preserves dialog",
+    "expression": "!!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:55:05.188103+00:00",
+    "name": "retired old binding cannot reread",
+    "expression": "!document.querySelector(\".ff-publication-row\") && __V10.reads.length===1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:55:05.529676+00:00",
+    "name": "new binding no detail revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:55:06.385828+00:00",
+    "name": "retained old callbacks and late read inert",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.querySelectorAll(\".ff-publication-row\").length===12 && document.querySelector(\".ff-publication input\").value===\"\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:55:06.599536+00:00",
+    "name": "no browser mutation attempt",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "IMPLEMENTATION_TREE": "ea4798924207d4004c92910815a42753e4ab9724",
+    "VALIDATION_TIMESTAMP": "2026-09-09T04:55:06.608601+00:00",
+    "name": "no intercepted mutation or remote permitted",
+    "expression": "true",
+    "passed": true,
+    "value": true
+  }
+]

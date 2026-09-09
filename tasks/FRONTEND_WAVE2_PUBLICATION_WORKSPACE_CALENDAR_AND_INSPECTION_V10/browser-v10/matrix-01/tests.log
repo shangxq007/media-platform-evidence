@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/tests.py", line 56, in <module>
+    for i,f in enumerate([ordinary,native,locales,calendar,filters,privacy,refresh,session,callbacks,network]):run('V10-'+str(i+1).zfill(2),f)
+                                                                                                               ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/tests.py", line 20, in run
+    try:fn();row['status']='PASS'
+        ~~^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/tests.py", line 25, in ordinary
+    b.viewport(1440,1000);b.nav('/w/w/projects/p/publication',4201);b.wait('document.body.innerText.includes("Workspace context unavailable")');ck('ordinary no injected provider','!window.__V10 && !document.querySelector(".ff-publication-row")');snap('ordinary-desktop');b.viewport(390,844);snap('ordinary-narrow')
+                          ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/chromium_helpers.py", line 59, in nav
+    self.raw('Page.navigate',{'url':f'http://127.0.0.1:{port}'+path});time.sleep(.3);self.wait('!!document.querySelector(".ff-app-shell")')
+                                                                                     ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/browser_helpers.py", line 37, in wait
+    raise AssertionError('precondition timeout: '+expression)
+AssertionError: precondition timeout: !!document.querySelector(".ff-app-shell")

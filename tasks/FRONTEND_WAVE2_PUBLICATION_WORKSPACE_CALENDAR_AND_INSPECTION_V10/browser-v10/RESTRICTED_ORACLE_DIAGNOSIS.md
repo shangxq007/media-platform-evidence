@@ -1,0 +1,3 @@
+# Restricted probe oracle correction
+
+restricted-01 has a retained assertion failure: expected output artifact ID despite explicitly revoking its artifact permission. Passive full DOM shows plan/attempt/external IDs retained and artifact output omitted. Snapshot model.ts lines 45–48 intentionally filters both artifact object and plan reference by the same separate grant; this is fail-closed behavior, not a demonstrated product defect. The seven sentinel omission assertion PASSED. Original runner/results remain unchanged. New restricted-corrected.py asserts permitted IDs and explicitly asserts denied artifact reference omission, rather than hiding or removing the failed evidence.

@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/tests.py", line 56, in <module>
+    for i,f in enumerate([ordinary,native,locales,calendar,filters,privacy,refresh,session,callbacks,network]):run('V10-'+str(i+1).zfill(2),f)
+                                                                                                               ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/tests.py", line 20, in run
+    try:fn();row['status']='PASS'
+        ~~^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/tests.py", line 42, in calendar
+    sel(3,'America/New_York');ck('NY cross-midnight excludes midnight from March10','document.querySelectorAll(".ff-publication-agenda .ff-publication-row").length===6');click('[aria-label="2024-03-09"]');ck('cross midnight assigned prior civil day','document.querySelector(".ff-publication-agenda").innerText.includes("midnight")');ck('unscheduled and invalid separate','document.querySelector("[aria-label=Unscheduled]").innerText.includes("unscheduled") && document.querySelector("[aria-label=\"Indeterminate date\"]").innerText.includes("invalid")');button('Previous month');ck('leap29 exists no30','!!document.querySelector("[aria-label=\"2024-02-29\"]") && !document.querySelector("[aria-label=\"2024-02-30\"]")');button('Previous month');button('Previous month');ck('year boundary December2023','document.querySelector(".ff-publication-results h2").textContent==="2023-12"');button('Next month');ck('year rollover January2024','document.querySelector(".ff-publication-results h2").textContent==="2024-01"');snap('calendar-year');button('Today');ck('today explicitly current','!!document.querySelector("[aria-current=date][aria-pressed=true]")');snap('calendar-today')
+                                                                                                                                                                                                                                                                                                                                             ~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/tests.py", line 4, in ck
+    def ck(n,e):b.check(n,e)
+                ~~~~~~~^^^^^
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/browser_helpers.py", line 27, in check
+    v=self.ev(expression);p=v is True
+  File "/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_PUBLICATION_WORKSPACE_CALENDAR_AND_INSPECTION_V10/browser-v10/runner/chromium_helpers.py", line 56, in ev
+    if r.get('exceptionDetails'):raise RuntimeError(r)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: {'result': {'type': 'object', 'subtype': 'error', 'className': 'SyntaxError', 'description': 'SyntaxError: missing ) after argument list', 'objectId': '326071745687601353.5.1'}, 'exceptionDetails': {'exceptionId': 1, 'text': 'Uncaught', 'lineNumber': 0, 'columnNumber': 111, 'scriptId': '55', 'exception': {'type': 'object', 'subtype': 'error', 'className': 'SyntaxError', 'description': 'SyntaxError: missing ) after argument list', 'objectId': '326071745687601353.5.2'}}}

@@ -1,0 +1,51 @@
+
+def contrast():
+ fresh()
+ evidence=[]
+ for theme in ['dark','light']:
+  ev('document.querySelector(".ff-root").setAttribute("data-theme",'+json.dumps(theme)+')')
+  for locale,placeholder in [('en','Search supplied publications'),('zh-CN','搜索已提供的发布内容')]:
+   b.locale(locale)
+   ck(theme+' '+locale+' visible localized placeholder','(()=>{const e=document.querySelector(".ff-publication input");const r=e.getBoundingClientRect();return e.placeholder==='+json.dumps(placeholder)+' && e.value==="" && r.width>0 && r.height>0 && getComputedStyle(e).visibility==="visible"})()')
+   for width in [1440,390]:
+    b.viewport(width,1000 if width==1440 else 844)
+    for i in range(4):
+     selector='.ff-publication select:nth-of-type('+str(i+1)+')'
+     ev('[...document.querySelectorAll(".ff-publication select")].forEach((e,i)=>e.setAttribute("data-native-select",i))')
+     selector='[data-native-select="'+str(i)+'"]'
+     click(selector)
+     # Real native pointer opens select; :open establishes popup state, not synthetic change.
+     ck(f'{theme} {locale} {width} select{i} native opened', 'document.querySelector('+json.dumps(selector)+').matches(":open")')
+     colors=ev('(()=>{const e=document.querySelector('+json.dumps(selector)+');return [e,...e.options].map(x=>({tag:x.tagName,text:x.textContent,foreground:getComputedStyle(x).color,background:getComputedStyle(x).backgroundColor}))})()')
+     import re
+     def lum(c):
+      rgb=[float(x)/255 for x in re.findall(r'[\d.]+',c)[:3]]
+      return sum(v*w for v,w in zip([x/12.92 if x<=.04045 else ((x+.055)/1.055)**2.4 for x in rgb],[.2126,.7152,.0722]))
+     for c in colors:c['contrast']=(max(lum(c['foreground']),lum(c['background']))+.05)/(min(lum(c['foreground']),lum(c['background']))+.05)
+     evidence.append({'theme':theme,'locale':locale,'width':width,'select':i,'colors':colors});(ROOT/'NATIVE_CONTRAST.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2))
+     ck(f'{theme} {locale} {width} select{i} options contrast 4.5',json.dumps(all(c['contrast']>=4.5 for c in colors)))
+     snap(f'dropdown-{theme}-{locale}-{width}-{i}');b.key('\ue00c')
+    ev('document.querySelector(".ff-publication input").scrollIntoView({block:"center"})');snap(f'placeholder-{theme}-{locale}-{width}')
+
+def noSource():
+ b.viewport(1440,1000);b.nav('/w/w/projects/p/publication?publicationFixture=project-only')
+ b.wait('!!document.querySelector(".ff-publication")')
+ ck('isolated Project context reaches actual Publication without provider','document.body.innerText.includes("ISOLATED PROJECT CONTEXT") && !document.body.innerText.includes("Workspace context unavailable") && __V10.reads.length===0 && !document.querySelector(".ff-publication-row")')
+ ck('no provider source-not-connected message','document.querySelector(".ff-publication").innerText.toLowerCase().includes("not connected")')
+ for locale in ['en','zh-CN']:
+  b.locale(locale)
+  for width in [1440,390]:
+   b.viewport(width,1000 if width==1440 else 844);snap(f'no-publication-source-{locale}-{width}')
+
+def longDetail():
+ fresh();ev('(()=>{let e=document.querySelector(".ff-publication");let f=e[Object.keys(e).find(k=>k.startsWith("__reactFiber$"))];while(f){if(f.memoizedProps?.source?.adapter){window.__source=f.memoizedProps.source;break}f=f.return}const read=__source.adapter.read;__source.adapter={origin:"isolated-verification",read:async(r,s)=>{const d=await read(r,s);d.plans[0].summary="Long permitted summary. ".repeat(300);return d}};__V10.replace();return true})()');b.wait('document.querySelectorAll(".ff-publication-row").length===12');button('Opening story')
+ for width in [1440,390]:
+  b.viewport(width,1000 if width==1440 else 844);ck('long detail '+str(width)+' viewport bounded','document.documentElement.scrollWidth<=innerWidth');snap('long-content-detail-'+str(width))
+ b.key('\ue00c')
+
+try:
+ journeys=[('V10-01',ordinary),('V10-02',native),('V10-03',locales),('V10-04',calendar),('V10-05',filters),('V10-06',privacy),('V10-07',refresh),('V10-08',session),('V10-09',callbacks),('V10-S01',bilingualCalendar),('V10-S02',preserve),('V10-S03',dismiss),('V10-S05',restrictedMetadata),('V10-S07',overflowCalendar),('V10-F01',contrast),('V10-F02',noSource),('V10-F03',longDetail),('V10-10',network)]
+ for id,fn in journeys:run(id,fn)
+except Exception:traceback.print_exc();sys.exit(1)
+finally:
+ (ROOT/'BOUNDARY_LOGS.json').write_text(json.dumps(ev('window.__V10 ? ({reads:__V10.reads,sdkLog:__V10.sdkLog,boundaryLog:__V10.boundaryLog}):null'),indent=2))

@@ -1,0 +1,215 @@
+{
+  "reads": [
+    {
+      "request": {
+        "scope": {
+          "principalId": "person",
+          "tenantId": "tenant",
+          "sessionId": "session",
+          "workspaceId": "w",
+          "projectId": "p",
+          "sourceId": "source"
+        },
+        "requestId": "publication-1",
+        "query": {
+          "kind": "project-publication-snapshot",
+          "limit": 200
+        }
+      },
+      "mode": "ready",
+      "aborted": true
+    },
+    {
+      "request": {
+        "scope": {
+          "principalId": "person",
+          "tenantId": "tenant",
+          "sessionId": "session",
+          "workspaceId": "w",
+          "projectId": "p",
+          "sourceId": "source"
+        },
+        "requestId": "publication-2",
+        "query": {
+          "kind": "project-publication-snapshot",
+          "limit": 200
+        }
+      },
+      "mode": "loading",
+      "aborted": true,
+      "settledLate": true
+    },
+    {
+      "request": {
+        "scope": {
+          "principalId": "person",
+          "tenantId": "tenant",
+          "sessionId": "next-1",
+          "workspaceId": "w",
+          "projectId": "p",
+          "sourceId": "source"
+        },
+        "requestId": "publication-1",
+        "query": {
+          "kind": "project-publication-snapshot",
+          "limit": 200
+        }
+      },
+      "mode": "loading",
+      "aborted": true,
+      "settledLate": true
+    },
+    {
+      "request": {
+        "scope": {
+          "principalId": "person",
+          "tenantId": "tenant",
+          "sessionId": "next-1",
+          "workspaceId": "w",
+          "projectId": "p",
+          "sourceId": "source"
+        },
+        "requestId": "publication-1",
+        "query": {
+          "kind": "project-publication-snapshot",
+          "limit": 200
+        }
+      },
+      "mode": "ready",
+      "aborted": false
+    }
+  ],
+  "sdkLog": [
+    {
+      "add": "UserLoaded"
+    },
+    {
+      "add": "UserUnloaded"
+    },
+    {
+      "add": "AccessTokenExpired"
+    },
+    {
+      "add": "UserSignedIn"
+    },
+    {
+      "add": "UserSignedOut"
+    },
+    {
+      "add": "UserSessionChanged"
+    },
+    {
+      "getUser": true,
+      "profile": {
+        "iss": "https://invalid.invalid/",
+        "aud": "EXPLICIT-NON-CREDENTIAL-FIXTURE",
+        "sub": "simulated-A",
+        "sid": "simulated-session-A",
+        "iat": 1,
+        "exp": 1788933305
+      },
+      "deferred": false
+    },
+    {
+      "remove": "UserLoaded"
+    },
+    {
+      "remove": "UserUnloaded"
+    },
+    {
+      "remove": "AccessTokenExpired"
+    },
+    {
+      "remove": "UserSignedIn"
+    },
+    {
+      "remove": "UserSignedOut"
+    },
+    {
+      "remove": "UserSessionChanged"
+    },
+    {
+      "add": "UserLoaded"
+    },
+    {
+      "add": "UserUnloaded"
+    },
+    {
+      "add": "AccessTokenExpired"
+    },
+    {
+      "add": "UserSignedIn"
+    },
+    {
+      "add": "UserSignedOut"
+    },
+    {
+      "add": "UserSessionChanged"
+    },
+    {
+      "getUser": true,
+      "profile": {
+        "iss": "https://invalid.invalid/",
+        "aud": "EXPLICIT-NON-CREDENTIAL-FIXTURE",
+        "sub": "simulated-A",
+        "sid": "simulated-session-A",
+        "iat": 1,
+        "exp": 1788933305
+      },
+      "deferred": false
+    },
+    {
+      "remove": "UserLoaded"
+    },
+    {
+      "remove": "UserUnloaded"
+    },
+    {
+      "remove": "AccessTokenExpired"
+    },
+    {
+      "remove": "UserSignedIn"
+    },
+    {
+      "remove": "UserSignedOut"
+    },
+    {
+      "remove": "UserSessionChanged"
+    },
+    {
+      "add": "UserLoaded"
+    },
+    {
+      "add": "UserUnloaded"
+    },
+    {
+      "add": "AccessTokenExpired"
+    },
+    {
+      "add": "UserSignedIn"
+    },
+    {
+      "add": "UserSignedOut"
+    },
+    {
+      "add": "UserSessionChanged"
+    },
+    {
+      "getUser": true,
+      "profile": {
+        "iss": "https://invalid.invalid/",
+        "aud": "EXPLICIT-NON-CREDENTIAL-FIXTURE",
+        "sub": "simulated-A",
+        "sid": "simulated-session-A",
+        "iat": 1,
+        "exp": 1788933305
+      },
+      "deferred": false
+    }
+  ],
+  "boundaryLog": [
+    {
+      "workspaceId": "w"
+    }
+  ]
+}
