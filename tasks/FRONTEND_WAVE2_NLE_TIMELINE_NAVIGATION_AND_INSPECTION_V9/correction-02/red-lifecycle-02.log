@@ -1,0 +1,1077 @@
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx (22 tests | 8 failed) 1791ms
+   ✓ bounded Timeline navigation > distinguishes unconfigured entry, loading, true empty and partial empty without fake media 138ms
+   ✓ bounded Timeline navigation > discovers multiple tracks, empty tracks and filtered no-match only within the loaded scope 44ms
+   ✓ bounded Timeline navigation > locates exact authored-range boundaries, end and zero without floating point or assumed FPS 208ms
+   ✓ bounded Timeline navigation > disables time actions for unknown basis and preserves logical metadata without inventing a duration 46ms
+   ✓ bounded Timeline navigation > selects by mouse and keyboard, inspects provenance, traps focus and closes back to the launcher 131ms
+   ✓ bounded Timeline navigation > preserves position, selection and scroll through inspector toggle, equal rerender and equal refresh 87ms
+   ✓ bounded Timeline navigation > locates the selected clip across filters without changing overlapping explicit target identity 42ms
+   ✓ bounded Timeline navigation > clears failed refresh metadata, supports retry and distinguishes stale and restricted responses 115ms
+   ✓ bounded Timeline navigation > rejects mismatched receipt scope, revision, duplicates, relationships and invalid time ranges 4ms
+   ✓ bounded Timeline navigation > retains full long names in accessible labels and details and localizes the main flow into Chinese 45ms
+   ✓ bounded Timeline navigation > removes missing selection on refresh and provides a focus fallback when its detail target disappears 47ms
+   ✓ bounded Timeline navigation > aborts late reads on revision and identity/access/adapter/owner changes and rejects retained controls 179ms
+   ✓ bounded Timeline navigation > withdraws metadata and rejects retained callbacks after explicit Selection owner retirement 36ms
+   ✓ rejects actual retained inspector and close callbacks when selection or dialog instance changes 97ms
+   × IR01-1 rejects actual shared toolbar callbacks after revision replacement in the same store 141ms
+     → Clear selection: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "ids": Array [],
+        "type": "select",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+     → Clear selection: expected { surfaceId: 'nle', …(13) } to be { surfaceId: 'nle', …(13) } // Object.is equality
+     → Hide inspector: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": false,
+        "type": "inspect",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+     → Hide inspector: expected { surfaceId: 'nle', …(13) } to be { surfaceId: 'nle', …(13) } // Object.is equality
+     → Reveal primary clip: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "WORKSPACE_PRESENTATION",
+        "targetId": "clip:opening",
+        "type": "reveal",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+     → Edit local properties: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": true,
+        "type": "inspect",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+     → Edit local properties: expected { surfaceId: 'nle', …(13) } to be { surfaceId: 'nle', …(13) } // Object.is equality
+     → Ask Agent: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": true,
+        "type": "agent",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+     → Ask Agent: expected { surfaceId: 'nle', …(13) } to be { surfaceId: 'nle', …(13) } // Object.is equality
+     → Show inspector: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": true,
+        "type": "inspect",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+     → Show inspector: expected { surfaceId: 'nle', …(13) } to be { surfaceId: 'nle', …(13) } // Object.is equality
+   × IR01-1 rejects actual shared toolbar callbacks after source replacement in the same store 133ms
+     → Clear selection: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "ids": Array [],
+        "type": "select",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+     → Clear selection: expected { surfaceId: 'nle', …(13) } to be { surfaceId: 'nle', …(13) } // Object.is equality
+     → Hide inspector: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": false,
+        "type": "inspect",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+     → Hide inspector: expected { surfaceId: 'nle', …(13) } to be { surfaceId: 'nle', …(13) } // Object.is equality
+     → Reveal primary clip: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "WORKSPACE_PRESENTATION",
+        "targetId": "clip:opening",
+        "type": "reveal",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+     → Edit local properties: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": true,
+        "type": "inspect",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+     → Edit local properties: expected { surfaceId: 'nle', …(13) } to be { surfaceId: 'nle', …(13) } // Object.is equality
+     → Ask Agent: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": true,
+        "type": "agent",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+     → Ask Agent: expected { surfaceId: 'nle', …(13) } to be { surfaceId: 'nle', …(13) } // Object.is equality
+     → Show inspector: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": true,
+        "type": "inspect",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+     → Show inspector: expected { surfaceId: 'nle', …(13) } to be { surfaceId: 'nle', …(13) } // Object.is equality
+   × IR01-2 discards shared mobile track inspection after clear before selecting a clip 51ms
+     → expected <section role="dialog" …(4)>…(6)</section> to be null
+   × IR01-2 discards metadata opening intent after clear instead of reviving it on selection 60ms
+     → expected <section role="dialog" …(4)>…(9)</section> to be null
+   × IR01-2 discards metadata opening intent after hide instead of reviving it on selection 47ms
+     → expected <section role="dialog" …(4)>…(9)</section> to be null
+   × IR01-2 discards metadata opening intent after primary instead of reviving it on selection 33ms
+     → expected <section role="dialog" …(4)>…(9)</section> to be null
+   × IR01-2 retires open shared/mobile and metadata inspectors across revision replacement 52ms
+     → expected <section role="dialog" …(4)>…(6)</section> to be null
+   × IR01-2 retires open shared/mobile and metadata inspectors across source replacement 50ms
+     → expected <section role="dialog" …(4)>…(6)</section> to be null
+stderr | src/interaction/InteractionShell.test.tsx > Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/p/unsupported expose no old owner
+Warning: A notFoundError was encountered on the route with ID "__root__", but a notFoundComponent option was not configured, nor was a router level defaultNotFoundComponent configured. Consider configuring at least one of these to avoid TanStack Router's overly generic defaultNotFoundComponent (<p>Not Found</p>)
+
+stderr | src/interaction/InteractionShell.test.tsx > Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/canvas expose no old owner
+Warning: A notFoundError was encountered on the route with ID "__root__", but a notFoundComponent option was not configured, nor was a router level defaultNotFoundComponent configured. Consider configuring at least one of these to avoid TanStack Router's overly generic defaultNotFoundComponent (<p>Not Found</p>)
+
+ ❯ src/interaction/InteractionShell.test.tsx (49 tests | 1 failed) 2891ms
+   ✓ converges direct keyboard, toolbar, inspector, command and Agent reveal on the same selection 260ms
+   ✓ modifies a synthetic rename, applies only local presentation, and updates palette discovery 201ms
+   ✓ offers two explicit synthetic clips whose modifier selection drives shared shell contexts 120ms
+   ✓ keeps Product UI locale independent from generated Agent conversation language 15ms
+   ✓ rejects stale UI proposals and resets context synchronously across project and surface changes 28ms
+   ✓ opens Inspector through the local Agent action, closes the dialog, and restores launcher focus 86ms
+   ✓ keeps technical proposal evidence closed until diagnostics are explicitly opened 60ms
+   ✓ traps Agent focus and restores its launcher after Escape and backdrop dismissal 15ms
+   ✓ keeps Agent header, conversation body, and composer in independent regions 20ms
+   ✓ preserves internal dialog mousedown defaults, text entry and button clicks 14ms
+   ✓ refreshes adapter projections after render, invalidates old proposals, and prunes without a render loop 24ms
+   ✓ localizes shared multi-selection and unavailable commands with stable action IDs 23ms
+   ✓ binds Canvas multi-selection to Inspector, toolbar, Command and Agent and invalidates a primary-only proposal 131ms
+   ✓ increases mounted provider revision across workspace, project and surface scopes with fresh empty lifetimes 10ms
+   ✓ Slice1C pagehide persisted=false retires synchronously and pageshow starts fresh without restoring proposals 13ms
+   ✓ Slice1C pagehide persisted=true retires synchronously and pageshow starts fresh without restoring proposals 14ms
+   ✓ Slice1C actual route query and hash preserve the same live exact owner and proposal; focus is independent  410ms
+   ✓ Slice1C actual route surface change is empty and fresh with no colliding localId carry and atomic observations 88ms
+   ✓ Slice1C actual route project change is empty and fresh with no colliding localId carry and atomic observations 85ms
+   ✓ Slice1C actual route workspace change is empty and fresh with no colliding localId carry and atomic observations 84ms
+   ✓ Slice1C actual Back and Forward recreate owners without historical membership 135ms
+   ✓ Slice1C aborted precommit navigation retains the actual old owner and exact valid proposal 54ms
+   ✓ Slice1C committed unresolved and ERROR targets expose no old selection or adapter and late responses cannot reactivate them 57ms
+   ✓ Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/%20/canvas expose no old owner 49ms
+   ✓ Slice1C malformed or missing route IDs and unsupported surface /w/%20/projects/p/canvas expose no old owner 50ms
+   ✓ Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/p/unsupported expose no old owner 45ms
+   ✓ Slice1C malformed or missing route IDs and unsupported surface /w/w/projects/canvas expose no old owner 47ms
+   ✓ Slice1C BLOCKED unknown project is explicitly provisional and confers no canonical authorization 60ms
+   ✓ Slice1C StrictMode adapter and owner recreation stays usable but never resurrects a retired proposal 7ms
+   ✓ Slice1C actual route commit cancels drag before old DOM retirement without partial geometry commit 83ms
+   ✓ Slice1C actual route commit cancels marquee before old DOM retirement without partial geometry commit 85ms
+   ✓ Slice1C actual route commit cancels pan before old DOM retirement without partial geometry commit 91ms
+   ✓ palette enters search, clamps enabled arrows, owns result Home/End and scrolls focused buttons 12ms
+   ✓ palette preserves editing and modified keys; input Enter is inert and native result click executes once 10ms
+   ✓ palette reconciles filter, no-match, all-unavailable and removed or disabled active results 11ms
+   ✓ palette resolves replacement by stable ID despite label and order changes 14ms
+   ✓ palette blocks simulated IME navigation, activation and Escape (events) 10ms
+   ✓ palette blocks simulated IME navigation, activation and Escape (native) 9ms
+   ✓ palette blocks simulated IME navigation, activation and Escape (legacy) 9ms
+   ✓ palette has localized purpose, one live status and external unavailable descriptions in en 8ms
+   ✓ palette has localized purpose, one live status and external unavailable descriptions in zh-CN 7ms
+   ✓ palette retains dialog Tab boundary trap, Escape and launcher restoration 57ms
+   ✓ palette selection projections reject retained closures and dispatch current primary/query without focus selection changes 22ms
+   ✓ palette suppresses a simulated composing Space release after composition ends 6ms
+   ✓ retained Selection commands reject changed revisions before dispatch, including untargeted actions 9ms
+   ✓ V5 discovers Canvas history in the shared palette, reconciles Inspector and keeps canonical actions disabled 170ms
+   ✓ V5 retained contextual history checks live adapter availability even before a new render 2ms
+   ✓ Workflow Agent preview rejects overlong titles before shared proposal truncation can bypass validation 50ms
+   × IR01-1 shared toolbar rejects retained selection revisions and still dispatches current local actions 19ms
+     → expected "dispatch" to not be called at all, but actually been called 5 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": false,
+        "type": "inspect",
+      },
+      "TOOLBAR",
+    ]
+
+  2nd dispatch call:
+
+    Array [
+      Object {
+        "category": "WORKSPACE_PRESENTATION",
+        "targetId": "one",
+        "type": "reveal",
+      },
+      "TOOLBAR",
+    ]
+
+  3rd dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "ids": Array [],
+        "type": "select",
+      },
+      "TOOLBAR",
+    ]
+
+  4th dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": true,
+        "type": "inspect",
+      },
+      "TOOLBAR",
+    ]
+
+  5th dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": true,
+        "type": "agent",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 5
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 9 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/interaction/InteractionShell.test.tsx > IR01-1 shared toolbar rejects retained selection revisions and still dispatches current local actions
+AssertionError: expected "dispatch" to not be called at all, but actually been called 5 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": false,
+        "type": "inspect",
+      },
+      "TOOLBAR",
+    ]
+
+  2nd dispatch call:
+
+    Array [
+      Object {
+        "category": "WORKSPACE_PRESENTATION",
+        "targetId": "one",
+        "type": "reveal",
+      },
+      "TOOLBAR",
+    ]
+
+  3rd dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "ids": Array [],
+        "type": "select",
+      },
+      "TOOLBAR",
+    ]
+
+  4th dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": true,
+        "type": "inspect",
+      },
+      "TOOLBAR",
+    ]
+
+  5th dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": true,
+        "type": "agent",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 5
+
+ ❯ src/interaction/InteractionShell.test.tsx:926:24
+    924|     callbacks.forEach(invoke => invoke()) // Invoke before React rende…
+    925|   })
+    926|   expect(dispatch).not.toHaveBeenCalled()
+       |                        ^
+    927|   expect(handle).not.toHaveBeenCalled()
+    928|   fireEvent.click(screen.getByRole('button', { name: 'Reveal primary n…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/29]⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after revision replacement in the same store
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after source replacement in the same store
+AssertionError: Clear selection: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "ids": Array [],
+        "type": "select",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:300:46
+    298|     const before = store.getSnapshot(); dispatch.mockClear()
+    299|     act(callback.invoke)
+    300|     expect.soft(dispatch, callback.name).not.toHaveBeenCalled()
+       |                                              ^
+    301|     expect.soft(store.getSnapshot(), callback.name).toBe(before)
+    302|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/29]⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after revision replacement in the same store
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after source replacement in the same store
+AssertionError: Clear selection: expected { surfaceId: 'nle', …(13) } to be { surfaceId: 'nle', …(13) } // Object.is equality
+
+- Expected
++ Received
+
+@@ -1,50 +1,16 @@
+  {
+    "agentOpen": false,
+    "inspectorOpen": true,
+    "lifetime": {},
+-   "primaryRef": {
+-     "kind": "CLIP",
+-     "localId": "clip:opening",
++   "primaryRef": null,
++   "primarySelectedObject": null,
+    "projectId": "p",
+-     "surfaceId": "nle",
+-     "workspaceId": "w",
+-   },
+-   "primarySelectedObject": {
+-     "id": "clip:opening",
+-     "kind": "CLIP",
+-     "logicalRef": undefined,
+-     "reference": undefined,
+-     "synthetic": true,
+-     "title": "Opening shot",
+-     "x": undefined,
+-     "y": undefined,
+-   },
+-   "projectId": "p",
+-   "revision": 9,
++   "revision": 10,
+    "revisionPair": undefined,
+-   "selectedObjects": [
+-     {
+-       "id": "clip:opening",
+-       "kind": "CLIP",
+-       "logicalRef": undefined,
+-       "reference": undefined,
+-       "synthetic": true,
+-       "title": "Opening shot",
+-       "x": undefined,
+-       "y": undefined,
+-     },
+-   ],
+-   "selectedRefs": [
+-     {
+-       "kind": "CLIP",
+-       "localId": "clip:opening",
+-       "projectId": "p",
+-       "surfaceId": "nle",
+-       "workspaceId": "w",
+-     },
+-   ],
++   "selectedObjects": [],
++   "selectedRefs": [],
+    "supported": [
+      "reveal",
+    ],
+    "surfaceId": "nle",
+    "time": undefined,
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:301:53
+    299|     act(callback.invoke)
+    300|     expect.soft(dispatch, callback.name).not.toHaveBeenCalled()
+    301|     expect.soft(store.getSnapshot(), callback.name).toBe(before)
+       |                                                     ^
+    302|   }
+    303| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/29]⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after revision replacement in the same store
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after source replacement in the same store
+AssertionError: Hide inspector: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": false,
+        "type": "inspect",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:300:46
+    298|     const before = store.getSnapshot(); dispatch.mockClear()
+    299|     act(callback.invoke)
+    300|     expect.soft(dispatch, callback.name).not.toHaveBeenCalled()
+       |                                              ^
+    301|     expect.soft(store.getSnapshot(), callback.name).toBe(before)
+    302|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/29]⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after revision replacement in the same store
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after source replacement in the same store
+AssertionError: Hide inspector: expected { surfaceId: 'nle', …(13) } to be { surfaceId: 'nle', …(13) } // Object.is equality
+
+- Expected
++ Received
+
+@@ -1,8 +1,8 @@
+  {
+    "agentOpen": false,
+-   "inspectorOpen": true,
++   "inspectorOpen": false,
+    "lifetime": {},
+    "primaryRef": {
+      "kind": "CLIP",
+      "localId": "clip:opening",
+      "projectId": "p",
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:301:53
+    299|     act(callback.invoke)
+    300|     expect.soft(dispatch, callback.name).not.toHaveBeenCalled()
+    301|     expect.soft(store.getSnapshot(), callback.name).toBe(before)
+       |                                                     ^
+    302|   }
+    303| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/29]⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after revision replacement in the same store
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after source replacement in the same store
+AssertionError: Reveal primary clip: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "WORKSPACE_PRESENTATION",
+        "targetId": "clip:opening",
+        "type": "reveal",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:300:46
+    298|     const before = store.getSnapshot(); dispatch.mockClear()
+    299|     act(callback.invoke)
+    300|     expect.soft(dispatch, callback.name).not.toHaveBeenCalled()
+       |                                              ^
+    301|     expect.soft(store.getSnapshot(), callback.name).toBe(before)
+    302|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/29]⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after revision replacement in the same store
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after source replacement in the same store
+AssertionError: Edit local properties: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": true,
+        "type": "inspect",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:300:46
+    298|     const before = store.getSnapshot(); dispatch.mockClear()
+    299|     act(callback.invoke)
+    300|     expect.soft(dispatch, callback.name).not.toHaveBeenCalled()
+       |                                              ^
+    301|     expect.soft(store.getSnapshot(), callback.name).toBe(before)
+    302|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/29]⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after revision replacement in the same store
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after source replacement in the same store
+AssertionError: Edit local properties: expected { surfaceId: 'nle', …(13) } to be { surfaceId: 'nle', …(13) } // Object.is equality
+
+- Expected
++ Received
+
+@@ -1,8 +1,8 @@
+  {
+    "agentOpen": false,
+-   "inspectorOpen": false,
++   "inspectorOpen": true,
+    "lifetime": {},
+    "primaryRef": {
+      "kind": "CLIP",
+      "localId": "clip:opening",
+      "projectId": "p",
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:301:53
+    299|     act(callback.invoke)
+    300|     expect.soft(dispatch, callback.name).not.toHaveBeenCalled()
+    301|     expect.soft(store.getSnapshot(), callback.name).toBe(before)
+       |                                                     ^
+    302|   }
+    303| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/29]⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after revision replacement in the same store
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after source replacement in the same store
+AssertionError: Ask Agent: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": true,
+        "type": "agent",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:300:46
+    298|     const before = store.getSnapshot(); dispatch.mockClear()
+    299|     act(callback.invoke)
+    300|     expect.soft(dispatch, callback.name).not.toHaveBeenCalled()
+       |                                              ^
+    301|     expect.soft(store.getSnapshot(), callback.name).toBe(before)
+    302|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/29]⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after revision replacement in the same store
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after source replacement in the same store
+AssertionError: Ask Agent: expected { surfaceId: 'nle', …(13) } to be { surfaceId: 'nle', …(13) } // Object.is equality
+
+- Expected
++ Received
+
+@@ -1,7 +1,7 @@
+  {
+-   "agentOpen": false,
++   "agentOpen": true,
+    "inspectorOpen": true,
+    "lifetime": {},
+    "primaryRef": {
+      "kind": "CLIP",
+      "localId": "clip:opening",
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:301:53
+    299|     act(callback.invoke)
+    300|     expect.soft(dispatch, callback.name).not.toHaveBeenCalled()
+    301|     expect.soft(store.getSnapshot(), callback.name).toBe(before)
+       |                                                     ^
+    302|   }
+    303| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/29]⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after revision replacement in the same store
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after source replacement in the same store
+AssertionError: Show inspector: expected "dispatch" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st dispatch call:
+
+    Array [
+      Object {
+        "category": "LOCAL_EPHEMERAL",
+        "open": true,
+        "type": "inspect",
+      },
+      "TOOLBAR",
+    ]
+
+
+Number of calls: 1
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:300:46
+    298|     const before = store.getSnapshot(); dispatch.mockClear()
+    299|     act(callback.invoke)
+    300|     expect.soft(dispatch, callback.name).not.toHaveBeenCalled()
+       |                                              ^
+    301|     expect.soft(store.getSnapshot(), callback.name).toBe(before)
+    302|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/29]⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after revision replacement in the same store
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-1 rejects actual shared toolbar callbacks after source replacement in the same store
+AssertionError: Show inspector: expected { surfaceId: 'nle', …(13) } to be { surfaceId: 'nle', …(13) } // Object.is equality
+
+- Expected
++ Received
+
+@@ -1,8 +1,8 @@
+  {
+    "agentOpen": false,
+-   "inspectorOpen": false,
++   "inspectorOpen": true,
+    "lifetime": {},
+    "primaryRef": {
+      "kind": "CLIP",
+      "localId": "clip:opening",
+      "projectId": "p",
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:301:53
+    299|     act(callback.invoke)
+    300|     expect.soft(dispatch, callback.name).not.toHaveBeenCalled()
+    301|     expect.soft(store.getSnapshot(), callback.name).toBe(before)
+       |                                                     ^
+    302|   }
+    303| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/29]⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-2 discards shared mobile track inspection after clear before selecting a clip
+AssertionError: expected <section role="dialog" …(4)>…(6)</section> to be null
+
+- Expected: 
+null
+
++ Received: 
+<section
+  aria-labelledby="_r_b_"
+  aria-modal="true"
+  class="ff-interaction-dialog "
+  role="dialog"
+  tabindex="-1"
+>
+  <header
+    class="ff-dialog-heading"
+  >
+    <h2
+      id="_r_b_"
+    >
+      Selection properties
+    </h2>
+    <button
+      aria-label="Close Selection properties"
+      type="button"
+    >
+      ×
+    </button>
+  </header>
+  <h3>
+    Presentation selection
+  </h3>
+  <p>
+    Synthetic fixture · no canonical clip geometry.
+  </p>
+  <div
+    class="ff-property-row"
+  >
+    <span>
+      Selected object
+    </span>
+    <div>
+      Ending shot
+    </div>
+  </div>
+  <button
+    class="ff-button ff-button--secondary "
+  >
+    Reveal primary clip
+  </button>
+  <button
+    class="ff-button ff-button--secondary "
+  >
+    Hide inspector
+  </button>
+</section>
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:313:40
+    311|   expect(screen.queryByRole('dialog')).toBeNull()
+    312|   fireEvent.click(button('Ending shot'))
+    313|   expect(screen.queryByRole('dialog')).toBeNull()
+       |                                        ^
+    314|   const nextLauncher = button('Open selection properties'); nextLaunch…
+    315|   fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/29]⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-2 discards metadata opening intent after clear instead of reviving it on selection
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-2 discards metadata opening intent after hide instead of reviving it on selection
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-2 discards metadata opening intent after primary instead of reviving it on selection
+AssertionError: expected <section role="dialog" …(4)>…(9)</section> to be null
+
+- Expected: 
+null
+
++ Received: 
+<section
+  aria-labelledby="_r_d_"
+  aria-modal="true"
+  class="ff-interaction-dialog ff-navigation-detail"
+  role="dialog"
+  tabindex="-1"
+>
+  <header
+    class="ff-dialog-heading"
+  >
+    <h2
+      id="_r_d_"
+    >
+      Timeline object metadata
+    </h2>
+    <button
+      aria-label="Close timeline metadata"
+      type="button"
+    >
+      ×
+    </button>
+  </header>
+  <div
+    class="ff-property-row"
+  >
+    <span>
+      Full name
+    </span>
+    <div>
+      Ending shot
+    </div>
+  </div>
+  <div
+    class="ff-property-row"
+  >
+    <span>
+      Logical ID
+    </span>
+    <div>
+      ending
+    </div>
+  </div>
+  <div
+    class="ff-property-row"
+  >
+    <span>
+      Supplied type
+    </span>
+    <div>
+      image
+    </div>
+  </div>
+  <div
+    class="ff-property-row"
+  >
+    <span>
+      Inspected revision
+    </span>
+    <div>
+      r1
+    </div>
+  </div>
+  <div
+    class="ff-property-row"
+  >
+    <span>
+      Track reference
+    </span>
+    <div>
+      v
+    </div>
+  </div>
+  <div
+    class="ff-property-row"
+  >
+    <span>
+      Timeline range
+    </span>
+    <div>
+      1001/30000
+       → 
+      2
+    </div>
+  </div>
+  <div
+    class="ff-property-row"
+  >
+    <span>
+      Exact duration (seconds)
+    </span>
+    <div>
+      58999/30000
+    </div>
+  </div>
+  <p>
+    Only supplied logical metadata is shown. Source references do not authorize media access.
+  </p>
+</section>
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:331:40
+    329|   }
+    330|   fireEvent.click(button('Ending shot'))
+    331|   expect(screen.queryByRole('dialog')).toBeNull()
+       |                                        ^
+    332|   fireEvent.click(button('Opening shot'))
+    333|   expect(screen.queryByRole('dialog')).toBeNull()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/29]⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-2 retires open shared/mobile and metadata inspectors across revision replacement
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > IR01-2 retires open shared/mobile and metadata inspectors across source replacement
+AssertionError: expected <section role="dialog" …(4)>…(6)</section> to be null
+
+- Expected: 
+null
+
++ Received: 
+<section
+  aria-labelledby="_r_j_"
+  aria-modal="true"
+  class="ff-interaction-dialog "
+  role="dialog"
+  tabindex="-1"
+>
+  <header
+    class="ff-dialog-heading"
+  >
+    <h2
+      id="_r_j_"
+    >
+      Selection properties
+    </h2>
+    <button
+      aria-label="Close Selection properties"
+      type="button"
+    >
+      ×
+    </button>
+  </header>
+  <h3>
+    Presentation selection
+  </h3>
+  <p>
+    Synthetic fixture · no canonical clip geometry.
+  </p>
+  <div
+    class="ff-property-row"
+  >
+    <span>
+      Selected object
+    </span>
+    <div>
+      Opening shot
+    </div>
+  </div>
+  <button
+    class="ff-button ff-button--secondary "
+  >
+    Reveal primary clip
+  </button>
+  <button
+    class="ff-button ff-button--secondary "
+  >
+    Hide inspector
+  </button>
+</section>
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:354:40
+    352|   expect(store).toBe(originalStore)
+    353|   fireEvent.click(button('Opening shot'))
+    354|   expect(screen.queryByRole('dialog')).toBeNull()
+       |                                        ^
+    355|   fireEvent.click(button('Open selection properties'))
+    356|   expect(screen.getByRole('dialog', { name: 'Selection properties' }))…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/29]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  9 failed | 62 passed (71)
+   Start at  09:59:50
+   Duration  6.85s (transform 2.48s, setup 0ms, collect 4.20s, tests 4.68s, environment 545ms, prepare 222ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/correction-02/red-lifecycle-02.tests.json

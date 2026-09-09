@@ -1,0 +1,78 @@
+
+ RUN  v3.2.6 /home/user/Documents/workspace/projects/.worktrees/frontend-wave2-product-ux-v1/frontend
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx (27 tests | 2 failed) 1958ms
+   ✓ bounded Timeline navigation > distinguishes unconfigured entry, loading, true empty and partial empty without fake media 120ms
+   ✓ bounded Timeline navigation > discovers multiple tracks, empty tracks and filtered no-match only within the loaded scope 41ms
+   ✓ bounded Timeline navigation > locates exact authored-range boundaries, end and zero without floating point or assumed FPS 188ms
+   × bounded Timeline navigation > keeps the explicitly selected clip at an inclusive endpoint without submitting the time form 65ms
+     → expected 'clip:opening' to be 'clip:ending' // Object.is equality
+   × bounded Timeline navigation > declares only Locate time as a submit action and retains the form submission path 24ms
+     → expected null to be 'button' // Object.is equality
+   ✓ bounded Timeline navigation > disables time actions for unknown basis and preserves logical metadata without inventing a duration 47ms
+   ✓ bounded Timeline navigation > selects by mouse and keyboard, inspects provenance, traps focus and closes back to the launcher 132ms
+   ✓ bounded Timeline navigation > preserves position, selection and scroll through inspector toggle, equal rerender and equal refresh 91ms
+   ✓ bounded Timeline navigation > locates the selected clip across filters without changing overlapping explicit target identity 38ms
+   ✓ bounded Timeline navigation > clears failed refresh metadata, supports retry and distinguishes stale and restricted responses 107ms
+   ✓ bounded Timeline navigation > rejects mismatched receipt scope, revision, duplicates, relationships and invalid time ranges 3ms
+   ✓ bounded Timeline navigation > retains full long names in accessible labels and details and localizes the main flow into Chinese 29ms
+   ✓ bounded Timeline navigation > removes missing selection on refresh and provides a focus fallback when its detail target disappears 42ms
+   ✓ bounded Timeline navigation > aborts late reads on revision and identity/access/adapter/owner changes and rejects retained controls 186ms
+   ✓ bounded Timeline navigation > withdraws metadata and rejects retained callbacks after explicit Selection owner retirement 41ms
+   ✓ rejects actual retained inspector and close callbacks when selection or dialog instance changes 82ms
+   ✓ IR01-1 rejects actual shared toolbar callbacks after revision replacement in the same store 79ms
+   ✓ IR01-1 rejects actual shared toolbar callbacks after source replacement in the same store 73ms
+   ✓ IR01-2 discards shared mobile track inspection after clear before selecting a clip 56ms
+   ✓ IR01-2 discards metadata opening intent after clear instead of reviving it on selection 77ms
+   ✓ IR01-2 discards metadata opening intent after hide instead of reviving it on selection 77ms
+   ✓ IR01-2 discards metadata opening intent after primary instead of reviving it on selection 46ms
+   ✓ IR01-2 retires open shared/mobile and metadata inspectors across revision replacement 93ms
+   ✓ IR01-2 retires open shared/mobile and metadata inspectors across source replacement 91ms
+   ✓ IR01-2 isolates retained mobile launch and dismissal callbacks from replacement lifetimes and dialog occurrences 59ms
+   ✓ IR01-2 discards mobile intent through batched clear or hide even when the same target returns 34ms
+   ✓ IR01-2 discards metadata intent through batched clear or hide even when the same target returns 35ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > bounded Timeline navigation > keeps the explicitly selected clip at an inclusive endpoint without submitting the time form
+AssertionError: expected 'clip:opening' to be 'clip:ending' // Object.is equality
+
+Expected: "clip:ending"
+Received: "clip:opening"
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:119:59
+    117|     expect(store.getSnapshot().primarySelectedObject?.id).toBe('clip:e…
+    118|     act(() => locateSelected.click())
+    119|     expect(store.getSnapshot().primarySelectedObject?.id).toBe('clip:e…
+       |                                                           ^
+    120|     expect(button('Ending shot').getAttribute('aria-pressed')).toBe('t…
+    121|     expect(screen.getByLabelText('Local navigation position').textCont…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/product/timeline/TimelineNavigation.test.tsx > bounded Timeline navigation > declares only Locate time as a submit action and retains the form submission path
+AssertionError: expected null to be 'button' // Object.is equality
+
+- Expected: 
+"button"
+
++ Received: 
+null
+
+ ❯ src/product/timeline/TimelineNavigation.test.tsx:129:49
+    127|     const locateTime = button('Locate time') as HTMLButtonElement
+    128|     const locateSelected = button('Locate selected clip') as HTMLButto…
+    129|     expect(locateSelected.getAttribute('type')).toBe('button')
+       |                                                 ^
+    130|     expect(locateSelected.type).toBe('button')
+    131|     expect(locateSelected.form).toBe(locateTime.form)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 25 passed (27)
+   Start at  10:55:41
+   Duration  4.06s (transform 790ms, setup 0ms, collect 1.21s, tests 1.96s, environment 256ms, prepare 111ms)
+
+JSON report written to /home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/correction-03/red-01.tests.json

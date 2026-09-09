@@ -1,0 +1,2 @@
+# Non-test diagnostic correction
+Two read-only attempts to inspect baseline tree 0289714b2d4094db210b55681fa4f6a8135f7054 through product Git failed because that external evidence tree is not in the product object database (git show reported path not in tree; git ls-tree reported not a tree object). Reissued read-only commands with GIT_ALTERNATE_OBJECT_DIRECTORIES from RECOVERY.json succeeded. No objects, refs or index entries were written. Backend TSV column arity and preservation of original identity/blocking columns were independently checked after correction.

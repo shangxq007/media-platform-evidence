@@ -1,0 +1,60 @@
+--- a/frontend/src/product/timeline/TimelineNavigation.test.tsx
++++ b/frontend/src/product/timeline/TimelineNavigation.test.tsx
+@@ -96,6 +96,46 @@
+     expect(clipsAtTime(point, '1').map(clip => clip.id)).toEqual(['point'])
+     expect(clipsAtTime(point, '999/1000')).toEqual([])
+     expect(timeDifference('1', '1')).toBe('0/1')
++  })
++  it('keeps the explicitly selected clip at an inclusive endpoint without submitting the time form', async () => {
++    let store!: InteractionStore
++    render(host(source(), { onStore: value => { store = value } }))
++    await screen.findByText('Ending shot')
++    const locateTime = button('Locate time') as HTMLButtonElement
++    const locateSelected = button('Locate selected clip') as HTMLButtonElement
++    const form = locateTime.form!
++    const submits: Array<EventTarget | null> = []
++    form.addEventListener('submit', event => { submits.push(event.submitter) })
++    fireEvent.change(screen.getByLabelText('Filter loaded tracks and clips'), { target: { value: 'Ending' } })
++    fireEvent.change(screen.getByLabelText('Exact time (integer or fraction)'), { target: { value: '1001/30000' } })
++    // Use DOM activation, including the form default action, instead of only a React click.
++    act(() => locateTime.click())
++    expect(submits).toEqual([locateTime])
++    expect(screen.getByText('Loaded clips at this position: 2')).toBeTruthy()
++    expect(store.getSnapshot().primarySelectedObject?.id).toBe('clip:opening')
++    act(() => button('Ending shot').click())
++    expect(store.getSnapshot().primarySelectedObject?.id).toBe('clip:ending')
++    act(() => locateSelected.click())
++    expect(store.getSnapshot().primarySelectedObject?.id).toBe('clip:ending')
++    expect(button('Ending shot').getAttribute('aria-pressed')).toBe('true')
++    expect(screen.getByLabelText('Local navigation position').textContent).toBe('1001/30000')
++    expect(submits).toEqual([locateTime])
++  })
++  it('declares only Locate time as a submit action and retains the form submission path', async () => {
++    render(host(source()))
++    await screen.findByText('Ending shot')
++    const locateTime = button('Locate time') as HTMLButtonElement
++    const locateSelected = button('Locate selected clip') as HTMLButtonElement
++    expect(locateSelected.getAttribute('type')).toBe('button')
++    expect(locateSelected.type).toBe('button')
++    expect(locateSelected.form).toBe(locateTime.form)
++    expect(Array.from(locateTime.form!.querySelectorAll('button')).map(control => control.type)).toEqual(['submit', 'button'])
++    fireEvent.change(screen.getByLabelText('Exact time (integer or fraction)'), { target: { value: '1/2' } })
++    // The DOM emulator does not synthesize implicit submission from an Enter keydown.
++    // Exercise the form submission endpoint used by Enter; native keyboard coverage is external.
++    act(() => locateTime.form!.requestSubmit(locateTime))
++    expect(screen.getByLabelText('Local navigation position').textContent).toBe('1/2')
++    expect(button('Ending shot').getAttribute('aria-pressed')).toBe('true')
+   })
+   it('disables time actions for unknown basis and preserves logical metadata without inventing a duration', async () => {
+     render(host(source(vi.fn(async request => receipt(request, { timeBasis: 'unknown' })))))
+--- a/frontend/src/product/timeline/TimelineNavigation.tsx
++++ b/frontend/src/product/timeline/TimelineNavigation.tsx
+@@ -191,7 +191,7 @@
+       <form className="ff-navigation-locate" onSubmit={event => { event.preventDefault(); locate(input) }}>
+         <label>{text('time')}<Input value={input} disabled={snapshot.timeBasis !== 'exact-seconds'} onChange={event => { if (owns()) setInput(event.target.value) }} aria-invalid={timeError} /></label>
+         <Button type="submit" disabled={snapshot.timeBasis !== 'exact-seconds'}>{text('locate')}</Button>
+-        <Button disabled={snapshot.timeBasis !== 'exact-seconds' || !selectedClip?.timelineRange} onClick={() => locateClip(selectedClip)}>{text('locateClip')}</Button>
++        <Button type="button" disabled={snapshot.timeBasis !== 'exact-seconds' || !selectedClip?.timelineRange} onClick={() => locateClip(selectedClip)}>{text('locateClip')}</Button>
+       </form>
+       <p>{text(snapshot.timeBasis === 'exact-seconds' ? 'seconds' : 'unknownTime')}</p>
+       {snapshot.bounds ? <p>{text('bounds')}: {snapshot.bounds.start} → {snapshot.bounds.end}</p> : <p>{text('unknownBounds')}</p>}

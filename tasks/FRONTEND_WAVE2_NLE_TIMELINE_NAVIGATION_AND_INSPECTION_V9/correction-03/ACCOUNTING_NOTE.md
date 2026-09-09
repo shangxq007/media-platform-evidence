@@ -1,0 +1,1 @@
+The first evidence-accounting command exited 1 because Vitest JSON does not provide numRuntimeErrorTestSuites. No test or gate failed during that command. Accounting was corrected to use the actual report fields and verifies total = passed + failed + pending + todo. No zero-runtime-error count is inferred from an absent field.
