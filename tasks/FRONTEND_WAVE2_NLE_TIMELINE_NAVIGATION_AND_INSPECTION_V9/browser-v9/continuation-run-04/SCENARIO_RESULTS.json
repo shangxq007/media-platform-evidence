@@ -1,0 +1,154 @@
+[
+  {
+    "id": "V9-01",
+    "status": "PASS",
+    "start_assertion": 0,
+    "network_start": 0,
+    "interception_start": 0,
+    "end_assertion": 3,
+    "network_end": 11,
+    "interception_end": 11
+  },
+  {
+    "id": "V9-02",
+    "status": "FAIL",
+    "start_assertion": 3,
+    "network_start": 11,
+    "interception_start": 11,
+    "error": "AssertionError(('V9-02 / locate explicitly selected clip retained', False))",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/browser-v9/continuation_tests_04.py\", line 40, in run\n    try:fn();row['status']='PASS'\n        ~~^^\n  File \"/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/browser-v9/continuation_tests_04.py\", line 53, in discovery\n    click(clip2);check('native click selects second clip before locate',selected('clip:clip-2'));b.ev('window.__submitLog=[];document.querySelector(\".ff-navigation-locate\").addEventListener(\"submit\",e=>__submitLog.push({submitter:e.submitter?.innerText,type:e.submitter?.type}));true');btn('Locate selected clip');(ROOT/'LOCATE_SELECTED_DIAGNOSTIC.json').write_text(json.dumps(b.ev('({selected:__store.getSnapshot().primarySelectedObject?.id,position:document.querySelector(\"output\").textContent,submits:__submitLog,buttons:[...document.querySelectorAll(\".ff-navigation-locate button\")].map(e=>({text:e.innerText,type:e.type,attribute:e.getAttribute(\"type\")}))})'),indent=2));check('locate explicitly selected clip retained',selected('clip:clip-2'));snap('english-exact-locate')\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/browser-v9/continuation_tests_04.py\", line 9, in check\n    def check(name,expr):b.check(current+' / '+name,expr)\n                         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/browser-v9/browser_helpers.py\", line 31, in check\n    assert p,(name,v)\n           ^\nAssertionError: ('V9-02 / locate explicitly selected clip retained', False)\n",
+    "end_assertion": 9,
+    "network_end": 21,
+    "interception_end": 21
+  },
+  {
+    "id": "V9-03",
+    "status": "PASS",
+    "start_assertion": 9,
+    "network_start": 21,
+    "interception_start": 21,
+    "end_assertion": 17,
+    "network_end": 30,
+    "interception_end": 24
+  },
+  {
+    "id": "V9-04",
+    "status": "PASS",
+    "start_assertion": 17,
+    "network_start": 30,
+    "interception_start": 24,
+    "end_assertion": 21,
+    "network_end": 39,
+    "interception_end": 27
+  },
+  {
+    "id": "V9-05",
+    "status": "PASS",
+    "start_assertion": 21,
+    "network_start": 39,
+    "interception_start": 27,
+    "end_assertion": 27,
+    "network_end": 48,
+    "interception_end": 30
+  },
+  {
+    "id": "V9-06",
+    "status": "PASS",
+    "start_assertion": 27,
+    "network_start": 48,
+    "interception_start": 30,
+    "end_assertion": 32,
+    "network_end": 57,
+    "interception_end": 33
+  },
+  {
+    "id": "V9-07",
+    "status": "PASS",
+    "start_assertion": 32,
+    "network_start": 57,
+    "interception_start": 33,
+    "end_assertion": 35,
+    "network_end": 79,
+    "interception_end": 43
+  },
+  {
+    "id": "V9-08",
+    "status": "PASS",
+    "start_assertion": 35,
+    "network_start": 79,
+    "interception_start": 43,
+    "end_assertion": 36,
+    "network_end": 88,
+    "interception_end": 46
+  },
+  {
+    "id": "V9-09",
+    "status": "PASS",
+    "start_assertion": 36,
+    "network_start": 88,
+    "interception_start": 46,
+    "end_assertion": 39,
+    "network_end": 106,
+    "interception_end": 52
+  },
+  {
+    "id": "V9-10",
+    "status": "PASS",
+    "start_assertion": 39,
+    "network_start": 106,
+    "interception_start": 52,
+    "end_assertion": 40,
+    "network_end": 117,
+    "interception_end": 57
+  },
+  {
+    "id": "IR01-1",
+    "status": "PASS",
+    "start_assertion": 40,
+    "network_start": 117,
+    "interception_start": 57,
+    "end_assertion": 66,
+    "network_end": 146,
+    "interception_end": 68
+  },
+  {
+    "id": "IR01-2A",
+    "status": "PASS",
+    "start_assertion": 66,
+    "network_start": 146,
+    "interception_start": 68,
+    "end_assertion": 72,
+    "network_end": 155,
+    "interception_end": 71
+  },
+  {
+    "id": "IR01-2B",
+    "status": "PASS",
+    "start_assertion": 72,
+    "network_start": 155,
+    "interception_start": 71,
+    "end_assertion": 76,
+    "network_end": 164,
+    "interception_end": 74
+  },
+  {
+    "id": "IR01-2C",
+    "status": "PASS",
+    "start_assertion": 76,
+    "network_start": 164,
+    "interception_start": 74,
+    "end_assertion": 84,
+    "network_end": 204,
+    "interception_end": 90
+  },
+  {
+    "id": "V9-11",
+    "status": "PASS",
+    "start_assertion": 84,
+    "network_start": 204,
+    "interception_start": 90,
+    "end_assertion": 85,
+    "network_end": 204,
+    "interception_end": 90
+  }
+]

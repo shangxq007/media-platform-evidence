@@ -1,0 +1,12 @@
+I’ll read the correction and applicable repository instructions, then make the minimal change and run the native-browser checks, preserving the existing evidence and creating no commits.
+The form has two buttons: “Locate time” is the intended submit action; “Locate selected clip” is missing `type="button"`. I’ll preserve the inclusive time boundaries and test the browser’s form-submission behavior. The brief assigns the final browser rerun to the parent, so I’ll use its preserved browser RED evidence and run local regression checks.
+The new regression reproduces the defect using DOM `.click()` with its default form action: “Locate selected clip” changes selection from the second clip back to the first. All 25 existing tests pass; the two new tests fail as expected. I’ll now add `type="button"` and rerun the checks.
+The fix passes all 178 focused Timeline and interaction tests. Typecheck, lint on both changed files, and the architecture guard also pass. The regression confirms that “Locate selected clip” retains the second clip without submitting, while “Locate time” still submits. I’m finishing the handoff and preservation checks; native browser GREEN remains pending the parent’s rerun.
+Fixed “Locate selected clip” with explicit `type="button"`, preserving Locate time submission and inclusive time semantics.
+
+- Reproduced behavioral RED; all 178 focused tests now pass.
+- Typecheck, lint and architecture guard pass.
+- Prior evidence preserved; no commits.
+- Final native-browser rerun remains with the parent.
+
+[Correction handoff](/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/writer/CORRECTION_03_HANDOFF.md)

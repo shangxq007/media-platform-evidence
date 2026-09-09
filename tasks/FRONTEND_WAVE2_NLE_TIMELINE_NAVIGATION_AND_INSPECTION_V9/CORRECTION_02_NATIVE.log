@@ -1,0 +1,16 @@
+I’ll read the correction brief and repository instructions, reproduce the lifecycle failures, then implement and verify the fix. I’ll preserve existing evidence and make no commits.
+The source matches both findings: toolbar handlers dispatch through the reused store without checking their original lifetime, and both inspectors retain open intent after selection disappears. I’ll test retained React handlers and clear→reselect sequences before changing the implementation.
+The reproductions are running with the product and dependencies mounted read-only. They cover every shared toolbar action across revision and source replacement, plus inspector reopening after clear, hide, target change, and navigation retirement. I’ve also saved the starting source and evidence hashes to check preservation.
+Both defects now have behavioral RED results: 9 failures with the implementation still unchanged. The retained toolbar callbacks dispatched into the new lifetime, and cleared or retired inspectors reopened on selection. The first run had two test-label errors; that log is preserved, and the corrected run fails on behavior in all nine cases.
+
+I’ll bind toolbar actions to their captured selection lifetime and revision, and discard inspector open intent when its owner or target becomes invalid.
+The initial correction passes all 71 focused tests, including the nine RED reproductions. I’m checking focus fallback, clear/reselect updates batched into one render, stale mobile-dialog dismissals, and continued title editing in the shared Canvas inspector. Then I’ll run the affected regressions and static checks for the handoff.
+The affected regressions passed: 503 tests, typecheck, architecture checks, and 131 architecture controls. I’ve tightened the replacement test to exercise each inspector separately. I’ll verify that final test version, check evidence preservation, and write the handoff. Browser verification remains with the parent task.
+Final verification passed: 503/503 tests, 131/131 architecture controls, typecheck, architecture guard, and lint with 0 errors and 46 existing warnings. Preservation checks found exactly four changed source/test paths, unchanged HEAD/index/stash, and all 8,205 inventoried prior evidence files intact. I’m recording the results and stabilized inspector behavior in the handoff.
+Implemented both lifecycle corrections with real RED reproductions.
+
+- 503 tests and 131 architecture controls pass.
+- Typecheck and lint pass; 46 existing warnings.
+- Prior work and evidence preserved. No commits or browser runs.
+
+[Correction handoff](/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/writer/CORRECTION_02_HANDOFF.md) includes exact changes, regression receipts, and preservation checks.

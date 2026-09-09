@@ -1,0 +1,18 @@
+I’ll read the V9 brief, repository instructions, and source contracts, then run behavioral RED tests before implementing. I’ll keep all changes uncommitted and leave the Git index untouched.
+The current NLE shows simulated playback and synthetic tracks, while TimelineQueryGateway supplies HEAD, revision history, details, and comparisons—but no track or clip content. I’ll replace the ordinary simulation with truthful navigation states and use an explicitly injected local projection to verify discovery and inspection. The existing preview/confirm/apply flow will remain in place.
+The behavioral RED run failed as expected: ordinary entry still exposes Play and synthetic lanes, and it has no distinct “track and clip projection unavailable” state. Native logs and JSON are saved. I’m now adding the bounded projection consumer, exact-time navigation, and selection-backed metadata dialog.
+The ordinary simulation is removed. The new consumer uses exact rational times without float conversion, exposes no playback controls, and validates request scope and target identity before displaying injected metadata. I’m adding coverage for loaded tracks, time boundaries, focus restoration, refresh continuity, and stale reads across context changes.
+The first regression run passed the operation-flow tests and found two older queries that became ambiguous because the revision ID now appears in both history and navigation. I scoped those assertions to the authority panel. I also added a test for retained callbacks so an old inspector action cannot open or close details for a newer selection.
+The authored Timeline range type includes both endpoints; half-open intervals belong to render execution windows. I’ll align navigation with the authored range rule: a shared boundary can match two clips, and the UI will report both matches.
+The focused tests now cover the existing NLE entry with queried HEAD and explicit revision changes; navigation causes no additional Operation or media-source calls. I’m finishing the lifecycle regression and updating the existing governance records and handoff. No real track/clip backend adapter is claimed.
+The latest focused run passed all 209 tests, including localization, the NLE route lifecycle, and the retained operation flow. Typecheck and lint also passed. I’m checking the final diff and Git preservation, then writing the fixture interface and test evidence into the handoff. Parent browser validation remains pending.
+HEAD, the index checksum, and stash state still match recovery, and no unrelated preserved files have drifted. Final review caught one state-label edge case: an injected source without an authoritative target should show unavailable, rather than restricted. That correction and its regression test are running through the handoff checks.
+The handoff checks passed: 209/209 tests, typecheck, and lint with 0 errors and 46 existing warnings. I’m saving the final handoff with exact changed paths, retained RED and iteration logs, coverage mapping, fixture interfaces, and unchanged Git-state evidence. Editing stops after that delivery.
+Completed bounded V9 implementation and [writer handoff](/home/user/Documents/workspace/audit-runs/FRONTEND_WAVE2_NLE_TIMELINE_NAVIGATION_AND_INSPECTION_V9/writer/WRITER_HANDOFF.md).
+
+- 209/209 focused tests passed.
+- Typecheck passed; lint: 0 errors, 46 existing warnings.
+- HEAD, index checksum, and stash unchanged. No commits or index writes.
+- RED logs, coverage mapping, and stable fixture interfaces preserved.
+
+Parent browser/final gates remain pending; real backend geometry integration remains unavailable.

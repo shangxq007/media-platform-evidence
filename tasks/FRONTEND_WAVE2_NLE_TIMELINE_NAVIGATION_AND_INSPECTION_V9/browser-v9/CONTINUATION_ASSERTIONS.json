@@ -1,0 +1,2792 @@
+[
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:20.867824+00:00",
+    "name": "V9-01 / ordinary final browser shell",
+    "expression": "!!document.querySelector(\".ff-app-shell\")",
+    "passed": false,
+    "value": false
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:22.458048+00:00",
+    "name": "V9-02 / bounded four actual source objects",
+    "expression": "document.querySelectorAll(\"[data-navigation-object]\").length===4 && document.body.innerText.includes(\"Partial loaded scope\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:22.903110+00:00",
+    "name": "V9-02 / filter within loaded clips",
+    "expression": "document.querySelectorAll(\"[data-navigation-object]\").length===2 && !document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:23.546493+00:00",
+    "name": "V9-02 / exact rational position",
+    "expression": "document.querySelector(\"output\").textContent===\"1001/30000\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:23.550764+00:00",
+    "name": "V9-02 / inclusive shared boundary first clip selected",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\" && document.body.innerText.includes(\"Matching loaded clips: 2\")",
+    "passed": false,
+    "value": false
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:24.775845+00:00",
+    "name": "V9-03 / native down selects and focuses clip",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\" && document.activeElement.dataset.navigationObject===\"clip:clip-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:24.948212+00:00",
+    "name": "V9-03 / native I metadata focus",
+    "expression": "!!document.querySelector(\".ff-navigation-detail\") && !!document.activeElement.closest(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:25.110687+00:00",
+    "name": "V9-03 / native Tab trapped",
+    "expression": "!!document.activeElement.closest(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:25.431300+00:00",
+    "name": "V9-03 / native Shift Tab trapped",
+    "expression": "!!document.activeElement.closest(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:25.812966+00:00",
+    "name": "V9-03 / Escape returns object focus",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.dataset.navigationObject===\"clip:clip-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:25.980737+00:00",
+    "name": "V9-03 / continue next clip",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-2\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:26.149886+00:00",
+    "name": "V9-03 / Escape clears local selection",
+    "expression": "!document.querySelector(\"[data-navigation-object][aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:26.927406+00:00",
+    "name": "V9-04 / Chinese labels actual locale",
+    "expression": "document.documentElement.lang===\"zh-CN\" && !document.querySelector(\".ff-navigation-locate\").innerText.includes(\"Locate time\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:27.303419+00:00",
+    "name": "V9-04 / Chinese dialog",
+    "expression": "!!document.querySelector(\"[role=dialog]\") && !document.querySelector(\"[role=dialog]\").innerText.includes(\"Close details\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:27.827524+00:00",
+    "name": "V9-04 / Chinese narrow no document overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth+1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:28.711341+00:00",
+    "name": "V9-05 / 1440 full long name accessible title",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\").title===__V9.longName",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:28.717121+00:00",
+    "name": "V9-05 / 1440 no horizontal document overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth+1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:28.722358+00:00",
+    "name": "V9-05 / 1440 bounded list geometry",
+    "expression": "(()=>{let r=document.querySelector(\".ff-navigation-list\").getBoundingClientRect();return r.width>0&&r.left>=0&&r.right<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:29.103309+00:00",
+    "name": "V9-05 / 390 full long name accessible title",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\").title===__V9.longName",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:29.109167+00:00",
+    "name": "V9-05 / 390 no horizontal document overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth+1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:29.114311+00:00",
+    "name": "V9-05 / 390 bounded list geometry",
+    "expression": "(()=>{let r=document.querySelector(\".ff-navigation-list\").getBoundingClientRect();return r.width>0&&r.left>=0&&r.right<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:30.119418+00:00",
+    "name": "V9-06 / loading no previous data",
+    "expression": "!document.querySelector(\"[data-navigation-object]\") && document.querySelector(\".ff-timeline-navigation [role=status]\").innerText.includes(\"Loading\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:30.487407+00:00",
+    "name": "V9-06 / bounded empty not full empty",
+    "expression": "!document.querySelector(\"[data-navigation-object]\") && document.querySelector(\".ff-navigation-list\").innerText.includes(\"loaded\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:30.853280+00:00",
+    "name": "V9-06 / error and retry",
+    "expression": "!document.querySelector(\"[data-navigation-object]\") && document.querySelector(\".ff-timeline-navigation\").innerText.includes(\"Retry\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:33.606947+00:00",
+    "name": "V9-08 / aborted source late completion not revived",
+    "expression": "__V9.reads.some(x=>x.aborted&&x.settledLate) && !document.querySelector(\"[data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:34.907899+00:00",
+    "name": "V9-09 / denied retires data and modal",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !document.querySelector(\"[data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:34.932552+00:00",
+    "name": "V9-09 / access regain no selection or modal",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !document.querySelector(\"[data-navigation-object][aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:37.040311+00:00",
+    "name": "V9-10 / SDK true identity retires pending receipt",
+    "expression": "__V9.sdkLog.some(x=>x.event===\"UserLoaded\"&&x.callbacks>0) && __V9.reads.some(x=>x.aborted&&x.settledLate) && !document.querySelector(\"[data-navigation-object]\") && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:37.994846+00:00",
+    "name": "IR01-1 / retained actual toolbar complete",
+    "expression": "__retained.length===5 && __retained.every(x=>typeof x.fn===\"function\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:40.101597+00:00",
+    "name": "IR01-2A / clear closes metadata fallback",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.matches(\".ff-timeline-navigation\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:40.315734+00:00",
+    "name": "IR01-2A / new clip no metadata revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:40.794918+00:00",
+    "name": "IR01-2A / batched same clip no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-01",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:40:43.501987+00:00",
+    "name": "V9-11 / no new canonical operation or media attempts including blocked",
+    "expression": "__networkPass===true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:22.966618+00:00",
+    "name": "V9-01 / ordinary final browser shell",
+    "expression": "!!document.querySelector(\".ff-app-shell\")",
+    "passed": false,
+    "value": false
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:24.226570+00:00",
+    "name": "V9-02 / bounded four actual source objects",
+    "expression": "document.querySelectorAll(\"[data-navigation-object]\").length===4 && document.body.innerText.includes(\"Partial loaded scope\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:24.681452+00:00",
+    "name": "V9-02 / filter within loaded clips",
+    "expression": "document.querySelectorAll(\"[data-navigation-object]\").length===2 && !document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:25.325725+00:00",
+    "name": "V9-02 / exact rational position",
+    "expression": "document.querySelector(\"output\").textContent===\"1001/30000\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:25.329608+00:00",
+    "name": "V9-02 / inclusive shared boundary first clip selected",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\" && document.body.innerText.includes(\"Loaded clips at this position: 2\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:25.708801+00:00",
+    "name": "V9-02 / locate explicitly selected clip retained",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-2\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\"",
+    "passed": false,
+    "value": false
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:26.926175+00:00",
+    "name": "V9-03 / native down selects and focuses clip",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\" && document.activeElement.dataset.navigationObject===\"clip:clip-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:27.099284+00:00",
+    "name": "V9-03 / native I metadata focus",
+    "expression": "!!document.querySelector(\".ff-navigation-detail\") && !!document.activeElement.closest(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:27.263329+00:00",
+    "name": "V9-03 / native Tab trapped",
+    "expression": "!!document.activeElement.closest(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:27.437315+00:00",
+    "name": "V9-03 / native Shift Tab trapped",
+    "expression": "!!document.activeElement.closest(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:27.810313+00:00",
+    "name": "V9-03 / Escape returns object focus",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.dataset.navigationObject===\"clip:clip-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:27.978021+00:00",
+    "name": "V9-03 / continue next clip",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-2\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:28.150335+00:00",
+    "name": "V9-03 / Escape clears local selection",
+    "expression": "!document.querySelector(\"[data-navigation-object][aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:28.941798+00:00",
+    "name": "V9-04 / Chinese labels actual locale",
+    "expression": "document.documentElement.lang===\"zh-CN\" && !document.querySelector(\".ff-navigation-locate\").innerText.includes(\"Locate time\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:29.315720+00:00",
+    "name": "V9-04 / Chinese dialog",
+    "expression": "!!document.querySelector(\"[role=dialog]\") && !document.querySelector(\"[role=dialog]\").innerText.includes(\"Close details\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:29.844667+00:00",
+    "name": "V9-04 / Chinese narrow no document overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth+1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:30.744852+00:00",
+    "name": "V9-05 / 1440 full long name accessible title",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\").title===__V9.longName",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:30.750503+00:00",
+    "name": "V9-05 / 1440 no horizontal document overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth+1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:30.756285+00:00",
+    "name": "V9-05 / 1440 bounded list geometry",
+    "expression": "(()=>{let r=document.querySelector(\".ff-navigation-list\").getBoundingClientRect();return r.width>0&&r.left>=0&&r.right<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:31.135033+00:00",
+    "name": "V9-05 / 390 full long name accessible title",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\").title===__V9.longName",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:31.141380+00:00",
+    "name": "V9-05 / 390 no horizontal document overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth+1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:31.147079+00:00",
+    "name": "V9-05 / 390 bounded list geometry",
+    "expression": "(()=>{let r=document.querySelector(\".ff-navigation-list\").getBoundingClientRect();return r.width>0&&r.left>=0&&r.right<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:32.149569+00:00",
+    "name": "V9-06 / loading no previous data",
+    "expression": "!document.querySelector(\"[data-navigation-object]\") && document.querySelector(\".ff-timeline-navigation [role=status]\").innerText.includes(\"Loading\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:32.514439+00:00",
+    "name": "V9-06 / bounded empty not full empty",
+    "expression": "!document.querySelector(\"[data-navigation-object]\") && document.querySelector(\".ff-navigation-list\").innerText.includes(\"loaded\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:32.894591+00:00",
+    "name": "V9-06 / error and retry",
+    "expression": "!document.querySelector(\"[data-navigation-object]\") && document.querySelector(\".ff-timeline-navigation\").innerText.includes(\"Retry\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:33.275410+00:00",
+    "name": "V9-06 / retry real adapter ready",
+    "expression": "__V9.reads.some(x=>x.mode===\"error\") && __V9.reads.at(-1).mode===\"ready\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:33.490579+00:00",
+    "name": "V9-06 / unknown timing never guessed",
+    "expression": "document.querySelector(\".ff-navigation-locate input\").disabled && document.querySelector(\"output\").textContent===\"Not located\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:35.423911+00:00",
+    "name": "V9-07 / real history gateway retires details",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldClip.isConnected && !document.querySelector(\"[aria-pressed=true][data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:35.432855+00:00",
+    "name": "V9-07 / new receipt targets explicit revision",
+    "expression": "__V9.reads.at(-1).request.target.revisionId===\"revision-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:36.567695+00:00",
+    "name": "V9-08 / aborted source late completion not revived",
+    "expression": "__V9.reads.some(x=>x.aborted&&x.settledLate) && !document.querySelector(\"[data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:37.918144+00:00",
+    "name": "V9-09 / denied retires data and modal",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !document.querySelector(\"[data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:37.938631+00:00",
+    "name": "V9-09 / access regain no selection or modal",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !document.querySelector(\"[data-navigation-object][aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:40.044027+00:00",
+    "name": "V9-10 / SDK true identity retires pending receipt",
+    "expression": "__V9.sdkLog.some(x=>x.event===\"UserLoaded\"&&x.callbacks>0) && __V9.reads.some(x=>x.aborted&&x.settledLate) && !document.querySelector(\"[data-navigation-object]\") && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:41.003452+00:00",
+    "name": "IR01-1 / retained actual toolbar complete",
+    "expression": "__retained.length===5 && __retained.every(x=>typeof x.fn===\"function\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:41.436421+00:00",
+    "name": "IR01-1 / all old selection callbacks inert",
+    "expression": "__store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:41.908423+00:00",
+    "name": "IR01-1 / all old source lifetime callbacks inert",
+    "expression": "__store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:43.313681+00:00",
+    "name": "IR01-2A / clear closes metadata fallback",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.matches(\".ff-timeline-navigation\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:43.534666+00:00",
+    "name": "IR01-2A / new clip no metadata revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:44.014402+00:00",
+    "name": "IR01-2A / batched same clip no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:45.726106+00:00",
+    "name": "IR01-2B / clear track closes mobile fallback",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.id===\"main-content\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:45.955297+00:00",
+    "name": "IR01-2B / new clip no mobile revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:46.164953+00:00",
+    "name": "IR01-2B / explicit new mobile launch",
+    "expression": "!!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:46.350821+00:00",
+    "name": "IR01-2B / mobile Escape returns launcher",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.matches(\".ff-mobile-inspector-launcher\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:47.944077+00:00",
+    "name": "IR01-2C / metadata revision retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:48.159830+00:00",
+    "name": "IR01-2C / metadata revision no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:49.920513+00:00",
+    "name": "IR01-2C / metadata source retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:50.150616+00:00",
+    "name": "IR01-2C / metadata source no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:51.742267+00:00",
+    "name": "IR01-2C / mobile revision retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:51.965706+00:00",
+    "name": "IR01-2C / mobile revision no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:53.234303+00:00",
+    "name": "IR01-2C / mobile source retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:53.467097+00:00",
+    "name": "IR01-2C / mobile source no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-02",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:41:53.491895+00:00",
+    "name": "V9-11 / no new canonical operation or media attempts including blocked",
+    "expression": "__networkPass===true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:00.206453+00:00",
+    "name": "V9-01 / ordinary final actual project boundary unavailable",
+    "expression": "document.body.innerText.includes(\"Workspace context unavailable\") && !document.body.innerText.includes(\"Loading workspace context\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:00.208762+00:00",
+    "name": "V9-01 / ordinary never injects projection",
+    "expression": "!window.__V9 && !document.querySelector(\"[data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:00.211239+00:00",
+    "name": "V9-01 / unknown source not loaded",
+    "expression": "!document.body.innerText.includes(\"Loaded timeline projection\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:01.402768+00:00",
+    "name": "V9-02 / bounded four actual source objects",
+    "expression": "document.querySelectorAll(\"[data-navigation-object]\").length===4 && document.body.innerText.includes(\"Partial loaded scope\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:01.849583+00:00",
+    "name": "V9-02 / filter within loaded clips",
+    "expression": "document.querySelectorAll(\"[data-navigation-object]\").length===2 && !document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:02.496062+00:00",
+    "name": "V9-02 / exact rational position",
+    "expression": "document.querySelector(\"output\").textContent===\"1001/30000\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:02.500474+00:00",
+    "name": "V9-02 / inclusive shared boundary first clip selected",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\" && document.body.innerText.includes(\"Loaded clips at this position: 2\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:02.680252+00:00",
+    "name": "V9-02 / native click selects second clip before locate",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-2\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:02.894148+00:00",
+    "name": "V9-02 / locate explicitly selected clip retained",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-2\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\"",
+    "passed": false,
+    "value": false
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:04.103135+00:00",
+    "name": "V9-03 / native down selects and focuses clip",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\" && document.activeElement.dataset.navigationObject===\"clip:clip-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:04.279284+00:00",
+    "name": "V9-03 / native I metadata focus",
+    "expression": "!!document.querySelector(\".ff-navigation-detail\") && !!document.activeElement.closest(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:04.443793+00:00",
+    "name": "V9-03 / native Tab trapped",
+    "expression": "!!document.activeElement.closest(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:04.616779+00:00",
+    "name": "V9-03 / native Shift Tab trapped",
+    "expression": "!!document.activeElement.closest(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:04.990363+00:00",
+    "name": "V9-03 / Escape returns object focus",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.dataset.navigationObject===\"clip:clip-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:05.158702+00:00",
+    "name": "V9-03 / continue next clip",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-2\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:05.328315+00:00",
+    "name": "V9-03 / Escape clears local selection",
+    "expression": "!document.querySelector(\"[data-navigation-object][aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:06.105610+00:00",
+    "name": "V9-04 / Chinese labels actual locale",
+    "expression": "document.documentElement.lang===\"zh-CN\" && !document.querySelector(\".ff-navigation-locate\").innerText.includes(\"Locate time\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:06.489473+00:00",
+    "name": "V9-04 / Chinese dialog",
+    "expression": "!!document.querySelector(\"[role=dialog]\") && !document.querySelector(\"[role=dialog]\").innerText.includes(\"Close details\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:07.024338+00:00",
+    "name": "V9-04 / Chinese narrow no document overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth+1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:07.925710+00:00",
+    "name": "V9-05 / 1440 full long name accessible title",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\").title===__V9.longName",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:07.931984+00:00",
+    "name": "V9-05 / 1440 no horizontal document overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth+1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:07.937300+00:00",
+    "name": "V9-05 / 1440 bounded list geometry",
+    "expression": "(()=>{let r=document.querySelector(\".ff-navigation-list\").getBoundingClientRect();return r.width>0&&r.left>=0&&r.right<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:08.331906+00:00",
+    "name": "V9-05 / 390 full long name accessible title",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\").title===__V9.longName",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:08.338242+00:00",
+    "name": "V9-05 / 390 no horizontal document overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth+1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:08.344110+00:00",
+    "name": "V9-05 / 390 bounded list geometry",
+    "expression": "(()=>{let r=document.querySelector(\".ff-navigation-list\").getBoundingClientRect();return r.width>0&&r.left>=0&&r.right<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:09.350215+00:00",
+    "name": "V9-06 / loading no previous data",
+    "expression": "!document.querySelector(\"[data-navigation-object]\") && document.querySelector(\".ff-timeline-navigation [role=status]\").innerText.includes(\"Loading\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:09.702228+00:00",
+    "name": "V9-06 / bounded empty not full empty",
+    "expression": "!document.querySelector(\"[data-navigation-object]\") && document.querySelector(\".ff-navigation-list\").innerText.includes(\"loaded\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:10.067350+00:00",
+    "name": "V9-06 / error and retry",
+    "expression": "!document.querySelector(\"[data-navigation-object]\") && document.querySelector(\".ff-timeline-navigation\").innerText.includes(\"Retry\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:10.426542+00:00",
+    "name": "V9-06 / retry real adapter ready",
+    "expression": "__V9.reads.some(x=>x.mode===\"error\") && __V9.reads.at(-1).mode===\"ready\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:10.652674+00:00",
+    "name": "V9-06 / unknown timing never guessed",
+    "expression": "document.querySelector(\".ff-navigation-locate input\").disabled && document.querySelector(\"output\").textContent===\"Not located\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:12.539068+00:00",
+    "name": "V9-07 / real history gateway retires details",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldClip.isConnected && !document.querySelector(\"[aria-pressed=true][data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:12.546247+00:00",
+    "name": "V9-07 / new receipt targets explicit revision",
+    "expression": "__V9.reads.at(-1).request.target.revisionId===\"revision-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:13.663315+00:00",
+    "name": "V9-08 / aborted source late completion not revived",
+    "expression": "__V9.reads.some(x=>x.aborted&&x.settledLate) && !document.querySelector(\"[data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:15.023196+00:00",
+    "name": "V9-09 / denied retires data and modal",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !document.querySelector(\"[data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:15.049352+00:00",
+    "name": "V9-09 / access regain no selection or modal",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !document.querySelector(\"[data-navigation-object][aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:17.165146+00:00",
+    "name": "V9-10 / SDK true identity retires pending receipt",
+    "expression": "__V9.sdkLog.some(x=>x.event===\"UserLoaded\"&&x.callbacks>0) && __V9.reads.some(x=>x.aborted&&x.settledLate) && !document.querySelector(\"[data-navigation-object]\") && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:18.128133+00:00",
+    "name": "IR01-1 / retained actual toolbar complete",
+    "expression": "__retained.length===5 && __retained.every(x=>typeof x.fn===\"function\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:18.550491+00:00",
+    "name": "IR01-1 / all old selection callbacks inert",
+    "expression": "__store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:19.016679+00:00",
+    "name": "IR01-1 / all old source lifetime callbacks inert",
+    "expression": "__store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:20.413722+00:00",
+    "name": "IR01-2A / clear closes metadata fallback",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.matches(\".ff-timeline-navigation\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:20.630642+00:00",
+    "name": "IR01-2A / new clip no metadata revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:21.115592+00:00",
+    "name": "IR01-2A / batched same clip no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:22.823157+00:00",
+    "name": "IR01-2B / clear track closes mobile fallback",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.id===\"main-content\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:23.034829+00:00",
+    "name": "IR01-2B / new clip no mobile revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:23.248160+00:00",
+    "name": "IR01-2B / explicit new mobile launch",
+    "expression": "!!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:23.436971+00:00",
+    "name": "IR01-2B / mobile Escape returns launcher",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.matches(\".ff-mobile-inspector-launcher\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:25.044584+00:00",
+    "name": "IR01-2C / metadata revision retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:25.259687+00:00",
+    "name": "IR01-2C / metadata revision no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:26.697836+00:00",
+    "name": "IR01-2C / metadata source retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:26.916007+00:00",
+    "name": "IR01-2C / metadata source no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:28.544998+00:00",
+    "name": "IR01-2C / mobile revision retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:28.759298+00:00",
+    "name": "IR01-2C / mobile revision no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:30.187111+00:00",
+    "name": "IR01-2C / mobile source retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:30.404097+00:00",
+    "name": "IR01-2C / mobile source no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-03",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:43:30.427486+00:00",
+    "name": "V9-11 / no new canonical operation or media attempts including blocked",
+    "expression": "__networkPass===true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:42.686896+00:00",
+    "name": "V9-01 / ordinary final actual project boundary unavailable",
+    "expression": "document.body.innerText.includes(\"Workspace context unavailable\") && !document.body.innerText.includes(\"Loading workspace context\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:42.689523+00:00",
+    "name": "V9-01 / ordinary never injects projection",
+    "expression": "!window.__V9 && !document.querySelector(\"[data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:42.692283+00:00",
+    "name": "V9-01 / unknown source not loaded",
+    "expression": "!document.body.innerText.includes(\"Loaded timeline projection\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:43.900195+00:00",
+    "name": "V9-02 / bounded four actual source objects",
+    "expression": "document.querySelectorAll(\"[data-navigation-object]\").length===4 && document.body.innerText.includes(\"Partial loaded scope\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:44.357515+00:00",
+    "name": "V9-02 / filter within loaded clips",
+    "expression": "document.querySelectorAll(\"[data-navigation-object]\").length===2 && !document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:45.007787+00:00",
+    "name": "V9-02 / exact rational position",
+    "expression": "document.querySelector(\"output\").textContent===\"1001/30000\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:45.012040+00:00",
+    "name": "V9-02 / inclusive shared boundary first clip selected",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\" && document.body.innerText.includes(\"Loaded clips at this position: 2\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:45.192840+00:00",
+    "name": "V9-02 / native click selects second clip before locate",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-2\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:45.404910+00:00",
+    "name": "V9-02 / locate explicitly selected clip retained",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-2\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\"",
+    "passed": false,
+    "value": false
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:46.616548+00:00",
+    "name": "V9-03 / native down selects and focuses clip",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\" && document.activeElement.dataset.navigationObject===\"clip:clip-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:46.793232+00:00",
+    "name": "V9-03 / metadata exact supplied range and duration",
+    "expression": "document.querySelector(\".ff-navigation-detail\").innerText.includes(\"1001/30000\") && document.querySelector(\".ff-navigation-detail\").innerText.includes(\"asset-1\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:46.798168+00:00",
+    "name": "V9-03 / native I metadata focus",
+    "expression": "!!document.querySelector(\".ff-navigation-detail\") && !!document.activeElement.closest(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:46.962781+00:00",
+    "name": "V9-03 / native Tab trapped",
+    "expression": "!!document.activeElement.closest(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:47.135634+00:00",
+    "name": "V9-03 / native Shift Tab trapped",
+    "expression": "!!document.activeElement.closest(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:47.521041+00:00",
+    "name": "V9-03 / Escape returns object focus",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.dataset.navigationObject===\"clip:clip-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:47.689914+00:00",
+    "name": "V9-03 / continue next clip",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-2\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:47.859856+00:00",
+    "name": "V9-03 / Escape clears local selection",
+    "expression": "!document.querySelector(\"[data-navigation-object][aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:48.649382+00:00",
+    "name": "V9-04 / Chinese exact discovery locate inspect labels",
+    "expression": "[\"筛选已加载轨道和片段\",\"精确时间（整数或分数）\",\"定位时间\",\"定位选中片段\",\"检查选中对象元数据\"].every(x=>document.querySelector(\".ff-timeline-navigation\").innerText.includes(x))",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:48.654961+00:00",
+    "name": "V9-04 / Chinese labels actual locale",
+    "expression": "document.documentElement.lang===\"zh-CN\" && !document.querySelector(\".ff-navigation-locate\").innerText.includes(\"Locate time\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:49.035886+00:00",
+    "name": "V9-04 / Chinese dialog",
+    "expression": "!!document.querySelector(\"[role=dialog]\") && !document.querySelector(\"[role=dialog]\").innerText.includes(\"Close details\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:49.584326+00:00",
+    "name": "V9-04 / Chinese narrow no document overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth+1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:50.484035+00:00",
+    "name": "V9-05 / 1440 full long name accessible title",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\").title===__V9.longName",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:50.490415+00:00",
+    "name": "V9-05 / 1440 no horizontal document overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth+1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:50.496416+00:00",
+    "name": "V9-05 / 1440 bounded list geometry",
+    "expression": "(()=>{let r=document.querySelector(\".ff-navigation-list\").getBoundingClientRect();return r.width>0&&r.left>=0&&r.right<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:50.873346+00:00",
+    "name": "V9-05 / 390 full long name accessible title",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\").title===__V9.longName",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:50.879673+00:00",
+    "name": "V9-05 / 390 no horizontal document overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth+1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:50.886070+00:00",
+    "name": "V9-05 / 390 bounded list geometry",
+    "expression": "(()=>{let r=document.querySelector(\".ff-navigation-list\").getBoundingClientRect();return r.width>0&&r.left>=0&&r.right<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:51.892515+00:00",
+    "name": "V9-06 / loading no previous data",
+    "expression": "!document.querySelector(\"[data-navigation-object]\") && document.querySelector(\".ff-timeline-navigation [role=status]\").innerText.includes(\"Loading\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:52.277360+00:00",
+    "name": "V9-06 / bounded empty not full empty",
+    "expression": "!document.querySelector(\"[data-navigation-object]\") && document.querySelector(\".ff-navigation-list\").innerText.includes(\"loaded\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:52.647224+00:00",
+    "name": "V9-06 / error and retry",
+    "expression": "!document.querySelector(\"[data-navigation-object]\") && document.querySelector(\".ff-timeline-navigation\").innerText.includes(\"Retry\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:53.006540+00:00",
+    "name": "V9-06 / retry real adapter ready",
+    "expression": "__V9.reads.some(x=>x.mode===\"error\") && __V9.reads.at(-1).mode===\"ready\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:53.228626+00:00",
+    "name": "V9-06 / unknown timing never guessed",
+    "expression": "document.querySelector(\".ff-navigation-locate input\").disabled && document.querySelector(\"output\").textContent===\"Not located\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:55.110067+00:00",
+    "name": "V9-07 / real history gateway retires details",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldClip.isConnected && !document.querySelector(\"[aria-pressed=true][data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:55.117225+00:00",
+    "name": "V9-07 / new receipt targets explicit revision",
+    "expression": "__V9.reads.at(-1).request.target.revisionId===\"revision-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:56.962153+00:00",
+    "name": "V9-07 / late prior revision response rejected",
+    "expression": "__V9.reads.some(x=>x.aborted&&x.settledLate)&&!document.querySelector(\"[data-navigation-object]\")&&__V9.reads.at(-1).request.target.revisionId===\"revision-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:57.917819+00:00",
+    "name": "V9-08 / aborted source late completion not revived",
+    "expression": "__V9.reads.some(x=>x.aborted&&x.settledLate) && !document.querySelector(\"[data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:59.292234+00:00",
+    "name": "V9-09 / denied retires data and modal",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !document.querySelector(\"[data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:45:59.311656+00:00",
+    "name": "V9-09 / access regain no selection or modal",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !document.querySelector(\"[data-navigation-object][aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:00.256389+00:00",
+    "name": "V9-09 / late response after denied access rejected",
+    "expression": "__V9.reads.some(x=>x.aborted&&x.settledLate)&&!document.querySelector(\"[data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:02.372240+00:00",
+    "name": "V9-10 / SDK true identity retires pending receipt",
+    "expression": "__V9.sdkLog.some(x=>x.event===\"UserLoaded\"&&x.callbacks>0) && __V9.reads.some(x=>x.aborted&&x.settledLate) && !document.querySelector(\"[data-navigation-object]\") && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:03.557991+00:00",
+    "name": "IR01-1 / selection all six real toolbar callbacks captured",
+    "expression": "__retained.length===6 && new Set(__retained.map(x=>x.label)).size===6 && __retained.every(x=>typeof x.fn===\"function\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:03.773965+00:00",
+    "name": "IR01-1 / selection same actual Selection store",
+    "expression": "__store===__originalStore",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:03.923135+00:00",
+    "name": "IR01-1 / selection retained Hide inspector no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:04.086848+00:00",
+    "name": "IR01-1 / selection retained Reveal primary clip no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:04.232934+00:00",
+    "name": "IR01-1 / selection retained Clear selection no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:04.377248+00:00",
+    "name": "IR01-1 / selection retained  no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:04.524976+00:00",
+    "name": "IR01-1 / selection retained Ask Agent no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:04.674841+00:00",
+    "name": "IR01-1 / selection retained Show inspector no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:05.846174+00:00",
+    "name": "IR01-1 / revision all six real toolbar callbacks captured",
+    "expression": "__retained.length===6 && new Set(__retained.map(x=>x.label)).size===6 && __retained.every(x=>typeof x.fn===\"function\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:06.653451+00:00",
+    "name": "IR01-1 / revision same actual Selection store",
+    "expression": "__store===__originalStore",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:06.661499+00:00",
+    "name": "IR01-1 / revision retired actual Selection lifetime",
+    "expression": "__store.getSnapshot().lifetime!==__originalLifetime",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:06.803779+00:00",
+    "name": "IR01-1 / revision retained Hide inspector no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:06.947465+00:00",
+    "name": "IR01-1 / revision retained Reveal primary clip no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:07.093175+00:00",
+    "name": "IR01-1 / revision retained Clear selection no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:07.240473+00:00",
+    "name": "IR01-1 / revision retained  no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:07.384667+00:00",
+    "name": "IR01-1 / revision retained Ask Agent no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:07.536496+00:00",
+    "name": "IR01-1 / revision retained Show inspector no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:08.725011+00:00",
+    "name": "IR01-1 / source all six real toolbar callbacks captured",
+    "expression": "__retained.length===6 && new Set(__retained.map(x=>x.label)).size===6 && __retained.every(x=>typeof x.fn===\"function\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:08.980127+00:00",
+    "name": "IR01-1 / source same actual Selection store",
+    "expression": "__store===__originalStore",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:08.988404+00:00",
+    "name": "IR01-1 / source retired actual Selection lifetime",
+    "expression": "__store.getSnapshot().lifetime!==__originalLifetime",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:09.132701+00:00",
+    "name": "IR01-1 / source retained Hide inspector no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:09.277207+00:00",
+    "name": "IR01-1 / source retained Reveal primary clip no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:09.426468+00:00",
+    "name": "IR01-1 / source retained Clear selection no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:09.572778+00:00",
+    "name": "IR01-1 / source retained  no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:09.724479+00:00",
+    "name": "IR01-1 / source retained Ask Agent no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:09.882040+00:00",
+    "name": "IR01-1 / source retained Show inspector no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:11.320463+00:00",
+    "name": "IR01-2A / clear closes metadata fallback",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.matches(\".ff-timeline-navigation\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:11.535856+00:00",
+    "name": "IR01-2A / new clip no metadata revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:12.020956+00:00",
+    "name": "IR01-2A / batched same clip no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:12.660077+00:00",
+    "name": "IR01-2A / batched hide show metadata no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:13.116619+00:00",
+    "name": "IR01-2A / primary change closes metadata",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:13.326676+00:00",
+    "name": "IR01-2A / original selection cannot revive metadata",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:14.890954+00:00",
+    "name": "IR01-2B / clear track closes mobile fallback",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.id===\"main-content\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:15.105533+00:00",
+    "name": "IR01-2B / new clip no mobile revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:15.320003+00:00",
+    "name": "IR01-2B / explicit new mobile launch",
+    "expression": "!!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:15.510847+00:00",
+    "name": "IR01-2B / mobile Escape returns launcher",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.matches(\".ff-mobile-inspector-launcher\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:16.980057+00:00",
+    "name": "IR01-2C / metadata revision retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:17.200355+00:00",
+    "name": "IR01-2C / metadata revision no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:18.491838+00:00",
+    "name": "IR01-2C / metadata source retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:18.711709+00:00",
+    "name": "IR01-2C / metadata source no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:20.171221+00:00",
+    "name": "IR01-2C / mobile revision retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:20.388916+00:00",
+    "name": "IR01-2C / mobile revision no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:21.688982+00:00",
+    "name": "IR01-2C / mobile source retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:21.927003+00:00",
+    "name": "IR01-2C / mobile source no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-04",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:46:21.951681+00:00",
+    "name": "V9-11 / no new canonical operation or media attempts including blocked",
+    "expression": "__networkPass===true",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:08.868821+00:00",
+    "name": "V9-01 / ordinary final actual project boundary unavailable",
+    "expression": "document.body.innerText.includes(\"Workspace context unavailable\") && !document.body.innerText.includes(\"Loading workspace context\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:08.871688+00:00",
+    "name": "V9-01 / ordinary never injects projection",
+    "expression": "!window.__V9 && !document.querySelector(\"[data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:08.874605+00:00",
+    "name": "V9-01 / unknown source not loaded",
+    "expression": "!document.body.innerText.includes(\"Loaded timeline projection\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:10.102803+00:00",
+    "name": "V9-02 / bounded four actual source objects",
+    "expression": "document.querySelectorAll(\"[data-navigation-object]\").length===4 && document.body.innerText.includes(\"Partial loaded scope\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:10.553701+00:00",
+    "name": "V9-02 / filter within loaded clips",
+    "expression": "document.querySelectorAll(\"[data-navigation-object]\").length===2 && !document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:11.200923+00:00",
+    "name": "V9-02 / exact rational position",
+    "expression": "document.querySelector(\"output\").textContent===\"1001/30000\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:11.205022+00:00",
+    "name": "V9-02 / inclusive shared boundary first clip selected",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\" && document.body.innerText.includes(\"Loaded clips at this position: 2\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:11.385620+00:00",
+    "name": "V9-02 / native click selects second clip before locate",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-2\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:11.599799+00:00",
+    "name": "V9-02 / locate explicitly selected clip retained",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-2\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\"",
+    "passed": false,
+    "value": false
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:12.811342+00:00",
+    "name": "V9-03 / native down selects and focuses clip",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\" && document.activeElement.dataset.navigationObject===\"clip:clip-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:12.987143+00:00",
+    "name": "V9-03 / metadata exact supplied range and duration",
+    "expression": "document.querySelector(\".ff-navigation-detail\").innerText.includes(\"1001/30000\") && document.querySelector(\".ff-navigation-detail\").innerText.includes(\"asset-1\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:12.991937+00:00",
+    "name": "V9-03 / native I metadata focus",
+    "expression": "!!document.querySelector(\".ff-navigation-detail\") && !!document.activeElement.closest(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:13.156070+00:00",
+    "name": "V9-03 / native Tab trapped",
+    "expression": "!!document.activeElement.closest(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:13.329090+00:00",
+    "name": "V9-03 / native Shift Tab trapped",
+    "expression": "!!document.activeElement.closest(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:13.718174+00:00",
+    "name": "V9-03 / Escape returns object focus",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.dataset.navigationObject===\"clip:clip-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:13.887686+00:00",
+    "name": "V9-03 / continue next clip",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-2\\\"]\")?.getAttribute(\"aria-pressed\")===\"true\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:14.058183+00:00",
+    "name": "V9-03 / Escape clears local selection",
+    "expression": "!document.querySelector(\"[data-navigation-object][aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:14.860025+00:00",
+    "name": "V9-04 / Chinese exact discovery locate inspect labels",
+    "expression": "[\"筛选已加载轨道和片段\",\"精确时间（整数或分数）\",\"定位时间\",\"定位选中片段\",\"检查选中对象元数据\"].every(x=>document.querySelector(\".ff-timeline-navigation\").innerText.includes(x))",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:14.865711+00:00",
+    "name": "V9-04 / Chinese labels actual locale",
+    "expression": "document.documentElement.lang===\"zh-CN\" && !document.querySelector(\".ff-navigation-locate\").innerText.includes(\"Locate time\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:15.246488+00:00",
+    "name": "V9-04 / Chinese dialog",
+    "expression": "!!document.querySelector(\"[role=dialog]\") && !document.querySelector(\"[role=dialog]\").innerText.includes(\"Close details\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:15.800379+00:00",
+    "name": "V9-04 / Chinese narrow no document overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth+1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:16.698375+00:00",
+    "name": "V9-05 / 1440 full long name accessible title",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\").title===__V9.longName",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:16.704656+00:00",
+    "name": "V9-05 / 1440 no horizontal document overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth+1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:16.710404+00:00",
+    "name": "V9-05 / 1440 bounded list geometry",
+    "expression": "(()=>{let r=document.querySelector(\".ff-navigation-list\").getBoundingClientRect();return r.width>0&&r.left>=0&&r.right<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:17.105705+00:00",
+    "name": "V9-05 / 390 full long name accessible title",
+    "expression": "document.querySelector(\"[data-navigation-object=\\\"clip:clip-1\\\"]\").title===__V9.longName",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:17.112160+00:00",
+    "name": "V9-05 / 390 no horizontal document overflow",
+    "expression": "document.documentElement.scrollWidth<=innerWidth+1",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:17.117826+00:00",
+    "name": "V9-05 / 390 bounded list geometry",
+    "expression": "(()=>{let r=document.querySelector(\".ff-navigation-list\").getBoundingClientRect();return r.width>0&&r.left>=0&&r.right<=innerWidth+1})()",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:18.139543+00:00",
+    "name": "V9-06 / loading no previous data",
+    "expression": "!document.querySelector(\"[data-navigation-object]\") && document.querySelector(\".ff-timeline-navigation [role=status]\").innerText.includes(\"Loading\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:18.504085+00:00",
+    "name": "V9-06 / bounded empty not full empty",
+    "expression": "!document.querySelector(\"[data-navigation-object]\") && document.querySelector(\".ff-navigation-list\").innerText.includes(\"loaded\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:18.875872+00:00",
+    "name": "V9-06 / error and retry",
+    "expression": "!document.querySelector(\"[data-navigation-object]\") && document.querySelector(\".ff-timeline-navigation\").innerText.includes(\"Retry\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:19.244915+00:00",
+    "name": "V9-06 / retry real adapter ready",
+    "expression": "__V9.reads.some(x=>x.mode===\"error\") && __V9.reads.at(-1).mode===\"ready\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:19.483046+00:00",
+    "name": "V9-06 / unknown timing never guessed",
+    "expression": "document.querySelector(\".ff-navigation-locate input\").disabled && document.querySelector(\"output\").textContent===\"Not located\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:21.385723+00:00",
+    "name": "V9-07 / real history gateway retires details",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldClip.isConnected && !document.querySelector(\"[aria-pressed=true][data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:21.393413+00:00",
+    "name": "V9-07 / new receipt targets explicit revision",
+    "expression": "__V9.reads.at(-1).request.target.revisionId===\"revision-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:23.252391+00:00",
+    "name": "V9-07 / late prior revision response rejected",
+    "expression": "__V9.reads.some(x=>x.aborted&&x.settledLate)&&!document.querySelector(\"[data-navigation-object]\")&&__V9.reads.at(-1).request.target.revisionId===\"revision-1\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:24.226996+00:00",
+    "name": "V9-08 / aborted source late completion not revived",
+    "expression": "__V9.reads.some(x=>x.aborted&&x.settledLate) && !document.querySelector(\"[data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:25.564906+00:00",
+    "name": "V9-09 / denied retires data and modal",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !document.querySelector(\"[data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:25.592469+00:00",
+    "name": "V9-09 / access regain no selection or modal",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !document.querySelector(\"[data-navigation-object][aria-pressed=true]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:26.557855+00:00",
+    "name": "V9-09 / late response after denied access rejected",
+    "expression": "__V9.reads.some(x=>x.aborted&&x.settledLate)&&!document.querySelector(\"[data-navigation-object]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:28.690519+00:00",
+    "name": "V9-10 / SDK true identity retires pending receipt",
+    "expression": "__V9.sdkLog.some(x=>x.event===\"UserLoaded\"&&x.callbacks>0) && __V9.reads.some(x=>x.aborted&&x.settledLate) && !document.querySelector(\"[data-navigation-object]\") && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:29.894336+00:00",
+    "name": "IR01-1 / selection all six real toolbar callbacks captured",
+    "expression": "__retained.length===6 && new Set(__retained.map(x=>x.label)).size===6 && __retained.every(x=>typeof x.fn===\"function\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:30.126059+00:00",
+    "name": "IR01-1 / selection same actual Selection store",
+    "expression": "__store===__originalStore",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:30.275832+00:00",
+    "name": "IR01-1 / selection retained Hide inspector no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:30.423507+00:00",
+    "name": "IR01-1 / selection retained Reveal primary clip no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:30.567537+00:00",
+    "name": "IR01-1 / selection retained Clear selection no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:30.711183+00:00",
+    "name": "IR01-1 / selection retained  no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:30.857643+00:00",
+    "name": "IR01-1 / selection retained Ask Agent no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:31.013202+00:00",
+    "name": "IR01-1 / selection retained Show inspector no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:32.233101+00:00",
+    "name": "IR01-1 / revision all six real toolbar callbacks captured",
+    "expression": "__retained.length===6 && new Set(__retained.map(x=>x.label)).size===6 && __retained.every(x=>typeof x.fn===\"function\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:33.074904+00:00",
+    "name": "IR01-1 / revision same actual Selection store",
+    "expression": "__store===__originalStore",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:33.086195+00:00",
+    "name": "IR01-1 / revision retired actual Selection lifetime",
+    "expression": "__store.getSnapshot().lifetime!==__originalLifetime",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:33.243154+00:00",
+    "name": "IR01-1 / revision retained Hide inspector no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:33.391365+00:00",
+    "name": "IR01-1 / revision retained Reveal primary clip no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:33.535655+00:00",
+    "name": "IR01-1 / revision retained Clear selection no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:33.680696+00:00",
+    "name": "IR01-1 / revision retained  no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:33.829413+00:00",
+    "name": "IR01-1 / revision retained Ask Agent no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:33.978361+00:00",
+    "name": "IR01-1 / revision retained Show inspector no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:35.208552+00:00",
+    "name": "IR01-1 / source all six real toolbar callbacks captured",
+    "expression": "__retained.length===6 && new Set(__retained.map(x=>x.label)).size===6 && __retained.every(x=>typeof x.fn===\"function\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:35.619850+00:00",
+    "name": "IR01-1 / source same actual Selection store",
+    "expression": "__store===__originalStore",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:35.628948+00:00",
+    "name": "IR01-1 / source retired actual Selection lifetime",
+    "expression": "__store.getSnapshot().lifetime!==__originalLifetime",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:35.774393+00:00",
+    "name": "IR01-1 / source retained Hide inspector no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:35.927420+00:00",
+    "name": "IR01-1 / source retained Reveal primary clip no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:36.076992+00:00",
+    "name": "IR01-1 / source retained Clear selection no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:36.225090+00:00",
+    "name": "IR01-1 / source retained  no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:36.386146+00:00",
+    "name": "IR01-1 / source retained Ask Agent no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:36.544663+00:00",
+    "name": "IR01-1 / source retained Show inspector no dispatch/state/focus effect",
+    "expression": "__dispatchCalls.length===0 && __store.getSnapshot()===__before && document.activeElement===__focus && !document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:38.002643+00:00",
+    "name": "IR01-2A / clear closes metadata fallback",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.matches(\".ff-timeline-navigation\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:38.236785+00:00",
+    "name": "IR01-2A / new clip no metadata revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:38.731921+00:00",
+    "name": "IR01-2A / batched same clip no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:39.398037+00:00",
+    "name": "IR01-2A / batched hide show metadata no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:39.885968+00:00",
+    "name": "IR01-2A / primary change closes metadata",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:40.134939+00:00",
+    "name": "IR01-2A / original selection cannot revive metadata",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:41.732781+00:00",
+    "name": "IR01-2B / clear track closes mobile fallback",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.id===\"main-content\"",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:41.970307+00:00",
+    "name": "IR01-2B / new clip no mobile revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:42.206241+00:00",
+    "name": "IR01-2B / explicit new mobile launch",
+    "expression": "!!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:42.399245+00:00",
+    "name": "IR01-2B / mobile Escape returns launcher",
+    "expression": "!document.querySelector(\"[role=dialog]\") && document.activeElement.matches(\".ff-mobile-inspector-launcher\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:44.082757+00:00",
+    "name": "IR01-2C / metadata revision retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:44.301502+00:00",
+    "name": "IR01-2C / metadata revision no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:45.621742+00:00",
+    "name": "IR01-2C / metadata source retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:45.895325+00:00",
+    "name": "IR01-2C / metadata source no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:47.369038+00:00",
+    "name": "IR01-2C / mobile revision retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:47.592414+00:00",
+    "name": "IR01-2C / mobile revision no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:49.076234+00:00",
+    "name": "IR01-2C / mobile source retires dialog",
+    "expression": "!document.querySelector(\"[role=dialog]\") && !__oldDialog.isConnected",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:49.302933+00:00",
+    "name": "IR01-2C / mobile source no revival",
+    "expression": "!document.querySelector(\"[role=dialog]\")",
+    "passed": true,
+    "value": true
+  },
+  {
+    "run": "continuation-run-05",
+    "IMPLEMENTATION_TREE": "a90af5baccf94a437b67e69fb1897328572a0209",
+    "VALIDATION_TIMESTAMP": "2026-09-09T02:47:49.329629+00:00",
+    "name": "V9-11 / no new canonical operation or media attempts including blocked",
+    "expression": "__networkPass===true",
+    "passed": true,
+    "value": true
+  }
+]
