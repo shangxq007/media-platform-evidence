@@ -1,0 +1,157 @@
+Documentation Index
+
+Fetch the complete documentation index at: /llms.txt
+
+Use this file to discover all available pages before exploring further.
+
+Skip to main content
+Postiz Documentation home page
+Search...
+Ctrl K
+GitHub
+Discord
+YouTube
+Get started
+Overview
+System Requirements
+How it works
+Install
+Docker Compose
+Docker
+Helm
+Dev Container
+Development Environment
+Migration to Temporal
+Configuration
+Configuration Reference
+Docker Compose Configuration
+Email Notifications
+Uploads & Storage
+R2 Configuration
+OIDC Configuration
+Design editor (Polotno)
+Browser extension
+Reverse proxies
+Caddy
+Nginx
+Traefik + Docker Compose
+WebSockets, HMR, and Dev Tunnels
+Provider API keys
+Overview
+Social platforms
+X (Twitter)
+LinkedIn
+LinkedIn Page
+Facebook
+Instagram
+Threads
+Bluesky
+Mastodon
+Google My Business
+MeWe
+Farcaster
+Video platforms
+YouTube
+TikTok
+Other platforms
+Reddit
+Pinterest
+Discord
+Slack
+Telegram
+Dribbble
+Skool
+Whop
+Tumblr
+Troubleshooting
+Self-Host Gotchas
+Discord
+Register to the cloud
+Guide
+Cloud
+Self-Hosting
+Public API
+Agents
+Add Postiz to your app
+Contributing
+Install
+Docker Compose
+Copy page
+
+Install Postiz using Docker Compose
+
+Watch the Tutorial for docker-compose install: https://m.youtube.com/watch?v=A6CjAmJOWvA&t=5s
+Warning: Please read this migration guide, on how to upgrade from v2.11.2 to v2.12.0+ for Temporal: https://docs.postiz.com/installation/migration
+​
+Docker Compose
+This guide assumes that you have Docker installed, with a reasonable amount of resources to run Postiz. This Docker Compose setup has been tested with;
+Virtual Machine, Ubuntu 24.04, 2Gb RAM, 2 vCPUs.
+​
+Configuration uses environment variables
+The Docker containers for Postiz are entirely configured with environment variables.
+Option A - environment variables in your docker-compose.yml file
+Option B - environment variables in a postiz.env file mounted in /config for the Postiz container only
+Option C - environment variables in a .env file next to your docker-compose.yml file (not recommended).
+… or a mixture of the above options!
+​
+Installation
+1
+
+Clone the Docker Compose repository
+
+git clone https://github.com/gitroomhq/postiz-docker-compose
+
+2
+
+Configure your Docker Compose
+
+Configure your Docker Compose variables
+3
+
+Run the docker-compose command
+
+docker compose up
+
+4
+
+Wait for it to load
+
+Access your frontend at: http://localhost:4007 (unless changed in variables)
+Visualize and monitor your workflows with temporal at: http://localhost:8080
+There is a configuration reference page with a list of configuration settings.
+​
+The docker-compose.yaml file
+The full, up-to-date Docker Compose file is maintained in the gitroomhq/postiz-docker-compose repository. Cloning that repository (see the steps above) gives you the docker-compose.yaml together with the dynamicconfig directory that the Temporal service mounts, so there is nothing to copy by hand.
+Always pull the file from the repository rather than copying a snapshot. The services, images, and environment variables change between releases, and the repository is the canonical source.
+​
+How to use Docker Compose
+From the cloned repository directory, run docker compose up to start the services.
+Note When you change variables, you must run docker compose down and then docker compose up to recreate these containers with these updated variables.
+Look through the logs for startup errors, and if you have problems, check out the support page.
+If everything looks good, then you can access the Postiz web interface at https://postiz.your-server.com
+​
+Next Steps
+Architecture
+Learn the architecture of the project
+Providers
+Set up providers such as LinkedIn, X and Reddit
+
+Was this page helpful?
+
+Yes
+No
+Previous
+Docker
+Install Postiz using Docker standalone
+Next
+github
+discord
+Powered by
+This documentation is built and hosted on Mintlify, a developer documentation platform
+On this page
+Docker Compose
+Configuration uses environment variables
+Installation
+The docker-compose.yaml file
+How to use Docker Compose
+Next Steps
